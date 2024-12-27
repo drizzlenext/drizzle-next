@@ -55,3 +55,11 @@ This command will ask the user for the ideal color palette. The AI will then gen
 ```bash
 npx shadrizz@latest ai color-palette
 ```
+
+### 4. The package finder tool
+
+This command will help you find npm packages based on your description. It will ask you to describe the package that you need. For example: image processing, web framework, change case of words, etc. Then it will provide a list of recommendation with pros, cons, github stars, weekly downloads, and link to github repo.
+
+```bash
+npx shadrizz@latest ai package-finder
+```

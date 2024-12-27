@@ -313,3 +313,40 @@ aiCommand
       log.log(json.data.reasoning);
     }
   });
+
+/**
+ * 4. package finder
+ */
+
+aiCommand
+  .command("package-finder")
+  .description("find and compare npm packages that match your description")
+  .action(async () => {
+    const apiKey = getApiKey();
+    const apiUrl = getApiUrl();
+    const value = await input({
+      message: "Describe the package that you need.",
+    });
+    log.blue("finding packages...");
+    const res = await fetch(`${apiUrl}/api/ai/package-finder`, {
+      headers: { "Api-Key": apiKey },
+      method: "POST",
+      body: JSON.stringify({
+        description: value,
+      }),
+    });
+
+    if (res.ok) {
+      const json = await res.json();
+      json.data.result.sort((a: any, b: any) => a.stars - b.stars);
+      for (const d of json.data.result) {
+        log.blue(`\n${d.name}`);
+        log.yellow(`stars: ${d.stars.toLocaleString()}`);
+        log.log(`description: ${d.description}`);
+        log.log(`pros: ${d.pros}`);
+        log.log(`cons: ${d.cons}`);
+        log.log(`weekly downloads: ${d.weeklyDownloads}`);
+        log.log(`link: ${d.link}`);
+      }
+    }
+  });
