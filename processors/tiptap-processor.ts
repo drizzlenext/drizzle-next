@@ -15,8 +15,12 @@ export class TiptapProcessor implements ShadrizzProcessor {
     "@tiptap/extension-text-align",
     "@tiptap/react",
     "@tiptap/starter-kit",
+    "@tiptap/extension-image",
+    "@tiptap/extension-code-block-lowlight",
+    "highlight.js",
+    "lowlight",
   ];
-  devDependencies: string[] = [];
+  devDependencies: string[] = ["@types/highlight.js"];
   shadcnComponents: string[] = [];
   dbDialectStrategy?: DbDialectStrategy | undefined;
 

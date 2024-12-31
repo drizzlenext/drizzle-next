@@ -33,6 +33,7 @@ export class NewProjectProcessor implements ShadrizzProcessor {
     "select",
     "popover",
     "alert",
+    "card",
   ];
 
   constructor(opts: ShadrizzConfig) {

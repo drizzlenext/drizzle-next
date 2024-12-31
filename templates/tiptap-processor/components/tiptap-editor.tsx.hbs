@@ -1,6 +1,8 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -8,9 +10,11 @@ import {
   AlignLeftIcon,
   AlignRightIcon,
   BoldIcon,
+  CodeIcon,
   Heading1Icon,
   Heading2Icon,
   Heading3Icon,
+  ImageIcon,
   ItalicIcon,
   LinkIcon,
   ListIcon,
@@ -19,6 +23,24 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 import "@/styles/tiptap-editor.css";
+
+import css from "highlight.js/lib/languages/css";
+import js from "highlight.js/lib/languages/javascript";
+import ts from "highlight.js/lib/languages/typescript";
+import html from "highlight.js/lib/languages/xml";
+
+// load all languages with "all" or common languages with "common"
+import { common, createLowlight } from "lowlight";
+
+// create a lowlight instance with all languages loaded
+const lowlight = createLowlight(common);
+
+// This is only an example, all supported languages are already loaded above
+// but you can also register only specific languages to reduce bundle-size
+lowlight.register("html", html);
+lowlight.register("css", css);
+lowlight.register("js", js);
+lowlight.register("ts", ts);
 
 export const TiptapEditor = ({
   html,
@@ -31,13 +53,18 @@ export const TiptapEditor = ({
 
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      Image,
+      StarterKit.configure({
+        codeBlock: false,
+      }),
+      CodeBlockLowlight.configure({ lowlight }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
       Link,
     ],
     content: html,
+    immediatelyRender: false,
   });
 
   const setLink = useCallback(() => {
@@ -60,6 +87,15 @@ export const TiptapEditor = ({
 
     // update link
     editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+  }, [editor]);
+
+  const addImage = useCallback(() => {
+    const url = window.prompt("URL");
+
+    if (url) {
+      // @ts-expect-error err
+      editor.chain().focus().setImage({ src: url }).run();
+    }
   }, [editor]);
 
   useEffect(() => {
@@ -197,6 +233,18 @@ export const TiptapEditor = ({
           type="button"
           size="icon"
           variant="ghost"
+          onClick={() => editor.chain().focus().toggleCode().run()}
+          className={editor.isActive("code") ? "is-active" : ""}
+        >
+          <CodeIcon />
+        </Button>
+        <Button type="button" size="icon" variant="ghost" onClick={addImage}>
+          <ImageIcon />
+        </Button>
+        <Button
+          type="button"
+          size="icon"
+          variant="ghost"
           onClick={setLink}
           className={editor.isActive("link") ? "is-active" : ""}
         >
@@ -218,6 +266,10 @@ export const TiptapEditor = ({
       </div>
 
       <input type="hidden" name={name} value={editorContent} />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css"
+      />
     </div>
   );
 };
