@@ -83,6 +83,9 @@ export class AdminProcessor implements ShadrizzProcessor {
     renderTemplate({
       inputPath: "admin-processor/actions/admin-login/admin-login.ts.hbs",
       outputPath: "actions/admin-login/admin-login.ts",
+      data: {
+        userObj,
+      },
     });
 
     renderTemplate({

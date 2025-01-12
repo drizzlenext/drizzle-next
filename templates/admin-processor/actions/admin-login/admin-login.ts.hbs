@@ -2,7 +2,7 @@
 
 import { signIn } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { users } from "@/schema/users";
+import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
@@ -16,8 +16,8 @@ export async function adminLogin(
 ): Promise<AdminLoginState> {
   "use server";
   try {
-    const userObj = await db.query.users.findFirst({
-      where: eq(users.email, formData.get("email") as string),
+    const userObj = await db.query.{{userObj.pluralCamelCase}}.findFirst({
+      where: eq({{userObj.pluralCamelCase}}.email, formData.get("email") as string),
     });
 
     if (userObj?.role !== "admin") {
