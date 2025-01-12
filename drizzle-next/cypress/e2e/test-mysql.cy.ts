@@ -19,7 +19,8 @@ describe("shadriz e2e test", () => {
     cy.contains("User");
     cy.contains("user@example.com").should("exist");
     cy.contains("admin@example.com").should("exist");
-    cy.contains("Admin Scaffold").click();
+    cy.get("a").contains("Admin Scaffold").click();
+    cy.get("h1").contains("Admin Scaffold");
     cy.contains("New").click();
     cy.get('input[name="intType"]').type("1");
     cy.get('input[name="tinyintType"]').type("2");

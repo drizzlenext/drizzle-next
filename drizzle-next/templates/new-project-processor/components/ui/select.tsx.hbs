@@ -1,0 +1,19 @@
+import * as React from "react";
+
+const Select = React.forwardRef<
+  HTMLSelectElement,
+  React.ComponentProps<"select">
+>((props, ref) => {
+  return <select ref={ref} {...props} />;
+});
+Select.displayName = "Select";
+
+const SelectOption = React.forwardRef<
+  HTMLOptionElement,
+  React.ComponentProps<"option">
+>((props, ref) => {
+  return <option ref={ref} {...props} />;
+});
+SelectOption.displayName = "SelectOption";
+
+export { Select, SelectOption };
