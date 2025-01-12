@@ -1,10 +1,6 @@
 import { log } from "../lib/log";
 import { dialectStrategyFactory } from "../lib/strategy-factory";
-import {
-  PackageManager,
-  DrizzleNextConfig,
-  DrizzleNextProcessor,
-} from "../lib/types";
+import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
 import {
   appendToEnvLocal,
   appendToFileIfTextNotExists,
@@ -12,9 +8,7 @@ import {
   removeTextFromFile,
   renderTemplate,
   renderTemplateIfNotExists,
-  spawnSyncCommand,
 } from "../lib/utils";
-import packageDrizzleNextJson from "../package-pinned.json";
 
 export class NewProjectProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
@@ -114,19 +108,40 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       },
     });
 
-    // TODO: remove when next.js and shadcn/ui init works with dark mode
-    // prettier-ignore
-    removeTextFromFile("app/globals.css", `:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}`);
-    // prettier-ignore
-    removeTextFromFile("app/globals.css", `@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}`)
+    renderTemplate({
+      inputPath: "new-project-processor/components/ui/button.tsx.hbs",
+      outputPath: "components/ui/button.tsx",
+    });
+
+    renderTemplate({
+      inputPath: "new-project-processor/components/ui/checkbox.tsx.hbs",
+      outputPath: "components/ui/checkbox.tsx",
+    });
+
+    renderTemplate({
+      inputPath: "new-project-processor/components/ui/input.tsx.hbs",
+      outputPath: "components/ui/input.tsx",
+    });
+
+    renderTemplate({
+      inputPath: "new-project-processor/components/ui/label.tsx.hbs",
+      outputPath: "components/ui/label.tsx",
+    });
+
+    renderTemplate({
+      inputPath: "new-project-processor/components/ui/select.tsx.hbs",
+      outputPath: "components/ui/select.tsx",
+    });
+
+    renderTemplate({
+      inputPath: "new-project-processor/components/ui/table.tsx.hbs",
+      outputPath: "components/ui/table.tsx",
+    });
+
+    renderTemplate({
+      inputPath: "new-project-processor/components/ui/textarea.tsx.hbs",
+      outputPath: "components/ui/textarea.tsx",
+    });
 
     appendToFileIfTextNotExists(".gitignore", "uploads/", "uploads/");
 
@@ -135,6 +150,7 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       "http://localhost:3000/uploads"
     );
 
+    // TODO: remove this and update scripts
     insertTextAfterIfNotExists(
       "package.json",
       `"scripts": {`,
