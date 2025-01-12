@@ -34,14 +34,14 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Install Dependencies
-        run: npm install
+        run: npm install -w docs
       - name: Build Docs
-        run: npx tsx scripts/build-docs
+        run: npm run docs:build -w docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: "docs/dist"
+          path: "docs/.vitepress/dist"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
