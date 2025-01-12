@@ -11,16 +11,17 @@ export default defineConfig({
       { text: "Docs", link: "/docs" },
     ],
 
-    // sidebar: [
-    //   {
-    //     text: "Examples",
-    //     items: [
-    //       { text: "Markdown Examples", link: "/markdown-examples" },
-    //       { text: "Runtime API Examples", link: "/api-examples" },
-    //       { text: "Docs", link: "/docs" },
-    //     ],
-    //   },
-    // ],
+    sidebar: [
+      {
+        // text: "Documentation",
+        items: [
+          // { text: "Markdown Examples", link: "/markdown-examples" },
+          // { text: "Runtime API Examples", link: "/api-examples" },
+          { text: "Documentation", link: "/docs" },
+          { text: "About", link: "/about" },
+        ],
+      },
+    ],
 
     socialLinks: [
       { icon: "github", link: "https://github.com/drizzle-next/drizzle-next" },
