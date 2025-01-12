@@ -1,44 +1,11 @@
 {
-  "name": "drizzle-next",
-  "version": "0.1.25",
-  "main": "dist/index.js",
-  "bin": {
-    "drizzle-next": "./dist/index.js"
-  },
-  "scripts": {
-    "test": "vitest",
-    "build": "tsc && cp -R templates dist && cp -R README.md dist/",
-    "start": "node dist/index.js",
-    "build-docs": "tsx scripts/build-docs",
-    "dev-docs": "nodemon --exec \"tsx scripts/build-docs && npx serve docs/dist\" --ignore ./docs/dist/ --ext hbs,js,css,md,ts --watch ./docs",
-    "cypress": "cypress open",
-    "test-postgresql": "sh ./scripts/test-postgresql.sh",
-    "test-sqlite": "sh ./scripts/test-sqlite.sh",
-    "test-mysql": "sh ./scripts/test-mysql.sh",
-    "test-postgresql-auto-increment": "sh ./scripts/test-postgresql-auto-increment.sh",
-    "test-demo": "sh ./scripts/test-demo.sh",
-    "merge-package-json": "tsx ./scripts/merge-package-json.ts"
-  },
-  "author": "travisluong",
-  "license": "MIT",
-  "description": "a full stack framework next.js shadcnui and drizzle orm",
-  "dependencies": {
-    "@inquirer/prompts": "^5.3.0",
-    "@types/pluralize": "^0.0.33",
-    "chalk": "^4.1.2",
-    "change-case-all": "^2.1.0",
-    "commander": "^12.1.0",
-    "handlebars": "^4.7.8",
-    "marked": "^13.0.2",
-    "pluralize": "^8.0.0",
-    "tsx": "^4.19.0",
-    "typescript": "^5.5.2",
-    "vitest": "^2.0.2",
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
-    "cypress": "^13.15.1",
-    "nodemon": "^3.1.7",
-    "tailwindcss": "^3.4.14"
-  }
+  "name": "drizzle-next-root",
+  "private": true,
+  "version": "0.0.0",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "workspaces": [
+    "drizzle-next"
+  ]
 }
