@@ -2,7 +2,7 @@ import { Command, Option } from "commander";
 import { PackageManager } from "../lib/types";
 import { select } from "@inquirer/prompts";
 import { spawnCommand } from "../lib/utils";
-import packageShadrizzJson from "../package-shadrizz.json";
+import packageShadrizzJson from "../package-pinned.json";
 
 export const newCommand = new Command("new");
 

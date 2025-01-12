@@ -14,7 +14,7 @@ import {
   renderTemplateIfNotExists,
   spawnSyncCommand,
 } from "../lib/utils";
-import packageShadrizzJson from "../package-shadrizz.json";
+import packageShadrizzJson from "../package-pinned.json";
 
 export class NewProjectProcessor implements ShadrizzProcessor {
   opts: ShadrizzConfig;

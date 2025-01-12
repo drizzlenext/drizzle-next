@@ -578,7 +578,7 @@ A scaffold is all of the starter code, including the UI and data layer, that is 
 
 **Why not a boilerplate?**
 
-Boilerplates go obsolete fast. shadrizz offers a `latest` option to install latest dependencies. This means you'll get the latest version of Drizzle ORM, shadcn/ui components, Auth.js, TailwindCSS, Zod, and more. If you prefer a more stable version, choose the `pinned` option during initialization and you'll get the pinned versions of each top-level dependency. The pinned versions can be found in `package-shadrizz.json` in the shadrizz GitHub repo.
+Boilerplates go obsolete fast. shadrizz offers a `latest` option to install latest dependencies. This means you'll get the latest version of Drizzle ORM, shadcn/ui components, Auth.js, TailwindCSS, Zod, and more. If you prefer a more stable version, choose the `pinned` option during initialization and you'll get the pinned versions of each top-level dependency. The pinned versions can be found in `package-pinned.json` in the shadrizz GitHub repo.
 
 ## Author
 

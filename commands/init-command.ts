@@ -44,7 +44,7 @@ initCommand
   .addOption(
     new Option(
       "--no-latest",
-      "install pinned dependencies and shadcn components specified in package-shadrizz.json"
+      "install pinned dependencies and shadcn components specified in package-pinned.json"
     )
   )
   .addOption(
@@ -125,7 +125,7 @@ initCommand
                 name: "pinned",
                 value: false,
                 description:
-                  "Installs pinned packages in package-shadrizz.json. More stable, but possibly obsolete.",
+                  "Installs pinned packages in package-pinned.json. More stable, but possibly obsolete.",
               },
               {
                 name: "latest",

@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import Handlebars from "handlebars";
 import { log } from "./log";
-import packageShadrizzJson from "../package-shadrizz.json";
+import packageShadrizzJson from "../package-pinned.json";
 import { PackageManager, ShadrizzConfig } from "./types";
 import { caseFactory } from "./case-utils";
 import { registerHandlebarsHelpers } from "./handlebars-helpers";
