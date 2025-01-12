@@ -26,4 +26,5 @@ export default defineConfig({
       { icon: "github", link: "https://github.com/drizzle-next/drizzle-next" },
     ],
   },
+  ignoreDeadLinks: true,
 });
