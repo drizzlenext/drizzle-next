@@ -5,14 +5,11 @@ layout: home
 hero:
   name: "Drizzle Next"
   text: "Generate Next.js And Drizzle ORM Code"
-  tagline: My great project tagline
+  tagline: The fastest way to build Next.js and Drizzle ORM Apps
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Documentation
+      link: /docs
 
 features:
   - title: Feature A
@@ -22,4 +19,3 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-
