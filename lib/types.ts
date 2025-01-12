@@ -1,4 +1,4 @@
-export interface ShadrizzConfig {
+export interface DrizzleNextConfig {
   version: string;
   packageManager: PackageManager;
   latest: boolean;
@@ -24,8 +24,8 @@ export type PkStrategy =
   | "nanoid"
   | "auto_increment";
 
-export interface ShadrizzProcessor {
-  opts: ShadrizzConfig;
+export interface DrizzleNextProcessor {
+  opts: DrizzleNextConfig;
   dependencies: string[];
   devDependencies: string[];
   shadcnComponents: string[];
@@ -43,7 +43,7 @@ export interface DataTypeStrategyMap {
 
 export type AuthorizationLevel = "admin" | "private" | "public";
 
-export interface ScaffoldProcessorOpts extends ShadrizzConfig {
+export interface ScaffoldProcessorOpts extends DrizzleNextConfig {
   table: string;
   columns: string[];
   authorizationLevel: AuthorizationLevel;
@@ -93,8 +93,8 @@ export interface DbDialectStrategy {
   timestampImport: string;
 }
 
-export interface DbPackageStrategy extends ShadrizzProcessor {
-  opts: ShadrizzConfig;
+export interface DbPackageStrategy extends DrizzleNextProcessor {
+  opts: DrizzleNextConfig;
   dialect: DbDialect;
   copyCreateUserScript(): void;
   copyMigrateScript(): void;

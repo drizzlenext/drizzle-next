@@ -3,8 +3,8 @@ import { dialectStrategyFactory } from "../lib/strategy-factory";
 import {
   DbDialect,
   DbDialectStrategy,
-  ShadrizzConfig,
-  ShadrizzProcessor,
+  DrizzleNextConfig,
+  DrizzleNextProcessor,
 } from "../lib/types";
 import {
   appendToFileIfTextNotExists,
@@ -14,14 +14,14 @@ import {
 import { ScaffoldProcessor } from "./scaffold-processor";
 import { caseFactory } from "../lib/case-utils";
 
-export class AdminProcessor implements ShadrizzProcessor {
-  opts: ShadrizzConfig;
+export class AdminProcessor implements DrizzleNextProcessor {
+  opts: DrizzleNextConfig;
   dependencies: string[] = [];
   devDependencies: string[] = [];
   shadcnComponents: string[] = ["card"];
   dbDialectStrategy: DbDialectStrategy;
 
-  constructor(opts: ShadrizzConfig) {
+  constructor(opts: DrizzleNextConfig) {
     this.dbDialectStrategy = dialectStrategyFactory(opts.dbDialect);
     this.opts = opts;
   }

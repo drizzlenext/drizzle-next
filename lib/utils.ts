@@ -3,8 +3,8 @@ import * as fs from "fs";
 import * as path from "path";
 import Handlebars from "handlebars";
 import { log } from "./log";
-import packageShadrizzJson from "../package-pinned.json";
-import { PackageManager, ShadrizzConfig } from "./types";
+import packageDrizzleNextJson from "../package-pinned.json";
+import { PackageManager, DrizzleNextConfig } from "./types";
 import { caseFactory } from "./case-utils";
 import { registerHandlebarsHelpers } from "./handlebars-helpers";
 
@@ -326,8 +326,8 @@ export async function installDependencies(opts: {
   const collectDependencies = [];
   for (const str of opts.dependencies) {
     const pinnedVersion =
-      packageShadrizzJson.dependencies[
-        str as keyof typeof packageShadrizzJson.dependencies
+      packageDrizzleNextJson.dependencies[
+        str as keyof typeof packageDrizzleNextJson.dependencies
       ];
     if (!pinnedVersion) {
       throw new Error("pinned version not found for dependency " + str);
@@ -368,8 +368,8 @@ export async function installDevDependencies(opts: {
   const collectDevDependencies = [];
   for (const str of opts.devDependencies) {
     const pinnedVersion =
-      packageShadrizzJson.devDependencies[
-        str as keyof typeof packageShadrizzJson.devDependencies
+      packageDrizzleNextJson.devDependencies[
+        str as keyof typeof packageDrizzleNextJson.devDependencies
       ];
     if (!pinnedVersion) {
       throw new Error("pinned version not found for dev dependency " + str);
@@ -407,7 +407,7 @@ export async function addShadcnComponents(opts: {
   packageManager: PackageManager;
   latest: boolean;
 }) {
-  const pinnedVersion = packageShadrizzJson.dependencies["shadcn"];
+  const pinnedVersion = packageDrizzleNextJson.dependencies["shadcn"];
   if (!pinnedVersion) {
     throw new Error("pinned version not found for shadcn");
   }
@@ -432,18 +432,18 @@ export async function addShadcnComponents(opts: {
   spawnSyncCommand(packageManagerRecords[opts.packageManager]);
 }
 
-export function loadShadrizzConfig(): ShadrizzConfig {
+export function loadDrizzleNextConfig(): DrizzleNextConfig {
   const json = fs.readFileSync(
-    path.join(process.cwd(), "shadrizz.config.json"),
+    path.join(process.cwd(), "drizzle-next.config.json"),
     "utf-8"
   );
   return JSON.parse(json);
 }
 
-export function completeShadrizzConfig(
-  partialConfig: Partial<ShadrizzConfig>
-): ShadrizzConfig {
-  const completeConfig: ShadrizzConfig = {
+export function completeDrizzleNextConfig(
+  partialConfig: Partial<DrizzleNextConfig>
+): DrizzleNextConfig {
+  const completeConfig: DrizzleNextConfig = {
     version: partialConfig.version ?? "",
     packageManager: partialConfig.packageManager ?? "npm",
     latest: partialConfig.latest ?? false,

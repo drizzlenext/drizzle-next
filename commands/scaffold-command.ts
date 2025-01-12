@@ -1,9 +1,9 @@
 import fs from "fs";
 import { Command, Option } from "commander";
 import { log } from "../lib/log";
-import { AuthorizationLevel, ShadrizzConfig } from "../lib/types";
+import { AuthorizationLevel, DrizzleNextConfig } from "../lib/types";
 import { select } from "@inquirer/prompts";
-import { loadShadrizzConfig } from "../lib/utils";
+import { loadDrizzleNextConfig } from "../lib/utils";
 import { ScaffoldProcessor } from "../processors/scaffold-processor";
 
 export const scaffoldCommand = new Command("scaffold");
@@ -14,13 +14,13 @@ scaffoldCommand
     `generate crud ui, db schema, db migration, and server actions for a database table
 
 # sqlite example
-npx shadrizz@latest scaffold post -c title:text content:text is_draft:boolean published_at:text
+npx drizzle-next@latest scaffold post -c title:text content:text is_draft:boolean published_at:text
 
 # postgresql example
-npx shadrizz@latest scaffold post -c title:text content:text is_draft:boolean published_at:timestamp
+npx drizzle-next@latest scaffold post -c title:text content:text is_draft:boolean published_at:timestamp
 
 # mysql example
-npx shadrizz@latest scaffold post -c title:varchar content:text is_draft:boolean published_at:timestamp
+npx drizzle-next@latest scaffold post -c title:varchar content:text is_draft:boolean published_at:timestamp
 
 `
   )
@@ -36,7 +36,7 @@ npx shadrizz@latest scaffold post -c title:varchar content:text is_draft:boolean
     ).choices(["admin", "private", "public"])
   )
   .action(async (table, options) => {
-    const shadrizzConfig: ShadrizzConfig = loadShadrizzConfig();
+    const drizzleNextConfig: DrizzleNextConfig = loadDrizzleNextConfig();
     const authorizationLevel: AuthorizationLevel =
       options.authorizationLevel ||
       (await select({
@@ -73,7 +73,7 @@ npx shadrizz@latest scaffold post -c title:varchar content:text is_draft:boolean
       columns: options.columns,
       authorizationLevel: authorizationLevel,
       enableCompletionMessage: true,
-      ...shadrizzConfig,
+      ...drizzleNextConfig,
     });
     scaffoldProcessor.process();
   });

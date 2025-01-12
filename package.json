@@ -1,9 +1,9 @@
 {
-  "name": "shadrizz",
+  "name": "drizzle-next",
   "version": "0.1.25",
   "main": "dist/index.js",
   "bin": {
-    "shadrizz": "./dist/index.js"
+    "drizzle-next": "./dist/index.js"
   },
   "scripts": {
     "test": "vitest",

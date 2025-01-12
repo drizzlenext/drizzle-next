@@ -9,8 +9,8 @@ import { log } from "../lib/log";
 import {
   DbDialect,
   DbDialectStrategy,
-  ShadrizzConfig,
-  ShadrizzProcessor,
+  DrizzleNextConfig,
+  DrizzleNextProcessor,
 } from "../lib/types";
 import {
   pkKeyValTemplates,
@@ -150,8 +150,8 @@ const authDbDialectStrategy: Record<DbDialect, AuthDbDialect> = {
   },
 };
 
-export class AuthProcessor implements ShadrizzProcessor {
-  constructor(public opts: ShadrizzConfig) {
+export class AuthProcessor implements DrizzleNextProcessor {
+  constructor(public opts: DrizzleNextConfig) {
     this.dbDialectStrategy = dialectStrategyFactory(this.opts.dbDialect);
   }
 

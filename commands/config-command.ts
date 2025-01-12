@@ -6,7 +6,7 @@ import { log } from "../lib/log";
 
 export const configCommand = new Command("config").description("configuration");
 
-const configDir = path.join(os.homedir(), ".shadrizz");
+const configDir = path.join(os.homedir(), ".drizzle-next");
 const configFile = path.join(configDir, "config.json");
 
 if (!fs.existsSync(configDir)) {

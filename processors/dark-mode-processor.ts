@@ -1,5 +1,5 @@
 import { log } from "../lib/log";
-import { ShadrizzConfig, ShadrizzProcessor } from "../lib/types";
+import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
 import {
   insertTextAfterIfNotExists,
   insertTextBeforeIfNotExists,
@@ -7,8 +7,8 @@ import {
   renderTemplate,
 } from "../lib/utils";
 
-export class DarkModeProcessor implements ShadrizzProcessor {
-  constructor(public opts: ShadrizzConfig) {}
+export class DarkModeProcessor implements DrizzleNextProcessor {
+  constructor(public opts: DrizzleNextConfig) {}
 
   dependencies = ["next-themes"];
 

@@ -1,13 +1,13 @@
 import { log } from "../lib/log";
-import { ShadrizzConfig, ShadrizzProcessor } from "../lib/types";
+import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
 import { renderTemplate, renderTemplateIfNotExists } from "../lib/utils";
 
-export class DbDialectProcessor implements ShadrizzProcessor {
-  opts: ShadrizzConfig;
+export class DbDialectProcessor implements DrizzleNextProcessor {
+  opts: DrizzleNextConfig;
   dependencies: string[] = [];
   devDependencies: string[] = [];
   shadcnComponents: string[] = [];
-  constructor(opts: ShadrizzConfig) {
+  constructor(opts: DrizzleNextConfig) {
     this.opts = opts;
   }
 

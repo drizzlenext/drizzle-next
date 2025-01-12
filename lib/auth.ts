@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import os from "os";
 
-const configDir = path.join(os.homedir(), ".shadrizz");
+const configDir = path.join(os.homedir(), ".drizzle-next");
 const configFile = path.join(configDir, "config.json");
 
 export function getApiKey() {
@@ -11,7 +11,7 @@ export function getApiKey() {
     return configData.apiKey;
   } else {
     console.log(
-      "No API Key found. Register at https://www.shadrizz.com. Use `config set-api-key <key>` to set api key."
+      "No API Key found. Register at https://www.drizzle-next.com. Use `config set-api-key <key>` to set api key."
     );
     process.exit(1);
   }
@@ -20,6 +20,6 @@ export function getApiKey() {
 export function getApiUrl() {
   if (fs.existsSync(configFile)) {
     const configData = JSON.parse(fs.readFileSync(configFile, "utf8"));
-    return configData.apiUrl ?? "https://www.shadrizz.com";
+    return configData.apiUrl ?? "https://www.drizzle-next.com";
   }
 }

@@ -10,7 +10,7 @@ describe("shadriz e2e test", () => {
 
   it("home page", () => {
     cy.visit("http://localhost:3000");
-    cy.get("h1").first().should("have.text", "shadrizz");
+    cy.get("h1").first().should("have.text", "drizzle-next");
   });
 
   it("admin scaffold happy path", () => {

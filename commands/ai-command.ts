@@ -7,7 +7,7 @@ import { ScaffoldProcessor } from "../processors/scaffold-processor";
 import {
   compileTemplate,
   getFilenamesFromFolder,
-  loadShadrizzConfig,
+  loadDrizzleNextConfig,
   writeToFile,
 } from "../lib/utils";
 import { dialectStrategyFactory } from "../lib/strategy-factory";
@@ -50,13 +50,13 @@ aiCommand
   .action(async () => {
     const apiKey = getApiKey();
     const apiUrl = getApiUrl();
-    const shadrizzConfig = loadShadrizzConfig();
+    const drizzleNextConfig = loadDrizzleNextConfig();
     const value = await input({ message: "What would you like to build?" });
     const res = await fetch(`${apiUrl}/api/ai/scaffold`, {
       headers: { "Api-Key": apiKey },
       body: JSON.stringify({
         ideaText: value,
-        dbDialect: shadrizzConfig.dbDialect,
+        dbDialect: drizzleNextConfig.dbDialect,
       }),
       method: "POST",
     });
@@ -102,12 +102,12 @@ aiCommand
             message: "What changes would you like to make?",
           });
           log.blue("Making adjustment");
-          const shadrizzConfig = loadShadrizzConfig();
+          const drizzleNextConfig = loadDrizzleNextConfig();
           const res = await fetchScaffoldAdjustment(apiKey, apiUrl, {
             adjustmentText,
             schemaText,
             threadId,
-            dbDialect: shadrizzConfig.dbDialect,
+            dbDialect: drizzleNextConfig.dbDialect,
           });
           if (!res.ok) {
             await handleError(res);
@@ -189,9 +189,9 @@ async function generateScaffold(schema: SchemaType) {
       )
       .map((col) => col.columnName + ":" + col.dataType);
     // generate scaffold
-    const shadrizzConfig = loadShadrizzConfig();
+    const drizzleNextConfig = loadDrizzleNextConfig();
     const processor = new ScaffoldProcessor({
-      ...shadrizzConfig,
+      ...drizzleNextConfig,
       table: table.tableName,
       columns: columnArr,
       authorizationLevel: authorizationLevel,
@@ -243,16 +243,16 @@ function renderTableSchema(schema: SchemaType) {
 }
 
 function getIdDataType() {
-  const shadrizzConfig = loadShadrizzConfig();
-  const dbDialectStrategy = dialectStrategyFactory(shadrizzConfig.dbDialect);
+  const drizzleNextConfig = loadDrizzleNextConfig();
+  const dbDialectStrategy = dialectStrategyFactory(drizzleNextConfig.dbDialect);
   const pkStrategyDataTypes = dbDialectStrategy.pkStrategyDataTypes;
-  const idDataType = pkStrategyDataTypes[shadrizzConfig.pkStrategy];
+  const idDataType = pkStrategyDataTypes[drizzleNextConfig.pkStrategy];
   return idDataType;
 }
 
 function getTimestampDataType() {
-  const shadrizzConfig = loadShadrizzConfig();
-  const dbDialectStrategy = dialectStrategyFactory(shadrizzConfig.dbDialect);
+  const drizzleNextConfig = loadDrizzleNextConfig();
+  const dbDialectStrategy = dialectStrategyFactory(drizzleNextConfig.dbDialect);
   const timestampDataType = dbDialectStrategy.timestampImport;
   return timestampDataType;
 }

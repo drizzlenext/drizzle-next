@@ -14,9 +14,9 @@ const VERSION = packageJson["version"];
 const program = new Command();
 
 program
-  .name("shadrizz")
+  .name("drizzle-next")
   .description(
-    "shadrizz - full stack framework next.js shadcn/ui and drizzle orm"
+    "drizzle-next - full stack framework next.js shadcn/ui and drizzle orm"
   )
   .version(VERSION);
 

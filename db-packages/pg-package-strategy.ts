@@ -1,16 +1,16 @@
 import { caseFactory } from "../lib/case-utils";
 import { log } from "../lib/log";
-import { DbDialect, DbPackageStrategy, ShadrizzConfig } from "../lib/types";
+import { DbDialect, DbPackageStrategy, DrizzleNextConfig } from "../lib/types";
 import { appendToEnvLocal, renderTemplate } from "../lib/utils";
 
 export class PgPackageStrategy implements DbPackageStrategy {
-  opts: ShadrizzConfig;
+  opts: DrizzleNextConfig;
   shadcnComponents: string[] = [];
   dialect: DbDialect = "postgresql";
   dependencies = ["pg"];
   devDependencies = ["@types/pg"];
 
-  constructor(opts: ShadrizzConfig) {
+  constructor(opts: DrizzleNextConfig) {
     this.opts = opts;
   }
 

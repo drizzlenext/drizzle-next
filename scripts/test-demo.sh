@@ -1,14 +1,14 @@
-SHADRIZZ_PATH="$HOME/code/shadrizz/index.ts"
+DRIZZLE_NEXT_PATH="$HOME/code/drizzle-next/index.ts"
 
-shadrizz() {
-    tsx "$SHADRIZZ_PATH" "$@"
+drizzle-next() {
+    tsx "$DRIZZLE_NEXT_PATH" "$@"
 }
 
-# rm -rf ~/code/shadrizz-demo
+# rm -rf ~/code/drizzle-next-demo
 # cd ~/code
-# shadrizz new shadrizz-demo -p pnpm --latest
-cd ~/code/shadrizz-demo
-shadrizz init -p pnpm --latest \
+# drizzle-next new drizzle-next-demo -p pnpm --latest
+cd ~/code/drizzle-next-demo
+drizzle-next init -p pnpm --latest \
     --db-dialect sqlite \
     -pk cuid2 \
     --auth-solution authjs \
@@ -17,17 +17,17 @@ shadrizz init -p pnpm --latest \
     --pluralize \
     --no-install
 # pnpm add @faker-js/faker
-# cp ~/code/shadrizz-env/.env.local.sqlite .env.local
-# cp ~/code/shadrizz/templates/test-demo/scripts/load-fake-data.ts.hbs scripts/load-fake-data.ts
-cp ~/code/shadrizz/templates/test-demo/app/page.tsx.hbs app/page.tsx
-cp ~/code/shadrizz/templates/test-demo/app/\(admin\)/admin/page.tsx.hbs app/\(admin\)/admin/page.tsx
-cp ~/code/shadrizz/templates/test-demo/app/\(private\)/dashboard/page.tsx.hbs app/\(private\)/dashboard/page.tsx
-# shadrizz add tiptap
-shadrizz scaffold -a admin category -c name:text
-shadrizz scaffold -a admin post -c category_id:references_select title:text published_at:timestamp content:text_tiptap
-shadrizz scaffold -a private todo -c title:text completed:boolean
-shadrizz scaffold -a private note -c title:text content:text_tiptap
-# shadrizz add stripe
+# cp ~/code/drizzle-next-env/.env.local.sqlite .env.local
+# cp ~/code/drizzle-next/templates/test-demo/scripts/load-fake-data.ts.hbs scripts/load-fake-data.ts
+cp ~/code/drizzle-next/templates/test-demo/app/page.tsx.hbs app/page.tsx
+cp ~/code/drizzle-next/templates/test-demo/app/\(admin\)/admin/page.tsx.hbs app/\(admin\)/admin/page.tsx
+cp ~/code/drizzle-next/templates/test-demo/app/\(private\)/dashboard/page.tsx.hbs app/\(private\)/dashboard/page.tsx
+# drizzle-next add tiptap
+drizzle-next scaffold -a admin category -c name:text
+drizzle-next scaffold -a admin post -c category_id:references_select title:text published_at:timestamp content:text_tiptap
+drizzle-next scaffold -a private todo -c title:text completed:boolean
+drizzle-next scaffold -a private note -c title:text content:text_tiptap
+# drizzle-next add stripe
 # npm run generate
 # npm run migrate
 # npx tsx scripts/create-user.ts test@example.com 12345678

@@ -2,13 +2,13 @@ import { log } from "../lib/log";
 import { dialectStrategyFactory } from "../lib/strategy-factory";
 import {
   DbDialectStrategy,
-  ShadrizzConfig,
-  ShadrizzProcessor,
+  DrizzleNextConfig,
+  DrizzleNextProcessor,
 } from "../lib/types";
 import { renderTemplate } from "../lib/utils";
 
-export class TiptapProcessor implements ShadrizzProcessor {
-  opts: ShadrizzConfig;
+export class TiptapProcessor implements DrizzleNextProcessor {
+  opts: DrizzleNextConfig;
   dependencies: string[] = [
     "@tiptap/core",
     "@tiptap/extension-link",
@@ -24,7 +24,7 @@ export class TiptapProcessor implements ShadrizzProcessor {
   shadcnComponents: string[] = [];
   dbDialectStrategy?: DbDialectStrategy | undefined;
 
-  constructor(opts: ShadrizzConfig) {
+  constructor(opts: DrizzleNextConfig) {
     this.dbDialectStrategy = dialectStrategyFactory(opts.dbDialect);
     this.opts = opts;
   }

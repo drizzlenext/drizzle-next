@@ -2,15 +2,15 @@ import { Command, Option } from "commander";
 import { PackageManager } from "../lib/types";
 import { select } from "@inquirer/prompts";
 import { spawnCommand } from "../lib/utils";
-import packageShadrizzJson from "../package-pinned.json";
+import packageDrizzleNextJson from "../package-pinned.json";
 
 export const newCommand = new Command("new");
 
-const PINNED_NEXTJS_VERSION = packageShadrizzJson.dependencies["next"];
+const PINNED_NEXTJS_VERSION = packageDrizzleNextJson.dependencies["next"];
 
 newCommand
   .description(
-    "initialize a new next.js project using recommended settings for shadrizz"
+    "initialize a new next.js project using recommended settings for drizzle-next"
   )
   .argument("<name>", "name of project")
   .addOption(

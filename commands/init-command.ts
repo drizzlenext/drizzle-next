@@ -1,10 +1,10 @@
 import { Command, Option } from "commander";
 import { log } from "../lib/log";
-import { ShadrizzConfig, ShadrizzProcessor } from "../lib/types";
+import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
 import { checkbox, select, confirm } from "@inquirer/prompts";
 import {
   addShadcnComponents,
-  completeShadrizzConfig,
+  completeDrizzleNextConfig,
   installDependencies,
   installDevDependencies,
   preflightChecks,
@@ -102,7 +102,7 @@ initCommand
 
       // inquire
 
-      const partialConfig: Partial<ShadrizzConfig> = {};
+      const partialConfig: Partial<DrizzleNextConfig> = {};
       partialConfig.version = VERSION;
 
       partialConfig.packageManager =
@@ -242,12 +242,12 @@ initCommand
 
       // process
 
-      const processors: ShadrizzProcessor[] = [];
+      const processors: DrizzleNextProcessor[] = [];
 
-      const completeConfig = completeShadrizzConfig(partialConfig);
+      const completeConfig = completeDrizzleNextConfig(partialConfig);
 
       writeToFile(
-        "shadrizz.config.json",
+        "drizzle-next.config.json",
         JSON.stringify(completeConfig, null, 2)
       );
 
@@ -324,7 +324,7 @@ initCommand
       }
 
       log.log("");
-      log.success("shadrizz init success");
+      log.success("drizzle-next init success");
     } catch (error) {
       log.red(`${error}`);
     }

@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.querySelector("#menu-btn");
-  const sidebar = document.querySelector(".shadrizz-sidebar");
-  const shadrizzDocs = document.querySelector(".shadrizz-docs");
+  const sidebar = document.querySelector(".drizzle-next-sidebar");
+  const drizzle-nextDocs = document.querySelector(".drizzle-next-docs");
   menuBtn.addEventListener("click", () => {
     if (sidebar.classList.contains("hidden")) {
       sidebar.classList.remove("hidden");
-      shadrizzDocs.classList.add("hidden");
+      drizzle-nextDocs.classList.add("hidden");
     } else {
       sidebar.classList.add("hidden");
-      shadrizzDocs.classList.remove("hidden");
+      drizzle-nextDocs.classList.remove("hidden");
     }
   });
 
   sidebar.addEventListener("click", (e) => {
     if (e.target.closest("a")) {
       sidebar.classList.add("hidden");
-      shadrizzDocs.classList.remove("hidden");
+      drizzle-nextDocs.classList.remove("hidden");
     }
   });
 

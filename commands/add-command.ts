@@ -1,11 +1,11 @@
 import { Command } from "commander";
 import { log } from "../lib/log";
-import { ShadrizzConfig } from "../lib/types";
+import { DrizzleNextConfig } from "../lib/types";
 import {
   addShadcnComponents,
   installDependencies,
   installDevDependencies,
-  loadShadrizzConfig,
+  loadDrizzleNextConfig,
 } from "../lib/utils";
 import { ADD_ON_REGISTRY, getAddOnHelpText } from "../lib/add-on-registry";
 
@@ -30,27 +30,27 @@ addCommand
     const addOn = ADD_ON_REGISTRY[name as keyof typeof ADD_ON_REGISTRY];
     const Processor = addOn.Processor;
 
-    const shadrizzConfig: ShadrizzConfig = loadShadrizzConfig();
+    const drizzleNextConfig: DrizzleNextConfig = loadDrizzleNextConfig();
 
-    const processor = new Processor(shadrizzConfig);
+    const processor = new Processor(drizzleNextConfig);
 
     if (options.install) {
       await installDependencies({
         dependencies: processor.dependencies,
-        packageManager: shadrizzConfig.packageManager,
-        latest: shadrizzConfig.latest,
+        packageManager: drizzleNextConfig.packageManager,
+        latest: drizzleNextConfig.latest,
       });
 
       await installDevDependencies({
         devDependencies: processor.devDependencies,
-        packageManager: shadrizzConfig.packageManager,
-        latest: shadrizzConfig.latest,
+        packageManager: drizzleNextConfig.packageManager,
+        latest: drizzleNextConfig.latest,
       });
 
       await addShadcnComponents({
         shadcnComponents: processor.shadcnComponents,
-        packageManager: shadrizzConfig.packageManager,
-        latest: shadrizzConfig.latest,
+        packageManager: drizzleNextConfig.packageManager,
+        latest: drizzleNextConfig.latest,
       });
     }
 

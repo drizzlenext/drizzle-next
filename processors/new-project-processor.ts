@@ -2,8 +2,8 @@ import { log } from "../lib/log";
 import { dialectStrategyFactory } from "../lib/strategy-factory";
 import {
   PackageManager,
-  ShadrizzConfig,
-  ShadrizzProcessor,
+  DrizzleNextConfig,
+  DrizzleNextProcessor,
 } from "../lib/types";
 import {
   appendToEnvLocal,
@@ -14,10 +14,10 @@ import {
   renderTemplateIfNotExists,
   spawnSyncCommand,
 } from "../lib/utils";
-import packageShadrizzJson from "../package-pinned.json";
+import packageDrizzleNextJson from "../package-pinned.json";
 
-export class NewProjectProcessor implements ShadrizzProcessor {
-  opts: ShadrizzConfig;
+export class NewProjectProcessor implements DrizzleNextProcessor {
+  opts: DrizzleNextConfig;
 
   dependencies = ["drizzle-orm", "dotenv", "zod"];
 
@@ -36,7 +36,7 @@ export class NewProjectProcessor implements ShadrizzProcessor {
     "card",
   ];
 
-  constructor(opts: ShadrizzConfig) {
+  constructor(opts: DrizzleNextConfig) {
     this.opts = opts;
   }
 
@@ -50,7 +50,7 @@ export class NewProjectProcessor implements ShadrizzProcessor {
       return;
     }
 
-    const pinnedVersion = packageShadrizzJson.dependencies["shadcn"];
+    const pinnedVersion = packageDrizzleNextJson.dependencies["shadcn"];
     if (!pinnedVersion) {
       throw new Error("pinned version not found for shadcn");
     }

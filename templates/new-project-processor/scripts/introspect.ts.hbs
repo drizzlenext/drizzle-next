@@ -1,7 +1,7 @@
 /**
  * introspect.
  * this is a utility script for reading an existing drizzle table
- * and generating a shadrizz scaffold command from the table.
+ * and generating a drizzle-next scaffold command from the table.
  * usage example: tsx scripts/introspect.ts myTable
  */
 
@@ -20,12 +20,12 @@ const PACKAGE_MANAGER_RECORD: Record<PackageManagers, string> = {
 async function main() {
   const tableName = process.argv[2];
 
-  const shadrizzConfig = JSON.parse(
-    fs.readFileSync("shadrizz.config.json", "utf-8")
+  const drizzleNextConfig = JSON.parse(
+    fs.readFileSync("drizzle-next.config.json", "utf-8")
   );
 
   const pkg =
-    PACKAGE_MANAGER_RECORD[shadrizzConfig.packageManager as PackageManagers];
+    PACKAGE_MANAGER_RECORD[drizzleNextConfig.packageManager as PackageManagers];
 
   const table = schema[tableName as keyof typeof schema];
 
@@ -45,7 +45,7 @@ async function main() {
   }
 
   let command =
-    `${pkg} shadrizz@latest scaffold ${camelToSnakeCase(tableName)}` + ` -c `;
+    `${pkg} drizzle-next@latest scaffold ${camelToSnakeCase(tableName)}` + ` -c `;
 
   for (const col of conf.columns) {
     if (

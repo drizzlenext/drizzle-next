@@ -1,6 +1,6 @@
 import { caseFactory } from "../lib/case-utils";
 import { log } from "../lib/log";
-import { DbDialect, DbPackageStrategy, ShadrizzConfig } from "../lib/types";
+import { DbDialect, DbPackageStrategy, DrizzleNextConfig } from "../lib/types";
 import {
   appendToEnvLocal,
   insertTextAfterIfNotExists,
@@ -8,13 +8,13 @@ import {
 } from "../lib/utils";
 
 export class Mysql2PackageStrategy implements DbPackageStrategy {
-  opts: ShadrizzConfig;
+  opts: DrizzleNextConfig;
   shadcnComponents: string[] = [];
   dialect: DbDialect = "mysql";
   dependencies = ["mysql2"];
   devDependencies = [];
 
-  constructor(opts: ShadrizzConfig) {
+  constructor(opts: DrizzleNextConfig) {
     this.opts = opts;
   }
 

@@ -1,17 +1,17 @@
 import { StripeProcessor } from "../processors/stripe-processor";
 import { TiptapProcessor } from "../processors/tiptap-processor";
-import { ShadrizzProcessor } from "./types";
+import { DrizzleNextProcessor } from "./types";
 
 type ClassType<T> = new (...args: any[]) => T;
 
-interface ShadrizzAddOn {
-  Processor: ClassType<ShadrizzProcessor>;
+interface DrizzleNextAddOn {
+  Processor: ClassType<DrizzleNextProcessor>;
   name: string;
   description: string;
 }
 
 interface ClassMap {
-  [key: string]: ShadrizzAddOn;
+  [key: string]: DrizzleNextAddOn;
 }
 
 export const ADD_ON_REGISTRY: ClassMap = {
