@@ -5,7 +5,7 @@ describe("shadriz e2e test", () => {
     cy.visit("http://localhost:3000/admin-login");
     cy.get('input[name="email"]').type("admin@example.com");
     cy.get('input[name="password"]').type("pw");
-    cy.contains("Sign in with Credentials").click();
+    cy.contains("Sign in").click();
   });
 
   it("home page", () => {
