@@ -9,7 +9,6 @@ import {
 
 export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
   opts: DrizzleNextConfig;
-  shadcnComponents: string[] = [];
   dialect: DbDialect = "sqlite";
   dependencies: string[] = ["better-sqlite3"];
   devDependencies: string[] = ["@types/better-sqlite3"];

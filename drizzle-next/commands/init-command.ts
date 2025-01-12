@@ -3,7 +3,6 @@ import { log } from "../lib/log";
 import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
 import { checkbox, select, confirm } from "@inquirer/prompts";
 import {
-  addShadcnComponents,
   completeDrizzleNextConfig,
   installDependencies,
   installDevDependencies,
@@ -276,7 +275,6 @@ initCommand
 
       const dependencies = [];
       const devDependencies = [];
-      const shadcnComponents = [];
 
       dependencies.push(...pkDependencies[completeConfig.pkStrategy]);
 
@@ -286,7 +284,6 @@ initCommand
       for (const processor of processors) {
         dependencies.push(...processor.dependencies);
         devDependencies.push(...processor.devDependencies);
-        shadcnComponents.push(...processor.shadcnComponents);
       }
 
       for (const authProvider of completeConfig.authProviders) {
@@ -304,12 +301,6 @@ initCommand
 
         await installDevDependencies({
           devDependencies,
-          packageManager: completeConfig.packageManager,
-          latest: completeConfig.latest,
-        });
-
-        await addShadcnComponents({
-          shadcnComponents,
           packageManager: completeConfig.packageManager,
           latest: completeConfig.latest,
         });

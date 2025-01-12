@@ -28,7 +28,6 @@ export interface DrizzleNextProcessor {
   opts: DrizzleNextConfig;
   dependencies: string[];
   devDependencies: string[];
-  shadcnComponents: string[];
   dbDialectStrategy?: DbDialectStrategy;
   init(): Promise<void>;
   render(): Promise<void>;

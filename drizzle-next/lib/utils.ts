@@ -402,36 +402,6 @@ export async function installDevDependencies(opts: {
   await runCommand(cmd);
 }
 
-export async function addShadcnComponents(opts: {
-  shadcnComponents: string[];
-  packageManager: PackageManager;
-  latest: boolean;
-}) {
-  const pinnedVersion = packageDrizzleNextJson.dependencies["shadcn"];
-  if (!pinnedVersion) {
-    throw new Error("pinned version not found for shadcn");
-  }
-  let version;
-  if (opts.latest) {
-    version = "latest";
-  } else {
-    version = pinnedVersion;
-  }
-  if (opts.shadcnComponents.length === 0) {
-    return;
-  }
-
-  const packageManagerRecords: Record<PackageManager, string> = {
-    npm: `npx shadcn@${version} add -y -o ${opts.shadcnComponents.join(" ")}`,
-    pnpm: `pnpm dlx shadcn@${version} add -y -o ${opts.shadcnComponents.join(
-      " "
-    )}`,
-    bun: `bunx shadcn@${version} add -y -o ${opts.shadcnComponents.join(" ")}`,
-  };
-
-  spawnSyncCommand(packageManagerRecords[opts.packageManager]);
-}
-
 export function loadDrizzleNextConfig(): DrizzleNextConfig {
   const json = fs.readFileSync(
     path.join(process.cwd(), "drizzle-next.config.json"),

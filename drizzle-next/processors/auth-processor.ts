@@ -159,8 +159,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   devDependencies = [];
 
-  shadcnComponents: string[] = ["separator", "avatar"];
-
   dbDialectStrategy: DbDialectStrategy;
 
   async init() {

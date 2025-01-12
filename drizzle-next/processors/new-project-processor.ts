@@ -23,19 +23,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
 
   devDependencies = ["drizzle-kit", "@types/react", "@types/react-dom"];
 
-  shadcnComponents: string[] = [
-    "table",
-    "label",
-    "input",
-    "button",
-    "textarea",
-    "checkbox",
-    "select",
-    "popover",
-    "alert",
-    "card",
-  ];
-
   constructor(opts: DrizzleNextConfig) {
     this.opts = opts;
   }
@@ -50,25 +37,7 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       return;
     }
 
-    const pinnedVersion = packageDrizzleNextJson.dependencies["shadcn"];
-    if (!pinnedVersion) {
-      throw new Error("pinned version not found for shadcn");
-    }
-    let version;
-    if (this.opts.latest) {
-      version = "latest";
-    } else {
-      version = pinnedVersion;
-    }
-
-    const packageManagerRecords: Record<PackageManager, string> = {
-      npm: `npx shadcn@${version} init -y -d`,
-      pnpm: `pnpm dlx shadcn@${version} init -y -d`,
-      bun: `bunx shadcn@${version} init -y -d`,
-    };
-
-    // await runCommand(packageManagerRecords[this.opts.packageManager]);
-    spawnSyncCommand(packageManagerRecords[this.opts.packageManager]);
+    // installation logic
   }
 
   async render() {

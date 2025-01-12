@@ -5,7 +5,6 @@ import { appendToEnvLocal, renderTemplate } from "../lib/utils";
 
 export class PgPackageStrategy implements DbPackageStrategy {
   opts: DrizzleNextConfig;
-  shadcnComponents: string[] = [];
   dialect: DbDialect = "postgresql";
   dependencies = ["pg"];
   devDependencies = ["@types/pg"];

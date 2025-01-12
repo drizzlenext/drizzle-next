@@ -14,8 +14,6 @@ export class DarkModeProcessor implements DrizzleNextProcessor {
 
   devDependencies = [];
 
-  shadcnComponents: string[] = ["dropdown-menu"];
-
   async init() {
     log.init("initializing dark mode...");
     await this.render();

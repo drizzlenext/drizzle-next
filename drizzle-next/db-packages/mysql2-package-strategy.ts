@@ -9,7 +9,6 @@ import {
 
 export class Mysql2PackageStrategy implements DbPackageStrategy {
   opts: DrizzleNextConfig;
-  shadcnComponents: string[] = [];
   dialect: DbDialect = "mysql";
   dependencies = ["mysql2"];
   devDependencies = [];

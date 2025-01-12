@@ -30,8 +30,6 @@ export class StripeProcessor implements DrizzleNextProcessor {
 
   devDependencies = [];
 
-  shadcnComponents: string[] = ["card"];
-
   dbDialectStrategy: DbDialectStrategy;
 
   async init() {

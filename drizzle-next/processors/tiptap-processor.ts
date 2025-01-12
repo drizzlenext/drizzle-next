@@ -21,7 +21,6 @@ export class TiptapProcessor implements DrizzleNextProcessor {
     "lowlight",
   ];
   devDependencies: string[] = ["@types/highlight.js"];
-  shadcnComponents: string[] = [];
   dbDialectStrategy?: DbDialectStrategy | undefined;
 
   constructor(opts: DrizzleNextConfig) {

@@ -6,7 +6,6 @@ export class DbDialectProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
   dependencies: string[] = [];
   devDependencies: string[] = [];
-  shadcnComponents: string[] = [];
   constructor(opts: DrizzleNextConfig) {
     this.opts = opts;
   }

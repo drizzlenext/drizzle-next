@@ -18,7 +18,6 @@ export class AdminProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
   dependencies: string[] = [];
   devDependencies: string[] = [];
-  shadcnComponents: string[] = ["card"];
   dbDialectStrategy: DbDialectStrategy;
 
   constructor(opts: DrizzleNextConfig) {

@@ -2,7 +2,6 @@ import { Command } from "commander";
 import { log } from "../lib/log";
 import { DrizzleNextConfig } from "../lib/types";
 import {
-  addShadcnComponents,
   installDependencies,
   installDevDependencies,
   loadDrizzleNextConfig,
@@ -43,12 +42,6 @@ addCommand
 
       await installDevDependencies({
         devDependencies: processor.devDependencies,
-        packageManager: drizzleNextConfig.packageManager,
-        latest: drizzleNextConfig.latest,
-      });
-
-      await addShadcnComponents({
-        shadcnComponents: processor.shadcnComponents,
         packageManager: drizzleNextConfig.packageManager,
         latest: drizzleNextConfig.latest,
       });
