@@ -372,7 +372,7 @@ This is the drizzle-next project structure. The scaffolding automations will wri
 - drizzle - sql migrations
 - lib - configuration and utilities
 - public - static assets
-- repositories - reusable queries and return types
+- queries - reusable queries and return types
 - schema - drizzle schemas
 - scripts - executable scripts
 - services - reusable business logic
@@ -380,15 +380,15 @@ This is the drizzle-next project structure. The scaffolding automations will wri
 - types - module augmentation
 ```
 
-## Repositories
+## Queries
 
-Repositories are modules containing reusable queries.
+The `queries` folder contains modules with reusable queries and return types from running the `scaffold` command.
 
-Why use the repository pattern if you can write the Drizzle query directly in the server component?
+Why extract the queries if you can write the Drizzle query directly in the server components?
 
-First, it makes the query reusable by putting it in a shared module.
+First, it makes the query functions reusable by putting it in a shared module.
 
-Second, the other major benefit is that it allows us to create a reusable Awaited ReturnType. For example:
+Second, the other benefit is that it allows us to create a reusable Awaited ReturnType. For example:
 
 ```ts
 export type PostsWithRelations = Awaited<
@@ -425,12 +425,14 @@ type PostsWithRelations = {
 Now we can annotate our components as needed without having to write the type ourself:
 
 ```tsx
-import { PostsWithRelations } from "@/repositories/post-repository";
+import { PostsWithRelations } from "@/queries/post-queries";
 
 export function PostTable({ postList }: { postList: PostsWithRelations }) {
 ...
 }
 ```
+
+This makes it easier to achieve full stack type safety across the front end and back end.
 
 ## Services
 

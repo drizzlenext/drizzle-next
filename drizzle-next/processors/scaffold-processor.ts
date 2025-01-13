@@ -166,7 +166,7 @@ export class ScaffoldProcessor {
     this.addUpdateForm();
     this.addDeleteForm();
     this.addTableComponent();
-    this.addRepository();
+    this.addQueries();
     insertSchemaToSchemaIndex(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
     });
@@ -659,13 +659,13 @@ export class ScaffoldProcessor {
         );
     }
   }
-  addRepository() {
+  addQueries() {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "scaffold-processor/repositories/table-repository.ts.hbs",
-      outputPath: `repositories/${tableObj.singularKebabCase}-repository.ts`,
+      inputPath: "scaffold-processor/queries/table-queries.ts.hbs",
+      outputPath: `queries/${tableObj.singularKebabCase}-queries.ts`,
       data: {
         tableObj,
         pkStrategyJsType:

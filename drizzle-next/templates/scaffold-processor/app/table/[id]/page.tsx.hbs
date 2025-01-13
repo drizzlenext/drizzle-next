@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { config } from "@/lib/config";
 {{/if}}
-import { get{{tableObj.singularPascalCase}}WithRelations } from "@/repositories/{{tableObj.singularKebabCase}}-repository";
+import { get{{tableObj.singularPascalCase}}WithRelations } from "@/queries/{{tableObj.singularKebabCase}}-queries";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
