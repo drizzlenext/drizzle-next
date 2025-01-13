@@ -16,10 +16,7 @@ addCommand
     `add-ons are extensions that can be added after a project has been initialized\n\navailable add-ons:\n${getAddOnHelpText()}`
   )
   .argument("<extension>", "the name of the add-on extension")
-  .option(
-    "--no-install",
-    "skip installation of dependencies and shadcn components"
-  )
+  .option("--no-install", "skip installation of dependencies")
   .action(async (name, options) => {
     if (!(name in ADD_ON_REGISTRY)) {
       log.red(`${name} not found in add-on registry`);

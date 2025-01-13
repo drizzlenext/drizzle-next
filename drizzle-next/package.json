@@ -21,7 +21,7 @@
   },
   "author": "travisluong",
   "license": "MIT",
-  "description": "a full stack framework next.js shadcnui and drizzle orm",
+  "description": "a full stack framework next.js and drizzle orm",
   "dependencies": {
     "@inquirer/prompts": "^5.3.0",
     "@types/pluralize": "^0.0.33",

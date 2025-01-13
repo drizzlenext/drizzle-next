@@ -15,9 +15,7 @@ const program = new Command();
 
 program
   .name("drizzle-next")
-  .description(
-    "drizzle-next - full stack framework next.js shadcn/ui and drizzle orm"
-  )
+  .description("drizzle-next - full stack framework next.js and drizzle orm")
   .version(VERSION);
 
 program.addCommand(newCommand);

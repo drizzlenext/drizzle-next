@@ -368,7 +368,7 @@ This is the drizzle-next project structure. The scaffolding automations will wri
 	- admin - components for admin routes
 	- private - components for private routes
 	- public - components for public routes
-	- ui - shadcn components
+	- ui - ui components
 - drizzle - sql migrations
 - lib - configuration and utilities
 - public - static assets
@@ -516,7 +516,7 @@ A scaffold is all of the starter code, including the UI and data layer, that is 
 
 **Why not a boilerplate?**
 
-Boilerplates go obsolete fast. drizzle-next offers a `latest` option to install latest dependencies. This means you'll get the latest version of Drizzle ORM, shadcn/ui components, Auth.js, TailwindCSS, Zod, and more. If you prefer a more stable version, choose the `pinned` option during initialization and you'll get the pinned versions of each top-level dependency. The pinned versions can be found in `package-pinned.json` in the drizzle-next GitHub repo.
+Boilerplates go obsolete fast. drizzle-next offers a `latest` option to install latest dependencies. This means you'll get the latest version of Drizzle ORM, Auth.js, TailwindCSS, Zod, and more. If you prefer a more stable version, choose the `pinned` option during initialization and you'll get the pinned versions of each top-level dependency. The pinned versions can be found in `package-pinned.json` in the drizzle-next GitHub repo.
 
 ## Author
 

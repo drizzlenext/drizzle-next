@@ -24,26 +24,18 @@ const VERSION = packageJson["version"];
 
 initCommand
   .description("initialize project, application boilerplate, and configuration")
-  .option(
-    "--no-install",
-    "skip installation of dependencies and shadcn components"
-  )
+  .option("--no-install", "skip installation of dependencies")
   .addOption(
     new Option(
       "-p, --package-manager <packageManager>",
       "the package manager for this project"
     ).choices(["npm", "pnpm", "bun"])
   )
-  .addOption(
-    new Option(
-      "-l, --latest",
-      "install latest dependencies and shadcn components"
-    )
-  )
+  .addOption(new Option("-l, --latest", "install latest dependencies"))
   .addOption(
     new Option(
       "--no-latest",
-      "install pinned dependencies and shadcn components specified in package-pinned.json"
+      "install pinned dependencies specified in package-pinned.json"
     )
   )
   .addOption(
