@@ -21,7 +21,6 @@ import {
   ListOrderedIcon,
   UnlinkIcon,
 } from "lucide-react";
-import { Button } from "./ui/button";
 import "@/styles/tiptap-editor.css";
 
 import css from "highlight.js/lib/languages/css";
@@ -117,32 +116,32 @@ export const TiptapEditor = ({
   return (
     <div className="border border-gray-300 dark:border-gray-800 p-0 rounded">
       {/* Toolbar */}
-      <div className="flex gap-2 border-b border-gray-300 dark:border-gray-800">
-        <Button
+      <div className="flex gap-2 border-b border-gray-300 dark:border-gray-800 pl-2">
+        <button
           type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
           className={
             editor.isActive("bold")
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <BoldIcon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
           className={
             editor.isActive("italic")
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <ItalicIcon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 1 }).run()
@@ -152,13 +151,13 @@ export const TiptapEditor = ({
           }
           className={
             editor.isActive("heading", { level: 1 })
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <Heading1Icon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
@@ -168,13 +167,13 @@ export const TiptapEditor = ({
           }
           className={
             editor.isActive("heading", { level: 2 })
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <Heading2Icon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 3 }).run()
@@ -184,104 +183,106 @@ export const TiptapEditor = ({
           }
           className={
             editor.isActive("heading", { level: 3 })
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <Heading3Icon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
           className={
             editor.isActive({ textAlign: "left" })
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <AlignLeftIcon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
           className={
             editor.isActive({ textAlign: "center" })
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <AlignCenterIcon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
           className={
             editor.isActive({ textAlign: "right" })
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <AlignRightIcon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={
             editor.isActive("bulletList")
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <ListIcon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={
             editor.isActive("orderedList")
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <ListOrderedIcon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() => editor.chain().focus().toggleCode().run()}
           className={
             editor.isActive("code")
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <CodeIcon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={addImage}
-          className="bg-white dark:bg-black"
+          className="bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
         >
           <ImageIcon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={setLink}
           className={
             editor.isActive("link")
-              ? "bg-gray-300 dark:bg-gray-800"
-              : "bg-white dark:bg-black"
+              ? "bg-gray-300 text-black dark:bg-gray-800 dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
+              : "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500"
           }
         >
           <LinkIcon />
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
           onClick={() => editor.chain().focus().unsetLink().run()}
           disabled={!editor.isActive("link")}
-          className={"bg-white dark:bg-black disabled:bg-white"}
+          className={
+            "bg-white text-black dark:bg-black dark:text-white disabled:text-gray-500 dark:disabled:text-gray-500 disabled:bg-white"
+          }
         >
           <UnlinkIcon />
-        </Button>
+        </button>
       </div>
 
       <div className="p-3">
