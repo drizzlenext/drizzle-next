@@ -1,13 +1,20 @@
 "use client";
 
-import { Table2Icon, LayoutDashboardIcon } from "lucide-react";
+import {
+  Table2Icon,
+  LayoutDashboardIcon,
+  UserIcon,
+  LogOutIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
 const items = [
-  { title: "Dashboard", "url": "/dashboard", icon: LayoutDashboardIcon },
-// [CODE_MARK private-sidebar-items]
+  { title: "Dashboard", url: "/dashboard", icon: LayoutDashboardIcon },
+  // [CODE_MARK private-sidebar-items]
+  { title: "Profile", url: "/profile", icon: UserIcon },
+  { title: "Sign out", url: "/signout", icon: LogOutIcon },
 ];
 
 export function PrivateSidebar() {

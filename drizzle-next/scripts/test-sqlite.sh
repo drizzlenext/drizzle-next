@@ -1,9 +1,9 @@
-DRIZZLE_NEXT_PATH="$HOME/code/drizzle-next/index.ts"
+DRIZZLE_NEXT_PATH="$HOME/code/drizzle-next/drizzle-next/index.ts"
 
-drizzle-next() {
+drizzle_next() {
     tsx "$DRIZZLE_NEXT_PATH" "$@"
 }
-
+alias drizzle-next="drizzle_next"
 rm -rf ~/code/demo-sqlite
 cd ~/code
 drizzle-next new demo-sqlite -p pnpm --latest
@@ -22,8 +22,8 @@ drizzle-next scaffold -a public public_scaffold -c text_type:text integer_type:i
 drizzle-next scaffold -a private category -c name:text
 drizzle-next scaffold -a private post -c category_id:references_select title:text likes:integer published_at:timestamp content:text_tiptap
 # drizzle-next add stripe
-npm run generate
-npm run migrate
+npx drizzle-kit generate
+npx drizzle-kit migrate
 npx tsx scripts/create-user.ts user@example.com pw
 npx tsx scripts/create-user.ts admin@example.com pw
 # npx tsx scripts/grant-admin.ts admin@example.com

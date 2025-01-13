@@ -1,6 +1,6 @@
 "use client";
 
-import { Table2Icon, GaugeIcon } from "lucide-react";
+import { Table2Icon, GaugeIcon, SettingsIcon, LogOutIcon } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
@@ -8,6 +8,8 @@ import { usePathname } from "next/navigation";
 const items = [
   { title: "Admin", url: "/admin", icon: GaugeIcon },
   // [CODE_MARK admin-sidebar-items]
+  { title: "Settings", url: "/admin/settings", icon: SettingsIcon },
+  { title: "Sign out", url: "/signout", icon: LogOutIcon },
 ];
 
 export function AdminSidebar() {

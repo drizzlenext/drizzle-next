@@ -44,7 +44,7 @@ export default async function Page(props: {
         </div>
         <div>
           <Link href="{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/new">
-            <Button variant="secondary">
+            <Button className="flex gap-1">
               <PlusIcon /> New
             </Button>
           </Link>

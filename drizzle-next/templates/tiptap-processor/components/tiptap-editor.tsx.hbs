@@ -115,147 +115,140 @@ export const TiptapEditor = ({
   }
 
   return (
-    <div className="border border-input p-0 rounded-md">
+    <div className="border border-gray-300 p-0 rounded">
       {/* Toolbar */}
-      <div className="flex gap-2 border-b">
+      <div className="flex gap-2 border-b border-gray-300">
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
-          className={editor.isActive("bold") ? "is-active" : ""}
+          className={editor.isActive("bold") ? "bg-gray-300" : "bg-white"}
         >
           <BoldIcon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
-          className={editor.isActive("italic") ? "is-active" : ""}
+          className={editor.isActive("italic") ? "bg-gray-300" : "bg-white"}
         >
           <ItalicIcon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 1 }).run()
           }
           disabled={
             !editor.can().chain().focus().toggleHeading({ level: 1 }).run()
           }
-          className={editor.isActive("heading") ? "is-active" : ""}
+          className={
+            editor.isActive("heading", { level: 1 })
+              ? "bg-gray-300"
+              : "bg-white"
+          }
         >
           <Heading1Icon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
           disabled={
             !editor.can().chain().focus().toggleHeading({ level: 2 }).run()
           }
-          className={editor.isActive("heading") ? "is-active" : ""}
+          className={
+            editor.isActive("heading", { level: 2 })
+              ? "bg-gray-300"
+              : "bg-white"
+          }
         >
           <Heading2Icon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 3 }).run()
           }
           disabled={
             !editor.can().chain().focus().toggleHeading({ level: 3 }).run()
           }
-          className={editor.isActive("heading") ? "is-active" : ""}
+          className={
+            editor.isActive("heading", { level: 3 })
+              ? "bg-gray-300"
+              : "bg-white"
+          }
         >
           <Heading3Icon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
-          className={editor.isActive({ textAlign: "left" }) ? "is-active" : ""}
+          className={
+            editor.isActive({ textAlign: "left" }) ? "bg-gray-300" : "bg-white"
+          }
         >
           <AlignLeftIcon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
           className={
-            editor.isActive({ textAlign: "center" }) ? "is-active" : ""
+            editor.isActive({ textAlign: "center" })
+              ? "bg-gray-300"
+              : "bg-white"
           }
         >
           <AlignCenterIcon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
           className={
-            editor.isActive({ textAlign: "center" }) ? "is-active" : ""
+            editor.isActive({ textAlign: "right" }) ? "bg-gray-300" : "bg-white"
           }
         >
           <AlignRightIcon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={editor.isActive("bulletList") ? "is-active" : ""}
+          className={editor.isActive("bulletList") ? "bg-gray-300" : "bg-white"}
         >
           <ListIcon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={editor.isActive("orderedList") ? "is-active" : ""}
+          className={
+            editor.isActive("orderedList") ? "bg-gray-300" : "bg-white"
+          }
         >
           <ListOrderedIcon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() => editor.chain().focus().toggleCode().run()}
-          className={editor.isActive("code") ? "is-active" : ""}
+          className={editor.isActive("code") ? "bg-gray-300" : "bg-white"}
         >
           <CodeIcon />
         </Button>
-        <Button type="button" size="icon" variant="ghost" onClick={addImage}>
+        <Button type="button" onClick={addImage} className="bg-white">
           <ImageIcon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={setLink}
-          className={editor.isActive("link") ? "is-active" : ""}
+          className={editor.isActive("link") ? "bg-gray-300" : "bg-white"}
         >
           <LinkIcon />
         </Button>
         <Button
           type="button"
-          size="icon"
-          variant="ghost"
           onClick={() => editor.chain().focus().unsetLink().run()}
           disabled={!editor.isActive("link")}
+          className={editor.isActive("link") ? "bg-white" : ""}
         >
           <UnlinkIcon />
         </Button>

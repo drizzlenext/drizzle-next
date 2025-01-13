@@ -25,8 +25,8 @@ drizzle-next scaffold -a public public_scaffold -c text_field:text integer_field
 drizzle-next scaffold -a admin category -c name:text
 drizzle-next scaffold -a admin post -c category_id:references_select title:text likes:integer published_at:timestamp content:text_tiptap
 # drizzle-next add stripe
-npm run generate
-npm run migrate
+npx drizzle-kit generate
+npx drizzle-kit migrate
 npx tsx scripts/create-user.ts user@example.com pw
 npx tsx scripts/create-user.ts admin@example.com pw
 npx tsx scripts/grant-admin.ts admin@example.com

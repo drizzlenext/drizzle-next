@@ -98,7 +98,7 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
   printCompletionMessage(): void {
     log.checklist("mysql2 checklist");
     log.task("update DB_URL in .env.local");
-    log.cmdtask("npm run generate");
-    log.cmdtask("npm run migrate");
+    log.cmdtask("npx drizzle-kit generate");
+    log.cmdtask("npx drizzle-kit migrate");
   }
 }

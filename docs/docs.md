@@ -73,8 +73,8 @@ You will be asked a few questions to configure the app:
 Generate and run the drizzle migrations:
 
 ```bash
-npm run generate
-npm run migrate
+npx drizzle-kit generate
+npx drizzle-kit migrate
 ```
 
 Create a test user and grant admin role:
@@ -107,8 +107,8 @@ npx drizzle-next@latest scaffold post -c title:text category_id:references conte
 Run the drizzle migrations:
 
 ```bash
-npm run generate
-npm run migrate
+npx drizzle-kit generate
+npx drizzle-kit migrate
 ```
 
 ### Step 6: Log in to the app

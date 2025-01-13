@@ -28,8 +28,8 @@ drizzle-next scaffold -a admin post -c category_id:references_select title:text 
 drizzle-next scaffold -a private todo -c title:text completed:boolean
 drizzle-next scaffold -a private note -c title:text content:text_tiptap
 # drizzle-next add stripe
-# npm run generate
-# npm run migrate
+# npx drizzle-kit generate
+# npx drizzle-kit migrate
 # npx tsx scripts/create-user.ts test@example.com 12345678
 # npx tsx scripts/grant-admin.ts test@example.com
 # npx tsx scripts/create-price.ts

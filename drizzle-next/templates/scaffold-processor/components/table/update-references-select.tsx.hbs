@@ -4,16 +4,11 @@
             name="{{validatedColumn.caseVariants.singularCamelCase}}"
             defaultValue={ {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.singularCamelCase}}?.toString() }
           >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              { {{validatedColumn.referenceTableVars.singularCamelCase}}List.map(({{validatedColumn.referenceTableVars.singularCamelCase}}) => (
-                <SelectItem key={ {{validatedColumn.referenceTableVars.singularCamelCase}}.id } value={ {{validatedColumn.referenceTableVars.singularCamelCase}}.id.toString() }>
-                  { {{validatedColumn.referenceTableVars.singularCamelCase}}.id}
-                </SelectItem>
-              ))}
-            </SelectContent>
+          { {{validatedColumn.referenceTableVars.singularCamelCase}}List.map(({{validatedColumn.referenceTableVars.singularCamelCase}}) => (
+            <SelectOption key={ {{validatedColumn.referenceTableVars.singularCamelCase}}.id } value={ {{validatedColumn.referenceTableVars.singularCamelCase}}.id.toString() }>
+              { {{validatedColumn.referenceTableVars.singularCamelCase}}.id}
+            </SelectOption>
+          ))}
           </Select>
           {state.errors?.{{validatedColumn.caseVariants.singularCamelCase}}?.map((error) => (
             <p className="text-destructive" key={error}>{error}</p>

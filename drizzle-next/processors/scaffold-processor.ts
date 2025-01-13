@@ -40,7 +40,7 @@ const formComponentImports: Record<FormComponent, string> = {
   input: `import { Input } from "@/components/ui/input";`,
   textarea: `import { Textarea } from "@/components/ui/textarea";`,
   checkbox: `import { Checkbox } from "@/components/ui/checkbox";`,
-  select: `import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";`,
+  select: `import { Select, SelectOption } from "@/components/ui/select";`,
   "tiptap-editor": `import { TiptapEditor } from "@/components/tiptap-editor";`,
 };
 
@@ -642,8 +642,8 @@ export class ScaffoldProcessor {
   printCompletionMessage() {
     log.success("scaffold success: " + this.opts.table);
     log.checklist("scaffold checklist");
-    log.cmdtask("npm run generate");
-    log.cmdtask("npm run migrate");
+    log.cmdtask("npx drizzle-kit generate");
+    log.cmdtask("npx drizzle-kit migrate");
   }
   authorizationRouteGroup() {
     switch (this.opts.authorizationLevel) {

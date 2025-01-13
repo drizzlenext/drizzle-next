@@ -3,9 +3,6 @@ import { signIn } from "@/lib/auth";
 import { AuthError } from "next-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 {{#if providers.credentials}}
 import { SignInForm } from "@/components/signin/signin-form";
 {{/if}}
@@ -19,11 +16,8 @@ export default async function Page(props: {
 
   return (
     <div className="flex min-h-screen justify-center items-center">
-      <Card>
-        <CardHeader>
-          <CardTitle>Sign In</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className="flex flex-col gap-5 border p-5 m-5 rounded">
+        <h1 className="font-bold mb-5">Sign In</h1>
         {{#if providers.google}}
             <form
               key={"google"}
@@ -46,7 +40,6 @@ export default async function Page(props: {
                 <span>Sign in with Google</span>
               </Button>
             </form>
-            <Separator className="my-4" />
         {{/if}}
         {{#if providers.github}}
             <form
@@ -70,11 +63,9 @@ export default async function Page(props: {
                 <span>Sign in with GitHub</span>
               </Button>
             </form>
-            <Separator className="my-4" />
         {{/if}}
         {{#if providers.credentials}}
             <SignInForm />
-            <Separator className="my-4" />
         {{/if}}
         {{#if providers.postmark}}
             <form
@@ -90,7 +81,6 @@ export default async function Page(props: {
               <Input type="text" name="email" placeholder="Email" />
               <Button type="submit">Sign in with Postmark</Button>
             </form>
-            <Separator className="my-4" />
         {{/if}}
         {{#if providers.nodemailer}}
             <form
@@ -106,13 +96,11 @@ export default async function Page(props: {
               <Input type="text" name="email" placeholder="Email" />
               <Button type="submit">Sign in with Nodemailer</Button>
             </form>
-            <Separator className="my-4" />
         {{/if}}
           {searchParams.error && (
             <p>Login failed</p>
           )}
-        </CardContent>
-      </Card>
+      </div>
     </div>
   );
 }

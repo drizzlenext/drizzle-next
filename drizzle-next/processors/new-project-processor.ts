@@ -5,7 +5,6 @@ import {
   appendToEnvLocal,
   appendToFileIfTextNotExists,
   insertTextAfterIfNotExists,
-  removeTextFromFile,
   renderTemplate,
   renderTemplateIfNotExists,
 } from "../lib/utils";
@@ -13,7 +12,14 @@ import {
 export class NewProjectProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
 
-  dependencies = ["drizzle-orm", "dotenv", "zod"];
+  dependencies = [
+    "drizzle-orm",
+    "dotenv",
+    "zod",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge",
+  ];
 
   devDependencies = ["drizzle-kit", "@types/react", "@types/react-dom"];
 
@@ -143,6 +149,11 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       outputPath: "components/ui/textarea.tsx",
     });
 
+    renderTemplate({
+      inputPath: "new-project-processor/lib/utils.ts.hbs",
+      outputPath: "lib/utils.ts",
+    });
+
     appendToFileIfTextNotExists(".gitignore", "uploads/", "uploads/");
 
     appendToEnvLocal(
@@ -150,11 +161,10 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       "http://localhost:3000/uploads"
     );
 
-    // TODO: remove this and update scripts
     insertTextAfterIfNotExists(
-      "package.json",
-      `"scripts": {`,
-      `\n    "generate": "drizzle-kit generate",\n    "migrate": "drizzle-kit migrate",`
+      "tailwind.config.ts",
+      "export default {",
+      `\n  darkMode: "class",\n`
     );
   }
 

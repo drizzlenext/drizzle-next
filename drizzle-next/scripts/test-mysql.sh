@@ -1,4 +1,4 @@
-DRIZZLE_NEXT_PATH="$HOME/code/drizzle-next/index.ts"
+DRIZZLE_NEXT_PATH="$HOME/code/drizzle-next/drizzle-next/index.ts"
 
 drizzle_next() {
     tsx "$DRIZZLE_NEXT_PATH" "$@"
@@ -25,8 +25,8 @@ drizzle-next scaffold -a public public_scaffold -c text_field:text integer_field
 drizzle-next scaffold -a admin category -c name:varchar
 drizzle-next scaffold -a admin post -c category_id:references_select title:varchar likes:int published_at:timestamp content:text_tiptap
 # drizzle-next add stripe 
-npm run generate
-npm run migrate
+npx drizzle-kit generate
+npx drizzle-kit migrate
 npx tsx scripts/create-user.ts user@example.com pw
 npx tsx scripts/create-user.ts admin@example.com pw
 npx tsx scripts/grant-admin.ts admin@example.com

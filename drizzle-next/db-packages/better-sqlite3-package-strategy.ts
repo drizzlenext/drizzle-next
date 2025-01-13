@@ -79,7 +79,7 @@ export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
 
   printCompletionMessage(): void {
     log.checklist("better-sqlite3 checklist");
-    log.cmdtask("npm run generate");
-    log.cmdtask("npm run migrate");
+    log.cmdtask("npx drizzle-kit generate");
+    log.cmdtask("npx drizzle-kit migrate");
   }
 }
