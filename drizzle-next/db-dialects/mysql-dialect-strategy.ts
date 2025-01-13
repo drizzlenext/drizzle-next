@@ -174,13 +174,13 @@ const mysqlDataTypeStrategies: DataTypeStrategyMap = {
   text: {
     jsType: "string",
     sqlType: "text",
-    formTemplate: "scaffold-processor/components/table/create-textarea.tsx.hbs",
+    formTemplate: "scaffold-processor/components/table/create-input.tsx.hbs",
     updateFormTemplate:
-      "scaffold-processor/components/table/update-textarea.tsx.hbs",
+      "scaffold-processor/components/table/update-input.tsx.hbs",
     getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts): string {
       return `${opts.keyName}: text()`;
     },
-    formComponents: ["textarea"],
+    formComponents: ["input"],
     zodCode: "z.coerce.string()",
   },
   boolean: {

@@ -33,7 +33,7 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="floatType"]').type("9");
     cy.get('input[name="charType"]').type("a");
     cy.get('input[name="varcharType"]').type("12");
-    cy.get('textarea[name="textType"]').type("13");
+    cy.get('input[name="textType"]').type("13");
     cy.get('input[name="booleanType"]').check({ force: true });
     cy.get('input[name="dateType"]').type("2008-08-08");
     cy.get('input[name="datetimeType"]').type("2008");
@@ -59,7 +59,7 @@ describe("shadriz e2e test", () => {
     cy.contains("New").click();
     // need to select the hidden vanilla select since radix ui uses portals
     // cy.get('select[name="categoryId"]').select(1, { force: true });
-    cy.get('select[name="categoryId"]').select(1);
+    cy.get('select[name="categoryId"]').select(0);
     cy.get('input[name="title"]').type("hello world", { force: true });
     cy.get('input[name="likes"]').type("123", { force: true });
     cy.get('input[name="publishedAt"]').type("2008-08-08", { force: true });
