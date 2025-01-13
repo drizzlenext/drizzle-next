@@ -154,6 +154,11 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       outputPath: "lib/utils.ts",
     });
 
+    renderTemplate({
+      inputPath: "new-project-processor/app/globals.css.hbs",
+      outputPath: "app/globals.css",
+    });
+
     appendToFileIfTextNotExists(".gitignore", "uploads/", "uploads/");
 
     appendToEnvLocal(
