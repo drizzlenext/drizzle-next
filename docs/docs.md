@@ -1,18 +1,12 @@
-# drizzle-next docs
+# Drizzle Next Documentation
 
-Drizzle Next is a TypeScript Scaffolding Automation Web Framework.
+Drizzle Next is a TypeScript scaffolding automation web framework.
 
-It is a CLI Tool That Generates Code For Next.js and Drizzle ORM Applications.
-
-- [Next.js](https://nextjs.org/) - React Framework<br>
-- [Drizzle ORM](https://orm.drizzle.team/) - Database Migrations, ORM, and Query Builder<br>
-- [shadcn/ui](https://ui.shadcn.com/) - Customizable Components<br>
-- [Auth.js](https://authjs.dev/) - Authentication<br>
-- [Zod](https://zod.dev/) - Data Validation
+It is primarily a CLI Tool that generates code for full stack applications built with Next.js and Drizzle ORM.
 
 ## Introduction
 
-drizzle-next is a full stack automation tool for building TypeScript web applications. This is an ephemeral web framework. You do not install it into your project as a dependency. It is a command line interface code generation tool. You use it to generate customizable code for full stack projects. You can scaffold database schemas and user interfaces to use as a reference to build your own full stack application.
+`drizzle-next` is a full stack automation tool for building TypeScript web applications. This is an ephemeral web framework. You do not install it into your project as a dependency. It is a command line interface code generation tool. You use it to generate customizable code for full stack projects. You can scaffold database schemas and user interfaces to use as a reference to build your own full stack application.
 
 ## Installation
 
@@ -33,9 +27,11 @@ npx drizzle-next@latest new my-app
 
 :::
 
-### Step 2: Run the CLI
+:::warning
+The `--typescript`, `--tailwind`, `--app`, `--no-src-dir`, and `--no-import-alias` are required for Drizzle Next to work properly.
+:::
 
-[UPDATE](https://ui.shadcn.com/docs/react-19) for Next.js 15 + React 19. If you're using `npm`, you may need to first run `npm config set legacy-peer-deps true` in order to work around a dependency error. Using `pnpm` instead of `npm` is recommended if you want to avoid this issue.
+### Step 2: Run the CLI
 
 Run the `drizzle-next init` command to setup your project.
 
@@ -86,7 +82,7 @@ npx tsx scripts/grant-admin.ts user@example.com
 
 ### Step 5: Scaffold an app
 
-In this example, we'll create a simple blog application with a wysiwyg editor.
+In this example, we'll create a simple blog application.
 
 First, open a new terminal.
 
