@@ -5,6 +5,7 @@ import packageJson from "./package.json";
 import { initCommand } from "./commands/init-command";
 import { scaffoldCommand } from "./commands/scaffold-command";
 import { addCommand } from "./commands/add-command";
+import { dbCommand } from "./commands/db-command";
 
 const VERSION = packageJson["version"];
 
@@ -18,5 +19,6 @@ program
 program.addCommand(initCommand);
 program.addCommand(scaffoldCommand);
 program.addCommand(addCommand);
+program.addCommand(dbCommand);
 
 program.parse();

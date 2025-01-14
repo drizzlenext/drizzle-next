@@ -8,5 +8,9 @@
   "workspaces": [
     "drizzle-next",
     "docs"
-  ]
+  ],
+  "dependencies": {
+    "drizzle-orm": "^0.38.3",
+    "esbuild-register": "^3.6.0"
+  }
 }
