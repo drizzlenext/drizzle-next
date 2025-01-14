@@ -17,7 +17,7 @@
     "merge-package-json": "tsx ./scripts/merge-package-json.ts"
   },
   "author": "travisluong",
-  "license": "ISC",
+  "license": "MIT",
   "description": "Full Stack Next.js and Drizzle ORM Framework",
   "dependencies": {
     "@inquirer/prompts": "^5.3.0",
