@@ -2,7 +2,7 @@
 
 Drizzle Next is a TypeScript scaffolding automation web framework.
 
-It is primarily a CLI Tool that generates code for full stack applications built with Next.js and Drizzle ORM.
+It is a CLI Tool that generates code for full stack applications built with Next.js and Drizzle ORM.
 
 ## Introduction
 
@@ -18,16 +18,7 @@ Start by creating a new Next.js project using `create-next-app`.
 npx create-next-app@latest my-app --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
 ```
 
-::: info
-Alternatively, use the `new` command to generate a new project using the above settings.
-
-```bash
-npx drizzle-next@latest new my-app
-```
-
-:::
-
-:::warning
+:::tip
 The `--typescript`, `--tailwind`, `--app`, `--no-src-dir`, and `--no-import-alias` are required for Drizzle Next to work properly.
 :::
 

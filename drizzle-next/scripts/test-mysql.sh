@@ -8,7 +8,7 @@ mysqlsh.exe -u root -e "drop database demo;" --sql
 mysqlsh.exe -u root -e "create database demo;" --sql
 rm -rf ~/code/demo-mysql
 cd ~/code
-drizzle-next new demo-mysql -p pnpm --latest
+pnpm create next-app@latest demo-mysql --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
 cd demo-mysql
 drizzle-next init -p pnpm --latest \
     --db-dialect mysql \

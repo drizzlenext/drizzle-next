@@ -8,7 +8,7 @@ PGPASSWORD=postgres dropdb -p 5433 -U postgres demo
 PGPASSWORD=postgres createdb -p 5433 -U postgres demo
 rm -rf ~/code/demo-postgresql
 cd ~/code
-drizzle-next new demo-postgresql -p pnpm --latest
+pnpm create next-app@latest demo-postgresql --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
 cd demo-postgresql
 drizzle-next init -p pnpm --latest \
     --db-dialect postgresql \

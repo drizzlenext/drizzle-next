@@ -6,7 +6,7 @@ drizzle-next() {
 
 # rm -rf ~/code/drizzle-next-demo
 # cd ~/code
-# drizzle-next new drizzle-next-demo -p pnpm --latest
+# pnpm create next-app@$latest drizzle-next-demo --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
 cd ~/code/drizzle-next-demo
 drizzle-next init -p pnpm --latest \
     --db-dialect sqlite \

@@ -6,7 +6,7 @@ drizzle_next() {
 alias drizzle-next="drizzle_next"
 rm -rf ~/code/demo-sqlite
 cd ~/code
-drizzle-next new demo-sqlite -p pnpm --latest
+pnpm create next-app@latest demo-sqlite --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
 cd ~/code/demo-sqlite
 drizzle-next init -p pnpm --latest \
     --db-dialect sqlite \
