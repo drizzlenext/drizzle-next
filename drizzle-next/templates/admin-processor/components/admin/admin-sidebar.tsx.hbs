@@ -16,7 +16,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col text-sm w-8 sm:w-40 fixed min-h-screen bg-background z-20 top-8 bg-gray-50 dark:bg-gray-950 border-r border-gray-300 dark:border-gray-800">
+    <div className="flex flex-col text-sm w-8 sm:w-40 fixed min-h-screen z-20 top-8 border-r bg-gray-200 dark:bg-gray-900 border-gray-300 dark:border-gray-700">
       {items.map((item) => (
         <Link
           key={item.title}

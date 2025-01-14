@@ -7,7 +7,10 @@ const Textarea = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <textarea
-      className={cn("border border-gray-800 bg-white dark:bg-black rounded w-full", className)}
+      className={cn(
+        "border border-gray-300 dark:border-gray-700 bg-white dark:bg-black w-full",
+        className
+      )}
       ref={ref}
       {...props}
     />

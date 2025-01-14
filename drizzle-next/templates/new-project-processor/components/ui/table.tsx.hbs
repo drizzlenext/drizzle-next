@@ -47,10 +47,7 @@ const TableHead = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <th
     ref={ref}
-    className={cn(
-      "border-b border-gray-300 dark:border-gray-800 border-t",
-      className
-    )}
+    className={cn("border-b border-gray-300 dark:border-gray-700", className)}
     {...props}
   />
 ));
@@ -62,7 +59,7 @@ const TableCell = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
-    className={cn("border-b border-gray-300 dark:border-gray-800", className)}
+    className={cn("border-b border-gray-300 dark:border-gray-700", className)}
     {...props}
   />
 ));
