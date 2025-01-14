@@ -2,11 +2,9 @@
 
 import { Command } from "commander";
 import packageJson from "./package.json";
-import { configCommand } from "./commands/config-command";
 import { initCommand } from "./commands/init-command";
 import { scaffoldCommand } from "./commands/scaffold-command";
 import { addCommand } from "./commands/add-command";
-import { aiCommand } from "./commands/ai-command";
 
 const VERSION = packageJson["version"];
 
@@ -14,13 +12,11 @@ const program = new Command();
 
 program
   .name("drizzle-next")
-  .description("drizzle-next - full stack framework next.js and drizzle orm")
+  .description("Full Stack Next.js and Drizzle ORM Framework")
   .version(VERSION);
 
 program.addCommand(initCommand);
 program.addCommand(scaffoldCommand);
 program.addCommand(addCommand);
-program.addCommand(configCommand);
-program.addCommand(aiCommand);
 
 program.parse();
