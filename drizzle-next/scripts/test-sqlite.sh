@@ -16,6 +16,7 @@ drizzle-next init -p pnpm --latest \
     --no-admin \
     --pluralize
 cp ~/code/drizzle-next-env/.env.local.sqlite .env.local
+cp ~/code/drizzle-next/drizzle-next/templates/test-scripts/load-fake-data.ts.hbs scripts/load-fake-data.ts
 drizzle-next add tiptap
 drizzle-next scaffold -a private private_scaffold -c text_type:text integer_type:integer real_type:real boolean_type:boolean file_type:file timestamp_type:timestamp
 drizzle-next scaffold -a public public_scaffold -c text_type:text integer_type:integer real_type:real boolean_type:boolean file_type:file timestamp_type:timestamp
