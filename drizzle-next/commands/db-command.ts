@@ -33,21 +33,30 @@ dbCommand
       fs.readFileSync("drizzle-next.config.json", "utf-8")
     );
 
-    const schema = require(path.join(process.cwd(), "./schema/index.ts"));
+    const schema = require(path.join(process.cwd(), "./lib/schema.ts"));
 
     const pkg =
       PACKAGE_MANAGER_RECORD[
         drizzleNextConfig.packageManager as PackageManager
       ];
 
+    if (table && !(table in schema)) {
+      log.red("table not found");
+      process.exit(1);
+    }
+
     if (config.dialect === "mysql") {
       table
         ? introspectMysqlTable(schema, pkg, table)
         : introspectMysqlSchema(schema, pkg);
     } else if (config.dialect === "postgresql") {
-      introspectPostgresqlSchema(schema, pkg);
+      table
+        ? introspectPostgresqlTable(schema, pkg, table)
+        : introspectPostgresqlSchema(schema, pkg);
     } else if (config.dialect === "sqlite") {
-      introspectSqliteSchema(schema, pkg);
+      table
+        ? introspectSqliteTable(schema, pkg, table)
+        : introspectSqliteSchema(schema, pkg);
     } else {
       throw new Error("unknown dialect");
     }
@@ -74,6 +83,7 @@ function introspectMysqlTable(schema: any, pkg: string, table: string) {
     }
   });
   tableConfig.columns.forEach((col) => {
+    if (["id", "createdAt", "updatedAt"].includes(col.name)) return;
     command +=
       camelToSnakeCase(col.name) +
       ":" +
@@ -104,6 +114,7 @@ function introspectPostgresqlTable(schema: any, pkg: string, table: string) {
     }
   });
   tableConfig.columns.forEach((col) => {
+    if (["id", "createdAt", "updatedAt"].includes(col.name)) return;
     command +=
       camelToSnakeCase(col.name) +
       ":" +
@@ -134,6 +145,7 @@ function introspectSqliteTable(schema: any, pkg: string, table: string) {
     }
   });
   tableConfig.columns.forEach((col) => {
+    if (["id", "createdAt", "updatedAt"].includes(col.name)) return;
     command +=
       camelToSnakeCase(col.name) +
       ":" +

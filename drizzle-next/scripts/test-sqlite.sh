@@ -29,5 +29,6 @@ npx tsx scripts/create-user.ts user@example.com pw
 npx tsx scripts/create-user.ts admin@example.com pw
 # npx tsx scripts/grant-admin.ts admin@example.com
 # npx tsx scripts/create-price.ts
+pnpm add -D @faker-js/faker
 npm run build
 npm run start

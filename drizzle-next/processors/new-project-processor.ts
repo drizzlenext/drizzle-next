@@ -104,16 +104,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       outputPath: "components/sortable.tsx",
     });
 
-    const dialectStrategy = dialectStrategyFactory(this.opts.dbDialect);
-
-    renderTemplate({
-      inputPath: "new-project-processor/scripts/introspect.ts.hbs",
-      outputPath: "scripts/introspect.ts",
-      data: {
-        drizzleDbCorePackage: dialectStrategy.drizzleDbCorePackage,
-      },
-    });
-
     renderTemplate({
       inputPath: "new-project-processor/components/ui/button.tsx.hbs",
       outputPath: "components/ui/button.tsx",

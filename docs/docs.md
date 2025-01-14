@@ -132,12 +132,12 @@ Note that the table names will be transformed according to the [Naming Conventio
 
 ## Introspect
 
-drizzle-next will create an `introspect.ts` script that can be used to generate a scaffold command from an existing drizzle table.
+Generate a drizzle-next scaffolding command based on an existing schema.
 
 For example:
 
 ```bash
-npx tsx scripts/introspect.ts products
+npx drizzle-kit@latest introspect products
 ```
 
 This would output something like:
@@ -146,11 +146,7 @@ This would output something like:
 npx drizzle-next@latest scaffold products -c title:varchar price:decimal description:text stock_quantity:integer
 ```
 
-You can make changes to the output as needed and run the command to generate a scaffold for the table. If the scaffold code already exists, it will override the existing scaffold.
-
-:::warning
-Note: This command only accounts for the column name and underlying data type. Special data types like `references` and `file` will be generated as `text`. You'll have to manually changes these back to `references` or `file` as needed.
-:::
+Running without the table argument will introspect all tables.
 
 ## Data types
 

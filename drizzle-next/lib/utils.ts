@@ -449,14 +449,10 @@ export function insertSchemaToSchemaIndex(
   opts: { pluralize: boolean }
 ) {
   const tableObj = caseFactory(table, { pluralize: opts.pluralize });
-  prependToFileIfNotExists(
+  appendToFileIfTextNotExists(
     "lib/schema.ts",
-    `import * as ${tableObj.pluralCamelCase} from "@/schema/${tableObj.pluralKebabCase}";\n`
-  );
-  insertTextAfterIfNotExists(
-    "lib/schema.ts",
-    "export const schema = {",
-    `\n  ...${tableObj.pluralCamelCase},`
+    `export * from "@/schema/${tableObj.pluralKebabCase}";`,
+    `export * from "@/schema/${tableObj.pluralKebabCase}";`
   );
 }
 

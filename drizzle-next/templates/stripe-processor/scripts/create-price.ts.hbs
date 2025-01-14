@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { openConnection } from "./sdb";
-import { schema } from "@/lib/schema";
+import * as schema from "@/lib/schema";
 
 dotenv.config({ path: ".env.local" });
 
