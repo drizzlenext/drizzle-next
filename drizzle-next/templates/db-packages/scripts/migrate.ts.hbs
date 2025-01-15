@@ -1,9 +1,9 @@
 {{migratorImport}}
-import { openConnection } from "./sdb";
+import { openConnection } from "@/lib/db";
 
 async function main() {
-  const { sdb, closeConnection } = await openConnection();
-  await migrate(sdb, { migrationsFolder: "drizzle" });
+  const { db, closeConnection } = await openConnection();
+  await migrate(db, { migrationsFolder: "drizzle" });
   await closeConnection();
 }
 

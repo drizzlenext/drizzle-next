@@ -26,7 +26,6 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
     this.copyMigrateScript();
     this.appendDbUrl();
     this.copyDbInstance();
-    this.copyDbInstanceForScripts();
     this.copyCreateUserScript();
     this.addCustomTypes();
     this.addServerComponentExternalPackageToNextConfig();
@@ -50,13 +49,6 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
     renderTemplate({
       inputPath: "db-packages/lib/db.ts.mysql2.hbs",
       outputPath: "lib/db.ts",
-    });
-  }
-
-  copyDbInstanceForScripts(): void {
-    renderTemplate({
-      inputPath: "db-packages/scripts/sdb.ts.mysql2.hbs",
-      outputPath: "scripts/sdb.ts",
     });
   }
 
@@ -97,7 +89,7 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
 
   printCompletionMessage(): void {
     log.checklist("mysql2 checklist");
-    log.task("update DB_URL in .env.local");
+    log.task("update DB_URL in .env");
     log.cmdtask("npx drizzle-kit generate");
     log.cmdtask("npx drizzle-kit migrate");
   }

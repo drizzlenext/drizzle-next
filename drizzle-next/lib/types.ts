@@ -99,7 +99,6 @@ export interface DbPackageStrategy extends DrizzleNextProcessor {
   copyMigrateScript(): void;
   appendDbUrl(): void;
   copyDbInstance(): void;
-  copyDbInstanceForScripts(): void;
   printCompletionMessage(): void;
 }
 

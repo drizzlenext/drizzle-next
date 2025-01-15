@@ -47,8 +47,8 @@ export const authStrategyMap: AuthStrategyMap = {
         "go to github > settings > developer settings > oauth apps > new oauth app"
       );
       log.subtask("callback: http://localhost:3000/api/auth/callback/github");
-      log.subtask("update AUTH_GITHUB_ID in .env.local");
-      log.subtask("update AUTH_GITHUB_SECRET in .env.local");
+      log.subtask("update AUTH_GITHUB_ID in .env");
+      log.subtask("update AUTH_GITHUB_SECRET in .env");
     },
     textToSearchInEnv: "AUTH_GITHUB_ID",
     dependencies: [],
@@ -67,8 +67,8 @@ export const authStrategyMap: AuthStrategyMap = {
         "go to console.cloud.google.com > new project > oauth consent screen + 2.0 client"
       );
       log.subtask("callback: http://localhost:3000/api/auth/callback/google");
-      log.subtask("update AUTH_GOOGLE_ID in .env.local");
-      log.subtask("update AUTH_GOOGLE_SECRET in .env.local");
+      log.subtask("update AUTH_GOOGLE_ID in .env");
+      log.subtask("update AUTH_GOOGLE_SECRET in .env");
     },
     textToSearchInEnv: "AUTH_GOOGLE_ID",
     dependencies: [],
@@ -100,7 +100,7 @@ export const authStrategyMap: AuthStrategyMap = {
       log.subtask("go to postmark > server > api tokens");
       log.subtask("generate token");
       log.subtask("change the from email in auth.ts");
-      log.subtask("update AUTH_POSTMARK_KEY in .env.local");
+      log.subtask("update AUTH_POSTMARK_KEY in .env");
     },
     textToSearchInEnv: "AUTH_POSTMARK_KEY",
     dependencies: [],
@@ -115,8 +115,8 @@ export const authStrategyMap: AuthStrategyMap = {
     dependencies: ["nodemailer"],
     printCompletionMessage: function (): void {
       log.task("setup nodemailer provider");
-      log.subtask("update EMAIL_SERVER in .env.local");
-      log.subtask("update EMAIL_FROM in .env.local");
+      log.subtask("update EMAIL_SERVER in .env");
+      log.subtask("update EMAIL_FROM in .env");
     },
     textToSearchInEnv: "EMAIL_SERVER",
     devDependencies: [],

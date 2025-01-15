@@ -26,7 +26,6 @@ export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
     this.copyMigrateScript();
     this.appendDbUrl();
     this.copyDbInstance();
-    this.copyDbInstanceForScripts();
     this.appendSqliteToGitignore();
     this.copyCreateUserScript();
   }
@@ -49,13 +48,6 @@ export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
     renderTemplate({
       inputPath: "db-packages/lib/db.ts.better-sqlite3.hbs",
       outputPath: "lib/db.ts",
-    });
-  }
-
-  copyDbInstanceForScripts(): void {
-    renderTemplate({
-      inputPath: "db-packages/scripts/sdb.ts.better-sqlite3.hbs",
-      outputPath: "scripts/sdb.ts",
     });
   }
 

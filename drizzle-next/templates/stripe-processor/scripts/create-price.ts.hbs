@@ -1,13 +1,11 @@
-import dotenv from "dotenv";
-import { openConnection } from "./sdb";
+import { config } from "@/lib/config";
+import { openConnection } from "@/lib/db";
 import * as schema from "@/lib/schema";
 
-dotenv.config({ path: ".env.local" });
-
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(config.STRIPE_SECRET_KEY);
 
 async function main() {
-  const { sdb, closeConnection } = await openConnection();
+  const { db, closeConnection } = await openConnection();
 
   const productMonthly = await stripe.products.create({
     name: "Monthly Subscription",
@@ -23,7 +21,7 @@ async function main() {
     product: productMonthly.id,
   });
 
-  await sdb.insert(schema.products).values({
+  await db.insert(schema.products).values({
     name: "Monthly Subscription",
     slug: "monthly-subscription",
     stripeProductId: productMonthly.id,
@@ -51,7 +49,7 @@ async function main() {
     product: productOneTime.id,
   });
 
-  await sdb.insert(schema.products).values({
+  await db.insert(schema.products).values({
     name: "One Time Purchase",
     slug: "one-time-purchase",
     stripeProductId: productOneTime.id,
@@ -67,7 +65,7 @@ async function main() {
     "Success! Here is your one time purchase price id: " + priceOneTime.id
   );
 
-  await sdb.insert(schema.products).values({
+  await db.insert(schema.products).values({
     name: "Dynamic Product",
     slug: "dynamic-product",
     price: 20000,

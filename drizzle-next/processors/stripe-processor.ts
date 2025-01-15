@@ -245,12 +245,12 @@ export class StripeProcessor implements DrizzleNextProcessor {
 
     log.task("stripe setup");
     log.subtask("go to stripe > developers > api keys");
-    log.subtask("update NEXT_STRIPE_PUBLISHABLE_KEY in .env.local");
-    log.subtask("update STRIPE_SECRET_KEY in .env.local");
+    log.subtask("update NEXT_STRIPE_PUBLISHABLE_KEY in .env");
+    log.subtask("update STRIPE_SECRET_KEY in .env");
 
     log.task("stripe webhook setup");
     log.subtask("go to stripe > developers > webhooks");
-    log.subtask("update STRIPE_WEBHOOK_SECRET in .env.local");
+    log.subtask("update STRIPE_WEBHOOK_SECRET in .env");
 
     log.task("start local stripe listener");
     log.cmdsubtask("stripe login");

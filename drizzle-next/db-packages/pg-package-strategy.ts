@@ -22,7 +22,6 @@ export class PgPackageStrategy implements DbPackageStrategy {
     this.copyMigrateScript();
     this.appendDbUrl();
     this.copyDbInstance();
-    this.copyDbInstanceForScripts();
     this.copyCreateUserScript();
 
     renderTemplate({
@@ -52,13 +51,6 @@ export class PgPackageStrategy implements DbPackageStrategy {
     });
   }
 
-  copyDbInstanceForScripts(): void {
-    renderTemplate({
-      inputPath: "db-packages/scripts/sdb.ts.pg.hbs",
-      outputPath: "scripts/sdb.ts",
-    });
-  }
-
   copyCreateUserScript() {
     if (!this.opts.authEnabled) return;
     const tableObj = caseFactory("user", {
@@ -75,7 +67,7 @@ export class PgPackageStrategy implements DbPackageStrategy {
 
   printCompletionMessage(): void {
     log.checklist("pg checklist");
-    log.task("update DB_URL in .env.local");
+    log.task("update DB_URL in .env");
     log.cmdtask("npx drizzle-kit generate");
     log.cmdtask("npx drizzle-kit migrate");
   }

@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { openConnection } from "./sdb";
+import { openConnection } from "@/lib/db";
 import { posts } from "@/schema/posts";
 import { categories } from "@/schema/categories";
 import { users } from "@/schema/users";
@@ -9,7 +9,7 @@ type Category = typeof categories.$inferInsert;
 type User = typeof users.$inferInsert;
 
 async function main() {
-  const { sdb, closeConnection } = await openConnection();
+  const { db, closeConnection } = await openConnection();
   const postList: Post[] = [];
   const categoryList: Category[] = [];
   const userList: User[] = [];
@@ -51,13 +51,13 @@ async function main() {
     });
   }
 
-  await sdb.delete(posts);
-  await sdb.delete(categories);
-  await sdb.delete(users);
+  await db.delete(posts);
+  await db.delete(categories);
+  await db.delete(users);
 
-  await sdb.insert(posts).values(postList);
-  await sdb.insert(categories).values(categoryList);
-  await sdb.insert(users).values(userList);
+  await db.insert(posts).values(postList);
+  await db.insert(categories).values(categoryList);
+  await db.insert(users).values(userList);
 
   await closeConnection();
 }

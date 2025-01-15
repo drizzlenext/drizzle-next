@@ -17,7 +17,7 @@ drizzle-next init -p pnpm --latest \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \
     --no-pluralize
-cp ~/code/drizzle-next-env/.env.local.mysql .env.local
+cp ~/code/drizzle-next-env/.env.mysql .env
 drizzle-next add tiptap
 drizzle-next scaffold -a admin admin_scaffold -c int_type:int tinyint_type:tinyint smallint_type:smallint mediumint_type:mediumint bigint_type:bigint real_type:real decimal_type:decimal double_type:double float_type:float char_type:char varchar_type:varchar text_type:text boolean_type:boolean date_type:date datetime_type:datetime time_type:time year_type:year timestamp_type:timestamp json_type:json file_type:file
 drizzle-next scaffold -a private private_scaffold -c text_field:text integer_field:int real_field:real decimal_field:decimal boolean_field:boolean file_field:file timestamp_field:timestamp

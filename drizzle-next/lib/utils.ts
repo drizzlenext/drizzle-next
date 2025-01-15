@@ -123,7 +123,7 @@ export function spawnSyncCommand(command: string) {
 }
 
 export function appendToEnvLocal(key: string, val: string) {
-  appendToFileIfTextNotExists(".env.local", `${key}=${val}`, `${key}=`);
+  appendToFileIfTextNotExists(".env", `${key}=${val}`, `${key}=`);
 }
 
 export function appendToFileIfTextNotExists(

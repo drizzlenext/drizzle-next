@@ -1,14 +1,13 @@
 import { eq } from "drizzle-orm";
-import { openConnection } from "./sdb";
+import { openConnection } from "@/lib/db";
 import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
-import { db } from "@/lib/db";
 
 async function main() {
-  const { sdb, closeConnection } = await openConnection();
+  const { db, closeConnection } = await openConnection();
 
   const email = process.argv[2];
 
-  const {{userObj.singularCamelCase}}Obj = await sdb.query.{{userObj.pluralCamelCase}}.findFirst({
+  const {{userObj.singularCamelCase}}Obj = await db.query.{{userObj.pluralCamelCase}}.findFirst({
     where: eq({{userObj.pluralCamelCase}}.email, email),
   });
 

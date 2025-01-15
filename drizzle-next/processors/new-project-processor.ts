@@ -70,8 +70,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplateIfNotExists({
-      inputPath: "new-project-processor/.env.local.hbs",
-      outputPath: ".env.local",
+      inputPath: "new-project-processor/.env.hbs",
+      outputPath: ".env",
     });
 
     renderTemplate({
