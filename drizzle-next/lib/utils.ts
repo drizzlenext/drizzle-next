@@ -413,6 +413,15 @@ export function loadDrizzleNextConfig(): DrizzleNextConfig {
   return drizzleNextConfig;
 }
 
+export function writeDrizzleNextConfig(completeConfig: DrizzleNextConfig) {
+  const configTsContent = `const drizzleNextConfig = ${JSON.stringify(
+    completeConfig,
+    null,
+    2
+  )};\n\nexport default drizzleNextConfig;`;
+  writeToFile("drizzle-next.config.ts", configTsContent);
+}
+
 export function completeDrizzleNextConfig(
   partialConfig: Partial<DrizzleNextConfig>
 ): DrizzleNextConfig {

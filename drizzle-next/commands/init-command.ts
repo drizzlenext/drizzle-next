@@ -7,6 +7,7 @@ import {
   installDependencies,
   installDevDependencies,
   preflightChecks,
+  writeDrizzleNextConfig,
   writeToFile,
 } from "../lib/utils";
 import { packageStrategyFactory } from "../lib/strategy-factory";
@@ -237,12 +238,7 @@ initCommand
 
       const completeConfig = completeDrizzleNextConfig(partialConfig);
 
-      const configTsContent = `const drizzleNextConfig = ${JSON.stringify(
-        completeConfig,
-        null,
-        2
-      )};\n\nexport default drizzleNextConfig;`;
-      writeToFile("drizzle-next.config.ts", configTsContent);
+      writeDrizzleNextConfig(completeConfig);
 
       const newProjectProcessor = new NewProjectProcessor(completeConfig);
 
