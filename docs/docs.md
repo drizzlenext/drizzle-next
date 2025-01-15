@@ -357,7 +357,7 @@ This is the drizzle-next project structure. The scaffolding automations will wri
 	- public - components for public routes
 	- ui - ui components
 - drizzle - sql migrations
-- lib - configuration and utilities
+- lib - configuration, utilities, functions
 - public - static assets
 - queries - reusable queries and return types
 - schema - drizzle schemas

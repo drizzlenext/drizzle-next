@@ -239,7 +239,7 @@ export class ScaffoldProcessor {
 
       // references
       if (dataType.startsWith("references") && referenceTableVars) {
-        referenceImportsCode += `import { ${referenceTableVars.pluralCamelCase} } from "./${referenceTableVars.pluralKebabCase}";\n`;
+        referenceImportsCode += `import { ${referenceTableVars.pluralCamelCase} } from "@/schema/${referenceTableVars.pluralKebabCase}";\n`;
         if (this.opts.pkStrategy === "auto_increment") {
           dataTypeSet.add(this.dbDialectStrategy.fkAutoIncrementDataType);
         }
