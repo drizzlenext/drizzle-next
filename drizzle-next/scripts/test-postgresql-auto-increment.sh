@@ -1,11 +1,12 @@
-DRIZZLE_NEXT_PATH="$HOME/code/drizzle-next/index.ts"
+DRIZZLE_NEXT_PATH="$HOME/code/drizzle-next/drizzle-next/index.ts"
 
-drizzle-next() {
+drizzle_next() {
     tsx "$DRIZZLE_NEXT_PATH" "$@"
 }
+alias drizzle-next="drizzle_next"
 
-PGPASSWORD=postgres dropdb -p 5433 -U postgres demo
-PGPASSWORD=postgres createdb -p 5433 -U postgres demo
+PGPASSWORD=postgres dropdb -p 5432 -U postgres demo
+PGPASSWORD=postgres createdb -p 5432 -U postgres demo
 rm -rf ~/code/demo-postgresql
 cd ~/code
 pnpm create next-app@latest demo-postgresql --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
