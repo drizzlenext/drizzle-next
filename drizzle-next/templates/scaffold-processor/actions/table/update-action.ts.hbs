@@ -13,7 +13,7 @@ import { uploadFile } from "@/lib/file-utils";
 import { auth } from "@/lib/auth";
 {{/if}}
 {{#if isAdmin}}
-import { isAdmin } from "@/services/authorization-service";
+import { isAdmin } from "@/lib/authorization";
 {{/if}}
 
 const update{{tableObj.singularPascalCase}}Schema = z.object({

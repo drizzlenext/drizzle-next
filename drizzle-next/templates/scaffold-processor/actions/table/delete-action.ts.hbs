@@ -10,7 +10,7 @@ import { z } from "zod";
 import { auth } from "@/lib/auth";
 {{/if}}
 {{#if isAdmin}}
-import { isAdmin } from "@/services/authorization-service";
+import { isAdmin } from "@/lib/authorization";
 {{/if}}
 
 const delete{{tableObj.singularPascalCase}}Schema = z.object({

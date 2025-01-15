@@ -282,7 +282,7 @@ If admin was enabled, users with the `admin` role will be able to access the adm
 
 You will be able to scaffold using an `admin` authorization level. The pages will be put into the `(admin)` route group. These pages along with the server actions will require a user with the `admin` role to access.
 
-An authorization check happens at the admin `layout.tsx`. The `authorization-service.ts` contains an `isAdmin` utility function that checks the current session for the admin role.
+An authorization check happens at the admin `layout.tsx`. The `authorization.ts` contains an `isAdmin` utility function that checks the current session for the admin role.
 
 After running an admin scaffold, a new link to the resource list page will be added to `admin-sidebar.tsx`.
 
@@ -362,7 +362,6 @@ This is the drizzle-next project structure. The scaffolding automations will wri
 - queries - reusable queries and return types
 - schema - drizzle schemas
 - scripts - executable scripts
-- services - reusable business logic
 - styles - css
 - types - module augmentation
 ```
@@ -420,12 +419,6 @@ export function PostTable({ postList }: { postList: PostsWithRelations }) {
 ```
 
 This makes it easier to achieve full stack type safety across the front end and back end.
-
-## Services
-
-The services directory is the place for reusable business logic. Initially, you may write the logic in the server components and actions, but eventually you might want to extract that logic and put it somewhere to be shared with other parts of the app.
-
-For example, drizzle-next generates an authorization service with reusable authorization logic that is used in multiple places, such as the admin layout and admin server actions.
 
 ## Naming conventions
 

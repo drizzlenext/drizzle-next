@@ -4,7 +4,7 @@ import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
 import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
-import { isAdmin } from "@/services/authorization-service";
+import { isAdmin } from "@/lib/authorization";
 import { AdminHeader } from "@/components/admin/admin-header";
 
 export default async function Layout({
