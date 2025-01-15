@@ -7,6 +7,9 @@ import packageDrizzleNextJson from "../package-pinned.json";
 import { PackageManager, DrizzleNextConfig } from "./types";
 import { caseFactory } from "./case-utils";
 import { registerHandlebarsHelpers } from "./handlebars-helpers";
+import { register } from "esbuild-register/dist/node";
+
+register();
 
 registerHandlebarsHelpers();
 
@@ -403,11 +406,11 @@ export async function installDevDependencies(opts: {
 }
 
 export function loadDrizzleNextConfig(): DrizzleNextConfig {
-  const json = fs.readFileSync(
-    path.join(process.cwd(), "drizzle-next.config.json"),
-    "utf-8"
-  );
-  return JSON.parse(json);
+  const drizzleNextConfig = require(path.join(
+    process.cwd(),
+    "./drizzle-next.config.ts"
+  )).default;
+  return drizzleNextConfig;
 }
 
 export function completeDrizzleNextConfig(

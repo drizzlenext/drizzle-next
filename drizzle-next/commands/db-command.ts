@@ -24,16 +24,12 @@ dbCommand
   .command("introspect")
   .argument("[table]", "the table to introspect")
   .action((table) => {
-    const config = require(path.join(
-      process.cwd(),
-      "./drizzle.config.ts"
-    )).default;
-
-    const drizzleNextConfig = JSON.parse(
-      fs.readFileSync("drizzle-next.config.json", "utf-8")
-    );
-
     const schema = require(path.join(process.cwd(), "./lib/schema.ts"));
+
+    const drizzleNextConfig = require(path.join(
+      process.cwd(),
+      "./drizzle-next.config.ts"
+    )).default;
 
     const pkg =
       PACKAGE_MANAGER_RECORD[
@@ -45,15 +41,15 @@ dbCommand
       process.exit(1);
     }
 
-    if (config.dialect === "mysql") {
+    if (drizzleNextConfig.dbDialect === "mysql") {
       table
         ? introspectMysqlTable(schema, pkg, table)
         : introspectMysqlSchema(schema, pkg);
-    } else if (config.dialect === "postgresql") {
+    } else if (drizzleNextConfig.dbDialect === "postgresql") {
       table
         ? introspectPostgresqlTable(schema, pkg, table)
         : introspectPostgresqlSchema(schema, pkg);
-    } else if (config.dialect === "sqlite") {
+    } else if (drizzleNextConfig.dbDialect === "sqlite") {
       table
         ? introspectSqliteTable(schema, pkg, table)
         : introspectSqliteSchema(schema, pkg);

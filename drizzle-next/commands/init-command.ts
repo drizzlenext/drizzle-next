@@ -237,10 +237,12 @@ initCommand
 
       const completeConfig = completeDrizzleNextConfig(partialConfig);
 
-      writeToFile(
-        "drizzle-next.config.json",
-        JSON.stringify(completeConfig, null, 2)
-      );
+      const configTsContent = `const drizzleNextConfig = ${JSON.stringify(
+        completeConfig,
+        null,
+        2
+      )};\n\nexport default drizzleNextConfig;`;
+      writeToFile("drizzle-next.config.ts", configTsContent);
 
       const newProjectProcessor = new NewProjectProcessor(completeConfig);
 
