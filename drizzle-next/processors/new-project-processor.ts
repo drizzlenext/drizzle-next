@@ -1,5 +1,4 @@
 import { log } from "../lib/log";
-import { dialectStrategyFactory } from "../lib/strategy-factory";
 import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
 import {
   appendToEnvLocal,
