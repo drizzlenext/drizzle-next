@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { {{tableObj.singularPascalCase}}DeleteForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-delete-form";
 import { db } from "@/lib/db";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+import { Container, ContainerTitle } from "@/components/ui/container";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -16,9 +17,9 @@ export default async function Page(props: { params: Params }) {
   }
 
   return (
-    <div className="p-2">
-      <h1 className="font-bold">Delete {{tableObj.singularCapitalCase}}</h1>
+    <Container>
+      <ContainerTitle>Delete {{tableObj.singularCapitalCase}}</ContainerTitle>
       <{{tableObj.singularPascalCase}}DeleteForm {{tableObj.singularCamelCase}}={ {{tableObj.singularCamelCase}}Obj } />
-    </div>
+    </Container>
   );
 }

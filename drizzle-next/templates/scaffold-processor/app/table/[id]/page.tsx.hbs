@@ -4,6 +4,7 @@ import Link from "next/link";
 import { config } from "@/lib/config";
 {{/if}}
 import { get{{tableObj.singularPascalCase}}WithRelations } from "@/queries/{{tableObj.singularKebabCase}}-queries";
+import { Container, ContainerTitle } from "@/components/ui/container";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -18,8 +19,8 @@ export default async function Page(props: { params: Params }) {
   }
 
   return (
-    <div className="p-2">
-      <h1 className="font-bold">{{tableObj.singularCapitalCase}}</h1>
+    <Container>
+      <ContainerTitle>{{tableObj.singularCapitalCase}}</ContainerTitle>
       {{#each validatedColumns}}
         {{#switch this.dataType}}
           {{#case "boolean"}}
@@ -54,6 +55,6 @@ export default async function Page(props: { params: Params }) {
           {{/default}}
         {{/switch}}
       {{/each}}
-    </div>
+    </Container>
   );
 }

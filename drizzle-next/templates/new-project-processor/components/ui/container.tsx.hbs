@@ -1,0 +1,28 @@
+import * as React from "react";
+
+import { cn } from "@/lib/utils";
+
+const Container = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "m-5 overflow-auto p-5 flex flex-col gap-5 border border-gray-300 dark:border-gray-700",
+      className
+    )}
+    {...props}
+  />
+));
+Container.displayName = "Container";
+
+const ContainerTitle = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("font-bold", className)} {...props} />
+));
+ContainerTitle.displayName = "ContainerTitle";
+
+export { Container, ContainerTitle };

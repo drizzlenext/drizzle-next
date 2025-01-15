@@ -29,7 +29,11 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
               {{/default}}
             {{/switch}}
           {{/each}}
-          <TableHead></TableHead>
+          <TableHead>
+            <Link href="{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/new">
+              New
+            </Link>
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -71,7 +75,7 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
               {{/switch}}
             {{/each}}
             <TableCell>
-              <div className="flex gap-2 text-blue-400">
+              <div className="flex gap-2">
                 <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`} className="flex text-sm items-center gap-2">
                   View
                 </Link>

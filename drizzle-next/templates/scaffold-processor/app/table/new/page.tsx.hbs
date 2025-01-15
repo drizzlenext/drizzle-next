@@ -2,6 +2,7 @@
 import { db } from "@/lib/db";
 {{/if}}
 import { {{tableObj.singularPascalCase}}CreateForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-create-form";
+import { Container, ContainerTitle } from "@/components/ui/container";
 
 export default async function Page() {
   {{#each referencesColumnList}}
@@ -9,13 +10,13 @@ export default async function Page() {
   {{/each}}
 
   return (
-    <div className="p-2">
-      <h1 className="font-bold">New {{tableObj.singularCapitalCase}}</h1>
+    <Container>
+      <ContainerTitle>New {{tableObj.singularCapitalCase}}</ContainerTitle>
       <{{tableObj.singularPascalCase}}CreateForm 
         {{#each referencesColumnList}}
         {{this.referenceTableVars.singularCamelCase}}List={ {{this.referenceTableVars.singularCamelCase}}List }
         {{/each}}
       />
-    </div>
+    </Container>
   );
 }

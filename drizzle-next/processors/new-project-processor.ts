@@ -139,6 +139,11 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
+      inputPath: "new-project-processor/components/ui/container.tsx.hbs",
+      outputPath: "components/ui/container.tsx",
+    });
+
+    renderTemplate({
       inputPath: "new-project-processor/lib/utils.ts.hbs",
       outputPath: "lib/utils.ts",
     });

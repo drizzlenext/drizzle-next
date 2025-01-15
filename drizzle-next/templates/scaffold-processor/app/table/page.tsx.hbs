@@ -9,6 +9,7 @@ import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCas
 import { {{tableObj.singularPascalCase}}Table } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-table";
 import { get{{tableObj.pluralPascalCase}}WithRelationsList } from "@/queries/{{tableObj.singularKebabCase}}-queries";
 import { like } from "drizzle-orm";
+import { Container, ContainerTitle } from "@/components/ui/container";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
@@ -36,31 +37,16 @@ export default async function Page(props: {
   });
 
   return (
-    <div className="flex flex-col p-2 gap-2">
-      <h1 className="font-bold">{{tableObj.pluralCapitalCase}}</h1>
-      <div className="flex gap-2 flex-wrap justify-between">
-        <div>
-          <SearchInput />
-        </div>
-        <div>
-          <Link href="{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/new">
-            <Button className="flex gap-1">
-              <PlusIcon /> New
-            </Button>
-          </Link>
-        </div>
-      </div>
-      <div>
-        <{{tableObj.singularPascalCase}}Table {{tableObj.singularCamelCase}}List={ {{tableObj.singularCamelCase}}List } />
-      </div>
-      <div className="p-2">
-        <Pagination
-          page={page}
-          pageSize={pageSize}
-          totalPages={totalPages}
-          count={count}
-        />
-      </div>
-    </div>
+    <Container>
+      <ContainerTitle>{{tableObj.pluralCapitalCase}}</ContainerTitle>
+      <SearchInput />
+      <{{tableObj.singularPascalCase}}Table {{tableObj.singularCamelCase}}List={ {{tableObj.singularCamelCase}}List } />
+      <Pagination
+        page={page}
+        pageSize={pageSize}
+        totalPages={totalPages}
+        count={count}
+      />
+    </Container>
   );
 }
