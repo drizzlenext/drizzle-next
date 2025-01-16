@@ -28,7 +28,10 @@ const DashboardToolbar = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-row justify-between mx-5 mb-5", className)}
+    className={cn(
+      "flex flex-row justify-between mx-5 mb-5 flex-wrap gap-5",
+      className
+    )}
     {...props}
   />
 ));
@@ -49,7 +52,7 @@ const DashboardFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "border border-t-0 border-zinc-300 dark:border-zinc-700 p-2 mx-5 mb-5",
+      "border border-zinc-300 dark:border-zinc-700 p-2 m-5",
       className
     )}
     {...props}

@@ -21,14 +21,14 @@ export function PrivateSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col text-sm w-8 sm:w-40 fixed min-h-screen z-20 top-8 border-r bg-zinc-200 dark:bg-zinc-900 border-zinc-300 dark:border-zinc-700">
+    <div className="flex flex-col text-sm w-10 sm:w-40 fixed min-h-screen z-20 top-8 border-r bg-zinc-200 dark:bg-zinc-900 border-zinc-300 dark:border-zinc-700">
       {items.map((item) => (
         <Link
           key={item.title}
           href={item.url}
           className={cn(
-            "flex items-center gap-1 p-1 hover:bg-muted m-1 rounded",
-            pathname === item.url && "bg-muted"
+            "flex items-center gap-2 p-2 hover:bg-zinc-300 dark:hover:bg-zinc-700",
+            pathname === item.url && "bg-zinc-300 dark:bg-zinc-700"
           )}
         >
           <item.icon className="flex-shrink-0 w-4 h-4" />

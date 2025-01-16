@@ -1,7 +1,6 @@
-import Image from "next/image";
-import { User2Icon } from "lucide-react";
-import { User } from "@/schema/{{userObj.pluralKebabCase}}";
+import { User } from "@/schema/users";
 import Link from "next/link";
+import { Avatar } from "../ui/avatar";
 
 export function AdminHeader({ user }: { user: User }) {
   return (
@@ -11,11 +10,7 @@ export function AdminHeader({ user }: { user: User }) {
           <Link href="/">drizzle-next</Link>
         </div>
         <div className="flex gap-2 px-2">
-          {user.image ? (
-            <Image src={user.image} unoptimized alt="avatar" />
-          ) : (
-            <User2Icon />
-          )}
+          <Avatar src={user.image ?? undefined} />
           <div>{user.name}</div>
         </div>
       </div>
