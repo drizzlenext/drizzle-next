@@ -2,7 +2,7 @@
 import { db } from "@/lib/db";
 {{/if}}
 import { {{tableObj.singularPascalCase}}CreateForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-create-form";
-import { Container, ContainerTitle, ContainerContent } from "@/components/ui/container";
+import { Dashboard, DashboardTitle, DashboardContent } from "@/components/ui/dashboard";
 
 export default async function Page() {
   {{#each referencesColumnList}}
@@ -10,15 +10,15 @@ export default async function Page() {
   {{/each}}
 
   return (
-    <Container>
-      <ContainerTitle>New {{tableObj.singularCapitalCase}}</ContainerTitle>
-      <ContainerContent>
+    <Dashboard>
+      <DashboardTitle>New {{tableObj.singularCapitalCase}}</DashboardTitle>
+      <DashboardContent>
         <{{tableObj.singularPascalCase}}CreateForm 
           {{#each referencesColumnList}}
           {{this.referenceTableVars.singularCamelCase}}List={ {{this.referenceTableVars.singularCamelCase}}List }
           {{/each}}
         />
-      </ContainerContent>
-    </Container>
+      </DashboardContent>
+    </Dashboard>
   );
 }

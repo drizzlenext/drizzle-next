@@ -3,7 +3,7 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 import { Pagination } from "@/components/pagination";
 import { SearchInput } from "@/components/search-input";
-import { Container, ContainerTitle, ContainerToolbar, ContainerContent, ContainerFooter } from "@/components/ui/container";
+import { Dashboard, DashboardTitle, DashboardToolbar, DashboardContent, DashboardFooter } from "@/components/ui/dashboard";
 import { Button } from "@/components/ui/button";
 import { parseSearchParams } from "@/lib/search-params-utils";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
@@ -36,25 +36,25 @@ export default async function Page(props: {
   });
 
   return (
-    <Container>
-      <ContainerTitle>{{tableObj.pluralCapitalCase}}</ContainerTitle>
-      <ContainerToolbar>
+    <Dashboard>
+      <DashboardTitle>{{tableObj.pluralCapitalCase}}</DashboardTitle>
+      <DashboardToolbar>
         <SearchInput />
         <Link href="{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/new">
           <Button>New</Button>
         </Link>
-      </ContainerToolbar>
-      <ContainerContent>
+      </DashboardToolbar>
+      <DashboardContent>
         <{{tableObj.singularPascalCase}}Table {{tableObj.singularCamelCase}}List={ {{tableObj.singularCamelCase}}List } />
-      </ContainerContent>
-      <ContainerFooter>
+      </DashboardContent>
+      <DashboardFooter>
         <Pagination
           page={page}
           pageSize={pageSize}
           totalPages={totalPages}
           count={count}
         />
-      </ContainerFooter>
-    </Container>
+      </DashboardFooter>
+    </Dashboard>
   );
 }

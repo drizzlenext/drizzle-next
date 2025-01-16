@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 {{/if}}
 import { {{tableObj.singularPascalCase}}UpdateForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-update-form";
 import { get{{tableObj.singularPascalCase}}WithRelations } from "@/queries/{{tableObj.singularKebabCase}}-queries";
-import { Container, ContainerTitle, ContainerContent } from "@/components/ui/container";
+import { Dashboard, DashboardTitle, DashboardContent } from "@/components/ui/dashboard";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -22,16 +22,16 @@ export default async function Page(props: { params: Params }) {
   {{/each}}
 
   return (
-    <Container>
-      <ContainerTitle>Editing {{tableObj.singularCapitalCase}}</ContainerTitle>
-      <ContainerContent>
+    <Dashboard>
+      <DashboardTitle>Editing {{tableObj.singularCapitalCase}}</DashboardTitle>
+      <DashboardContent>
         <{{tableObj.singularPascalCase}}UpdateForm 
           {{tableObj.singularCamelCase}}={ {{tableObj.singularCamelCase}}Obj }
           {{#each referencesColumnList}}
           {{this.referenceTableVars.singularCamelCase}}List={ {{this.referenceTableVars.singularCamelCase}}List }
           {{/each}}
         />
-      </ContainerContent>
-    </Container>
+      </DashboardContent>
+    </Dashboard>
   );
 }

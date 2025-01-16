@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const Container = React.forwardRef<
+const Dashboard = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -12,17 +12,17 @@ const Container = React.forwardRef<
     {...props}
   />
 ));
-Container.displayName = "Container";
+Dashboard.displayName = "Dashboard";
 
-const ContainerTitle = React.forwardRef<
+const DashboardTitle = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <h1 ref={ref} className={cn("font-bold m-5", className)} {...props} />
 ));
-ContainerTitle.displayName = "ContainerTitle";
+DashboardTitle.displayName = "DashboardTitle";
 
-const ContainerToolbar = React.forwardRef<
+const DashboardToolbar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -32,17 +32,17 @@ const ContainerToolbar = React.forwardRef<
     {...props}
   />
 ));
-ContainerToolbar.displayName = "ContainerToolbar";
+DashboardToolbar.displayName = "DashboardToolbar";
 
-const ContainerContent = React.forwardRef<
+const DashboardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("mx-5", className)} {...props} />
 ));
-ContainerContent.displayName = "ContainerContent";
+DashboardContent.displayName = "DashboardContent";
 
-const ContainerFooter = React.forwardRef<
+const DashboardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -55,12 +55,12 @@ const ContainerFooter = React.forwardRef<
     {...props}
   />
 ));
-ContainerFooter.displayName = "ContainerFooter";
+DashboardFooter.displayName = "DashboardFooter";
 
 export {
-  Container,
-  ContainerTitle,
-  ContainerToolbar,
-  ContainerContent,
-  ContainerFooter,
+  Dashboard,
+  DashboardTitle,
+  DashboardToolbar,
+  DashboardContent,
+  DashboardFooter,
 };
