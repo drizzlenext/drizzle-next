@@ -20,6 +20,7 @@ describe("shadriz e2e test", () => {
     cy.contains("user@example.com").should("exist");
     cy.contains("admin@example.com").should("exist");
     cy.contains("Admin Scaffold").click();
+    cy.get("h1").contains("Admin Scaffolds").click();
     cy.contains("New").click();
     cy.get('input[name="integerType"]').type("1");
     cy.get('input[name="smallintType"]').type("2");

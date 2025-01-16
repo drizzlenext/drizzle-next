@@ -3,8 +3,8 @@
 import { startTransition, useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { SignInState, signInAction } from "@/actions/signin/signin-action";
+import { Form, FormControl, FormMessage } from "../ui/form";
 
 export function SignInForm() {
   const initialState: SignInState = {};
@@ -17,32 +17,28 @@ export function SignInForm() {
   }
 
   return (
-    <form
+    <Form
       key={"credentials"}
-      className="flex flex-col gap-2 items-center w-full mb-5"
-      action={dispatch}
       onSubmit={handleSubmit}
     >
-      <div className="w-full">
-        <Label>Email</Label>
+      <FormControl>
         <Input
           type="text"
           name="email"
-          placeholder="user@example.com"
+          placeholder="Email"
         />
-      </div>
-      <div className="w-full">
-        <Label>Password</Label>
+      </FormControl>
+      <FormControl>
         <Input
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="Password"
         />
-      </div>
+      </FormControl>
       <Button className="w-full" type="submit">
-        <span>Sign in with Credentials</span>
+        Sign in with Credentials
       </Button>
-      {state.message && <p>{state.message}</p>}
-    </form>
+      {state.message && <FormMessage>{state.message}</FormMessage>}
+    </Form>
   );
 }

@@ -18,7 +18,7 @@ const ContainerTitle = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("font-bold m-5", className)} {...props} />
+  <h1 ref={ref} className={cn("font-bold m-5", className)} {...props} />
 ));
 ContainerTitle.displayName = "ContainerTitle";
 

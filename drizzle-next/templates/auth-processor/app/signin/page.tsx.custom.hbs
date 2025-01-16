@@ -3,6 +3,8 @@ import { signIn } from "@/lib/auth";
 import { AuthError } from "next-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormMessage } from "@/components/ui/form";
 {{#if providers.credentials}}
 import { SignInForm } from "@/components/signin/signin-form";
 {{/if}}
@@ -16,12 +18,47 @@ export default async function Page(props: {
 
   return (
     <div className="flex min-h-screen justify-center items-center">
-      <div className="flex flex-col gap-5 border p-5 m-5 rounded">
-        <h1 className="font-bold mb-5">Sign In</h1>
+      <Card className="w-[320px]">
+        <CardHeader>
+          <CardTitle>Sign In</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-12">
+        {{#if providers.credentials}}
+            <SignInForm />
+        {{/if}}
+        {{#if providers.postmark}}
+            <Form
+              className="flex flex-col gap-5"
+              action={async (formData) => {
+                "use server";
+                await signIn("postmark", {
+                  email: formData.get("email"),
+                  redirectTo: "/dashboard",
+                });
+              }}
+            >
+              <Input type="text" name="email" placeholder="Email" />
+              <Button type="submit" className="w-full">Sign in with Postmark</Button>
+            </Form>
+        {{/if}}
+        {{#if providers.nodemailer}}
+            <Form
+              className="flex flex-col gap-5"
+              action={async (formData) => {
+                "use server";
+                await signIn("nodemailer", {
+                  email: formData.get("email"),
+                  redirectTo: "/dashboard",
+                });
+              }}
+            >
+              <Input type="text" name="email" placeholder="Email" />
+              <Button type="submit" className="w-full">Sign in with Nodemailer</Button>
+            </Form>
+        {{/if}}
         {{#if providers.google}}
-            <form
+            <Form
               key={"google"}
-              className="flex flex-col gap-2 items-center w-full"
               action={async () => {
                 "use server";
                 try {
@@ -37,14 +74,13 @@ export default async function Page(props: {
               }}
             >
               <Button className="w-full" type="submit">
-                <span>Sign in with Google</span>
+                Sign in with Google
               </Button>
-            </form>
+            </Form>
         {{/if}}
         {{#if providers.github}}
-            <form
+            <Form
               key={"github"}
-              className="flex flex-col gap-2 items-center w-full"
               action={async () => {
                 "use server";
                 try {
@@ -60,47 +96,15 @@ export default async function Page(props: {
               }}
             >
               <Button className="w-full" type="submit">
-                <span>Sign in with GitHub</span>
+                Sign in with GitHub
               </Button>
-            </form>
-        {{/if}}
-        {{#if providers.credentials}}
-            <SignInForm />
-        {{/if}}
-        {{#if providers.postmark}}
-            <form
-              className="flex flex-col gap-5"
-              action={async (formData) => {
-                "use server";
-                await signIn("postmark", {
-                  email: formData.get("email"),
-                  redirectTo: "/dashboard",
-                });
-              }}
-            >
-              <Input type="text" name="email" placeholder="Email" />
-              <Button type="submit">Sign in with Postmark</Button>
-            </form>
-        {{/if}}
-        {{#if providers.nodemailer}}
-            <form
-              className="flex flex-col gap-5"
-              action={async (formData) => {
-                "use server";
-                await signIn("nodemailer", {
-                  email: formData.get("email"),
-                  redirectTo: "/dashboard",
-                });
-              }}
-            >
-              <Input type="text" name="email" placeholder="Email" />
-              <Button type="submit">Sign in with Nodemailer</Button>
-            </form>
+            </Form>
         {{/if}}
           {searchParams.error && (
-            <p>Login failed</p>
+            <FormMessage>Login failed</FormMessage>
           )}
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
