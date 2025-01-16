@@ -127,26 +127,16 @@ npx drizzle-next@latest scaffold products -c title:varchar price:decimal descrip
 ```
 
 :::info
-Note that the table names will be transformed according to the [Naming Conventions](#naming-conventions) in this document.
+That the table names will be transformed according to the [Naming Conventions](#naming-conventions) in this document.
 :::
 
-## Introspect
+### Skip UI generation
 
-Generate a drizzle-next scaffolding command based on an existing schema.
+The `--no-ui` flag allows you to skip the generation of the routes, pages, components, and actions. Useful if you want to only scaffold the Drizzle database table without the UI.
 
-For example:
+### Skip DB generation
 
-```bash
-npx drizzle-kit@latest introspect products
-```
-
-This would output something like:
-
-```text
-npx drizzle-next@latest scaffold products -c title:varchar price:decimal description:text stock_quantity:integer
-```
-
-Running without the table argument will introspect all tables.
+The `--no-db` flag allows you to skip the generation of the Drizzle database table. Useful if you have an existing table and want to only scaffold the routes, pages, components, and actions.
 
 ## Data types
 
@@ -224,7 +214,7 @@ npx drizzle-next@latest scaffold media -c title:text image:file video:file
 ```
 
 :::warning
-Note: Next.js only generates routes for public files at compile time. If you need to serve the uploaded files, putting them into the `public` directory will not work in production without a new build every time.
+Next.js only generates routes for public files at compile time. If you need to serve the uploaded files, putting them into the `public` directory will not work in production without a new build every time.
 :::
 
 If the uploaded files need to be served immediately after uploading, consider using a web server like nginx to serve the static files or an s3 compatible bucket instead.
