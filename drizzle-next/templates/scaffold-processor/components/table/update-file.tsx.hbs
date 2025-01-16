@@ -1,4 +1,4 @@
-        <div>
+        <FormControl>
           <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
           { {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.originalCamelCase}}  && (
             <div>
@@ -7,6 +7,6 @@
           )}
           <Input type="file" name="{{validatedColumn.caseVariants.originalCamelCase}}" />
           {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
-            <p className="text-destructive" key={error}>{error}</p>
+            <FormMessage key={error}>{error}</FormMessage>
           ))}
-        </div>
+        </FormControl>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { config } from "@/lib/config";
 {{/if}}
 import { get{{tableObj.singularPascalCase}}WithRelations } from "@/queries/{{tableObj.singularKebabCase}}-queries";
-import { Container, ContainerTitle } from "@/components/ui/container";
+import { Container, ContainerTitle, ContainerContent } from "@/components/ui/container";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -21,40 +21,42 @@ export default async function Page(props: { params: Params }) {
   return (
     <Container>
       <ContainerTitle>{{tableObj.singularCapitalCase}}</ContainerTitle>
-      {{#each validatedColumns}}
-        {{#switch this.dataType}}
-          {{#case "boolean"}}
-      <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}} ? "true": "false" }</p>
-          {{/case}}
-          {{#case "date"}}
-      <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}}?.toLocaleDateString() }</p>
-          {{/case}}
-          {{#case "datetime"}}
-      <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}}?.toLocaleString() }</p>
-          {{/case}}   
-          {{#case "timestamp"}}
-      <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}}?.toLocaleString() }</p>
-          {{/case}}
-          {{#case "json"}}
-      <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { JSON.stringify({{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}}) }</p>
-          {{/case}}
-          {{#case "jsonb"}}
-      <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { JSON.stringify({{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}}) }</p>
-          {{/case}}
-          {{#case "references"}}
-      <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.singularCamelCase}} }</p>
-          {{/case}}
-          {{#case "references_select"}}
-      <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.singularCamelCase}} }</p>
-          {{/case}}
-          {{#case "file"}}
-      <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> <Link href={`${config.NEXT_PUBLIC_UPLOAD_BASE_URL}/${ {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}} }`}>{ {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}} }</Link></p>
-          {{/case}}
-          {{#default}}
-      <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}} }</p>
-          {{/default}}
-        {{/switch}}
-      {{/each}}
+      <ContainerContent>
+        {{#each validatedColumns}}
+          {{#switch this.dataType}}
+            {{#case "boolean"}}
+        <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}} ? "true": "false" }</p>
+            {{/case}}
+            {{#case "date"}}
+        <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}}?.toLocaleDateString() }</p>
+            {{/case}}
+            {{#case "datetime"}}
+        <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}}?.toLocaleString() }</p>
+            {{/case}}   
+            {{#case "timestamp"}}
+        <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}}?.toLocaleString() }</p>
+            {{/case}}
+            {{#case "json"}}
+        <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { JSON.stringify({{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}}) }</p>
+            {{/case}}
+            {{#case "jsonb"}}
+        <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { JSON.stringify({{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}}) }</p>
+            {{/case}}
+            {{#case "references"}}
+        <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.singularCamelCase}} }</p>
+            {{/case}}
+            {{#case "references_select"}}
+        <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.singularCamelCase}} }</p>
+            {{/case}}
+            {{#case "file"}}
+        <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> <Link href={`${config.NEXT_PUBLIC_UPLOAD_BASE_URL}/${ {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}} }`}>{ {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}} }</Link></p>
+            {{/case}}
+            {{#default}}
+        <p><strong>{{this.caseVariants.originalCapitalCase}}:</strong> { {{../tableObj.singularCamelCase}}Obj.{{this.caseVariants.originalCamelCase}} }</p>
+            {{/default}}
+          {{/switch}}
+        {{/each}}
+      </ContainerContent>
     </Container>
   );
 }

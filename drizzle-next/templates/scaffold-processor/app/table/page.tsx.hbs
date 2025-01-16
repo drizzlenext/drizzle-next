@@ -1,15 +1,14 @@
+import { like } from "drizzle-orm";
 import Link from "next/link";
-import { PlusIcon } from "lucide-react";
 import { db } from "@/lib/db";
 import { Pagination } from "@/components/pagination";
-import { Button } from "@/components/ui/button";
 import { SearchInput } from "@/components/search-input";
+import { Container, ContainerTitle, ContainerToolbar, ContainerContent, ContainerFooter } from "@/components/ui/container";
+import { Button } from "@/components/ui/button";
 import { parseSearchParams } from "@/lib/search-params-utils";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 import { {{tableObj.singularPascalCase}}Table } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-table";
 import { get{{tableObj.pluralPascalCase}}WithRelationsList } from "@/queries/{{tableObj.singularKebabCase}}-queries";
-import { like } from "drizzle-orm";
-import { Container, ContainerTitle } from "@/components/ui/container";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
@@ -39,14 +38,23 @@ export default async function Page(props: {
   return (
     <Container>
       <ContainerTitle>{{tableObj.pluralCapitalCase}}</ContainerTitle>
-      <SearchInput />
-      <{{tableObj.singularPascalCase}}Table {{tableObj.singularCamelCase}}List={ {{tableObj.singularCamelCase}}List } />
-      <Pagination
-        page={page}
-        pageSize={pageSize}
-        totalPages={totalPages}
-        count={count}
-      />
+      <ContainerToolbar>
+        <SearchInput />
+        <Link href="{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/new">
+          <Button>New</Button>
+        </Link>
+      </ContainerToolbar>
+      <ContainerContent>
+        <{{tableObj.singularPascalCase}}Table {{tableObj.singularCamelCase}}List={ {{tableObj.singularCamelCase}}List } />
+      </ContainerContent>
+      <ContainerFooter>
+        <Pagination
+          page={page}
+          pageSize={pageSize}
+          totalPages={totalPages}
+          count={count}
+        />
+      </ContainerFooter>
     </Container>
   );
 }

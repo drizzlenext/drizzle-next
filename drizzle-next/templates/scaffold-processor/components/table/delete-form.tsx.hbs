@@ -2,24 +2,29 @@
 
 import { delete{{tableObj.singularPascalCase}}, Delete{{tableObj.singularPascalCase}}State } from "@/actions/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/delete-{{tableObj.singularKebabCase}}";
 import { Button } from "@/components/ui/button";
-import { useActionState } from "react";
+import { startTransition, useActionState } from "react";
 import { {{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+import { Form, FormControl, FormMessage } from "@/components/ui/form";
 
 export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularCamelCase}} }: { {{tableObj.singularCamelCase}}: {{tableObj.singularPascalCase}} }) {
   const initialState: Delete{{tableObj.singularPascalCase}}State = {};
   const [state, dispatch] = useActionState(delete{{tableObj.singularPascalCase}}, initialState);
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.target as HTMLFormElement);
+    startTransition(() => dispatch(formData))
+  }
+
   return (
-    <div>
-      <form action={dispatch} className="flex flex-col gap-2">
+      <Form onSubmit={handleSubmit}>
         <input type="hidden" name="id" value={ {{tableObj.singularCamelCase}}.id} />
-        <div>
+        <FormControl>
           <Button type="submit">
             Delete
           </Button>
-        </div>
-        {state.message && <p>{state.message}</p>}
-      </form>
-    </div>
+        </FormControl>
+        {state.message && <FormMessage>{state.message}</FormMessage>}
+      </Form>
   );
 }

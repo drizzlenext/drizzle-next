@@ -1,4 +1,4 @@
-        <div className="flex flex-col gap-2">
+        <FormControl>
           <Label>{{validatedColumn.caseVariants.singularCapitalCase}}</Label>
           <Select name="{{validatedColumn.caseVariants.singularCamelCase}}">
           { {{validatedColumn.referenceTableVars.singularCamelCase}}List.map(({{validatedColumn.referenceTableVars.singularCamelCase}}) => (
@@ -8,6 +8,6 @@
           ))}
           </Select>
           {state.errors?.{{validatedColumn.caseVariants.singularCamelCase}}?.map((error) => (
-            <p className="text-destructive" key={error}>{error}</p>
+            <FormMessage key={error}>{error}</FormMessage>
           ))}
-        </div>
+        </FormControl>

@@ -4,6 +4,7 @@ import { startTransition, useActionState } from "react";
 import { create{{tableObj.singularPascalCase}}, Create{{tableObj.singularPascalCase}}State } from "@/actions/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/create-{{tableObj.singularKebabCase}}";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Form, FormControl, FormMessage } from "@/components/ui/form";
 {{formControlsImports}}
 {{#each referencesColumnList}}
 import { {{this.referenceTableVars.singularPascalCase}} } from "@/schema/{{this.referenceTableVars.pluralKebabCase}}";
@@ -28,14 +29,12 @@ export function {{tableObj.singularPascalCase}}CreateForm({{#if hasReferences}}{
   }
 
   return (
-    <div>
-      <form action={dispatch} onSubmit={handleSubmit} className="flex flex-col gap-2">
+    <Form onSubmit={handleSubmit} className="flex flex-col gap-2">
 {{formControls}}
-        <div>
-          <Button type="submit">Submit</Button>
-        </div>
-        {state.message && <p>{state.message}</p>}
-      </form>
-    </div>
+      <FormControl>
+        <Button type="submit">Submit</Button>
+      </FormControl>
+      {state.message && <FormMessage>{state.message}</FormMessage>}
+    </Form>
   );
 }

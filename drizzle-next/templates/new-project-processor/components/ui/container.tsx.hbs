@@ -8,10 +8,7 @@ const Container = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "m-5 overflow-auto p-5 flex flex-col gap-5 border border-gray-300 dark:border-gray-700",
-      className
-    )}
+    className={cn("flex flex-col relative", className)}
     {...props}
   />
 ));
@@ -21,8 +18,49 @@ const ContainerTitle = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("font-bold", className)} {...props} />
+  <div ref={ref} className={cn("font-bold m-5", className)} {...props} />
 ));
 ContainerTitle.displayName = "ContainerTitle";
 
-export { Container, ContainerTitle };
+const ContainerToolbar = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-row justify-between mx-5 mb-5", className)}
+    {...props}
+  />
+));
+ContainerToolbar.displayName = "ContainerToolbar";
+
+const ContainerContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("mx-5", className)} {...props} />
+));
+ContainerContent.displayName = "ContainerContent";
+
+const ContainerFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "border border-t-0 border-zinc-300 dark:border-zinc-700 p-2 mx-5 mb-5",
+      className
+    )}
+    {...props}
+  />
+));
+ContainerFooter.displayName = "ContainerFooter";
+
+export {
+  Container,
+  ContainerTitle,
+  ContainerToolbar,
+  ContainerContent,
+  ContainerFooter,
+};

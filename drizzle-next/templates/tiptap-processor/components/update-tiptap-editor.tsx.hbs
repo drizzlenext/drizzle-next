@@ -1,7 +1,7 @@
-        <div>
+        <FormControl>
           <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
           <TiptapEditor html={ {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.originalCamelCase}} ?? ""} name="{{validatedColumn.caseVariants.originalCamelCase}}" />
           {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
-            <p className="text-destructive" key={error}>{error}</p>
+            <FormMessage key={error}>{error}</FormMessage>
           ))}
-        </div>
+        </FormControl>

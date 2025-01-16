@@ -1,7 +1,7 @@
-        <div>
+        <FormControl>
           <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
           <Input type="file" name="{{validatedColumn.caseVariants.originalCamelCase}}" />
           {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
-            <p className="text-destructive" key={error}>{error}</p>
+            <FormMessage className="text-destructive" key={error}>{error}</FormMessage>
           ))}
-        </div>
+        </FormControl>

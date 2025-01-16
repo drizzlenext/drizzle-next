@@ -5,7 +5,9 @@ const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <table ref={ref} className={cn("w-full", className)} {...props} />
+  <div className="overflow-auto w-full border border-zinc-300 dark:border-zinc-700">
+    <table ref={ref} className={cn("", className)} {...props} />
+  </div>
 ));
 Table.displayName = "Table";
 
@@ -37,7 +39,14 @@ const TableRow = React.forwardRef<
   HTMLTableRowElement,
   React.HTMLAttributes<HTMLTableRowElement>
 >(({ className, ...props }, ref) => (
-  <tr ref={ref} className={cn("", className)} {...props} />
+  <tr
+    ref={ref}
+    className={cn(
+      "even:bg-zinc-100 odd:bg-white dark:even:bg-zinc-900 dark:odd:bg-black",
+      className
+    )}
+    {...props}
+  />
 ));
 TableRow.displayName = "TableRow";
 
@@ -47,7 +56,10 @@ const TableHead = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <th
     ref={ref}
-    className={cn("border-b border-gray-300 dark:border-gray-700", className)}
+    className={cn(
+      "border-b border-zinc-300 dark:border-zinc-700 p-2",
+      className
+    )}
     {...props}
   />
 ));
@@ -60,7 +72,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "border-b border-gray-300 dark:border-gray-700 py-2",
+      "border-b border-zinc-300 dark:border-zinc-700 p-2",
       className
     )}
     {...props}
