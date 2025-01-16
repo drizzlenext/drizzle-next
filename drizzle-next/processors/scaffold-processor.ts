@@ -79,7 +79,6 @@ export class ScaffoldProcessor {
       this.getValidatedColumnsWithTimestamps();
     this.validatedColumnsWithIdAndTimestamps =
       this.getValidatedColumsWithIdAndTimestamps();
-    this.opts.enableSchemaGeneration = opts.enableSchemaGeneration ?? true;
   }
 
   getValidatedColumsWithIdAndTimestamps() {
@@ -151,30 +150,35 @@ export class ScaffoldProcessor {
   }
 
   process(): void {
-    if (this.opts.enableSchemaGeneration) {
+    if (!this.opts.enableDbScaffold && !this.opts.enableUiScaffold) {
+      throw new Error("ui and db scaffold are both skipped. nothing to do.");
+    }
+    if (this.opts.enableDbScaffold) {
       this.addSchema();
+      insertSchemaToSchemaIndex(this.opts.table, {
+        pluralize: this.opts.pluralizeEnabled,
+      });
     }
-    this.addListView();
-    this.addDetailView();
-    this.addNewView();
-    this.addEditView();
-    this.addDeleteView();
-    this.addCreateAction();
-    this.addUpdateAction();
-    this.addDeleteAction();
-    this.addCreateForm();
-    this.addUpdateForm();
-    this.addDeleteForm();
-    this.addTableComponent();
-    this.addQueries();
-    insertSchemaToSchemaIndex(this.opts.table, {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-    if (this.opts.authorizationLevel === "admin") {
-      this.addLinkToAdminSidebar();
-    }
-    if (this.opts.authorizationLevel === "private") {
-      this.addLinkToPrivateSidebar();
+    if (this.opts.enableUiScaffold) {
+      this.addListView();
+      this.addDetailView();
+      this.addNewView();
+      this.addEditView();
+      this.addDeleteView();
+      this.addCreateAction();
+      this.addUpdateAction();
+      this.addDeleteAction();
+      this.addCreateForm();
+      this.addUpdateForm();
+      this.addDeleteForm();
+      this.addTableComponent();
+      this.addQueries();
+      if (this.opts.authorizationLevel === "admin") {
+        this.addLinkToAdminSidebar();
+      }
+      if (this.opts.authorizationLevel === "private") {
+        this.addLinkToPrivateSidebar();
+      }
     }
     if (this.opts.enableCompletionMessage) {
       this.printCompletionMessage();

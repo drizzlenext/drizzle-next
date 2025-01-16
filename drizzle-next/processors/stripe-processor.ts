@@ -153,6 +153,8 @@ export class StripeProcessor implements DrizzleNextProcessor {
       columns: stripeWebhooksColumns[this.opts.dbDialect],
       table: "stripe_webhooks",
       enableCompletionMessage: false,
+      enableUiScaffold: true,
+      enableDbScaffold: true,
     });
     stripeWebhooksProcessor.process();
 
@@ -191,6 +193,8 @@ export class StripeProcessor implements DrizzleNextProcessor {
       columns: productsColumns[this.opts.dbDialect],
       table: "products",
       enableCompletionMessage: false,
+      enableUiScaffold: true,
+      enableDbScaffold: true,
     });
     productsProcessor.process();
 
@@ -209,6 +213,8 @@ export class StripeProcessor implements DrizzleNextProcessor {
       columns: paymentsColumns[this.opts.dbDialect],
       table: "payments",
       enableCompletionMessage: false,
+      enableUiScaffold: true,
+      enableDbScaffold: true,
     });
     paymentsProcessor.process();
   }

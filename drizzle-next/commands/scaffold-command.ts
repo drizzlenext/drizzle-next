@@ -35,7 +35,15 @@ npx drizzle-next@latest scaffold post -c title:varchar content:text is_draft:boo
       "the authorization level of this scaffold"
     ).choices(["admin", "private", "public"])
   )
+  .option("--no-db", "skip the generation of drizzle database table", true)
+  .option("--no-ui", "skip the generation of routes, pages, and actions", true)
   .action(async (table, options) => {
+    if (!options.ui && !options.db) {
+      log.red(
+        "--no-db and --no-ui flag are present. both ui and db generation are skipped. nothing to do."
+      );
+      process.exit(1);
+    }
     const drizzleNextConfig: DrizzleNextConfig = loadDrizzleNextConfig();
     const authorizationLevel: AuthorizationLevel =
       options.authorizationLevel ||
@@ -73,6 +81,8 @@ npx drizzle-next@latest scaffold post -c title:varchar content:text is_draft:boo
       columns: options.columns,
       authorizationLevel: authorizationLevel,
       enableCompletionMessage: true,
+      enableUiScaffold: options.ui,
+      enableDbScaffold: options.db,
       ...drizzleNextConfig,
     });
     scaffoldProcessor.process();

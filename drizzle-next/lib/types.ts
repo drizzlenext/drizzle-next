@@ -47,7 +47,8 @@ export interface ScaffoldProcessorOpts extends DrizzleNextConfig {
   columns: string[];
   authorizationLevel: AuthorizationLevel;
   enableCompletionMessage: boolean;
-  enableSchemaGeneration?: boolean;
+  enableUiScaffold: boolean;
+  enableDbScaffold: boolean;
 }
 
 export interface DataTypeStrategyOpts {

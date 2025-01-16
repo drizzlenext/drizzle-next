@@ -133,7 +133,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
       columns: strategies[this.opts.dbDialect],
       table: this.opts.pluralizeEnabled ? "users" : "user",
       enableCompletionMessage: false,
-      enableSchemaGeneration: false,
+      enableUiScaffold: true,
+      enableDbScaffold: false,
     });
 
     userScaffold.process();
