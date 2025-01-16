@@ -1,5 +1,5 @@
         <FormControl>
-          <Label className="mr-2">{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
+          <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
           <Checkbox name="{{validatedColumn.caseVariants.originalCamelCase}}" defaultChecked={  {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.originalCamelCase}} ?? false } />
           {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
             <FormMessage key={error}>{error}</FormMessage>

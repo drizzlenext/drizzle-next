@@ -1,7 +1,7 @@
         <FormControl>
-          <Label className="mr-2">{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
+          <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
           <Checkbox name="{{validatedColumn.caseVariants.originalCamelCase}}" />
           {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
-            <FormMessage className="text-destructive" key={error}>{error}</FormMessage>
+            <FormMessage key={error}>{error}</FormMessage>
           ))}
         </FormControl>

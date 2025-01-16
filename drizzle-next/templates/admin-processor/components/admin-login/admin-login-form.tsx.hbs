@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AdminLoginState, adminLogin } from "@/actions/admin-login/admin-login";
+import { Form, FormControl, FormMessage } from "../ui/form";
 
 export function AdminLoginForm() {
   const initialState: AdminLoginState = {};
@@ -17,24 +18,19 @@ export function AdminLoginForm() {
   }
 
   return (
-    <form
-      key={"credentials"}
-      className="flex flex-col gap-2 items-center w-full mb-5"
-      action={dispatch}
-      onSubmit={handleSubmit}
-    >
-      <div className="w-full">
+    <Form key={"credentials"} onSubmit={handleSubmit}>
+      <FormControl>
         <Label>Email</Label>
         <Input type="text" name="email" placeholder="user@example.com" />
-      </div>
-      <div className="w-full">
+      </FormControl>
+      <FormControl>
         <Label>Password</Label>
         <Input type="password" name="password" placeholder="password" />
-      </div>
-      <Button className="w-full" type="submit">
-        <span>Sign in</span>
-      </Button>
-      {state.message && <p>{state.message}</p>}
-    </form>
+      </FormControl>
+      <FormControl>
+        <Button type="submit">Sign in</Button>
+      </FormControl>
+      {state.message && <FormMessage>{state.message}</FormMessage>}
+    </Form>
   );
 }

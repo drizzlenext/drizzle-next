@@ -88,6 +88,18 @@ const TableCaption = React.forwardRef<
 ));
 TableCaption.displayName = "TableCaption";
 
+const TableRowActions = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex gap-2 text-blue-500 underline", className)}
+    {...props}
+  />
+));
+TableRowActions.displayName = "TableRowActions";
+
 export {
   Table,
   TableHeader,
@@ -97,4 +109,5 @@ export {
   TableRow,
   TableCell,
   TableCaption,
+  TableRowActions,
 };

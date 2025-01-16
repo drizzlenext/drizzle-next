@@ -1,19 +1,11 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-const Form = React.forwardRef<
-  HTMLFormElement,
-  React.HTMLAttributes<HTMLFormElement>
->(({ className, ...props }, ref) => (
-  <form
-    ref={ref}
-    className={cn(
-      "mb-5 p-5 border border-zinc-300 dark:border-zinc-700",
-      className
-    )}
-    {...props}
-  />
-));
+const Form = React.forwardRef<HTMLFormElement, React.ComponentProps<"form">>(
+  ({ className, ...props }, ref) => (
+    <form ref={ref} className={cn("", className)} {...props} />
+  )
+);
 Form.displayName = "Form";
 
 const FormControl = React.forwardRef<

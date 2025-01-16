@@ -29,7 +29,7 @@ export function {{tableObj.singularPascalCase}}CreateForm({{#if hasReferences}}{
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="flex flex-col gap-2">
+    <Form onSubmit={handleSubmit}>
 {{formControls}}
       <FormControl>
         <Button type="submit">Submit</Button>

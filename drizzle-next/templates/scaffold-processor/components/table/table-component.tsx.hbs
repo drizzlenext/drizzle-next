@@ -6,6 +6,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TableRowActions,
 } from "@/components/ui/table";
 import { Sortable } from "@/components/sortable";
 import { {{tableObj.pluralPascalCase}}WithRelationsList } from "@/queries/{{tableObj.singularKebabCase}}-queries";
@@ -13,7 +14,7 @@ import { {{tableObj.pluralPascalCase}}WithRelationsList } from "@/queries/{{tabl
 export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelCase}}List }: { {{tableObj.singularCamelCase}}List: {{tableObj.pluralPascalCase}}WithRelationsList }) {
   return (
     <Table>
-      <TableHeader className="bg-background">
+      <TableHeader>
         <TableRow>
           <TableHead><Sortable column="id">Id</Sortable></TableHead>
           {{#each validatedColumns}}
@@ -71,7 +72,7 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
               {{/switch}}
             {{/each}}
             <TableCell>
-              <div className="flex gap-2">
+              <TableRowActions>
                 <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>
                   View
                 </Link>
@@ -81,7 +82,7 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
                 <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/delete`}>
                   Delete
                 </Link>
-              </div>
+              </TableRowActions>
             </TableCell>
           </TableRow>
         ))}
