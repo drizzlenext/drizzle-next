@@ -14,6 +14,7 @@ cd demo-postgresql
 drizzle-next init -p pnpm --latest \
     --db-dialect postgresql \
     -pk cuid2 \
+    -css tailwind \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \

@@ -13,6 +13,7 @@ cd demo-mysql
 drizzle-next init -p pnpm --latest \
     --db-dialect mysql \
     -pk uuidv7 \
+    -css tailwind \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \

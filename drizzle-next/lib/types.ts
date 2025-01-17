@@ -5,6 +5,7 @@ export interface DrizzleNextConfig {
   dbDialect: DbDialect;
   dbPackage: DbPackage;
   pkStrategy: PkStrategy;
+  cssStrategy: CssStrategy;
   authEnabled: boolean;
   authSolution: AuthSolution;
   authProviders: AuthProvider[];
@@ -23,6 +24,8 @@ export type PkStrategy =
   | "uuidv4"
   | "nanoid"
   | "auto_increment";
+
+export type CssStrategy = "tailwind" | "none";
 
 export interface DrizzleNextProcessor {
   opts: DrizzleNextConfig;

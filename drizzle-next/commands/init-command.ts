@@ -53,6 +53,12 @@ initCommand
     ).choices(["cuid2", "uuidv7", "uuidv4", "nanoid", "auto_increment"])
   )
   .addOption(
+    new Option("-css, --css-strategy <cssStrategy>", "css strategy").choices([
+      "tailwind",
+      "none",
+    ])
+  )
+  .addOption(
     new Option(
       "-a, --auth-solution <authSolution>",
       "authentication solution"
@@ -185,6 +191,18 @@ initCommand
               value: "auto_increment",
               description:
                 "Auto increment. Warning: Does not work with Auth.js Drizzle Adapter.",
+            },
+          ],
+        }));
+      partialConfig.cssStrategy =
+        options.cssStrategy ||
+        (await select({
+          message: "Which css strategy would you like to use?",
+          choices: [
+            { value: "tailwind", description: "utility-first css framework" },
+            {
+              value: "none",
+              description: "tailwind styling removed",
             },
           ],
         }));

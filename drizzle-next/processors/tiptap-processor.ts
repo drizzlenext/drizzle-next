@@ -35,6 +35,7 @@ export class TiptapProcessor implements DrizzleNextProcessor {
     renderTemplate({
       inputPath: "tiptap-processor/components/tiptap-editor.tsx.hbs",
       outputPath: "components/tiptap-editor.tsx",
+      stripClassNames: false,
     });
     renderTemplate({
       inputPath: "tiptap-processor/styles/tiptap-editor.css.hbs",

@@ -11,6 +11,7 @@ cd ~/code/demo-sqlite
 drizzle-next init -p pnpm --latest \
     --db-dialect sqlite \
     -pk nanoid \
+    -css tailwind \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --no-admin \

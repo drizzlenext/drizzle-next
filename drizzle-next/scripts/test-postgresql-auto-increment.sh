@@ -14,6 +14,7 @@ cd demo-postgresql
 drizzle-next init -p pnpm --latest \
     --db-dialect postgresql \
     -pk auto_increment \
+    -css tailwind \
     --auth-solution none \
     --pluralize
 cp ~/code/drizzle-next-env/.env.postgresql .env

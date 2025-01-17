@@ -34,16 +34,27 @@ export function renderTemplateIfNotExists({
   });
 }
 
+function stripClassNameAttributes(input: string): string {
+  return input
+    .replace(/className="([^"]*)"/g, 'className=""')
+    .replace(/className=\{[^}]*\}/gs, 'className=""');
+}
+
 export function renderTemplate({
   inputPath,
   outputPath,
   data,
+  stripClassNames,
 }: {
   inputPath: string;
   outputPath: string;
   data?: any;
+  stripClassNames?: boolean;
 }) {
-  const content = compileTemplate({ inputPath, data });
+  let content = compileTemplate({ inputPath, data });
+  if (stripClassNames ?? global.globalConfig.cssStrategy === "none") {
+    content = stripClassNameAttributes(content);
+  }
   const joinedOutputPath = path.join(process.cwd(), outputPath);
   const resolvedPath = path.resolve(joinedOutputPath);
   const dir = path.dirname(resolvedPath);
@@ -410,6 +421,7 @@ export function loadDrizzleNextConfig(): DrizzleNextConfig {
     process.cwd(),
     "./drizzle-next.config.ts"
   )).default;
+  global.globalConfig = drizzleNextConfig;
   return drizzleNextConfig;
 }
 
@@ -432,6 +444,7 @@ export function completeDrizzleNextConfig(
     dbDialect: partialConfig.dbDialect ?? "sqlite",
     dbPackage: partialConfig.dbPackage ?? "better-sqlite3",
     pkStrategy: partialConfig.pkStrategy ?? "cuid2",
+    cssStrategy: partialConfig.cssStrategy ?? "tailwind",
     authEnabled: partialConfig.authSolution === "authjs",
     authSolution: partialConfig.authSolution ?? "none",
     authProviders: partialConfig.authProviders ?? ["credentials", "github"],
@@ -439,6 +452,7 @@ export function completeDrizzleNextConfig(
     install: partialConfig.install ?? true,
     pluralizeEnabled: partialConfig.pluralizeEnabled ?? true,
   };
+  global.globalConfig = completeConfig;
   return completeConfig;
 }
 
