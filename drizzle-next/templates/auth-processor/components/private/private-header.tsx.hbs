@@ -1,6 +1,7 @@
 import { User } from "@/schema/users";
 import Link from "next/link";
 import { Avatar } from "../ui/avatar";
+import { User2Icon } from "lucide-react";
 
 export function PrivateHeader({ user }: { user: User }) {
   return (
@@ -10,7 +11,9 @@ export function PrivateHeader({ user }: { user: User }) {
           <Link href="/">drizzle-next</Link>
         </div>
         <div className="flex gap-2 px-2">
-          <Avatar src={user.image ?? undefined} />
+          <Avatar src={user.image}>
+            <User2Icon />
+          </Avatar>
           <div>{user.name}</div>
         </div>
       </div>

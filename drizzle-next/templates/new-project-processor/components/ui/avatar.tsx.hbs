@@ -1,28 +1,26 @@
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
-import { User2Icon } from "lucide-react";
-import Image from "next/image";
 
-const Avatar = React.forwardRef<HTMLImageElement, React.ComponentProps<"img">>(
-  ({ src, className, ...props }, ref) => (
-    <div>
-      {src ? (
-        <Image
-          ref={ref}
-          className={cn("w-6 h-6 rounded-full", className)}
-          {...props}
-          width={24}
-          height={24}
-          src={src}
-          unoptimized
-          alt="avatar"
-        />
-      ) : (
-        <User2Icon />
-      )}
-    </div>
-  )
+const Avatar = ({
+  src,
+  className,
+  children,
+}: {
+  src?: string | null;
+  className?: string;
+  children?: React.ReactNode;
+}) => (
+  <div>
+    {src ? (
+      <img
+        className={cn("w-6 h-6 rounded-full", className)}
+        src={src}
+        alt="avatar"
+      />
+    ) : (
+      <div>{children}</div>
+    )}
+  </div>
 );
 Avatar.displayName = "Avatar";
 
