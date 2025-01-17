@@ -19,7 +19,7 @@ npx create-next-app@latest my-app --typescript --eslint --tailwind --app --no-sr
 ```
 
 :::tip
-The `--typescript`, `--tailwind`, `--app`, `--no-src-dir`, and `--no-import-alias` are required for Drizzle Next to work properly.
+The `--typescript`, `--app`, `--no-src-dir`, and `--no-import-alias` are required for Drizzle Next to work properly.
 :::
 
 ### Step 2: Run the CLI
@@ -49,6 +49,7 @@ You will be asked a few questions to configure the app:
 ? Do you want to install latest packages or pinned packages? pinned
 ? Which database dialect would you like to use? sqlite
 ? Which primary key generation strategy would you like to use? cuid2
+? Which css strategy would you like to use? tailwind
 ? Which authentication solution do you want to use? authjs
 ? Which auth providers would you like to use? credentials
 ? Do you want to add an admin dashboard with role-based authorization? yes
@@ -132,11 +133,11 @@ That the table names will be transformed according to the [Naming Conventions](#
 
 ### Skip UI generation
 
-The `--no-ui` flag allows you to skip the generation of the routes, pages, components, and actions. Useful if you want to only scaffold the Drizzle database table without the UI.
+The `--no-ui` flag allows you to skip the generation of the routes, pages, components, and actions. This is useful if you want to only scaffold the Drizzle database table without the UI.
 
 ### Skip DB generation
 
-The `--no-db` flag allows you to skip the generation of the Drizzle database table. Useful if you have an existing table and want to only scaffold the routes, pages, components, and actions.
+The `--no-db` flag allows you to skip the generation of the Drizzle database table. This is useful if you have an existing table and want to only scaffold the routes, pages, components, and actions.
 
 ## Data types
 
@@ -154,7 +155,7 @@ int, tinyint, smallint, mediumint, bigint, real, decimal, double, float, serial,
 
 integer, real, text, boolean, bigint, timestamp
 
-## Primary key generation strategy
+## Primary key strategy
 
 drizzle-next supports the following primary key generation strategies:
 
@@ -164,7 +165,7 @@ drizzle-next supports the following primary key generation strategies:
 - `nanoid` - Uses the `nanoid` package
 - `auto_increment` - Auto increment (This strategy is not compatible with the Drizzle Adapter for Auth.js)
 
-The strategy that you choose during the `init` process will be saved in `drizzle-next.config.json`. This will be used for the authentication, stripe, and scaffold schemas.
+The strategy that you choose during the `init` process will be saved in `drizzle-next.config.ts`. This will be used for the authentication, stripe, and scaffold schemas.
 
 ## Foreign key constraints
 
@@ -202,6 +203,50 @@ npx drizzle-next@latest scaffold post -c category_id:references_select title:tex
 ```
 
 The component will initially show a list of ids, however it is easy to customize by changing the code in the form. For example, changing the react code from `{category.id}` to `{category.title}`.
+
+## CSS Strategy
+
+TailwindCSS is a popular CSS framework. It ships with Next.js by default. It is also the default and recommended CSS framework of Drizzle Next.
+
+However, there are many other options, such as css, scss, css modules, and other css-in-js solutions.
+
+If you prefer a different option, you can opt out of TailwindCSS by choosing the `none` css strategy during the `init` command. This will remove all TailwindCSS styling from the generated code.
+
+This is configurable in the generated `drizzle-next.config.ts`.
+
+## Auth
+
+If auth was enabled during initialization, you will be able to scaffold using a `private` authorization level. These pages along with the server actions will require a user to be authenticated to access.
+
+drizzle-next provides a `create-user.ts` script to create test users.
+
+drizzle-next uses the `jwt` strategy of Auth.js. If you need `database` sessions, you will have to provide the implementation. Note: the `credentials` provider only supports the `jwt` strategy.
+
+### Private Dashboard
+
+If auth was enabled, users will be able to sign in and access a user dashboard at `/dashboard`.
+
+Any pages scaffolded with a `private` authorization level will be placed into the the `(private)` route group.
+
+After running a private scaffold, a new link to the resource list page will be added to `private-sidebar.tsx`.
+
+Users can sign in at `/signin`.
+
+### Admin Dashboard
+
+If admin was enabled, users with the `admin` role will be able to access the admin dashboard at `/admin`. The admin login is at `/admin-login`.
+
+You will be able to scaffold using an `admin` authorization level. The pages will be put into the `(admin)` route group. These pages along with the server actions will require a user with the `admin` role to access.
+
+An authorization check happens at the admin `layout.tsx`. The `authorization.ts` contains an `isAdmin` utility function that checks the current session for the admin role.
+
+After running an admin scaffold, a new link to the resource list page will be added to `admin-sidebar.tsx`.
+
+A `grant-admin.ts` script is provided to grant users the admin role.
+
+The application uses a `role` text field to determine the user's role. Any user with an `admin` role will have admin access.
+
+Users will be assigned a `user` role when created. This behavior can be changed in `auth.ts`.
 
 ## File uploads
 
@@ -247,40 +292,6 @@ server {
 :::tip
 The Next.js `Image` component performs automatic resizing of images. This works well for static images. However, uploaded images will not show up immediately unless you use the `unoptimized` attribute. Alternatively, you can use a regular `img` tag.
 :::
-
-## Auth
-
-If auth was enabled during initialization, you will be able to scaffold using a `private` authorization level. These pages along with the server actions will require a user to be authenticated to access.
-
-drizzle-next provides a `create-user.ts` script to create test users.
-
-drizzle-next uses the `jwt` strategy of Auth.js. If you need `database` sessions, you will have to provide the implementation. Note: the `credentials` provider only supports the `jwt` strategy.
-
-### Private Dashboard
-
-If auth was enabled, users will be able to sign in and access a user dashboard at `/dashboard`.
-
-Any pages scaffolded with a `private` authorization level will be placed into the the `(private)` route group.
-
-After running a private scaffold, a new link to the resource list page will be added to `private-sidebar.tsx`.
-
-Users can sign in at `/signin`.
-
-### Admin Dashboard
-
-If admin was enabled, users with the `admin` role will be able to access the admin dashboard at `/admin`. The admin login is at `/admin-login`.
-
-You will be able to scaffold using an `admin` authorization level. The pages will be put into the `(admin)` route group. These pages along with the server actions will require a user with the `admin` role to access.
-
-An authorization check happens at the admin `layout.tsx`. The `authorization.ts` contains an `isAdmin` utility function that checks the current session for the admin role.
-
-After running an admin scaffold, a new link to the resource list page will be added to `admin-sidebar.tsx`.
-
-A `grant-admin.ts` script is provided to grant users the admin role.
-
-The application uses a `role` text field to determine the user's role. Any user with an `admin` role will have admin access.
-
-Users will be assigned a `user` role when created. This behavior can be changed in `auth.ts`.
 
 ## Add-on Extensions
 
@@ -420,7 +431,7 @@ Case transformations (camel case, snake case, etc) will always be applied, howev
 
 Original, in this context, means no transformations are applied.
 
-You can change the mode in `drizzle-next.config.json` by setting the `pluralizeEnabled` boolean.
+You can change the mode in `drizzle-next.config.ts` by setting the `pluralizeEnabled` boolean.
 
 ### Pluralize Enabled
 
