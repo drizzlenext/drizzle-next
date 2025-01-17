@@ -39,7 +39,7 @@ features:
   - icon:
       src: https://cdn.simpleicons.org/tailwindcss/gray
     title: TailwindCSS (optional)
-    details: Design great looking sites TailwindCSS, a utility-first CSS framework, the default of Next.js. You can opt out of TailwindCSS if you prefer a different CSS solution.
+    details: Design great looking sites with TailwindCSS, a utility-first CSS framework, the default of Next.js. You can opt out of TailwindCSS if you prefer a different CSS solution.
   - icon:
       src: https://cdn.simpleicons.org/auth0/gray
     title: Auth.js (optional)
