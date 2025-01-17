@@ -1,115 +1,6 @@
-# Drizzle Next Documentation
+# Scaffold
 
-Drizzle Next is a TypeScript scaffolding automation web framework.
-
-It is a CLI Tool that generates code for full stack applications built with Next.js and Drizzle ORM.
-
-## Introduction
-
-`drizzle-next` is a full stack automation tool for building TypeScript web applications. This is an ephemeral web framework. You do not install it into your project as a dependency. It is a command line interface code generation tool. You use it to generate customizable code for full stack projects. You can scaffold database schemas and user interfaces to use as a reference to build your own full stack application.
-
-## Installation
-
-### Step 1: Create new project
-
-Start by creating a new Next.js project using `create-next-app`.
-
-```bash
-npx create-next-app@latest my-app --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
-```
-
-:::tip
-The `--typescript`, `--app`, `--no-src-dir`, and `--no-import-alias` are required for Drizzle Next to work properly.
-:::
-
-### Step 2: Run the CLI
-
-Run the `drizzle-next init` command to setup your project.
-
-```bash
-cd my-app
-npx drizzle-next@latest init
-```
-
-::: info
-Alternatively, you can also run the command non-interactively:
-
-```bash
-npx drizzle-next@latest init -p npm --latest --db-dialect sqlite -pk cuid2 --auth-solution authjs --auth-providers github,google,credentials --admin
-```
-
-:::
-
-### Step 3: Configure project
-
-You will be asked a few questions to configure the app:
-
-```text
-? Which package manager do you want to use? npm
-? Do you want to install latest packages or pinned packages? pinned
-? Which database dialect would you like to use? sqlite
-? Which primary key generation strategy would you like to use? cuid2
-? Which css strategy would you like to use? tailwind
-? Which authentication solution do you want to use? authjs
-? Which auth providers would you like to use? credentials
-? Do you want to add an admin dashboard with role-based authorization? yes
-? Do you want to enable the automatic pluralization of table and variable names? yes
-```
-
-### Step 4: Project checklist
-
-Generate and run the drizzle migrations:
-
-```bash
-npx drizzle-kit generate
-npx drizzle-kit migrate
-```
-
-Create a test user and grant admin role:
-
-```bash
-npx tsx scripts/create-user.ts user@example.com password123
-npx tsx scripts/grant-admin.ts user@example.com
-```
-
-### Step 5: Scaffold an app
-
-In this example, we'll create a simple blog application.
-
-First, open a new terminal.
-
-For the following scaffolds, make sure to choose `admin` as the authorization level.
-
-Create a `categories` schema:
-
-```bash
-npx drizzle-next@latest scaffold category -c name:text
-```
-
-Create a `posts` schema:
-
-```bash
-npx drizzle-next@latest scaffold post -c title:text category_id:references content:text is_draft:boolean published_at:timestamp
-```
-
-Run the drizzle migrations:
-
-```bash
-npx drizzle-kit generate
-npx drizzle-kit migrate
-```
-
-### Step 6: Log in to the app
-
-Start the dev server:
-
-```bash
-npm run dev
-```
-
-Go to http://localhost:3000/admin-login and log in with the admin user.
-
-## Scaffold
+A scaffold is all of the starter code, including the UI and data layer, that is required to have a fully functional CRUD application. Scaffolding was popular in MVC frameworks such as Ruby on Rails. With scaffolding, you spend less time looking things up because there is a point of reference to build upon. This frees up time and energy to focus on building the interesting parts of the app.
 
 After the initial configuration is completed, you can create full stack scaffolding with the `scaffold` command.
 
@@ -493,18 +384,6 @@ If you pass in `foo_bars` as the table name, it will always use the plural form.
 
 drizzle-next is suitable for full stack monolithic server side rendered web applications. It is a full stack tool kit that automates away the time consuming things you need to do at the start of a new full stack Next.js project, saving you days worth of boilerplate coding.
 
-**What is a scaffold?**
-
-A scaffold is all of the starter code, including the UI and data layer, that is required to have a fully functional CRUD application. Scaffolding was popular in MVC frameworks such as Ruby on Rails. With scaffolding, you spend less time looking things up because there is a point of reference to build upon. This frees up time and energy to focus on building the interesting parts of the app.
-
 **Why not a boilerplate?**
 
 Boilerplates go obsolete fast. drizzle-next offers a `latest` option to install latest dependencies. This means you'll get the latest version of Drizzle ORM, Auth.js, TailwindCSS, Zod, and more. If you prefer a more stable version, choose the `pinned` option during initialization and you'll get the pinned versions of each top-level dependency. The pinned versions can be found in `package-pinned.json` in the drizzle-next GitHub repo.
-
-## Author
-
-Built by [travisluong](https://www.travisluong.com).
-
-## License
-
-MIT

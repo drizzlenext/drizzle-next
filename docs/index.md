@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Documentation
-      link: /docs
+      link: /introduction
 
 features:
   - icon:
@@ -33,19 +33,19 @@ features:
     title: Zod
     details: Build bullet-proof applications with zod. Generated server actions will have customizable zod data validations to ensure correct data is saved to your database.
   - icon:
-      src: https://cdn.simpleicons.org/tailwindcss/gray
-    title: TailwindCSS
-    details: Design great looking sites TailwindCSS, a utility-first CSS framework, the default of Next.js. Drizzle Next even includes a Dark Mode toggle.
-  - icon:
       src: https://cdn.simpleicons.org/shadcnui/gray
-    title: shadcn/ui (optional)
-    details: Drizzle Next uses a set of minimalist UI components similar to shadcn/ui. The scaffolding code is compatible with shadcn/ui.
+    title: drizzle/ui (shadcn inspired)
+    details: Drizzle Next uses a set of zero-dependency minimalist UI components that are copied into your project. You can opt of styling altogether if you prefer complete control over styling.
+  - icon:
+      src: https://cdn.simpleicons.org/tailwindcss/gray
+    title: TailwindCSS (optional)
+    details: Design great looking sites TailwindCSS, a utility-first CSS framework, the default of Next.js. You can opt out of TailwindCSS if you prefer a different CSS solution.
   - icon:
       src: https://cdn.simpleicons.org/auth0/gray
     title: Auth.js (optional)
-    details: Generate Auth.js configuration and setup using Credentials, GitHub, Google, Postmark, and/or Nodemailer providers. More providers can be added as needed.
+    details: Generate Auth.js configuration and setup using Credentials, GitHub, Google, Postmark, and others. You can opt out of Auth.js if you prefer to roll your own auth.
   - icon:
       src: https://cdn.simpleicons.org/stripe/gray
     title: Stripe (optional)
-    details: Generate an initial setup for Stripe integration, including webhook and customer portal endpoints.
+    details: Generate an initial setup for Stripe integration, including webhook and customer portal endpoints. This is an optional add-on extension.
 ---

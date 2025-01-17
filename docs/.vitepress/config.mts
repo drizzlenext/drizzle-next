@@ -8,7 +8,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
-      { text: "Docs", link: "/docs" },
+      { text: "Docs", link: "/introduction" },
     ],
 
     sidebar: [
@@ -17,7 +17,9 @@ export default defineConfig({
         items: [
           // { text: "Markdown Examples", link: "/markdown-examples" },
           // { text: "Runtime API Examples", link: "/api-examples" },
-          { text: "Documentation", link: "/docs" },
+          { text: "Introduction", link: "/introduction" },
+          { text: "Installation", link: "/installation" },
+          { text: "Scaffold", link: "/scaffold" },
           { text: "About", link: "/about" },
         ],
       },
