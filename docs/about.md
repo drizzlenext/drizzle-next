@@ -56,9 +56,9 @@ Traditionally, developers either choose to write their own css or scss, or use a
 
 shadcn/ui skyrocketed in popularity because it introduced a new approach to UI component libraries. They have created a collection of pre-styled components built on various headless libraries like radix-ui, and provided it to you to copy and paste into your own project. You can copy and paste them directly from the shadcn website, or use the shadcn cli tool. Effectively, this negates the weaknesses of the former two options. You don't waste as much time rolling your own components, while still being able to customize these components that already look good out of the box.
 
-Drizzle Next initially used shadcn as the default UI component option. However, shadcn was removed in favor of custom ZERO dependency components. One feature of shadcn, or disadvantage depending on how you look at it, is that shadcn requires you to install various dependencies like radix-ui. While they look great and are accessibility friendly, it locks Drizzle Next into a specific UI solution.
+Drizzle Next initially used shadcn as the default UI component option. However, shadcn was removed in favor of custom minimal dependency components. We kept the `cn` function for merging class names which uses `clsx` and `tailwind-merge`, but got rid of everything else. One feature of shadcn, or disadvantage depending on how you look at it, is that shadcn requires you to install various dependencies like radix-ui. These lock Drizzle Next into a specific UI solution.
 
-I wanted to give developers the choice of UI solution. However, the spirit of shadcn still lives on, as the Drizzle Next React UI components are built on native HTML elements and are fully customizable. They are copied into your project into the `components/ui` directory, just like shadcn. And if you still want to use shadcn, it takes minutes to add a component using their cli.
+As primarily a full stack framework, I wanted to give developers the choice of UI solution. However, the spirit of shadcn still lives on, as the Drizzle Next React UI components are built on native HTML elements and are fully customizable. They are copied into your project into the `components/ui` directory, just like shadcn. And if you still want to use shadcn, it takes minutes to add a component using their cli.
 
 ## Drizzle ORM
 
