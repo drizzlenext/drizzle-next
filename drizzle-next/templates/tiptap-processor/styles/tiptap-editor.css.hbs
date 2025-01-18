@@ -1,3 +1,5 @@
+/* tiptap editor */
+
 .tiptap h1 {
   font-size: 40px;
 }
@@ -31,28 +33,6 @@
   border-radius: 5px;
   padding: 5px;
 }
-
-.ProseMirror:focus {
-  outline: none;
-}
-
-.tiptap-btn {
-  padding: 5px;
-  color: #000;
-}
-
-.tiptap-btn.active {
-  background-color: #ccc;
-}
-
-.tiptap-btn.inactive {
-  background-color: #fff;
-}
-
-.tiptap-btn:disabled {
-  color: #999;
-}
-
 .dark .tiptap pre {
   color: #fff;
   background-color: #333;
@@ -60,22 +40,55 @@
   padding: 5px;
 }
 
+.ProseMirror:focus {
+  outline: none;
+}
+
+/* tiptap ui */
+
+.tiptap-container {
+  border: 1px solid #d4d4d8;
+}
+.dark .tiptap-container {
+  border: 1px solid #3f3f46;
+}
+
+.tiptap-toolbar {
+  border-bottom: 1px solid #d4d4d8;
+}
+.dark .tiptap-toolbar {
+  border-bottom: 1px solid #3f3f46;
+}
+
+.tiptap-btn {
+  padding: 5px;
+  color: #000;
+}
 .dark .tiptap-btn {
   color: #fff;
   background-color: #000;
   padding: 5px;
 }
 
+.tiptap-btn.active {
+  background-color: #ccc;
+}
 .dark .tiptap-btn.active {
   color: #fff;
   background-color: #333;
 }
 
+.tiptap-btn.inactive {
+  background-color: #fff;
+}
 .dark .tiptap-btn.inactive {
   color: #fff;
   background-color: #000;
 }
 
+.tiptap-btn:disabled {
+  color: #999;
+}
 .dark .tiptap-btn:disabled {
   color: #fff;
   color: #999;
