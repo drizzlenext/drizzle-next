@@ -9,23 +9,41 @@ type Theme = "dark" | "light" | undefined;
 export function ModeToggle() {
   const [theme, setTheme] = useState<Theme>();
 
+  function setDark() {
+    setTheme("dark");
+    localStorage.setItem("theme", "dark");
+    document.documentElement.classList.add("dark");
+  }
+
+  function setLight() {
+    setTheme("light");
+    localStorage.setItem("theme", "light");
+    document.documentElement.classList.remove("dark");
+  }
+
   useEffect(() => {
-    setTheme(localStorage.getItem("theme") as Theme);
+    const storedTheme = localStorage.getItem("theme") as Theme;
+
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+    if (storedTheme === "dark") {
+      setDark();
+    } else if (storedTheme === "light") {
+      setLight();
+    } else if (prefersDark) {
+      setDark();
+    } else {
+      setLight();
+    }
   }, []);
 
   function handleClick() {
-    switch (theme) {
-      case "dark":
-        setTheme("light");
-        localStorage.setItem("theme", "light");
-        document.documentElement.classList.add("light");
-        document.documentElement.classList.remove("dark");
-        break;
-      default:
-        setTheme("dark");
-        localStorage.setItem("theme", "dark");
-        document.documentElement.classList.add("dark");
-        document.documentElement.classList.remove("light");
+    if (theme === "dark") {
+      setLight();
+    } else {
+      setDark();
     }
   }
 
