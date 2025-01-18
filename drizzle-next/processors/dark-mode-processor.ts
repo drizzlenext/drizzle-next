@@ -1,16 +1,11 @@
 import { log } from "../lib/log";
 import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
-import {
-  insertTextAfterIfNotExists,
-  insertTextBeforeIfNotExists,
-  prependToFileIfNotExists,
-  renderTemplate,
-} from "../lib/utils";
+import { insertTextAfterIfNotExists, renderTemplate } from "../lib/utils";
 
 export class DarkModeProcessor implements DrizzleNextProcessor {
   constructor(public opts: DrizzleNextConfig) {}
 
-  dependencies = ["next-themes"];
+  dependencies = [];
 
   devDependencies = [];
 
@@ -20,16 +15,8 @@ export class DarkModeProcessor implements DrizzleNextProcessor {
   }
 
   async render() {
-    await this.addThemeProvider();
-    await this.addThemeProviderToRootLayout();
     await this.addModeToggle();
-  }
-
-  async addThemeProvider() {
-    renderTemplate({
-      inputPath: "dark-mode-processor/components/theme-provider.tsx.hbs",
-      outputPath: "components/theme-provider.tsx",
-    });
+    await this.addSuppressHydrationWarning();
   }
 
   async addModeToggle() {
@@ -39,27 +26,7 @@ export class DarkModeProcessor implements DrizzleNextProcessor {
     });
   }
 
-  async addThemeProviderToRootLayout() {
-    prependToFileIfNotExists(
-      "app/layout.tsx",
-      `import { ThemeProvider } from "@/components/theme-provider";\n`
-    );
-
-    const code = `<ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >\n          `;
-
-    insertTextBeforeIfNotExists("app/layout.tsx", "{children}", code);
-
-    insertTextAfterIfNotExists(
-      "app/layout.tsx",
-      "{children}",
-      "\n        </ ThemeProvider>\n"
-    );
-
+  async addSuppressHydrationWarning() {
     insertTextAfterIfNotExists(
       "app/layout.tsx",
       "<html",
@@ -67,5 +34,7 @@ export class DarkModeProcessor implements DrizzleNextProcessor {
     );
   }
 
-  printCompletionMessage() {}
+  printCompletionMessage() {
+    log.success("dark mode added");
+  }
 }

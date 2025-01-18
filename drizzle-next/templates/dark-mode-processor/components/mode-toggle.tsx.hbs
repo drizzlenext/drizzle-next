@@ -1,31 +1,48 @@
 "use client";
 
-import * as React from "react";
-import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+
+type Theme = "dark" | "light" | undefined;
 
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme();
+  const [theme, setTheme] = useState<Theme>();
+
+  useEffect(() => {
+    setTheme(localStorage.getItem("theme") as Theme);
+  }, []);
 
   function handleClick() {
     switch (theme) {
-      case "light":
-        setTheme("dark");
-        break;
       case "dark":
         setTheme("light");
+        localStorage.setItem("theme", "light");
+        document.documentElement.classList.add("light");
+        document.documentElement.classList.remove("dark");
         break;
       default:
-        break;
+        setTheme("dark");
+        localStorage.setItem("theme", "dark");
+        document.documentElement.classList.add("dark");
+        document.documentElement.classList.remove("light");
     }
   }
 
   return (
-    <Button onClick={handleClick}>
-      <SunIcon className="block dark:hidden" />
-      <MoonIcon className="hidden dark:block" />
-      <span className="sr-only">Toggle theme</span>
-    </Button>
+    <div>
+      <Button onClick={handleClick}>
+        <SunIcon className="block dark:hidden" />
+        <MoonIcon className="hidden dark:block" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+      <script>
+        {`if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }`}
+      </script>
+    </div>
   );
 }
