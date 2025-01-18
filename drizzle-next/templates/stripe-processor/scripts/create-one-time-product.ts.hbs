@@ -1,0 +1,40 @@
+import { config } from "@/lib/config";
+import { openConnection } from "@/lib/db";
+import * as schema from "@/lib/schema";
+
+const stripe = require("stripe")(config.STRIPE_SECRET_KEY);
+
+async function main() {
+  const { db, closeConnection } = await openConnection();
+
+  const productOneTime = await stripe.products.create({
+    name: "One Time Purchase",
+    description: "One time purchase",
+  });
+
+  const priceOneTime = await stripe.prices.create({
+    unit_amount: 10000,
+    currency: "usd",
+    product: productOneTime.id,
+  });
+
+  await db.insert(schema.products).values({
+    name: "One Time Purchase",
+    slug: "one-time-purchase",
+    stripeProductId: productOneTime.id,
+    stripePriceId: priceOneTime.id,
+    stripeMode: "payment",
+    price: 10000,
+    description: "One time purchase",
+  });
+  console.log(
+    "Success! Here is your one time purchase product id: " + productOneTime.id
+  );
+  console.log(
+    "Success! Here is your one time purchase price id: " + priceOneTime.id
+  );
+
+  await closeConnection();
+}
+
+main();

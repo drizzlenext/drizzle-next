@@ -1,35 +1,28 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Link from "next/link";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
-export default async function Page(props: {
-  searchParams: SearchParams;
-}) {
+export default async function Page(props: { searchParams: SearchParams }) {
   const searchParams = await props.searchParams;
   const { success, canceled } = searchParams;
   return (
-    <div className="max-w-7xl p-5 flex flex-col gap-5 m-auto">
+    <div className="max-w-3xl p-5 flex flex-col gap-5 m-auto">
       <h1 className="font-bold font-retro uppercase">Confirmation</h1>
       {success && (
-        <Alert>
-          <AlertTitle>Success</AlertTitle>
-          <AlertDescription>
+        <div>
+          <p>
             Thank you for purchasing. See purchase history at{" "}
             <Link href="/account" className="font-bold underline">
               account.
             </Link>
-          </AlertDescription>
-        </Alert>
+          </p>
+        </div>
       )}
 
       {canceled && (
-        <Alert>
-          <AlertTitle>Checkout Canceled</AlertTitle>
-          <AlertDescription>
-            Checkout Session was canceled. Please try again.
-          </AlertDescription>
-        </Alert>
+        <div>
+          <p>Checkout Session was canceled. Please try again.</p>
+        </div>
       )}
     </div>
   );

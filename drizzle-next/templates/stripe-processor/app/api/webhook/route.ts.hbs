@@ -51,6 +51,7 @@ export async function POST(req: Request) {
 async function handleCheckoutSessionCompleted(event: any) {
   const email = event.data.object.customer_email;
   const stripeCustomerId = event.data.object.customer;
+  const productIdFromMetadata = event.data.object.metadata.product_id;
 
   const user = await db.query.users.findFirst({
     where: or(
@@ -71,13 +72,12 @@ async function handleCheckoutSessionCompleted(event: any) {
       .where(eq(users.id, user.id));
   }
 
-  // process dynamic product
-  const productId = event.data.object.metadata.product_id;
-  if (productId) {
+  // process dynamic-product
+  if (productIdFromMetadata) {
     await db.insert(payments).values({
       amountTotal: event.data.object.amount_total,
       userId: user.id,
-      productId: productId,
+      productId: productIdFromMetadata,
     });
 
     // TODO: fulfill dynamic order
@@ -119,6 +119,8 @@ async function handleCheckoutSessionCompleted(event: any) {
 
 async function handleInvoicePaid(event: any) {
   const email = event.data.object.customer_email;
+  const data = event.data.object.lines.data;
+  const total = event.data.object.total;
 
   const user = await db.query.users.findFirst({
     where: eq(users.email, email),
@@ -128,9 +130,7 @@ async function handleInvoicePaid(event: any) {
     throw new Error("user not found " + email);
   }
 
-  const data = event.data.object.lines.data;
-  const total = event.data.object.total;
-
+  // process subscription
   for (const d of data) {
     const stripeProductId = d.price.product;
 
@@ -139,7 +139,8 @@ async function handleInvoicePaid(event: any) {
     });
 
     if (!product) {
-      throw new Error("product not found " + stripeProductId);
+      console.log("product not found. likely an unmapped dynamic-product.");
+      return;
     }
 
     if (product.stripeMode === "subscription") {
@@ -158,6 +159,6 @@ async function handleInvoicePaid(event: any) {
 }
 
 async function handleInvoicePaymentFailed(event: any) {
-  console.log("handle invoice payment failed");
+  // TODO: handle invoice payment failed event
   console.log(event);
 }

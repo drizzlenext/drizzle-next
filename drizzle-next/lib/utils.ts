@@ -53,7 +53,9 @@ export function renderTemplate({
 }) {
   let content = compileTemplate({ inputPath, data });
   if (stripClassNames ?? global.globalConfig.cssStrategy === "none") {
-    content = stripClassNameAttributes(content);
+    if (outputPath.endsWith(".tsx")) {
+      content = stripClassNameAttributes(content);
+    }
   }
   const joinedOutputPath = path.join(process.cwd(), outputPath);
   const resolvedPath = path.resolve(joinedOutputPath);

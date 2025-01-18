@@ -8,8 +8,8 @@ import {
 } from "../lib/types";
 import {
   appendToEnvLocal,
+  insertTextAfterIfNotExists,
   insertTextBeforeIfNotExists,
-  prependToFileIfNotExists,
   renderTemplate,
 } from "../lib/utils";
 import {
@@ -45,7 +45,7 @@ export class StripeProcessor implements DrizzleNextProcessor {
     this.addCustomerPortalApiRoute();
     this.addWebhookApiRoute();
     this.addConfirmationPage();
-    this.addCreatePriceScript();
+    this.addCreateProductScripts();
     this.scaffold();
     this.addLinkToPrivateSidebar();
     this.addStripeCustomerIdToUsersSchema();
@@ -127,17 +127,20 @@ export class StripeProcessor implements DrizzleNextProcessor {
     });
   }
 
-  addCreatePriceScript() {
-    renderTemplate({
-      inputPath: "stripe-processor/scripts/create-price.ts.hbs",
-      outputPath: "scripts/create-price.ts",
-    });
-  }
-
   addCreateProductScripts() {
     renderTemplate({
+      inputPath: "stripe-processor/scripts/create-dynamic-product.ts.hbs",
+      outputPath: "scripts/create-dynamic-product.ts",
+    });
+
+    renderTemplate({
       inputPath: "stripe-processor/scripts/create-one-time-product.ts.hbs",
-      outputPath: "scripts/scripts/create-subscription-product.ts.hbs",
+      outputPath: "scripts/create-one-time-product.ts",
+    });
+
+    renderTemplate({
+      inputPath: "stripe-processor/scripts/create-dynamic-product.ts.hbs",
+      outputPath: "scripts/create-subscription-product.ts",
     });
   }
 
@@ -200,12 +203,20 @@ export class StripeProcessor implements DrizzleNextProcessor {
 
     const paymentsColumns: Record<DbDialect, string[]> = {
       postgresql: [
-        "user:references",
-        "product:references",
+        "user_id:references",
+        "product_id:references",
         "amount_total:integer",
       ],
-      mysql: ["user:references", "product:references", "amount_total:int"],
-      sqlite: ["user:references", "product:references", "amount_total:integer"],
+      mysql: [
+        "user_id:references",
+        "product_id:references",
+        "amount_total:int",
+      ],
+      sqlite: [
+        "user_id:references",
+        "product_id:references",
+        "amount_total:integer",
+      ],
     };
     const paymentsProcessor = new ScaffoldProcessor({
       ...this.opts,
@@ -220,15 +231,16 @@ export class StripeProcessor implements DrizzleNextProcessor {
   }
 
   addLinkToPrivateSidebar() {
-    prependToFileIfNotExists(
+    insertTextAfterIfNotExists(
       "components/private/private-sidebar.tsx",
+      `"use client";`,
       `import { CreditCardIcon } from "lucide-react";`
     );
 
     insertTextBeforeIfNotExists(
       "components/private/private-sidebar.tsx",
       "// [CODE_MARK private-sidebar-items]",
-      `  { title: "Account", url: "/account", icon: CreditCardIcon }`
+      `  { title: "Account", url: "/account", icon: CreditCardIcon },`
     );
   }
 
