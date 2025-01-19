@@ -4,7 +4,8 @@ import { delete{{tableObj.singularPascalCase}}, Delete{{tableObj.singularPascalC
 import { Button } from "@/components/ui/button";
 import { startTransition, useActionState } from "react";
 import { {{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
-import { Form, FormControl, FormMessage } from "@/components/ui/form";
+import { Form, FormControl } from "@/components/ui/form";
+import { Label } from "@/components/ui/label";
 import { Alert } from "@/components/ui/alert";
 
 export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularCamelCase}} }: { {{tableObj.singularCamelCase}}: {{tableObj.singularPascalCase}} }) {
@@ -18,14 +19,17 @@ export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularC
   }
 
   return (
-      <Form onSubmit={handleSubmit}>
-        <input type="hidden" name="id" value={ {{tableObj.singularCamelCase}}.id} />
-        <FormControl>
-          <Button type="submit">
-            Delete
-          </Button>
-        </FormControl>
-        {state.message && <Alert variant="danger">{state.message}</Alert>}
-      </Form>
+    <Form onSubmit={handleSubmit}>
+      <FormControl>
+        <Label>Id: {post.id}</Label>
+        <input type="hidden" name="id" value={post.id} />
+      </FormControl>
+      <FormControl>
+        <Button variant="danger" type="submit">
+          Delete
+        </Button>
+      </FormControl>
+      {state.message && <Alert variant="danger">{state.message}</Alert>}
+    </Form>
   );
 }

@@ -1,16 +1,26 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-type AlertType = "danger" | "warning" | "info" | "success";
+type AlertVariant =
+  | "primary"
+  | "muted"
+  | "success"
+  | "danger"
+  | "warning"
+  | "info";
 
 const Alert = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { variant?: AlertType }
+  React.HTMLAttributes<HTMLDivElement> & { variant?: AlertVariant }
 >(({ className, variant, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      "border border-primary-600 p-5 dark:border-primary-400",
+      "border border-black p-5 text-black dark:border-white dark:text-white",
+      variant === "primary" &&
+        "border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400",
+      variant === "muted" &&
+        "border-muted-600 text-muted-600 dark:border-muted-400 dark:text-muted-400",
       variant === "success" &&
         "border-success-600 text-success-600 dark:border-success-400 dark:text-success-400",
       variant === "danger" &&
