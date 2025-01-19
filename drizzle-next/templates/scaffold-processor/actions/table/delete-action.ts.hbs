@@ -1,11 +1,12 @@
 "use server";
 
-import { db } from "@/lib/db";
-import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { cookies } from "next/headers";
+import { db } from "@/lib/db";
+import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 {{#if isNotPublic}}
 import { auth } from "@/lib/auth";
 {{/if}}
@@ -55,7 +56,7 @@ export async function delete{{tableObj.singularPascalCase}}(
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "invalid data",
+      message: "Invalid data",
     };
   }
 
@@ -64,9 +65,13 @@ export async function delete{{tableObj.singularPascalCase}}(
   } catch (error) {
     console.log(error);
     return {
-      message: "database error",
+      message: "Database error",
     }
   }
+
+  (await cookies()).set("notice-success", "{{tableObj.singularCapitalCase}} was successfully deleted", {
+    maxAge: 0,
+  });
 
   revalidatePath("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}");
   redirect("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}");

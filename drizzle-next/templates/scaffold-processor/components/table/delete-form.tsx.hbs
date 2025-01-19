@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { startTransition, useActionState } from "react";
 import { {{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 import { Form, FormControl, FormMessage } from "@/components/ui/form";
+import { Alert } from "@/components/ui/alert";
 
 export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularCamelCase}} }: { {{tableObj.singularCamelCase}}: {{tableObj.singularPascalCase}} }) {
   const initialState: Delete{{tableObj.singularPascalCase}}State = {};
@@ -24,7 +25,7 @@ export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularC
             Delete
           </Button>
         </FormControl>
-        {state.message && <FormMessage>{state.message}</FormMessage>}
+        {state.message && <Alert variant="danger">{state.message}</Alert>}
       </Form>
   );
 }

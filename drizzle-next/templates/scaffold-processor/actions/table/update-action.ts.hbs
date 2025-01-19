@@ -81,7 +81,7 @@ export async function update{{tableObj.singularPascalCase}}(
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "invalid data",
+      message: "Invalid data",
     };
   }
 
@@ -93,7 +93,7 @@ export async function update{{tableObj.singularPascalCase}}(
   } catch (error) {
     console.error(error);
     return {
-      message: "database error",
+      message: "Database error",
     }
   }
 
