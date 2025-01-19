@@ -5,6 +5,7 @@ import { config } from "@/lib/config";
 {{/if}}
 import { get{{tableObj.singularPascalCase}}WithRelations } from "@/queries/{{tableObj.singularKebabCase}}-queries";
 import { Dashboard, DashboardTitle, DashboardContent } from "@/components/ui/dashboard";
+import { Notice } from "@/components/notice";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -20,6 +21,7 @@ export default async function Page(props: { params: Params }) {
 
   return (
     <Dashboard>
+      <Notice />
       <DashboardTitle>{{tableObj.singularCapitalCase}}</DashboardTitle>
       <DashboardContent>
         {{#each validatedColumns}}

@@ -1,11 +1,12 @@
 "use server";
 
-import { db } from "@/lib/db";
-import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { cookies } from "next/headers";
+import { db } from "@/lib/db";
+import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 {{#if importFileUtils}}
 import { uploadFile } from "@/lib/file-utils";
 {{/if}}
@@ -95,6 +96,10 @@ export async function update{{tableObj.singularPascalCase}}(
       message: "database error",
     }
   }
+
+  (await cookies()).set("notice-success", "{{tableObj.singularCapitalCase}} was successfully updated", {
+    maxAge: 0,
+  });
 
   revalidatePath("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}");
   revalidatePath("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id);
