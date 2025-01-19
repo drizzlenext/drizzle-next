@@ -21,8 +21,8 @@ export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularC
   return (
     <Form onSubmit={handleSubmit}>
       <FormControl>
-        <Label>Id: {post.id}</Label>
-        <input type="hidden" name="id" value={post.id} />
+        <Label>Id: { {{tableObj.singularCamelCase}}.id }</Label>
+        <input type="hidden" name="id" value={ {{tableObj.singularCamelCase}}.id } />
       </FormControl>
       <FormControl>
         <Button variant="danger" type="submit">
