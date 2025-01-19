@@ -1,7 +1,7 @@
-        <FormControl>
-          <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
-          <Input name="{{validatedColumn.caseVariants.singularCamelCase}}" />
-          {state.errors?.{{validatedColumn.caseVariants.singularCamelCase}}?.map((error) => (
-            <FormMessage key={error}>{error}</FormMessage>
-          ))}
-        </FormControl>
+      <FormControl>
+        <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
+        <Input name="{{validatedColumn.caseVariants.singularCamelCase}}" />
+        {state.errors?.{{validatedColumn.caseVariants.singularCamelCase}}?.map((error) => (
+          <FormMessage key={error}>{error}</FormMessage>
+        ))}
+      </FormControl>

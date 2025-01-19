@@ -1,16 +1,16 @@
-        <FormControl>
-          <Label>{{validatedColumn.caseVariants.singularCapitalCase}}</Label>
-          <Select 
-            name="{{validatedColumn.caseVariants.singularCamelCase}}"
-            defaultValue={ {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.singularCamelCase}}?.toString() }
-          >
-          { {{validatedColumn.referenceTableVars.singularCamelCase}}List.map(({{validatedColumn.referenceTableVars.singularCamelCase}}) => (
-            <SelectOption key={ {{validatedColumn.referenceTableVars.singularCamelCase}}.id } value={ {{validatedColumn.referenceTableVars.singularCamelCase}}.id.toString() }>
-              { {{validatedColumn.referenceTableVars.singularCamelCase}}.id}
-            </SelectOption>
-          ))}
-          </Select>
-          {state.errors?.{{validatedColumn.caseVariants.singularCamelCase}}?.map((error) => (
-            <FormMessage key={error}>{error}</FormMessage>
-          ))}
-        </FormControl>
+      <FormControl>
+        <Label>{{validatedColumn.caseVariants.singularCapitalCase}}</Label>
+        <Select 
+          name="{{validatedColumn.caseVariants.singularCamelCase}}"
+          defaultValue={ {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.singularCamelCase}}?.toString() }
+        >
+        { {{validatedColumn.referenceTableVars.singularCamelCase}}List.map(({{validatedColumn.referenceTableVars.singularCamelCase}}) => (
+          <SelectOption key={ {{validatedColumn.referenceTableVars.singularCamelCase}}.id } value={ {{validatedColumn.referenceTableVars.singularCamelCase}}.id.toString() }>
+            { {{validatedColumn.referenceTableVars.singularCamelCase}}.id}
+          </SelectOption>
+        ))}
+        </Select>
+        {state.errors?.{{validatedColumn.caseVariants.singularCamelCase}}?.map((error) => (
+          <FormMessage key={error}>{error}</FormMessage>
+        ))}
+      </FormControl>

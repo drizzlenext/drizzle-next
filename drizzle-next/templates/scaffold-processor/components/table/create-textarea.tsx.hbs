@@ -1,7 +1,7 @@
-        <FormControl>
-          <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
-          <Textarea name="{{validatedColumn.caseVariants.originalCamelCase}}" />
-          {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
-            <FormMessage key={error}>{error}</FormMessage>
-          ))}
-        </FormControl>
+      <FormControl>
+        <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
+        <Textarea name="{{validatedColumn.caseVariants.originalCamelCase}}" />
+        {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
+          <FormMessage key={error}>{error}</FormMessage>
+        ))}
+      </FormControl>
