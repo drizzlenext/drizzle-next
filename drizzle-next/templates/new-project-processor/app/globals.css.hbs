@@ -3,18 +3,10 @@
 @tailwind utilities;
 
 body {
-  background-color: white;
-  color: black;
-}
-
-.dark body {
-  background-color: black;
-  color: white;
+  @apply bg-white text-black;
+  @apply dark:bg-black dark:text-white;
 }
 
 .lucide {
-  color: inherit;
-  width: 24px;
-  height: 24px;
-  stroke-width: 1px;
+  stroke-width: 1.5px;
 }

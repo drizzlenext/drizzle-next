@@ -1,7 +1,6 @@
 "use client";
 
 import { MoonIcon, SunIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
 type Theme = "dark" | "light" | undefined;
@@ -25,7 +24,7 @@ export function ModeToggle() {
     const storedTheme = localStorage.getItem("theme") as Theme;
 
     const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches;
 
     if (storedTheme === "dark") {
@@ -48,19 +47,10 @@ export function ModeToggle() {
   }
 
   return (
-    <div>
-      <Button onClick={handleClick}>
-        <SunIcon className="block dark:hidden" />
-        <MoonIcon className="hidden dark:block" />
-        <span className="sr-only">Toggle theme</span>
-      </Button>
-      <script>
-        {`if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-          } else {
-            document.documentElement.classList.remove('dark')
-          }`}
-      </script>
+    <div onClick={handleClick} className="cursor-pointer">
+      <SunIcon className="block dark:hidden" />
+      <MoonIcon className="hidden dark:block" />
+      <span className="sr-only">Toggle theme</span>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export function Pagination({
   const pathname = usePathname();
   const [pageValue, setPageValue] = useState<string>(page.toString());
   const [pageSizeValue, setPageSizeValue] = useState<string>(
-    pageSize.toString()
+    pageSize.toString(),
   );
 
   function first() {
@@ -93,7 +93,7 @@ export function Pagination({
   }
 
   return (
-    <div className="flex items-center gap-2 flex-wrap">
+    <div className="flex flex-wrap items-center gap-2">
       <div className="text-nowrap">
         {count} {count === 1 ? "row" : "rows"}
       </div>

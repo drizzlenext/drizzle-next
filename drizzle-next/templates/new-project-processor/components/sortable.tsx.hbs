@@ -55,12 +55,12 @@ export function Sortable({
   return (
     <div
       onClick={handleClick}
-      className="flex items-center cursor-pointer select-none"
+      className="flex cursor-pointer select-none items-center"
     >
       <div className="text-nowrap">{children}</div>
-      {sortOrder === "asc" && <MoveUpIcon className="w-3 h-3" />}
-      {sortOrder === "desc" && <MoveDownIcon className="w-3 h-3" />}
-      {sortOrder === "none" && <div className="w-3 h-3"></div>}
+      {sortOrder === "asc" && <MoveUpIcon className="h-4 w-4" />}
+      {sortOrder === "desc" && <MoveDownIcon className="h-4 w-4" />}
+      {sortOrder === "none" && <div className="h-4 w-4"></div>}
     </div>
   );
 }

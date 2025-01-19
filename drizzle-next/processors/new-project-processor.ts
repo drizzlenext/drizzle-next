@@ -41,6 +41,18 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
 
   async render() {
     renderTemplate({
+      inputPath: "new-project-processor/app/layout.tsx.hbs",
+      outputPath: "app/layout.tsx",
+    });
+
+    if (this.opts.cssStrategy === "tailwind") {
+      renderTemplate({
+        inputPath: "new-project-processor/tailwind.config.ts.hbs",
+        outputPath: "tailwind.config.ts",
+      });
+    }
+
+    renderTemplate({
       inputPath: "new-project-processor/app/page.tsx.hbs",
       outputPath: "app/page.tsx",
     });
@@ -173,12 +185,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     appendToEnvLocal(
       "NEXT_PUBLIC_UPLOAD_BASE_URL",
       "http://localhost:3000/uploads"
-    );
-
-    insertTextAfterIfNotExists(
-      "tailwind.config.ts",
-      "export default {",
-      `\n  darkMode: "class",\n`
     );
   }
 
