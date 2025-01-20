@@ -69,7 +69,7 @@ export async function delete{{tableObj.singularPascalCase}}(
     }
   }
 
-  (await cookies()).set("notice-success", "{{tableObj.singularCapitalCase}} was successfully deleted", {
+  (await cookies()).set("notice", "{{tableObj.singularCapitalCase}} was successfully deleted", {
     maxAge: 0,
   });
 

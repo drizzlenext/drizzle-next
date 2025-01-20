@@ -93,7 +93,7 @@ export async function create{{tableObj.singularPascalCase}}(
     }
   }
 
-  (await cookies()).set("notice-success", "{{tableObj.singularCapitalCase}} was successfully created", {
+  (await cookies()).set("notice", "{{tableObj.singularCapitalCase}} was successfully created", {
     maxAge: 0,
   });
 

@@ -4,39 +4,12 @@ import { Alert } from "@/components/ui/alert";
 export async function Notice() {
   const cookieStore = await cookies();
 
-  const danger = cookieStore.get("notice-danger");
-  const warning = cookieStore.get("notice-warning");
-  const info = cookieStore.get("notice-info");
-  const success = cookieStore.get("notice-success");
+  const notice = cookieStore.get("notice");
 
-  if (danger) {
-    return (
-      <Alert variant="danger" className="mx-5 mt-5">
-        {danger?.value}
-      </Alert>
-    );
-  }
-
-  if (warning) {
-    return (
-      <Alert variant="warning" className="mx-5 mt-5">
-        {warning?.value}
-      </Alert>
-    );
-  }
-
-  if (info) {
-    return (
-      <Alert variant="info" className="mx-5 mt-5">
-        {info?.value}
-      </Alert>
-    );
-  }
-
-  if (success) {
+  if (notice) {
     return (
       <Alert variant="success" className="mx-5 mt-5">
-        {success?.value}
+        {notice.value}
       </Alert>
     );
   }

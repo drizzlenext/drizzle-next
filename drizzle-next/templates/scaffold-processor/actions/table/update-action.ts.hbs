@@ -97,7 +97,7 @@ export async function update{{tableObj.singularPascalCase}}(
     }
   }
 
-  (await cookies()).set("notice-success", "{{tableObj.singularCapitalCase}} was successfully updated", {
+  (await cookies()).set("notice", "{{tableObj.singularCapitalCase}} was successfully updated", {
     maxAge: 0,
   });
 

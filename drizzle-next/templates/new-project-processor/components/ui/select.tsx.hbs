@@ -9,7 +9,7 @@ const Select = React.forwardRef<
     <select
       className={cn(
         "w-full border border-muted-400 bg-transparent p-2 focus:border-black focus:outline-none focus:ring-0 dark:border-muted-600 dark:focus:border-white",
-        className,
+        className
       )}
       ref={ref}
       {...props}
@@ -22,7 +22,13 @@ const SelectOption = React.forwardRef<
   HTMLOptionElement,
   React.ComponentProps<"option">
 >(({ className, ...props }, ref) => {
-  return <option className={cn("", className)} ref={ref} {...props} />;
+  return (
+    <option
+      className={cn("bg-white dark:bg-black", className)}
+      ref={ref}
+      {...props}
+    />
+  );
 });
 SelectOption.displayName = "SelectOption";
 

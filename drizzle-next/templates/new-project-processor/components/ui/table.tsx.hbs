@@ -42,7 +42,7 @@ const TableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "border-b border-primary-300 hover:bg-primary-100 dark:border-primary-700 dark:hover:bg-primary-900",
+      "border-b border-muted-400 hover:bg-muted-100 dark:border-muted-600 dark:hover:bg-muted-900",
       className,
     )}
     {...props}
@@ -57,7 +57,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "border-b border-primary-300 p-2 font-semibold dark:border-primary-700",
+      "border-b border-muted-400 p-2 font-semibold dark:border-muted-600",
       className,
     )}
     {...props}
@@ -88,7 +88,7 @@ const TableRowActions = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex gap-2 text-primary-700 underline dark:text-primary-300",
+      "flex gap-2 text-info-700 underline dark:text-info-400",
       className,
     )}
     {...props}
