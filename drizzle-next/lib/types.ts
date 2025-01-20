@@ -6,6 +6,7 @@ export interface DrizzleNextConfig {
   dbPackage: DbPackage;
   pkStrategy: PkStrategy;
   cssStrategy: CssStrategy;
+  colorPalette: ColorPalette;
   authEnabled: boolean;
   authSolution: AuthSolution;
   authProviders: AuthProvider[];
@@ -114,3 +115,27 @@ export type AuthProvider =
   | "nodemailer";
 
 export type DbPackage = "pg" | "mysql2" | "better-sqlite3";
+
+export type ColorPalette =
+  | "slate"
+  | "gray"
+  | "zinc"
+  | "neutral"
+  | "stone"
+  | "red"
+  | "orange"
+  | "amber"
+  | "yellow"
+  | "lime"
+  | "green"
+  | "emerald"
+  | "teal"
+  | "cyan"
+  | "sky"
+  | "blue"
+  | "indigo"
+  | "violet"
+  | "purple"
+  | "fuschia"
+  | "pink"
+  | "rose";

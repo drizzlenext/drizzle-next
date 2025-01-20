@@ -49,6 +49,9 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       renderTemplate({
         inputPath: "new-project-processor/tailwind.config.ts.hbs",
         outputPath: "tailwind.config.ts",
+        data: {
+          colorPalette: this.opts.colorPalette,
+        },
       });
     }
 

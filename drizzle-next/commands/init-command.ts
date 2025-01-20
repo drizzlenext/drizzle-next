@@ -1,6 +1,10 @@
 import { Command, Option } from "commander";
 import { log } from "../lib/log";
-import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
+import {
+  ColorPalette,
+  DrizzleNextConfig,
+  DrizzleNextProcessor,
+} from "../lib/types";
 import { checkbox, select, confirm } from "@inquirer/prompts";
 import {
   completeDrizzleNextConfig,
@@ -55,6 +59,32 @@ initCommand
     new Option("-css, --css-strategy <cssStrategy>", "css strategy").choices([
       "tailwind",
       "none",
+    ])
+  )
+  .addOption(
+    new Option("--color-palette <colorPalette>").choices([
+      "slate",
+      "gray",
+      "zinc",
+      "neutral",
+      "stone",
+      "red",
+      "orange",
+      "amber",
+      "yellow",
+      "lime",
+      "green",
+      "emerald",
+      "teal",
+      "cyan",
+      "sky",
+      "blue",
+      "indigo",
+      "violet",
+      "purple",
+      "fuschia",
+      "pink",
+      "rose",
     ])
   )
   .addOption(
@@ -201,10 +231,41 @@ initCommand
             { value: "tailwind", description: "utility-first css framework" },
             {
               value: "none",
-              description: "tailwind styling removed",
+              description: "no css is included",
             },
           ],
         }));
+      if (partialConfig.cssStrategy === "tailwind") {
+        partialConfig.colorPalette =
+          options.colorPalette ||
+          (await select({
+            message: "Which color palette would you like to start with?",
+            choices: [
+              { value: "slate" },
+              { value: "gray" },
+              { value: "zinc" },
+              { value: "neutral" },
+              { value: "stone" },
+              { value: "red" },
+              { value: "orange" },
+              { value: "amber" },
+              { value: "yellow" },
+              { value: "lime" },
+              { value: "green" },
+              { value: "emerald" },
+              { value: "teal" },
+              { value: "cyan" },
+              { value: "sky" },
+              { value: "blue" },
+              { value: "indigo" },
+              { value: "violet" },
+              { value: "purple" },
+              { value: "fuschia" },
+              { value: "pink" },
+              { value: "rose" },
+            ],
+          }));
+      }
       partialConfig.authSolution =
         options.authSolution ||
         (await select({
