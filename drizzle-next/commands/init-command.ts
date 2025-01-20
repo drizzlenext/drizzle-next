@@ -8,7 +8,6 @@ import {
   installDevDependencies,
   preflightChecks,
   writeDrizzleNextConfig,
-  writeToFile,
 } from "../lib/utils";
 import { packageStrategyFactory } from "../lib/strategy-factory";
 import { AuthProcessor, authStrategyMap } from "../processors/auth-processor";
@@ -24,7 +23,7 @@ export const initCommand = new Command("init");
 const VERSION = packageJson["version"];
 
 initCommand
-  .description("initialize project, application boilerplate, and configuration")
+  .description("initialize next.js project for development with drizzle-next")
   .option("--no-install", "skip installation of dependencies")
   .addOption(
     new Option(

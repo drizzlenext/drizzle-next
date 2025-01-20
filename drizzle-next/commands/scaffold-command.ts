@@ -9,18 +9,13 @@ import { ScaffoldProcessor } from "../processors/scaffold-processor";
 export const scaffoldCommand = new Command("scaffold");
 
 scaffoldCommand
-  .summary("scaffold crud ui, db schema, migration, and actions")
+  .summary("scaffold next.js ui and drizzle database table")
   .description(
-    `generate crud ui, db schema, db migration, and server actions for a database table
+    `scaffold next.js ui and drizzle database table
 
-# sqlite example
-npx drizzle-next@latest scaffold post -c title:text content:text is_draft:boolean published_at:text
-
-# postgresql example
-npx drizzle-next@latest scaffold post -c title:text content:text is_draft:boolean published_at:timestamp
-
-# mysql example
-npx drizzle-next@latest scaffold post -c title:varchar content:text is_draft:boolean published_at:timestamp
+examples:
+npx drizzle-next@latest scaffold category -c name:text
+npx drizzle-next@latest scaffold post -c category_id:references title:text likes:integer published_at:timestamp content:text
 
 `
   )
