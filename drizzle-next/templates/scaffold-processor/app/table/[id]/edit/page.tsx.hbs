@@ -1,10 +1,11 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 {{#if referencesColumnList.length}}
 import { db } from "@/lib/db";
 {{/if}}
 import { {{tableObj.singularPascalCase}}UpdateForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-update-form";
 import { get{{tableObj.singularPascalCase}}WithRelations } from "@/queries/{{tableObj.singularKebabCase}}-queries";
-import { Dashboard, DashboardTitle, DashboardContent } from "@/components/ui/dashboard";
+import { Dashboard, DashboardTitle, DashboardContent, DashboardActions } from "@/components/ui/dashboard";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -32,6 +33,10 @@ export default async function Page(props: { params: Params }) {
           {{/each}}
         />
       </DashboardContent>
+      <DashboardActions>
+        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
+        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>Show</Link>
+      </DashboardActions>
     </Dashboard>
   );
 }

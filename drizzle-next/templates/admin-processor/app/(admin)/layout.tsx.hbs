@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
 import { isAdmin } from "@/lib/authorization";
 import { AdminHeader } from "@/components/admin/admin-header";
+import { Notice } from "@/components/notice";
 
 export default async function Layout({
   children,
@@ -36,7 +37,10 @@ export default async function Layout({
       <div>
         <AdminSidebar />
         <div className="ml-8 flex flex-col sm:ml-40">
-          <div className="mt-12">{children}</div>
+          <div className="mt-12">
+            <Notice />
+            <div>{children}</div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,8 +1,9 @@
+import Link from "next/link";
 {{#if referencesColumnList.length}}
 import { db } from "@/lib/db";
 {{/if}}
 import { {{tableObj.singularPascalCase}}CreateForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-create-form";
-import { Dashboard, DashboardTitle, DashboardContent } from "@/components/ui/dashboard";
+import { Dashboard, DashboardTitle, DashboardContent, DashboardActions } from "@/components/ui/dashboard";
 
 export default async function Page() {
   {{#each referencesColumnList}}
@@ -19,6 +20,9 @@ export default async function Page() {
           {{/each}}
         />
       </DashboardContent>
+      <DashboardActions>
+        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
+      </DashboardActions>
     </Dashboard>
   );
 }

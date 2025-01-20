@@ -1,11 +1,10 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 {{#if hasFileDataType}}
-import Link from "next/link";
 import { config } from "@/lib/config";
 {{/if}}
 import { get{{tableObj.singularPascalCase}}WithRelations } from "@/queries/{{tableObj.singularKebabCase}}-queries";
-import { Dashboard, DashboardTitle, DashboardContent } from "@/components/ui/dashboard";
-import { Notice } from "@/components/notice";
+import { Dashboard, DashboardTitle, DashboardContent, DashboardActions } from "@/components/ui/dashboard";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -21,9 +20,9 @@ export default async function Page(props: { params: Params }) {
 
   return (
     <Dashboard>
-      <Notice />
       <DashboardTitle>{{tableObj.singularCapitalCase}}</DashboardTitle>
       <DashboardContent>
+        <p><strong>Id:</strong> { {{tableObj.singularCamelCase}}Obj.id }</p>
         {{#each validatedColumns}}
           {{#switch this.dataType}}
             {{#case "boolean"}}
@@ -59,6 +58,11 @@ export default async function Page(props: { params: Params }) {
           {{/switch}}
         {{/each}}
       </DashboardContent>
+      <DashboardActions>
+        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
+        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/edit`}>Edit</Link>
+        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/delete`}>Delete</Link>
+      </DashboardActions>
     </Dashboard>
   );
 }

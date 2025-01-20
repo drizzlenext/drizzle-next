@@ -1,15 +1,17 @@
-import { cookies } from "next/headers";
+"use client";
+
 import { Alert } from "@/components/ui/alert";
+import { useSearchParams } from "next/navigation";
 
-export async function Notice() {
-  const cookieStore = await cookies();
+export function Notice() {
+  const searchParams = useSearchParams();
 
-  const notice = cookieStore.get("notice");
+  const notice = searchParams.get("notice");
 
   if (notice) {
     return (
       <Alert variant="success" className="mx-5 mt-5">
-        {notice.value}
+        {notice}
       </Alert>
     );
   }

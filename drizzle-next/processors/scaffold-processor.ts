@@ -325,6 +325,7 @@ export class ScaffoldProcessor {
         hasFileDataType,
         pkStrategyJsType:
           this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
+        isAdmin: this.opts.authorizationLevel === "admin",
       },
     });
   }
@@ -351,6 +352,7 @@ export class ScaffoldProcessor {
         referencesColumnList: referencesColumnList,
         pkStrategyJsType:
           this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
+        isAdmin: this.opts.authorizationLevel === "admin",
       },
     });
   }
@@ -368,6 +370,7 @@ export class ScaffoldProcessor {
         tableObj: tableObj,
         authorizationLevel: this.opts.authorizationLevel,
         referencesColumnList: referencesColumnList,
+        isAdmin: this.opts.authorizationLevel === "admin",
       },
     });
   }
@@ -385,6 +388,7 @@ export class ScaffoldProcessor {
         authorizationLevel: this.opts.authorizationLevel,
         pkStrategyJsType:
           this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
+        isAdmin: this.opts.authorizationLevel === "admin",
       },
     });
   }

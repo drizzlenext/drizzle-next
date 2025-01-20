@@ -1,9 +1,10 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { {{tableObj.singularPascalCase}}DeleteForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-delete-form";
 import { db } from "@/lib/db";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
-import { Dashboard, DashboardTitle, DashboardContent } from "@/components/ui/dashboard";
+import { Dashboard, DashboardTitle, DashboardContent, DashboardActions } from "@/components/ui/dashboard";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -22,6 +23,10 @@ export default async function Page(props: { params: Params }) {
       <DashboardContent>
         <{{tableObj.singularPascalCase}}DeleteForm {{tableObj.singularCamelCase}}={ {{tableObj.singularCamelCase}}Obj } />
       </DashboardContent>
+      <DashboardActions>
+        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
+        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>Show</Link>
+      </DashboardActions>
     </Dashboard>
   );
 }

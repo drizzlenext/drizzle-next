@@ -7,7 +7,7 @@ const Dashboard = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("relative flex flex-col mb-10", className)}
+    className={cn("relative flex flex-col mb-10 p-5 gap-5", className)}
     {...props}
   />
 ));
@@ -17,7 +17,7 @@ const DashboardTitle = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <h1 ref={ref} className={cn("m-5 font-bold", className)} {...props} />
+  <h1 ref={ref} className={cn("font-bold", className)} {...props} />
 ));
 DashboardTitle.displayName = "DashboardTitle";
 
@@ -27,10 +27,7 @@ const DashboardToolbar = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "mx-5 mb-5 flex flex-row flex-wrap justify-between gap-5",
-      className,
-    )}
+    className={cn("flex flex-row flex-wrap justify-between gap-5", className)}
     {...props}
   />
 ));
@@ -40,7 +37,7 @@ const DashboardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("mx-5", className)} {...props} />
+  <div ref={ref} className={cn("", className)} {...props} />
 ));
 DashboardContent.displayName = "DashboardContent";
 
@@ -48,9 +45,24 @@ const DashboardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("m-5", className)} {...props} />
+  <div ref={ref} className={cn("", className)} {...props} />
 ));
 DashboardFooter.displayName = "DashboardFooter";
+
+const DashboardActions = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "flex gap-5 text-info-600 underline dark:text-info-400",
+      className
+    )}
+    {...props}
+  />
+));
+DashboardActions.displayName = "DashboardActions";
 
 export {
   Dashboard,
@@ -58,4 +70,5 @@ export {
   DashboardToolbar,
   DashboardContent,
   DashboardFooter,
+  DashboardActions,
 };

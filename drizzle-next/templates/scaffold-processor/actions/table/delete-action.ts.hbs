@@ -4,7 +4,6 @@ import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { cookies } from "next/headers";
 import { db } from "@/lib/db";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 {{#if isNotPublic}}
@@ -69,10 +68,6 @@ export async function delete{{tableObj.singularPascalCase}}(
     }
   }
 
-  (await cookies()).set("notice", "{{tableObj.singularCapitalCase}} was successfully deleted", {
-    maxAge: 0,
-  });
-
   revalidatePath("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}");
-  redirect("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}");
+  redirect("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}?notice={{tableObj.singularPascalCase}} was successfully deleted");
 }
