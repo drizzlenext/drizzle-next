@@ -1,27 +1,35 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-const Dashboard = React.forwardRef<
+const PageLayout = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("relative flex flex-col mb-10 p-5 gap-5", className)}
+    className={cn("flex flex-col mb-10 p-5 gap-5", className)}
     {...props}
   />
 ));
-Dashboard.displayName = "Dashboard";
+PageLayout.displayName = "PageLayout";
 
-const DashboardTitle = React.forwardRef<
+const PageHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <h1 ref={ref} className={cn("font-bold", className)} {...props} />
+  <div ref={ref} className={cn("", className)} {...props} />
 ));
-DashboardTitle.displayName = "DashboardTitle";
+PageHeader.displayName = "PageHeader";
 
-const DashboardToolbar = React.forwardRef<
+const PageTitle = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("font-bold", className)} {...props} />
+));
+PageTitle.displayName = "PageTitle";
+
+const PageToolbar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -31,25 +39,25 @@ const DashboardToolbar = React.forwardRef<
     {...props}
   />
 ));
-DashboardToolbar.displayName = "DashboardToolbar";
+PageToolbar.displayName = "PageToolbar";
 
-const DashboardContent = React.forwardRef<
+const PageContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("flex flex-col gap-2", className)} {...props} />
+));
+PageContent.displayName = "PageContent";
+
+const PageFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("", className)} {...props} />
 ));
-DashboardContent.displayName = "DashboardContent";
+PageFooter.displayName = "PageFooter";
 
-const DashboardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("", className)} {...props} />
-));
-DashboardFooter.displayName = "DashboardFooter";
-
-const DashboardActions = React.forwardRef<
+const PageActions = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -62,13 +70,14 @@ const DashboardActions = React.forwardRef<
     {...props}
   />
 ));
-DashboardActions.displayName = "DashboardActions";
+PageActions.displayName = "PageActions";
 
 export {
-  Dashboard,
-  DashboardTitle,
-  DashboardToolbar,
-  DashboardContent,
-  DashboardFooter,
-  DashboardActions,
+  PageLayout,
+  PageHeader,
+  PageTitle,
+  PageToolbar,
+  PageContent,
+  PageFooter,
+  PageActions,
 };

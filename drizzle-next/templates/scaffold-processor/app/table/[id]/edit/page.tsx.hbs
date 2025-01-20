@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 {{/if}}
 import { {{tableObj.singularPascalCase}}UpdateForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-update-form";
 import { get{{tableObj.singularPascalCase}}WithRelations } from "@/queries/{{tableObj.singularKebabCase}}-queries";
-import { Dashboard, DashboardTitle, DashboardContent, DashboardActions } from "@/components/ui/dashboard";
+import { PageLayout, PageHeader, PageTitle, PageContent, PageActions } from "@/components/ui/page-layout";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -23,20 +23,22 @@ export default async function Page(props: { params: Params }) {
   {{/each}}
 
   return (
-    <Dashboard>
-      <DashboardTitle>Editing {{tableObj.singularCapitalCase}}</DashboardTitle>
-      <DashboardContent>
+    <PageLayout>
+      <PageHeader>
+        <PageTitle>Editing {{tableObj.singularCapitalCase}}</PageTitle>
+      </PageHeader>
+      <PageContent>
         <{{tableObj.singularPascalCase}}UpdateForm 
           {{tableObj.singularCamelCase}}={ {{tableObj.singularCamelCase}}Obj }
           {{#each referencesColumnList}}
           {{this.referenceTableVars.singularCamelCase}}List={ {{this.referenceTableVars.singularCamelCase}}List }
           {{/each}}
         />
-      </DashboardContent>
-      <DashboardActions>
+      </PageContent>
+      <PageActions>
         <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
         <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>Show</Link>
-      </DashboardActions>
-    </Dashboard>
+      </PageActions>
+    </PageLayout>
   );
 }

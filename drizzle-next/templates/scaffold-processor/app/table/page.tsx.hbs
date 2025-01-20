@@ -3,7 +3,7 @@ import { like } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { Pagination } from "@/components/pagination";
 import { SearchInput } from "@/components/search-input";
-import { Dashboard, DashboardTitle, DashboardToolbar, DashboardContent, DashboardFooter } from "@/components/ui/dashboard";
+import { PageLayout, PageHeader, PageTitle, PageToolbar, PageContent, PageFooter } from "@/components/ui/page-layout";
 import { Button } from "@/components/ui/button";
 import { parseSearchParams } from "@/lib/search-params-utils";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
@@ -36,25 +36,27 @@ export default async function Page(props: {
   });
 
   return (
-    <Dashboard>
-      <DashboardTitle>{{tableObj.pluralCapitalCase}}</DashboardTitle>
-      <DashboardToolbar>
+    <PageLayout>
+      <PageHeader>
+        <PageTitle>{{tableObj.pluralCapitalCase}}</PageTitle>
+      </PageHeader>
+      <PageToolbar>
         <SearchInput />
         <Link href="{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/new">
           <Button variant="info">New</Button>
         </Link>
-      </DashboardToolbar>
-      <DashboardContent>
-        <{{tableObj.singularPascalCase}}Table {{tableObj.singularCamelCase}}List={ {{tableObj.singularCamelCase}}List } />
-      </DashboardContent>
-      <DashboardFooter>
+      </PageToolbar>
+      <PageContent>
+          <{{tableObj.singularPascalCase}}Table {{tableObj.singularCamelCase}}List={ {{tableObj.singularCamelCase}}List } />
+      </PageContent>
+      <PageFooter>
         <Pagination
           page={page}
           pageSize={pageSize}
           totalPages={totalPages}
           count={count}
         />
-      </DashboardFooter>
-    </Dashboard>
+      </PageFooter>
+    </PageLayout>
   );
 }

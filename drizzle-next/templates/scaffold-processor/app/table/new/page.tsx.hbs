@@ -3,7 +3,7 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 {{/if}}
 import { {{tableObj.singularPascalCase}}CreateForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-create-form";
-import { Dashboard, DashboardTitle, DashboardContent, DashboardActions } from "@/components/ui/dashboard";
+import { PageLayout, PageHeader, PageTitle, PageContent, PageActions } from "@/components/ui/page-layout";
 
 export default async function Page() {
   {{#each referencesColumnList}}
@@ -11,18 +11,20 @@ export default async function Page() {
   {{/each}}
 
   return (
-    <Dashboard>
-      <DashboardTitle>New {{tableObj.singularCapitalCase}}</DashboardTitle>
-      <DashboardContent>
+    <PageLayout>
+      <PageHeader>
+        <PageTitle>New {{tableObj.singularCapitalCase}}</PageTitle>
+      </PageHeader>
+      <PageContent>
         <{{tableObj.singularPascalCase}}CreateForm 
           {{#each referencesColumnList}}
           {{this.referenceTableVars.singularCamelCase}}List={ {{this.referenceTableVars.singularCamelCase}}List }
           {{/each}}
         />
-      </DashboardContent>
-      <DashboardActions>
+      </PageContent>
+      <PageActions>
         <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
-      </DashboardActions>
-    </Dashboard>
+      </PageActions>
+    </PageLayout>
   );
 }

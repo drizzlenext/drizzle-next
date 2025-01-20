@@ -13,14 +13,17 @@ describe("shadriz e2e test", () => {
     cy.contains("drizzle-next");
   });
 
-  it("admin scaffold happy path", () => {
+  it("user happy path", () => {
     cy.contains("Admin");
     cy.contains("User").click();
     cy.contains("User");
     cy.contains("user@example.com").should("exist");
     cy.contains("admin@example.com").should("exist");
+  });
+
+  it("admin scaffold happy path", () => {
     cy.contains("Admin Scaffold").click();
-    cy.get("h1").contains("Admin Scaffolds").click();
+    cy.get("div").contains("Admin Scaffolds");
     cy.contains("New").click();
     cy.get('input[name="integerType"]').type("1");
     cy.get('input[name="smallintType"]').type("2");

@@ -1,18 +1,18 @@
 import { auth } from "@/lib/auth";
 import {
-  Dashboard,
-  DashboardContent,
-  DashboardTitle,
-} from "@/components/ui/dashboard";
+  PageLayout,
+  PageContent,
+  PageTitle,
+} from "@/components/ui/page-layout";
 
 export default async function Page() {
   const session = await auth();
   return (
-    <Dashboard>
-      <DashboardTitle>Profile</DashboardTitle>
-      <DashboardContent>
+    <PageLayout>
+      <PageTitle>Profile</PageTitle>
+      <PageContent>
         <strong>Email:</strong> {session?.user?.email}
-      </DashboardContent>
-    </Dashboard>
+      </PageContent>
+    </PageLayout>
   );
 }

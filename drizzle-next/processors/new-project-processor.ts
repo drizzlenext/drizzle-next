@@ -171,8 +171,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "new-project-processor/components/ui/dashboard.tsx.hbs",
-      outputPath: "components/ui/dashboard.tsx",
+      inputPath: "new-project-processor/components/ui/page-layout.tsx.hbs",
+      outputPath: "components/ui/page-layout.tsx",
     });
 
     renderTemplate({

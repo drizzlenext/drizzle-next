@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { config } from "@/lib/config";
 {{/if}}
 import { get{{tableObj.singularPascalCase}}WithRelations } from "@/queries/{{tableObj.singularKebabCase}}-queries";
-import { Dashboard, DashboardTitle, DashboardContent, DashboardActions } from "@/components/ui/dashboard";
+import { PageLayout, PageHeader, PageTitle, PageContent, PageActions } from "@/components/ui/page-layout";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -19,9 +19,11 @@ export default async function Page(props: { params: Params }) {
   }
 
   return (
-    <Dashboard>
-      <DashboardTitle>{{tableObj.singularCapitalCase}}</DashboardTitle>
-      <DashboardContent>
+    <PageLayout>
+      <PageHeader>
+        <PageTitle>{{tableObj.singularCapitalCase}}</PageTitle>
+      </PageHeader>
+      <PageContent>
         <p><strong>Id:</strong> { {{tableObj.singularCamelCase}}Obj.id }</p>
         {{#each validatedColumns}}
           {{#switch this.dataType}}
@@ -57,12 +59,12 @@ export default async function Page(props: { params: Params }) {
             {{/default}}
           {{/switch}}
         {{/each}}
-      </DashboardContent>
-      <DashboardActions>
+      </PageContent>
+      <PageActions>
         <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
         <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/edit`}>Edit</Link>
         <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/delete`}>Delete</Link>
-      </DashboardActions>
-    </Dashboard>
+      </PageActions>
+    </PageLayout>
   );
 }

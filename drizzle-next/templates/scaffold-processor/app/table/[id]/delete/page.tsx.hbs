@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { {{tableObj.singularPascalCase}}DeleteForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-delete-form";
 import { db } from "@/lib/db";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
-import { Dashboard, DashboardTitle, DashboardContent, DashboardActions } from "@/components/ui/dashboard";
+import { PageLayout, PageHeader, PageTitle, PageContent, PageActions } from "@/components/ui/page-layout";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -18,15 +18,17 @@ export default async function Page(props: { params: Params }) {
   }
 
   return (
-    <Dashboard>
-      <DashboardTitle>Delete {{tableObj.singularCapitalCase}}</DashboardTitle>
-      <DashboardContent>
+    <PageLayout>
+      <PageHeader>
+        <PageTitle>Delete {{tableObj.singularCapitalCase}}</PageTitle>
+      </PageHeader>
+      <PageContent>
         <{{tableObj.singularPascalCase}}DeleteForm {{tableObj.singularCamelCase}}={ {{tableObj.singularCamelCase}}Obj } />
-      </DashboardContent>
-      <DashboardActions>
+      </PageContent>
+      <PageActions>
         <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
         <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>Show</Link>
-      </DashboardActions>
-    </Dashboard>
+      </PageActions>
+    </PageLayout>
   );
 }

@@ -36,6 +36,7 @@ drizzle-next init -p pnpm --latest \
     --db-dialect postgresql \
     -pk cuid2 \
     -css tailwind \
+    -color indigo \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \
@@ -48,6 +49,7 @@ drizzle-next init -p pnpm --latest \
     --db-dialect postgresql \
     -pk cuid2 \
     -css tailwind \
+    -color emerald \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \

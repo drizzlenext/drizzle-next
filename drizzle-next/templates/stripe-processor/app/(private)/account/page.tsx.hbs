@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  Dashboard,
-  DashboardContent,
-  DashboardTitle,
-} from "@/components/ui/dashboard";
+  PageLayout,
+  PageContent,
+  PageTitle,
+} from "@/components/ui/page-layout";
 import {
   Table,
   TableBody,
@@ -50,9 +50,9 @@ export default async function Page() {
     .orderBy(desc(payments.createdAt));
 
   return (
-    <Dashboard>
-      <DashboardTitle>Account</DashboardTitle>
-      <DashboardContent className="flex flex-col gap-5">
+    <PageLayout>
+      <PageTitle>Account</PageTitle>
+      <PageContent className="flex flex-col gap-5">
         {user.stripeCustomerId && (
           <Card>
             <CardHeader>
@@ -98,7 +98,7 @@ export default async function Page() {
             </Table>
           </CardContent>
         </Card>
-      </DashboardContent>
-    </Dashboard>
+      </PageContent>
+    </PageLayout>
   );
 }

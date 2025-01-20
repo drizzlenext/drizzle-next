@@ -62,7 +62,7 @@ initCommand
     ])
   )
   .addOption(
-    new Option("--color-palette <colorPalette>").choices([
+    new Option("-color, --color-palette <colorPalette>").choices([
       "slate",
       "gray",
       "zinc",
