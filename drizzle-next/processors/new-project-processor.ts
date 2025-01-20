@@ -88,6 +88,11 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
+      inputPath: "new-project-processor/components/ui/mode-script.tsx.hbs",
+      outputPath: "components/ui/mode-script.tsx",
+    });
+
+    renderTemplate({
       inputPath: "new-project-processor/lib/file-utils.ts.hbs",
       outputPath: "lib/file-utils.ts",
     });

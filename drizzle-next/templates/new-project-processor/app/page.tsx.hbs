@@ -1,7 +1,12 @@
 import { PublicFooter } from "@/components/public/public-footer";
 import { PublicHeader } from "@/components/public/public-header";
 import { Button } from "@/components/ui/button";
-import { ExternalLinkIcon, GaugeIcon, LayoutDashboardIcon } from "lucide-react";
+import {
+  CloudDrizzleIcon,
+  ExternalLinkIcon,
+  GaugeIcon,
+  LayoutDashboardIcon,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function Page() {
@@ -10,7 +15,9 @@ export default function Page() {
       <PublicHeader />
       <div className="flex flex-col justify-center h-screen">
         <main className="flex flex-col flex-1 gap-5 w-72 m-auto justify-center">
-          <h1 className="text-4xl font-bold font-mono">drizzle-next</h1>
+          <h1 className="text-4xl font-mono flex gap-2 items-center">
+            <CloudDrizzleIcon size={36} /> drizzle-next
+          </h1>
           <Link href="https://www.drizzle-next.com" target="_blank">
             <Button className="w-full flex items-center gap-2 justify-center">
               <ExternalLinkIcon /> View Documentation

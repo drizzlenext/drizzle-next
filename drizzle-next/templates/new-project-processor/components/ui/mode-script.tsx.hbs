@@ -1,0 +1,19 @@
+"use client";
+
+import * as React from "react";
+
+export const ModeScript = React.memo(() => {
+  return (
+    <script
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={ {
+        __html: `if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+              document.documentElement.classList.add('dark')
+            } else {
+              document.documentElement.classList.remove('dark')
+            }`,
+      } }
+    />
+  );
+});
+ModeScript.displayName = "ModeScript";
