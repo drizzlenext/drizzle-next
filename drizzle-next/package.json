@@ -27,13 +27,13 @@
     "drizzle-orm": "^0.38.3",
     "esbuild-register": "^3.6.0",
     "handlebars": "^4.7.8",
-    "pluralize": "^8.0.0",
-    "typescript": "^5.5.2"
+    "pluralize": "^8.0.0"
   },
   "devDependencies": {
     "@types/pluralize": "^0.0.33",
     "cypress": "^13.15.1",
     "tsx": "^4.19.2",
+    "typescript": "^5.5.2",
     "vitest": "^2.1.8"
   },
   "directories": {
