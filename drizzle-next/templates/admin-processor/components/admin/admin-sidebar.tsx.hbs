@@ -4,6 +4,7 @@ import { Table2Icon, GaugeIcon, SettingsIcon, LogOutIcon } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { Sidebar } from "@/components/ui/sidebar";
 
 const items = [
   { title: "Admin", url: "/admin", icon: GaugeIcon },
@@ -16,14 +17,14 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed top-12 z-20 flex min-h-screen w-10 flex-col border-r border-primary-300 bg-primary-50 text-sm dark:border-primary-700 dark:bg-primary-900 sm:w-40">
+    <Sidebar>
       {items.map((item) => (
         <Link
           key={item.title}
           href={item.url}
           className={cn(
-            "flex h-9 items-center justify-center gap-2 p-2 text-center hover:bg-primary-100 dark:hover:bg-primary-800 sm:justify-start",
-            pathname === item.url && "bg-primary-100 dark:bg-primary-800",
+            "flex items-center gap-2 p-2 hover:bg-primary-100 dark:hover:bg-primary-900",
+            pathname === item.url && "bg-primary-100 dark:bg-primary-900"
           )}
         >
           <item.icon className="h-4 w-4 flex-shrink-0" />
@@ -32,6 +33,6 @@ export function AdminSidebar() {
           </span>
         </Link>
       ))}
-    </div>
+    </Sidebar>
   );
 }

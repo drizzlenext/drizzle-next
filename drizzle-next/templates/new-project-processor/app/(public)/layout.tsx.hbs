@@ -1,12 +1,12 @@
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
+import { PublicFooter } from "@/components/public/public-footer";
+import { PublicHeader } from "@/components/public/public-header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <Header />
-      <main className="container mx-auto p-4">{children}</main >
-      <Footer />
+      <PublicHeader />
+      <main className="container mx-auto p-4">{children}</main>
+      <PublicFooter />
     </div>
   );
 }

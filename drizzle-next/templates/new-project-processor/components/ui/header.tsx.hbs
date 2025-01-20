@@ -1,0 +1,19 @@
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+const Header = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "fixed z-20 flex h-12 w-full shrink-0 items-center justify-between gap-2 border-b border-primary-300 bg-primary-100 dark:border-primary-700 dark:bg-primary-900",
+      className
+    )}
+    {...props}
+  />
+));
+Header.displayName = "Header";
+
+export { Header };

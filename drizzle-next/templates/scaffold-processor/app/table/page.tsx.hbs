@@ -41,7 +41,7 @@ export default async function Page(props: {
       <DashboardToolbar>
         <SearchInput />
         <Link href="{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/new">
-          <Button>New</Button>
+          <Button variant="info">New</Button>
         </Link>
       </DashboardToolbar>
       <DashboardContent>
