@@ -5,11 +5,7 @@ const PageLayout = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-col mb-10 p-5 gap-5", className)}
-    {...props}
-  />
+  <div ref={ref} className={cn("mb-10 flex flex-col", className)} {...props} />
 ));
 PageLayout.displayName = "PageLayout";
 
@@ -17,7 +13,14 @@ const PageHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("", className)} {...props} />
+  <div
+    ref={ref}
+    className={cn(
+      "flex flex-wrap items-center justify-between gap-5 border-muted-300 dark:border-muted-700 border-b p-5 bg-primary-50 dark:bg-primary-950 min-h-20",
+      className
+    )}
+    {...props}
+  />
 ));
 PageHeader.displayName = "PageHeader";
 
@@ -29,34 +32,6 @@ const PageTitle = React.forwardRef<
 ));
 PageTitle.displayName = "PageTitle";
 
-const PageToolbar = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-row flex-wrap justify-between gap-5", className)}
-    {...props}
-  />
-));
-PageToolbar.displayName = "PageToolbar";
-
-const PageContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("flex flex-col gap-2", className)} {...props} />
-));
-PageContent.displayName = "PageContent";
-
-const PageFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("", className)} {...props} />
-));
-PageFooter.displayName = "PageFooter";
-
 const PageActions = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -64,7 +39,7 @@ const PageActions = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex gap-5 text-info-600 underline dark:text-info-400",
+      "flex flex-wrap gap-5 [&>a]:text-info-600 [&>a]:underline dark:[&>a]:text-info-400",
       className
     )}
     {...props}
@@ -72,12 +47,31 @@ const PageActions = React.forwardRef<
 ));
 PageActions.displayName = "PageActions";
 
+const PageContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col gap-2 p-5", className)}
+    {...props}
+  />
+));
+PageContent.displayName = "PageContent";
+
+const PageFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("px-5", className)} {...props} />
+));
+PageFooter.displayName = "PageFooter";
+
 export {
   PageLayout,
   PageHeader,
   PageTitle,
-  PageToolbar,
+  PageActions,
   PageContent,
   PageFooter,
-  PageActions,
 };

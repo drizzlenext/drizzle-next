@@ -2,8 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   PageLayout,
-  PageContent,
+  PageHeader,
   PageTitle,
+  PageContent,
 } from "@/components/ui/page-layout";
 import {
   Table,
@@ -51,7 +52,9 @@ export default async function Page() {
 
   return (
     <PageLayout>
-      <PageTitle>Account</PageTitle>
+      <PageHeader>
+        <PageTitle>Account</PageTitle>
+      </PageHeader>
       <PageContent className="flex flex-col gap-5">
         {user.stripeCustomerId && (
           <Card>

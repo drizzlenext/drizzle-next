@@ -26,6 +26,10 @@ export default async function Page(props: { params: Params }) {
     <PageLayout>
       <PageHeader>
         <PageTitle>Editing {{tableObj.singularCapitalCase}}</PageTitle>
+        <PageActions>
+          <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
+          <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>Show</Link>
+        </PageActions>
       </PageHeader>
       <PageContent>
         <{{tableObj.singularPascalCase}}UpdateForm 
@@ -35,10 +39,6 @@ export default async function Page(props: { params: Params }) {
           {{/each}}
         />
       </PageContent>
-      <PageActions>
-        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
-        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>Show</Link>
-      </PageActions>
     </PageLayout>
   );
 }

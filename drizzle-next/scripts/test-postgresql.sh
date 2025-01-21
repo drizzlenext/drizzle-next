@@ -41,9 +41,9 @@ drizzle-next init -p pnpm --latest \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \
     --pluralize
-cp ~/code/drizzle-next-env/.env.postgresql .env
 drizzle-next add tiptap
 drizzle-next add stripe
+pnpm i -D prettier prettier-plugin-tailwindcss
 else
 drizzle-next init -p pnpm --latest \
     --db-dialect postgresql \
@@ -59,6 +59,8 @@ drizzle-next add tiptap --no-install
 drizzle-next add stripe --no-install
 fi
 
+cp ~/code/drizzle-next-env/.env.postgresql .env
+cp ~/code/drizzle-next/templates/test-scripts/.prettierrc.hbs .prettierrc
 drizzle-next scaffold -a admin admin_scaffold -c integer_type:integer smallint_type:smallint bigint_type:bigint serial_type:serial bigserial_type:bigserial boolean_type:boolean text_type:text varchar_type:varchar char_type:char numeric_type:numeric decimal_type:decimal real_type:real double_precision_type:doublePrecision json_type:json jsonb_type:jsonb time_type:time timestamp_type:timestamp: date_type:date file_type:file
 drizzle-next scaffold -a private private_scaffold -c text_field:text integer_field:integer real_field:real decimal_field:decimal boolean_field:boolean file_field:file timestamp_field:timestamp
 drizzle-next scaffold -a public public_scaffold -c text_field:text integer_field:integer real_field:real decimal_field:decimal boolean_field:boolean file_field:file timestamp_field:timestamp

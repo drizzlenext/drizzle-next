@@ -14,6 +14,9 @@ export default async function Page() {
     <PageLayout>
       <PageHeader>
         <PageTitle>New {{tableObj.singularCapitalCase}}</PageTitle>
+        <PageActions>
+          <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
+        </PageActions>
       </PageHeader>
       <PageContent>
         <{{tableObj.singularPascalCase}}CreateForm 
@@ -22,9 +25,6 @@ export default async function Page() {
           {{/each}}
         />
       </PageContent>
-      <PageActions>
-        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
-      </PageActions>
     </PageLayout>
   );
 }
