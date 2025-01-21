@@ -22,87 +22,87 @@ export default async function Page(props: {
         <CardHeader>
           <CardTitle>Sign In</CardTitle>
         </CardHeader>
-        <CardContent className="flex flex-col gap-8">
+        <CardContent className="flex flex-col gap-10">
         {{#if providers.credentials}}
-            <SignInForm />
+          <SignInForm />
         {{/if}}
         {{#if providers.postmark}}
-            <Form
-              className="flex flex-col gap-2"
-              action={async (formData) => {
-                "use server";
-                await signIn("postmark", {
-                  email: formData.get("email"),
-                  redirectTo: "/dashboard",
-                });
-              }}
-            >
-              <Input type="text" name="email" placeholder="Email" />
-              <Button type="submit" className="w-full">Sign in with Postmark</Button>
-            </Form>
+          <Form
+            className="flex flex-col gap-5"
+            action={async (formData) => {
+              "use server";
+              await signIn("postmark", {
+                email: formData.get("email"),
+                redirectTo: "/dashboard",
+              });
+            }}
+          >
+            <Input type="text" name="email" placeholder="Email" />
+            <Button type="submit" className="w-full">Sign in with Postmark</Button>
+          </Form>
         {{/if}}
         {{#if providers.nodemailer}}
-            <Form
-              className="flex flex-col gap-2"
-              action={async (formData) => {
-                "use server";
-                await signIn("nodemailer", {
-                  email: formData.get("email"),
-                  redirectTo: "/dashboard",
-                });
-              }}
-            >
-              <Input type="text" name="email" placeholder="Email" />
-              <Button type="submit" className="w-full">Sign in with Nodemailer</Button>
-            </Form>
+          <Form
+            className="flex flex-col gap-5"
+            action={async (formData) => {
+              "use server";
+              await signIn("nodemailer", {
+                email: formData.get("email"),
+                redirectTo: "/dashboard",
+              });
+            }}
+          >
+            <Input type="text" name="email" placeholder="Email" />
+            <Button type="submit" className="w-full">Sign in with Nodemailer</Button>
+          </Form>
         {{/if}}
         {{#if providers.google}}
-            <Form
-              key={"google"}
-              action={async () => {
-                "use server";
-                try {
-                  await signIn("google", {
-                    redirectTo: "/dashboard",
-                  });
-                } catch (error) {
-                  if (error instanceof AuthError) {
-                    return redirect(`/signin/?error=${error.type}`);
-                  }
-                  throw error;
+          <Form
+            key={"google"}
+            action={async () => {
+              "use server";
+              try {
+                await signIn("google", {
+                  redirectTo: "/dashboard",
+                });
+              } catch (error) {
+                if (error instanceof AuthError) {
+                  return redirect(`/signin/?error=${error.type}`);
                 }
-              }}
-            >
-              <Button className="w-full" type="submit">
-                Sign in with Google
-              </Button>
-            </Form>
+                throw error;
+              }
+            }}
+          >
+            <Button className="w-full" type="submit">
+              Sign in with Google
+            </Button>
+          </Form>
         {{/if}}
         {{#if providers.github}}
-            <Form
-              key={"github"}
-              action={async () => {
-                "use server";
-                try {
-                  await signIn("github", {
-                    redirectTo: "/dashboard",
-                  });
-                } catch (error) {
-                  if (error instanceof AuthError) {
-                    return redirect(`/signin/?error=${error.type}`);
-                  }
-                  throw error;
+          <Form
+            key={"github"}
+            action={async () => {
+              "use server";
+              try {
+                await signIn("github", {
+                  redirectTo: "/dashboard",
+                });
+              } catch (error) {
+                if (error instanceof AuthError) {
+                  return redirect(`/signin/?error=${error.type}`);
                 }
-              }}
-            >
-              <Button className="w-full" type="submit">
-                Sign in with GitHub
-              </Button>
-            </Form>
+                throw error;
+              }
+            }}
+          >
+            <Button className="w-full" type="submit">
+              Sign in with GitHub
+            </Button>
+          </Form>
         {{/if}}
-          {searchParams.error && (
-            <FormMessage>Login failed</FormMessage>
-          )}
+        {searchParams.error && (
+          <FormMessage>Login failed</FormMessage>
+        )}
         </CardContent>
       </Card>
     </div>
