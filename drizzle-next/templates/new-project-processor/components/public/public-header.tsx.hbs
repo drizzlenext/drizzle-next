@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/mode-toggle";
+import { DarkModeToggle } from "@/components/ui/dark-mode-toggle";
 import Link from "next/link";
 import { Header } from "../ui/header";
 export function PublicHeader() {
@@ -13,7 +13,7 @@ export function PublicHeader() {
         <div className="flex items-center">
           <Link href="/signin">Sign In</Link>
           <div className="ml-5 inline-block">
-            <ModeToggle />
+            <DarkModeToggle />
           </div>
         </div>
       </div>

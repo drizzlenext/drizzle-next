@@ -91,9 +91,21 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "new-project-processor/components/ui/mode-script.tsx.hbs",
-      outputPath: "components/ui/mode-script.tsx",
+      inputPath: "new-project-processor/components/ui/dark-mode-toggle.tsx.hbs",
+      outputPath: "components/ui/dark-mode-toggle.tsx",
     });
+
+    renderTemplate({
+      inputPath: "new-project-processor/components/ui/dark-mode-script.tsx.hbs",
+      outputPath: "components/ui/dark-mode-script.tsx",
+    });
+
+    // for dark mode
+    insertTextAfterIfNotExists(
+      "app/layout.tsx",
+      "<html",
+      " suppressHydrationWarning"
+    );
 
     renderTemplate({
       inputPath: "new-project-processor/lib/file-utils.ts.hbs",

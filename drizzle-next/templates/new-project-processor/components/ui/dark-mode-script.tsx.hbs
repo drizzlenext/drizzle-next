@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const ModeScript = React.memo(() => {
+export const DarkModeScript = React.memo(() => {
   return (
     <script suppressHydrationWarning>
       {`if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -11,4 +11,4 @@ export const ModeScript = React.memo(() => {
     </script>
   );
 });
-ModeScript.displayName = "ModeScript";
+DarkModeScript.displayName = "DarkModeScript";

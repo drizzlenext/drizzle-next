@@ -1,10 +1,6 @@
 import { Command, Option } from "commander";
 import { log } from "../lib/log";
-import {
-  ColorPalette,
-  DrizzleNextConfig,
-  DrizzleNextProcessor,
-} from "../lib/types";
+import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
 import { checkbox, select, confirm } from "@inquirer/prompts";
 import {
   completeDrizzleNextConfig,
@@ -16,7 +12,6 @@ import {
 import { packageStrategyFactory } from "../lib/strategy-factory";
 import { AuthProcessor, authStrategyMap } from "../processors/auth-processor";
 import { NewProjectProcessor } from "../processors/new-project-processor";
-import { DarkModeProcessor } from "../processors/dark-mode-processor";
 import { AdminProcessor } from "../processors/admin-processor";
 import { DbDialectProcessor } from "../processors/db-dialect-processor";
 import packageJson from "../package.json";
@@ -345,9 +340,6 @@ initCommand
       const devDependencies = [];
 
       dependencies.push(...pkDependencies[completeConfig.pkStrategy]);
-
-      const darkModeProcessor = new DarkModeProcessor(completeConfig);
-      processors.push(darkModeProcessor);
 
       for (const processor of processors) {
         dependencies.push(...processor.dependencies);

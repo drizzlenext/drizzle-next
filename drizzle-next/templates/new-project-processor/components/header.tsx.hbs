@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/mode-toggle";
+import { DarkModeToggle } from "@/components/ui/dark-mode-toggle";
 import Link from "next/link";
 export function Header() {
   return (
@@ -12,7 +12,7 @@ export function Header() {
         <div>
           <Link href="/signin">Sign In</Link>
           <div className="ml-5 inline-block">
-            <ModeToggle />
+            <DarkModeToggle />
           </div>
         </div>
       </div>
