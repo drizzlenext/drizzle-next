@@ -20,122 +20,105 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="flex max-w-7xl m-auto p-5 justify-center">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <Card className="min-w-80 sm:max-w-96 flex-grow-0">
-          <CardHeader className="bg-accent text-accent-foreground rounded-t-xl">
-            <CardTitle>One Time</CardTitle>
-            <CardDescription>Own forever</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <h2 className="font-bold text-3xl">$100 One Time</h2>
-            <ul>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature A
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature B
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature C
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature D
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature E
-              </li>
-            </ul>
-          </CardContent>
-          <CardFooter>
-            <form action="/api/checkout-sessions-one-time" method="POST">
-              <input type="hidden" name="slug" value="one-time-purchase" />
-              <Button type="submit">Purchase</Button>
-            </form>
-          </CardFooter>
-        </Card>
+    <div className="grid grid-cols-3 gap-5">
+      <Card>
+        <CardHeader>
+          <CardTitle>One Time</CardTitle>
+          <CardDescription>Own forever</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <h2 className="font-bold text-3xl">$100 One Time</h2>
+          <ul>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature A
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature B
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature C
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature D
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature E
+            </li>
+          </ul>
+        </CardContent>
+        <CardFooter>
+          <form action="/api/checkout-sessions-one-time" method="POST">
+            <input type="hidden" name="slug" value="one-time-purchase" />
+            <Button type="submit">Purchase</Button>
+          </form>
+        </CardFooter>
+      </Card>
 
-        <Card className="min-w-80 sm:max-w-96 flex-grow-0">
-          <CardHeader className="bg-accent text-accent-foreground rounded-t-xl">
-            <CardTitle>Monthly Plan</CardTitle>
-            <CardDescription>Billed monthly</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <h2 className="font-bold text-3xl">$10 / Month</h2>
-            <ul>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature A
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature B
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature C
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature D
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature E
-              </li>
-            </ul>
-          </CardContent>
-          <CardFooter>
-            <form action="/api/checkout-sessions-subscription" method="POST">
-              <input type="hidden" name="slug" value="monthly-subscription" />
-              <Button type="submit">Subscribe</Button>
-            </form>
-          </CardFooter>
-        </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Monthly Plan</CardTitle>
+          <CardDescription>Billed monthly</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <h2 className="font-bold text-3xl">$10 / Month</h2>
+          <ul>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature A
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature B
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature C
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature D
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature E
+            </li>
+          </ul>
+        </CardContent>
+        <CardFooter>
+          <form action="/api/checkout-sessions-subscription" method="POST">
+            <input type="hidden" name="slug" value="monthly-subscription" />
+            <Button type="submit">Subscribe</Button>
+          </form>
+        </CardFooter>
+      </Card>
 
-        <Card className="min-w-80 sm:max-w-96 flex-grow-0">
-          <CardHeader className="bg-accent text-accent-foreground rounded-t-xl">
-            <CardTitle>Dynamic Example</CardTitle>
-            <CardDescription>Dynamic Line Items</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <h2 className="font-bold text-3xl">Dynamic Price</h2>
-            <ul>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature A
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature B
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature C
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature D
-              </li>
-              <li className="flex gap-2">
-                <CheckIcon className="w-6 h-6 flex-shrink-0 text-brand-foreground" />{" "}
-                Feature E
-              </li>
-            </ul>
-          </CardContent>
-          <CardFooter>
-            <form action="/api/checkout-sessions-dynamic" method="POST">
-              <input type="hidden" name="slug" value="dynamic-product" />
-              <Button type="submit">Checkout</Button>
-            </form>
-          </CardFooter>
-        </Card>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Dynamic Example</CardTitle>
+          <CardDescription>Dynamic Line Items</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <h2 className="font-bold text-3xl">Dynamic Price</h2>
+          <ul>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature A
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature B
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature C
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature D
+            </li>
+            <li className="flex gap-2">
+              <CheckIcon /> Feature E
+            </li>
+          </ul>
+        </CardContent>
+        <CardFooter>
+          <form action="/api/checkout-sessions-dynamic" method="POST">
+            <input type="hidden" name="slug" value="dynamic-product" />
+            <Button type="submit">Checkout</Button>
+          </form>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
