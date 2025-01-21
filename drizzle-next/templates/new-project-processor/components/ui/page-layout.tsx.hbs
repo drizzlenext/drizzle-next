@@ -16,8 +16,8 @@ const PageHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-wrap items-center justify-between gap-5 border-muted-300 dark:border-muted-700 border-b p-5 bg-primary-50 dark:bg-primary-950 min-h-20",
-      className
+      "flex min-h-16 flex-wrap items-center justify-between gap-5 border-b border-muted-300 bg-primary-50 p-5 py-3 dark:border-muted-700 dark:bg-primary-950",
+      className,
     )}
     {...props}
   />
@@ -40,7 +40,7 @@ const PageActions = React.forwardRef<
     ref={ref}
     className={cn(
       "flex flex-wrap gap-5 [&>a]:text-info-600 [&>a]:underline dark:[&>a]:text-info-400",
-      className
+      className,
     )}
     {...props}
   />
