@@ -6,11 +6,7 @@ import {
   DrizzleNextConfig,
   DrizzleNextProcessor,
 } from "../lib/types";
-import {
-  appendToFileIfTextNotExists,
-  renderTemplate,
-  renderTemplateIfNotExists,
-} from "../lib/utils";
+import { renderTemplate, renderTemplateIfNotExists } from "../lib/utils";
 import { ScaffoldProcessor } from "./scaffold-processor";
 import { caseFactory } from "../lib/case-utils";
 
@@ -59,8 +55,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplateIfNotExists({
-      inputPath: `admin-processor/components/admin/admin-sidebar.tsx.hbs`,
-      outputPath: `components/admin/admin-sidebar.tsx`,
+      inputPath: `admin-processor/components/admin/layout/admin-sidebar.tsx.hbs`,
+      outputPath: `components/admin/layout/admin-sidebar.tsx`,
     });
 
     renderTemplate({
@@ -93,11 +89,22 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "admin-processor/components/admin/admin-header.tsx.hbs",
-      outputPath: "components/admin/admin-header.tsx",
+      inputPath: "admin-processor/components/admin/layout/admin-shell.tsx.hbs",
+      outputPath: "components/admin/layout/admin-shell.tsx",
+    });
+
+    renderTemplate({
+      inputPath: "admin-processor/components/admin/layout/admin-header.tsx.hbs",
+      outputPath: "components/admin/layout/admin-header.tsx",
       data: {
         userObj,
       },
+    });
+
+    renderTemplate({
+      inputPath:
+        "admin-processor/components/admin/layout/admin-content.tsx.hbs",
+      outputPath: "components/admin/layout/admin-content.tsx",
     });
 
     const strategies: Record<DbDialect, string[]> = {

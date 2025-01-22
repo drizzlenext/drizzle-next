@@ -1,12 +1,13 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
 import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
 import { isAdmin } from "@/lib/authorization";
-import { AdminHeader } from "@/components/admin/admin-header";
-import { Notice } from "@/components/notice";
+import { AdminShell } from "@/components/admin/layout/admin-shell";
+import { AdminHeader } from "@/components/admin/layout/admin-header";
+import { AdminSidebar } from "@/components/admin/layout/admin-sidebar";
+import { AdminContent } from "@/components/admin/layout/admin-content";
 
 export default async function Layout({
   children,
@@ -32,18 +33,11 @@ export default async function Layout({
   }
 
   return (
-    <div>
+    <AdminShell>
       <AdminHeader user={userObj} />
-      <div>
-        <AdminSidebar />
-        <div className="ml-8 flex flex-col sm:ml-40">
-          <div className="mt-12">
-            <Notice />
-            <div>{children}</div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <AdminSidebar />
+      <AdminContent>{children}</AdminContent>
+    </AdminShell>
   );
 }
 

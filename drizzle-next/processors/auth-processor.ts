@@ -180,10 +180,12 @@ export class AuthProcessor implements DrizzleNextProcessor {
     this.addAuthTrustHostToEnv();
     this.appendAuthSecretToEnv();
     this.addSignOutPage();
-    this.addPrivateSidebar();
     this.addUserSchema();
     this.addNextAuthModuleAugmentation();
+    this.addPrivateShell();
     this.addPrivateHeader();
+    this.addPrivateContent();
+    this.addPrivateSidebar();
     if (this.opts.authProviders.includes("credentials")) {
       this.addSignInForm();
       this.addSignInAction();
@@ -209,8 +211,9 @@ export class AuthProcessor implements DrizzleNextProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "auth-processor/components/private/private-header.tsx.hbs",
-      outputPath: "components/private/private-header.tsx",
+      inputPath:
+        "auth-processor/components/private/layout/private-header.tsx.hbs",
+      outputPath: "components/private/layout/private-header.tsx",
       data: {
         userObj,
       },
@@ -238,11 +241,28 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   addPrivateSidebar() {
     renderTemplateIfNotExists({
-      inputPath: "auth-processor/components/private/private-sidebar.tsx.hbs",
-      outputPath: "components/private/private-sidebar.tsx",
+      inputPath:
+        "auth-processor/components/private/layout/private-sidebar.tsx.hbs",
+      outputPath: "components/private/layout/private-sidebar.tsx",
       data: {
         userObj: caseFactory("user", { pluralize: this.opts.pluralizeEnabled }),
       },
+    });
+  }
+
+  addPrivateShell() {
+    renderTemplate({
+      inputPath:
+        "auth-processor/components/private/layout/private-shell.tsx.hbs",
+      outputPath: "components/private/layout/private-shell.tsx",
+    });
+  }
+
+  addPrivateContent() {
+    renderTemplate({
+      inputPath:
+        "auth-processor/components/private/layout/private-content.tsx.hbs",
+      outputPath: "components/private/layout/private-content.tsx",
     });
   }
 

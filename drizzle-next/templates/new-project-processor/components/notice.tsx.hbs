@@ -1,6 +1,5 @@
 "use client";
 
-import { Alert } from "@/components/ui/alert";
 import { useSearchParams } from "next/navigation";
 
 export function Notice() {
@@ -10,8 +9,8 @@ export function Notice() {
 
   if (notice) {
     return (
-      <div className="bg-primary-50 px-5 pb-0 pt-3 dark:bg-primary-950">
-        <Alert variant="success">{notice}</Alert>
+      <div className="text-center text-success-600 dark:text-success-400 bg-success-100 dark:bg-success-900">
+        {notice}
       </div>
     );
   }

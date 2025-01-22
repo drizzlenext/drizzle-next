@@ -4,7 +4,6 @@ import { Table2Icon, GaugeIcon, SettingsIcon, LogOutIcon } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { Sidebar } from "@/components/ui/sidebar";
 
 const items = [
   { title: "Admin", url: "/admin", icon: GaugeIcon },
@@ -17,7 +16,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar>
+    <div className="row-span-1 col-span-1 z-20 flex-col border-r border-muted-300 bg-primary-50 text-sm dark:border-muted-700 dark:bg-primary-950">
       {items.map((item) => (
         <Link
           key={item.title}
@@ -28,11 +27,11 @@ export function AdminSidebar() {
           )}
         >
           <item.icon className="h-4 w-4 flex-shrink-0" />
-          <span className="hidden overflow-hidden text-nowrap sm:block">
+          <span className="overflow-hidden text-nowrap sm:block">
             {item.title}
           </span>
         </Link>
       ))}
-    </Sidebar>
+    </div>
   );
 }

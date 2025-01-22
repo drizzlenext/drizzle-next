@@ -232,13 +232,13 @@ export class StripeProcessor implements DrizzleNextProcessor {
 
   addLinkToPrivateSidebar() {
     insertTextAfterIfNotExists(
-      "components/private/private-sidebar.tsx",
+      "components/private/layout/private-sidebar.tsx",
       `"use client";`,
-      `import { CreditCardIcon } from "lucide-react";`
+      `\n\nimport { CreditCardIcon } from "lucide-react";`
     );
 
     insertTextBeforeIfNotExists(
-      "components/private/private-sidebar.tsx",
+      "components/private/layout/private-sidebar.tsx",
       "// [CODE_MARK private-sidebar-items]",
       `  { title: "Account", url: "/account", icon: CreditCardIcon },`
     );

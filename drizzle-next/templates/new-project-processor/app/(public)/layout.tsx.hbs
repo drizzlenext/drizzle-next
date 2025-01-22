@@ -1,13 +1,15 @@
-import { PublicFooter } from "@/components/public/public-footer";
-import { PublicHeader } from "@/components/public/public-header";
+import { PublicShell } from "@/components/public/layout/public-shell";
+import { PublicHeader } from "@/components/public/layout/public-header";
+import { PublicContent } from "@/components/public/layout/public-content";
+import { PublicFooter } from "@/components/public/layout/public-footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
+    <PublicShell>
       <PublicHeader />
-      <main className="container mx-auto px-5 py-20">{children}</main>
+      <PublicContent>{children}</PublicContent>
       <PublicFooter />
-    </div>
+    </PublicShell>
   );
 }
 
