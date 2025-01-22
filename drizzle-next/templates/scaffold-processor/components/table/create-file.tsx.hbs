@@ -1,6 +1,6 @@
       <FormControl>
-        <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
-        <Input type="file" name="{{validatedColumn.caseVariants.originalCamelCase}}" />
+        <Label htmlFor="{{validatedColumn.caseVariants.originalCamelCase}}">{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
+        <Input type="file" name="{{validatedColumn.caseVariants.originalCamelCase}}" id="{{validatedColumn.caseVariants.originalCamelCase}}" />
         {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
           <FormMessage key={error}>{error}</FormMessage>
         ))}

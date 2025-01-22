@@ -1,11 +1,11 @@
       <FormControl>
-        <Label>{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
+        <Label htmlFor="{{validatedColumn.caseVariants.originalCamelCase}}">{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
         { {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.originalCamelCase}}  && (
           <div>
             <Link href={config.NEXT_PUBLIC_UPLOAD_BASE_URL +  {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.originalCamelCase}} }>{ {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.originalCamelCase}} }</Link>
           </div>
         )}
-        <Input type="file" name="{{validatedColumn.caseVariants.originalCamelCase}}" />
+        <Input type="file" name="{{validatedColumn.caseVariants.originalCamelCase}}" id="{{validatedColumn.caseVariants.originalCamelCase}}" />
         {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
           <FormMessage key={error}>{error}</FormMessage>
         ))}

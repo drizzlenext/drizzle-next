@@ -46,9 +46,11 @@ lowlight.register("ts", ts);
 export const TiptapEditor = ({
   html,
   name,
+  id,
 }: {
   html: string;
   name: string;
+  id: string;
 }) => {
   const [editorContent, setEditorContent] = useState(html);
 
@@ -289,7 +291,7 @@ export const TiptapEditor = ({
         <EditorContent editor={editor} />
       </div>
 
-      <input type="hidden" name={name} value={editorContent} />
+      <input type="hidden" name={name} id={id} value={editorContent} />
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css"

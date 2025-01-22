@@ -20,12 +20,12 @@ export function AdminSignInForm() {
   return (
     <Form key={"credentials"} onSubmit={handleSubmit}>
       <FormControl>
-        <Label>Email</Label>
-        <Input type="text" name="email" />
+        <Label htmlFor="email">Email</Label>
+        <Input type="text" name="email" id="email" />
       </FormControl>
       <FormControl>
-        <Label>Password</Label>
-        <Input type="password" name="password" />
+        <Label htmlFor="password">Password</Label>
+        <Input type="password" name="password" id="password" />
       </FormControl>
       <FormControl>
         <Button type="submit">Sign in</Button>

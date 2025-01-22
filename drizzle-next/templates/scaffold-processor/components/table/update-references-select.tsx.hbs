@@ -1,7 +1,8 @@
       <FormControl>
-        <Label>{{validatedColumn.caseVariants.singularCapitalCase}}</Label>
+        <Label htmlFor="{{validatedColumn.caseVariants.singularCamelCase}}">{{validatedColumn.caseVariants.singularCapitalCase}}</Label>
         <Select 
           name="{{validatedColumn.caseVariants.singularCamelCase}}"
+          id="{{validatedColumn.caseVariants.singularCamelCase}}"
           defaultValue={ {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.singularCamelCase}}?.toString() }
         >
         { {{validatedColumn.referenceTableVars.singularCamelCase}}List.map(({{validatedColumn.referenceTableVars.singularCamelCase}}) => (
