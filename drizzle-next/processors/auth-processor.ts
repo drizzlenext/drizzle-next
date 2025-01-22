@@ -234,8 +234,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   addSignOutPage() {
     renderTemplate({
-      inputPath: "auth-processor/app/signout/page.tsx.hbs",
-      outputPath: "app/signout/page.tsx",
+      inputPath: "auth-processor/app/(auth)/signout/page.tsx.hbs",
+      outputPath: "app/(auth)/signout/page.tsx",
     });
   }
 
@@ -351,8 +351,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   addCustomSignInPage() {
     renderTemplate({
-      inputPath: "auth-processor/app/signin/page.tsx.custom.hbs",
-      outputPath: "app/signin/page.tsx",
+      inputPath: "auth-processor/app/(auth)/signin/page.tsx.hbs",
+      outputPath: "app/(auth)/signin/page.tsx",
       data: {
         providers: {
           google: this.opts.authProviders.includes("google"),
