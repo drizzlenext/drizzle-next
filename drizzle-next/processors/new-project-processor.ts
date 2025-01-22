@@ -122,8 +122,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "new-project-processor/components/pagination.tsx.hbs",
-      outputPath: "components/pagination.tsx",
+      inputPath: "new-project-processor/components/ui/pagination.tsx.hbs",
+      outputPath: "components/ui/pagination.tsx",
     });
 
     renderTemplate({
@@ -132,8 +132,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "new-project-processor/components/search-input.tsx.hbs",
-      outputPath: "components/search-input.tsx",
+      inputPath: "new-project-processor/components/ui/search-input.tsx.hbs",
+      outputPath: "components/ui/search-input.tsx",
     });
 
     renderTemplate({
@@ -142,8 +142,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "new-project-processor/components/sortable.tsx.hbs",
-      outputPath: "components/sortable.tsx",
+      inputPath: "new-project-processor/components/ui/sortable.tsx.hbs",
+      outputPath: "components/ui/sortable.tsx",
     });
 
     renderTemplate({
@@ -207,8 +207,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "new-project-processor/components/notice.tsx.hbs",
-      outputPath: "components/notice.tsx",
+      inputPath: "new-project-processor/components/ui/notice.tsx.hbs",
+      outputPath: "components/ui/notice.tsx",
     });
 
     renderTemplate({

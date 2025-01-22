@@ -33,8 +33,8 @@ export class TiptapProcessor implements DrizzleNextProcessor {
   }
   async render(): Promise<void> {
     renderTemplate({
-      inputPath: "tiptap-processor/components/tiptap-editor.tsx.hbs",
-      outputPath: "components/tiptap-editor.tsx",
+      inputPath: "tiptap-processor/components/ui/tiptap-editor.tsx.hbs",
+      outputPath: "components/ui/tiptap-editor.tsx",
       stripClassNames: false,
     });
     renderTemplate({
