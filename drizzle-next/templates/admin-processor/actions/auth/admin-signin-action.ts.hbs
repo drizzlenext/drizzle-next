@@ -6,14 +6,14 @@ import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
-export interface AdminLoginState {
+export interface AdminSignInState {
   message?: string;
 }
 
-export async function adminLogin(
-  prevState: AdminLoginState,
+export async function adminSignInAction(
+  prevState: AdminSignInState,
   formData: FormData
-): Promise<AdminLoginState> {
+): Promise<AdminSignInState> {
   "use server";
   try {
     const userObj = await db.query.{{userObj.pluralCamelCase}}.findFirst({
@@ -33,7 +33,7 @@ export async function adminLogin(
     });
   } catch (error) {
     return {
-      message: "Login failed.",
+      message: "Sign In failed.",
     };
   }
   redirect("/admin");

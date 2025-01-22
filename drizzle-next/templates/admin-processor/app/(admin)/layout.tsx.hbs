@@ -17,11 +17,11 @@ export default async function Layout({
   const session = await auth();
 
   if (!session?.user?.id) {
-    redirect("/admin-login");
+    redirect("/admin-signin");
   }
 
   if (!isAdmin(session)) {
-    redirect("/admin-login");
+    redirect("/admin-signin");
   }
 
   const userObj = await db.query.{{userObj.pluralCamelCase}}.findFirst({
@@ -29,7 +29,7 @@ export default async function Layout({
   });
 
   if (!userObj) {
-    redirect("/admin-login");
+    redirect("/admin-signin");
   }
 
   return (

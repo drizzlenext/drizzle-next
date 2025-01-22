@@ -42,8 +42,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "admin-processor/app/admin-login/page.tsx.hbs",
-      outputPath: "app/admin-login/page.tsx",
+      inputPath: "admin-processor/app/admin-signin/page.tsx.hbs",
+      outputPath: "app/admin-signin/page.tsx",
     });
 
     renderTemplate({
@@ -70,14 +70,13 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath:
-        "admin-processor/components/admin-login/admin-login-form.tsx.hbs",
-      outputPath: "components/admin-login/admin-login-form.tsx",
+      inputPath: "admin-processor/components/auth/admin-signin-form.tsx.hbs",
+      outputPath: "components/auth/admin-signin-form.tsx",
     });
 
     renderTemplate({
-      inputPath: "admin-processor/actions/admin-login/admin-login.ts.hbs",
-      outputPath: "actions/admin-login/admin-login.ts",
+      inputPath: "admin-processor/actions/auth/admin-signin-action.ts.hbs",
+      outputPath: "actions/auth/admin-signin-action.ts",
       data: {
         userObj,
       },

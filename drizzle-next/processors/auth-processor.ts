@@ -194,15 +194,15 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   addSignInAction() {
     renderTemplate({
-      inputPath: "auth-processor/actions/signin/signin-action.ts.hbs",
-      outputPath: "actions/signin/signin-action.ts",
+      inputPath: "auth-processor/actions/auth/signin-action.ts.hbs",
+      outputPath: "actions/auth/signin-action.ts",
     });
   }
 
   addSignInForm() {
     renderTemplate({
-      inputPath: "auth-processor/components/signin/signin-form.tsx.hbs",
-      outputPath: "components/signin/signin-form.tsx",
+      inputPath: "auth-processor/components/auth/signin-form.tsx.hbs",
+      outputPath: "components/auth/signin-form.tsx",
     });
   }
 

@@ -4,12 +4,12 @@ import { startTransition, useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AdminLoginState, adminLogin } from "@/actions/admin-login/admin-login";
+import { AdminSignInState, adminSignInAction } from "@/actions/auth/admin-signin-action";
 import { Form, FormControl, FormMessage } from "../ui/form";
 
-export function AdminLoginForm() {
-  const initialState: AdminLoginState = {};
-  const [state, dispatch] = useActionState(adminLogin, initialState);
+export function AdminSignInForm() {
+  const initialState: AdminSignInState = {};
+  const [state, dispatch] = useActionState(adminSignInAction, initialState);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

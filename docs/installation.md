@@ -97,4 +97,4 @@ Start the dev server:
 npm run dev
 ```
 
-Go to http://localhost:3000/admin-login and log in with the admin user.
+Go to http://localhost:3000/admin-signin and sign in with the admin user.

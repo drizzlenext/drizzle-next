@@ -125,7 +125,7 @@ Users can sign in at `/signin`.
 
 ### Admin Dashboard
 
-If admin was enabled, users with the `admin` role will be able to access the admin dashboard at `/admin`. The admin login is at `/admin-login`.
+If admin was enabled, users with the `admin` role will be able to access the admin dashboard at `/admin`. The admin signin is at `/admin-signin`.
 
 You will be able to scaffold using an `admin` authorization level. The pages will be put into the `(admin)` route group. These pages along with the server actions will require a user with the `admin` role to access.
 

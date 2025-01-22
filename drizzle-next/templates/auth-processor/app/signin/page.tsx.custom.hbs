@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormMessage } from "@/components/ui/form";
 {{#if providers.credentials}}
-import { SignInForm } from "@/components/signin/signin-form";
+import { SignInForm } from "@/components/auth/signin-form";
 {{/if}}
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
@@ -101,7 +101,7 @@ export default async function Page(props: {
           </Form>
         {{/if}}
         {searchParams.error && (
-          <FormMessage>Login failed</FormMessage>
+          <FormMessage>Sign In failed</FormMessage>
         )}
         </CardContent>
       </Card>
