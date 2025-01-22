@@ -23,11 +23,6 @@ export class PgPackageStrategy implements DbPackageStrategy {
     this.appendDbUrl();
     this.copyDbInstance();
     this.copyCreateUserScript();
-
-    renderTemplate({
-      inputPath: "db-packages/lib/custom-types.ts.pg.hbs",
-      outputPath: "lib/custom-types.ts",
-    });
   }
 
   copyMigrateScript(): void {

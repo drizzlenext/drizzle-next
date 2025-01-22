@@ -27,7 +27,6 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
     this.appendDbUrl();
     this.copyDbInstance();
     this.copyCreateUserScript();
-    this.addCustomTypes();
     this.addServerComponentExternalPackageToNextConfig();
   }
 
@@ -63,13 +62,6 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
       data: {
         tableObj,
       },
-    });
-  }
-
-  addCustomTypes() {
-    renderTemplate({
-      inputPath: "db-packages/lib/custom-types.ts.mysql2.hbs",
-      outputPath: "lib/custom-types.ts",
     });
   }
 
