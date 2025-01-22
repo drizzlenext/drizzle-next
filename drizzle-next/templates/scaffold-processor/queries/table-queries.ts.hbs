@@ -10,23 +10,23 @@ export async function get{{tableObj.pluralPascalCase}}WithRelationsList({
   filters,
   limit,
   offset,
-  sort,
+  sortKey,
   sortOrder,
 }: {
   filters?: SQL;
   limit?: number;
   offset?: number;
-  sort?: string;
+  sortKey?: string;
   sortOrder?: string;
 }) {
   let orderBy;
-  if (sort && sort in {{tableObj.pluralCamelCase}}) {
+  if (sortKey && sortKey in {{tableObj.pluralCamelCase}}) {
     switch (sortOrder) {
       case "asc":
-        orderBy = asc({{tableObj.pluralCamelCase}}[sort as keyof {{tableObj.singularPascalCase}}]);
+        orderBy = asc({{tableObj.pluralCamelCase}}[sortKey as keyof {{tableObj.singularPascalCase}}]);
         break;
       case "desc":
-        orderBy = desc({{tableObj.pluralCamelCase}}[sort as keyof {{tableObj.singularPascalCase}}]);
+        orderBy = desc({{tableObj.pluralCamelCase}}[sortKey as keyof {{tableObj.singularPascalCase}}]);
         break;
     }
   }

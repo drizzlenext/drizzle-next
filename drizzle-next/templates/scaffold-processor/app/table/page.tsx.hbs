@@ -21,7 +21,7 @@ export default async function Page(props: {
     pageIndex = 0,
     pageSize = 10,
     search,
-    sort = "createdAt",
+    sortKey = "createdAt",
     sortOrder = "desc",
   } = parseSearchParams(searchParams);
   const filters = search ? like({{tableObj.pluralCamelCase}}.id, `%${search}%`) : undefined;
@@ -29,7 +29,7 @@ export default async function Page(props: {
   const totalPages = Math.ceil(count / pageSize);
   const {{tableObj.singularCamelCase}}List = await get{{tableObj.pluralPascalCase}}WithRelationsList({
     filters: filters,
-    sort: sort,
+    sortKey: sortKey,
     sortOrder: sortOrder,
     limit: pageSize,
     offset: pageIndex * pageSize,
