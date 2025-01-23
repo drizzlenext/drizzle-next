@@ -11,9 +11,9 @@ import { ADD_ON_REGISTRY, getAddOnHelpText } from "../lib/add-on-registry";
 export const addCommand = new Command("add");
 
 addCommand
-  .summary("add an add-on extension to the application")
+  .summary("add an extension to the project")
   .description(
-    `add-ons are extensions that can be added after a project has been initialized\n\navailable add-ons:\n${getAddOnHelpText()}`
+    `add-ons are optional feature extensions that can be added after a project has been initialized\n\navailable add-ons:\n${getAddOnHelpText()}`
   )
   .argument("<extension>", "the name of the add-on extension")
   .option("--no-install", "skip installation of dependencies")

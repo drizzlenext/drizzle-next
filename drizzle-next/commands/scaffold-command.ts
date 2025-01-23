@@ -15,14 +15,14 @@ scaffoldCommand
 
 examples:
 npx drizzle-next@latest scaffold category -c name:text
-npx drizzle-next@latest scaffold post -c category_id:references title:text likes:integer published_at:timestamp content:text
+npx drizzle-next@latest scaffold post -c category_id:references title:text content:text is_draft:boolean
 
 `
   )
   .argument("<table>", "the database table name")
   .requiredOption(
     "-c, --columns <columns...>",
-    "space separated list of columns in the following format: column_name:data_type"
+    "space separated list of columns in the format of column_name:data_type"
   )
   .addOption(
     new Option(
@@ -31,7 +31,11 @@ npx drizzle-next@latest scaffold post -c category_id:references title:text likes
     ).choices(["admin", "private", "public"])
   )
   .option("--no-db", "skip the generation of drizzle database table", true)
-  .option("--no-ui", "skip the generation of routes, pages, and actions", true)
+  .option(
+    "--no-ui",
+    "skip the generation of next.js routes, pages, and actions",
+    true
+  )
   .action(async (table, options) => {
     if (!options.ui && !options.db) {
       log.red(
