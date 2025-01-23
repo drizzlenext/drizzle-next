@@ -40,23 +40,36 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
   }
 
   async render() {
-    if (this.opts.cssStrategy === "tailwind") {
-      renderTemplate({
-        inputPath: "new-project-processor/app/layout.tsx.hbs",
-        outputPath: "app/layout.tsx",
-      });
-      renderTemplate({
-        inputPath: "new-project-processor/tailwind.config.ts.hbs",
-        outputPath: "tailwind.config.ts",
-        data: {
-          colorPalette: this.opts.colorPalette,
-        },
-      });
-      renderTemplate({
-        inputPath: "new-project-processor/app/globals.css.hbs",
-        outputPath: "app/globals.css",
-      });
+    switch (this.opts.cssStrategy) {
+      case "tailwind":
+        renderTemplate({
+          inputPath: "new-project-processor/tailwind.config.ts.hbs",
+          outputPath: "tailwind.config.ts",
+          data: {
+            colorPalette: this.opts.colorPalette,
+          },
+        });
+        renderTemplate({
+          inputPath: "new-project-processor/app/globals.css.hbs",
+          outputPath: "app/globals.css",
+        });
+        break;
+      case "none":
+        renderTemplate({
+          inputPath: "new-project-processor/app/globals.css.none.hbs",
+          outputPath: "app/globals.css",
+        });
+        break;
+      default:
+        const exhaustiveCheck: never = this.opts.cssStrategy;
+        throw new Error(`unhandled case: ${exhaustiveCheck}`);
     }
+
+    renderTemplate({
+      inputPath: "new-project-processor/app/layout.tsx.hbs",
+      outputPath: "app/layout.tsx",
+      stripClassNames: false,
+    });
 
     renderTemplate({
       inputPath: "new-project-processor/app/page.tsx.hbs",
