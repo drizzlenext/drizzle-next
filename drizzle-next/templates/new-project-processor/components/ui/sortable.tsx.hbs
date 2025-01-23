@@ -19,8 +19,8 @@ export function Sortable({
   const pathname = usePathname();
 
   useEffect(() => {
-    const sort = searchParams.get("sort");
-    if (sort !== column) {
+    const sortKey = searchParams.get("sortKey");
+    if (sortKey !== column) {
       setSortOrder("none");
     }
   }, [searchParams, column]);
@@ -32,17 +32,17 @@ export function Sortable({
       case "asc":
         setSortOrder("desc");
         params.set("sortOrder", "desc");
-        params.set("sort", column);
+        params.set("sortKey", column);
         break;
       case "desc":
         setSortOrder("none");
         params.delete("sortOrder");
-        params.delete("sort");
+        params.delete("sortKey");
         break;
       case "none":
         setSortOrder("asc");
         params.set("sortOrder", "asc");
-        params.set("sort", column);
+        params.set("sortKey", column);
         break;
       default:
         const exhaustiveCheck: never = sortOrder;
