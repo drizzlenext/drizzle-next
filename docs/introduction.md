@@ -2,13 +2,11 @@
 
 Drizzle Next is a TypeScript scaffolding automation web framework.
 
-It is a CLI Tool that generates code for full stack applications built with Next.js and Drizzle ORM.
+It is a CLI Tool that generates full stack web applications built with Next.js and Drizzle ORM.
 
 ## Introduction
 
-Drizzle Next is a full stack automation tool for building TypeScript web applications.
-
-This is an ephemeral web framework.
+Drizzle Next is an ephemeral web framework.
 
 You do not install it into your project as a dependency.
 
@@ -18,7 +16,7 @@ You use it to generate customizable code for full stack projects.
 
 ## Why Drizzle Next?
 
-TL;DR I was inspired by 5 tools in particular:
+TL;DR I was inspired by 5 tools:
 
 - Ruby on Rails - for the idea of scaffolding
 - Next.js - for making React development easier

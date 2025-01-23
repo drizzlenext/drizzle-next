@@ -9,7 +9,7 @@ npx create-next-app@latest my-app --typescript --eslint --tailwind --app --no-sr
 ```
 
 :::tip
-The `--typescript`, `--app`, `--no-src-dir`, and `--no-import-alias` are required for Drizzle Next to work properly.
+The `--typescript`, `--app`, `--no-src-dir`, and `--no-import-alias` are required for Drizzle Next to work properly. `--tailwind` is recommended, however it is optional if you prefer to start with no styling applied.
 :::
 
 ## Step 2: Run the CLI
@@ -21,15 +21,6 @@ cd my-app
 npx drizzle-next@latest init
 ```
 
-::: info
-Alternatively, you can also run the command non-interactively:
-
-```bash
-npx drizzle-next@latest init -p npm --latest --db-dialect sqlite -pk cuid2 --auth-solution authjs --auth-providers github,google,credentials --admin
-```
-
-:::
-
 ## Step 3: Configure project
 
 You will be asked a few questions to configure the app:
@@ -37,15 +28,24 @@ You will be asked a few questions to configure the app:
 ```text
 ? Which package manager would you like to use? npm
 ? Which database dialect would you like to use? sqlite
-? Which primary key generation strategy would you like to use? cuid2
+? Which primary key generation strategy would you like to use? uuidv4
 ? Which css strategy would you like to use? tailwind
-? Which color palette would you like to use? blue
+? Which color palette would you like to use? indigo
 ? Which authentication solution would you like to use? authjs
-? Which auth providers would you like to use? credentials
+? Which auth providers would you like to use? credentials,github,google
 ? Do you want to add an admin dashboard with role-based authorization? yes
 ```
 
-## Step 4: Project checklist
+::: info
+Alternatively, you can also run the command non-interactively:
+
+```bash
+npx drizzle-next@latest init --package-manager npm --db-dialect sqlite --pk-strategy uuidv4 --css-strategy tailwind --color-palette indigo --auth-solution authjs --auth-providers credentials,github,google --admin
+```
+
+:::
+
+## Step 4: Create user
 
 Generate and run the drizzle migrations:
 
@@ -60,6 +60,16 @@ Create a test user and grant admin role:
 npx tsx scripts/create-user.ts user@example.com password123
 npx tsx scripts/grant-admin.ts user@example.com
 ```
+
+Start the dev server:
+
+```bash
+npm run dev
+```
+
+Go to http://localhost:3000/admin-signin and sign in with the admin user.
+
+There should be an empty dashboard. In the next step, we'll generate our first scaffold.
 
 ## Step 5: Scaffold an app
 
@@ -88,12 +98,4 @@ npx drizzle-kit generate
 npx drizzle-kit migrate
 ```
 
-## Step 6: Log in to the app
-
-Start the dev server:
-
-```bash
-npm run dev
-```
-
-Go to http://localhost:3000/admin-signin and sign in with the admin user.
+The admin dashboard should now have a fully functional scaffold for a posts resource.

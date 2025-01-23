@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "Drizzle Next"
   text: "Full Stack Next.js and Drizzle ORM Framework"
-  tagline: Generate project boilerplate using scaffolding commands inspired by Ruby on Rails
+  tagline: Generate apps using scaffolding commands inspired by Ruby on Rails and shadcn/ui
   actions:
     - theme: brand
       text: Documentation
@@ -15,11 +15,11 @@ features:
   - icon:
       src: https://cdn.simpleicons.org/Next.js/gray
     title: Next.js
-    details: Drizzle Next can help you generate Next.js routes, forms, server components and actions with CLI scaffolding automations.
+    details: Generate Next.js routes, pages, forms, and server actions with CLI scaffolding automations.
   - icon:
       src: https://cdn.simpleicons.org/drizzle/gray
     title: Drizzle ORM
-    details: Save time by generating Drizzle ORM configuration, schemas, and queries using the CLI.
+    details: Generate Drizzle ORM configuration, schemas, and queries using the CLI.
   - icon:
       src: https://cdn.simpleicons.org/typescript/gray
     title: TypeScript
@@ -27,23 +27,23 @@ features:
   - icon:
       src: https://cdn.simpleicons.org/postgresql/gray
     title: SQL
-    details: Leverage the full power of SQL databases including PostgreSQL, MySQL, or SQLite. Write SQL-like queries with Drizzle ORM. Generate plain SQL migrations with Drizzle Kit.
+    details: Use PostgreSQL, MySQL, or SQLite. Write SQL-like queries with Drizzle ORM. Generate plain SQL migrations with Drizzle Kit.
   - icon:
       src: https://cdn.simpleicons.org/zod/gray
     title: Zod
-    details: Build bullet-proof applications with zod. Generated server actions will have customizable zod data validations to ensure correct data is saved to your database.
+    details: Zod is a TypeScript-first schema declaration and validation library. Generated server actions will have customizable zod data validations.
   - icon:
       src: https://cdn.simpleicons.org/shadcnui/gray
-    title: drizzle/ui (shadcn inspired)
-    details: Drizzle Next uses a set of zero-dependency minimalist UI components that are copied into your project. You can opt of styling altogether if you prefer complete control over styling.
+    title: drizzle/ui
+    details: Drizzle Next uses a set of minimal-dependency, and fully customizable, UI components (inspired by shadcn) that are copied into your project.
   - icon:
       src: https://cdn.simpleicons.org/tailwindcss/gray
     title: TailwindCSS (optional)
-    details: Design great looking sites with TailwindCSS, a utility-first CSS framework, the default of Next.js. You can opt out of TailwindCSS if you prefer a different CSS solution.
+    details: TailwindCSS is a utility-first CSS framework that is the default of Next.js. You can opt out of TailwindCSS if you prefer to start with a blank slate.
   - icon:
       src: https://cdn.simpleicons.org/auth0/gray
     title: Auth.js (optional)
-    details: Generate Auth.js configuration and setup using Credentials, GitHub, Google, Postmark, and others. You can opt out of Auth.js if you prefer to roll your own auth.
+    details: Generate Auth.js configuration and setup using Credentials, GitHub, Google, and other providers. You can opt out of Auth.js if you prefer to roll your own authentication.
   - icon:
       src: https://cdn.simpleicons.org/stripe/gray
     title: Stripe (optional)
