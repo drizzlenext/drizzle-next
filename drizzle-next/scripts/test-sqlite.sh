@@ -12,6 +12,7 @@ drizzle-next init -p pnpm --latest \
     --db-dialect sqlite \
     -pk nanoid \
     -css tailwind \
+    --color-palette blue \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --no-admin \
