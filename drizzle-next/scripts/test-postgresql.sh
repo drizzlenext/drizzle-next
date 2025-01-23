@@ -32,28 +32,28 @@ fi
 cd demo-postgresql
 
 if [ "$RESET" = true ]; then
-drizzle-next init -p pnpm --latest \
+drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
-    -pk cuid2 \
-    -css tailwind \
-    -color indigo \
+    --pk-strategy cuid2 \
+    --css-strategy tailwind \
+    --color-palette indigo \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \
-    --pluralize
+    --latest
 drizzle-next add tiptap
 drizzle-next add stripe
 pnpm i -D prettier prettier-plugin-tailwindcss
 else
-drizzle-next init -p pnpm --latest \
+drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
-    -pk cuid2 \
-    -css tailwind \
-    -color emerald \
+    --pk-strategy cuid2 \
+    --css-strategy tailwind \
+    --color-palette indigo \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \
-    --pluralize \
+    --latest \
     --no-install
 drizzle-next add tiptap --no-install
 drizzle-next add stripe --no-install

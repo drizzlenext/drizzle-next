@@ -40,18 +40,21 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
   }
 
   async render() {
-    renderTemplate({
-      inputPath: "new-project-processor/app/layout.tsx.hbs",
-      outputPath: "app/layout.tsx",
-    });
-
     if (this.opts.cssStrategy === "tailwind") {
+      renderTemplate({
+        inputPath: "new-project-processor/app/layout.tsx.hbs",
+        outputPath: "app/layout.tsx",
+      });
       renderTemplate({
         inputPath: "new-project-processor/tailwind.config.ts.hbs",
         outputPath: "tailwind.config.ts",
         data: {
           colorPalette: this.opts.colorPalette,
         },
+      });
+      renderTemplate({
+        inputPath: "new-project-processor/app/globals.css.hbs",
+        outputPath: "app/globals.css",
       });
     }
 
@@ -98,13 +101,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       inputPath: "new-project-processor/components/ui/dark-mode-script.tsx.hbs",
       outputPath: "components/ui/dark-mode-script.tsx",
     });
-
-    // for dark mode
-    insertTextAfterIfNotExists(
-      "app/layout.tsx",
-      "<html",
-      " suppressHydrationWarning"
-    );
 
     renderTemplate({
       inputPath: "new-project-processor/lib/file-utils.ts.hbs",
@@ -214,11 +210,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     renderTemplate({
       inputPath: "new-project-processor/lib/utils.ts.hbs",
       outputPath: "lib/utils.ts",
-    });
-
-    renderTemplate({
-      inputPath: "new-project-processor/app/globals.css.hbs",
-      outputPath: "app/globals.css",
     });
 
     appendToFileIfTextNotExists(".gitignore", "uploads/", "uploads/");

@@ -8,15 +8,15 @@ rm -rf ~/code/demo-sqlite
 cd ~/code
 pnpm create next-app@latest demo-sqlite --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
 cd ~/code/demo-sqlite
-drizzle-next init -p pnpm --latest \
+drizzle-next init --package-manager pnpm \
     --db-dialect sqlite \
-    -pk nanoid \
-    -css tailwind \
+    --pk-strategy nanoid \
+    --css-strategy tailwind \
     --color-palette blue \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --no-admin \
-    --pluralize
+    --latest
 cp ~/code/drizzle-next-env/.env.sqlite .env
 cp ~/code/drizzle-next/drizzle-next/templates/test-scripts/load-fake-data.ts.hbs scripts/load-fake-data.ts
 drizzle-next add tiptap

@@ -10,15 +10,16 @@ rm -rf ~/code/demo-mysql
 cd ~/code
 pnpm create next-app@latest demo-mysql --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
 cd demo-mysql
-drizzle-next init -p pnpm --latest \
+drizzle-next init --package-manager pnpm \
     --db-dialect mysql \
-    -pk uuidv7 \
-    -css tailwind \
+    --pk-strategy uuidv7 \
+    --css-strategy tailwind \
     --color-palette orange \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \
-    --no-pluralize
+    --no-pluralize \
+    --latest
 cp ~/code/drizzle-next-env/.env.mysql .env
 drizzle-next add tiptap
 drizzle-next scaffold -a admin admin_scaffold -c int_type:int tinyint_type:tinyint smallint_type:smallint mediumint_type:mediumint bigint_type:bigint real_type:real decimal_type:decimal double_type:double float_type:float char_type:char varchar_type:varchar text_type:text boolean_type:boolean date_type:date datetime_type:datetime time_type:time year_type:year timestamp_type:timestamp json_type:json file_type:file

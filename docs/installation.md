@@ -35,15 +35,14 @@ npx drizzle-next@latest init -p npm --latest --db-dialect sqlite -pk cuid2 --aut
 You will be asked a few questions to configure the app:
 
 ```text
-? Which package manager do you want to use? npm
-? Do you want to install latest packages or pinned packages? pinned
+? Which package manager would you like to use? npm
 ? Which database dialect would you like to use? sqlite
 ? Which primary key generation strategy would you like to use? cuid2
 ? Which css strategy would you like to use? tailwind
-? Which authentication solution do you want to use? authjs
+? Which color palette would you like to use? blue
+? Which authentication solution would you like to use? authjs
 ? Which auth providers would you like to use? credentials
 ? Do you want to add an admin dashboard with role-based authorization? yes
-? Do you want to enable the automatic pluralization of table and variable names? yes
 ```
 
 ## Step 4: Project checklist

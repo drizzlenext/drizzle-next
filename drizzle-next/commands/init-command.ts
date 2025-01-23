@@ -23,22 +23,14 @@ const VERSION = packageJson["version"];
 
 initCommand
   .description("initialize next.js project for development with drizzle-next")
-  .option("--no-install", "skip installation of dependencies")
   .addOption(
     new Option(
-      "-p, --package-manager <packageManager>",
-      "the package manager for this project"
+      "--package-manager <manager>",
+      "package manager for this project"
     ).choices(["npm", "pnpm", "bun"])
   )
-  .addOption(new Option("-l, --latest", "install latest dependencies"))
   .addOption(
-    new Option(
-      "--no-latest",
-      "install pinned dependencies specified in package-pinned.json"
-    )
-  )
-  .addOption(
-    new Option("-d, --db-dialect <dbDialect>", "the database dialect").choices([
+    new Option("--db-dialect <dialect>", "database dialect").choices([
       "sqlite",
       "postgresql",
       "mysql",
@@ -46,18 +38,18 @@ initCommand
   )
   .addOption(
     new Option(
-      "-pk, --pk-strategy <pkStrategy>",
+      "--pk-strategy <strategy>",
       "primary key generation strategy"
-    ).choices(["cuid2", "uuidv7", "uuidv4", "nanoid", "auto_increment"])
+    ).choices(["uuidv4", "cuid2", "uuidv7", "nanoid", "auto_increment"])
   )
   .addOption(
-    new Option("-css, --css-strategy <cssStrategy>", "css strategy").choices([
+    new Option("--css-strategy <strategy>", "css strategy").choices([
       "tailwind",
       "none",
     ])
   )
   .addOption(
-    new Option("-color, --color-palette <colorPalette>").choices([
+    new Option("--color-palette <color>", "tailwind color palette").choices([
       "slate",
       "gray",
       "zinc",
@@ -83,14 +75,13 @@ initCommand
     ])
   )
   .addOption(
-    new Option(
-      "-a, --auth-solution <authSolution>",
-      "authentication solution"
-    ).choices(["authjs", "none"])
+    new Option("--auth-solution <solution>", "authentication solution").choices(
+      ["authjs", "none"]
+    )
   )
   .option(
-    "-ap, --auth-providers <authProviders>",
-    `comma separated list of authjs providers: github,google,credentials,postmark,nodemailer`,
+    "--auth-providers <providers>",
+    `comma-separated list of auth providers (choices: "credentials", "github", "google", "postmark", "nodemailer")`,
     (value: string, dummyPrevious: any) => {
       const authProviders = value.split(",");
       const validProviders = new Set([
@@ -108,16 +99,11 @@ initCommand
       return authProviders;
     }
   )
-  .option("-ad, --admin", "admin dashboard with role-based authorization")
-  .option("--no-admin", "no admin dashboard")
-  .option(
-    "--pluralize",
-    "enable the automatic pluralization of variable naming conventions"
-  )
-  .option(
-    "--no-pluralize",
-    "disable the automatic pluralization of variable naming conventions"
-  )
+  .option("--admin", "generate admin dashboard with role-based authorization")
+  .option("--no-admin", "skip generation of admin dashboard")
+  .option("--no-pluralize", "disable the pluralization of variable names", true)
+  .option("--no-install", "skip installation of dependencies")
+  .option("--latest", "install latest cutting edge dependencies")
   .action(async (options) => {
     try {
       preflightChecks();
@@ -130,34 +116,10 @@ initCommand
       partialConfig.packageManager =
         options.packageManager ||
         (await select({
-          message: "Which package manager do you want to use?",
+          message: "Which package manager would you like to use?",
           choices: [{ value: "npm" }, { value: "pnpm" }, { value: "bun" }],
         }));
 
-      partialConfig.install = options.install;
-
-      if (options.install) {
-        partialConfig.latest =
-          options.latest ??
-          (await select({
-            message:
-              "Do you want to install latest packages or pinned packages?",
-            choices: [
-              {
-                name: "pinned",
-                value: false,
-                description:
-                  "Installs pinned packages in package-pinned.json. More stable, but possibly obsolete.",
-              },
-              {
-                name: "latest",
-                value: true,
-                description:
-                  "Installs latest packages. Less stable, but cutting edge.",
-              },
-            ],
-          }));
-      }
       partialConfig.dbDialect =
         options.dbDialect ||
         (await select({
@@ -191,6 +153,11 @@ initCommand
             "Which primary key generation strategy would you like to use?",
           choices: [
             {
+              name: "uuidv4",
+              value: "uuidv4",
+              description: "Uses crypto.randomUUID",
+            },
+            {
               name: "cuid2",
               value: "cuid2",
               description: "Uses the @paralleldrive/cuid2 package",
@@ -199,11 +166,6 @@ initCommand
               name: "uuidv7",
               value: "uuidv7",
               description: "Uses the uuidv7 package",
-            },
-            {
-              name: "uuidv4",
-              value: "uuidv4",
-              description: "Uses crypto.randomUUID",
             },
             {
               name: "nanoid",
@@ -234,7 +196,7 @@ initCommand
         partialConfig.colorPalette =
           options.colorPalette ||
           (await select({
-            message: "Which color palette would you like to start with?",
+            message: "Which color palette would you like to use?",
             choices: [
               { value: "slate" },
               { value: "gray" },
@@ -264,7 +226,7 @@ initCommand
       partialConfig.authSolution =
         options.authSolution ||
         (await select({
-          message: "Which authentication solution do you want to use?",
+          message: "Which authentication solution would you like to use?",
           choices: [{ value: "authjs" }, { value: "none" }],
         }));
       if (
@@ -297,13 +259,10 @@ initCommand
             default: true,
           }));
       }
-      partialConfig.pluralizeEnabled =
-        options.pluralize ??
-        (await confirm({
-          message:
-            "Do you want to enable the automatic pluralization of table and variable names?",
-          default: true,
-        }));
+
+      partialConfig.pluralizeEnabled = options.pluralize;
+
+      partialConfig.install = options.install;
 
       // process
 
