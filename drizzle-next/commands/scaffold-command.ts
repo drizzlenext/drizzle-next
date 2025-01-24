@@ -15,7 +15,7 @@ scaffoldCommand
 
 examples:
 npx drizzle-next@latest scaffold category -c name:text
-npx drizzle-next@latest scaffold post -c category_id:references title:text content:text is_draft:boolean
+npx drizzle-next@latest scaffold post -c category_id:references title:text content:text is_published:boolean
 
 `
   )
