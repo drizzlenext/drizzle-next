@@ -67,7 +67,9 @@ Start the dev server:
 npm run dev
 ```
 
-Go to http://localhost:3000/admin-signin and sign in with the admin user.
+Go to http://localhost:3000.
+
+Then click on "Admin Dashboard" and sign in.
 
 There should be an empty dashboard. In the next step, we'll generate our first scaffold.
 
