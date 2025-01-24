@@ -11,9 +11,9 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div>
+    <div className="flex h-screen flex-col">
       <PublicHeader />
-      <div className="flex flex-col justify-center h-screen">
+      <div className="flex flex-1 flex-col justify-center">
         <main className="flex flex-col flex-1 gap-5 w-72 m-auto justify-center">
           <h1 className="text-4xl font-mono flex gap-2 items-center text-primary-600 dark:text-primary-400">
             <CloudDrizzleIcon size={36} /> drizzle-next
