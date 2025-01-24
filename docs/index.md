@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "Drizzle Next"
   text: "Full Stack Next.js and Drizzle ORM Framework"
-  tagline: Generate apps using scaffolding commands inspired by Ruby on Rails and shadcn/ui
+  tagline: Generate apps using CLI commands inspired by Ruby on Rails and shadcn/ui
   actions:
     - theme: brand
       text: Documentation
