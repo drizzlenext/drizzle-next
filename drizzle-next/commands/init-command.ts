@@ -69,7 +69,7 @@ initCommand
       "indigo",
       "violet",
       "purple",
-      "fuschia",
+      "fuchsia",
       "pink",
       "rose",
     ])
@@ -217,7 +217,7 @@ initCommand
               { value: "indigo" },
               { value: "violet" },
               { value: "purple" },
-              { value: "fuschia" },
+              { value: "fuchsia" },
               { value: "pink" },
               { value: "rose" },
             ],

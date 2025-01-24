@@ -136,6 +136,6 @@ export type ColorPalette =
   | "indigo"
   | "violet"
   | "purple"
-  | "fuschia"
+  | "fuchsia"
   | "pink"
   | "rose";
