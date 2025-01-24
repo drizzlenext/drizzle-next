@@ -9,6 +9,7 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Docs", link: "/introduction" },
+      { text: "Demo", link: "https://demo.drizzle-next.com" },
     ],
 
     sidebar: [

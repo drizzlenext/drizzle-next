@@ -10,6 +10,9 @@ hero:
     - theme: brand
       text: Documentation
       link: /introduction
+    - theme: alt
+      text: Demo
+      link: https://demo.drizzle-next.com
 
 features:
   - icon:
