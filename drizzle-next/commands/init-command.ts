@@ -40,7 +40,7 @@ initCommand
     new Option(
       "--pk-strategy <strategy>",
       "primary key generation strategy"
-    ).choices(["uuidv4", "cuid2", "uuidv7", "nanoid", "auto_increment"])
+    ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"])
   )
   .addOption(
     new Option("--css-strategy <strategy>", "css strategy").choices([
@@ -153,14 +153,14 @@ initCommand
             "Which primary key generation strategy would you like to use?",
           choices: [
             {
-              name: "uuidv4",
-              value: "uuidv4",
-              description: "Uses crypto.randomUUID",
-            },
-            {
               name: "cuid2",
               value: "cuid2",
               description: "Uses the @paralleldrive/cuid2 package",
+            },
+            {
+              name: "uuidv4",
+              value: "uuidv4",
+              description: "Uses crypto.randomUUID",
             },
             {
               name: "uuidv7",

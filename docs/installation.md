@@ -28,7 +28,7 @@ You will be asked a few questions to configure the app:
 ```text
 ? Which package manager would you like to use? npm
 ? Which database dialect would you like to use? sqlite
-? Which primary key generation strategy would you like to use? uuidv4
+? Which primary key generation strategy would you like to use? cuid2
 ? Which css strategy would you like to use? tailwind
 ? Which color palette would you like to use? indigo
 ? Which authentication solution would you like to use? authjs
