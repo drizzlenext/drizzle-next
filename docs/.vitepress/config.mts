@@ -29,6 +29,10 @@ export default defineConfig({
     socialLinks: [
       { icon: "github", link: "https://github.com/drizzle-next/drizzle-next" },
     ],
+
+    search: {
+      provider: "local",
+    },
   },
   ignoreDeadLinks: true,
 });
