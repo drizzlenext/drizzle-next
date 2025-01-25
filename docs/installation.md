@@ -40,7 +40,7 @@ You will be asked a few questions to configure the app:
 Alternatively, you can also run the command non-interactively:
 
 ```bash
-npx drizzle-next@latest init --package-manager npm --db-dialect sqlite --pk-strategy uuidv4 --css-strategy tailwind --color-palette indigo --auth-solution authjs --auth-providers credentials,github,google --admin
+npx drizzle-next@latest init --package-manager npm --db-dialect sqlite --pk-strategy cuid2 --css-strategy tailwind --color-palette indigo --auth-solution authjs --auth-providers credentials,github,google --admin
 ```
 
 :::

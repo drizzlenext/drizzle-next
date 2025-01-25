@@ -52,6 +52,76 @@ The language is more verbose and has a somewhat steeper learning curve, but I su
 
 One other thing worth mentioning is the use of TypeScript on both the front end and back end in a full stack project. The types can be shared between the two sides. With Drizzle ORM, you can infer the types of your database types and share them with the front end. This gives your full stack app end to end type safety. So when the database changes, the TypeScript compiler can catch issues on the front end. Furthermore, using a single language across the full stack lowers cognitive burden, as you no longer have to context switch between two languages.
 
+## Drizzle ORM
+
+Drizzle ORM is a Headless TypeScript ORM that provides both SQL-like and relational queries. It also provides a `drizzle-kit` CLI tool that generates and runs raw SQL migrations from your TypeScript table definitions. The learning curve for Drizzle is quick if you are familiar with SQL. Drizzle always outputs 1 query, which helps prevent common mistakes that lead to performance issues.
+
+In general there are 3 levels of abstraction for interacting with your database. You can execute raw sql, use the ORM, or the query builder. Drizzle conveniently provides each method.
+
+### Raw SQL
+
+This is one example using Drizzle's way of running raw SQL:
+
+```ts
+const statement = sql`select * from ${posts}`;
+const postList = db.all(statement) as Post[];
+```
+
+While raw SQL does give you greater flexibility and control, you'd still have to map the results to application objects or use a Type assertion as in the above example.
+
+### ORM
+
+ORMs, or Object Relational Mappers, allow you to interact with your database using application-level constructs. Here is an example using Drizzle's ORM:
+
+```ts
+const postList = await db.query.posts.findMany();
+```
+
+Instead of writing raw sql, you're calling methods on a class that abstract away all of the SQL statements. Under the hood, it might be writing `select * from posts`. The data gets mapped and returned as application objects. ORMs provide the highest level code abstraction for interacting with the database.
+
+### Query builders
+
+Then there are query builders. They fall somewhere in between. You can interact with your database with language methods that look like SQL. For example:
+
+```ts
+const postList = await db.select().from(posts);
+```
+
+Query builders allow you to chain together functions, so you can dynamically add filters onto the query. For example, imagine I have this query to find published posts:
+
+```ts
+const postList = await db
+  .select()
+  .from(posts)
+  .where(eq(posts.isPublished, true));
+```
+
+If I want to conditionally add another filter, there would be a means of doing so without concatenating SQL strings. Here is an example of conditionally adding a filter to a query with Drizzle:
+
+```ts
+const filters = [eq(posts.isPublished, false)];
+
+if (condition) {
+  filters.push(like(posts.title, "%hello%"));
+}
+
+const query = db.select().from(posts);
+query.where(and(...filters));
+const postList4 = await query;
+```
+
+With raw SQL, you'd have to concatenate the strings manually, which is very error prone and possibly not secure.
+
+### Why Drizzle?
+
+What were my criteria in picking an ORM? My requirements were simple. Here are the things that were important to me:
+
+1. I wanted to be able to build queries dynamically. Meaning, I can tack on additional filters conditionally. Both the ORM and query builder of Drizzle make this relatively easy to do.
+2. I wanted to be able to write migrations in plain SQL, as opposed to using a library. Migrations are the incremental changes that you make to your database over time. As it turns out, Drizzle ORM provides a way to detect changes in your TypeScript table definitions and generate the raw SQL migrations.
+3. I wanted the ORM to work with TypeScript, so that when my database changes, the TypeScript compiler will catch any issues that may occur in the application logic.
+
+Drizzle ORM happened to meet, and in some areas, exceed my expectations for an ORM.
+
 ## shadcn/ui
 
 shadcn/ui is the tool that copies and pastes beautifully styled components into your projects. Similarly, Drizzle Next generates full stack components into your Next.js project. You have full control of the code that is generated instead of the code being hidden behind an external package. Drizzle Next was heavily inspired by the "copy and paste" philosophy of shadcn.
@@ -63,28 +133,6 @@ shadcn/ui skyrocketed in popularity because it introduced a new approach to UI c
 Drizzle Next initially used shadcn as the default UI component option. However, shadcn was removed in favor of custom minimal dependency components. We kept the `cn` function for merging class names which uses `clsx` and `tailwind-merge`, but got rid of everything else. One feature of shadcn, or disadvantage depending on how you look at it, is that shadcn requires you to install various dependencies like radix-ui. These lock Drizzle Next into a specific UI solution, and adds a significant number of dependencies to the project.
 
 As primarily a full stack framework, I wanted to give developers the choice of UI solution. However, the spirit of shadcn still lives on, as the Drizzle Next React UI components are built on native HTML elements and are fully customizable. They are copied into your project into the `components/ui` directory, just like shadcn. And if you still want to use shadcn, it takes a minute add a component using their cli.
-
-## Drizzle ORM
-
-Drizzle ORM is a Headless TypeScript ORM that provides both SQL-like and relational queries. It also provides a `drizzle-kit` CLI tool that generates and runs plain SQL migrations from your TypeScript table definitions. If you know SQL, then you probably know Drizzle. Drizzle always outputs 1 query, which helps prevent common mistakes that lead to performance issues.
-
-When I committed to the adoption of TypeScript, I began my search for a TypeScript ORM to power the backend of my apps. I have used many ORMs, query builders, and database drivers in the past, which influenced and determined my criteria for picking a new one. If you're not familiar with these terms, I'll attempt a brief explanation. Note that the code examples are not specific to any library. They are made up to illustrate the concept.
-
-Database drivers provide the lowest level control. You execute plain sql strings. It might look something like this: `rows = db.execute("select * from users")`. Then you may need to manually transform the row data that gets returned into application objects. The row data might look something like this: `[["roger", "roger@example.com"], ["bob", "bob@example.com"]]`. Or it may return an array of plain objects, depending on the driver.
-
-ORMs, or Object Relational Mappers, are language specific libraries that allow you to interact with your database using application-level constructs. For example, to query for users would look something like this: `users = User.findAll()`. Instead of writing raw sql, you're calling methods on a class that abstract away all of the SQL statements. Under the hood, it might be writing `select * from users`. The raw sql data gets _mapped_ and returned as application objects. ORMs provide the highest level code abstraction for interacting with the database.
-
-Then there are query builders. They fall somewhere in between. You can interact with your database with language methods that look like SQL. For example, `db.select("users")`. Query builders allow you to chain together functions, so you can dynamically add filters onto the query. For example I have this query: `query = db.select("products").where("price < 100")`. If I want to conditionally add another filter, I could do something like this: `query.andWhere("size='M'")`. Without a query builder, you'd have to concatenate SQL strings manually, which is very error prone and possibly not secure.
-
-The main trade off is control and convenience. The lower the level, the more control you have, but the more reinventing of the wheel you must do. The higher the level, the more convenience you get, but the less control you have.
-
-So what were my criteria in picking an ORM? My requirements were simple. Here are the things that were important to me:
-
-1. I wanted to be able to build queries dynamically. Meaning, I can tack on additional filters conditionally. Both the ORM and query builder of Drizzle make this relatively easy to do.
-2. I wanted to be able to write migrations in plain SQL, as opposed to using a library. Migrations are the incremental changes that you make to your database over time. As it turns out, Drizzle ORM provides a way to detect changes in your TypeScript table definitions and generate the raw SQL migrations.
-3. I wanted the ORM to work with TypeScript, so that when my database changes, the TypeScript compiler will catch any issues that may occur in the application logic.
-
-Drizzle ORM happened to meet, and in some areas, exceed my expectations for an ORM.
 
 ## Other Inspirations
 
