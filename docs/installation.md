@@ -1,5 +1,7 @@
 # Installation
 
+This guide covers everything you need to know to install and create your first application.
+
 ## Step 1: Create new project
 
 Start by creating a new Next.js project using `create-next-app`.

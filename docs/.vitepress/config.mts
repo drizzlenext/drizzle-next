@@ -20,7 +20,7 @@ export default defineConfig({
           // { text: "Runtime API Examples", link: "/api-examples" },
           { text: "Introduction", link: "/introduction" },
           { text: "Installation", link: "/installation" },
-          { text: "Scaffold", link: "/scaffold" },
+          { text: "Guide", link: "/guide" },
           { text: "About", link: "/about" },
         ],
       },

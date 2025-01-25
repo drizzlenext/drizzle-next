@@ -1,4 +1,8 @@
-# Scaffold
+# Guide
+
+This guide covers the usage details and features of Drizzle Next.
+
+## Scaffold
 
 A scaffold is all of the starter code, including the UI and data layer, that is required to have a fully functional CRUD application. With scaffolding, you spend less time writing boilerplate code and looking things up in documentation because there is a point of reference to build upon. This frees up time and energy to focus on building the interesting parts of the app.
 
