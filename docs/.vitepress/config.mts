@@ -35,4 +35,21 @@ export default defineConfig({
     },
   },
   ignoreDeadLinks: true,
+  head: [
+    [
+      "script",
+      {
+        async: "",
+        src: "https://www.googletagmanager.com/gtag/js?id=G-FR34HJSEG9",
+      },
+    ],
+    [
+      "script",
+      {},
+      `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FR34HJSEG9');`,
+    ],
+  ],
 });
