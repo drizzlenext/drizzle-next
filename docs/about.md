@@ -120,7 +120,7 @@ What were my criteria in picking an ORM? My requirements were simple. Here are t
 2. I wanted to be able to write migrations in plain SQL, as opposed to using a library. Migrations are the incremental changes that you make to your database over time. As it turns out, Drizzle ORM provides a way to detect changes in your TypeScript table definitions and generate the raw SQL migrations.
 3. I wanted the ORM to work with TypeScript, so that when my database changes, the TypeScript compiler will catch any issues that may occur in the application logic.
 
-Drizzle ORM happened to meet, and in some areas, exceed my expectations for an ORM.
+Drizzle ORM happened to meet, and in some areas exceed, my expectations for an ORM.
 
 ## shadcn/ui
 

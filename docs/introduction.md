@@ -1,29 +1,29 @@
 # Drizzle Next Documentation
 
-Drizzle Next is a TypeScript scaffolding automation web framework.
+Drizzle Next is a TypeScript web framework for scaffolding automation.
 
-It is a CLI Tool that generates full stack scaffolding for apps built with Next.js and Drizzle ORM.
+This CLI Tool generates full-stack scaffolding for apps built with Next.js and Drizzle ORM.
 
-User and Admin dashboards with authentication and authorization are optionally included.
+It also supports generating user and admin dashboards to kickstart your development process.
 
 ## Introduction
 
 Drizzle Next is an ephemeral web framework.
 
-You do not install it into your project as a dependency.
+Unlike traditional frameworks, it is not installed into your project as a dependency.
 
-It is a command line interface code generation tool with a focus on minimum dependencies.
+Instead, it is a command line interface code generation tool with a focus on minimum dependencies.
 
 The generated code is fully customizable as it is written to your project, and not an external dependency.
 
 ## Why Drizzle Next?
 
-TL;DR I was inspired by these revolutionary technologies:
+TL;DR: Drizzle Next combines proven technologies with innovative ideas to elevate your development workflow:
 
-- Ruby on Rails - for the idea of scaffolding
-- Next.js - for making React development easier
-- TypeScript - for adding types to JavaScript and the elimination of bugs
-- Drizzle ORM - for a TypeScript query builder, ORM, and plain SQL migrations
-- shadcn/ui - for the idea of customizable copy and paste components
+- Next.js: For its seamless React integration and powerful server-side capabilities.
+- TypeScript: For type safety and fewer bugs.
+- Drizzle ORM: For a TypeScript-first query builder, ORM, and plain SQL migrations.
+- Ruby on Rails: For the concept of scaffolding to speed up development.
+- shadcn/ui: For the idea of customizable, copy-and-paste-ready components.
 
 [See About page for more details](/about.md)
