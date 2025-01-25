@@ -8,6 +8,7 @@ import { AdminShell } from "@/components/admin/layout/admin-shell";
 import { AdminHeader } from "@/components/admin/layout/admin-header";
 import { AdminSidebar } from "@/components/admin/layout/admin-sidebar";
 import { AdminContent } from "@/components/admin/layout/admin-content";
+import { FlashMessage } from "@/components/ui/flash-message";
 
 export default async function Layout({
   children,
@@ -36,7 +37,10 @@ export default async function Layout({
     <AdminShell>
       <AdminHeader user={userObj} />
       <AdminSidebar />
-      <AdminContent>{children}</AdminContent>
+      <AdminContent>
+        <FlashMessage />
+        {children}
+      </AdminContent>
     </AdminShell>
   );
 }

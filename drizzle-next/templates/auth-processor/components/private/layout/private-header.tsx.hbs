@@ -2,7 +2,6 @@ import { User } from "@/schema/{{userObj.pluralKebabCase}}";
 import Link from "next/link";
 import { Avatar } from "@/components//ui/avatar";
 import { User2Icon } from "lucide-react";
-import { Notice } from "@/components/ui/notice";
 
 export function PrivateHeader({ user }: { user: User }) {
   return (
@@ -18,7 +17,6 @@ export function PrivateHeader({ user }: { user: User }) {
           <div>{user.name}</div>
         </div>
       </div>
-      <Notice />
     </div>
   );
 }

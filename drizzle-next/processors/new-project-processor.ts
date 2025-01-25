@@ -3,7 +3,6 @@ import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
 import {
   appendToEnvLocal,
   appendToFileIfTextNotExists,
-  insertTextAfterIfNotExists,
   renderTemplate,
   renderTemplateIfNotExists,
 } from "../lib/utils";
@@ -217,8 +216,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "new-project-processor/components/ui/notice.tsx.hbs",
-      outputPath: "components/ui/notice.tsx",
+      inputPath: "new-project-processor/components/ui/flash-message.tsx.hbs",
+      outputPath: "components/ui/flash-message.tsx",
     });
 
     renderTemplate({

@@ -2,14 +2,14 @@
 
 import { useSearchParams } from "next/navigation";
 
-export function Notice() {
+export function FlashMessage() {
   const searchParams = useSearchParams();
 
   const notice = searchParams.get("notice");
 
   if (notice) {
     return (
-      <div className="text-center text-success-600 dark:text-success-400 bg-success-100 dark:bg-success-900">
+      <div className="sticky top-0 bg-success-100 text-center text-success-600 dark:bg-success-900 dark:text-success-400">
         {notice}
       </div>
     );

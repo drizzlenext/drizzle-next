@@ -2,12 +2,16 @@ import { PublicShell } from "@/components/public/layout/public-shell";
 import { PublicHeader } from "@/components/public/layout/public-header";
 import { PublicContent } from "@/components/public/layout/public-content";
 import { PublicFooter } from "@/components/public/layout/public-footer";
+import { FlashMessage } from "@/components/ui/flash-message";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <PublicShell>
       <PublicHeader />
-      <PublicContent>{children}</PublicContent>
+      <PublicContent>
+        <FlashMessage />
+        {children}
+      </PublicContent>
       <PublicFooter />
     </PublicShell>
   );
