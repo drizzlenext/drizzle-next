@@ -11,22 +11,21 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 }
 `;
 
-export function DarkModeProvider({ children }: { children: React.ReactNode }) {
+export function DarkModeScript() {
   const isServerInserted = React.useRef(false);
 
   useServerInsertedHTML(() => {
-    if (isServerInserted.current) {
-      return;
+    if (!isServerInserted.current) {
+      isServerInserted.current = true;
+      return (
+        <script
+          dangerouslySetInnerHTML={ {
+            __html: script,
+          } }
+        />
+      );
     }
-    isServerInserted.current = true;
-    return (
-      <script
-        dangerouslySetInnerHTML={ {
-          __html: script,
-        } }
-      />
-    );
   });
 
-  return children;
+  return null;
 }

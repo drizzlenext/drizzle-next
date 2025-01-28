@@ -110,9 +110,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath:
-        "new-project-processor/components/ui/dark-mode-provider.tsx.hbs",
-      outputPath: "components/ui/dark-mode-provider.tsx",
+      inputPath: "new-project-processor/components/ui/dark-mode-script.tsx.hbs",
+      outputPath: "components/ui/dark-mode-script.tsx",
     });
 
     renderTemplate({
