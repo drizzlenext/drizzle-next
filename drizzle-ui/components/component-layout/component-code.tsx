@@ -32,7 +32,7 @@ export function ComponentCode({
                 button.textContent = originalText;
               }, 3000);
             }}
-            className="absolute right-0 top-0 mr-2 mt-2"
+            className="absolute right-0 top-0 mr-2 mt-2 bg-white text-black"
           >
             Copy
           </Button>
