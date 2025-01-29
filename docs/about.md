@@ -107,7 +107,7 @@ if (condition) {
 
 const query = db.select().from(posts);
 query.where(and(...filters));
-const postList4 = await query;
+const postList = await query;
 ```
 
 With raw SQL, you'd have to concatenate the strings manually, which is very error prone and possibly not secure.
