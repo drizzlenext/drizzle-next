@@ -20,7 +20,7 @@ export default function Home() {
           philosophy of shadcn/ui.
         </div>
         <div>
-          <Link href="/components/alert">
+          <Link href="/introduction">
             <Button className="rounded-3xl p-2 px-3">Documentation</Button>
           </Link>
         </div>
