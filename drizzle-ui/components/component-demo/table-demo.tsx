@@ -9,33 +9,35 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+const data = [
+  { id: 1, name: "coffee", price: 5.0 },
+  { id: 2, name: "coffee", price: 5.0 },
+  { id: 3, name: "coffee", price: 5.0 },
+];
+
 export function TableDemo() {
   return (
     <Table>
-      <TableCaption>Computer.</TableCaption>
+      <TableCaption>Coffee</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>Id</TableHead>
           <TableHead>Name</TableHead>
+          <TableHead className="text-right">Price</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell>1</TableCell>
-          <TableCell>PC</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>2</TableCell>
-          <TableCell>Mac</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>3</TableCell>
-          <TableCell>Linux</TableCell>
-        </TableRow>
+        {data.map((item) => (
+          <TableRow key={item.id}>
+            <TableCell>{item.id}</TableCell>
+            <TableCell>{item.name}</TableCell>
+            <TableCell className="text-right">{item.price}</TableCell>
+          </TableRow>
+        ))}
       </TableBody>
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
+          <TableCell colSpan={2}>Total</TableCell>
           <TableCell className="text-right">$2,500.00</TableCell>
         </TableRow>
       </TableFooter>
