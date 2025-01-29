@@ -29,7 +29,7 @@ const Alert = React.forwardRef<
         "border-warning-600 text-warning-600 dark:border-warning-400 dark:text-warning-400",
       variant === "info" &&
         "border-info-600 text-info-600 dark:border-info-400 dark:text-info-400",
-      className
+      className,
     )}
     {...props}
   />

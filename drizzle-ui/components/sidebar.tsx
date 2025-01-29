@@ -4,7 +4,10 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-const items = [{ title: "Alert", url: "/components/alert" }];
+const items = [
+  { title: "Alert", url: "/components/alert" },
+  { title: "Avatar", url: "/components/avatar" },
+];
 
 export function Sidebar() {
   const pathname = usePathname();
