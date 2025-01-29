@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { DarkModeToggle } from "./ui/dark-mode";
+import { ArrowUpRightIcon } from "lucide-react";
 
 export function Header() {
   return (
@@ -7,7 +9,17 @@ export function Header() {
         <div className="px-2 font-mono font-bold">
           <Link href="/">drizzle-ui</Link>
         </div>
-        <div className="flex gap-2 px-2">🌧️</div>
+        <div className="flex gap-5 px-2">
+          <Link href="/introduction">Docs</Link>
+          <Link
+            href="https://www.drizzle-next.com"
+            className="flex items-center gap-1"
+            target="_blank"
+          >
+            Drizzle Next <ArrowUpRightIcon className="h-4 w-4 text-muted-500" />
+          </Link>
+          <DarkModeToggle />
+        </div>
       </div>
     </div>
   );

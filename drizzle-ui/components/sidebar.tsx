@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
 const items = [
+  { title: "Introduction", url: "/introduction" },
+  { title: "Installation", url: "/installation" },
   { title: "Alert", url: "/components/alert" },
   { title: "Avatar", url: "/components/avatar" },
   { title: "Button", url: "/components/button" },
@@ -28,7 +30,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="z-20 col-span-1 row-span-1 flex-col border-r border-muted-300 bg-primary-50 text-sm dark:border-muted-700 dark:bg-primary-950">
+    <div className="z-20 col-span-1 row-span-1 flex-col overflow-auto border-r border-muted-300 bg-primary-50 text-sm dark:border-muted-700 dark:bg-primary-950">
       {items.map((item) => (
         <Link
           key={item.title}

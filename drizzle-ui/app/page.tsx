@@ -1,10 +1,31 @@
-import { Alert } from "@/components/ui/alert";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { Button } from "@/components/ui/button";
+import { CloudDrizzleIcon, LightbulbIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div>
-      <h1>Hello World</h1>
-      <Alert variant="success">test</Alert>
+    <div className="h-screen">
+      <Header />
+      <div className="container m-auto flex max-w-5xl flex-1 flex-col gap-5 px-4 py-8">
+        <h1 className="flex items-center gap-5 text-7xl font-bold">
+          <CloudDrizzleIcon size={100} /> Drizzle UI
+        </h1>
+        <div className="max-w-lg text-4xl font-bold">
+          The minimalist component library used in Drizzle Next.
+        </div>
+        <div className="flex max-w-lg gap-2 text-xl">
+          <LightbulbIcon size={50} /> Inspired by the genius copy-and-paste
+          philosophy of shadcn/ui.
+        </div>
+        <div>
+          <Link href="/components/alert">
+            <Button className="rounded-3xl p-2 px-3">Documentation</Button>
+          </Link>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

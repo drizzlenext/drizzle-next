@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <Shell>
       <Header />
       <Sidebar />
-      <div>{children}</div>
+      <div className="overflow-auto">{children}</div>
     </Shell>
   );
 }
