@@ -6,14 +6,35 @@ import { ComponentTitle } from "@/components/component-layout/component-title";
 import { AlertDemo } from "@/components/component-demo/alert-demo";
 import { getFileContent } from "@/lib/file-utils";
 
-const code = getFileContent("components/ui/alert.tsx");
-const usage = getFileContent("components/component-demo/alert-demo.tsx");
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { notFound } from "next/navigation";
 
-export default function Page() {
+type Params = Promise<{ id: string }>;
+
+export default async function Page(props: { params: Params }) {
+  const params = await props.params;
+
+  const markdownFilePath = path.join(
+    process.cwd(),
+    "content",
+    params.id + ".md"
+  );
+  if (!fs.existsSync(markdownFilePath)) {
+    notFound();
+  }
+  const fileContent = getFileContent(markdownFilePath);
+
+  const { data } = matter(fileContent);
+
+  const code = getFileContent(data.code);
+  const usage = getFileContent(data.usage);
+
   return (
     <ComponentPage>
-      <ComponentTitle>Alert</ComponentTitle>
-      <ComponentDescription>An alert</ComponentDescription>
+      <ComponentTitle>{data.title}</ComponentTitle>
+      <ComponentDescription>{data.description}</ComponentDescription>
       <ComponentPreview>
         <AlertDemo />
       </ComponentPreview>
