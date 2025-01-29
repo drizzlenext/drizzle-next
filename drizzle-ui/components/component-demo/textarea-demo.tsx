@@ -1,5 +1,5 @@
-import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
 
-export function CheckboxDemo() {
-  return <Checkbox />;
+export function TextareaDemo() {
+  return <Textarea />;
 }

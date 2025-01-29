@@ -1,5 +1,14 @@
-import { Checkbox } from "@/components/ui/checkbox";
+import { Form, FormControl } from "@/components/ui/form";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
-export function CheckboxDemo() {
-  return <Checkbox />;
+export function FormDemo() {
+  return (
+    <Form>
+      <FormControl>
+        <Label>Label</Label>
+        <Input />
+      </FormControl>
+    </Form>
+  );
 }

@@ -1,5 +1,5 @@
-import { Checkbox } from "@/components/ui/checkbox";
+import { SearchInput } from "@/components/ui/search-input";
 
-export function CheckboxDemo() {
-  return <Checkbox />;
+export function SearchInputDemo() {
+  return <SearchInput />;
 }

@@ -2,6 +2,7 @@
 
 import hljs from "highlight.js";
 import { useEffect } from "react";
+import { Button } from "../ui/button";
 
 export function ComponentCode({
   code,
@@ -18,10 +19,10 @@ export function ComponentCode({
 
   return (
     <div>
-      <h2 className="font-bold text-3xl">{title}</h2>
+      <h2 className="text-3xl font-bold">{title}</h2>
       <pre className="rounded">
         <div className="relative">
-          <button
+          <Button
             onClick={(event) => {
               navigator.clipboard.writeText(code);
               const button = event.target as HTMLButtonElement;
@@ -31,10 +32,10 @@ export function ComponentCode({
                 button.textContent = originalText;
               }, 3000);
             }}
-            className="absolute top-0 right-0 mt-2 mr-2 p-1 bg-gray-200 rounded hover:bg-gray-300"
+            className="absolute right-0 top-0 mr-2 mt-2"
           >
             Copy
-          </button>
+          </Button>
         </div>
         <code className={`language-${language} rounded`}>{code}</code>
       </pre>

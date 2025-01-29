@@ -20,6 +20,16 @@ import { CheckboxDemo } from "@/components/component-demo/checkbox-demo";
 import { DarkModeDemo } from "@/components/component-demo/dark-mode-demo";
 import { FlashMessageDemo } from "@/components/component-demo/flash-message-demo";
 import { ComponentContent } from "@/components/component-layout/component-content";
+import { FormDemo } from "@/components/component-demo/form-demo";
+import { InputDemo } from "@/components/component-demo/input-demo";
+import { LabelDemo } from "@/components/component-demo/label-demo";
+import { PageLayoutDemo } from "@/components/component-demo/page-layout-demo";
+import { PaginationDemo } from "@/components/component-demo/pagination-demo";
+import { SearchInput } from "@/components/ui/search-input";
+import { SelectDemo } from "@/components/component-demo/select-demo";
+import { SortableDemo } from "@/components/component-demo/sortable-demo";
+import { TableDemo } from "@/components/component-demo/table-demo";
+import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 
 const componentMap: { [key: string]: React.ComponentType } = {
   alert: AlertDemo,
@@ -29,6 +39,16 @@ const componentMap: { [key: string]: React.ComponentType } = {
   checkbox: CheckboxDemo,
   "dark-mode": DarkModeDemo,
   "flash-message": FlashMessageDemo,
+  form: FormDemo,
+  input: InputDemo,
+  label: LabelDemo,
+  "page-layout": PageLayoutDemo,
+  pagination: PaginationDemo,
+  "search-input": SearchInput,
+  select: SelectDemo,
+  sortable: SortableDemo,
+  table: TableDemo,
+  textarea: TextareaDemo,
 };
 
 type Params = Promise<{ id: string }>;
