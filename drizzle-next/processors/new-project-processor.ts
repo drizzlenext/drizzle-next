@@ -10,18 +10,15 @@ import {
 export class NewProjectProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
 
-  dependencies = [
-    "drizzle-orm",
-    "dotenv",
-    "zod",
-    "lucide-react",
-    "clsx",
-    "tailwind-merge",
-  ];
+  dependencies = ["drizzle-orm", "dotenv", "zod", "lucide-react", "clsx"];
 
-  devDependencies = ["drizzle-kit", "@types/react", "@types/react-dom"];
+  devDependencies = ["drizzle-kit"];
 
   constructor(opts: DrizzleNextConfig) {
+    if (opts.cssStrategy === "tailwind") {
+      this.dependencies.push("tailwind-merge");
+    }
+
     this.opts = opts;
   }
 
@@ -222,6 +219,9 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     renderTemplate({
       inputPath: "new-project-processor/lib/utils.ts.hbs",
       outputPath: "lib/utils.ts",
+      data: {
+        tailwind: this.opts.cssStrategy === "tailwind",
+      },
     });
 
     appendToFileIfTextNotExists(".gitignore", "uploads/", "uploads/");
