@@ -450,7 +450,7 @@ export function completeDrizzleNextConfig(
     colorPalette: partialConfig.colorPalette ?? "zinc",
     authEnabled: partialConfig.authSolution === "authjs",
     authSolution: partialConfig.authSolution ?? "none",
-    authProviders: partialConfig.authProviders ?? ["credentials", "github"],
+    authProviders: partialConfig.authProviders ?? [],
     adminEnabled: partialConfig.adminEnabled ?? false,
     install: partialConfig.install ?? true,
     pluralizeEnabled: partialConfig.pluralizeEnabled ?? true,
