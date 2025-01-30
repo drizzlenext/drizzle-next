@@ -58,7 +58,7 @@ export default async function Page(props: { params: Params }) {
 
   const markdownFilePath = path.join(
     process.cwd(),
-    "content",
+    "content/components/",
     params.id + ".md",
   );
   if (!fs.existsSync(markdownFilePath)) {
