@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "declaration": true,
+    "declarationDir": "dist/cjs/types",
+    "sourceMap": true,
+    "outDir": "dist/cjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "emitDeclarationOnly": true
+  },
+  "include": ["components/*.ts"]
+}
