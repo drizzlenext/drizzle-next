@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { DarkModeToggle } from "./ui/dark-mode";
+import { DarkModeToggle } from "../ui/dark-mode";
 import { ArrowUpRightIcon } from "lucide-react";
 
 export function Header() {

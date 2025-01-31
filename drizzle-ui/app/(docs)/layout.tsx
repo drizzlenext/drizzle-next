@@ -1,7 +1,7 @@
-import { CodeHighlight } from "@/components/code-highlight";
-import { Header } from "@/components/header";
-import { Shell } from "@/components/shell";
-import { Sidebar } from "@/components/sidebar";
+import { CodeHighlight } from "@/components/docs/code-highlight";
+import { Header } from "@/components/docs/header";
+import { Shell } from "@/components/docs/shell";
+import { Sidebar } from "@/components/docs/sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
