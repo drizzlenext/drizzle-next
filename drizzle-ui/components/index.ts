@@ -3,6 +3,7 @@ export { Avatar } from "./ui/avatar";
 export { Button } from "./ui/button";
 export { Card } from "./ui/card";
 export { Checkbox } from "./ui/checkbox";
+export { cn } from "./ui/cn";
 export { DarkModeScript, DarkModeToggle } from "./ui/dark-mode";
 export { FlashMessage } from "./ui/flash-message";
 export { Form, FormControl, FormMessage } from "./ui/form";
