@@ -71,7 +71,7 @@ export default async function Page(props: { params: Params }) {
 
   const htmlContent = await marked(content);
 
-  const code = getFileContent(data.code);
+  const code = getFileContent(data.code).replace("./cn", "@/lib/utils");
   const usage = getFileContent(data.usage);
 
   const DynamicComponent = componentMap[params.id] || null;
