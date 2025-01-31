@@ -30,6 +30,7 @@ import { SelectDemo } from "@/components/component-demo/select-demo";
 import { SortableDemo } from "@/components/component-demo/sortable-demo";
 import { TableDemo } from "@/components/component-demo/table-demo";
 import { TextareaDemo } from "@/components/component-demo/textarea-demo";
+import { Suspense } from "react";
 
 const componentMap: { [key: string]: React.ComponentType } = {
   alert: AlertDemo,
@@ -81,10 +82,21 @@ export default async function Page(props: { params: Params }) {
       <ComponentDescription>{data.description}</ComponentDescription>
       <ComponentContent htmlContent={htmlContent} />
       <ComponentPreview>
-        <DynamicComponent />
+        <Suspense>
+          <DynamicComponent />
+        </Suspense>
       </ComponentPreview>
       <ComponentCode language="ts" code={code} title="Code" />
       <ComponentCode language="ts" code={usage} title="Usage" />
     </ComponentPage>
   );
+}
+
+export async function generateStaticParams() {
+  const componentsDir = path.join(process.cwd(), "content/components");
+  const filenames = fs.readdirSync(componentsDir);
+
+  return filenames.map((filename) => ({
+    id: filename.replace(/\.md$/, ""),
+  }));
 }
