@@ -8,6 +8,8 @@ Drizzle UI is the default UI solution for Drizzle Next. There is nothing extra y
 
 ## Option 2: Drizzle UI CLI
 
+Using the Drizzle UI CLI is the fastest way to copy and paste components into your project.
+
 Step 1: Create a new Next.js project
 
 ```bash
@@ -38,7 +40,7 @@ npx create-next-app@latest my-app --typescript --eslint --tailwind --app --no-sr
 
 Step 2: Install a few dependencies
 
-```
+```bash
 npm i clsx tailwind-merge
 ```
 
@@ -93,15 +95,21 @@ You can now copy and paste components from this website into the `components/ui`
 
 ## Option 3: Install as dependency
 
-This option installs drizzle-ui as a dependency. This is the classic UI library approach. You can still style your components by adding extra classes, however you won't be able to change the underlying implementation, like adding new variants and functionality. If you never need to customize, you can try this option.
+This is an experimental option that installs drizzle-ui as a dependency. This is the classic UI library approach. You can still style your components by adding extra classes, however you won't be able to change the underlying implementation, like adding new variants and functionality. If you don't care about customization, this option might be suitable.
 
-Step 1: Install drizzle-ui
+Step 1: Create a new Next.js project
+
+```bash
+npx create-next-app@latest my-app --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
+```
+
+Step 2: Install drizzle-ui
 
 ```bash
 npm i drizzle-ui
 ```
 
-Step 2: Copy `tailwind.config.ts` into your project
+Step 3: Copy `tailwind.config.ts` into your project
 
 ```ts
 import type { Config } from "tailwindcss";
@@ -130,4 +138,25 @@ export default {
   },
   plugins: [],
 } satisfies Config;
+```
+
+Step 4: Use components
+
+You can now import components from `drizzle-ui`.
+
+```tsx
+import { Button } from "drizzle-ui";
+
+export function ButtonDemo() {
+  return (
+    <div className="flex gap-5">
+      <Button variant="primary">Primary</Button>
+      <Button variant="muted">Muted</Button>
+      <Button variant="success">Success</Button>
+      <Button variant="warning">Warning</Button>
+      <Button variant="danger">Danger</Button>
+      <Button variant="info">Info</Button>
+    </div>
+  );
+}
 ```
