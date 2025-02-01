@@ -76,7 +76,7 @@ export function DarkModeToggle() {
   }
 
   return (
-    <div onClick={handleClick} className="cursor-pointer">
+    <div onClick={handleClick} className="h-6 w-6 cursor-pointer">
       <SunIcon className="block dark:hidden" />
       <MoonIcon className="hidden dark:block" />
       <span className="sr-only">Toggle theme</span>

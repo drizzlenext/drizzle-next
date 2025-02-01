@@ -1,29 +1,29 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
+  TableRowActions,
 } from "@/components/ui/table";
+import Link from "next/link";
 
 const data = [
-  { id: 1, name: "coffee", price: 5.0 },
-  { id: 2, name: "coffee", price: 5.0 },
-  { id: 3, name: "coffee", price: 5.0 },
+  { id: 1, name: "coffee", price: 5 },
+  { id: 2, name: "coffee", price: 5 },
+  { id: 3, name: "coffee", price: 5 },
 ];
 
 export function TableDemo() {
   return (
     <Table>
-      <TableCaption>Coffee</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>Id</TableHead>
           <TableHead>Name</TableHead>
-          <TableHead className="text-right">Price</TableHead>
+          <TableHead>Price</TableHead>
+          <TableHead></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -31,16 +31,16 @@ export function TableDemo() {
           <TableRow key={item.id}>
             <TableCell>{item.id}</TableCell>
             <TableCell>{item.name}</TableCell>
-            <TableCell className="text-right">{item.price}</TableCell>
+            <TableCell>{item.price}</TableCell>
+            <TableCell className="text-right">
+              <TableRowActions>
+                <Link href="">View</Link> <Link href="">Edit</Link>{" "}
+                <Link href="">Delete</Link>
+              </TableRowActions>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={2}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter>
     </Table>
   );
 }
