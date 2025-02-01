@@ -1,9 +1,9 @@
 import { getFileContent } from "@/lib/file-utils";
-import { marked } from "marked";
+import { marked } from "@/lib/markdown-utils";
 
 export default async function Page() {
   const fileContent = getFileContent("content/introduction.md");
-  const htmlContent = await marked(fileContent);
+  const htmlContent = await marked.parse(fileContent);
 
   return (
     <div
