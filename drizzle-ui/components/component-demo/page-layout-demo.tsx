@@ -15,9 +15,15 @@ export function PageLayoutDemo() {
         <PageTitle>Page Header</PageTitle>
       </PageHeader>
       <PageNav>
-        <Link href="">Link</Link>
+        <Link href="">Back</Link>
+        <Link href="">Edit</Link>
+        <Link href="">Delete</Link>
       </PageNav>
-      <PageContent>Page content</PageContent>
+      <PageContent>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo delectus
+        repellendus quibusdam, nisi aut harum ducimus corporis aliquam mollitia
+        placeat rerum vero quam eum earum natus deleniti laudantium illo porro!
+      </PageContent>
       <PageFooter>Footer</PageFooter>
     </PageLayout>
   );
