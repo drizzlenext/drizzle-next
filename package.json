@@ -8,5 +8,8 @@
   "workspaces": [
     "drizzle-next",
     "docs"
-  ]
+  ],
+  "dependencies": {
+    "commander": "^13.1.0"
+  }
 }
