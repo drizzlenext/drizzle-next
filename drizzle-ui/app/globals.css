@@ -10,3 +10,11 @@ body {
 .lucide {
   stroke-width: 1.5px;
 }
+
+.docs a {
+  @apply font-bold underline;
+}
+
+.docs code {
+  @apply bg-[#0d1117] text-white;
+}
