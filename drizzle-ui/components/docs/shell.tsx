@@ -1,8 +1,11 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { ReactNode, useEffect } from "react";
 
 export function Shell({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+
   useEffect(() => {
     const codeBlocks = document.querySelectorAll("pre code");
 
@@ -27,7 +30,7 @@ export function Shell({ children }: { children: ReactNode }) {
       pre.style.position = "relative";
       pre.appendChild(button);
     });
-  }, []);
+  }, [pathname]);
 
   return (
     <div className="grid h-screen grid-cols-[36px_1fr] grid-rows-[auto_1fr] sm:grid-cols-[180px_1fr]">
