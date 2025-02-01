@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:all": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:all": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:cli",
     "build:esm": "rollup -c ./rollup.esm.mjs",
     "build:cjs": "rollup -c ./rollup.cjs.mjs",
+    "build:cli": "tsc --project ./tsconfig.cli.json && mkdir \"dist/components/ui\" && cp -r components/ui dist/components",
     "clean": "rm -rf dist"
   },
   "dependencies": {
@@ -55,5 +56,8 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist"
-  ]
+  ],
+  "bin": {
+    "drizzle-ui": "dist/index.js"
+  }
 }
