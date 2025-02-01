@@ -1,7 +1,5 @@
 # Introduction
 
-shadcn/ui is rain. drizzle-ui is drizzle.
-
 Drizzle UI is the minimalist component library used in Drizzle Next. Drizzle UI was greatly influenced by the copy-and-paste approach of shadcn/ui. In fact, shadcn/ui was the original UI solution for Drizzle Next. However, it was ultimately decided that Drizzle Next would benefit from having an ultra-minimalist version of it's own copy-and-paste component library.
 
 Many dependencies were required to use shadcn/ui components. For example, components such as avatar, checkbox, label, select, dark mode and other basic features required various packages to be installed. This slowed down the installation, build and testing process for Drizzle Next. Many of the dependencies seemed extraneous, as a similar result could be attained without added dependencies.
