@@ -80,12 +80,17 @@ export default async function Page(props: { params: Params }) {
     <ComponentPage>
       <ComponentTitle>{data.title}</ComponentTitle>
       <ComponentDescription>{data.description}</ComponentDescription>
-      <ComponentContent htmlContent={htmlContent} />
+      {htmlContent && <ComponentContent htmlContent={htmlContent} />}
       <ComponentPreview>
         <Suspense>
           <DynamicComponent />
         </Suspense>
       </ComponentPreview>
+      <ComponentCode
+        language="bash"
+        code={`npx drizzle-ui@latest add ${params.id}`}
+        title="Installation"
+      />
       <ComponentCode language="ts" code={code} title="Code" />
       <ComponentCode language="ts" code={usage} title="Usage" />
     </ComponentPage>
