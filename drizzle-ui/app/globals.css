@@ -15,10 +15,11 @@ body {
   @apply font-bold underline;
 }
 
-.docs code {
-  @apply bg-[#0d1117] text-white;
+.docs code:not(pre code) {
+  @apply rounded bg-muted-300 dark:bg-muted-700;
 }
 
 .docs pre code {
   padding-right: 80px !important;
+  border-radius: 4px;
 }
