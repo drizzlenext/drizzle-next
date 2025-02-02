@@ -38,7 +38,7 @@ jobs:
       - name: Build Docs
         run: npm run docs:build -w docs
       - name: Build Drizzle UI Docs
-        run: cd drizzle-ui && npm run build
+        run: cd drizzle-ui && npm i && npm run build
       - name: Create ui subpath
         run: mkdir -p docs/.vitepress/dist/ui
       - name: Copy drizzle-ui
