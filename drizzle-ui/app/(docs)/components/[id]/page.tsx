@@ -18,6 +18,7 @@ import { ButtonDemo } from "@/components/component-demo/button-demo";
 import { CardDemo } from "@/components/component-demo/card-demo";
 import { CheckboxDemo } from "@/components/component-demo/checkbox-demo";
 import { DarkModeDemo } from "@/components/component-demo/dark-mode-demo";
+import { DashboardLayoutDemo } from "@/components/component-demo/dashboard-layout-demo";
 import { FlashMessageDemo } from "@/components/component-demo/flash-message-demo";
 import { ComponentContent } from "@/components/component-layout/component-content";
 import { FormDemo } from "@/components/component-demo/form-demo";
@@ -39,6 +40,7 @@ const componentMap: { [key: string]: React.ComponentType } = {
   card: CardDemo,
   checkbox: CheckboxDemo,
   "dark-mode": DarkModeDemo,
+  "dashboard-layout": DashboardLayoutDemo,
   "flash-message": FlashMessageDemo,
   form: FormDemo,
   input: InputDemo,
