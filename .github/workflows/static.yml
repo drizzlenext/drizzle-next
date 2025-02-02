@@ -37,6 +37,12 @@ jobs:
         run: npm install -w docs
       - name: Build Docs
         run: npm run docs:build -w docs
+      - name: Build Drizzle UI Docs
+        run: cd drizzle-ui && npm run build
+      - name: Create ui subpath
+        run: mkdir -p docs/.vitepress/dist/ui
+      - name: Copy drizzle-ui
+        run: cp -r drizzle-ui/out/* docs/.vitepress/dist/ui
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
