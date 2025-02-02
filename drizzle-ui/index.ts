@@ -54,28 +54,28 @@ program.command("init").action(async () => {
 });
 
 program
-  .command("add <component>")
-  .description("Add a new component to the project")
-  .action(async (component) => {
+  .command("add <components...>")
+  .description("Add new components to the project")
+  .action(async (components) => {
     try {
       const destinationDir = path.join(process.cwd(), "components", "ui");
-      const destinationPath = path.join(destinationDir, `${component}.tsx`);
-
       await fs.promises.mkdir(destinationDir, { recursive: true });
 
-      const sourcePath = path.join(
-        __dirname,
-        "components",
-        "ui",
-        `${component}.tsx`,
-      );
+      for (const component of components) {
+        const destinationPath = path.join(destinationDir, `${component}.tsx`);
+        const sourcePath = path.join(
+          __dirname,
+          "components",
+          "ui",
+          `${component}.tsx`,
+        );
 
-      let fileContent = await fs.promises.readFile(sourcePath, "utf-8");
+        let fileContent = await fs.promises.readFile(sourcePath, "utf-8");
+        fileContent = fileContent.replace(/.\/cn/g, "@/lib/utils");
 
-      fileContent = fileContent.replace(/.\/cn/g, "@/lib/utils");
-
-      await fs.promises.writeFile(destinationPath, fileContent);
-      console.log(`${component}.tsx file copied and modified successfully.`);
+        await fs.promises.writeFile(destinationPath, fileContent);
+        console.log(`${component}.tsx file copied and modified successfully.`);
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.error(`Error: ${error.message}`);
