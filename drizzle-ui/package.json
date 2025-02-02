@@ -14,6 +14,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@next/third-parties": "^15.1.6",
     "commander": "^13.1.0",
     "next": "15.1.6",
     "react": "^19.0.0",
