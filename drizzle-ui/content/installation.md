@@ -28,6 +28,8 @@ Step 3: Add components
 npx drizzle-ui@latest add button
 ```
 
+Alternatively, you can manually copy and paste the components on this website into your `components/ui` folder.
+
 ## Option 3: Install as dependency
 
 This is an experimental option that installs drizzle-ui as a dependency. This is the classic UI library approach. You can still style your components by adding extra classes, however you won't be able to change the underlying implementation, like adding new variants and functionality. If you don't care about customization, this option might be suitable.
