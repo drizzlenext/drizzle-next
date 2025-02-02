@@ -7,7 +7,7 @@ export default async function Page() {
 
   return (
     <div
-      className="docs flex flex-col gap-5 p-5 [&>h1]:font-bold"
+      className="docs flex flex-col gap-5 p-5"
       dangerouslySetInnerHTML={{ __html: htmlContent }}
     ></div>
   );

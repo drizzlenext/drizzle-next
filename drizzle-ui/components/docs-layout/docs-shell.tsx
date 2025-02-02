@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect } from "react";
 
-export function Shell({ children }: { children: ReactNode }) {
+export function DocsShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {

@@ -1,5 +1,5 @@
-import { Footer } from "@/components/docs/footer";
-import { Header } from "@/components/docs/header";
+import { DocsFooter } from "@/components/docs-layout/docs-footer";
+import { DocsHeader } from "@/components/docs-layout/docs-header";
 import { Button } from "@/components/ui/button";
 import { CloudDrizzleIcon, LightbulbIcon } from "lucide-react";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="h-screen">
-      <Header />
+      <DocsHeader />
       <div className="container m-auto flex max-w-5xl flex-1 flex-col gap-5 px-4 py-8">
         <h1 className="flex items-center gap-5 text-7xl font-bold">
           <CloudDrizzleIcon size={100} /> Drizzle UI
@@ -25,7 +25,7 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <Footer />
+      <DocsFooter />
     </div>
   );
 }

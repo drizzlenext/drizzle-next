@@ -27,7 +27,7 @@ const items = [
   { title: "Textarea", url: "/components/textarea" },
 ];
 
-export function Sidebar() {
+export function DocsSidebar() {
   const pathname = usePathname();
 
   return (

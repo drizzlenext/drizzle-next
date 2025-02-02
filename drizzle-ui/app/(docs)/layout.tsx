@@ -1,13 +1,14 @@
-import { Header } from "@/components/docs/header";
-import { Shell } from "@/components/docs/shell";
-import { Sidebar } from "@/components/docs/sidebar";
+import { DocsContent } from "@/components/docs-layout/docs-content";
+import { DocsHeader } from "@/components/docs-layout/docs-header";
+import { DocsShell } from "@/components/docs-layout/docs-shell";
+import { DocsSidebar } from "@/components/docs-layout/docs-sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Shell>
-      <Header />
-      <Sidebar />
-      <div className="docs overflow-auto">{children}</div>
-    </Shell>
+    <DocsShell>
+      <DocsHeader />
+      <DocsSidebar />
+      <DocsContent>{children}</DocsContent>
+    </DocsShell>
   );
 }
