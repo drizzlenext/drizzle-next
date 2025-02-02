@@ -59,5 +59,8 @@
   ],
   "bin": {
     "drizzle-ui": "dist/cli/index.js"
-  }
+  },
+  "description": "The minimalist component library used in Drizzle Next",
+  "author": "travisluong",
+  "license": "MIT"
 }

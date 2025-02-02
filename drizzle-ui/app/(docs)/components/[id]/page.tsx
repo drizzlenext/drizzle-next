@@ -71,7 +71,7 @@ export default async function Page(props: { params: Params }) {
 
   const htmlContent = await marked(content);
 
-  const code = getFileContent(data.code).replace("./cn", "@/lib/utils");
+  const code = getFileContent(data.code).replace("./utils", "@/lib/utils");
   const usage = getFileContent(data.usage);
 
   const DynamicComponent = componentMap[params.id] || null;
@@ -89,9 +89,9 @@ export default async function Page(props: { params: Params }) {
       <ComponentCode
         language="bash"
         code={`npx drizzle-ui@latest add ${params.id}`}
-        title="Installation"
+        title="CLI Installation"
       />
-      <ComponentCode language="ts" code={code} title="Code" />
+      <ComponentCode language="ts" code={code} title="Manual Installation" />
       <ComponentCode language="ts" code={usage} title="Usage" />
     </ComponentPage>
   );

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "./cn";
+import { cn } from "./utils";
 
 const Select = React.forwardRef<
   HTMLSelectElement,

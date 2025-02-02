@@ -10,7 +10,7 @@ const Avatar = ({
   className?: string;
   children?: React.ReactNode;
 }) => (
-  <div>
+  <div className="flex h-6 w-6 justify-center rounded-full bg-muted-300 text-black dark:bg-muted-800 dark:text-white">
     {src ? (
       <img
         className={cn("h-6 w-6 rounded-full", className)}
