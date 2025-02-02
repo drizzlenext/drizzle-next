@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import packageJson from "./package.json";
+import packageJson from "../package.json";
 import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
@@ -24,7 +24,7 @@ program.command("init").action(async () => {
     }
     console.log(`Stdout: ${stdout}`);
 
-    const sourcePath = path.join(__dirname, "lib", "utils.ts");
+    const sourcePath = path.join(__dirname, "templates", "lib", "utils.ts.hbs");
     const destinationPath = path.join(process.cwd(), "lib", "utils.ts");
 
     const libDir = path.join(process.cwd(), "lib");
@@ -33,7 +33,11 @@ program.command("init").action(async () => {
     await copyFileAsync(sourcePath, destinationPath);
     console.log("utils.ts file copied successfully.");
 
-    const tailwindConfigSourcePath = path.join(__dirname, "tailwind.config.ts");
+    const tailwindConfigSourcePath = path.join(
+      __dirname,
+      "templates",
+      "tailwind.config.ts.hbs",
+    );
     const tailwindConfigDestinationPath = path.join(
       process.cwd(),
       "tailwind.config.ts",

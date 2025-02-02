@@ -10,6 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["index.ts"],
+  "include": ["cli/index.ts"],
   "exclude": ["node_modules", "dist", "test"]
 }
