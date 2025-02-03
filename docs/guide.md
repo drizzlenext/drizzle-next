@@ -252,6 +252,7 @@ This is the drizzle-next project structure. The scaffolding automations will wri
 - components
   - admin - components for admin routes
   - auth - components for authentication
+  - layouts - components for dashboard layouts
   - private - components for private routes
   - public - components for public routes
   - ui - ui components
