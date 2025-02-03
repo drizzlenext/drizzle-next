@@ -74,26 +74,26 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
 
     renderTemplate({
       inputPath:
-        "new-project-processor/components/public/layout/public-shell.tsx.hbs",
-      outputPath: "components/public/layout/public-shell.tsx",
+        "new-project-processor/components/layouts/public/public-layout.tsx.hbs",
+      outputPath: "components/layouts/public/public-layout.tsx",
     });
 
     renderTemplate({
       inputPath:
-        "new-project-processor/components/public/layout/public-header.tsx.hbs",
-      outputPath: "components/public/layout/public-header.tsx",
+        "new-project-processor/components/layouts/public/public-header.tsx.hbs",
+      outputPath: "components/layouts/public/public-header.tsx",
     });
 
     renderTemplate({
       inputPath:
-        "new-project-processor/components/public/layout/public-content.tsx.hbs",
-      outputPath: "components/public/layout/public-content.tsx",
+        "new-project-processor/components/layouts/public/public-content.tsx.hbs",
+      outputPath: "components/layouts/public/public-content.tsx",
     });
 
     renderTemplate({
       inputPath:
-        "new-project-processor/components/public/layout/public-footer.tsx.hbs",
-      outputPath: "components/public/layout/public-footer.tsx",
+        "new-project-processor/components/layouts/public/public-footer.tsx.hbs",
+      outputPath: "components/layouts/public/public-footer.tsx",
     });
 
     renderTemplate({

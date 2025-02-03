@@ -4,10 +4,10 @@ import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
 import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
 import { isAdmin } from "@/lib/authorization";
-import { AdminShell } from "@/components/admin/layout/admin-shell";
-import { AdminHeader } from "@/components/admin/layout/admin-header";
-import { AdminSidebar } from "@/components/admin/layout/admin-sidebar";
-import { AdminContent } from "@/components/admin/layout/admin-content";
+import { AdminLayout } from "@/components/layouts/admin/admin-layout";
+import { AdminHeader } from "@/components/layouts/admin/admin-header";
+import { AdminSidebar } from "@/components/layouts/admin/admin-sidebar";
+import { AdminContent } from "@/components/layouts/admin/admin-content";
 import { FlashMessage } from "@/components/ui/flash-message";
 
 export default async function Layout({
@@ -34,14 +34,14 @@ export default async function Layout({
   }
 
   return (
-    <AdminShell>
+    <AdminLayout>
       <AdminHeader user={userObj} />
       <AdminSidebar />
       <AdminContent>
         <FlashMessage />
         {children}
       </AdminContent>
-    </AdminShell>
+    </AdminLayout>
   );
 }
 

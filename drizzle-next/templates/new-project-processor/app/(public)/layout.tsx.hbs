@@ -1,19 +1,19 @@
-import { PublicShell } from "@/components/public/layout/public-shell";
-import { PublicHeader } from "@/components/public/layout/public-header";
-import { PublicContent } from "@/components/public/layout/public-content";
-import { PublicFooter } from "@/components/public/layout/public-footer";
+import { PublicLayout } from "@/components/layouts/public/public-layout";
+import { PublicHeader } from "@/components/layouts/public/public-header";
+import { PublicContent } from "@/components/layouts/public/public-content";
+import { PublicFooter } from "@/components/layouts/public/public-footer";
 import { FlashMessage } from "@/components/ui/flash-message";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <PublicShell>
+    <PublicLayout>
       <PublicHeader />
       <PublicContent>
         <FlashMessage />
         {children}
       </PublicContent>
       <PublicFooter />
-    </PublicShell>
+    </PublicLayout>
   );
 }
 

@@ -632,7 +632,7 @@ export class ScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     insertTextBeforeIfNotExists(
-      "components/admin/layout/admin-sidebar.tsx",
+      "components/layouts/admin/admin-sidebar.tsx",
       "// [CODE_MARK admin-sidebar-items]",
       `  { title: "${tableObj.pluralCapitalCase}", url: "/admin/${tableObj.pluralKebabCase}", icon: Table2Icon },\n`
     );
@@ -642,7 +642,7 @@ export class ScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     insertTextBeforeIfNotExists(
-      "components/private/layout/private-sidebar.tsx",
+      "components/layouts/private/private-sidebar.tsx",
       "// [CODE_MARK private-sidebar-items]",
       `  { title: "${tableObj.pluralCapitalCase}", url: "/${tableObj.pluralKebabCase}", icon: Table2Icon },\n`
     );

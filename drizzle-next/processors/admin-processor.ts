@@ -55,8 +55,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplateIfNotExists({
-      inputPath: `admin-processor/components/admin/layout/admin-sidebar.tsx.hbs`,
-      outputPath: `components/admin/layout/admin-sidebar.tsx`,
+      inputPath: `admin-processor/components/layouts/admin/admin-sidebar.tsx.hbs`,
+      outputPath: `components/layouts/admin/admin-sidebar.tsx`,
     });
 
     renderTemplate({
@@ -88,13 +88,15 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "admin-processor/components/admin/layout/admin-shell.tsx.hbs",
-      outputPath: "components/admin/layout/admin-shell.tsx",
+      inputPath:
+        "admin-processor/components/layouts/admin/admin-layout.tsx.hbs",
+      outputPath: "components/layouts/admin/admin-layout.tsx",
     });
 
     renderTemplate({
-      inputPath: "admin-processor/components/admin/layout/admin-header.tsx.hbs",
-      outputPath: "components/admin/layout/admin-header.tsx",
+      inputPath:
+        "admin-processor/components/layouts/admin/admin-header.tsx.hbs",
+      outputPath: "components/layouts/admin/admin-header.tsx",
       data: {
         userObj,
       },
@@ -102,8 +104,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
 
     renderTemplate({
       inputPath:
-        "admin-processor/components/admin/layout/admin-content.tsx.hbs",
-      outputPath: "components/admin/layout/admin-content.tsx",
+        "admin-processor/components/layouts/admin/admin-content.tsx.hbs",
+      outputPath: "components/layouts/admin/admin-content.tsx",
     });
 
     const strategies: Record<DbDialect, string[]> = {

@@ -172,7 +172,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
     this.addAuthRouteHandler();
     // this.addAuthMiddleware();
     this.appendSecretsToEnv();
-    this.addPrivateLayout();
+    this.addLayout();
     this.addPrivateDashboard();
     this.addCustomSignInPage();
     this.addProfilePage();
@@ -181,8 +181,9 @@ export class AuthProcessor implements DrizzleNextProcessor {
     this.appendAuthSecretToEnv();
     this.addSignOutPage();
     this.addUserSchema();
+    this.addLayout();
     this.addNextAuthModuleAugmentation();
-    this.addPrivateShell();
+    this.addPrivateLayout();
     this.addPrivateHeader();
     this.addPrivateContent();
     this.addPrivateSidebar();
@@ -212,8 +213,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
     });
     renderTemplate({
       inputPath:
-        "auth-processor/components/private/layout/private-header.tsx.hbs",
-      outputPath: "components/private/layout/private-header.tsx",
+        "auth-processor/components/layouts/private/private-header.tsx.hbs",
+      outputPath: "components/layouts/private/private-header.tsx",
       data: {
         userObj,
       },
@@ -242,27 +243,27 @@ export class AuthProcessor implements DrizzleNextProcessor {
   addPrivateSidebar() {
     renderTemplateIfNotExists({
       inputPath:
-        "auth-processor/components/private/layout/private-sidebar.tsx.hbs",
-      outputPath: "components/private/layout/private-sidebar.tsx",
+        "auth-processor/components/layouts/private/private-sidebar.tsx.hbs",
+      outputPath: "components/layouts/private/private-sidebar.tsx",
       data: {
         userObj: caseFactory("user", { pluralize: this.opts.pluralizeEnabled }),
       },
     });
   }
 
-  addPrivateShell() {
+  addPrivateLayout() {
     renderTemplate({
       inputPath:
-        "auth-processor/components/private/layout/private-shell.tsx.hbs",
-      outputPath: "components/private/layout/private-shell.tsx",
+        "auth-processor/components/layouts/private/private-layout.tsx.hbs",
+      outputPath: "components/layouts/private/private-layout.tsx",
     });
   }
 
   addPrivateContent() {
     renderTemplate({
       inputPath:
-        "auth-processor/components/private/layout/private-content.tsx.hbs",
-      outputPath: "components/private/layout/private-content.tsx",
+        "auth-processor/components/layouts/private/private-content.tsx.hbs",
+      outputPath: "components/layouts/private/private-content.tsx",
     });
   }
 
@@ -329,7 +330,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
     }
   }
 
-  addPrivateLayout() {
+  addLayout() {
     const userObj = caseFactory("user", {
       pluralize: this.opts.pluralizeEnabled,
     });
