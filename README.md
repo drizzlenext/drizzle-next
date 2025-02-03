@@ -1,12 +1,11 @@
 # Drizzle Next
 
-Full Stack Next.js and Drizzle ORM Framework
-
 Generate apps using CLI commands inspired by Ruby on Rails and shadcn/ui
 
 ## Documentation
 
-https://www.drizzle-next.com
+- [Drizzle Next](https://www.drizzle-next.com) - Full Stack Next.js and Drizzle ORM Framework
+- [Drizzle UI](https://www.drizzle-next.com/ui) - The Minimalist Component Library used in Drizzle Next
 
 ## License
 
