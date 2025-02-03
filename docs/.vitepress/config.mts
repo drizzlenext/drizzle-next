@@ -37,7 +37,8 @@ export default defineConfig({
 
     footer: {
       message: "Released under the MIT License.",
-      copyright: "Copyright © 2025-present Travis Luong",
+      copyright:
+        'Copyright © 2025-present <a href="https://x.com/TravisLuong">Travis Luong</a>',
     },
   },
   ignoreDeadLinks: true,
