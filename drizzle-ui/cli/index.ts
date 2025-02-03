@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command } from "commander";
 import packageJson from "../package.json";
 import { exec } from "child_process";
