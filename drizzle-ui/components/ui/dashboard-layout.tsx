@@ -7,9 +7,9 @@ import { ArrowUpRightIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "./utils";
 
-export function DashboardShell({ children }: { children: ReactNode }) {
+export function DashboardLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="grid grid-rows-[auto_1fr] grid-cols-[36px_1fr] sm:grid-cols-[180px_1fr] h-screen">
+    <div className="grid h-screen grid-cols-[36px_1fr] grid-rows-[auto_1fr] sm:grid-cols-[180px_1fr]">
       {children}
     </div>
   );
@@ -58,9 +58,9 @@ export function DashboardSidebar() {
             pathname === item.url && "bg-primary-100 dark:bg-primary-900",
           )}
         >
-            <span className="overflow-hidden text-nowrap sm:block font-normal">
+          <span className="overflow-hidden text-nowrap font-normal sm:block">
             {item.title}
-            </span>
+          </span>
         </Link>
       ))}
     </div>
@@ -68,5 +68,5 @@ export function DashboardSidebar() {
 }
 
 export function DashboardContent({ children }: { children: ReactNode }) {
-  return <div className="row-span-1 col-span-1 overflow-auto">{children}</div>;
+  return <div className="col-span-1 row-span-1 overflow-auto">{children}</div>;
 }

@@ -1,5 +1,5 @@
-import { DocsFooter } from "@/components/docs-layout/docs-footer";
-import { DocsHeader } from "@/components/docs-layout/docs-header";
+import { DocsFooter } from "@/components/layouts/docs/docs-footer";
+import { DocsHeader } from "@/components/layouts/docs/docs-header";
 import { Button } from "@/components/ui/button";
 import { CloudDrizzleIcon, LightbulbIcon } from "lucide-react";
 import Link from "next/link";

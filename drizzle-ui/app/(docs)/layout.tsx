@@ -1,14 +1,14 @@
-import { DocsContent } from "@/components/docs-layout/docs-content";
-import { DocsHeader } from "@/components/docs-layout/docs-header";
-import { DocsShell } from "@/components/docs-layout/docs-shell";
-import { DocsSidebar } from "@/components/docs-layout/docs-sidebar";
+import { DocsContent } from "@/components/layouts/docs/docs-content";
+import { DocsHeader } from "@/components/layouts/docs/docs-header";
+import { DocsLayout } from "@/components/layouts/docs/docs-layout";
+import { DocsSidebar } from "@/components/layouts/docs/docs-sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <DocsShell>
+    <DocsLayout>
       <DocsHeader />
       <DocsSidebar />
       <DocsContent>{children}</DocsContent>
-    </DocsShell>
+    </DocsLayout>
   );
 }
