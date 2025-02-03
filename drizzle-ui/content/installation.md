@@ -1,5 +1,7 @@
 # Installation
 
+Drizzle UI was built specifically for use by the full stack Drizzle Next framework. The components were extracted from the source code of Drizzle Next and made available as a standalone package. The components can be copied and pasted or it can be installed as a dependency for a Next.js project. This library is designed for Next.js as some of the components use Next.js specific hooks.
+
 There are three ways to install Drizzle UI.
 
 ## Option 1: Use Drizzle Next
@@ -25,7 +27,7 @@ npx drizzle-ui@latest init
 Step 3: Add components
 
 ```bash
-npx drizzle-ui@latest add button
+npx drizzle-ui@latest add alert avatar button
 ```
 
 Alternatively, you can manually copy and paste the components on this website into your `components/ui` folder.

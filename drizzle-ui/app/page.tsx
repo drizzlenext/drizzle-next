@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="h-screen">
+    <div className="flex h-screen flex-col">
       <DocsHeader />
       <div className="container m-auto flex max-w-5xl flex-1 flex-col gap-5 px-4 py-8">
         <h1 className="flex items-center gap-5 text-7xl font-bold">
@@ -16,8 +16,8 @@ export default function Home() {
           The minimalist component library used in Drizzle Next.
         </div>
         <div className="flex max-w-lg gap-2 text-xl">
-          <LightbulbIcon size={50} /> Inspired by the genius copy-and-paste
-          philosophy of shadcn/ui.
+          <LightbulbIcon size={50} /> Inspired by the copy-and-paste philosophy
+          of shadcn/ui.
         </div>
         <div>
           <Link href="/introduction">
