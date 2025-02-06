@@ -1,7 +1,15 @@
 import { asc, desc, sql } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
 import Link from "next/link";
-import { DrizzleSortable } from "./drizzle-sortable";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+  Sortable,
+  TableHead,
+} from "drizzle-ui";
 
 type Params = Promise<{ [key: string]: string }>;
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
@@ -139,36 +147,36 @@ export function DrizzleTable({
   list: Record<string, any>;
 }) {
   return (
-    <table>
-      <thead>
-        <tr>
+    <Table>
+      <TableHeader>
+        <TableRow>
           {columns.map((col) => {
             return (
-              <th key={col.name}>
-                <DrizzleSortable column={col.name}>{col.name}</DrizzleSortable>
-              </th>
+              <TableHead key={col.name}>
+                <Sortable column={col.name}>{col.name}</Sortable>
+              </TableHead>
             );
           })}
-        </tr>
-      </thead>
-      <tbody>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
         {list.map((row: Record<string, any>) => {
           return (
-            <tr key={row.id}>
+            <TableRow key={row.id}>
               {columns.map((col) => {
                 return (
-                  <td key={col.name}>
+                  <TableCell key={col.name}>
                     {col.dataType === "date" && row[col.name]?.toLocaleString()}
                     {col.dataType === "json" && JSON.stringify(row[col.name])}
                     {col.dataType === "string" && row[col.name]}
                     {col.dataType === "number" && row[col.name]}
-                  </td>
+                  </TableCell>
                 );
               })}
-            </tr>
+            </TableRow>
           );
         })}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   );
 }
