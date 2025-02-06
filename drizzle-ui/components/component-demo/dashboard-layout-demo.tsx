@@ -8,25 +8,8 @@ import {
 export function DashboardLayoutDemo() {
   return (
     <DashboardLayout>
-      <DashboardHeader
-        title="Drizzle Next"
-        nav={[
-          { link: "/", text: "Home" },
-          { link: "https://www.drizzle-next.com", text: "Drizzle Next" },
-        ]}
-      />
-      <DashboardSidebar
-        items={[
-          {
-            text: "Components",
-            items: [
-              { text: "Introduction", link: "/introduction" },
-              { text: "Installation", link: "/installation" },
-              { text: "Alert", link: "/components/alert" },
-            ],
-          },
-        ]}
-      />
+      <DashboardHeader />
+      <DashboardSidebar />
       <DashboardContent>
         {Array.from({ length: 20 }).map((_, index) => (
           <div key={index} className="p-5">
