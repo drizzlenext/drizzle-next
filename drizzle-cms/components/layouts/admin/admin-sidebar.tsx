@@ -8,6 +8,8 @@ import { usePathname } from "next/navigation";
 const items = [
   { title: "Admin", url: "/admin", icon: GaugeIcon },
     { title: "Users", url: "/admin/users", icon: Table2Icon },
+  { title: "Categories", url: "/admin/categories", icon: Table2Icon },
+  { title: "Posts", url: "/admin/posts", icon: Table2Icon },
 // [CODE_MARK admin-sidebar-items]
   { title: "Settings", url: "/admin/settings", icon: SettingsIcon },
   { title: "Sign out", url: "/signout", icon: LogOutIcon },

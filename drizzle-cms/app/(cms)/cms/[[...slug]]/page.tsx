@@ -1,5 +1,7 @@
 import { db } from "@/lib/db";
 import { DrizzleCms, DrizzleCmsConfig } from "@/package/drizzle-cms";
+import { categories } from "@/schema/categories";
+import { posts } from "@/schema/posts";
 import { users } from "@/schema/users";
 
 type Params = Promise<{ [key: string]: string }>;
@@ -9,6 +11,12 @@ const config: DrizzleCmsConfig = {
   basePath: "/cms",
   schema: {
     users: { drizzleSchema: users, label: "Users", path: "users" },
+    posts: { drizzleSchema: posts, label: "Posts", path: "posts" },
+    categories: {
+      drizzleSchema: categories,
+      label: "Categories",
+      path: "categories",
+    },
   },
 };
 

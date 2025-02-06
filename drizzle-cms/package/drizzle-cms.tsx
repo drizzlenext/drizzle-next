@@ -9,6 +9,7 @@ import {
   TableRow,
   Sortable,
   TableHead,
+  Pagination,
 } from "drizzle-ui";
 
 type Params = Promise<{ [key: string]: string }>;
@@ -107,6 +108,12 @@ export async function DrizzleCms(props: {
       <div>searchParams: {JSON.stringify(searchParams)}</div>
       <div>curTable {curTable}</div>
       <DrizzleTable list={list} columns={simplifiedColumns} />
+      <Pagination
+        count={count}
+        page={page}
+        pageSize={pageSize}
+        totalPages={totalPages}
+      />
     </div>
   );
 }
