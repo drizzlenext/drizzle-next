@@ -1,5 +1,6 @@
 "use client";
 
+import { DashboardLayout } from "@/components/ui/dashboard-layout";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect } from "react";
 
@@ -32,9 +33,5 @@ export function DocsLayout({ children }: { children: ReactNode }) {
     });
   }, [pathname]);
 
-  return (
-    <div className="grid h-screen grid-cols-[36px_1fr] grid-rows-[auto_1fr] sm:grid-cols-[180px_1fr]">
-      {children}
-    </div>
-  );
+  return <DashboardLayout>{children}</DashboardLayout>;
 }
