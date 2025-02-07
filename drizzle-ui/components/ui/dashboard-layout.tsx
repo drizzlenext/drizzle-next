@@ -18,15 +18,14 @@ const DashboardLayout = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const [state, setState] = React.useState({ sidebarOpen: true });
+  const [state, setState] = React.useState({ sidebarOpen: false });
 
   return (
     <DashboardLayoutContext.Provider value={{ state, setState }}>
       <div
         ref={ref}
         className={cn(
-          "grid h-screen grid-cols-[0px_1fr] grid-rows-[auto_1fr] sm:grid-cols-[180px_1fr]",
-          state.sidebarOpen && "grid-cols-[1fr_0px] sm:grid-cols-[180px_1fr]",
+          "grid h-screen grid-rows-[auto_1fr] sm:grid-cols-[192px_1fr]",
           className,
         )}
         {...props}
@@ -71,7 +70,7 @@ const DashboardHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "col-span-2 row-span-1 flex h-12 w-full items-center justify-between gap-2 border-b border-muted-300 bg-gradient-to-t from-primary-100 to-primary-50 dark:border-muted-700 dark:bg-primary-900 dark:from-primary-950 dark:to-primary-900",
+      "flex h-12 w-full items-center justify-between gap-2 border-b border-muted-300 bg-gradient-to-t from-primary-100 to-primary-50 dark:border-muted-700 dark:bg-primary-900 dark:from-primary-950 dark:to-primary-900 sm:col-span-2",
       className,
     )}
     {...props}
@@ -83,7 +82,7 @@ const DashboardSidebar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { setState } = React.useContext(DashboardLayoutContext);
+  const { state, setState } = React.useContext(DashboardLayoutContext);
 
   const handleClick = () => {
     setState((prevState) => ({
@@ -96,7 +95,9 @@ const DashboardSidebar = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "z-20 col-span-1 row-span-1 flex-col overflow-auto border-muted-300 bg-primary-50 text-sm dark:border-muted-700 dark:bg-primary-950 sm:border-r",
+        "fixed inset-y-12 z-20 h-full w-[calc(100%-100px)] transform flex-col overflow-auto border-r border-muted-300 bg-primary-50 text-sm transition-transform duration-300 ease-in-out dark:border-muted-700 dark:bg-primary-950 sm:relative sm:inset-y-0 sm:w-48",
+        state.sidebarOpen ? "translate-x-0" : "-translate-x-full",
+        "sm:translate-x-0",
         className,
       )}
       onClick={handleClick}
@@ -144,7 +145,7 @@ const DashboardContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("col-span-1 row-span-1 overflow-auto", className)}
+    className={cn("min-w-0 overflow-auto p-5", className)}
     {...props}
   />
 ));
