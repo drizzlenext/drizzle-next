@@ -27,3 +27,51 @@ body {
 .docs .preview a {
   @apply font-normal no-underline;
 }
+
+/* Apply to all scrollbars */
+* {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #d1d5db #f3f4f6; /* thumb color & track color */
+}
+
+/* Chrome, Safari, Edge */
+*::-webkit-scrollbar {
+  width: 8px; /* Scrollbar width */
+}
+
+*::-webkit-scrollbar-track {
+  background: #f3f4f6; /* Dark track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #d1d5db; /* Gray thumb */
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af; /* Lighter gray on hover */
+}
+
+/* Apply to all scrollbars */
+.dark * {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #4b5563 #1f2937; /* thumb color & track color */
+}
+
+/* Chrome, Safari, Edge */
+.dark *::-webkit-scrollbar {
+  width: 8px; /* Scrollbar width */
+}
+
+.dark *::-webkit-scrollbar-track {
+  background: #1f2937; /* Dark track */
+}
+
+.dark *::-webkit-scrollbar-thumb {
+  background: #4b5563; /* Gray thumb */
+  border-radius: 4px;
+}
+
+.dark *::-webkit-scrollbar-thumb:hover {
+  background: #6b7280; /* Lighter gray on hover */
+}
