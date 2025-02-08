@@ -18,7 +18,11 @@ import { usePathname } from "next/navigation";
 const items = [
   { text: "Introduction", link: "/introduction", icon: Table2Icon },
   { text: "Installation", link: "/installation", icon: Table2Icon },
-  { text: "Alert", link: "/components/alert", icon: Table2Icon },
+  {
+    text: "Dashboard Layout",
+    link: "/components/dashboard-layout",
+    icon: Table2Icon,
+  },
 ];
 
 export function DashboardLayoutDemo() {
@@ -57,12 +61,12 @@ export function DashboardLayoutDemo() {
       </DashboardSidebar>
       <DashboardContent>
         {Array.from({ length: 20 }).map((_, index) => (
-          <div key={index} className="p-5">
+          <p key={index} className="mb-5">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi
             soluta optio vel dolorum voluptatum ipsum, quam quidem animi nam qui
             eveniet, sapiente hic corrupti quibusdam dolor itaque blanditiis
             tenetur dolorem!
-          </div>
+          </p>
         ))}
       </DashboardContent>
     </DashboardLayout>

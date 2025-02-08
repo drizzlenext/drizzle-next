@@ -18,7 +18,6 @@ import { ButtonDemo } from "@/components/component-demo/button-demo";
 import { CardDemo } from "@/components/component-demo/card-demo";
 import { CheckboxDemo } from "@/components/component-demo/checkbox-demo";
 import { DarkModeDemo } from "@/components/component-demo/dark-mode-demo";
-import { DashboardLayoutDemo } from "@/components/component-demo/dashboard-layout-demo";
 import { FlashMessageDemo } from "@/components/component-demo/flash-message-demo";
 import { ComponentContent } from "@/components/component-layout/component-content";
 import { FormDemo } from "@/components/component-demo/form-demo";
@@ -33,14 +32,14 @@ import { TableDemo } from "@/components/component-demo/table-demo";
 import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 import { Suspense } from "react";
 
-const componentMap: { [key: string]: React.ComponentType } = {
+const componentMap: { [key: string]: React.ComponentType | null } = {
   alert: AlertDemo,
   avatar: AvatarDemo,
   button: ButtonDemo,
   card: CardDemo,
   checkbox: CheckboxDemo,
   "dark-mode": DarkModeDemo,
-  "dashboard-layout": DashboardLayoutDemo,
+  "dashboard-layout": null,
   "flash-message": FlashMessageDemo,
   form: FormDemo,
   input: InputDemo,
@@ -83,11 +82,13 @@ export default async function Page(props: { params: Params }) {
       <ComponentTitle>{data.title}</ComponentTitle>
       <ComponentDescription>{data.description}</ComponentDescription>
       {htmlContent && <ComponentContent htmlContent={htmlContent} />}
-      <ComponentPreview>
-        <Suspense>
-          <DynamicComponent />
-        </Suspense>
-      </ComponentPreview>
+      {DynamicComponent && (
+        <ComponentPreview>
+          <Suspense>
+            <DynamicComponent />
+          </Suspense>
+        </ComponentPreview>
+      )}
       <ComponentCode
         language="bash"
         code={`npx drizzle-ui@latest add ${params.id}`}
