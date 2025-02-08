@@ -18,8 +18,8 @@ export function ComponentCode({
 
   return (
     <div>
-      <h2 className="text-3xl font-bold">{title}</h2>
-      <pre className="rounded">
+      <h2>{title}</h2>
+      <pre>
         <code className={`language-${language} rounded`}>{code}</code>
       </pre>
     </div>

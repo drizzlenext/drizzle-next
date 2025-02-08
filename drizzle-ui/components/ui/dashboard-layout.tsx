@@ -145,7 +145,7 @@ const DashboardContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("min-w-0 overflow-auto p-5", className)}
+    className={cn("min-w-0 overflow-auto", className)}
     {...props}
   />
 ));

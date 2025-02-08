@@ -11,23 +11,6 @@ body {
   stroke-width: 1.5px;
 }
 
-.docs a {
-  @apply font-bold underline;
-}
-
-.docs code:not(pre code) {
-  @apply rounded bg-muted-300 dark:bg-muted-700;
-}
-
-.docs pre code {
-  padding-right: 80px !important;
-  border-radius: 4px;
-}
-
-.docs .preview a {
-  @apply font-normal no-underline;
-}
-
 * {
   scrollbar-width: auto;
   scrollbar-color: #dddddd white;

@@ -1,5 +1,9 @@
 import { ReactNode } from "react";
 
 export function ComponentPage({ children }: { children: ReactNode }) {
-  return <div className="flex flex-col gap-5">{children}</div>;
+  return (
+    <div className="prose dark:prose-invert prose-pre:bg-[#0d1117] m-auto">
+      {children}
+    </div>
+  );
 }

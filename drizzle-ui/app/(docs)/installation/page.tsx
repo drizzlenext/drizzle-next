@@ -5,5 +5,10 @@ export default async function Page() {
   const fileContent = getFileContent("content/installation.md");
   const htmlContent = await marked.parse(fileContent);
 
-  return <div dangerouslySetInnerHTML={{ __html: htmlContent }}></div>;
+  return (
+    <div
+      className="prose dark:prose-invert prose-pre:bg-[#0d1117] m-auto"
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
+    ></div>
+  );
 }
