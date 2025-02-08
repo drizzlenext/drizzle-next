@@ -29,11 +29,11 @@ body {
 }
 
 * {
-  scrollbar-width: thin;
+  scrollbar-width: auto;
   scrollbar-color: #dddddd white;
 }
 
 .dark * {
-  scrollbar-width: thin;
+  scrollbar-width: auto;
   scrollbar-color: #333333 black;
 }
