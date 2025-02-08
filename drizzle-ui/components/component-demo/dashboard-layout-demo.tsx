@@ -9,6 +9,9 @@ import {
   DashboardSidebarLabel,
   DashboardSidebarItem,
   DashboardSidebarToggle,
+  DashboardTitle,
+  DashboardNav,
+  DashboardNavToggle,
 } from "@/components/ui/dashboard-layout";
 import { ArrowUpRightIcon, Table2Icon } from "lucide-react";
 import Link from "next/link";
@@ -31,11 +34,11 @@ export function DashboardLayoutDemo() {
   return (
     <DashboardLayout>
       <DashboardHeader>
-        <div className="flex items-center gap-2 px-2 font-mono font-bold">
+        <DashboardTitle>
           <DashboardSidebarToggle />
           <Link href="/">drizzle-ui</Link>
-        </div>
-        <div className="flex items-center gap-5 px-2">
+        </DashboardTitle>
+        <DashboardNav>
           <Link href="/introduction">Docs</Link>
           <Link
             href="https://www.drizzle-next.com"
@@ -45,7 +48,8 @@ export function DashboardLayoutDemo() {
             Drizzle Next <ArrowUpRightIcon className="h-4 w-4 text-muted-500" />
           </Link>
           <DarkModeToggle />
-        </div>
+        </DashboardNav>
+        <DashboardNavToggle />
       </DashboardHeader>
       <DashboardSidebar>
         <DashboardSidebarGroup>

@@ -2,14 +2,20 @@
 
 import * as React from "react";
 import { cn } from "./utils";
-import { MenuIcon, XIcon } from "lucide-react";
+import { MenuIcon, SquareMenuIcon, XIcon } from "lucide-react";
+
+interface DashboardLayoutState {
+  sidebarOpen: boolean;
+  navOpen: boolean;
+}
 
 const DashboardLayoutContext = React.createContext<{
-  state: { sidebarOpen: boolean };
-  setState: React.Dispatch<React.SetStateAction<{ sidebarOpen: boolean }>>;
+  state: DashboardLayoutState;
+  setState: React.Dispatch<React.SetStateAction<DashboardLayoutState>>;
 }>({
   state: {
     sidebarOpen: false,
+    navOpen: false,
   },
   setState: () => {},
 });
@@ -18,7 +24,10 @@ const DashboardLayout = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const [state, setState] = React.useState({ sidebarOpen: false });
+  const [state, setState] = React.useState({
+    sidebarOpen: false,
+    navOpen: false,
+  });
 
   return (
     <DashboardLayoutContext.Provider value={{ state, setState }}>
@@ -61,8 +70,6 @@ const DashboardSidebarToggle = React.forwardRef<
 });
 DashboardSidebarToggle.displayName = "DashboardSidebarToggle";
 
-export { DashboardLayoutContext };
-
 const DashboardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -77,6 +84,70 @@ const DashboardHeader = React.forwardRef<
   />
 ));
 DashboardHeader.displayName = "DashboardHeader";
+
+const DashboardTitle = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "flex items-center gap-2 px-2 font-mono font-bold",
+      className,
+    )}
+    {...props}
+  />
+));
+DashboardTitle.displayName = "DashboardTitle";
+
+const DashboardNav = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { state } = React.useContext(DashboardLayoutContext);
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "z-50 flex w-full flex-col items-center gap-0 border-b border-muted-300 bg-muted-50 py-3 text-sm dark:border-primary-700 dark:bg-primary-950 [&>a:hover]:bg-primary-100 dark:[&>a:hover]:bg-primary-900 [&>a]:w-full [&>a]:px-4 [&>a]:py-1",
+        state.navOpen ? "absolute top-12" : "hidden",
+        "sm:right-0 sm:top-0 sm:flex sm:w-auto sm:flex-row sm:items-center sm:gap-5 sm:border-none sm:bg-transparent sm:px-2 sm:text-base sm:dark:bg-transparent sm:[&>a]:w-auto sm:[&>a]:p-0 sm:[&>a]:px-2",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
+DashboardNav.displayName = "DashboardNav";
+
+const DashboardNavToggle = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { state, setState } = React.useContext(DashboardLayoutContext);
+
+  const toggleNav = () => {
+    setState((prevState) => ({
+      ...prevState,
+      navOpen: !prevState.navOpen,
+    }));
+  };
+
+  return (
+    <div
+      ref={ref}
+      className={cn("cursor-pointer select-none px-3 sm:hidden", className)}
+      {...props}
+    >
+      {state.navOpen ? (
+        <XIcon onClick={toggleNav} />
+      ) : (
+        <SquareMenuIcon onClick={toggleNav} />
+      )}
+    </div>
+  );
+});
+DashboardNavToggle.displayName = "DashboardNavToggle";
 
 const DashboardSidebar = React.forwardRef<
   HTMLDivElement,
@@ -155,6 +226,9 @@ export {
   DashboardLayout,
   DashboardSidebarToggle,
   DashboardHeader,
+  DashboardTitle,
+  DashboardNav,
+  DashboardNavToggle,
   DashboardSidebar,
   DashboardSidebarGroup,
   DashboardSidebarLabel,
