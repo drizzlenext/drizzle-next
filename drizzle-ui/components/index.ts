@@ -5,6 +5,19 @@ export { Card } from "./ui/card";
 export { Checkbox } from "./ui/checkbox";
 export { cn } from "./ui/utils";
 export { DarkModeScript, DarkModeToggle } from "./ui/dark-mode";
+export {
+  DashboardLayout,
+  DashboardSidebarToggle,
+  DashboardHeader,
+  DashboardTitle,
+  DashboardNav,
+  DashboardNavToggle,
+  DashboardSidebar,
+  DashboardSidebarGroup,
+  DashboardSidebarLabel,
+  DashboardSidebarItem,
+  DashboardContent,
+} from "./ui/dashboard-layout";
 export { FlashMessage } from "./ui/flash-message";
 export { Form, FormControl, FormMessage } from "./ui/form";
 export { Input } from "./ui/input";

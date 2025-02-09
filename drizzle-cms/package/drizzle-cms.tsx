@@ -10,7 +10,19 @@ import {
   Sortable,
   TableHead,
   Pagination,
+  DashboardLayout,
+  DashboardHeader,
+  DashboardTitle,
+  DashboardSidebarToggle,
+  DashboardContent,
+  DashboardSidebar,
+  DashboardSidebarItem,
+  DashboardNav,
+  DashboardNavToggle,
+  DashboardSidebarGroup,
+  DashboardSidebarLabel,
 } from "drizzle-ui";
+import { DrizzleCmsLayout } from "./drizzle-cms-layout";
 
 type Params = Promise<{ [key: string]: string }>;
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
@@ -20,6 +32,16 @@ export type DrizzleCmsConfig = {
   schema: {
     [key: string]: {
       drizzleSchema: any;
+      label: string;
+      path: string;
+    };
+  };
+};
+
+export type DrizzleCmsLayoutConfig = {
+  basePath: string;
+  schema: {
+    [key: string]: {
       label: string;
       path: string;
     };
@@ -36,11 +58,6 @@ export async function DrizzleCms(props: {
   const searchParams = await props.searchParams;
   const config = props.config;
   const db = props.db;
-
-  const tables = Object.values(config.schema).map((schema) => ({
-    label: schema.label,
-    path: schema.path,
-  }));
 
   const curTable = params.slug;
 
@@ -95,15 +112,20 @@ export async function DrizzleCms(props: {
     };
   });
 
+  const slimSchema: { [key: string]: { label: string; path: string } } = {};
+
+  Object.entries(config.schema).forEach(
+    ([key, value]) =>
+      (slimSchema[key] = { label: value.label, path: value.path })
+  );
+
+  const drizzleCmsLayoutConfig: DrizzleCmsLayoutConfig = {
+    basePath: config.basePath,
+    schema: slimSchema,
+  };
+
   return (
-    <div>
-      <div>
-        {tables.map((table) => (
-          <div key={table.path}>
-            <Link href={`${config.basePath}/${table.path}`}>{table.label}</Link>
-          </div>
-        ))}
-      </div>
+    <DrizzleCmsLayout config={drizzleCmsLayoutConfig}>
       <div>params: {JSON.stringify(params)}</div>
       <div>searchParams: {JSON.stringify(searchParams)}</div>
       <div>curTable {curTable}</div>
@@ -114,7 +136,7 @@ export async function DrizzleCms(props: {
         pageSize={pageSize}
         totalPages={totalPages}
       />
-    </div>
+    </DrizzleCmsLayout>
   );
 }
 
