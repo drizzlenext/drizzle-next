@@ -5,6 +5,7 @@ import {
   PageNav,
   PageContent,
   PageFooter,
+  PageAside,
 } from "@/components/ui/page-layout";
 import Link from "next/link";
 import { SearchInput } from "@/components/ui/search-input";
@@ -15,18 +16,26 @@ export function PageLayoutDemo() {
     <PageLayout>
       <PageHeader>
         <PageTitle>Page Header</PageTitle>
-        <SearchInput />
+        <PageNav>
+          <Link href="">Back</Link>
+          <Link href="">Edit</Link>
+          <Link href="">Delete</Link>
+        </PageNav>
       </PageHeader>
-      <PageNav>
-        <Link href="">Back</Link>
-        <Link href="">Edit</Link>
-        <Link href="">Delete</Link>
-      </PageNav>
       <PageContent>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo delectus
-        repellendus quibusdam, nisi aut harum ducimus corporis aliquam mollitia
-        placeat rerum vero quam eum earum natus deleniti laudantium illo porro!
+        {Array.from({ length: 10 }).map((_, index) => (
+          <p key={index} className="mb-5">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi
+            soluta optio vel dolorum voluptatum ipsum, quam quidem animi nam qui
+            eveniet, sapiente hic corrupti quibusdam dolor itaque blanditiis
+            tenetur dolorem!
+          </p>
+        ))}
       </PageContent>
+      <PageAside>
+        Filter
+        <SearchInput />
+      </PageAside>
       <PageFooter>
         <Pagination count={100} page={1} pageSize={10} totalPages={10} />
       </PageFooter>
