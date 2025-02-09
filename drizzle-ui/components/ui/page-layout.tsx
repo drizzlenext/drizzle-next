@@ -103,7 +103,7 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute inset-y-14 right-0 z-10 row-span-2 h-full min-w-52 max-w-52 transform border-l border-muted-300 bg-primary-50 p-4 duration-300 ease-in-out dark:border-muted-700 dark:bg-primary-950",
+        "absolute inset-y-14 right-0 z-10 row-span-2 h-full min-w-52 max-w-52 transform border-l border-muted-300 bg-primary-50 p-4 transition-transform duration-300 ease-in-out dark:border-muted-700 dark:bg-primary-950",
         state.asideOpen ? "translate-x-0" : "translate-x-full",
         className,
       )}

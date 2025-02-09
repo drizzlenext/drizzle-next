@@ -109,7 +109,7 @@ const DashboardNav = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute top-12 z-50 flex w-full origin-top transform flex-col items-center gap-0 border-b border-muted-300 bg-muted-50 py-3 text-sm transition-all duration-200 dark:border-primary-700 dark:bg-primary-950 [&>a:hover]:bg-primary-100 dark:[&>a:hover]:bg-primary-900 [&>a]:w-full [&>a]:px-4 [&>a]:py-1",
+        "absolute top-12 z-50 flex w-full origin-top transform flex-col items-center gap-0 border-b border-muted-300 bg-muted-50 py-3 text-sm transition-all transition-transform duration-200 dark:border-primary-700 dark:bg-primary-950 [&>a:hover]:bg-primary-100 dark:[&>a:hover]:bg-primary-900 [&>a]:w-full [&>a]:px-4 [&>a]:py-1",
         state.navOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0",
         "sm:relative sm:right-0 sm:top-0 sm:flex sm:w-auto sm:scale-100 sm:flex-row sm:items-center sm:gap-5 sm:border-none sm:bg-transparent sm:px-2 sm:text-base sm:opacity-100 sm:dark:bg-transparent sm:[&>a]:w-auto sm:[&>a]:p-0 sm:[&>a]:px-2",
         className,
