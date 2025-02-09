@@ -11,6 +11,10 @@ import {
   TableHead,
   Pagination,
   TableRowActions,
+  PageLayout,
+  PageHeader,
+  PageTitle,
+  PageContent,
 } from "drizzle-ui";
 import { DrizzleCmsLayout } from "./drizzle-cms-layout";
 import Link from "next/link";
@@ -50,7 +54,7 @@ export async function DrizzleCms(props: {
   const config = props.config;
   const db = props.db;
 
-  const curTable = params.slug;
+  const curTable = params.slug[0];
 
   const schema = config.schema[curTable];
 
@@ -117,23 +121,28 @@ export async function DrizzleCms(props: {
 
   return (
     <DrizzleCmsLayout config={drizzleCmsLayoutConfig}>
-      <div className="flex flex-col gap-5 p-4">
-        {/* <div>params: {JSON.stringify(params)}</div>
+      <PageLayout>
+        <PageHeader>
+          <PageTitle>{capitalCase(curTable)}</PageTitle>
+        </PageHeader>
+        <PageContent>
+          {/* <div>params: {JSON.stringify(params)}</div>
         <div>searchParams: {JSON.stringify(searchParams)}</div>
         <div>curTable {curTable}</div> */}
-        <DrizzleTable
-          list={list}
-          columns={simplifiedColumns}
-          curTable={curTable}
-          config={config}
-        />
-        <Pagination
-          count={count}
-          page={page}
-          pageSize={pageSize}
-          totalPages={totalPages}
-        />
-      </div>
+          <DrizzleTable
+            list={list}
+            columns={simplifiedColumns}
+            curTable={curTable}
+            config={config}
+          />
+          <Pagination
+            count={count}
+            page={page}
+            pageSize={pageSize}
+            totalPages={totalPages}
+          />
+        </PageContent>
+      </PageLayout>
     </DrizzleCmsLayout>
   );
 }
