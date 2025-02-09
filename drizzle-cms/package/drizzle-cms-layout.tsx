@@ -12,6 +12,7 @@ import {
   DashboardNavToggle,
   DashboardSidebarGroup,
   DashboardSidebarLabel,
+  DarkModeToggle,
 } from "drizzle-ui";
 import Link from "next/link";
 
@@ -33,8 +34,6 @@ export function DrizzleCmsLayout({
     path: schema.path,
   }));
 
-  console.log(tables);
-
   return (
     <DashboardLayout>
       <DashboardHeader>
@@ -42,7 +41,9 @@ export function DrizzleCmsLayout({
           <DashboardSidebarToggle />
           drizzle-cms
         </DashboardTitle>
-        <DashboardNav>nav</DashboardNav>
+        <DashboardNav>
+          <DarkModeToggle />
+        </DashboardNav>
         <DashboardNavToggle />
       </DashboardHeader>
       <DashboardSidebar>

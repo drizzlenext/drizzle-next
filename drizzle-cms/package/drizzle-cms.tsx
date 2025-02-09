@@ -1,6 +1,5 @@
 import { asc, desc, sql } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
-import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -10,17 +9,6 @@ import {
   Sortable,
   TableHead,
   Pagination,
-  DashboardLayout,
-  DashboardHeader,
-  DashboardTitle,
-  DashboardSidebarToggle,
-  DashboardContent,
-  DashboardSidebar,
-  DashboardSidebarItem,
-  DashboardNav,
-  DashboardNavToggle,
-  DashboardSidebarGroup,
-  DashboardSidebarLabel,
 } from "drizzle-ui";
 import { DrizzleCmsLayout } from "./drizzle-cms-layout";
 
@@ -126,16 +114,18 @@ export async function DrizzleCms(props: {
 
   return (
     <DrizzleCmsLayout config={drizzleCmsLayoutConfig}>
-      <div>params: {JSON.stringify(params)}</div>
-      <div>searchParams: {JSON.stringify(searchParams)}</div>
-      <div>curTable {curTable}</div>
-      <DrizzleTable list={list} columns={simplifiedColumns} />
-      <Pagination
-        count={count}
-        page={page}
-        pageSize={pageSize}
-        totalPages={totalPages}
-      />
+      <div className="p-4">
+        <div>params: {JSON.stringify(params)}</div>
+        <div>searchParams: {JSON.stringify(searchParams)}</div>
+        <div>curTable {curTable}</div>
+        <DrizzleTable list={list} columns={simplifiedColumns} />
+        <Pagination
+          count={count}
+          page={page}
+          pageSize={pageSize}
+          totalPages={totalPages}
+        />
+      </div>
     </DrizzleCmsLayout>
   );
 }
