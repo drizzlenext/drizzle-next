@@ -3,17 +3,20 @@ import { DarkModeToggle } from "../../ui/dark-mode";
 import { ArrowUpRightIcon } from "lucide-react";
 import {
   DashboardHeader,
+  DashboardNav,
+  DashboardNavToggle,
   DashboardSidebarToggle,
+  DashboardTitle,
 } from "@/components/ui/dashboard-layout";
 
 export function DocsHeader() {
   return (
     <DashboardHeader>
-      <div className="flex items-center gap-5 px-2 font-mono font-bold">
+      <DashboardTitle>
         <DashboardSidebarToggle />
         <Link href="/">drizzle-ui</Link>
-      </div>
-      <div className="flex flex-wrap items-center gap-5 px-2">
+      </DashboardTitle>
+      <DashboardNav>
         <Link href="/introduction">Docs</Link>
         <Link
           href="https://www.drizzle-next.com"
@@ -23,7 +26,8 @@ export function DocsHeader() {
           Drizzle Next <ArrowUpRightIcon className="h-4 w-4 text-muted-500" />
         </Link>
         <DarkModeToggle />
-      </div>
+      </DashboardNav>
+      <DashboardNavToggle />
     </DashboardHeader>
   );
 }
