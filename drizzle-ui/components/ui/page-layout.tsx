@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "./utils";
+import { PanelRightCloseIcon, PanelRightIcon } from "lucide-react";
 
 interface PageLayoutState {
   asideOpen: boolean;
@@ -26,7 +27,10 @@ const PageLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "grid grid-cols-[1fr_208px] grid-rows-[auto_auto_auto]",
+          "relative grid grid-cols-[1fr_0px] grid-rows-[auto_auto_auto] overflow-clip",
+          state.asideOpen
+            ? "sm:grid-cols-[1fr_208px]"
+            : "sm:grid-cols-[1fr_0px]",
           className,
         )}
         {...props}
@@ -43,7 +47,7 @@ const PageHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "col-span-2 flex min-h-14 flex-wrap items-center justify-between gap-2 border-b border-muted-300 bg-muted-100 px-5 py-2 dark:border-muted-700 dark:bg-muted-900",
+      "col-span-2 flex min-h-14 items-center justify-between gap-2 overflow-auto border-b border-muted-300 bg-muted-100 px-5 dark:border-muted-700 dark:bg-muted-900",
       className,
     )}
     {...props}
@@ -66,7 +70,7 @@ const PageNav = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-wrap items-center gap-5 p-2 px-5 py-2 [&>a]:text-info-600 [&>a]:underline dark:[&>a]:text-info-400",
+      "ml-auto flex items-center gap-5 p-2 px-5 py-2 [&>a]:text-info-600 [&>a]:underline dark:[&>a]:text-info-400",
       className,
     )}
     {...props}
@@ -86,24 +90,56 @@ const PageFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("px-5", className)} {...props} />
+  <div ref={ref} className={cn("col-span-2 px-5", className)} {...props} />
 ));
 PageFooter.displayName = "PageFooter";
 
 const PageAside = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "row-span-2 h-full min-w-48 max-w-48 border-l border-muted-300 p-4 dark:border-muted-700",
-      className,
-    )}
-    {...props}
-  />
-));
+>(({ className, ...props }, ref) => {
+  const { state } = React.useContext(PageLayoutContext);
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "absolute inset-y-14 right-0 z-10 row-span-2 h-full min-w-52 max-w-52 transform border-l border-muted-300 bg-primary-50 p-4 duration-300 ease-in-out dark:border-muted-700 dark:bg-primary-950",
+        state.asideOpen ? "translate-x-0" : "translate-x-full",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
 PageAside.displayName = "PageAside";
+
+const PageAsideToggle = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { state, setState } = React.useContext(PageLayoutContext);
+
+  const toggleAside = () => {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        asideOpen: !state.asideOpen,
+      };
+    });
+  };
+
+  return (
+    <div
+      ref={ref}
+      className={cn("cursor-pointer select-none", className)}
+      {...props}
+      onClick={toggleAside}
+    >
+      {state.asideOpen ? <PanelRightCloseIcon /> : <PanelRightIcon />}
+    </div>
+  );
+});
+PageAsideToggle.displayName = "PageAsideToggle";
 
 export {
   PageLayout,
@@ -113,4 +149,5 @@ export {
   PageContent,
   PageFooter,
   PageAside,
+  PageAsideToggle,
 };

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "./utils";
-import { MenuIcon, SidebarIcon, XIcon } from "lucide-react";
+import { MenuIcon, SidebarCloseIcon, SidebarIcon, XIcon } from "lucide-react";
 
 interface DashboardLayoutState {
   sidebarOpen: boolean;
@@ -64,7 +64,7 @@ const DashboardSidebarToggle = React.forwardRef<
       onClick={toggleSidebar}
       {...props}
     >
-      {state.sidebarOpen ? <XIcon /> : <SidebarIcon />}
+      {state.sidebarOpen ? <SidebarCloseIcon /> : <SidebarIcon />}
     </div>
   );
 });

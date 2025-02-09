@@ -6,6 +6,7 @@ import {
   PageContent,
   PageFooter,
   PageAside,
+  PageAsideToggle,
 } from "@/components/ui/page-layout";
 import Link from "next/link";
 import { SearchInput } from "@/components/ui/search-input";
@@ -21,9 +22,10 @@ export function PageLayoutDemo() {
           <Link href="">Edit</Link>
           <Link href="">Delete</Link>
         </PageNav>
+        <PageAsideToggle />
       </PageHeader>
       <PageContent>
-        {Array.from({ length: 10 }).map((_, index) => (
+        {Array.from({ length: 5 }).map((_, index) => (
           <p key={index} className="mb-5">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi
             soluta optio vel dolorum voluptatum ipsum, quam quidem animi nam qui
