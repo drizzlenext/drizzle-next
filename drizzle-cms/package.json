@@ -12,6 +12,7 @@
     "@auth/drizzle-adapter": "^1.7.4",
     "bcrypt": "^5.1.1",
     "better-sqlite3": "^11.7.0",
+    "change-case-all": "^2.1.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.38.4",

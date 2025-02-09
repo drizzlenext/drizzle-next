@@ -1,3 +1,4 @@
+import { capitalCase } from "change-case-all";
 import { asc, desc, sql } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
 import {
@@ -9,8 +10,10 @@ import {
   Sortable,
   TableHead,
   Pagination,
+  TableRowActions,
 } from "drizzle-ui";
 import { DrizzleCmsLayout } from "./drizzle-cms-layout";
+import Link from "next/link";
 
 type Params = Promise<{ [key: string]: string }>;
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
@@ -114,11 +117,16 @@ export async function DrizzleCms(props: {
 
   return (
     <DrizzleCmsLayout config={drizzleCmsLayoutConfig}>
-      <div className="p-4">
-        <div>params: {JSON.stringify(params)}</div>
+      <div className="flex flex-col gap-5 p-4">
+        {/* <div>params: {JSON.stringify(params)}</div>
         <div>searchParams: {JSON.stringify(searchParams)}</div>
-        <div>curTable {curTable}</div>
-        <DrizzleTable list={list} columns={simplifiedColumns} />
+        <div>curTable {curTable}</div> */}
+        <DrizzleTable
+          list={list}
+          columns={simplifiedColumns}
+          curTable={curTable}
+          config={config}
+        />
         <Pagination
           count={count}
           page={page}
@@ -161,9 +169,13 @@ export interface SimplifiedColumn {
 export function DrizzleTable({
   columns,
   list,
+  config,
+  curTable,
 }: {
   columns: SimplifiedColumn[];
   list: Record<string, any>;
+  config: DrizzleCmsConfig;
+  curTable: string;
 }) {
   return (
     <Table>
@@ -172,10 +184,11 @@ export function DrizzleTable({
           {columns.map((col) => {
             return (
               <TableHead key={col.name}>
-                <Sortable column={col.name}>{col.name}</Sortable>
+                <Sortable column={col.name}>{capitalCase(col.name)}</Sortable>
               </TableHead>
             );
           })}
+          <TableHead></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -192,6 +205,21 @@ export function DrizzleTable({
                   </TableCell>
                 );
               })}
+              <TableCell>
+                <TableRowActions>
+                  <Link href={`${config.basePath}/${curTable}/${row.id}`}>
+                    View
+                  </Link>
+                  <Link href={`${config.basePath}/${curTable}/${row.id}/edit`}>
+                    Edit
+                  </Link>
+                  <Link
+                    href={`${config.basePath}/${curTable}/${row.id}/delete`}
+                  >
+                    Delete
+                  </Link>
+                </TableRowActions>
+              </TableCell>
             </TableRow>
           );
         })}
