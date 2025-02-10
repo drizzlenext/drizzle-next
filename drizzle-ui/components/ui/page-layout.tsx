@@ -12,7 +12,7 @@ const PageLayoutContext = React.createContext<{
   state: PageLayoutState;
   setState: React.Dispatch<React.SetStateAction<PageLayoutState>>;
 }>({
-  state: { asideOpen: true },
+  state: { asideOpen: false },
   setState: () => {},
 });
 
@@ -20,17 +20,43 @@ const PageLayout = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const [state, setState] = React.useState({ asideOpen: true });
+  const [state, setState] = React.useState<PageLayoutState>({
+    asideOpen: false,
+  });
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setState((prevState) => ({
+          ...prevState,
+          asideOpen: true,
+        }));
+      }
+      if (window.innerWidth < 768) {
+        setState((prevState) => ({
+          ...prevState,
+          asideOpen: false,
+        }));
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Set initial state based on current window size
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <PageLayoutContext.Provider value={{ state, setState }}>
       <div
         ref={ref}
         className={cn(
-          "relative grid grid-cols-[1fr_0px] grid-rows-[auto_1fr_auto] overflow-auto overflow-x-clip",
-          state.asideOpen
-            ? "md:grid-cols-[1fr_336px]"
-            : "md:grid-cols-[1fr_0px]",
+          "relative grid grid-cols-[1fr_0px] grid-rows-[auto_1fr_auto] overflow-auto overflow-x-clip md:grid-cols-[1fr_304px]",
+          state.asideOpen === false && "md:grid-cols-[1fr_0px]",
           className,
         )}
         {...props}
@@ -118,8 +144,9 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute inset-y-16 right-4 z-0 row-span-2 h-fit w-80 transform border border-muted-300 bg-primary-50 p-4 transition-transform duration-300 ease-in-out dark:border-muted-700 dark:bg-primary-950",
-        state.asideOpen ? "translate-x-0" : "translate-x-[calc(100%+16px)]",
+        "absolute inset-y-16 right-4 z-0 row-span-2 h-fit w-72 border border-muted-300 bg-primary-50 p-4 transition-transform duration-200 ease-in-out dark:border-muted-700 dark:bg-primary-950",
+        state.asideOpen === false && "translate-x-[calc(100%+16px)]",
+        state.asideOpen === true && "translate-x-0",
         className,
       )}
       {...props}
