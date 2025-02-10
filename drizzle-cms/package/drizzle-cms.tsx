@@ -15,6 +15,10 @@ import {
   PageHeader,
   PageTitle,
   PageContent,
+  PageNav,
+  PageAsideToggle,
+  PageAside,
+  PageFooter,
 } from "drizzle-ui";
 import { DrizzleCmsLayout } from "./drizzle-cms-layout";
 import Link from "next/link";
@@ -124,6 +128,7 @@ export async function DrizzleCms(props: {
       <PageLayout>
         <PageHeader>
           <PageTitle>{capitalCase(curTable)}</PageTitle>
+          <PageAsideToggle />
         </PageHeader>
         <PageContent>
           {/* <div>params: {JSON.stringify(params)}</div>
@@ -135,13 +140,16 @@ export async function DrizzleCms(props: {
             curTable={curTable}
             config={config}
           />
+        </PageContent>
+        <PageAside>Aside</PageAside>
+        <PageFooter>
           <Pagination
             count={count}
             page={page}
             pageSize={pageSize}
             totalPages={totalPages}
           />
-        </PageContent>
+        </PageFooter>
       </PageLayout>
     </DrizzleCmsLayout>
   );

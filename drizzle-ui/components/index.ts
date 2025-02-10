@@ -29,6 +29,8 @@ export {
   PageHeader,
   PageNav,
   PageTitle,
+  PageAside,
+  PageAsideToggle,
 } from "./ui/page-layout";
 export { Pagination } from "./ui/pagination";
 export { SearchInput } from "./ui/search-input";
