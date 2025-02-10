@@ -9,9 +9,9 @@ import {
   PageAsideToggle,
 } from "@/components/ui/page-layout";
 import { SearchInput } from "@/components/ui/search-input";
-import { Pagination } from "../ui/pagination";
+import { Pagination } from "@/components/ui/pagination";
 import { TableDemo } from "./table-demo";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 export function PageLayoutDemo() {
   return (

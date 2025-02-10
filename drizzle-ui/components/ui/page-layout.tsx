@@ -12,7 +12,7 @@ const PageLayoutContext = React.createContext<{
   state: PageLayoutState;
   setState: React.Dispatch<React.SetStateAction<PageLayoutState>>;
 }>({
-  state: { asideOpen: false },
+  state: { asideOpen: true },
   setState: () => {},
 });
 
@@ -21,7 +21,7 @@ const PageLayout = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const [state, setState] = React.useState<PageLayoutState>({
-    asideOpen: false,
+    asideOpen: true,
   });
 
   React.useEffect(() => {
