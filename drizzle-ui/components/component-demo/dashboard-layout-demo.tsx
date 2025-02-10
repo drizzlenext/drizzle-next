@@ -17,6 +17,7 @@ import { ArrowUpRightIcon, Table2Icon } from "lucide-react";
 import Link from "next/link";
 import { DarkModeToggle } from "@/components/ui/dark-mode";
 import { usePathname } from "next/navigation";
+import { PageLayoutDemo } from "./page-layout-demo";
 
 const items = [
   { text: "Introduction", link: "/introduction", icon: Table2Icon },
@@ -64,14 +65,7 @@ export function DashboardLayoutDemo() {
         </DashboardSidebarGroup>
       </DashboardSidebar>
       <DashboardContent>
-        {Array.from({ length: 20 }).map((_, index) => (
-          <p key={index} className="mb-5">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi
-            soluta optio vel dolorum voluptatum ipsum, quam quidem animi nam qui
-            eveniet, sapiente hic corrupti quibusdam dolor itaque blanditiis
-            tenetur dolorem!
-          </p>
-        ))}
+        <PageLayoutDemo />
       </DashboardContent>
     </DashboardLayout>
   );

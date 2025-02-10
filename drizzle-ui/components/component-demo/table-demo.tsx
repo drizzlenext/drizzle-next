@@ -9,11 +9,13 @@ import {
 } from "@/components/ui/table";
 import Link from "next/link";
 
-const data = [
-  { id: 1, name: "coffee", price: 5 },
-  { id: 2, name: "coffee", price: 5 },
-  { id: 3, name: "coffee", price: 5 },
-];
+const data = Array.from({ length: 20 }, (_, index) => ({
+  id: index + 1,
+  name: "coffee",
+  price: 5,
+  description: "A hot beverage made from roasted coffee beans",
+  category: "Beverage",
+}));
 
 export function TableDemo() {
   return (
@@ -23,7 +25,8 @@ export function TableDemo() {
           <TableHead>Id</TableHead>
           <TableHead>Name</TableHead>
           <TableHead>Price</TableHead>
-          <TableHead></TableHead>
+          <TableHead>Description</TableHead>
+          <TableHead>Category</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -32,6 +35,8 @@ export function TableDemo() {
             <TableCell>{item.id}</TableCell>
             <TableCell>{item.name}</TableCell>
             <TableCell>{item.price}</TableCell>
+            <TableCell>{item.description}</TableCell>
+            <TableCell>{item.category}</TableCell>
             <TableCell className="text-right">
               <TableRowActions>
                 <Link href="">View</Link> <Link href="">Edit</Link>{" "}

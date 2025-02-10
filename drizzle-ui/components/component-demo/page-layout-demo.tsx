@@ -8,9 +8,10 @@ import {
   PageAside,
   PageAsideToggle,
 } from "@/components/ui/page-layout";
-import Link from "next/link";
 import { SearchInput } from "@/components/ui/search-input";
 import { Pagination } from "../ui/pagination";
+import { TableDemo } from "./table-demo";
+import { Button } from "../ui/button";
 
 export function PageLayoutDemo() {
   return (
@@ -18,21 +19,12 @@ export function PageLayoutDemo() {
       <PageHeader>
         <PageTitle>Page Header</PageTitle>
         <PageNav>
-          <Link href="">Back</Link>
-          <Link href="">Edit</Link>
-          <Link href="">Delete</Link>
+          <Button variant="info">New</Button>
         </PageNav>
         <PageAsideToggle />
       </PageHeader>
       <PageContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <p key={index} className="mb-5">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi
-            soluta optio vel dolorum voluptatum ipsum, quam quidem animi nam qui
-            eveniet, sapiente hic corrupti quibusdam dolor itaque blanditiis
-            tenetur dolorem!
-          </p>
-        ))}
+        <TableDemo />
       </PageContent>
       <PageAside>
         Filter
