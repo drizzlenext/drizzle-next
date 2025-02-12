@@ -22,6 +22,7 @@ import {
 } from "drizzle-ui";
 import { DrizzleCmsLayout } from "./drizzle-cms-layout";
 import Link from "next/link";
+import { DrizzleFilter } from "./drizzle-filter";
 
 type Params = Promise<{ [key: string]: string }>;
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
@@ -141,7 +142,10 @@ export async function DrizzleCms(props: {
             config={config}
           />
         </PageContent>
-        <PageAside>Aside</PageAside>
+        <PageAside>
+          <PageTitle>Filters</PageTitle>
+          <DrizzleFilter simplifiedColumns={simplifiedColumns} />
+        </PageAside>
         <PageFooter>
           <Pagination
             count={count}
