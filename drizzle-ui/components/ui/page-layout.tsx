@@ -127,7 +127,7 @@ const PageFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "col-span-2 border-t border-primary-300 p-4 dark:border-primary-700",
+      "z-20 col-span-2 border-t border-muted-300 bg-muted-50 p-4 dark:border-muted-700 dark:bg-muted-950",
       className,
     )}
     {...props}
@@ -144,7 +144,7 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute inset-y-16 right-4 z-0 row-span-2 h-fit w-72 border border-muted-300 bg-primary-50 p-4 transition-transform duration-200 ease-in-out dark:border-muted-700 dark:bg-primary-950",
+        "absolute inset-y-14 right-0 z-0 w-72 border-l border-muted-300 bg-primary-50 p-4 transition-transform duration-200 ease-in-out dark:border-muted-700 dark:bg-primary-950",
         state.asideOpen === false && "translate-x-[calc(100%+16px)]",
         state.asideOpen === true && "translate-x-0",
         className,
