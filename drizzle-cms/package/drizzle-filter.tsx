@@ -4,6 +4,8 @@ import { capitalCase } from "change-case-all";
 import { Button, Input, Select, SelectOption } from "drizzle-ui";
 import { SimplifiedColumn } from "./drizzle-cms";
 import { useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const operators = ["=", "<", ">", "<=", ">=", "contains"];
 
@@ -12,9 +14,39 @@ export function DrizzleFilter({
 }: {
   simplifiedColumns: SimplifiedColumn[];
 }) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const [filters, setFilters] = useState<
     { column: string; operator: string; value: string }[]
   >([]);
+
+  function applyOne(index: number) {
+    const filter = filters[index];
+    const params = new URLSearchParams(searchParams);
+    params.set("filters", JSON.stringify([filter]));
+    router.push(`${pathname}?${params.toString()}`);
+  }
+
+  function clearOne(index: number) {
+    setFilters((prev) => prev.filter((_, i) => i !== index));
+    // Code to run after setState
+    const params = new URLSearchParams(searchParams);
+    params.set("filters", JSON.stringify([filters]));
+    router.push(`${pathname}?${params.toString()}`);
+  }
+
+  function applyAll() {
+    const params = new URLSearchParams();
+    params.set("filters", JSON.stringify(filters));
+    router.push(`${pathname}?${params.toString()}`);
+  }
+
+  function clearAll() {
+    setFilters([]);
+    router.push(`${pathname}`);
+  }
 
   return (
     <div>
@@ -65,13 +97,10 @@ export function DrizzleFilter({
               )
             }
           />
-          <Button className="col-span-2">Apply</Button>
-          <Button
-            className="col-span-2"
-            onClick={() =>
-              setFilters((prev) => prev.filter((_, i) => i !== index))
-            }
-          >
+          <Button className="col-span-2" onClick={() => applyOne(index)}>
+            Apply
+          </Button>
+          <Button className="col-span-2" onClick={() => clearOne(index)}>
             Clear
           </Button>
         </div>
@@ -81,14 +110,14 @@ export function DrizzleFilter({
           onClick={() =>
             setFilters((prev) => [
               ...prev,
-              { column: "", operator: "", value: "" },
+              { column: "id", operator: "=", value: "" },
             ])
           }
         >
           Add Filter
         </Button>
-        <Button>Apply All</Button>
-        <Button onClick={() => setFilters([])}>Clear All</Button>
+        <Button onClick={() => applyAll()}>Apply All</Button>
+        <Button onClick={() => clearAll()}>Clear All</Button>
       </div>
     </div>
   );

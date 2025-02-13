@@ -56,6 +56,20 @@ export async function DrizzleCms(props: {
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;
+  const filtersParam = searchParams.filters;
+
+  let filters: Array<{ column: string; operator: string; value: string }> = [];
+
+  if (filtersParam) {
+    try {
+      // Decode and parse the URL-encoded JSON
+      filters = JSON.parse(decodeURIComponent(filtersParam));
+      // return filters;
+    } catch (error) {
+      return "Invalid filters format";
+    }
+  }
+
   const config = props.config;
   const db = props.db;
 
