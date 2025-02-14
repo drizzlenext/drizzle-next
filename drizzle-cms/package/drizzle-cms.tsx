@@ -1,5 +1,5 @@
 import { capitalCase } from "change-case-all";
-import { asc, desc, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gt, gte, like, lt, lte, ne } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
 import {
   Table,
@@ -46,6 +46,16 @@ export type DrizzleCmsLayoutConfig = {
       path: string;
     };
   };
+};
+
+const operatorMap = {
+  "=": eq,
+  "<>": ne,
+  ">": gt,
+  "<": lt,
+  ">=": gte,
+  "<=": lte,
+  Contains: like,
 };
 
 export async function DrizzleCms(props: {
@@ -109,15 +119,19 @@ export async function DrizzleCms(props: {
 
   const tableConf = getTableConfig(drizzleSchema);
 
-  let filter;
-  if (search) {
-    filter = sql`${search}`;
+  const whereClause = [];
+
+  for (const filter of filters) {
+    if (!filter.column && !filter.operator && !filter.value) continue;
+    const op = operatorMap[filter.operator as keyof typeof operatorMap];
+    whereClause.push(op(drizzleSchema[filter.column], filter.value));
   }
 
   const list = await db.query[schema.path].findMany({
     limit: pageSize,
     offset: pageIndex * pageSize,
     orderBy: orderBy,
+    where: and(...whereClause),
   });
   const simplifiedColumns = tableConf.columns.map((col) => {
     return {
