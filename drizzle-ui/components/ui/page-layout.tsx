@@ -55,8 +55,8 @@ const PageLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "relative grid min-h-[calc(100vh-3rem)] grid-cols-[1fr_0px] grid-rows-[auto_1fr_auto] overflow-auto overflow-x-clip md:grid-cols-[1fr_304px]",
-          state.asideOpen === false && "md:grid-cols-[1fr_0px]",
+          "relative grid min-h-[calc(100vh-3rem)] grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] overflow-auto overflow-x-clip",
+          state.asideOpen ? "" : "",
           className,
         )}
         {...props}
@@ -69,16 +69,20 @@ PageLayout.displayName = "PageLayout";
 const PageHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "col-span-2 flex min-h-14 items-center justify-between gap-2 overflow-auto border-b border-muted-300 bg-primary-50 px-5 dark:border-muted-700 dark:bg-primary-950",
-      className,
-    )}
-    {...props}
-  />
-));
+>(({ className, ...props }, ref) => {
+  const { state } = React.useContext(PageLayoutContext);
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "flex min-h-14 items-center justify-between gap-2 overflow-auto border-b border-muted-300 bg-primary-50 px-5 dark:border-muted-700 dark:bg-primary-950",
+        state.asideOpen ? "col-span-3 md:col-span-2" : "col-span-3",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
 PageHeader.displayName = "PageHeader";
 
 const PageTitle = React.forwardRef<
@@ -111,28 +115,39 @@ PageNav.displayName = "PageNav";
 const PageContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("overflow-auto px-5 py-2", className)}
-    {...props}
-  />
-));
+>(({ className, ...props }, ref) => {
+  const { state } = React.useContext(PageLayoutContext);
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "row-start-2 overflow-auto px-5 py-2",
+        state.asideOpen ? "col-span-3 md:col-span-2" : "col-span-3",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
 PageContent.displayName = "PageContent";
 
 const PageFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "z-20 col-span-2 border-t border-muted-300 bg-muted-50 p-4 dark:border-muted-700 dark:bg-muted-950",
-      className,
-    )}
-    {...props}
-  />
-));
+>(({ className, ...props }, ref) => {
+  const { state } = React.useContext(PageLayoutContext);
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "z-20 col-span-2 border-t border-muted-300 bg-muted-50 p-4 dark:border-muted-700 dark:bg-muted-950",
+        state.asideOpen ? "col-span-3 md:col-span-2" : "col-span-3",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
 PageFooter.displayName = "PageFooter";
 
 const PageAside = React.forwardRef<
@@ -144,9 +159,8 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute inset-y-14 right-0 z-0 w-72 border-l border-muted-300 bg-primary-50 p-4 transition-transform duration-200 ease-in-out dark:border-muted-700 dark:bg-primary-950",
-        state.asideOpen === false && "translate-x-[calc(100%+16px)]",
-        state.asideOpen === true && "translate-x-0",
+        "absolute inset-y-14 right-0 z-0 row-span-3 w-80 border-l border-muted-300 bg-primary-50 p-4 dark:border-muted-700 dark:bg-primary-950 md:static",
+        state.asideOpen ? "" : "hidden",
         className,
       )}
       {...props}

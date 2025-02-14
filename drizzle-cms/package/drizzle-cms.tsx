@@ -123,6 +123,9 @@ export async function DrizzleCms(props: {
 
   for (const filter of filters) {
     if (!filter.column && !filter.operator && !filter.value) continue;
+    if (!(filter.operator in operatorMap)) {
+      throw new Error("operator invalid");
+    }
     const op = operatorMap[filter.operator as keyof typeof operatorMap];
     whereClause.push(op(drizzleSchema[filter.column], filter.value));
   }
