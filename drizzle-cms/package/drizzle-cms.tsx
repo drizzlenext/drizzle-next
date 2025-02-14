@@ -127,7 +127,15 @@ export async function DrizzleCms(props: {
       throw new Error("operator invalid");
     }
     const op = operatorMap[filter.operator as keyof typeof operatorMap];
-    whereClause.push(op(drizzleSchema[filter.column], filter.value));
+    const col = drizzleSchema[filter.column];
+    let parsedValue;
+    if (col.dataType === "date" && filter.operator !== "Contains") {
+      parsedValue = new Date(filter.value);
+    } else {
+      parsedValue = filter.value;
+    }
+
+    whereClause.push(op(drizzleSchema[filter.column], parsedValue));
   }
 
   const list = await db.query[schema.path].findMany({
