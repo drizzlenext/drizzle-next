@@ -6,6 +6,7 @@ import { SimplifiedColumn } from "./drizzle-cms";
 import { useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { FilterIcon, PlusIcon, XIcon } from "lucide-react";
 
 const operators = ["=", "<", ">", "<=", ">=", "contains"];
 
@@ -51,9 +52,9 @@ export function DrizzleFilter({
   return (
     <div>
       {filters.map((filter, index) => (
-        <div key={index} className="grid grid-rows-3 grid-cols-4 gap-1 mb-3">
+        <div key={index} className="grid grid-rows-2 grid-cols-7 gap-1 mb-3">
           <Select
-            className="col-span-4"
+            className="col-span-3"
             value={filter.column}
             onChange={(e) =>
               setFilters((prev) =>
@@ -70,7 +71,7 @@ export function DrizzleFilter({
             ))}
           </Select>
           <Select
-            className="col-span-2"
+            className="col-span-3"
             value={filter.operator}
             onChange={(e) =>
               setFilters((prev) =>
@@ -86,8 +87,11 @@ export function DrizzleFilter({
               </SelectOption>
             ))}
           </Select>
+          <div className="flex justify-center items-center">
+            <XIcon className="cursor-pointer" onClick={() => clearOne(index)} />
+          </div>
           <Input
-            className="col-span-2"
+            className="col-span-6"
             value={filter.value}
             onChange={(e) =>
               setFilters((prev) =>
@@ -97,16 +101,17 @@ export function DrizzleFilter({
               )
             }
           />
-          <Button className="col-span-2" onClick={() => applyOne(index)}>
-            Apply
-          </Button>
-          <Button className="col-span-2" onClick={() => clearOne(index)}>
-            Clear
-          </Button>
+          <div className="flex items-center justify-center">
+            <FilterIcon
+              className="cursor-pointer"
+              onClick={() => applyOne(index)}
+            />
+          </div>
         </div>
       ))}
-      <div className="grid grid-cols-3 text-xs gap-2">
+      <div className="grid grid-cols-2 text-xs gap-2">
         <Button
+          className="col-span-2 flex items-center gap-2 justify-center"
           onClick={() =>
             setFilters((prev) => [
               ...prev,
@@ -114,10 +119,10 @@ export function DrizzleFilter({
             ])
           }
         >
-          Add Filter
+          <PlusIcon /> Add Filter
         </Button>
-        <Button onClick={() => applyAll()}>Apply All</Button>
-        <Button onClick={() => clearAll()}>Clear All</Button>
+        <Button onClick={() => applyAll()}>Apply</Button>
+        <Button onClick={() => clearAll()}>Clear</Button>
       </div>
     </div>
   );
