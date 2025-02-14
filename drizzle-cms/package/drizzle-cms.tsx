@@ -1,6 +1,4 @@
 import { capitalCase } from "change-case-all";
-import { and, asc, desc, eq, gt, gte, like, lt, lte, ne } from "drizzle-orm";
-import { getTableConfig } from "drizzle-orm/sqlite-core";
 import {
   Table,
   TableBody,
@@ -9,20 +7,10 @@ import {
   TableRow,
   Sortable,
   TableHead,
-  Pagination,
   TableRowActions,
-  PageLayout,
-  PageHeader,
-  PageTitle,
-  PageContent,
-  PageNav,
-  PageAsideToggle,
-  PageAside,
-  PageFooter,
 } from "drizzle-ui";
 import { DrizzleCmsLayout } from "./drizzle-cms-layout";
 import Link from "next/link";
-import { DrizzleFilter } from "./drizzle-filter";
 import { ListPage } from "./pages/list-page";
 import {
   DrizzleCmsConfig,
@@ -30,6 +18,8 @@ import {
   Params,
   SearchParams,
 } from "./types";
+import { RootPage } from "./pages/root-page";
+import { ViewPage } from "./pages/view-page";
 
 export async function DrizzleCms(props: {
   params: Params;
@@ -53,12 +43,17 @@ export async function DrizzleCms(props: {
     schema: slimSchema,
   };
 
-  console.log(params);
+  let page;
+  if (!params.slug) {
+    page = <RootPage {...props} />;
+  } else if (params.slug.length === 1) {
+    page = <ListPage {...props} />;
+  } else if (params.slug.length === 2) {
+    page = <ViewPage {...props} />;
+  }
 
   return (
-    <DrizzleCmsLayout config={drizzleCmsLayoutConfig}>
-      <ListPage {...props} />
-    </DrizzleCmsLayout>
+    <DrizzleCmsLayout config={drizzleCmsLayoutConfig}>{page}</DrizzleCmsLayout>
   );
 }
 
