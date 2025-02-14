@@ -1,11 +1,9 @@
 import { db } from "@/lib/db";
-import { DrizzleCms, DrizzleCmsConfig } from "@/package/drizzle-cms";
+import { DrizzleCms } from "@/package/drizzle-cms";
+import { DrizzleCmsConfig, Params, SearchParams } from "@/package/types";
 import { categories } from "@/schema/categories";
 import { posts } from "@/schema/posts";
 import { users } from "@/schema/users";
-
-type Params = Promise<{ [key: string]: string }>;
-type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
 const config: DrizzleCmsConfig = {
   basePath: "/cms",

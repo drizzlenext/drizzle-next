@@ -17,8 +17,8 @@ import {
 import Link from "next/link";
 
 import { ReactNode } from "react";
-import { DrizzleCmsLayoutConfig } from "./drizzle-cms";
 import { usePathname } from "next/navigation";
+import { DrizzleCmsLayoutConfig } from "./types";
 
 export function DrizzleCmsLayout({
   children,

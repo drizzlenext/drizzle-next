@@ -24,30 +24,12 @@ import { DrizzleCmsLayout } from "./drizzle-cms-layout";
 import Link from "next/link";
 import { DrizzleFilter } from "./drizzle-filter";
 import { ListPage } from "./pages/list-page";
-
-type Params = Promise<{ [key: string]: string }>;
-type SearchParams = Promise<{ [key: string]: string | undefined }>;
-
-export type DrizzleCmsConfig = {
-  basePath: string;
-  schema: {
-    [key: string]: {
-      drizzleSchema: any;
-      label: string;
-      path: string;
-    };
-  };
-};
-
-export type DrizzleCmsLayoutConfig = {
-  basePath: string;
-  schema: {
-    [key: string]: {
-      label: string;
-      path: string;
-    };
-  };
-};
+import {
+  DrizzleCmsConfig,
+  DrizzleCmsLayoutConfig,
+  Params,
+  SearchParams,
+} from "./types";
 
 export async function DrizzleCms(props: {
   params: Params;

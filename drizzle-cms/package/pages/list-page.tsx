@@ -9,20 +9,18 @@ import {
   PageTitle,
   Pagination,
 } from "drizzle-ui";
-import { DrizzleCmsConfig, DrizzleTable } from "../drizzle-cms";
+import { DrizzleTable } from "../drizzle-cms";
 import { DrizzleFilter } from "../drizzle-filter";
 import { parseSearchParams } from "../utils";
 import { and, asc, desc, eq, gt, gte, like, lt, lte, ne } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
+import { DrizzleCmsConfig, Params, SearchParams } from "../types";
 
 export interface ListPageParams {
   curTable: string;
   simplifiedColumns: { name: string; dataType: any }[];
   config: DrizzleCmsConfig;
 }
-
-type Params = Promise<{ [key: string]: string }>;
-type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
 const operatorMap = {
   "=": eq,
