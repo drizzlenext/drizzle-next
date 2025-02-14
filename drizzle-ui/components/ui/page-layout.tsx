@@ -55,7 +55,7 @@ const PageLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "relative grid grid-cols-[1fr_0px] grid-rows-[auto_1fr_auto] overflow-auto overflow-x-clip md:grid-cols-[1fr_304px]",
+          "relative grid min-h-[calc(100vh-3rem)] grid-cols-[1fr_0px] grid-rows-[auto_1fr_auto] overflow-auto overflow-x-clip md:grid-cols-[1fr_304px]",
           state.asideOpen === false && "md:grid-cols-[1fr_0px]",
           className,
         )}
