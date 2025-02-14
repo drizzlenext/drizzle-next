@@ -98,10 +98,6 @@ export async function DrizzleCms(props: {
     sortOrder = "desc",
   } = parseSearchParams(searchParams);
 
-  const count = await db.$count(drizzleSchema);
-
-  const totalPages = Math.ceil(count / pageSize);
-
   let orderBy;
 
   if (sortKey && sortKey in drizzleSchema) {
@@ -137,6 +133,10 @@ export async function DrizzleCms(props: {
 
     whereClause.push(op(drizzleSchema[filter.column], parsedValue));
   }
+
+  const count = await db.$count(drizzleSchema, and(...whereClause));
+
+  const totalPages = Math.ceil(count / pageSize);
 
   const list = await db.query[schema.path].findMany({
     limit: pageSize,
