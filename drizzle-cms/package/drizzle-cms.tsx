@@ -23,6 +23,7 @@ import {
 import { DrizzleCmsLayout } from "./drizzle-cms-layout";
 import Link from "next/link";
 import { DrizzleFilter } from "./drizzle-filter";
+import { ListPage } from "./pages/list-page";
 
 type Params = Promise<{ [key: string]: string }>;
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
@@ -48,16 +49,6 @@ export type DrizzleCmsLayoutConfig = {
   };
 };
 
-const operatorMap = {
-  "=": eq,
-  "<>": ne,
-  ">": gt,
-  "<": lt,
-  ">=": gte,
-  "<=": lte,
-  Contains: like,
-};
-
 export async function DrizzleCms(props: {
   params: Params;
   searchParams: SearchParams;
@@ -66,90 +57,7 @@ export async function DrizzleCms(props: {
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;
-  const filtersParam = searchParams.filters;
-
-  let filters: Array<{ column: string; operator: string; value: string }> = [];
-
-  if (filtersParam) {
-    try {
-      // Decode and parse the URL-encoded JSON
-      filters = JSON.parse(decodeURIComponent(filtersParam));
-      // return filters;
-    } catch (error) {
-      return "Invalid filters format";
-    }
-  }
-
   const config = props.config;
-  const db = props.db;
-
-  const curTable = params.slug[0];
-
-  const schema = config.schema[curTable];
-
-  const drizzleSchema = schema.drizzleSchema;
-
-  const {
-    page = 1,
-    pageIndex = 0,
-    pageSize = 10,
-    search,
-    sortKey = "createdAt",
-    sortOrder = "desc",
-  } = parseSearchParams(searchParams);
-
-  let orderBy;
-
-  if (sortKey && sortKey in drizzleSchema) {
-    switch (sortOrder) {
-      case "asc":
-        orderBy = asc(drizzleSchema[sortKey as keyof typeof drizzleSchema]);
-        break;
-      case "desc":
-        orderBy = desc(drizzleSchema[sortKey as keyof typeof drizzleSchema]);
-        break;
-      default:
-        break;
-    }
-  }
-
-  const tableConf = getTableConfig(drizzleSchema);
-
-  const whereClause = [];
-
-  for (const filter of filters) {
-    if (!filter.column && !filter.operator && !filter.value) continue;
-    if (!(filter.operator in operatorMap)) {
-      throw new Error("operator invalid");
-    }
-    const op = operatorMap[filter.operator as keyof typeof operatorMap];
-    const col = drizzleSchema[filter.column];
-    let parsedValue;
-    if (col.dataType === "date" && filter.operator !== "Contains") {
-      parsedValue = new Date(filter.value);
-    } else {
-      parsedValue = filter.value;
-    }
-
-    whereClause.push(op(drizzleSchema[filter.column], parsedValue));
-  }
-
-  const count = await db.$count(drizzleSchema, and(...whereClause));
-
-  const totalPages = Math.ceil(count / pageSize);
-
-  const list = await db.query[schema.path].findMany({
-    limit: pageSize,
-    offset: pageIndex * pageSize,
-    orderBy: orderBy,
-    where: and(...whereClause),
-  });
-  const simplifiedColumns = tableConf.columns.map((col) => {
-    return {
-      name: col.name,
-      dataType: col.dataType,
-    };
-  });
 
   const slimSchema: { [key: string]: { label: string; path: string } } = {};
 
@@ -163,62 +71,13 @@ export async function DrizzleCms(props: {
     schema: slimSchema,
   };
 
+  console.log(params);
+
   return (
     <DrizzleCmsLayout config={drizzleCmsLayoutConfig}>
-      <PageLayout>
-        <PageHeader>
-          <PageTitle>{capitalCase(curTable)}</PageTitle>
-          <PageAsideToggle />
-        </PageHeader>
-        <PageContent>
-          {/* <div>params: {JSON.stringify(params)}</div>
-        <div>searchParams: {JSON.stringify(searchParams)}</div>
-        <div>curTable {curTable}</div> */}
-          <DrizzleTable
-            list={list}
-            columns={simplifiedColumns}
-            curTable={curTable}
-            config={config}
-          />
-        </PageContent>
-        <PageAside>
-          <PageTitle>Filters</PageTitle>
-          <DrizzleFilter simplifiedColumns={simplifiedColumns} />
-        </PageAside>
-        <PageFooter>
-          <Pagination
-            count={count}
-            page={page}
-            pageSize={pageSize}
-            totalPages={totalPages}
-          />
-        </PageFooter>
-      </PageLayout>
+      <ListPage {...props} />
     </DrizzleCmsLayout>
   );
-}
-
-export function parseSearchParams(searchParams: Awaited<SearchParams>) {
-  const page =
-    typeof searchParams.page === "string"
-      ? parseInt(searchParams.page)
-      : undefined;
-  const pageIndex = page ? page - 1 : undefined;
-  const pageSize =
-    typeof searchParams.pageSize === "string"
-      ? parseInt(searchParams.pageSize)
-      : undefined;
-  const search = searchParams.search;
-  const sortKey = searchParams.sortKey;
-  const sortOrder = searchParams.sortOrder;
-  return {
-    page,
-    pageIndex,
-    pageSize,
-    search,
-    sortKey,
-    sortOrder,
-  };
 }
 
 export interface SimplifiedColumn {
