@@ -22,3 +22,11 @@ export function parseSearchParams(searchParams: Awaited<SearchParams>) {
     sortOrder,
   };
 }
+
+export function renderValue(value: any) {
+  if (typeof value === "object") {
+    return new Date(value).toLocaleString();
+  } else {
+    return value;
+  }
+}

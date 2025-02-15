@@ -1,5 +1,10 @@
-import { capitalCase } from "change-case-all";
 import {
+  Button,
+  Checkbox,
+  Form,
+  FormControl,
+  Input,
+  Label,
   PageContent,
   PageHeader,
   PageLayout,
@@ -7,11 +12,14 @@ import {
   PageTitle,
 } from "drizzle-ui";
 import { DrizzleCmsConfig, Params, SearchParams } from "../types";
+import { capitalCase } from "change-case-all";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { renderValue } from "../utils";
+import { startTransition } from "react";
+import { ObjectForm } from "../components/object-form";
 
-export async function ViewPage(props: {
+export async function EditPage(props: {
   params: Params;
   searchParams: SearchParams;
   config: DrizzleCmsConfig;
@@ -28,26 +36,21 @@ export async function ViewPage(props: {
   const obj = await db.query[schema.path].findFirst({
     where: eq(drizzleSchema.id, id),
   });
-  console.log(obj);
 
   return (
     <PageLayout>
       <PageHeader>
-        <PageTitle>{capitalCase(curTable)}</PageTitle>
+        <PageTitle>Editing {capitalCase(curTable)}</PageTitle>
         <PageNav>
           <Link href={`${config.basePath}/${curTable}`}>Back</Link>
-          <Link href={`${config.basePath}/${curTable}/${id}/edit`}>Edit</Link>
+          <Link href={`${config.basePath}/${curTable}/${id}`}>View</Link>
           <Link href={`${config.basePath}/${curTable}/${id}/delete`}>
             Delete
           </Link>
         </PageNav>
       </PageHeader>
       <PageContent>
-        {Object.entries(obj).map(([key, value]) => (
-          <div key={key}>
-            <strong>{capitalCase(key)}</strong>: {renderValue(value)}
-          </div>
-        ))}
+        <ObjectForm obj={obj} />
       </PageContent>
     </PageLayout>
   );

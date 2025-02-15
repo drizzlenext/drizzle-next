@@ -20,6 +20,7 @@ import {
 } from "./types";
 import { RootPage } from "./pages/root-page";
 import { ViewPage } from "./pages/view-page";
+import { EditPage } from "./pages/edit-page";
 
 export async function DrizzleCms(props: {
   params: Params;
@@ -50,6 +51,11 @@ export async function DrizzleCms(props: {
     page = <ListPage {...props} />;
   } else if (params.slug.length === 2) {
     page = <ViewPage {...props} />;
+  } else if (params.slug.length === 3) {
+    if (params.slug[2] === "edit") {
+      page = <EditPage {...props} />;
+    } else if (params.slug[2] === "delete") {
+    }
   }
 
   return (
