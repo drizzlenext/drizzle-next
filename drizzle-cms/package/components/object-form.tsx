@@ -12,6 +12,7 @@ import {
 } from "drizzle-ui";
 import { renderValue } from "../utils";
 import { useState } from "react";
+import { ColumnInfoMap } from "../types";
 
 type AlertVariant =
   | "primary"
@@ -26,14 +27,25 @@ interface UpdateStatus {
   status?: AlertVariant;
 }
 
-export function ObjectForm({ obj, curTable }: { obj: any; curTable: string }) {
+export function ObjectForm({
+  obj,
+  curTable,
+  columnInfoMap,
+}: {
+  obj: any;
+  curTable: string;
+  columnInfoMap: ColumnInfoMap;
+}) {
   const [state, setState] = useState<UpdateStatus>({});
+
+  console.log("COLLLL", columnInfoMap);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     // api call
     const data = Object.fromEntries(formData.entries());
+
     const res = await fetch(`/api/${curTable}/${obj.id}`, {
       method: "PUT",
       headers: {
@@ -49,7 +61,9 @@ export function ObjectForm({ obj, curTable }: { obj: any; curTable: string }) {
     <Form onSubmit={handleSubmit}>
       <input type="hidden" name="curTable" defaultValue={curTable} />
       {Object.entries(obj).map(([key, value]) => {
-        return <div key={key}>{renderFormControl(key, value)}</div>;
+        return (
+          <div key={key}>{renderFormControl(key, value, columnInfoMap)}</div>
+        );
       })}
       <FormControl>
         <Button type="submit">Submit</Button>
@@ -59,22 +73,26 @@ export function ObjectForm({ obj, curTable }: { obj: any; curTable: string }) {
   );
 }
 
-function renderFormControl(key: string, value: any) {
-  if (typeof value === "string") {
+function renderFormControl(
+  key: string,
+  value: any,
+  columnInfoMap: ColumnInfoMap
+) {
+  if (columnInfoMap[key] == "string") {
     return (
       <FormControl>
         <Label htmlFor={key}>{capitalCase(key)}</Label>
         <Input defaultValue={renderValue(value)} name={key} id={key} />
       </FormControl>
     );
-  } else if (typeof value === "boolean") {
+  } else if (columnInfoMap[key] === "boolean") {
     return (
       <FormControl>
         <Label htmlFor={key}>{capitalCase(key)}</Label>
         <Checkbox defaultChecked={value} name={key} id={key} />
       </FormControl>
     );
-  } else if (value instanceof Date) {
+  } else if (columnInfoMap[key] === "date") {
     return (
       <FormControl>
         <Label htmlFor={key}>{capitalCase(key)}</Label>

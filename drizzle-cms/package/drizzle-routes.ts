@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import { DrizzleCmsConfig } from "./types";
-import { eq } from "drizzle-orm";
+import { eq, getTableColumns } from "drizzle-orm";
 import { createSchemaFactory } from "drizzle-zod";
 
 const { createUpdateSchema } = createSchemaFactory({
-  coerce: true,
+  coerce: {
+    date: true,
+    boolean: true,
+  },
 });
 
 export function PUT_REQUEST(config: DrizzleCmsConfig) {
@@ -23,9 +26,12 @@ export function PUT_REQUEST(config: DrizzleCmsConfig) {
     const db = config.db;
     const schema = config.schema[curTable];
     const drizzleSchema = schema.drizzleSchema;
+
+    const obj = getEmptyDrizzleObject(drizzleSchema);
+
     const updateSchema = createUpdateSchema(drizzleSchema);
 
-    const validatedFields = updateSchema.safeParse(body);
+    const validatedFields = updateSchema.safeParse({ ...obj, ...body });
 
     if (!validatedFields.success) {
       return NextResponse.json(validatedFields.error.flatten().fieldErrors, {
@@ -42,4 +48,13 @@ export function PUT_REQUEST(config: DrizzleCmsConfig) {
       .where(eq(drizzleSchema.id, id));
     return Response.json({ message: `Update success`, status: "success" });
   };
+}
+
+function getEmptyDrizzleObject(drizzleSchema: any) {
+  const cols = getTableColumns(drizzleSchema);
+  const obj: { [key: string]: any } = {};
+  for (const key in cols) {
+    obj[key] = null;
+  }
+  return obj;
 }

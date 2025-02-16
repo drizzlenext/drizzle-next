@@ -5,9 +5,14 @@ import {
   PageNav,
   PageTitle,
 } from "drizzle-ui";
-import { DrizzleCmsConfig, Params, SearchParams } from "../types";
+import {
+  ColumnInfoMap,
+  DrizzleCmsConfig,
+  Params,
+  SearchParams,
+} from "../types";
 import { capitalCase } from "change-case-all";
-import { eq } from "drizzle-orm";
+import { eq, getTableColumns } from "drizzle-orm";
 import Link from "next/link";
 import { ObjectForm } from "../components/object-form";
 
@@ -28,6 +33,12 @@ export async function EditPage(props: {
     where: eq(drizzleSchema.id, id),
   });
 
+  const cols = getTableColumns(drizzleSchema);
+  const columnInfoMap: ColumnInfoMap = {};
+  for (const col in cols) {
+    columnInfoMap[col] = drizzleSchema[col].dataType;
+  }
+
   return (
     <PageLayout>
       <PageHeader>
@@ -41,7 +52,11 @@ export async function EditPage(props: {
         </PageNav>
       </PageHeader>
       <PageContent>
-        <ObjectForm obj={obj} curTable={curTable} />
+        <ObjectForm
+          obj={obj}
+          curTable={curTable}
+          columnInfoMap={columnInfoMap}
+        />
       </PageContent>
     </PageLayout>
   );

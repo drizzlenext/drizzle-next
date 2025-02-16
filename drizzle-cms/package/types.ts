@@ -23,3 +23,7 @@ export type DrizzleCmsLayoutConfig = {
     };
   };
 };
+
+export type ColumnInfoMap = {
+  [key: string]: "string" | "boolean" | "number" | "date";
+};
