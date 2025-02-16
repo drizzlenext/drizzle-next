@@ -74,5 +74,19 @@ function renderFormControl(key: string, value: any) {
         <Checkbox defaultChecked={value} name={key} id={key} />
       </FormControl>
     );
+  } else if (value instanceof Date) {
+    return (
+      <FormControl>
+        <Label htmlFor={key}>{capitalCase(key)}</Label>
+        <Input
+          type="datetime-local"
+          defaultValue={value.toISOString().slice(0, 16)}
+          name={key}
+          id={key}
+        />
+      </FormControl>
+    );
+  } else if (typeof value === "object") {
+    // Handle other object types if necessary
   }
 }

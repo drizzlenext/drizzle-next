@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { DrizzleCmsConfig } from "./types";
 import { eq } from "drizzle-orm";
+import { createSchemaFactory } from "drizzle-zod";
+
+const { createUpdateSchema } = createSchemaFactory({
+  coerce: true,
+});
 
 export function PUT_REQUEST(config: DrizzleCmsConfig) {
   return async function (request: Request) {
@@ -18,11 +23,23 @@ export function PUT_REQUEST(config: DrizzleCmsConfig) {
     const db = config.db;
     const schema = config.schema[curTable];
     const drizzleSchema = schema.drizzleSchema;
+    const updateSchema = createUpdateSchema(drizzleSchema);
+
+    const validatedFields = updateSchema.safeParse(body);
+
+    if (!validatedFields.success) {
+      return NextResponse.json(validatedFields.error.flatten().fieldErrors, {
+        status: 400,
+      });
+    }
 
     if (!(curTable in db.query)) {
       return NextResponse.json({ message: `not found` }, { status: 404 });
     }
-    await db.update(drizzleSchema).set(body).where(eq(drizzleSchema.id, id));
+    await db
+      .update(drizzleSchema)
+      .set(validatedFields.data)
+      .where(eq(drizzleSchema.id, id));
     return Response.json({ message: `Update success`, status: "success" });
   };
 }
