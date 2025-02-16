@@ -36,7 +36,6 @@ export async function ListPage(props: {
   params: Params;
   searchParams: SearchParams;
   config: DrizzleCmsConfig;
-  db: any;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;
@@ -55,7 +54,7 @@ export async function ListPage(props: {
   }
 
   const config = props.config;
-  const db = props.db;
+  const db = props.config.db;
 
   const curTable = params.slug[0];
 

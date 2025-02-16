@@ -11,6 +11,7 @@ export type DrizzleCmsConfig = {
       path: string;
     };
   };
+  db: any;
 };
 
 export type DrizzleCmsLayoutConfig = {

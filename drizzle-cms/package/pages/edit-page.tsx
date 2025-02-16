@@ -1,10 +1,4 @@
 import {
-  Button,
-  Checkbox,
-  Form,
-  FormControl,
-  Input,
-  Label,
   PageContent,
   PageHeader,
   PageLayout,
@@ -15,15 +9,12 @@ import { DrizzleCmsConfig, Params, SearchParams } from "../types";
 import { capitalCase } from "change-case-all";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
-import { renderValue } from "../utils";
-import { startTransition } from "react";
 import { ObjectForm } from "../components/object-form";
 
 export async function EditPage(props: {
   params: Params;
   searchParams: SearchParams;
   config: DrizzleCmsConfig;
-  db: any;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;
@@ -32,7 +23,7 @@ export async function EditPage(props: {
   const id = params.slug[1];
   const schema = config.schema[curTable];
   const drizzleSchema = schema.drizzleSchema;
-  const db = props.db;
+  const db = props.config.db;
   const obj = await db.query[schema.path].findFirst({
     where: eq(drizzleSchema.id, id),
   });
@@ -50,7 +41,7 @@ export async function EditPage(props: {
         </PageNav>
       </PageHeader>
       <PageContent>
-        <ObjectForm obj={obj} />
+        <ObjectForm obj={obj} curTable={curTable} />
       </PageContent>
     </PageLayout>
   );

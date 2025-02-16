@@ -15,7 +15,6 @@ export async function ViewPage(props: {
   params: Params;
   searchParams: SearchParams;
   config: DrizzleCmsConfig;
-  db: any;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;
@@ -24,7 +23,7 @@ export async function ViewPage(props: {
   const id = params.slug[1];
   const schema = config.schema[curTable];
   const drizzleSchema = schema.drizzleSchema;
-  const db = props.db;
+  const db = props.config.db;
   const obj = await db.query[schema.path].findFirst({
     where: eq(drizzleSchema.id, id),
   });

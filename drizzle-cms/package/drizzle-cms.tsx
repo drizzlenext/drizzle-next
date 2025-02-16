@@ -26,11 +26,11 @@ export async function DrizzleCms(props: {
   params: Params;
   searchParams: SearchParams;
   config: DrizzleCmsConfig;
-  db: any;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;
   const config = props.config;
+  const db = config.db;
 
   const slimSchema: { [key: string]: { label: string; path: string } } = {};
 
