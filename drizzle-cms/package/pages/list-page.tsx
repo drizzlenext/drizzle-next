@@ -59,7 +59,7 @@ export async function ListPage(props: {
   const config = props.config;
   const db = props.config.db;
 
-  const curTable = params.slug[0];
+  const curTable = params.segments[0];
 
   const schema = config.schema[curTable];
 

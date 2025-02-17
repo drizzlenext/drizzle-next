@@ -24,8 +24,8 @@ export async function EditPage(props: {
   const params = await props.params;
   const searchParams = await props.searchParams;
   const config = props.config;
-  const curTable = params.slug[0];
-  const id = params.slug[1];
+  const curTable = params.segments[0];
+  const id = params.segments[1];
   const schema = config.schema[curTable];
   const drizzleSchema = schema.drizzleSchema;
   const db = props.config.db;

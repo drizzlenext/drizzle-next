@@ -46,20 +46,20 @@ export async function DrizzleCms(props: {
   };
 
   let page;
-  if (!params.slug) {
+  if (!params.segments) {
     page = <RootPage {...props} />;
-  } else if (params.slug.length === 1) {
+  } else if (params.segments.length === 1) {
     page = <ListPage {...props} />;
-  } else if (params.slug.length === 2) {
-    if (params.slug[1] === "new") {
+  } else if (params.segments.length === 2) {
+    if (params.segments[1] === "new") {
       page = <NewPage {...props} />;
     } else {
       page = <ViewPage {...props} />;
     }
-  } else if (params.slug.length === 3) {
-    if (params.slug[2] === "edit") {
+  } else if (params.segments.length === 3) {
+    if (params.segments[2] === "edit") {
       page = <EditPage {...props} />;
-    } else if (params.slug[2] === "delete") {
+    } else if (params.segments[2] === "delete") {
     }
   }
 
