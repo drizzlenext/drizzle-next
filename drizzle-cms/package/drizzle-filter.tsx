@@ -6,7 +6,7 @@ import { SimplifiedColumn } from "./drizzle-cms";
 import { useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { FilterIcon, PlusIcon, XIcon } from "lucide-react";
+import { FilterIcon, MinusIcon, PlusIcon } from "lucide-react";
 
 const operators = ["=", "<>", "<", ">", "<=", ">=", "Contains"];
 
@@ -25,6 +25,10 @@ export function DrizzleFilter({
 
   function applyOne(index: number) {
     const filter = filters[index];
+    if (filter.value === "") {
+      router.push(`${pathname}`);
+      return;
+    }
     const params = new URLSearchParams(searchParams);
     params.set("filters", JSON.stringify([filter]));
     router.push(`${pathname}?${params.toString()}`);
@@ -49,12 +53,26 @@ export function DrizzleFilter({
     router.push(`${pathname}`);
   }
 
+  if (filters.length === 0) {
+    return (
+      <div className="flex justify-end">
+        <Button
+          onClick={() => {
+            setFilters((prev) => [{ column: "id", operator: "=", value: "" }]);
+          }}
+        >
+          <FilterIcon />
+        </Button>
+      </div>
+    );
+  }
+
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {filters.map((filter, index) => (
-        <div key={index} className="grid grid-rows-2 grid-cols-7 gap-1 mb-3">
+        <div key={index} className="flex gap-2">
           <Select
-            className="col-span-3"
+            className="min-w-16 max-w-32"
             value={filter.column}
             onChange={(e) =>
               setFilters((prev) =>
@@ -71,7 +89,7 @@ export function DrizzleFilter({
             ))}
           </Select>
           <Select
-            className="col-span-3"
+            className="min-w-16 max-w-32"
             value={filter.operator}
             onChange={(e) =>
               setFilters((prev) =>
@@ -87,11 +105,8 @@ export function DrizzleFilter({
               </SelectOption>
             ))}
           </Select>
-          <div className="flex justify-center items-center">
-            <XIcon className="cursor-pointer" onClick={() => clearOne(index)} />
-          </div>
           <Input
-            className="col-span-6"
+            className="flex-grow"
             value={filter.value}
             onChange={(e) =>
               setFilters((prev) =>
@@ -100,28 +115,38 @@ export function DrizzleFilter({
                 )
               )
             }
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                applyOne(index);
+              }
+            }}
           />
-          <div className="flex items-center justify-center">
-            <FilterIcon
-              className="cursor-pointer"
-              onClick={() => applyOne(index)}
-            />
+          <div>
+            <Button onClick={() => applyOne(index)}>Apply</Button>
+          </div>
+          <div>
+            <Button onClick={() => clearOne(index)}>
+              <MinusIcon />
+            </Button>
+          </div>
+          <div>
+            <Button
+              className=""
+              onClick={() =>
+                setFilters((prev) => [
+                  ...prev.slice(0, index),
+                  { column: "id", operator: "=", value: "" },
+                  ...prev.slice(index, prev.length),
+                ])
+              }
+            >
+              <PlusIcon />
+            </Button>
           </div>
         </div>
       ))}
-      <div className="grid grid-cols-2 text-xs gap-2">
-        <Button
-          className="col-span-2 flex items-center gap-2 justify-center"
-          onClick={() =>
-            setFilters((prev) => [
-              ...prev,
-              { column: "id", operator: "=", value: "" },
-            ])
-          }
-        >
-          <PlusIcon /> Add Filter
-        </Button>
-        <Button onClick={() => applyAll()}>Apply</Button>
+      <div className="flex gap-2 justify-end">
+        <Button onClick={() => applyAll()}>Apply All</Button>
         <Button onClick={() => clearAll()}>Clear</Button>
       </div>
     </div>

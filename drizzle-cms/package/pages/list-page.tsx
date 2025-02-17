@@ -141,9 +141,7 @@ export async function ListPage(props: {
         </PageNav>
       </PageHeader>
       <PageContent>
-        {/* <div>params: {JSON.stringify(params)}</div>
-            <div>searchParams: {JSON.stringify(searchParams)}</div>
-            <div>curTable {curTable}</div> */}
+        <DrizzleFilter simplifiedColumns={simplifiedColumns} />
         <DrizzleTable
           list={list}
           columns={simplifiedColumns}
@@ -153,7 +151,6 @@ export async function ListPage(props: {
       </PageContent>
       <PageAside>
         <PageTitle>Filters</PageTitle>
-        <DrizzleFilter simplifiedColumns={simplifiedColumns} />
       </PageAside>
       <PageFooter>
         <Pagination
