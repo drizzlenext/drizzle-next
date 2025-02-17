@@ -8,7 +8,16 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { FilterIcon, MinusIcon, PlusIcon } from "lucide-react";
 
-const operators = ["=", "<>", "<", ">", "<=", ">=", "Contains"];
+const operators = [
+  "=",
+  "<>",
+  "<",
+  ">",
+  "<=",
+  ">=",
+  "Contains",
+  "Contains - Case Insensitive",
+];
 
 export function DrizzleFilter({
   simplifiedColumns,

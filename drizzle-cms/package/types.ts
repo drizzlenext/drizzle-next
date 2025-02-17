@@ -12,6 +12,7 @@ export type DrizzleCmsConfig = {
     };
   };
   db: any;
+  dbDialect: "postgresql" | "mysql" | "sqlite";
 };
 
 export type DrizzleCmsLayoutConfig = {

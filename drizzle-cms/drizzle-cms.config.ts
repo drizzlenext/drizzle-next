@@ -16,4 +16,5 @@ export const config: DrizzleCmsConfig = {
     },
   },
   db: db,
+  dbDialect: "sqlite",
 };

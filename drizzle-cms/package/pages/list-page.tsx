@@ -14,7 +14,19 @@ import {
 import { DrizzleTable } from "../drizzle-cms";
 import { DrizzleFilter } from "../drizzle-filter";
 import { parseSearchParams } from "../utils";
-import { and, asc, desc, eq, gt, gte, like, lt, lte, ne } from "drizzle-orm";
+import {
+  and,
+  asc,
+  desc,
+  eq,
+  gt,
+  gte,
+  like,
+  lt,
+  lte,
+  ne,
+  ilike,
+} from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
 import { DrizzleCmsConfig, Params, SearchParams } from "../types";
 import Link from "next/link";
@@ -33,6 +45,7 @@ const operatorMap = {
   ">=": gte,
   "<=": lte,
   Contains: like,
+  "Contains - Case Insensitive": ilike,
 };
 
 export async function ListPage(props: {
@@ -91,6 +104,10 @@ export async function ListPage(props: {
 
   const tableConf = getTableConfig(drizzleSchema);
 
+  if (config.dbDialect === "sqlite" || config.dbDialect === "mysql") {
+    operatorMap["Contains - Case Insensitive"] = like;
+  }
+
   const whereClause = [];
 
   for (const filter of filters) {
@@ -103,7 +120,7 @@ export async function ListPage(props: {
     let parsedValue;
     if (col.dataType === "date" && filter.operator !== "Contains") {
       parsedValue = new Date(filter.value);
-    } else if (filter.operator === "Contains") {
+    } else if (filter.operator.startsWith("Contains")) {
       parsedValue = `%${filter.value}%`;
     } else {
       parsedValue = filter.value;
