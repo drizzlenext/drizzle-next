@@ -16,6 +16,7 @@ import { eq, getTableColumns } from "drizzle-orm";
 import Link from "next/link";
 import { ObjectDeleteForm } from "../components/object-delete-form";
 import { notFound } from "next/navigation";
+import { ChevronRightIcon } from "lucide-react";
 
 export async function DeletePage(props: {
   params: Params;
@@ -47,10 +48,21 @@ export async function DeletePage(props: {
   return (
     <PageLayout>
       <PageHeader>
-        <PageTitle>Delete {capitalCase(curTable)}</PageTitle>
+        <PageTitle className="flex items-center">
+          <Link href={`${config.basePath}/${curTable}`} className="underline">
+            {capitalCase(curTable)}
+          </Link>{" "}
+          <ChevronRightIcon />{" "}
+          <Link
+            href={`${config.basePath}/${curTable}/${id}`}
+            className="underline"
+          >
+            {obj.id}
+          </Link>
+          <ChevronRightIcon />
+          Delete
+        </PageTitle>
         <PageNav>
-          <Link href={`${config.basePath}/${curTable}`}>Back</Link>
-          <Link href={`${config.basePath}/${curTable}/${id}`}>View</Link>
           <Link href={`${config.basePath}/${curTable}/${id}/edit`}>Edit</Link>
         </PageNav>
       </PageHeader>
