@@ -1,11 +1,13 @@
 import { capitalCase } from "change-case-all";
 import {
+  Button,
   PageAside,
   PageAsideToggle,
   PageContent,
   PageFooter,
   PageHeader,
   PageLayout,
+  PageNav,
   PageTitle,
   Pagination,
 } from "drizzle-ui";
@@ -15,6 +17,7 @@ import { parseSearchParams } from "../utils";
 import { and, asc, desc, eq, gt, gte, like, lt, lte, ne } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
 import { DrizzleCmsConfig, Params, SearchParams } from "../types";
+import Link from "next/link";
 
 export interface ListPageParams {
   curTable: string;
@@ -128,7 +131,14 @@ export async function ListPage(props: {
     <PageLayout>
       <PageHeader>
         <PageTitle>{capitalCase(curTable)}</PageTitle>
-        <PageAsideToggle />
+        <PageNav>
+          <Link href={`${config.basePath}/${curTable}/new`}>
+            <Button className="rounded-2xl" variant="info">
+              New
+            </Button>
+          </Link>
+          <PageAsideToggle />
+        </PageNav>
       </PageHeader>
       <PageContent>
         {/* <div>params: {JSON.stringify(params)}</div>

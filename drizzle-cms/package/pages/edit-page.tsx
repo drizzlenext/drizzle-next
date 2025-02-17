@@ -14,7 +14,7 @@ import {
 import { capitalCase } from "change-case-all";
 import { eq, getTableColumns } from "drizzle-orm";
 import Link from "next/link";
-import { ObjectForm } from "../components/object-form";
+import { ObjectForm } from "../components/object-update-form";
 
 export async function EditPage(props: {
   params: Params;

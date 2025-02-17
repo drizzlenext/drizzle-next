@@ -59,6 +59,11 @@ export function ObjectForm({
 
   return (
     <Form onSubmit={handleSubmit}>
+      {state.message && (
+        <Alert variant={state.status} className="mb-5">
+          {state.message}
+        </Alert>
+      )}
       <input type="hidden" name="curTable" defaultValue={curTable} />
       {Object.entries(obj).map(([key, value]) => {
         return (
@@ -68,7 +73,6 @@ export function ObjectForm({
       <FormControl>
         <Button type="submit">Submit</Button>
       </FormControl>
-      {state.message && <Alert variant={state.status}>{state.message}</Alert>}
     </Form>
   );
 }
