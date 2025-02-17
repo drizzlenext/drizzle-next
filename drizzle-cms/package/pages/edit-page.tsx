@@ -16,6 +16,7 @@ import { eq, getTableColumns } from "drizzle-orm";
 import Link from "next/link";
 import { ObjectForm } from "../components/object-update-form";
 import { notFound } from "next/navigation";
+import { ChevronRightIcon } from "lucide-react";
 
 export async function EditPage(props: {
   params: Params;
@@ -47,10 +48,20 @@ export async function EditPage(props: {
   return (
     <PageLayout>
       <PageHeader>
-        <PageTitle>Editing {capitalCase(curTable)}</PageTitle>
+        <PageTitle className="flex items-center">
+          <Link href={`${config.basePath}/${curTable}`} className="underline">
+            {capitalCase(curTable)}
+          </Link>
+          <ChevronRightIcon />{" "}
+          <Link
+            href={`${config.basePath}/${curTable}/${id}`}
+            className="underline"
+          >
+            {obj.id}
+          </Link>{" "}
+          <ChevronRightIcon /> Edit
+        </PageTitle>
         <PageNav>
-          <Link href={`${config.basePath}/${curTable}`}>Back</Link>
-          <Link href={`${config.basePath}/${curTable}/${id}`}>View</Link>
           <Link href={`${config.basePath}/${curTable}/${id}/delete`}>
             Delete
           </Link>

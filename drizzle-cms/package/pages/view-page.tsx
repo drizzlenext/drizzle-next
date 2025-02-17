@@ -11,6 +11,7 @@ import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { renderValue } from "../utils";
 import { notFound } from "next/navigation";
+import { ChevronRightIcon } from "lucide-react";
 
 export async function ViewPage(props: {
   params: Params;
@@ -36,9 +37,13 @@ export async function ViewPage(props: {
   return (
     <PageLayout>
       <PageHeader>
-        <PageTitle>{capitalCase(curTable)}</PageTitle>
+        <PageTitle className="flex items-center">
+          <Link href={`${config.basePath}/${curTable}`} className="underline">
+            {capitalCase(curTable)}
+          </Link>{" "}
+          <ChevronRightIcon /> {obj.id}
+        </PageTitle>
         <PageNav>
-          <Link href={`${config.basePath}/${curTable}`}>Back</Link>
           <Link href={`${config.basePath}/${curTable}/${id}/edit`}>Edit</Link>
           <Link href={`${config.basePath}/${curTable}/${id}/delete`}>
             Delete
