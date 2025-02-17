@@ -1,18 +1,9 @@
 "use client";
 
-import { capitalCase } from "change-case-all";
-import {
-  Alert,
-  Button,
-  Checkbox,
-  Form,
-  FormControl,
-  Input,
-  Label,
-} from "drizzle-ui";
-import { renderValue } from "../utils";
+import { Alert, Button, Form, FormControl } from "drizzle-ui";
 import { useState } from "react";
 import { ColumnInfoMap } from "../types";
+import { RenderFormControl } from "./render-form-control";
 
 type AlertVariant =
   | "primary"
@@ -37,8 +28,6 @@ export function ObjectForm({
   columnInfoMap: ColumnInfoMap;
 }) {
   const [state, setState] = useState<UpdateStatus>({});
-
-  console.log("COLLLL", columnInfoMap);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -67,7 +56,13 @@ export function ObjectForm({
       <input type="hidden" name="curTable" defaultValue={curTable} />
       {Object.entries(obj).map(([key, value]) => {
         return (
-          <div key={key}>{renderFormControl(key, value, columnInfoMap)}</div>
+          <div key={key}>
+            <RenderFormControl
+              keyName={key}
+              value={value}
+              columnInfoMap={columnInfoMap}
+            />
+          </div>
         );
       })}
       <FormControl>
@@ -75,40 +70,4 @@ export function ObjectForm({
       </FormControl>
     </Form>
   );
-}
-
-function renderFormControl(
-  key: string,
-  value: any,
-  columnInfoMap: ColumnInfoMap
-) {
-  if (columnInfoMap[key] == "string") {
-    return (
-      <FormControl>
-        <Label htmlFor={key}>{capitalCase(key)}</Label>
-        <Input defaultValue={renderValue(value)} name={key} id={key} />
-      </FormControl>
-    );
-  } else if (columnInfoMap[key] === "boolean") {
-    return (
-      <FormControl>
-        <Label htmlFor={key}>{capitalCase(key)}</Label>
-        <Checkbox defaultChecked={value} name={key} id={key} />
-      </FormControl>
-    );
-  } else if (columnInfoMap[key] === "date") {
-    return (
-      <FormControl>
-        <Label htmlFor={key}>{capitalCase(key)}</Label>
-        <Input
-          type="datetime-local"
-          defaultValue={value.toISOString().slice(0, 16)}
-          name={key}
-          id={key}
-        />
-      </FormControl>
-    );
-  } else if (typeof value === "object") {
-    // Handle other object types if necessary
-  }
 }

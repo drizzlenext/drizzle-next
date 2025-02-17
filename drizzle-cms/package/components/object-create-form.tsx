@@ -13,6 +13,7 @@ import {
 import { renderValue } from "../utils";
 import { useState } from "react";
 import { ColumnInfoMap } from "../types";
+import { RenderFormControl } from "./render-form-control";
 
 type AlertVariant =
   | "primary"
@@ -63,42 +64,20 @@ export function ObjectCreateForm({
       <input type="hidden" name="curTable" defaultValue={curTable} />
       {Object.keys(columnInfoMap).map((key) => {
         if (["id", "createdAt", "updatedAt"].includes(key)) return null;
-        return <div key={key}>{renderFormControl(key, "", columnInfoMap)}</div>;
+        return (
+          <div key={key}>
+            {" "}
+            <RenderFormControl
+              keyName={key}
+              value={undefined}
+              columnInfoMap={columnInfoMap}
+            />
+          </div>
+        );
       })}
       <FormControl>
         <Button type="submit">Submit</Button>
       </FormControl>
     </Form>
   );
-}
-
-function renderFormControl(
-  key: string,
-  value: any,
-  columnInfoMap: ColumnInfoMap
-) {
-  if (columnInfoMap[key] == "string") {
-    return (
-      <FormControl>
-        <Label htmlFor={key}>{capitalCase(key)}</Label>
-        <Input defaultValue="" name={key} id={key} />
-      </FormControl>
-    );
-  } else if (columnInfoMap[key] === "boolean") {
-    return (
-      <FormControl>
-        <Label htmlFor={key}>{capitalCase(key)}</Label>
-        <Checkbox defaultChecked={false} name={key} id={key} />
-      </FormControl>
-    );
-  } else if (columnInfoMap[key] === "date") {
-    return (
-      <FormControl>
-        <Label htmlFor={key}>{capitalCase(key)}</Label>
-        <Input type="datetime-local" defaultValue="" name={key} id={key} />
-      </FormControl>
-    );
-  } else if (typeof value === "object") {
-    // Handle other object types if necessary
-  }
 }
