@@ -14,10 +14,10 @@ import {
 import { capitalCase } from "change-case-all";
 import { eq, getTableColumns } from "drizzle-orm";
 import Link from "next/link";
-import { ObjectForm } from "../components/object-update-form";
+import { ObjectDeleteForm } from "../components/object-delete-form";
 import { notFound } from "next/navigation";
 
-export async function EditPage(props: {
+export async function DeletePage(props: {
   params: Params;
   searchParams: SearchParams;
   config: DrizzleCmsConfig;
@@ -47,17 +47,15 @@ export async function EditPage(props: {
   return (
     <PageLayout>
       <PageHeader>
-        <PageTitle>Editing {capitalCase(curTable)}</PageTitle>
+        <PageTitle>Delete {capitalCase(curTable)}</PageTitle>
         <PageNav>
           <Link href={`${config.basePath}/${curTable}`}>Back</Link>
           <Link href={`${config.basePath}/${curTable}/${id}`}>View</Link>
-          <Link href={`${config.basePath}/${curTable}/${id}/delete`}>
-            Delete
-          </Link>
+          <Link href={`${config.basePath}/${curTable}/${id}/edit`}>Edit</Link>
         </PageNav>
       </PageHeader>
       <PageContent>
-        <ObjectForm
+        <ObjectDeleteForm
           obj={obj}
           curTable={curTable}
           columnInfoMap={columnInfoMap}

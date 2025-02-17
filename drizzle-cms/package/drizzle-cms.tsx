@@ -22,6 +22,7 @@ import { RootPage } from "./pages/root-page";
 import { ViewPage } from "./pages/view-page";
 import { EditPage } from "./pages/edit-page";
 import { NewPage } from "./pages/new-page";
+import { DeletePage } from "./pages/delete-page";
 
 export async function DrizzleCms(props: {
   params: Params;
@@ -60,6 +61,7 @@ export async function DrizzleCms(props: {
     if (params.segments[2] === "edit") {
       page = <EditPage {...props} />;
     } else if (params.segments[2] === "delete") {
+      page = <DeletePage {...props} />;
     }
   }
 

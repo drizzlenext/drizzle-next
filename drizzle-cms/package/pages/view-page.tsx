@@ -10,6 +10,7 @@ import { DrizzleCmsConfig, Params, SearchParams } from "../types";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { renderValue } from "../utils";
+import { notFound } from "next/navigation";
 
 export async function ViewPage(props: {
   params: Params;
@@ -27,7 +28,10 @@ export async function ViewPage(props: {
   const obj = await db.query[schema.path].findFirst({
     where: eq(drizzleSchema.id, id),
   });
-  console.log(obj);
+
+  if (!obj) {
+    notFound();
+  }
 
   return (
     <PageLayout>
