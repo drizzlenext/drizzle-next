@@ -103,6 +103,8 @@ export async function ListPage(props: {
     let parsedValue;
     if (col.dataType === "date" && filter.operator !== "Contains") {
       parsedValue = new Date(filter.value);
+    } else if (filter.operator === "Contains") {
+      parsedValue = `%${filter.value}%`;
     } else {
       parsedValue = filter.value;
     }
