@@ -57,11 +57,12 @@ export function DrizzleFilter({
     return (
       <div className="flex justify-end">
         <Button
+          className="flex gap-2 items-center"
           onClick={() => {
             setFilters((prev) => [{ column: "id", operator: "=", value: "" }]);
           }}
         >
-          <FilterIcon />
+          <FilterIcon /> Filter
         </Button>
       </div>
     );
@@ -134,9 +135,13 @@ export function DrizzleFilter({
               className=""
               onClick={() =>
                 setFilters((prev) => [
-                  ...prev.slice(0, index),
-                  { column: "id", operator: "=", value: "" },
-                  ...prev.slice(index, prev.length),
+                  ...prev.slice(0, index + 1),
+                  {
+                    column: filter.column,
+                    operator: filter.operator,
+                    value: filter.value,
+                  },
+                  ...prev.slice(index + 1),
                 ])
               }
             >
