@@ -2,27 +2,51 @@ import * as React from "react";
 import { cn } from "./utils";
 
 type ButtonVariant =
+  | "default"
   | "primary"
   | "muted"
   | "success"
   | "danger"
   | "warning"
-  | "info";
+  | "info"
+  | "outline"
+  | "ghost";
+
+const buttonVariantMap: Record<ButtonVariant, string> = {
+  default: "bg-black dark:bg-white",
+  primary: "bg-primary-600 dark:bg-primary-500",
+  muted: "bg-muted-600 dark:bg-muted-500",
+  success: "bg-success-600 dark:bg-success-500",
+  danger: "bg-danger-600 dark:bg-danger-500",
+  warning: "bg-warning-600 dark:bg-warning-500",
+  info: "bg-info-600 dark:bg-info-500",
+  outline:
+    "bg-transparent dark:bg-transparent border border-muted-500 dark:border-muted-700 text-muted-950 dark:text-muted-50",
+  ghost:
+    "bg-transparent dark:bg-transparent hover:bg-muted-300 dark:hover:bg-muted-700 text-muted-950 dark:text-muted-50",
+};
+
+type ButtonSizeVariant = "default" | "icon";
+
+const buttonSizeMap: Record<ButtonSizeVariant, string> = {
+  default: "",
+  icon: "h-9 w-9 py-1 px-1 flex items-center justify-center",
+};
 
 const Button = React.forwardRef<
   HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant }
->(({ className, variant, ...props }, ref) => {
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    variant?: ButtonVariant;
+    size?: ButtonSizeVariant;
+  }
+>(({ className, variant, size, ...props }, ref) => {
   return (
     <button
       className={cn(
-        "rounded bg-black px-3 py-1 text-white hover:opacity-80 disabled:opacity-50 dark:bg-white dark:text-black",
-        variant === "primary" && "bg-primary-600 dark:bg-primary-400",
-        variant === "muted" && "bg-muted-600 dark:bg-muted-400",
-        variant === "success" && "bg-success-600 dark:bg-success-400",
-        variant === "danger" && "bg-danger-600 dark:bg-danger-400",
-        variant === "warning" && "bg-warning-600 dark:bg-warning-400",
-        variant === "info" && "bg-info-600 dark:bg-info-400",
+        "rounded px-3 py-1 text-muted-50 hover:opacity-80 disabled:opacity-50 dark:text-muted-950",
+        buttonVariantMap.default,
+        variant && buttonVariantMap[variant],
+        size && buttonSizeMap[size],
         className,
       )}
       ref={ref}

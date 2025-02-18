@@ -14,7 +14,7 @@ export default {
     extend: {
       colors: {
         primary: color.zinc,
-        muted: color.gray,
+        muted: color.neutral,
         danger: color.red,
         info: color.blue,
         success: color.green,
