@@ -4,6 +4,7 @@ import { MoonIcon, SunIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useServerInsertedHTML } from "next/navigation";
 import * as React from "react";
+import { Button } from "@/components/ui/button";
 
 const script = /*js*/ `
 if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -77,10 +78,10 @@ export function DarkModeToggle() {
   }
 
   return (
-    <div onClick={handleClick} className="h-6 w-6 cursor-pointer">
+    <Button onClick={handleClick} size="icon" variant="ghost">
       <SunIcon className="block dark:hidden" />
       <MoonIcon className="hidden dark:block" />
       <span className="sr-only">Toggle theme</span>
-    </div>
+    </Button>
   );
 }

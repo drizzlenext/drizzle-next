@@ -32,7 +32,7 @@ const Alert = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded border p-2",
+      "border p-2",
       alertVariantMap.default,
       variant && alertVariantMap[variant],
       className,
