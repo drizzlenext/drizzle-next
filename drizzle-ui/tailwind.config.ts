@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import color from "tailwindcss/colors";
 import typography from "@tailwindcss/typography";
 
 export default {
@@ -13,16 +12,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: color.zinc,
-        muted: color.neutral,
-        danger: color.red,
-        info: color.blue,
-        success: color.green,
-        warning: color.yellow,
-        checkbox: color.zinc,
-        card: color.stone,
-        input: color.blue,
-        select: color.blue,
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        primary: {
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
+        },
+        muted: {
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
+        },
+        success: {
+          DEFAULT: "var(--success)",
+          foreground: "var(--success-foreground)",
+        },
+        destructive: {
+          DEFAULT: "var(--destructive)",
+          foreground: "var(--destructive-foreground)",
+        },
+        warning: {
+          DEFAULT: "var(--warning)",
+          foreground: "var(--warning-foreground)",
+        },
+        info: { DEFAULT: "var(--info)", foreground: "var(--info-foreground)" },
+        sidebar: {
+          DEFAULT: "var(--sidebar)",
+          foreground: "var(--sidebar-foreground)",
+        },
+        input: "var(--input)",
       },
     },
   },

@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-white text-black;
-  @apply dark:bg-black dark:text-white;
-}
-
 .lucide {
   stroke-width: 1.5px;
 }
@@ -19,4 +14,46 @@ body {
 .dark * {
   scrollbar-width: auto;
   scrollbar-color: #333333 black;
+}
+
+@layer base {
+  :root {
+    --background: theme(colors.white);
+    --foreground: theme(colors.black);
+    --primary: theme(colors.black);
+    --primary-foreground: theme(colors.white);
+    --muted: theme(colors.zinc.300);
+    --muted-foreground: theme(colors.black);
+    --destructive: theme(colors.red.700);
+    --destructive-foreground: theme(colors.white);
+    --info: theme(colors.blue.700);
+    --info-foreground: theme(colors.white);
+    --success: theme(colors.green.700);
+    --success-foreground: theme(colors.white);
+    --warning: theme(colors.yellow.700);
+    --warning-foreground: theme(colors.white);
+    --sidebar: theme(colors.zinc.100);
+    --sidebar-foreground: theme(colors.black);
+    --input: theme(colors.zinc.500);
+  }
+
+  .dark {
+    --background: theme(colors.zinc.800);
+    --foreground: theme(colors.white);
+    --primary: theme(colors.white);
+    --primary-foreground: theme(colors.black);
+    --muted: theme(colors.zinc.700);
+    --muted-foreground: theme(colors.white);
+    --destructive: theme(colors.red.700);
+    --destructive-foreground: theme(colors.white);
+    --info: theme(colors.blue.700);
+    --info-foreground: theme(colors.white);
+    --success: theme(colors.green.700);
+    --success-foreground: theme(colors.white);
+    --warning: theme(colors.yellow.700);
+    --warning-foreground: theme(colors.white);
+    --sidebar: theme(colors.zinc.800);
+    --sidebar-foreground: theme(colors.white);
+    --input: theme(colors.zinc.500);
+  }
 }
