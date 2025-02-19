@@ -3,7 +3,6 @@ import { cn } from "./utils";
 
 type ButtonVariant =
   | "default"
-  | "primary"
   | "muted"
   | "success"
   | "destructive"
@@ -14,7 +13,6 @@ type ButtonVariant =
 
 const buttonVariantMap: Record<ButtonVariant, string> = {
   default: "bg-primary text-primary-foreground",
-  primary: "bg-primary text-primary-foreground",
   muted: "bg-muted text-muted-foreground",
   success: "bg-success text-success-foreground",
   destructive: "bg-destructive text-destructive-foreground",
