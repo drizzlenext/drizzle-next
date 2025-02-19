@@ -9,10 +9,7 @@ const Checkbox = React.forwardRef<
     <input
       type="checkbox"
       ref={ref}
-      className={cn(
-        "accent-checkbox-950 dark:accent-checkbox-50 h-5 w-5",
-        className,
-      )}
+      className={cn("accent-checkbox h-5 w-5", className)}
       {...props}
     />
   );

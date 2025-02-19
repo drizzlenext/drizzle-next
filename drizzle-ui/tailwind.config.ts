@@ -11,6 +11,9 @@ export default {
   ],
   theme: {
     extend: {
+      borderColor: {
+        DEFAULT: "var(--border)",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -40,6 +43,8 @@ export default {
           foreground: "var(--sidebar-foreground)",
         },
         input: "var(--input)",
+        ring: "var(--ring)",
+        checkbox: "var(--checkbox)",
       },
     },
   },

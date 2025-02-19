@@ -20,11 +20,7 @@ const FormMessage = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("text-danger-600 dark:text-danger-400", className)}
-    {...props}
-  />
+  <div ref={ref} className={cn("text-destructive", className)} {...props} />
 ));
 FormMessage.displayName = "FormMessage";
 

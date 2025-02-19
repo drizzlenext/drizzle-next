@@ -34,11 +34,17 @@
     --warning-foreground: theme(colors.white);
     --sidebar: theme(colors.zinc.100);
     --sidebar-foreground: theme(colors.black);
+    --card: theme(colors.zinc.50);
+    --card-foreground: theme(colors.zinc.950);
+    --checkbox: theme(colors.black);
     --input: theme(colors.zinc.500);
+    --input-focus: theme(colors.blue.500);
+    --border: theme(colors.zinc.300);
+    --ring: theme(colors.blue.500);
   }
 
   .dark {
-    --background: theme(colors.zinc.800);
+    --background: theme(colors.zinc.900);
     --foreground: theme(colors.white);
     --primary: theme(colors.white);
     --primary-foreground: theme(colors.black);
@@ -54,6 +60,12 @@
     --warning-foreground: theme(colors.white);
     --sidebar: theme(colors.zinc.800);
     --sidebar-foreground: theme(colors.white);
+    --card: theme(colors.zinc.950);
+    --card-foreground: theme(colors.zinc.50);
+    --checkbox: theme(colors.white);
     --input: theme(colors.zinc.500);
+    --input-focus: theme(colors.blue.500);
+    --border: theme(colors.zinc.700);
+    --ring: theme(colors.blue.500);
   }
 }

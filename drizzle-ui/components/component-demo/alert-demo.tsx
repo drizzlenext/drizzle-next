@@ -1,21 +1,27 @@
 import { Alert } from "@/components/ui/alert";
 import {
   CheckIcon,
-  CircleXIcon,
   InfoIcon,
+  MessageCircleIcon,
   TriangleAlertIcon,
+  VolumeOffIcon,
+  XIcon,
 } from "lucide-react";
 
 export function AlertDemo() {
   return (
     <div className="flex flex-col gap-5">
-      <Alert>Default</Alert>
-      <Alert variant="muted">Muted</Alert>
+      <Alert>
+        <MessageCircleIcon /> Default
+      </Alert>
+      <Alert variant="muted">
+        <VolumeOffIcon /> Muted
+      </Alert>
       <Alert variant="success">
         <CheckIcon /> Success
       </Alert>
       <Alert variant="destructive">
-        <CircleXIcon /> Destructive
+        <XIcon /> Destructive
       </Alert>
       <Alert variant="warning">
         <TriangleAlertIcon /> Warning
