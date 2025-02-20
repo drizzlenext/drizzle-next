@@ -38,6 +38,10 @@ export default {
           foreground: "var(--warning-foreground)",
         },
         info: { DEFAULT: "var(--info)", foreground: "var(--info-foreground)" },
+        header: {
+          DEFAULT: "var(--header)",
+          foreground: "var(--header-foreground)",
+        },
         sidebar: {
           DEFAULT: "var(--sidebar)",
           foreground: "var(--sidebar-foreground)",

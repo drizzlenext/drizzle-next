@@ -77,7 +77,7 @@ const DashboardHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex h-12 w-full items-center justify-between gap-2 border-b border-muted-300 bg-gradient-to-t from-primary-100 to-primary-50 dark:border-muted-700 dark:bg-primary-900 dark:from-primary-950 dark:to-primary-900 md:col-span-2",
+      "bg-header text-header-foreground flex h-12 w-full items-center justify-between gap-2 border-b md:col-span-2",
       className,
     )}
     {...props}
@@ -109,7 +109,7 @@ const DashboardNav = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute top-12 z-50 flex w-full origin-top transform flex-col items-center gap-0 border-b border-muted-300 bg-muted-50 py-3 text-sm transition-all transition-transform duration-200 dark:border-primary-700 dark:bg-primary-950 [&>a:hover]:bg-primary-100 dark:[&>a:hover]:bg-primary-900 [&>a]:w-full [&>a]:px-4 [&>a]:py-1",
+        "absolute top-12 z-50 flex w-full origin-top transform flex-col items-center gap-0 border-b bg-background py-3 text-sm transition-transform duration-200 [&>a:hover]:bg-muted dark:[&>a:hover]:bg-muted [&>a]:w-full [&>a]:px-4 [&>a]:py-1",
         state.navOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0",
         "md:relative md:right-0 md:top-0 md:flex md:w-auto md:scale-100 md:flex-row md:items-center md:gap-5 md:border-none md:bg-transparent md:px-2 md:text-base md:opacity-100 md:dark:bg-transparent md:[&>a]:w-auto md:[&>a]:p-0 md:[&>a]:px-2",
         className,
@@ -166,7 +166,7 @@ const DashboardSidebar = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "fixed inset-y-12 z-20 h-full w-2/3 transform flex-col overflow-auto border-r border-muted-300 bg-primary-50 text-sm transition-transform duration-200 ease-in-out dark:border-muted-700 dark:bg-primary-950 md:relative md:inset-y-0 md:w-48",
+        "fixed inset-y-12 z-20 h-full w-2/3 transform flex-col overflow-auto border-r bg-sidebar text-sm transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48",
         state.sidebarOpen ? "translate-x-0" : "-translate-x-full",
         "md:translate-x-0",
         className,
@@ -201,7 +201,7 @@ const DashboardSidebarItem = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-row items-center gap-2 overflow-hidden text-nowrap px-3 py-1 font-normal hover:bg-primary-100 dark:hover:bg-primary-900",
+      "hover:bg-primary-100 dark:hover:bg-primary-900 flex flex-row items-center gap-2 overflow-hidden text-nowrap px-3 py-1 font-normal",
       active && "bg-primary-100 dark:bg-primary-900",
       className,
     )}
