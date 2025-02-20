@@ -44,6 +44,10 @@ export default {
           foreground: "var(--warning-foreground)",
         },
         info: { DEFAULT: "var(--info)", foreground: "var(--info-foreground)" },
+        dashboard: {
+          DEFAULT: "var(--dashboard)",
+          foreground: "var(--dashboard-foreground)",
+        },
         header: {
           DEFAULT: "var(--header)",
           foreground: "var(--header-foreground)",

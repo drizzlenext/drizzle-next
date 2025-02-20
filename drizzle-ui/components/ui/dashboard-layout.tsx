@@ -34,7 +34,7 @@ const DashboardLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "grid h-screen grid-rows-[auto_1fr] md:grid-cols-[192px_1fr]",
+          "bg-dashboard text-dashboard-foreground grid h-screen grid-rows-[auto_1fr] md:grid-cols-[192px_1fr]",
           className,
         )}
         {...props}
@@ -77,7 +77,7 @@ const DashboardHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-header text-header-foreground flex h-12 w-full items-center justify-between gap-2 border-b md:col-span-2",
+      "flex h-12 w-full items-center justify-between gap-2 border-b bg-header text-header-foreground md:col-span-2",
       className,
     )}
     {...props}

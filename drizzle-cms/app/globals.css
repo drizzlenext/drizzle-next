@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-white text-black;
-  @apply dark:bg-black dark:text-white;
-}
-
 .lucide {
   stroke-width: 1.5px;
 }
