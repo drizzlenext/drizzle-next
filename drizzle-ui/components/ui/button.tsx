@@ -19,7 +19,7 @@ const buttonVariantMap: Record<ButtonVariant, string> = {
   warning: "bg-warning text-warning-foreground",
   info: "bg-info text-info-foreground",
   outline: "bg-transparent border border-input text-foreground",
-  ghost: "bg-transparent bg-background text-foreground hover:bg-muted",
+  ghost: "bg-transparent text-foreground hover:bg-muted",
 };
 
 type ButtonSizeVariant = "default" | "icon";
