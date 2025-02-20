@@ -15,7 +15,9 @@ export default {
         DEFAULT: "var(--border)",
       },
       borderRadius: {
+        alert: "var(--rounded-alert)",
         button: "var(--rounded-button)",
+        card: "var(--rounded-card)",
         input: "var(--rounded-input)",
       },
       colors: {
