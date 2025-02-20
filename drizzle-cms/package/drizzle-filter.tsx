@@ -138,13 +138,18 @@ export function DrizzleFilter({
             </Button>
           </div>
           <div>
-            <Button variant="outline" onClick={() => clearOne(index)}>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => clearOne(index)}
+            >
               <MinusIcon />
             </Button>
           </div>
           <div>
             <Button
               variant="outline"
+              size="icon"
               onClick={() =>
                 setFilters((prev) => [
                   ...prev.slice(0, index + 1),

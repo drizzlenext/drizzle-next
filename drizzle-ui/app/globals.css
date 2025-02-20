@@ -46,7 +46,7 @@
     --input-background: theme(colors.zinc.50);
     --input-ring: theme(colors.blue.500);
     --rounded-alert: 6px;
-    --rounded-button: 4px;
+    --rounded-button: 0px;
     --rounded-card: 12px;
     --rounded-input: 0px;
   }
