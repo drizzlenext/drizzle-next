@@ -4,7 +4,7 @@ import { MoonIcon, SunIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useServerInsertedHTML } from "next/navigation";
 import * as React from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "./button";
 
 const script = /*js*/ `
 if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
