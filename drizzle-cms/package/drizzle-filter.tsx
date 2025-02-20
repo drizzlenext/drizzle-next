@@ -66,6 +66,7 @@ export function DrizzleFilter({
     return (
       <div className="flex justify-end">
         <Button
+          variant="outline"
           className="flex gap-2 items-center"
           onClick={() => {
             setFilters((prev) => [{ column: "id", operator: "=", value: "" }]);
@@ -132,16 +133,18 @@ export function DrizzleFilter({
             }}
           />
           <div>
-            <Button onClick={() => applyOne(index)}>Apply</Button>
+            <Button variant="outline" onClick={() => applyOne(index)}>
+              Apply
+            </Button>
           </div>
           <div>
-            <Button onClick={() => clearOne(index)}>
+            <Button variant="outline" onClick={() => clearOne(index)}>
               <MinusIcon />
             </Button>
           </div>
           <div>
             <Button
-              className=""
+              variant="outline"
               onClick={() =>
                 setFilters((prev) => [
                   ...prev.slice(0, index + 1),
@@ -160,8 +163,12 @@ export function DrizzleFilter({
         </div>
       ))}
       <div className="flex gap-2 justify-end">
-        <Button onClick={() => applyAll()}>Apply All</Button>
-        <Button onClick={() => clearAll()}>Clear</Button>
+        <Button variant="outline" onClick={() => applyAll()}>
+          Apply All
+        </Button>
+        <Button variant="outline" onClick={() => clearAll()}>
+          Clear
+        </Button>
       </div>
     </div>
   );
