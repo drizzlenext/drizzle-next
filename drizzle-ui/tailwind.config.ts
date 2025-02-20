@@ -14,6 +14,10 @@ export default {
       borderColor: {
         DEFAULT: "var(--border)",
       },
+      borderRadius: {
+        button: "var(--rounded-button)",
+        input: "var(--rounded-input)",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -42,6 +46,10 @@ export default {
           DEFAULT: "var(--header)",
           foreground: "var(--header-foreground)",
         },
+        card: {
+          DEFAULT: "var(--card)",
+          foreground: "var(--card-foreground)",
+        },
         sidebar: {
           DEFAULT: "var(--sidebar)",
           foreground: "var(--sidebar-foreground)",
@@ -51,7 +59,6 @@ export default {
           background: "var(--input-background)",
           ring: "var(--input-ring)",
         },
-        ring: "var(--ring)",
         checkbox: "var(--checkbox)",
       },
     },
