@@ -46,7 +46,11 @@ export default {
           DEFAULT: "var(--sidebar)",
           foreground: "var(--sidebar-foreground)",
         },
-        input: "var(--input)",
+        input: {
+          border: "var(--input-border)",
+          background: "var(--input-background)",
+          ring: "var(--input-ring)",
+        },
         ring: "var(--ring)",
         checkbox: "var(--checkbox)",
       },

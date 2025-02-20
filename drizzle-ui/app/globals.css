@@ -38,10 +38,11 @@
     --sidebar-foreground: theme(colors.black);
     --card: theme(colors.zinc.50);
     --card-foreground: theme(colors.zinc.950);
-    --checkbox: theme(colors.black);
-    --input: theme(colors.zinc.500);
     --border: theme(colors.zinc.300);
-    --ring: theme(colors.blue.500);
+    --checkbox: theme(colors.black);
+    --input-border: theme(colors.zinc.500);
+    --input-background: theme(colors.zinc.50);
+    --input-ring: theme(colors.blue.500);
   }
 
   .dark {
@@ -65,9 +66,10 @@
     --sidebar-foreground: theme(colors.white);
     --card: theme(colors.zinc.950);
     --card-foreground: theme(colors.zinc.50);
-    --checkbox: theme(colors.white);
-    --input: theme(colors.zinc.500);
     --border: theme(colors.zinc.700);
-    --ring: theme(colors.blue.500);
+    --checkbox: theme(colors.white);
+    --input-border: theme(colors.zinc.500);
+    --input-background: theme(colors.zinc.800);
+    --input-ring: theme(colors.blue.500);
   }
 }
