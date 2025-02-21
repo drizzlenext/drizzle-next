@@ -59,7 +59,7 @@
     --foreground: theme(colors.white);
     --primary: theme(colors.white);
     --primary-foreground: theme(colors.black);
-    --muted: theme(colors.zinc.600);
+    --muted: theme(colors.zinc.800);
     --muted-foreground: theme(colors.white);
     --destructive: theme(colors.red.600);
     --destructive-foreground: theme(colors.white);
