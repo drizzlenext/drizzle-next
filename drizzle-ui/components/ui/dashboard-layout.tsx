@@ -14,7 +14,7 @@ const DashboardLayoutContext = React.createContext<{
   setState: React.Dispatch<React.SetStateAction<DashboardLayoutState>>;
 }>({
   state: {
-    sidebarOpen: false,
+    sidebarOpen: true,
     navOpen: false,
   },
   setState: () => {},
@@ -25,16 +25,27 @@ const DashboardLayout = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const [state, setState] = React.useState({
-    sidebarOpen: false,
+    sidebarOpen: true,
     navOpen: false,
   });
+
+  React.useEffect(() => {
+    const storedSidebarOpen = localStorage.getItem("sidebarOpen");
+    if (storedSidebarOpen !== null) {
+      setState((prevState) => ({
+        ...prevState,
+        sidebarOpen: storedSidebarOpen === "true",
+      }));
+    }
+  }, []);
 
   return (
     <DashboardLayoutContext.Provider value={{ state, setState }}>
       <div
         ref={ref}
         className={cn(
-          "bg-dashboard text-dashboard-foreground grid h-screen grid-rows-[auto_1fr] md:grid-cols-[192px_1fr]",
+          "grid h-screen grid-rows-[auto_1fr] bg-dashboard text-dashboard-foreground md:grid-cols-[192px_1fr]",
+          !state.sidebarOpen && "md:grid-cols-[0px_1fr]",
           className,
         )}
         {...props}
@@ -51,16 +62,20 @@ const DashboardSidebarToggle = React.forwardRef<
   const { state, setState } = React.useContext(DashboardLayoutContext);
 
   const toggleSidebar = () => {
-    setState((prevState) => ({
-      ...prevState,
-      sidebarOpen: !prevState.sidebarOpen,
-    }));
+    setState((prevState) => {
+      const newSidebarOpen = !prevState.sidebarOpen;
+      localStorage.setItem("sidebarOpen", newSidebarOpen.toString());
+      return {
+        ...prevState,
+        sidebarOpen: newSidebarOpen,
+      };
+    });
   };
 
   return (
     <div
       ref={ref}
-      className={cn("block cursor-pointer select-none md:hidden", className)}
+      className={cn("block cursor-pointer select-none", className)}
       onClick={toggleSidebar}
       {...props}
     >
@@ -168,7 +183,6 @@ const DashboardSidebar = React.forwardRef<
       className={cn(
         "fixed inset-y-12 z-20 h-full w-2/3 transform flex-col overflow-auto border-r bg-sidebar text-sm transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48",
         state.sidebarOpen ? "translate-x-0" : "-translate-x-full",
-        "md:translate-x-0",
         className,
       )}
       onClick={handleClick}

@@ -25,7 +25,7 @@ const buttonVariantMap: Record<ButtonVariant, string> = {
 type ButtonSizeVariant = "default" | "icon";
 
 const buttonSizeMap: Record<ButtonSizeVariant, string> = {
-  default: "",
+  default: "min-w-9 min-h-9",
   icon: "min-w-9 min-h-9 max-w-9 max-h-9 aspect-square py-0 px-0 flex items-center justify-center",
 };
 
@@ -35,7 +35,7 @@ const Button = React.forwardRef<
     variant?: ButtonVariant;
     size?: ButtonSizeVariant;
   }
->(({ className, variant, size, ...props }, ref) => {
+>(({ className, variant = "default", size = "default", ...props }, ref) => {
   return (
     <button
       className={cn(

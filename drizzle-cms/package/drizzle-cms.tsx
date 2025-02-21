@@ -87,17 +87,20 @@ export function DrizzleTable({
   curTable: string;
 }) {
   return (
-    <Table>
+    <Table className="border">
       <TableHeader>
         <TableRow>
           {columns.map((col) => {
             return (
-              <TableHead key={col.name}>
+              <TableHead
+                key={col.name}
+                className="border text-nowrap overflow-clip max-w-28"
+              >
                 <Sortable column={col.name}>{capitalCase(col.name)}</Sortable>
               </TableHead>
             );
           })}
-          <TableHead></TableHead>
+          <TableHead className="border"></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -106,7 +109,10 @@ export function DrizzleTable({
             <TableRow key={row.id}>
               {columns.map((col) => {
                 return (
-                  <TableCell key={col.name}>
+                  <TableCell
+                    key={col.name}
+                    className="text-nowrap overflow-clip max-w-28 border"
+                  >
                     {col.dataType === "date" && row[col.name]?.toLocaleString()}
                     {col.dataType === "json" && JSON.stringify(row[col.name])}
                     {col.dataType === "string" && row[col.name]}

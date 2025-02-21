@@ -56,6 +56,10 @@ export default {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",
         },
+        page: {
+          DEFAULT: "var(--page)",
+          foreground: "var(--page-foreground)",
+        },
         sidebar: {
           DEFAULT: "var(--sidebar)",
           foreground: "var(--sidebar-foreground)",

@@ -149,17 +149,19 @@ export async function ListPage(props: {
   return (
     <PageLayout>
       <PageHeader>
-        <PageTitle>{capitalCase(curTable)}</PageTitle>
-        <PageNav>
+        <PageTitle className="flex gap-5 items-center">
+          {capitalCase(curTable)}{" "}
           <Link href={`${config.basePath}/${curTable}/new`}>
-            <Button className="rounded-2xl" variant="info">
+            <Button className="rounded-2xl" variant="muted">
               New
             </Button>
           </Link>
+        </PageTitle>
+        <PageNav className="flex-wrap px-0">
           <PageAsideToggle />
         </PageNav>
       </PageHeader>
-      <PageContent>
+      <PageContent className="h-[calc(100vh-175px)] p-1">
         <DrizzleFilter simplifiedColumns={simplifiedColumns} />
         <DrizzleTable
           list={list}

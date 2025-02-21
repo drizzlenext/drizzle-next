@@ -12,7 +12,7 @@ const PageLayoutContext = React.createContext<{
   state: PageLayoutState;
   setState: React.Dispatch<React.SetStateAction<PageLayoutState>>;
 }>({
-  state: { asideOpen: true },
+  state: { asideOpen: false },
   setState: () => {},
 });
 
@@ -21,41 +21,15 @@ const PageLayout = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const [state, setState] = React.useState<PageLayoutState>({
-    asideOpen: true,
+    asideOpen: false,
   });
-
-  React.useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setState((prevState) => ({
-          ...prevState,
-          asideOpen: true,
-        }));
-      }
-      if (window.innerWidth < 768) {
-        setState((prevState) => ({
-          ...prevState,
-          asideOpen: false,
-        }));
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // Set initial state based on current window size
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <PageLayoutContext.Provider value={{ state, setState }}>
       <div
         ref={ref}
         className={cn(
-          "relative grid min-h-[calc(100vh-3rem)] grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] overflow-auto overflow-x-clip",
+          "bg-page text-page-foreground relative grid min-h-[calc(100vh-3rem)] grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] overflow-auto overflow-x-clip",
           state.asideOpen ? "" : "",
           className,
         )}
@@ -75,7 +49,7 @@ const PageHeader = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex min-h-14 items-center justify-between gap-2 overflow-auto border-b border-muted-300 bg-primary-50 px-5 dark:border-muted-700 dark:bg-primary-950",
+        "bg-page text-page-foreground flex min-h-14 items-center justify-between gap-2 overflow-auto border-b px-5",
         state.asideOpen ? "col-span-3 md:col-span-2" : "col-span-3",
         className,
       )}
@@ -91,7 +65,10 @@ const PageTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("text-nowrap font-bold", className)}
+    className={cn(
+      "bg-page text-page-foreground text-nowrap font-bold",
+      className,
+    )}
     {...props}
   />
 ));
@@ -104,7 +81,7 @@ const PageNav = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "ml-auto flex items-center gap-5 p-2 px-5 py-2 [&>a]:text-info-600 [&>a]:underline dark:[&>a]:text-info-400",
+      "[&>a]:text-info-600 dark:[&>a]:text-info-400 bg-page text-page-foreground ml-auto flex items-center gap-5 p-2 px-5 py-2 [&>a]:underline",
       className,
     )}
     {...props}
@@ -121,7 +98,7 @@ const PageContent = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "row-start-2 overflow-auto px-5 py-2",
+        "bg-page text-page-foreground row-start-2 overflow-auto px-5 py-2",
         state.asideOpen ? "col-span-3 md:col-span-2" : "col-span-3",
         className,
       )}
@@ -140,7 +117,7 @@ const PageFooter = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "z-20 col-span-2 border-t border-muted-300 bg-muted-50 p-4 dark:border-muted-700 dark:bg-muted-950",
+        "bg-page text-page-foreground z-20 col-span-2 border-t p-4",
         state.asideOpen ? "col-span-3 md:col-span-2" : "col-span-3",
         className,
       )}
@@ -159,7 +136,7 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute inset-y-14 right-0 z-0 row-span-3 w-80 border-l border-muted-300 bg-primary-50 p-4 dark:border-muted-700 dark:bg-primary-950 md:static",
+        "bg-page text-page-foreground absolute inset-y-14 right-0 z-0 row-span-3 w-80 border-l p-4 md:static",
         state.asideOpen ? "" : "hidden",
         className,
       )}
