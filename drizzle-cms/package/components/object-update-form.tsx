@@ -42,14 +42,8 @@ export function ObjectForm({
       },
       body: JSON.stringify(data),
     });
-    if (res.ok) {
-      const json = await res.json();
-      console.log(json);
-
-      setState({ message: json.message, status: getStatus(res.status) });
-    } else {
-      setState({ message: "An error occurred", status: "destructive" });
-    }
+    const json = await res.json();
+    setState({ message: json.message, status: getStatus(res.status) });
   }
 
   return (

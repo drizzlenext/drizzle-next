@@ -11,7 +11,7 @@ const { createUpdateSchema, createInsertSchema } = createSchemaFactory({
 });
 
 export function POST_REQUEST(config: DrizzleCmsConfig) {
-  return async function (request: NextRequest) {
+  return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
     const body = await request.json();
@@ -45,11 +45,11 @@ export function POST_REQUEST(config: DrizzleCmsConfig) {
     }
     await db.insert(drizzleSchema).values(validatedFields.data);
     return NextResponse.json({ message: `Create success` });
-  };
+  });
 }
 
 export function PUT_REQUEST(config: DrizzleCmsConfig) {
-  return async function (request: NextRequest) {
+  return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
     const body = await request.json();
@@ -85,11 +85,11 @@ export function PUT_REQUEST(config: DrizzleCmsConfig) {
       .set(validatedFields.data)
       .where(eq(drizzleSchema.id, id));
     return NextResponse.json({ message: `Update success` });
-  };
+  });
 }
 
 export function DELETE_REQUEST(config: DrizzleCmsConfig) {
-  return async function (request: NextRequest) {
+  return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
     const param0 = segments[0];
@@ -111,7 +111,7 @@ export function DELETE_REQUEST(config: DrizzleCmsConfig) {
     await db.delete(drizzleSchema).where(eq(drizzleSchema.id, id));
 
     return NextResponse.json({ message: "Delete success" });
-  };
+  });
 }
 
 function getEmptyDrizzleObject(drizzleSchema: any) {
@@ -122,4 +122,20 @@ function getEmptyDrizzleObject(drizzleSchema: any) {
     obj[key] = null;
   }
   return obj;
+}
+
+function withErrorHandling(
+  handler: (request: NextRequest) => Promise<NextResponse>
+) {
+  return async function (request: NextRequest) {
+    try {
+      return await handler(request);
+    } catch (error) {
+      console.error(error);
+      return NextResponse.json(
+        { message: "Internal Server Error" },
+        { status: 500 }
+      );
+    }
+  };
 }

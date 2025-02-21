@@ -7,6 +7,7 @@ import {
   Checkbox,
   Form,
   FormControl,
+  FormMessage,
   Input,
   Label,
 } from "drizzle-ui";
@@ -18,6 +19,17 @@ import { RenderFormControl } from "./render-form-control";
 interface UpdateStatus {
   message?: string;
   status?: "success" | "destructive";
+  error?: {
+    [key: string]: string[];
+  };
+}
+
+function getStatus(statusCode: number) {
+  if (statusCode >= 200 && statusCode <= 299) {
+    return "success";
+  } else if (statusCode >= 400 && statusCode <= 599) {
+    return "destructive";
+  }
 }
 
 export function ObjectCreateForm({
@@ -42,12 +54,17 @@ export function ObjectCreateForm({
       },
       body: JSON.stringify(data),
     });
-    const json = await res.json();
-    setState({ message: json.message, status: json.status });
+    if (res.ok) {
+      const json = await res.json();
+      setState({ message: json.message, status: getStatus(res.status) });
+    } else {
+      const json = await res.json();
+      setState({ status: getStatus(res.status), error: json });
+    }
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="flex flex-col gap-1">
       {state.message && (
         <Alert variant={state.status} className="mb-5">
           {state.message}
@@ -64,6 +81,9 @@ export function ObjectCreateForm({
               value={undefined}
               columnInfoMap={columnInfoMap}
             />
+            {state?.error && state.error[key] && (
+              <FormMessage>{state.error[key]}</FormMessage>
+            )}
           </div>
         );
       })}
