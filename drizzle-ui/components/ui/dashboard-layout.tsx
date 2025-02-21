@@ -2,12 +2,14 @@
 
 import * as React from "react";
 import { cn } from "./utils";
-import { MenuIcon, SidebarCloseIcon, SidebarIcon, XIcon } from "lucide-react";
+import { MenuIcon, SidebarIcon, XIcon } from "lucide-react";
 import { Button } from "./button";
 
+// the sidebarOpen flag must begin as undefined
+// to handle different starting states for sm and md resolutions
 interface DashboardLayoutState {
-  sidebarOpen: boolean;
-  navOpen: boolean;
+  sidebarOpen?: boolean;
+  navOpen?: boolean;
 }
 
 const DashboardLayoutContext = React.createContext<{
@@ -15,8 +17,8 @@ const DashboardLayoutContext = React.createContext<{
   setState: React.Dispatch<React.SetStateAction<DashboardLayoutState>>;
 }>({
   state: {
-    sidebarOpen: true,
-    navOpen: false,
+    sidebarOpen: undefined,
+    navOpen: undefined,
   },
   setState: () => {},
 });
@@ -25,28 +27,17 @@ const DashboardLayout = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const [state, setState] = React.useState({
-    sidebarOpen: true,
-    navOpen: false,
-  });
-
-  React.useEffect(() => {
-    const storedSidebarOpen = localStorage.getItem("sidebarOpen");
-    if (storedSidebarOpen !== null) {
-      setState((prevState) => ({
-        ...prevState,
-        sidebarOpen: storedSidebarOpen === "true",
-      }));
-    }
-  }, []);
+  const [state, setState] = React.useState({} as DashboardLayoutState);
 
   return (
     <DashboardLayoutContext.Provider value={{ state, setState }}>
       <div
         ref={ref}
         className={cn(
-          "grid h-screen grid-rows-[auto_1fr] bg-dashboard text-dashboard-foreground md:grid-cols-[192px_1fr]",
-          !state.sidebarOpen && "md:grid-cols-[0px_1fr]",
+          "grid h-screen grid-rows-[auto_1fr] bg-dashboard text-dashboard-foreground",
+          state.sidebarOpen === undefined && "md:grid-cols-[192px_1fr]",
+          state.sidebarOpen === true && "md:grid-cols-[192px_1fr]",
+          state.sidebarOpen === false && "md:grid-cols-[0px_1fr]",
           className,
         )}
         {...props}
@@ -64,8 +55,18 @@ const DashboardSidebarToggle = React.forwardRef<
 
   const toggleSidebar = () => {
     setState((prevState) => {
-      const newSidebarOpen = !prevState.sidebarOpen;
-      localStorage.setItem("sidebarOpen", newSidebarOpen.toString());
+      let newSidebarOpen;
+      if (state.sidebarOpen === undefined) {
+        // the initial behavior is different for sm and md screen sizes
+        if (window.innerWidth <= 768) {
+          newSidebarOpen = true;
+        } else {
+          newSidebarOpen = false;
+        }
+      } else {
+        // after the sidebar is set the first time, revert to normal toggle behavior
+        newSidebarOpen = !prevState.sidebarOpen;
+      }
       return {
         ...prevState,
         sidebarOpen: newSidebarOpen,
@@ -82,7 +83,7 @@ const DashboardSidebarToggle = React.forwardRef<
       onClick={toggleSidebar}
       {...props}
     >
-      {state.sidebarOpen ? <SidebarCloseIcon /> : <SidebarIcon />}
+      <SidebarIcon />
     </Button>
   );
 });
@@ -177,7 +178,9 @@ const DashboardSidebar = React.forwardRef<
       ref={ref}
       className={cn(
         "fixed inset-y-12 z-20 h-full w-2/3 transform flex-col overflow-auto border-r bg-sidebar text-sm transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48",
-        state.sidebarOpen ? "translate-x-0" : "-translate-x-full",
+        state.sidebarOpen === undefined && "-translate-x-full md:translate-x-0",
+        state.sidebarOpen === true && "translate-x-0",
+        state.sidebarOpen === false && "-translate-x-full",
         className,
       )}
       {...props}

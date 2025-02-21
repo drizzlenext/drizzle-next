@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "./utils";
-import { PanelRightCloseIcon, PanelRightIcon } from "lucide-react";
+import { PanelRightIcon } from "lucide-react";
 import { Button } from "./button";
 
 interface PageLayoutState {
@@ -171,7 +171,7 @@ const PageAsideToggle = React.forwardRef<
       {...props}
       onClick={toggleAside}
     >
-      {state.asideOpen ? <PanelRightCloseIcon /> : <PanelRightIcon />}
+      <PanelRightIcon />
     </Button>
   );
 });
