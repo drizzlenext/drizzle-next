@@ -26,10 +26,17 @@ import {
   lte,
   ne,
   ilike,
+  getTableColumns,
 } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
-import { DrizzleCmsConfig, Params, SearchParams } from "../types";
+import {
+  ColumnInfoMap,
+  DrizzleCmsConfig,
+  Params,
+  SearchParams,
+} from "../types";
 import Link from "next/link";
+import { ObjectUpdateForm } from "../components/object-update-form";
 
 export interface ListPageParams {
   curTable: string;
@@ -146,8 +153,22 @@ export async function ListPage(props: {
     };
   });
 
+  const cols = getTableColumns(drizzleSchema);
+  const columnInfoMap: ColumnInfoMap = {};
+  for (const col in cols) {
+    columnInfoMap[col] = drizzleSchema[col].dataType;
+  }
+
+  let obj;
+  if (searchParams.id) {
+    obj = await db.query[schema.path].findFirst({
+      where: eq(drizzleSchema.id, searchParams.id),
+    });
+    console.log(obj);
+  }
+
   return (
-    <PageLayout>
+    <PageLayout asideOpen={!!obj}>
       <PageHeader>
         <PageTitle className="flex gap-5 items-center">
           {capitalCase(curTable)}{" "}
@@ -173,7 +194,13 @@ export async function ListPage(props: {
         />
       </PageContent>
       <PageAside>
-        <PageTitle>Filters</PageTitle>
+        {obj && (
+          <ObjectUpdateForm
+            obj={obj}
+            curTable={curTable}
+            columnInfoMap={columnInfoMap}
+          />
+        )}
       </PageAside>
       <PageFooter>
         <Pagination

@@ -14,7 +14,7 @@ import {
 import { capitalCase } from "change-case-all";
 import { eq, getTableColumns } from "drizzle-orm";
 import Link from "next/link";
-import { ObjectForm } from "../components/object-update-form";
+import { ObjectUpdateForm } from "../components/object-update-form";
 import { notFound } from "next/navigation";
 import { ChevronRightIcon } from "lucide-react";
 
@@ -68,7 +68,7 @@ export async function EditPage(props: {
         </PageNav>
       </PageHeader>
       <PageContent>
-        <ObjectForm
+        <ObjectUpdateForm
           obj={obj}
           curTable={curTable}
           columnInfoMap={columnInfoMap}

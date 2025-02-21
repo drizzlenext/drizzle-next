@@ -19,11 +19,18 @@ const PageLayoutContext = React.createContext<{
 
 const PageLayout = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+  React.HTMLAttributes<HTMLDivElement> & { asideOpen?: boolean }
+>(({ className, asideOpen = false, ...props }, ref) => {
   const [state, setState] = React.useState<PageLayoutState>({
-    asideOpen: false,
+    asideOpen: asideOpen,
   });
+
+  React.useEffect(() => {
+    setState((prevState) => ({
+      ...prevState,
+      asideOpen: asideOpen,
+    }));
+  }, [asideOpen]);
 
   return (
     <PageLayoutContext.Provider value={{ state, setState }}>

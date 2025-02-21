@@ -4,6 +4,8 @@ import { Alert, Button, Form, FormControl } from "drizzle-ui";
 import { useState } from "react";
 import { ColumnInfoMap } from "../types";
 import { RenderFormControl } from "./render-form-control";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 interface UpdateStatus {
   message?: string;
@@ -18,7 +20,7 @@ function getStatus(statusCode: number) {
   }
 }
 
-export function ObjectForm({
+export function ObjectUpdateForm({
   obj,
   curTable,
   columnInfoMap,
@@ -28,6 +30,15 @@ export function ObjectForm({
   columnInfoMap: ColumnInfoMap;
 }) {
   const [state, setState] = useState<UpdateStatus>({});
+  const [curObj, setCurObj] = useState(obj);
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    const id = params.get("id");
+    // TODO: fetch single object to load update form
+  }, [searchParams]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -54,7 +65,7 @@ export function ObjectForm({
         </Alert>
       )}
       <input type="hidden" name="curTable" defaultValue={curTable} />
-      {Object.entries(obj).map(([key, value]) => {
+      {Object.entries(curObj).map(([key, value]) => {
         return (
           <div key={key}>
             <RenderFormControl

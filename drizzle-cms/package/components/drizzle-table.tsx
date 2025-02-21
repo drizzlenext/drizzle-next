@@ -13,6 +13,7 @@ import {
 } from "drizzle-ui";
 import Link from "next/link";
 import { DrizzleCmsConfig, DrizzleTableConfig } from "../types";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export function DrizzleTable({
   list,
@@ -21,6 +22,16 @@ export function DrizzleTable({
   list: Record<string, any>;
   config: DrizzleTableConfig;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  function handleClick(id: any) {
+    const params = new URLSearchParams(searchParams);
+    params.set("id", id);
+    router.push(`${pathname}?${params.toString()}`);
+  }
+
   return (
     <Table className="border">
       <TableHeader>
@@ -44,7 +55,7 @@ export function DrizzleTable({
             <TableRow
               key={row.id}
               className="hover:bg-zinc-100 dark:hover:bg-zinc-800"
-              onClick={() => console.log("click")}
+              onClick={() => handleClick(row.id)}
             >
               {config.columns.map((col) => {
                 return (
