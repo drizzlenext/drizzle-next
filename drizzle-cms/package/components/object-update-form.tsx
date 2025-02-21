@@ -47,7 +47,7 @@ export function ObjectForm({
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="flex flex-col gap-2">
       {state.message && (
         <Alert variant={state.status} className="mb-5">
           {state.message}
