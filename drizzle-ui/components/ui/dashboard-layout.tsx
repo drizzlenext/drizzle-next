@@ -177,7 +177,7 @@ const DashboardSidebar = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "fixed inset-y-12 z-20 h-full w-2/3 transform flex-col overflow-auto border-r bg-sidebar text-sm transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48",
+        "fixed inset-y-12 z-20 h-full w-2/3 transform flex-col overflow-auto border-r bg-sidebar text-sm transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48 md:duration-0",
         state.sidebarOpen === undefined && "-translate-x-full md:translate-x-0",
         state.sidebarOpen === true && "translate-x-0",
         state.sidebarOpen === false && "-translate-x-full",
