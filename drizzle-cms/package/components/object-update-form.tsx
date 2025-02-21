@@ -5,17 +5,17 @@ import { useState } from "react";
 import { ColumnInfoMap } from "../types";
 import { RenderFormControl } from "./render-form-control";
 
-type AlertVariant =
-  | "primary"
-  | "muted"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info";
-
 interface UpdateStatus {
   message?: string;
-  status?: AlertVariant;
+  status?: "success" | "destructive";
+}
+
+function getStatus(statusCode: number) {
+  if (statusCode >= 200 && statusCode <= 299) {
+    return "success";
+  } else if (statusCode >= 400 && statusCode <= 599) {
+    return "destructive";
+  }
 }
 
 export function ObjectForm({
@@ -42,8 +42,14 @@ export function ObjectForm({
       },
       body: JSON.stringify(data),
     });
-    const json = await res.json();
-    setState({ message: json.message, status: json.status });
+    if (res.ok) {
+      const json = await res.json();
+      console.log(json);
+
+      setState({ message: json.message, status: getStatus(res.status) });
+    } else {
+      setState({ message: "An error occurred", status: "destructive" });
+    }
   }
 
   return (

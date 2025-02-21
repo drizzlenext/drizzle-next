@@ -44,7 +44,7 @@ export function POST_REQUEST(config: DrizzleCmsConfig) {
       return NextResponse.json({ message: `not found` }, { status: 404 });
     }
     await db.insert(drizzleSchema).values(validatedFields.data);
-    return NextResponse.json({ message: `Create success`, status: "success" });
+    return NextResponse.json({ message: `Create success` });
   };
 }
 
@@ -84,7 +84,7 @@ export function PUT_REQUEST(config: DrizzleCmsConfig) {
       .update(drizzleSchema)
       .set(validatedFields.data)
       .where(eq(drizzleSchema.id, id));
-    return NextResponse.json({ message: `Update success`, status: "success" });
+    return NextResponse.json({ message: `Update success` });
   };
 }
 
@@ -110,7 +110,7 @@ export function DELETE_REQUEST(config: DrizzleCmsConfig) {
 
     await db.delete(drizzleSchema).where(eq(drizzleSchema.id, id));
 
-    return NextResponse.json({ message: "Delete success", status: "success" });
+    return NextResponse.json({ message: "Delete success" });
   };
 }
 

@@ -15,17 +15,9 @@ import { useState } from "react";
 import { ColumnInfoMap } from "../types";
 import { RenderFormControl } from "./render-form-control";
 
-type AlertVariant =
-  | "primary"
-  | "muted"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info";
-
 interface UpdateStatus {
   message?: string;
-  status?: AlertVariant;
+  status?: "success" | "destructive";
 }
 
 export function ObjectCreateForm({
