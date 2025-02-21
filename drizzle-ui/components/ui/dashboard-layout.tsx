@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cn } from "./utils";
 import { MenuIcon, SidebarCloseIcon, SidebarIcon, XIcon } from "lucide-react";
+import { Button } from "./button";
 
 interface DashboardLayoutState {
   sidebarOpen: boolean;
@@ -56,8 +57,8 @@ const DashboardLayout = React.forwardRef<
 DashboardLayout.displayName = "DashboardLayout";
 
 const DashboardSidebarToggle = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  HTMLButtonElement,
+  React.HTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
   const { state, setState } = React.useContext(DashboardLayoutContext);
 
@@ -73,14 +74,16 @@ const DashboardSidebarToggle = React.forwardRef<
   };
 
   return (
-    <div
+    <Button
       ref={ref}
-      className={cn("block cursor-pointer select-none", className)}
+      variant="ghost"
+      size="icon"
+      className={cn("", className)}
       onClick={toggleSidebar}
       {...props}
     >
       {state.sidebarOpen ? <SidebarCloseIcon /> : <SidebarIcon />}
-    </div>
+    </Button>
   );
 });
 DashboardSidebarToggle.displayName = "DashboardSidebarToggle";
@@ -136,8 +139,8 @@ const DashboardNav = React.forwardRef<
 DashboardNav.displayName = "DashboardNav";
 
 const DashboardNavToggle = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  HTMLButtonElement,
+  React.HTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
   const { state, setState } = React.useContext(DashboardLayoutContext);
 
@@ -149,9 +152,11 @@ const DashboardNavToggle = React.forwardRef<
   };
 
   return (
-    <div
+    <Button
       ref={ref}
-      className={cn("cursor-pointer select-none px-3 md:hidden", className)}
+      variant="ghost"
+      size="icon"
+      className={cn("md:hidden", className)}
       {...props}
     >
       {state.navOpen ? (
@@ -159,7 +164,7 @@ const DashboardNavToggle = React.forwardRef<
       ) : (
         <MenuIcon onClick={toggleNav} />
       )}
-    </div>
+    </Button>
   );
 });
 DashboardNavToggle.displayName = "DashboardNavToggle";

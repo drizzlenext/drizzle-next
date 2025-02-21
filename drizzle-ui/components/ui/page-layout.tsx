@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cn } from "./utils";
 import { PanelRightCloseIcon, PanelRightIcon } from "lucide-react";
+import { Button } from "./button";
 
 interface PageLayoutState {
   asideOpen: boolean;
@@ -147,8 +148,8 @@ const PageAside = React.forwardRef<
 PageAside.displayName = "PageAside";
 
 const PageAsideToggle = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  HTMLButtonElement,
+  React.HTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
   const { state, setState } = React.useContext(PageLayoutContext);
 
@@ -162,14 +163,16 @@ const PageAsideToggle = React.forwardRef<
   };
 
   return (
-    <div
+    <Button
       ref={ref}
-      className={cn("cursor-pointer select-none", className)}
+      variant="ghost"
+      size="icon"
+      className={cn("", className)}
       {...props}
       onClick={toggleAside}
     >
       {state.asideOpen ? <PanelRightCloseIcon /> : <PanelRightIcon />}
-    </div>
+    </Button>
   );
 });
 PageAsideToggle.displayName = "PageAsideToggle";

@@ -26,7 +26,7 @@ type ButtonSizeVariant = "default" | "icon";
 
 const buttonSizeMap: Record<ButtonSizeVariant, string> = {
   default: "min-w-9 min-h-9",
-  icon: "min-w-9 min-h-9 max-w-9 max-h-9 aspect-square py-0 px-0 flex items-center justify-center",
+  icon: "min-w-9 min-h-9 max-w-9 max-h-9 aspect-square py-0 px-0 flex items-center justify-center rounded-icon",
 };
 
 const Button = React.forwardRef<

@@ -51,6 +51,7 @@
     --rounded-button: 0px;
     --rounded-card: 12px;
     --rounded-input: 0px;
+    --rounded-icon: 4px;
   }
 
   .dark {

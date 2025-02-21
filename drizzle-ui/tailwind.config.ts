@@ -19,6 +19,7 @@ export default {
         button: "var(--rounded-button)",
         card: "var(--rounded-card)",
         input: "var(--rounded-input)",
+        icon: "var(--rounded-icon)",
       },
       colors: {
         background: "var(--background)",
