@@ -30,7 +30,7 @@ const PageLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "bg-page text-page-foreground relative grid min-h-[calc(100vh-3rem)] grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] overflow-auto overflow-x-clip",
+          "relative grid min-h-[calc(100vh-3rem)] grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] overflow-auto overflow-x-clip bg-page text-page-foreground",
           state.asideOpen ? "" : "",
           className,
         )}
@@ -50,7 +50,7 @@ const PageHeader = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-page text-page-foreground flex min-h-14 items-center justify-between gap-2 overflow-auto border-b px-5",
+        "flex min-h-14 items-center justify-between gap-2 overflow-auto border-b bg-page px-5 text-page-foreground",
         state.asideOpen ? "col-span-3 md:col-span-2" : "col-span-3",
         className,
       )}
@@ -67,7 +67,7 @@ const PageTitle = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-page text-page-foreground text-nowrap font-bold",
+      "text-nowrap bg-page font-bold text-page-foreground",
       className,
     )}
     {...props}
@@ -82,7 +82,7 @@ const PageNav = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "[&>a]:text-info-600 dark:[&>a]:text-info-400 bg-page text-page-foreground ml-auto flex items-center gap-5 p-2 px-5 py-2 [&>a]:underline",
+      "[&>a]:text-info-600 dark:[&>a]:text-info-400 ml-auto flex items-center gap-5 bg-page p-2 px-5 py-2 text-page-foreground [&>a]:underline",
       className,
     )}
     {...props}
@@ -99,7 +99,7 @@ const PageContent = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-page text-page-foreground row-start-2 overflow-auto px-5 py-2",
+        "row-start-2 overflow-auto bg-page px-5 py-2 text-page-foreground",
         state.asideOpen ? "col-span-3 md:col-span-2" : "col-span-3",
         className,
       )}
@@ -118,7 +118,7 @@ const PageFooter = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-page text-page-foreground z-20 col-span-2 border-t p-4",
+        "z-20 col-span-2 border-t bg-page p-4 text-page-foreground",
         state.asideOpen ? "col-span-3 md:col-span-2" : "col-span-3",
         className,
       )}
@@ -137,8 +137,8 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-page text-page-foreground absolute inset-y-14 right-0 z-0 row-span-3 w-80 border-l p-4 md:static",
-        state.asideOpen ? "" : "hidden",
+        "absolute inset-y-14 right-0 z-0 row-span-3 w-80 transform border-l bg-page p-4 text-page-foreground transition-transform md:static",
+        state.asideOpen ? "translate-x-0" : "translate-x-full md:hidden",
         className,
       )}
       {...props}
