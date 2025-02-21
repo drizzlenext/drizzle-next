@@ -11,7 +11,7 @@ import {
   PageTitle,
   Pagination,
 } from "drizzle-ui";
-import { DrizzleTable } from "../drizzle-cms";
+import { DrizzleTable } from "../components/drizzle-table";
 import { DrizzleFilter } from "../drizzle-filter";
 import { parseSearchParams } from "../utils";
 import {
@@ -165,9 +165,11 @@ export async function ListPage(props: {
         <DrizzleFilter simplifiedColumns={simplifiedColumns} />
         <DrizzleTable
           list={list}
-          columns={simplifiedColumns}
-          curTable={curTable}
-          config={config}
+          config={{
+            basePath: config.basePath,
+            columns: simplifiedColumns,
+            curTable: curTable,
+          }}
         />
       </PageContent>
       <PageAside>

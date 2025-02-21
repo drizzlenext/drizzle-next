@@ -28,3 +28,14 @@ export type DrizzleCmsLayoutConfig = {
 export type ColumnInfoMap = {
   [key: string]: "string" | "boolean" | "number" | "date";
 };
+
+export interface SimplifiedColumn {
+  name: string;
+  dataType: string;
+}
+
+export interface DrizzleTableConfig {
+  curTable: string;
+  basePath: string;
+  columns: SimplifiedColumn[];
+}
