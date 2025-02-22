@@ -12,7 +12,7 @@ import {
 } from "drizzle-ui";
 import { renderValue } from "../utils";
 import { useState } from "react";
-import { ColumnInfoMap } from "../types";
+import { ColumnDataTypeMap } from "../types";
 
 interface UpdateStatus {
   message?: string;
@@ -26,7 +26,7 @@ export function ObjectDeleteForm({
 }: {
   obj: any;
   curTable: string;
-  columnInfoMap: ColumnInfoMap;
+  columnInfoMap: ColumnDataTypeMap;
 }) {
   const [state, setState] = useState<UpdateStatus>({});
 

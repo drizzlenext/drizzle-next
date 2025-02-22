@@ -30,7 +30,7 @@ import {
 } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
 import {
-  ColumnInfoMap,
+  ColumnDataTypeMap,
   DrizzleCmsConfig,
   Params,
   SearchParams,
@@ -154,9 +154,9 @@ export async function ListPage(props: {
   });
 
   const cols = getTableColumns(drizzleSchema);
-  const columnInfoMap: ColumnInfoMap = {};
+  const columnDataTypeMap: ColumnDataTypeMap = {};
   for (const col in cols) {
-    columnInfoMap[col] = drizzleSchema[col].dataType;
+    columnDataTypeMap[col] = drizzleSchema[col].dataType;
   }
 
   let obj;
@@ -198,7 +198,8 @@ export async function ListPage(props: {
           <ObjectUpdateForm
             obj={obj}
             curTable={curTable}
-            columnInfoMap={columnInfoMap}
+            columnDataTypeMap={columnDataTypeMap}
+            formControlMap={schema.formControlMap}
           />
         )}
       </PageAside>

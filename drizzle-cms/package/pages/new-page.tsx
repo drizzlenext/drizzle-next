@@ -1,6 +1,6 @@
 import { PageContent, PageHeader, PageLayout, PageTitle } from "drizzle-ui";
 import {
-  ColumnInfoMap,
+  ColumnDataTypeMap,
   DrizzleCmsConfig,
   Params,
   SearchParams,
@@ -25,9 +25,9 @@ export async function NewPage(props: {
   const db = props.config.db;
 
   const cols = getTableColumns(drizzleSchema);
-  const columnInfoMap: ColumnInfoMap = {};
+  const columnDataTypeMap: ColumnDataTypeMap = {};
   for (const col in cols) {
-    columnInfoMap[col] = drizzleSchema[col].dataType;
+    columnDataTypeMap[col] = drizzleSchema[col].dataType;
   }
 
   return (
@@ -36,7 +36,11 @@ export async function NewPage(props: {
         <PageTitle>New {capitalCase(pluralize(curTable, 1))}</PageTitle>
       </PageHeader>
       <PageContent>
-        <ObjectCreateForm columnInfoMap={columnInfoMap} curTable={curTable} />
+        <ObjectCreateForm
+          columnDataTypeMap={columnDataTypeMap}
+          formControlMap={schema.formControlMap}
+          curTable={curTable}
+        />
       </PageContent>
     </PageLayout>
   );

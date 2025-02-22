@@ -2,6 +2,18 @@ export type Params = Promise<{ [key: string]: string }>;
 
 export type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
+export type FormControlType =
+  | "input"
+  | "textarea"
+  | "checkbox"
+  | "date"
+  | "datetime-local"
+  | "number";
+
+export type FormControlMap = {
+  [key: string]: FormControlType;
+};
+
 export type DrizzleCmsConfig = {
   basePath: string;
   schema: {
@@ -9,6 +21,7 @@ export type DrizzleCmsConfig = {
       drizzleSchema: any;
       label: string;
       path: string;
+      formControlMap?: FormControlMap;
     };
   };
   db: any;
@@ -25,8 +38,10 @@ export type DrizzleCmsLayoutConfig = {
   };
 };
 
-export type ColumnInfoMap = {
-  [key: string]: "string" | "boolean" | "number" | "date";
+export type ColumnDataType = "string" | "boolean" | "number" | "date";
+
+export type ColumnDataTypeMap = {
+  [key: string]: ColumnDataType;
 };
 
 export interface SimplifiedColumn {

@@ -11,9 +11,9 @@ import {
   Input,
   Label,
 } from "drizzle-ui";
-import { renderValue } from "../utils";
+import { getFormControlMap, renderValue } from "../utils";
 import { useState } from "react";
-import { ColumnInfoMap } from "../types";
+import { ColumnDataTypeMap, FormControlMap } from "../types";
 import { RenderFormControl } from "./render-form-control";
 
 interface UpdateStatus {
@@ -34,10 +34,12 @@ function getStatus(statusCode: number) {
 
 export function ObjectCreateForm({
   curTable,
-  columnInfoMap,
+  columnDataTypeMap,
+  formControlMap,
 }: {
   curTable: string;
-  columnInfoMap: ColumnInfoMap;
+  columnDataTypeMap: ColumnDataTypeMap;
+  formControlMap?: FormControlMap;
 }) {
   const [state, setState] = useState<UpdateStatus>({});
 
@@ -63,6 +65,11 @@ export function ObjectCreateForm({
     }
   }
 
+  const mergedFormControlMap = getFormControlMap(
+    columnDataTypeMap,
+    formControlMap
+  );
+
   return (
     <Form onSubmit={handleSubmit} className="flex flex-col gap-2">
       {state.message && (
@@ -71,7 +78,7 @@ export function ObjectCreateForm({
         </Alert>
       )}
       <input type="hidden" name="curTable" defaultValue={curTable} />
-      {Object.keys(columnInfoMap).map((key) => {
+      {Object.keys(columnDataTypeMap).map((key) => {
         if (["id", "createdAt", "updatedAt"].includes(key)) return null;
         return (
           <div key={key}>
@@ -79,7 +86,7 @@ export function ObjectCreateForm({
             <RenderFormControl
               keyName={key}
               value={undefined}
-              columnInfoMap={columnInfoMap}
+              formControlMap={mergedFormControlMap}
             />
             {state?.error && state.error[key] && (
               <FormMessage>{state.error[key]}</FormMessage>

@@ -2,9 +2,10 @@
 
 import { Alert, Button, Form, FormControl } from "drizzle-ui";
 import { useState } from "react";
-import { ColumnInfoMap } from "../types";
+import { ColumnDataTypeMap, FormControlMap } from "../types";
 import { RenderFormControl } from "./render-form-control";
 import { useEffect } from "react";
+import { getFormControlMap } from "../utils";
 
 interface UpdateStatus {
   message?: string;
@@ -22,11 +23,13 @@ function getStatus(statusCode: number) {
 export function ObjectUpdateForm({
   obj,
   curTable,
-  columnInfoMap,
+  columnDataTypeMap,
+  formControlMap,
 }: {
   obj: any;
   curTable: string;
-  columnInfoMap: ColumnInfoMap;
+  columnDataTypeMap: ColumnDataTypeMap;
+  formControlMap?: FormControlMap;
 }) {
   const [state, setState] = useState<UpdateStatus>({});
   const [curObj, setCurObj] = useState(obj);
@@ -61,6 +64,11 @@ export function ObjectUpdateForm({
     setState({ message: json.message, status: getStatus(res.status) });
   }
 
+  const mergedFormControlMap = getFormControlMap(
+    columnDataTypeMap,
+    formControlMap
+  );
+
   return (
     <Form onSubmit={handleSubmit} className="flex flex-col gap-2">
       {state.message && (
@@ -75,7 +83,7 @@ export function ObjectUpdateForm({
             <RenderFormControl
               keyName={key}
               value={value}
-              columnInfoMap={columnInfoMap}
+              formControlMap={mergedFormControlMap}
             />
           </div>
         );

@@ -6,7 +6,7 @@ import {
   PageTitle,
 } from "drizzle-ui";
 import {
-  ColumnInfoMap,
+  ColumnDataTypeMap,
   DrizzleCmsConfig,
   Params,
   SearchParams,
@@ -40,7 +40,7 @@ export async function EditPage(props: {
   }
 
   const cols = getTableColumns(drizzleSchema);
-  const columnInfoMap: ColumnInfoMap = {};
+  const columnInfoMap: ColumnDataTypeMap = {};
   for (const col in cols) {
     columnInfoMap[col] = drizzleSchema[col].dataType;
   }

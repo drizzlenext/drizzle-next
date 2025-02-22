@@ -8,7 +8,12 @@ export const config: DrizzleCmsConfig = {
   basePath: "/cms",
   schema: {
     users: { drizzleSchema: users, label: "Users", path: "users" },
-    posts: { drizzleSchema: posts, label: "Posts", path: "posts" },
+    posts: {
+      drizzleSchema: posts,
+      label: "Posts",
+      path: "posts",
+      formControlMap: { content: "textarea", updatedAt: "input" },
+    },
     categories: {
       drizzleSchema: categories,
       label: "Categories",
