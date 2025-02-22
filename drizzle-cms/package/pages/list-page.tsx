@@ -190,6 +190,7 @@ export async function ListPage(props: {
             basePath: config.basePath,
             columns: simplifiedColumns,
             curTable: curTable,
+            curRow: obj,
           }}
         />
       </PageContent>

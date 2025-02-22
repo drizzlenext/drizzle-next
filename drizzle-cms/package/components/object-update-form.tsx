@@ -4,7 +4,6 @@ import { Alert, Button, Form, FormControl } from "drizzle-ui";
 import { useState } from "react";
 import { ColumnInfoMap } from "../types";
 import { RenderFormControl } from "./render-form-control";
-import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 interface UpdateStatus {
@@ -32,18 +31,22 @@ export function ObjectUpdateForm({
   const [state, setState] = useState<UpdateStatus>({});
   const [curObj, setCurObj] = useState(obj);
 
-  const searchParams = useSearchParams();
-
   useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    const id = params.get("id");
-    // TODO: fetch single object to load update form
-  }, [searchParams]);
+    function handleRowClick(event: CustomEvent) {
+      const { detail } = event;
+      setCurObj(detail);
+    }
+
+    window.addEventListener("rowClick", handleRowClick as EventListener);
+
+    return () => {
+      window.removeEventListener("rowClick", handleRowClick as EventListener);
+    };
+  }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    // api call
     const data = Object.fromEntries(formData.entries());
 
     const res = await fetch(`/api/${curTable}/${obj.id}`, {

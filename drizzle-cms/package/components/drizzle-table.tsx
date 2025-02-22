@@ -10,26 +10,32 @@ import {
   Sortable,
   TableHead,
   TableRowActions,
+  cn,
 } from "drizzle-ui";
 import Link from "next/link";
 import { DrizzleCmsConfig, DrizzleTableConfig } from "../types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export function DrizzleTable({
   list,
   config,
 }: {
-  list: Record<string, any>;
+  list: Record<string, any>[];
   config: DrizzleTableConfig;
 }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [curRow, setCurRow] = useState<Record<string, any>>(config.curRow);
 
-  function handleClick(id: any) {
+  function handleClick(row: any) {
+    setCurRow(row);
     const params = new URLSearchParams(searchParams);
-    params.set("id", id);
+    params.set("id", row.id);
     router.push(`${pathname}?${params.toString()}`);
+    const event = new CustomEvent("rowClick", { detail: row });
+    window.dispatchEvent(event);
   }
 
   return (
@@ -54,8 +60,11 @@ export function DrizzleTable({
           return (
             <TableRow
               key={row.id}
-              className="hover:bg-zinc-100 dark:hover:bg-zinc-800"
-              onClick={() => handleClick(row.id)}
+              className={cn(
+                "hover:bg-zinc-100 dark:hover:bg-zinc-800",
+                curRow?.id === row.id && "bg-zinc-100 dark:bg-zinc-800"
+              )}
+              onClick={() => handleClick(row)}
             >
               {config.columns.map((col) => {
                 return (

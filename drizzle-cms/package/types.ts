@@ -38,4 +38,5 @@ export interface DrizzleTableConfig {
   curTable: string;
   basePath: string;
   columns: SimplifiedColumn[];
+  curRow: Record<string, any>;
 }
