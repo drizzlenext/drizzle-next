@@ -48,6 +48,39 @@ export function POST_REQUEST(config: DrizzleCmsConfig) {
   });
 }
 
+export function GET_REQUEST(config: DrizzleCmsConfig) {
+  return withErrorHandling(async function (request: NextRequest) {
+    const url = new URL(request.url);
+    const segments = url.pathname.split("/").filter(Boolean);
+    const param0 = segments[0];
+    if (param0 !== "api") {
+      return NextResponse.json({ message: "not found" }, { status: 404 });
+    }
+    const curTable = segments[1];
+    const id = segments[2];
+    const db = config.db;
+
+    if (!(curTable in db.query)) {
+      return NextResponse.json({ message: `not found` }, { status: 404 });
+    }
+
+    const schema = config.schema[curTable];
+    const drizzleSchema = schema.drizzleSchema;
+
+    // handle object
+    if (id) {
+      const data = await db.query[curTable].findFirst({
+        where: eq(drizzleSchema.id, id),
+      });
+      return NextResponse.json({ data: data }, { status: 200 });
+    }
+
+    // handle list
+    const data = await db.query[curTable].findMany();
+    return NextResponse.json({ data: data });
+  });
+}
+
 export function PUT_REQUEST(config: DrizzleCmsConfig) {
   return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
