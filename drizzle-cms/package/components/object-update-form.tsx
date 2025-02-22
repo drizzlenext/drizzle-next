@@ -35,6 +35,7 @@ export function ObjectUpdateForm({
     function handleRowClick(event: CustomEvent) {
       const { detail } = event;
       setCurObj((prev: any) => ({ ...prev, ...detail }));
+      setState(() => ({}));
     }
 
     window.addEventListener("rowClick", handleRowClick as EventListener);
