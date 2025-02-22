@@ -164,7 +164,6 @@ export async function ListPage(props: {
     obj = await db.query[schema.path].findFirst({
       where: eq(drizzleSchema.id, searchParams.id),
     });
-    console.log(obj);
   }
 
   return (
@@ -194,7 +193,7 @@ export async function ListPage(props: {
           }}
         />
       </PageContent>
-      <PageAside>
+      <PageAside className="overflow-auto">
         {obj && (
           <ObjectUpdateForm
             obj={obj}

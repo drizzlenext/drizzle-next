@@ -1,3 +1,5 @@
+"use client";
+
 import { Checkbox, FormControl, Input, Label } from "drizzle-ui";
 import { ColumnInfoMap } from "../types";
 import { capitalCase } from "change-case-all";

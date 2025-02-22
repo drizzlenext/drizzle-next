@@ -34,7 +34,7 @@ export function ObjectUpdateForm({
   useEffect(() => {
     function handleRowClick(event: CustomEvent) {
       const { detail } = event;
-      setCurObj(detail);
+      setCurObj((prev: any) => ({ ...prev, ...detail }));
     }
 
     window.addEventListener("rowClick", handleRowClick as EventListener);
@@ -70,7 +70,7 @@ export function ObjectUpdateForm({
       <input type="hidden" name="curTable" defaultValue={curTable} />
       {Object.entries(curObj).map(([key, value]) => {
         return (
-          <div key={key}>
+          <div key={JSON.stringify(key + value)}>
             <RenderFormControl
               keyName={key}
               value={value}
