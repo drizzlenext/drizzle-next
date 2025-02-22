@@ -182,7 +182,7 @@ export async function ListPage(props: {
           <PageAsideToggle />
         </PageNav>
       </PageHeader>
-      <PageContent className="h-[calc(100vh-175px)] p-1">
+      <PageContent className="h-[calc(100vh-145px)] px-1 py-1">
         <DrizzleFilter simplifiedColumns={simplifiedColumns} />
         <DrizzleTable
           list={list}

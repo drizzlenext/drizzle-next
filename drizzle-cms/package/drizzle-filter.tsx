@@ -2,7 +2,7 @@
 
 import { capitalCase } from "change-case-all";
 import { Button, Input, Select, SelectOption } from "drizzle-ui";
-import { SimplifiedColumn } from "./drizzle-cms";
+import { SimplifiedColumn } from "./types";
 import { useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -79,9 +79,9 @@ export function DrizzleFilter({
   }
 
   return (
-    <div className="flex flex-col gap-2 mb-1">
+    <div className="flex flex-col gap-1 mb-1">
       {filters.map((filter, index) => (
-        <div key={index} className="flex gap-2">
+        <div key={index} className="flex gap-1">
           <Select
             className="min-w-16 max-w-32"
             value={filter.column}

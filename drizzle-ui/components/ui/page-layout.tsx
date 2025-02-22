@@ -57,7 +57,7 @@ const PageHeader = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex max-h-14 min-h-14 items-center justify-between gap-2 overflow-auto border-b bg-page px-5 text-page-foreground md:col-span-2",
+        "flex max-h-12 min-h-12 items-center justify-between gap-2 overflow-auto overflow-y-hidden border-b bg-page px-5 text-page-foreground md:col-span-2",
         state.asideOpen ? "" : "",
         className,
       )}
@@ -125,7 +125,7 @@ const PageFooter = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "z-20 border-t bg-page p-4 text-page-foreground md:col-span-2",
+        "z-20 max-h-12 min-h-12 border-t bg-page px-4 py-1 text-page-foreground md:col-span-2",
         state.asideOpen ? "" : "",
         className,
       )}
@@ -144,7 +144,7 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute inset-y-14 right-0 z-0 row-span-3 w-[50%] min-w-72 transform border-l bg-page p-4 text-page-foreground transition-transform duration-200 md:duration-0",
+        "absolute inset-y-12 right-0 z-0 row-span-3 w-[50%] min-w-72 transform border-l bg-page p-4 text-page-foreground transition-transform duration-200 md:duration-0",
         state.asideOpen ? "translate-x-0" : "translate-x-full",
         className,
       )}
