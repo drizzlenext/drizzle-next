@@ -37,8 +37,8 @@ const PageLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "relative grid min-h-[calc(100vh-3rem)] overflow-auto overflow-x-clip bg-page text-page-foreground",
-          state.asideOpen ? "md:grid-cols-[1fr_1fr]" : "md:grid-cols-[1fr_0px]",
+          "relative flex h-[calc(100vh-3rem)] flex-col overflow-auto overflow-x-clip bg-page text-page-foreground",
+          state.asideOpen ? "" : "",
           className,
         )}
         {...props}
@@ -57,7 +57,7 @@ const PageHeader = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex max-h-12 min-h-12 items-center justify-between gap-2 overflow-auto overflow-y-hidden border-b bg-page px-5 text-page-foreground md:col-span-2",
+        "flex max-h-12 min-h-12 items-center justify-between gap-2 overflow-auto overflow-y-hidden border-b bg-page px-5 text-page-foreground",
         state.asideOpen ? "" : "",
         className,
       )}
@@ -106,8 +106,8 @@ const PageContent = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "row-start-2 overflow-auto bg-page px-5 py-2 text-page-foreground",
-        state.asideOpen ? "" : "",
+        "flex-grow overflow-auto bg-page px-5 py-2 text-page-foreground",
+        state.asideOpen ? "w-[30%] md:w-[50%]" : "",
         className,
       )}
       {...props}
@@ -125,7 +125,7 @@ const PageFooter = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "z-20 max-h-12 min-h-12 border-t bg-page px-4 py-1 text-page-foreground md:col-span-2",
+        "z-20 max-h-12 min-h-12 border-t bg-page px-4 py-1 text-page-foreground",
         state.asideOpen ? "" : "",
         className,
       )}
@@ -144,7 +144,7 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute inset-y-12 right-0 z-0 row-span-3 w-[50%] min-w-72 transform border-l bg-page p-4 text-page-foreground transition-transform duration-200 md:duration-0",
+        "absolute inset-y-12 right-0 z-0 w-[70%] transform border-l bg-page p-4 text-page-foreground transition-transform duration-200 md:w-[50%] md:duration-0",
         state.asideOpen ? "translate-x-0" : "translate-x-full",
         className,
       )}
