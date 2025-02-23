@@ -40,9 +40,9 @@ export async function EditPage(props: {
   }
 
   const cols = getTableColumns(drizzleSchema);
-  const columnInfoMap: ColumnDataTypeMap = {};
+  const columnDataTypeMap: ColumnDataTypeMap = {};
   for (const col in cols) {
-    columnInfoMap[col] = drizzleSchema[col].dataType;
+    columnDataTypeMap[col] = drizzleSchema[col].dataType;
   }
 
   return (
@@ -71,7 +71,7 @@ export async function EditPage(props: {
         <ObjectUpdateForm
           obj={obj}
           curTable={curTable}
-          columnInfoMap={columnInfoMap}
+          columnDataTypeMap={columnDataTypeMap}
         />
       </PageContent>
     </PageLayout>

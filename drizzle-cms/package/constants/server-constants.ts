@@ -1,5 +1,17 @@
+import { eq, gt, gte, like, lt, lte, ne, ilike } from "drizzle-orm";
 import { ColumnDataType } from "drizzle-orm";
-import { FormControlType } from "./types";
+import { FormControlType } from "../types";
+
+export const OPERATOR_MAP = {
+  "=": eq,
+  "<>": ne,
+  ">": gt,
+  "<": lt,
+  ">=": gte,
+  "<=": lte,
+  Contains: like,
+  "Contains - Case Insensitive": ilike,
+};
 
 export const DEFAULT_FORM_CONTROLS: Record<ColumnDataType, FormControlType> = {
   string: "input",

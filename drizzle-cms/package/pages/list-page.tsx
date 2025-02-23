@@ -13,21 +13,8 @@ import {
 } from "drizzle-ui";
 import { DrizzleTable } from "../components/drizzle-table";
 import { DrizzleFilter } from "../drizzle-filter";
-import { parseSearchParams } from "../utils";
-import {
-  and,
-  asc,
-  desc,
-  eq,
-  gt,
-  gte,
-  like,
-  lt,
-  lte,
-  ne,
-  ilike,
-  getTableColumns,
-} from "drizzle-orm";
+import { parseSearchParams } from "../utils/server-utils";
+import { and, asc, desc, eq, like, getTableColumns } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
 import {
   ColumnDataTypeMap,
@@ -38,23 +25,13 @@ import {
 } from "../types";
 import Link from "next/link";
 import { ObjectUpdateForm } from "../components/object-update-form";
+import { OPERATOR_MAP } from "../constants/server-constants";
 
 export interface ListPageParams {
   curTable: string;
   simplifiedColumns: { name: string; dataType: any }[];
   config: DrizzleCmsConfig;
 }
-
-const operatorMap = {
-  "=": eq,
-  "<>": ne,
-  ">": gt,
-  "<": lt,
-  ">=": gte,
-  "<=": lte,
-  Contains: like,
-  "Contains - Case Insensitive": ilike,
-};
 
 export async function ListPage(props: {
   params: Params;
@@ -113,17 +90,17 @@ export async function ListPage(props: {
   const tableConf = getTableConfig(drizzleSchema);
 
   if (config.dbDialect === "sqlite" || config.dbDialect === "mysql") {
-    operatorMap["Contains - Case Insensitive"] = like;
+    OPERATOR_MAP["Contains - Case Insensitive"] = like;
   }
 
   const whereClause = [];
 
   for (const filter of filters) {
     if (!filter.column && !filter.operator && !filter.value) continue;
-    if (!(filter.operator in operatorMap)) {
+    if (!(filter.operator in OPERATOR_MAP)) {
       throw new Error("operator invalid");
     }
-    const op = operatorMap[filter.operator as keyof typeof operatorMap];
+    const op = OPERATOR_MAP[filter.operator as keyof typeof OPERATOR_MAP];
     const col = drizzleSchema[filter.column];
     let parsedValue;
     if (col.dataType === "date" && filter.operator !== "Contains") {

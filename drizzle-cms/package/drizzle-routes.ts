@@ -1,21 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { DrizzleCmsConfig, Filter } from "./types";
 import { createSchemaFactory } from "drizzle-zod";
-import {
-  and,
-  asc,
-  desc,
-  eq,
-  gt,
-  gte,
-  like,
-  lt,
-  lte,
-  ne,
-  ilike,
-  getTableColumns,
-} from "drizzle-orm";
-import { parseSearchParams } from "./utils";
+import { and, asc, desc, eq, getTableColumns } from "drizzle-orm";
+import { parseSearchParams } from "./utils/server-utils";
+import { OPERATOR_MAP } from "./constants/server-constants";
 
 const { createUpdateSchema, createInsertSchema } = createSchemaFactory({
   coerce: {
@@ -23,17 +11,6 @@ const { createUpdateSchema, createInsertSchema } = createSchemaFactory({
     boolean: true,
   },
 });
-
-const operatorMap = {
-  "=": eq,
-  "<>": ne,
-  ">": gt,
-  "<": lt,
-  ">=": gte,
-  "<=": lte,
-  Contains: like,
-  "Contains - Case Insensitive": ilike,
-};
 
 export function POST_REQUEST(config: DrizzleCmsConfig) {
   return withErrorHandling(async function (request: NextRequest) {
@@ -147,10 +124,10 @@ export function GET_REQUEST(config: DrizzleCmsConfig) {
 
     for (const filter of filters) {
       if (!filter.column && !filter.operator && !filter.value) continue;
-      if (!(filter.operator in operatorMap)) {
+      if (!(filter.operator in OPERATOR_MAP)) {
         throw new Error("operator invalid");
       }
-      const op = operatorMap[filter.operator as keyof typeof operatorMap];
+      const op = OPERATOR_MAP[filter.operator as keyof typeof OPERATOR_MAP];
       const col = drizzleSchema[filter.column];
       let parsedValue;
       if (col.dataType === "date" && filter.operator !== "Contains") {

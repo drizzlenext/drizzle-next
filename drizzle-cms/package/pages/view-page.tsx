@@ -9,7 +9,7 @@ import {
 import { DrizzleCmsConfig, Params, SearchParams } from "../types";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
-import { renderValue } from "../utils";
+import { renderValue } from "../utils/shared-utils";
 import { notFound } from "next/navigation";
 import { ChevronRightIcon } from "lucide-react";
 

@@ -11,7 +11,7 @@ import {
   Input,
   Label,
 } from "drizzle-ui";
-import { getFormControlMap, renderValue } from "../utils";
+import { getFormControlMap } from "../utils/client-utils";
 import { useState } from "react";
 import { ColumnDataTypeMap, FormControlMap } from "../types";
 import { RenderFormControl } from "./render-form-control";

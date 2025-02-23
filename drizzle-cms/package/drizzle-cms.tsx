@@ -1,16 +1,4 @@
-import { capitalCase } from "change-case-all";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow,
-  Sortable,
-  TableHead,
-  TableRowActions,
-} from "drizzle-ui";
 import { DrizzleCmsLayout } from "./drizzle-cms-layout";
-import Link from "next/link";
 import { ListPage } from "./pages/list-page";
 import {
   DrizzleCmsConfig,
