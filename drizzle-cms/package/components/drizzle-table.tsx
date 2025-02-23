@@ -103,17 +103,30 @@ export function DrizzleTable({
         data[curCell.col.name] = new Date(data[curCell.col.name]);
       }
 
+      const newData = Object.assign({}, curList[idx], data);
+
+      const updateEvent = new CustomEvent("rowClick", {
+        detail: newData,
+      });
+      window.dispatchEvent(updateEvent);
+
       setCurList([
         ...curList.slice(0, idx),
-        Object.assign({}, curList[idx], data),
+        newData,
         ...curList.slice(idx + 1),
       ]);
     } else {
       console.error("patch failed");
-      alert("Patch failed.");
+      alert("Server error.");
     }
 
     setCurCell(undefined);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      e.currentTarget.blur();
+    }
   }
 
   return (
@@ -155,7 +168,12 @@ export function DrizzleTable({
                     onDoubleClick={(e) => handleDoubleClickCell(e, row, col)}
                   >
                     {isCurrentCell(row, col, curCell) ? (
-                      <TableCellInput row={row} col={col} onBlur={handleBlur} />
+                      <TableCellInput
+                        row={row}
+                        col={col}
+                        onBlur={handleBlur}
+                        onKeyDown={handleKeyDown}
+                      />
                     ) : (
                       <>
                         {col.dataType === "date" &&
@@ -212,10 +230,12 @@ function TableCellInput({
   row,
   col,
   onBlur,
+  onKeyDown,
 }: {
   row: Record<string, any>;
   col: SimplifiedColumn;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }) {
   if (col.dataType === "boolean") {
     return (
@@ -223,6 +243,7 @@ function TableCellInput({
         className="border h-10"
         defaultValue={row[col.name] ? "t" : "f"}
         onBlur={onBlur}
+        onKeyDown={onKeyDown}
       />
     );
   } else if (col.dataType === "date") {
@@ -231,6 +252,7 @@ function TableCellInput({
         className="border h-10"
         defaultValue={row[col.name].toLocaleString()}
         onBlur={onBlur}
+        onKeyDown={onKeyDown}
       />
     );
   }
@@ -240,6 +262,7 @@ function TableCellInput({
       className="border h-10"
       defaultValue={row[col.name]}
       onBlur={onBlur}
+      onKeyDown={onKeyDown}
     />
   );
 }
