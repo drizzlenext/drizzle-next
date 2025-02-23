@@ -1,16 +1,6 @@
 "use client";
 
-import { capitalCase } from "change-case-all";
-import {
-  Alert,
-  Button,
-  Checkbox,
-  Form,
-  FormControl,
-  Input,
-  Label,
-} from "drizzle-ui";
-import { renderValue } from "../utils";
+import { Alert, Button, Form, FormControl, Label } from "drizzle-ui";
 import { useState } from "react";
 import { ColumnDataTypeMap } from "../types";
 

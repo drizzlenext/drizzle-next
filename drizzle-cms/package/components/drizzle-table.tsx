@@ -13,7 +13,7 @@ import {
   cn,
 } from "drizzle-ui";
 import Link from "next/link";
-import { DrizzleCmsConfig, DrizzleTableConfig } from "../types";
+import { DrizzleTableConfig } from "../types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
