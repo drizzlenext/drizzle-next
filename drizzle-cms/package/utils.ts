@@ -4,7 +4,9 @@ import { DEFAULT_FORM_CONTROLS } from "./constants";
 
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
-export function parseSearchParams(searchParams: Awaited<SearchParams>) {
+export function parseSearchParams(
+  searchParams: Awaited<SearchParams> | { [key: string]: string }
+) {
   const page =
     typeof searchParams.page === "string"
       ? parseInt(searchParams.page)

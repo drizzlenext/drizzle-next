@@ -1,7 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DrizzleCmsConfig } from "./types";
-import { eq, getTableColumns } from "drizzle-orm";
+import { DrizzleCmsConfig, Filter } from "./types";
 import { createSchemaFactory } from "drizzle-zod";
+import {
+  and,
+  asc,
+  desc,
+  eq,
+  gt,
+  gte,
+  like,
+  lt,
+  lte,
+  ne,
+  ilike,
+  getTableColumns,
+} from "drizzle-orm";
+import { parseSearchParams } from "./utils";
 
 const { createUpdateSchema, createInsertSchema } = createSchemaFactory({
   coerce: {
@@ -9,6 +23,17 @@ const { createUpdateSchema, createInsertSchema } = createSchemaFactory({
     boolean: true,
   },
 });
+
+const operatorMap = {
+  "=": eq,
+  "<>": ne,
+  ">": gt,
+  "<": lt,
+  ">=": gte,
+  "<=": lte,
+  Contains: like,
+  "Contains - Case Insensitive": ilike,
+};
 
 export function POST_REQUEST(config: DrizzleCmsConfig) {
   return withErrorHandling(async function (request: NextRequest) {
@@ -52,6 +77,7 @@ export function GET_REQUEST(config: DrizzleCmsConfig) {
   return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
+
     const param0 = segments[0];
     if (param0 !== "api") {
       return NextResponse.json({ message: "not found" }, { status: 404 });
@@ -76,8 +102,77 @@ export function GET_REQUEST(config: DrizzleCmsConfig) {
     }
 
     // handle list
-    const data = await db.query[curTable].findMany();
-    return NextResponse.json({ data: data });
+
+    const queryParams = Object.fromEntries(url.searchParams.entries());
+    const filtersParam = queryParams.filters;
+
+    const {
+      page = 1,
+      pageIndex = 0,
+      pageSize = 10,
+      search,
+      sortKey = "createdAt",
+      sortOrder = "desc",
+    } = parseSearchParams(queryParams);
+
+    let orderBy;
+
+    if (sortKey && sortKey in drizzleSchema) {
+      switch (sortOrder) {
+        case "asc":
+          orderBy = asc(drizzleSchema[sortKey as keyof typeof drizzleSchema]);
+          break;
+        case "desc":
+          orderBy = desc(drizzleSchema[sortKey as keyof typeof drizzleSchema]);
+          break;
+        default:
+          break;
+      }
+    }
+
+    let filters: Array<Filter> = [];
+
+    if (filtersParam) {
+      try {
+        filters = JSON.parse(filtersParam);
+      } catch (error) {
+        return NextResponse.json(
+          { message: "Invalid filters format" },
+          { status: 400 }
+        );
+      }
+    }
+
+    const whereClause = [];
+
+    for (const filter of filters) {
+      if (!filter.column && !filter.operator && !filter.value) continue;
+      if (!(filter.operator in operatorMap)) {
+        throw new Error("operator invalid");
+      }
+      const op = operatorMap[filter.operator as keyof typeof operatorMap];
+      const col = drizzleSchema[filter.column];
+      let parsedValue;
+      if (col.dataType === "date" && filter.operator !== "Contains") {
+        parsedValue = new Date(filter.value);
+      } else if (filter.operator.startsWith("Contains")) {
+        parsedValue = `%${filter.value}%`;
+      } else {
+        parsedValue = filter.value;
+      }
+
+      whereClause.push(op(drizzleSchema[filter.column], parsedValue));
+    }
+
+    const count = await db.$count(drizzleSchema, and(...whereClause));
+
+    const data = await db.query[curTable].findMany({
+      limit: pageSize,
+      offset: pageIndex * pageSize,
+      orderBy: orderBy,
+      where: and(...whereClause),
+    });
+    return NextResponse.json({ count: count, data: data });
   });
 }
 
