@@ -62,6 +62,12 @@ export function ObjectUpdateForm({
     });
     const json = await res.json();
     setState({ message: json.message, status: getStatus(res.status) });
+    if (res.ok) {
+      const event = new CustomEvent("objectUpdateFormSubmitted", {
+        detail: data,
+      });
+      window.dispatchEvent(event);
+    }
   }
 
   const mergedFormControlMap = getFormControlMap(

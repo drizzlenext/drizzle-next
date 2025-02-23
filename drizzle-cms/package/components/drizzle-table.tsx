@@ -50,6 +50,29 @@ export function DrizzleTable({
     }
   }, [curCell]);
 
+  useEffect(() => {
+    function handler(event: CustomEvent) {
+      const { detail } = event;
+      const idx = curList.findIndex((obj) => detail.id === obj.id);
+      if (idx === -1) {
+        return;
+      }
+      setCurList([...curList.slice(0, idx), detail, ...curList.slice(idx + 1)]);
+    }
+
+    window.addEventListener(
+      "objectUpdateFormSubmitted",
+      handler as EventListener
+    );
+
+    return () => {
+      window.removeEventListener(
+        "objectUpdateFormSubmitted",
+        handler as EventListener
+      );
+    };
+  }, []);
+
   function handleClick(row: any) {
     setCurRow(row);
     const params = new URLSearchParams(searchParams);
