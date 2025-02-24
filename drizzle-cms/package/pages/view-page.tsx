@@ -24,10 +24,10 @@ export async function ViewPage(props: {
   const curTable = params.segments[0];
   const id = params.segments[1];
   const schema = config.schema[curTable];
-  const drizzleSchema = schema.drizzleSchema;
+  const drizzleTable = schema.drizzleTable;
   const db = props.config.db;
   const obj = await db.query[schema.path].findFirst({
-    where: eq(drizzleSchema.id, id),
+    where: eq(drizzleTable.id, id),
   });
 
   if (!obj) {

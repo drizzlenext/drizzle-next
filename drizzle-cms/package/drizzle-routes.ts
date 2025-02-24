@@ -27,11 +27,11 @@ export function POST_REQUEST(config: DrizzleCmsConfig) {
     const id = segments[2];
     const db = config.db;
     const schema = config.schema[curTable];
-    const drizzleSchema = schema.drizzleSchema;
+    const drizzleTable = schema.drizzleTable;
 
-    const obj = getEmptyDrizzleObject(drizzleSchema);
+    const obj = getEmptyDrizzleObject(drizzleTable);
 
-    const insertSchema = createInsertSchema(drizzleSchema);
+    const insertSchema = createInsertSchema(drizzleTable);
 
     const validatedFields = insertSchema.safeParse({ ...obj, ...body });
 
@@ -45,7 +45,7 @@ export function POST_REQUEST(config: DrizzleCmsConfig) {
     if (!(curTable in db.query)) {
       return NextResponse.json({ message: `not found` }, { status: 404 });
     }
-    await db.insert(drizzleSchema).values(validatedFields.data);
+    await db.insert(drizzleTable).values(validatedFields.data);
     return NextResponse.json({ message: `Create success` });
   });
 }
@@ -68,7 +68,7 @@ export function GET_REQUEST(config: DrizzleCmsConfig) {
     }
 
     const schema = config.schema[curTable];
-    const drizzleSchema = schema.drizzleSchema;
+    const drizzleSchema = schema.drizzleTable;
 
     // handle object
     if (id) {
@@ -168,7 +168,7 @@ export function PUT_REQUEST(config: DrizzleCmsConfig) {
     const id = segments[2];
     const db = config.db;
     const schema = config.schema[curTable];
-    const drizzleSchema = schema.drizzleSchema;
+    const drizzleSchema = schema.drizzleTable;
 
     const obj = getEmptyDrizzleObject(drizzleSchema);
 
@@ -211,7 +211,7 @@ export function PATCH_REQUEST(config: DrizzleCmsConfig) {
     const id = segments[2];
     const db = config.db;
     const schema = config.schema[curTable];
-    const drizzleSchema = schema.drizzleSchema;
+    const drizzleSchema = schema.drizzleTable;
 
     const patchSchema = createUpdateSchema(drizzleSchema);
 
@@ -254,7 +254,7 @@ export function DELETE_REQUEST(config: DrizzleCmsConfig) {
     const id = segments[2];
     const db = config.db;
     const schema = config.schema[curTable];
-    const drizzleSchema = schema.drizzleSchema;
+    const drizzleSchema = schema.drizzleTable;
 
     if (!(curTable in db.query)) {
       return NextResponse.json({ message: `not found` }, { status: 404 });

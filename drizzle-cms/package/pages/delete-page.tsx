@@ -29,20 +29,20 @@ export async function DeletePage(props: {
   const curTable = params.segments[0];
   const id = params.segments[1];
   const schema = config.schema[curTable];
-  const drizzleSchema = schema.drizzleSchema;
+  const drizzleTable = schema.drizzleTable;
   const db = props.config.db;
   const obj = await db.query[schema.path].findFirst({
-    where: eq(drizzleSchema.id, id),
+    where: eq(drizzleTable.id, id),
   });
 
   if (!obj) {
     notFound();
   }
 
-  const cols = getTableColumns(drizzleSchema);
+  const cols = getTableColumns(drizzleTable);
   const columnInfoMap: ColumnDataTypeMap = {};
   for (const col in cols) {
-    columnInfoMap[col] = drizzleSchema[col].dataType;
+    columnInfoMap[col] = drizzleTable[col].dataType;
   }
 
   return (

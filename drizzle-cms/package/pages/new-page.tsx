@@ -23,13 +23,13 @@ export async function NewPage(props: {
   const curTable = params.segments[0];
   const id = params.segments[1];
   const schema = config.schema[curTable];
-  const drizzleSchema = schema.drizzleSchema;
+  const drizzleTable = schema.drizzleTable;
   const db = props.config.db;
 
-  const cols = getTableColumns(drizzleSchema);
+  const cols = getTableColumns(drizzleTable);
   const columnDataTypeMap: ColumnDataTypeMap = {};
   for (const col in cols) {
-    columnDataTypeMap[col] = drizzleSchema[col].dataType;
+    columnDataTypeMap[col] = drizzleTable[col].dataType;
   }
 
   return (

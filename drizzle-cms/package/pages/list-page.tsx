@@ -11,7 +11,7 @@ import {
   PageTitle,
   Pagination,
 } from "drizzle-ui";
-import { DrizzleTable } from "../components/drizzle-table";
+import { ObjectTable } from "../components/object-table";
 import { DrizzleFilter } from "../drizzle-filter";
 import { parseSearchParams } from "../utils/server-utils";
 import { and, asc, desc, eq, like, getTableColumns } from "drizzle-orm";
@@ -61,7 +61,7 @@ export async function ListPage(props: {
 
   const schema = config.schema[curTable];
 
-  const drizzleSchema = schema.drizzleSchema;
+  const drizzleTable = schema.drizzleTable;
 
   const {
     page = 1,
@@ -74,20 +74,20 @@ export async function ListPage(props: {
 
   let orderBy;
 
-  if (sortKey && sortKey in drizzleSchema) {
+  if (sortKey && sortKey in drizzleTable) {
     switch (sortOrder) {
       case "asc":
-        orderBy = asc(drizzleSchema[sortKey as keyof typeof drizzleSchema]);
+        orderBy = asc(drizzleTable[sortKey as keyof typeof drizzleTable]);
         break;
       case "desc":
-        orderBy = desc(drizzleSchema[sortKey as keyof typeof drizzleSchema]);
+        orderBy = desc(drizzleTable[sortKey as keyof typeof drizzleTable]);
         break;
       default:
         break;
     }
   }
 
-  const tableConf = getTableConfig(drizzleSchema);
+  const tableConf = getTableConfig(drizzleTable);
 
   if (config.dbDialect === "sqlite" || config.dbDialect === "mysql") {
     OPERATOR_MAP["Contains - Case Insensitive"] = like;
@@ -101,7 +101,7 @@ export async function ListPage(props: {
       throw new Error("operator invalid");
     }
     const op = OPERATOR_MAP[filter.operator as keyof typeof OPERATOR_MAP];
-    const col = drizzleSchema[filter.column];
+    const col = drizzleTable[filter.column];
     let parsedValue;
     if (col.dataType === "date" && filter.operator !== "Contains") {
       parsedValue = new Date(filter.value);
@@ -111,10 +111,10 @@ export async function ListPage(props: {
       parsedValue = filter.value;
     }
 
-    whereClause.push(op(drizzleSchema[filter.column], parsedValue));
+    whereClause.push(op(drizzleTable[filter.column], parsedValue));
   }
 
-  const count = await db.$count(drizzleSchema, and(...whereClause));
+  const count = await db.$count(drizzleTable, and(...whereClause));
 
   const totalPages = Math.ceil(count / pageSize);
 
@@ -131,16 +131,16 @@ export async function ListPage(props: {
     };
   });
 
-  const cols = getTableColumns(drizzleSchema);
+  const cols = getTableColumns(drizzleTable);
   const columnDataTypeMap: ColumnDataTypeMap = {};
   for (const col in cols) {
-    columnDataTypeMap[col] = drizzleSchema[col].dataType;
+    columnDataTypeMap[col] = drizzleTable[col].dataType;
   }
 
   let obj;
   if (searchParams.id) {
     obj = await db.query[schema.path].findFirst({
-      where: eq(drizzleSchema.id, searchParams.id),
+      where: eq(drizzleTable.id, searchParams.id),
     });
   }
 
@@ -161,7 +161,7 @@ export async function ListPage(props: {
       </PageHeader>
       <PageContent className="h-[calc(100vh-145px)] px-1 py-1">
         <DrizzleFilter simplifiedColumns={simplifiedColumns} />
-        <DrizzleTable
+        <ObjectTable
           list={list}
           config={{
             basePath: config.basePath,

@@ -24,7 +24,7 @@ interface CurrentCell {
   el: HTMLTableCellElement;
 }
 
-export function DrizzleTable({
+export function ObjectTable({
   list,
   config,
 }: {

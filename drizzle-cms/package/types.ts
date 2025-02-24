@@ -18,7 +18,7 @@ export type DrizzleCmsConfig = {
   basePath: string;
   schema: {
     [key: string]: {
-      drizzleSchema: any;
+      drizzleTable: any;
       label: string;
       path: string;
       formControlMap?: FormControlMap;
