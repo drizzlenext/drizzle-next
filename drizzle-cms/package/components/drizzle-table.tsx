@@ -71,7 +71,7 @@ export function DrizzleTable({
         handler as EventListener
       );
     };
-  }, []);
+  }, [curList]);
 
   function handleClick(row: any) {
     setCurRow(row);
@@ -185,7 +185,7 @@ export function DrizzleTable({
                   <TableCell
                     key={col.name}
                     className={cn(
-                      "text-nowrap overflow-clip max-w-28 border select-none",
+                      "text-nowrap overflow-clip min-w-12 max-w-24 border select-none",
                       isCurrentCell(row, col, curCell) && "p-0"
                     )}
                     onDoubleClick={(e) => handleDoubleClickCell(e, row, col)}
@@ -200,7 +200,9 @@ export function DrizzleTable({
                     ) : (
                       <>
                         {col.dataType === "date" &&
-                          row[col.name]?.toLocaleString()}
+                        row[col.name] instanceof Date
+                          ? row[col.name]?.toISOString()
+                          : row[col.name]}
                         {col.dataType === "json" &&
                           JSON.stringify(row[col.name])}
                         {col.dataType === "string" && row[col.name]}
@@ -215,7 +217,7 @@ export function DrizzleTable({
                 );
               })}
               <TableCell>
-                <TableRowActions>
+                <TableRowActions onClick={(e) => e.stopPropagation()}>
                   <Link
                     href={`${config.basePath}/${config.curTable}/${row.id}`}
                   >
@@ -273,7 +275,11 @@ function TableCellInput({
     return (
       <Input
         className="border h-10"
-        defaultValue={row[col.name].toLocaleString()}
+        defaultValue={
+          row[col.name] instanceof Date
+            ? row[col.name].toISOString()
+            : new Date(row[col.name]).toISOString()
+        }
         onBlur={onBlur}
         onKeyDown={onKeyDown}
       />

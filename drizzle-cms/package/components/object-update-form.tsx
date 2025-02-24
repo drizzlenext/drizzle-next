@@ -63,8 +63,11 @@ export function ObjectUpdateForm({
     const json = await res.json();
     setState({ message: json.message, status: getStatus(res.status) });
     if (res.ok) {
+      const res = await fetch(`/api/${curTable}/${obj.id}`);
+      const json = await res.json();
+      setCurObj(json.data);
       const event = new CustomEvent("objectUpdateFormSubmitted", {
-        detail: data,
+        detail: json.data,
       });
       window.dispatchEvent(event);
     }

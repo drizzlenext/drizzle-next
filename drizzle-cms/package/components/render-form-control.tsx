@@ -27,8 +27,12 @@ export function RenderFormControl({
         <FormControl>
           <Label htmlFor={keyName}>{capitalCase(keyName)}</Label>
           <Input
-            type="date"
-            defaultValue={value?.toISOString().slice(0, 16)}
+            // type="date"
+            defaultValue={
+              value instanceof Date
+                ? value?.toISOString()
+                : new Date(value).toISOString()
+            }
             name={keyName}
             id={keyName}
           />
@@ -39,8 +43,12 @@ export function RenderFormControl({
         <FormControl>
           <Label htmlFor={keyName}>{capitalCase(keyName)}</Label>
           <Input
-            type="datetime-local"
-            defaultValue={value?.toISOString().slice(0, 16)}
+            // type="datetime-local"
+            defaultValue={
+              value instanceof Date
+                ? value.toISOString()
+                : new Date(value).toISOString()
+            }
             name={keyName}
             id={keyName}
           />

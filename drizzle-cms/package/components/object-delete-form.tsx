@@ -3,6 +3,7 @@
 import { Alert, Button, Form, FormControl, Label } from "drizzle-ui";
 import { useState } from "react";
 import { ColumnDataTypeMap } from "../types";
+import pluralize from "pluralize";
 
 interface UpdateStatus {
   message?: string;
@@ -46,12 +47,18 @@ export function ObjectDeleteForm({
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="flex flex-col gap-2">
       <input type="hidden" name="curTable" defaultValue={curTable} />
       <FormControl>
-        <Label>Are you sure you want to delete this {curTable}</Label>
-        <Button type="submit">Submit</Button>
+        <Label>
+          Are you sure you want to delete this {pluralize(curTable, 1)}?
+        </Label>
       </FormControl>
+      <div>
+        <Button type="submit" variant="destructive">
+          Delete
+        </Button>
+      </div>
     </Form>
   );
 }
