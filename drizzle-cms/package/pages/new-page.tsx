@@ -9,6 +9,8 @@ import { capitalCase } from "change-case-all";
 import pluralize from "pluralize";
 import { ObjectCreateForm } from "../components/object-create-form";
 import { getTableColumns } from "drizzle-orm";
+import Link from "next/link";
+import { ChevronRightIcon } from "lucide-react";
 
 export async function NewPage(props: {
   params: Params;
@@ -33,7 +35,13 @@ export async function NewPage(props: {
   return (
     <PageLayout>
       <PageHeader>
-        <PageTitle>New {capitalCase(pluralize(curTable, 1))}</PageTitle>
+        <PageTitle className="flex items-center">
+          <Link href={`${config.basePath}/${curTable}`} className="underline">
+            {capitalCase(curTable)}
+          </Link>
+          <ChevronRightIcon />
+          New
+        </PageTitle>
       </PageHeader>
       <PageContent>
         <ObjectCreateForm

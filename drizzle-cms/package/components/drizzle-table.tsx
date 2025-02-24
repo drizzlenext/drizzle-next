@@ -200,9 +200,11 @@ export function DrizzleTable({
                     ) : (
                       <>
                         {col.dataType === "date" &&
-                        row[col.name] instanceof Date
-                          ? row[col.name]?.toISOString()
-                          : row[col.name]}
+                          row[col.name] instanceof Date &&
+                          row[col.name]?.toISOString()}
+                        {col.dataType === "date" &&
+                          typeof row[col.name] === "string" &&
+                          row[col.name]}
                         {col.dataType === "json" &&
                           JSON.stringify(row[col.name])}
                         {col.dataType === "string" && row[col.name]}
