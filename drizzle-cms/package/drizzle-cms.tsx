@@ -1,11 +1,5 @@
-import { DrizzleCmsLayout } from "./drizzle-cms-layout";
 import { ListPage } from "./pages/list-page";
-import {
-  DrizzleCmsConfig,
-  DrizzleCmsLayoutConfig,
-  Params,
-  SearchParams,
-} from "./types";
+import { DrizzleCmsConfig, Params, SearchParams } from "./types";
 import { RootPage } from "./pages/root-page";
 import { ViewPage } from "./pages/view-page";
 import { EditPage } from "./pages/edit-page";
@@ -19,21 +13,7 @@ export async function DrizzleCms(props: {
   config: DrizzleCmsConfig;
 }) {
   const params = await props.params;
-  const searchParams = await props.searchParams;
   const config = completeDrizzleCmsConfig(props.config);
-  const db = config.db;
-
-  const slimSchema: { [key: string]: { label: string; path: string } } = {};
-
-  Object.entries(config.schema).forEach(
-    ([key, value]) =>
-      (slimSchema[key] = { label: value.label, path: value.path })
-  );
-
-  const drizzleCmsLayoutConfig: DrizzleCmsLayoutConfig = {
-    basePath: config.basePath,
-    sidebarTables: slimSchema,
-  };
 
   let page;
   if (!params.segments) {
@@ -54,7 +34,5 @@ export async function DrizzleCms(props: {
     }
   }
 
-  return (
-    <DrizzleCmsLayout config={drizzleCmsLayoutConfig}>{page}</DrizzleCmsLayout>
-  );
+  return <>{page}</>;
 }

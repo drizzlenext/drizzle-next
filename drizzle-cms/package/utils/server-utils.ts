@@ -1,6 +1,7 @@
 import {
   DrizzleCmsConfig,
   DrizzleCmsConfigComplete,
+  DrizzleCmsLayoutConfig,
   DrizzleTableConfigComplete,
   SearchParams,
 } from "../types";
@@ -50,7 +51,37 @@ export function completeDrizzleCmsConfig(config: DrizzleCmsConfig) {
     schema: completeSchema,
     db: config.db,
     dbDialect: config.dbDialect,
+    sidebar: config.sidebar,
   };
+
+  return completeConfig;
+}
+
+// function for generating the layout config from drizzle cms config
+// adds table links to sidebar dynamically if the dynamic-tables item is present
+// can't use the cms config because it contains circular server-side references
+// layout is client-side
+export function completeLayoutConfig(config: DrizzleCmsConfig) {
+  const conf = completeDrizzleCmsConfig(config);
+  const completeConfig: DrizzleCmsLayoutConfig = {
+    basePath: conf.basePath,
+    sidebar: conf.sidebar,
+  };
+
+  const dynamicTablesSidebar = completeConfig.sidebar.find(
+    (item) => item.type === "dynamic-tables"
+  );
+
+  if (dynamicTablesSidebar) {
+    dynamicTablesSidebar.items = [];
+
+    Object.entries(conf.schema).forEach(([key, value]) => {
+      dynamicTablesSidebar?.items?.push({
+        text: value.tableName,
+        link: `${config.basePath}/${value.path}`,
+      });
+    });
+  }
 
   return completeConfig;
 }

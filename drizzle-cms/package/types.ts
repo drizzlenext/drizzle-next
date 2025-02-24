@@ -22,6 +22,13 @@ export type DrizzleTableConfig = {
   formControlMap?: FormControlMap;
 };
 
+export type SidebarItem = {
+  text: string;
+  link?: string;
+  items?: SidebarItem[];
+  type?: "dynamic-tables";
+};
+
 export type DrizzleCmsConfig = {
   basePath: string;
   schema: {
@@ -29,6 +36,7 @@ export type DrizzleCmsConfig = {
   };
   db: any;
   dbDialect: "postgresql" | "mysql" | "sqlite";
+  sidebar: SidebarItem[];
 };
 
 export type DrizzleTableConfigComplete = Required<DrizzleTableConfig>;
@@ -39,12 +47,7 @@ export type DrizzleCmsConfigComplete = Required<DrizzleCmsConfig> & {
 
 export type DrizzleCmsLayoutConfig = {
   basePath: string;
-  sidebarTables: {
-    [key: string]: {
-      label: string;
-      path: string;
-    };
-  };
+  sidebar: SidebarItem[];
 };
 
 export type ColumnDataType = "string" | "boolean" | "number" | "date";

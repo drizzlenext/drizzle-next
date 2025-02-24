@@ -18,4 +18,9 @@ export const config: DrizzleCmsConfig = {
   },
   db: db,
   dbDialect: "sqlite",
+  sidebar: [
+    { text: "Custom Page", link: "/cms/custom-page" },
+    { text: "Custom Group", items: [{ text: "A custom link", link: "/" }] },
+    { text: "Tables", type: "dynamic-tables" },
+  ],
 };
