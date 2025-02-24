@@ -1,10 +1,15 @@
 import { PageContent, PageHeader, PageLayout, PageTitle } from "drizzle-ui";
-import { DrizzleCmsConfig, Params, SearchParams } from "../types";
+import {
+  DrizzleCmsConfig,
+  DrizzleCmsConfigComplete,
+  Params,
+  SearchParams,
+} from "../types";
 
 export async function RootPage(props: {
   params: Params;
   searchParams: SearchParams;
-  config: DrizzleCmsConfig;
+  config: DrizzleCmsConfigComplete;
 }) {
   return (
     <PageLayout>

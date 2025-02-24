@@ -19,6 +19,7 @@ import { getTableConfig } from "drizzle-orm/sqlite-core";
 import {
   ColumnDataTypeMap,
   DrizzleCmsConfig,
+  DrizzleCmsConfigComplete,
   Filter,
   Params,
   SearchParams,
@@ -36,7 +37,7 @@ export interface ListPageParams {
 export async function ListPage(props: {
   params: Params;
   searchParams: SearchParams;
-  config: DrizzleCmsConfig;
+  config: DrizzleCmsConfigComplete;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;

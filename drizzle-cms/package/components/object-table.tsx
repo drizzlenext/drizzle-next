@@ -14,7 +14,7 @@ import {
   Input,
 } from "drizzle-ui";
 import Link from "next/link";
-import { DrizzleTableConfig, SimplifiedColumn } from "../types";
+import { ObjectTableConfig, SimplifiedColumn } from "../types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -29,7 +29,7 @@ export function ObjectTable({
   config,
 }: {
   list: Record<string, any>[];
-  config: DrizzleTableConfig;
+  config: ObjectTableConfig;
 }) {
   const router = useRouter();
   const pathname = usePathname();

@@ -8,6 +8,7 @@ import {
 import {
   ColumnDataTypeMap,
   DrizzleCmsConfig,
+  DrizzleCmsConfigComplete,
   Params,
   SearchParams,
 } from "../types";
@@ -21,7 +22,7 @@ import { ChevronRightIcon } from "lucide-react";
 export async function DeletePage(props: {
   params: Params;
   searchParams: SearchParams;
-  config: DrizzleCmsConfig;
+  config: DrizzleCmsConfigComplete;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;

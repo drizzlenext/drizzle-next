@@ -14,23 +14,32 @@ export type FormControlMap = {
   [key: string]: FormControlType;
 };
 
+export type DrizzleTableConfig = {
+  drizzleTable: any;
+  tableName?: string;
+  label?: string;
+  path?: string;
+  formControlMap?: FormControlMap;
+};
+
 export type DrizzleCmsConfig = {
   basePath: string;
   schema: {
-    [key: string]: {
-      drizzleTable: any;
-      label: string;
-      path: string;
-      formControlMap?: FormControlMap;
-    };
+    [key: string]: DrizzleTableConfig;
   };
   db: any;
   dbDialect: "postgresql" | "mysql" | "sqlite";
 };
 
+export type DrizzleTableConfigComplete = Required<DrizzleTableConfig>;
+
+export type DrizzleCmsConfigComplete = Required<DrizzleCmsConfig> & {
+  schema: { [key: string]: DrizzleTableConfigComplete };
+};
+
 export type DrizzleCmsLayoutConfig = {
   basePath: string;
-  schema: {
+  sidebarTables: {
     [key: string]: {
       label: string;
       path: string;
@@ -49,7 +58,7 @@ export interface SimplifiedColumn {
   dataType: string;
 }
 
-export interface DrizzleTableConfig {
+export interface ObjectTableConfig {
   curTable: string;
   basePath: string;
   columns: SimplifiedColumn[];

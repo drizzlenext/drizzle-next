@@ -29,9 +29,9 @@ export function DrizzleCmsLayout({
 }) {
   const pathname = usePathname();
 
-  const tables = Object.values(config.schema).map((schema) => ({
-    label: schema.label,
-    path: schema.path,
+  const tables = Object.values(config.sidebarTables).map((item) => ({
+    label: item.label,
+    path: item.path,
   }));
 
   return (

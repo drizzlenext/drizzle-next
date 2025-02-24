@@ -11,6 +11,7 @@ import { ViewPage } from "./pages/view-page";
 import { EditPage } from "./pages/edit-page";
 import { NewPage } from "./pages/new-page";
 import { DeletePage } from "./pages/delete-page";
+import { completeDrizzleCmsConfig } from "./utils/server-utils";
 
 export async function DrizzleCms(props: {
   params: Params;
@@ -19,7 +20,7 @@ export async function DrizzleCms(props: {
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;
-  const config = props.config;
+  const config = completeDrizzleCmsConfig(props.config);
   const db = config.db;
 
   const slimSchema: { [key: string]: { label: string; path: string } } = {};
@@ -31,25 +32,25 @@ export async function DrizzleCms(props: {
 
   const drizzleCmsLayoutConfig: DrizzleCmsLayoutConfig = {
     basePath: config.basePath,
-    schema: slimSchema,
+    sidebarTables: slimSchema,
   };
 
   let page;
   if (!params.segments) {
-    page = <RootPage {...props} />;
+    page = <RootPage {...props} config={config} />;
   } else if (params.segments.length === 1) {
-    page = <ListPage {...props} />;
+    page = <ListPage {...props} config={config} />;
   } else if (params.segments.length === 2) {
     if (params.segments[1] === "new") {
-      page = <NewPage {...props} />;
+      page = <NewPage {...props} config={config} />;
     } else {
-      page = <ViewPage {...props} />;
+      page = <ViewPage {...props} config={config} />;
     }
   } else if (params.segments.length === 3) {
     if (params.segments[2] === "edit") {
-      page = <EditPage {...props} />;
+      page = <EditPage {...props} config={config} />;
     } else if (params.segments[2] === "delete") {
-      page = <DeletePage {...props} />;
+      page = <DeletePage {...props} config={config} />;
     }
   }
 

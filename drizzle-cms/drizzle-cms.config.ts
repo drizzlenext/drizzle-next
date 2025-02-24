@@ -7,17 +7,13 @@ import { users } from "./schema/users";
 export const config: DrizzleCmsConfig = {
   basePath: "/cms",
   schema: {
-    users: { drizzleTable: users, label: "Users", path: "users" },
+    users: { drizzleTable: users },
     posts: {
       drizzleTable: posts,
-      label: "Posts",
-      path: "posts",
       formControlMap: { content: "textarea", updatedAt: "input" },
     },
     categories: {
       drizzleTable: categories,
-      label: "Categories",
-      path: "categories",
     },
   },
   db: db,

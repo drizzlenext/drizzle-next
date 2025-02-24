@@ -6,7 +6,12 @@ import {
   PageNav,
   PageTitle,
 } from "drizzle-ui";
-import { DrizzleCmsConfig, Params, SearchParams } from "../types";
+import {
+  DrizzleCmsConfig,
+  DrizzleCmsConfigComplete,
+  Params,
+  SearchParams,
+} from "../types";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { renderValue } from "../utils/shared-utils";
@@ -16,7 +21,7 @@ import { ChevronRightIcon } from "lucide-react";
 export async function ViewPage(props: {
   params: Params;
   searchParams: SearchParams;
-  config: DrizzleCmsConfig;
+  config: DrizzleCmsConfigComplete;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;
