@@ -10,6 +10,8 @@ const items = [
     { title: "Users", url: "/admin/users", icon: Table2Icon },
   { title: "Categories", url: "/admin/categories", icon: Table2Icon },
   { title: "Posts", url: "/admin/posts", icon: Table2Icon },
+  { title: "Tags", url: "/admin/tags", icon: Table2Icon },
+  { title: "Posts Tags", url: "/admin/posts-tags", icon: Table2Icon },
 // [CODE_MARK admin-sidebar-items]
   { title: "Settings", url: "/admin/settings", icon: SettingsIcon },
   { title: "Sign out", url: "/signout", icon: LogOutIcon },

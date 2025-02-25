@@ -1,3 +1,4 @@
+import { kebabCase } from "change-case-all";
 import {
   DrizzleCmsConfig,
   DrizzleCmsConfigComplete,
@@ -41,7 +42,7 @@ export function completeDrizzleCmsConfig(config: DrizzleCmsConfig) {
       drizzleTable: value.drizzleTable,
       tableName: value.tableName || key,
       label: value.label || key,
-      path: value.path || key,
+      path: value.path || kebabCase(key),
       formControlMap: value.formControlMap || {},
       TableRowActionsSlot: value.TableRowActionsSlot,
     };

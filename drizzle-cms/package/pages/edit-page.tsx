@@ -12,7 +12,7 @@ import {
   Params,
   SearchParams,
 } from "../types";
-import { capitalCase } from "change-case-all";
+import { camelCase, capitalCase } from "change-case-all";
 import { eq, getTableColumns } from "drizzle-orm";
 import Link from "next/link";
 import { ObjectUpdateForm } from "../components/object-update-form";
@@ -27,12 +27,13 @@ export async function EditPage(props: {
   const params = await props.params;
   const searchParams = await props.searchParams;
   const config = props.config;
-  const curTable = params.segments[0];
+  const curPath = params.segments[0];
+  const curTable = camelCase(curPath);
   const id = params.segments[1];
-  const schema = config.schema[curTable];
-  const drizzleTable = schema.drizzleTable;
+  const drizzleTableConfig = config.schema[curTable];
+  const drizzleTable = drizzleTableConfig.drizzleTable;
   const db = props.config.db;
-  const obj = await db.query[schema.path].findFirst({
+  const obj = await db.query[curTable].findFirst({
     where: eq(drizzleTable.id, id),
   });
 
@@ -50,12 +51,12 @@ export async function EditPage(props: {
     <PageLayout>
       <PageHeader>
         <PageTitle className="flex items-center">
-          <Link href={`${config.basePath}/${curTable}`} className="underline">
-            {capitalCase(curTable)}
+          <Link href={`${config.basePath}/${curPath}`} className="underline">
+            {capitalCase(curPath)}
           </Link>
           <ChevronRightIcon />{" "}
           <Link
-            href={`${config.basePath}/${curTable}/${id}`}
+            href={`${config.basePath}/${curPath}/${id}`}
             className="underline"
           >
             {obj.id}
@@ -63,7 +64,7 @@ export async function EditPage(props: {
           <ChevronRightIcon /> Edit
         </PageTitle>
         <PageNav>
-          <Link href={`${config.basePath}/${curTable}/${id}/delete`}>
+          <Link href={`${config.basePath}/${curPath}/${id}/delete`}>
             Delete
           </Link>
         </PageNav>

@@ -1,4 +1,4 @@
-import { capitalCase } from "change-case-all";
+import { camelCase, capitalCase } from "change-case-all";
 import {
   Button,
   PageAside,
@@ -58,11 +58,12 @@ export async function ListPage(props: {
   const config = props.config;
   const db = props.config.db;
 
-  const curTable = params.segments[0];
+  const curPath = params.segments[0];
+  const curTable = camelCase(curPath);
 
-  const schema = config.schema[curTable];
+  const drizzleTableConfig = config.schema[curTable];
 
-  const drizzleTable = schema.drizzleTable;
+  const drizzleTable = drizzleTableConfig.drizzleTable;
 
   const {
     page = 1,
@@ -119,7 +120,7 @@ export async function ListPage(props: {
 
   const totalPages = Math.ceil(count / pageSize);
 
-  const list = await db.query[schema.path].findMany({
+  const list = await db.query[curTable].findMany({
     limit: pageSize,
     offset: pageIndex * pageSize,
     orderBy: orderBy,
@@ -140,7 +141,7 @@ export async function ListPage(props: {
 
   let obj;
   if (searchParams.id) {
-    obj = await db.query[schema.path].findFirst({
+    obj = await db.query[curTable].findFirst({
       where: eq(drizzleTable.id, searchParams.id),
     });
   }
@@ -149,8 +150,8 @@ export async function ListPage(props: {
     <PageLayout asideOpen={!!obj}>
       <PageHeader>
         <PageTitle className="flex gap-5 items-center">
-          {capitalCase(curTable)}{" "}
-          <Link href={`${config.basePath}/${curTable}/new`}>
+          {capitalCase(curPath)}{" "}
+          <Link href={`${config.basePath}/${curPath}/new`}>
             <Button className="rounded-2xl" variant="muted">
               New
             </Button>
@@ -167,8 +168,9 @@ export async function ListPage(props: {
           basePath={config.basePath}
           columns={simplifiedColumns}
           curTable={curTable}
+          curPath={curPath}
           curRow={obj}
-          TableRowActionsSlot={schema.TableRowActionsSlot}
+          TableRowActionsSlot={drizzleTableConfig.TableRowActionsSlot}
         />
       </PageContent>
       <PageAside className="overflow-auto">
@@ -177,7 +179,7 @@ export async function ListPage(props: {
             obj={obj}
             curTable={curTable}
             columnDataTypeMap={columnDataTypeMap}
-            formControlMap={schema.formControlMap}
+            formControlMap={drizzleTableConfig.formControlMap}
           />
         )}
       </PageAside>

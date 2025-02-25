@@ -3,6 +3,8 @@ import { db } from "./lib/db";
 import { DrizzleCmsConfig } from "./package/types";
 import { categories } from "./schema/categories";
 import { posts } from "./schema/posts";
+import { postsTags } from "./schema/posts-tags";
+import { tags } from "./schema/tags";
 import { users } from "./schema/users";
 
 export const config: DrizzleCmsConfig = {
@@ -16,6 +18,13 @@ export const config: DrizzleCmsConfig = {
     },
     categories: {
       drizzleTable: categories,
+    },
+    tags: {
+      drizzleTable: tags,
+    },
+    postsTags: {
+      drizzleTable: postsTags,
+      label: "posts tags",
     },
   },
   db: db,

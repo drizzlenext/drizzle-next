@@ -1,6 +1,6 @@
 "use client";
 
-import { capitalCase } from "change-case-all";
+import { capitalCase, kebabCase } from "change-case-all";
 import {
   Table,
   TableBody,
@@ -26,6 +26,7 @@ interface CurrentCell {
 
 type ObjectTableProps = {
   list: Record<string, any>[];
+  curPath: string;
   curTable: string;
   basePath: string;
   columns: SimplifiedColumn[];
@@ -232,6 +233,7 @@ export function ObjectTable(props: ObjectTableProps) {
                         <DefaultRowActions
                           basePath={props.basePath}
                           curTable={props.curTable}
+                          curPath={props.curPath}
                           row={row}
                         />
                       )}
@@ -241,6 +243,7 @@ export function ObjectTable(props: ObjectTableProps) {
                     <DefaultRowActions
                       basePath={props.basePath}
                       curTable={props.curTable}
+                      curPath={props.curPath}
                       row={row}
                     />
                   )}
@@ -257,17 +260,18 @@ export function ObjectTable(props: ObjectTableProps) {
 function DefaultRowActions(props: {
   basePath: string;
   curTable: string;
+  curPath: string;
   row: any;
 }) {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curTable}/${props.row.id}`}>
+      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}`}>
         View
       </Link>
-      <Link href={`${props.basePath}/${props.curTable}/${props.row.id}/edit`}>
+      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/edit`}>
         Edit
       </Link>
-      <Link href={`${props.basePath}/${props.curTable}/${props.row.id}/delete`}>
+      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/delete`}>
         Delete
       </Link>
     </>
