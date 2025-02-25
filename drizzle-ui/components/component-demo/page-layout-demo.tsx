@@ -21,9 +21,9 @@ export function PageLayoutDemo() {
         <PageNav>
           <Button variant="info">New</Button>
         </PageNav>
-        <PageAsideToggle />
       </PageHeader>
       <PageContent>
+        <PageAsideToggle className="ml-auto" />
         <TableDemo />
       </PageContent>
       <PageAside>

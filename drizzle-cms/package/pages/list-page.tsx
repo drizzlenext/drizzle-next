@@ -170,7 +170,12 @@ export async function ListPage(props: {
         </PageNav>
       </PageHeader>
       <PageContent className="h-[calc(100vh-145px)]">
-        <DrizzleFilter simplifiedColumns={simplifiedColumns} />
+        <div className="flex justify-between">
+          <DrizzleFilter simplifiedColumns={simplifiedColumns} />
+          <div className="flex-shrink">
+            <PageAsideToggle className="ml-2" />
+          </div>
+        </div>
         <ObjectTable
           list={list}
           basePath={config.basePath}
@@ -198,7 +203,6 @@ export async function ListPage(props: {
           pageSize={pageSize}
           totalPages={totalPages}
         />
-        <PageAsideToggle />
       </PageFooter>
     </PageLayout>
   );

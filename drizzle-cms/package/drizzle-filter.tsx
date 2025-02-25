@@ -64,7 +64,7 @@ export function DrizzleFilter({
 
   if (filters.length === 0) {
     return (
-      <div className="flex justify-end mb-2">
+      <div className="flex mb-2">
         <Button
           variant="outline"
           className="flex gap-2 items-center"
@@ -79,7 +79,7 @@ export function DrizzleFilter({
   }
 
   return (
-    <div className="flex flex-col gap-1 mb-1">
+    <div className="flex flex-col flex-grow gap-1 mb-1">
       {filters.map((filter, index) => (
         <div key={index} className="flex gap-1">
           <Select
