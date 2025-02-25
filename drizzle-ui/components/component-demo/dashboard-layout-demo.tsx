@@ -13,7 +13,7 @@ import {
   DashboardNav,
   DashboardNavToggle,
 } from "@/components/ui/dashboard-layout";
-import { ArrowUpRightIcon, Table2Icon } from "lucide-react";
+import { ArrowUpRightIcon, NotebookIcon, Table2Icon } from "lucide-react";
 import Link from "next/link";
 import { DarkModeToggle } from "@/components/ui/dark-mode";
 import { usePathname } from "next/navigation";
@@ -46,7 +46,7 @@ export function DashboardLayoutDemo() {
             className="flex items-center gap-1"
             target="_blank"
           >
-            Drizzle Next <ArrowUpRightIcon className="h-4 w-4 text-muted-500" />
+            Drizzle Next <ArrowUpRightIcon className="text-muted-500 h-4 w-4" />
           </Link>
           <DarkModeToggle />
         </DashboardNav>
@@ -54,7 +54,9 @@ export function DashboardLayoutDemo() {
       </DashboardHeader>
       <DashboardSidebar>
         <DashboardSidebarGroup>
-          <DashboardSidebarLabel>Documentation</DashboardSidebarLabel>
+          <DashboardSidebarLabel>
+            <NotebookIcon /> Documentation
+          </DashboardSidebarLabel>
           {items.map((item) => (
             <Link key={item.link} href={item.link}>
               <DashboardSidebarItem active={pathname === item.link}>

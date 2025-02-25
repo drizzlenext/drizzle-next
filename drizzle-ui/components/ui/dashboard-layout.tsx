@@ -201,7 +201,11 @@ const DashboardSidebarLabel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("px-3 pt-2 font-bold", className)} {...props} />
+  <div
+    ref={ref}
+    className={cn("flex gap-2 px-3 pt-2 font-bold", className)}
+    {...props}
+  />
 ));
 DashboardSidebarLabel.displayName = "DashboardSidebarLabel";
 

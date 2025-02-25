@@ -1,3 +1,4 @@
+import { GroupIcon, Table2Icon, TableIcon } from "lucide-react";
 import {
   PostDeletePageActions,
   PostEditPageActions,
@@ -12,6 +13,8 @@ import { posts } from "./schema/posts";
 import { postsTags } from "./schema/posts-tags";
 import { tags } from "./schema/tags";
 import { users } from "./schema/users";
+import Link from "next/link";
+import { Button } from "drizzle-ui";
 
 export const config: DrizzleCmsConfig = {
   basePath: "/cms",
@@ -24,7 +27,17 @@ export const config: DrizzleCmsConfig = {
       ViewPageActionsSlot: PostViewPageActions,
       EditPageActionsSlot: PostEditPageActions,
       DeletePageActionsSlot: PostDeletePageActions,
-      ListPageActionsSlot: PostListPageActions,
+      ListPageActionsSlot: (props) => {
+        return (
+          <>
+            <Link href={`${props.basePath}/${props.curPath}/new`}>
+              <Button className="rounded-2xl" variant="muted">
+                New
+              </Button>
+            </Link>
+          </>
+        );
+      },
     },
     categories: {
       drizzleTable: categories,
@@ -40,8 +53,18 @@ export const config: DrizzleCmsConfig = {
   db: db,
   dbDialect: "sqlite",
   sidebar: [
-    { text: "Custom Page", link: "/cms/custom-page" },
-    { text: "Custom Group", items: [{ text: "A custom link", link: "/" }] },
+    {
+      text: "Custom Page",
+      link: "/cms/custom-page",
+      icon: <Table2Icon size={16} />,
+    },
+    {
+      text: "Custom Group",
+      icon: <GroupIcon size={16} />,
+      items: [
+        { text: "A custom link", link: "/", icon: <TableIcon size={16} /> },
+      ],
+    },
     { text: "Tables", type: "dynamic-tables" },
   ],
 };

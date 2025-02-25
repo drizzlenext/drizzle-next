@@ -57,19 +57,27 @@ function renderSidebarItems(pathname: string, sidebarItems?: SidebarItem[]) {
       {sidebarItems.map((item) => {
         if (item.link) {
           return (
-            <Link href={item.link} key={item.text}>
-              <DashboardSidebarItem active={pathname === item.link}>
-                {item.text}
-                {renderSidebarItems(pathname, item.items)}
-              </DashboardSidebarItem>
-            </Link>
+            <div key={item.text}>
+              <Link href={item.link}>
+                <DashboardSidebarItem active={pathname === item.link}>
+                  {item.icon ? item.icon : null}
+                  {item.text}
+                </DashboardSidebarItem>
+              </Link>
+
+              {renderSidebarItems(pathname, item.items)}
+            </div>
           );
         } else {
           return (
-            <DashboardSidebarLabel key={item.text}>
-              {item.text}
+            <div key={item.text}>
+              <DashboardSidebarLabel>
+                {item.icon ? item.icon : null}
+                {item.text}
+              </DashboardSidebarLabel>
+
               {renderSidebarItems(pathname, item.items)}
-            </DashboardSidebarLabel>
+            </div>
           );
         }
       })}

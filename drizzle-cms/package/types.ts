@@ -1,3 +1,4 @@
+import { LucideIcon } from "lucide-react";
 import { JSX } from "react";
 
 export type Params = Promise<{ [key: string]: string }>;
@@ -52,6 +53,7 @@ export type SidebarItem = {
   link?: string;
   items?: SidebarItem[];
   type?: "dynamic-tables";
+  icon?: JSX.Element;
 };
 
 export type DrizzleCmsConfig = {
