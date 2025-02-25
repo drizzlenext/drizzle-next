@@ -31,7 +31,9 @@ export function RenderFormControl({
             defaultValue={
               value instanceof Date
                 ? value?.toISOString()
-                : new Date(value).toISOString()
+                : typeof value === "string"
+                ? new Date(value).toISOString()
+                : undefined
             }
             name={keyName}
             id={keyName}
@@ -47,7 +49,9 @@ export function RenderFormControl({
             defaultValue={
               value instanceof Date
                 ? value.toISOString()
-                : new Date(value).toISOString()
+                : typeof value === "string"
+                ? new Date(value).toISOString()
+                : undefined
             }
             name={keyName}
             id={keyName}
