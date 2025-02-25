@@ -189,7 +189,7 @@ export function ObjectTable(props: ObjectTableProps) {
                   <TableCell
                     key={col.name}
                     className={cn(
-                      "text-nowrap overflow-clip border select-none",
+                      "text-nowrap overflow-clip border select-none max-w-96",
                       isCurrentCell(row, col, curCell) && "p-0"
                     )}
                     onDoubleClick={(e) => handleDoubleClickCell(e, row, col)}
