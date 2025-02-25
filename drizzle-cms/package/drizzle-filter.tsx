@@ -64,7 +64,7 @@ export function DrizzleFilter({
 
   if (filters.length === 0) {
     return (
-      <div className="flex justify-end mb-1">
+      <div className="flex justify-end mb-2">
         <Button
           variant="outline"
           className="flex gap-2 items-center"

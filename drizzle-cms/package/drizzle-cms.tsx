@@ -34,5 +34,9 @@ export async function DrizzleCms(props: {
     }
   }
 
+  if (!page) {
+    return <div>Not Found</div>;
+  }
+
   return <>{page}</>;
 }

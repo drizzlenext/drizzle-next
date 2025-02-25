@@ -45,6 +45,10 @@ export function completeDrizzleCmsConfig(config: DrizzleCmsConfig) {
       path: value.path || kebabCase(key),
       formControlMap: value.formControlMap || {},
       TableRowActionsSlot: value.TableRowActionsSlot,
+      ViewPageActionsSlot: value.ViewPageActionsSlot,
+      ListPageActionsSlot: value.ListPageActionsSlot,
+      EditPageActionsSlot: value.EditPageActionsSlot,
+      DeletePageActionsSlot: value.DeletePageActionsSlot,
     };
   });
 

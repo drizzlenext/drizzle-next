@@ -228,15 +228,8 @@ export function ObjectTable(props: ObjectTableProps) {
                     <props.TableRowActionsSlot
                       basePath={props.basePath}
                       curTable={props.curTable}
+                      curPath={props.curPath}
                       row={row}
-                      DefaultRowActions={() => (
-                        <DefaultRowActions
-                          basePath={props.basePath}
-                          curTable={props.curTable}
-                          curPath={props.curPath}
-                          row={row}
-                        />
-                      )}
                     />
                   )}
                   {!props.TableRowActionsSlot && (

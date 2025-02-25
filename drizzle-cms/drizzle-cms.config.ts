@@ -1,4 +1,10 @@
-import { PostRowActions } from "./drizzle-cms.components";
+import {
+  PostDeletePageActions,
+  PostEditPageActions,
+  PostListPageActions,
+  PostRowActions,
+  PostViewPageActions,
+} from "./drizzle-cms.components";
 import { db } from "./lib/db";
 import { DrizzleCmsConfig } from "./package/types";
 import { categories } from "./schema/categories";
@@ -15,6 +21,10 @@ export const config: DrizzleCmsConfig = {
       drizzleTable: posts,
       formControlMap: { content: "textarea", updatedAt: "input" },
       TableRowActionsSlot: PostRowActions,
+      ViewPageActionsSlot: PostViewPageActions,
+      EditPageActionsSlot: PostEditPageActions,
+      DeletePageActionsSlot: PostDeletePageActions,
+      ListPageActionsSlot: PostListPageActions,
     },
     categories: {
       drizzleTable: categories,

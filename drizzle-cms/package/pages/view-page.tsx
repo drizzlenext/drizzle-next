@@ -50,10 +50,21 @@ export async function ViewPage(props: {
           <ChevronRightIcon /> {obj.id}
         </PageTitle>
         <PageNav>
-          <Link href={`${config.basePath}/${curPath}/${id}/edit`}>Edit</Link>
-          <Link href={`${config.basePath}/${curPath}/${id}/delete`}>
-            Delete
-          </Link>
+          {drizzleTableConfig.ViewPageActionsSlot && (
+            <drizzleTableConfig.ViewPageActionsSlot
+              basePath={config.basePath}
+              curPath={curPath}
+              curTable={curTable}
+              row={obj}
+            />
+          )}
+          {!drizzleTableConfig.ViewPageActionsSlot && (
+            <DefaultPageActions
+              basePath={config.basePath}
+              curPath={curPath}
+              obj={obj}
+            />
+          )}
         </PageNav>
       </PageHeader>
       <PageContent>
@@ -64,5 +75,22 @@ export async function ViewPage(props: {
         ))}
       </PageContent>
     </PageLayout>
+  );
+}
+
+function DefaultPageActions(props: {
+  basePath: string;
+  curPath: string;
+  obj: any;
+}) {
+  return (
+    <>
+      <Link href={`${props.basePath}/${props.curPath}/${props.obj.id}/edit`}>
+        Edit
+      </Link>
+      <Link href={`${props.basePath}/${props.curPath}/${props.obj.id}/delete`}>
+        Delete
+      </Link>
+    </>
   );
 }

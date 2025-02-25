@@ -19,11 +19,20 @@ export type FormControlMap = {
 export type TableRowActionsProps = {
   basePath: string;
   curTable: string;
+  curPath: string;
   row: any;
-  DefaultRowActions: () => JSX.Element;
 };
 
 export type TableRowActionsSlot = (props: TableRowActionsProps) => JSX.Element;
+
+export type PageActionsProps = {
+  basePath: string;
+  curTable: string;
+  curPath: string;
+  row?: any;
+};
+
+export type PageActionsSlot = (props: PageActionsProps) => JSX.Element;
 
 export type DrizzleTableConfig = {
   drizzleTable: any;
@@ -32,6 +41,10 @@ export type DrizzleTableConfig = {
   path?: string;
   formControlMap?: FormControlMap;
   TableRowActionsSlot?: TableRowActionsSlot;
+  ViewPageActionsSlot?: PageActionsSlot;
+  EditPageActionsSlot?: PageActionsSlot;
+  DeletePageActionsSlot?: PageActionsSlot;
+  ListPageActionsSlot?: PageActionsSlot;
 };
 
 export type SidebarItem = {
@@ -58,6 +71,10 @@ export type DrizzleTableConfigComplete = {
   path: string;
   formControlMap: FormControlMap;
   TableRowActionsSlot?: TableRowActionsSlot;
+  ViewPageActionsSlot?: PageActionsSlot;
+  EditPageActionsSlot?: PageActionsSlot;
+  DeletePageActionsSlot?: PageActionsSlot;
+  ListPageActionsSlot?: PageActionsSlot;
 };
 
 export type DrizzleCmsConfigComplete = {

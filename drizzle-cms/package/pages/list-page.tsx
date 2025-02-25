@@ -151,17 +151,25 @@ export async function ListPage(props: {
       <PageHeader>
         <PageTitle className="flex gap-5 items-center">
           {capitalCase(curPath)}{" "}
-          <Link href={`${config.basePath}/${curPath}/new`}>
-            <Button className="rounded-2xl" variant="muted">
-              New
-            </Button>
-          </Link>
         </PageTitle>
         <PageNav className="flex-wrap px-0">
-          <PageAsideToggle />
+          {drizzleTableConfig.ListPageActionsSlot && (
+            <drizzleTableConfig.ListPageActionsSlot
+              basePath={config.basePath}
+              curPath={curPath}
+              curTable={curTable}
+            />
+          )}
+          {!drizzleTableConfig.ListPageActionsSlot && (
+            <Link href={`${config.basePath}/${curPath}/new`}>
+              <Button className="rounded-2xl" variant="muted">
+                New
+              </Button>
+            </Link>
+          )}
         </PageNav>
       </PageHeader>
-      <PageContent className="h-[calc(100vh-145px)] px-1 py-1">
+      <PageContent className="h-[calc(100vh-145px)]">
         <DrizzleFilter simplifiedColumns={simplifiedColumns} />
         <ObjectTable
           list={list}
@@ -183,13 +191,14 @@ export async function ListPage(props: {
           />
         )}
       </PageAside>
-      <PageFooter>
+      <PageFooter className="flex justify-between">
         <Pagination
           count={count}
           page={page}
           pageSize={pageSize}
           totalPages={totalPages}
         />
+        <PageAsideToggle />
       </PageFooter>
     </PageLayout>
   );

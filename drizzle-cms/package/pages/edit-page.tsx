@@ -64,9 +64,14 @@ export async function EditPage(props: {
           <ChevronRightIcon /> Edit
         </PageTitle>
         <PageNav>
-          <Link href={`${config.basePath}/${curPath}/${id}/delete`}>
-            Delete
-          </Link>
+          {drizzleTableConfig.EditPageActionsSlot && (
+            <drizzleTableConfig.EditPageActionsSlot
+              basePath={config.basePath}
+              curPath={curPath}
+              curTable={curTable}
+              row={obj}
+            />
+          )}
         </PageNav>
       </PageHeader>
       <PageContent>
