@@ -20,13 +20,14 @@ export function PageLayoutDemo() {
         <PageTitle>Page Header</PageTitle>
         <PageNav>
           <Button variant="info">New</Button>
+          <PageAsideToggle className="ml-auto" />
         </PageNav>
       </PageHeader>
       <PageContent>
-        <PageAsideToggle className="ml-auto" />
         <TableDemo />
       </PageContent>
       <PageAside>
+        <PageAsideToggle className="ml-auto" />
         Filter
         <SearchInput />
       </PageAside>

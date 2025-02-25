@@ -167,14 +167,12 @@ export async function ListPage(props: {
               </Button>
             </Link>
           )}
+          <PageAsideToggle />
         </PageNav>
       </PageHeader>
       <PageContent className="h-[calc(100vh-145px)]">
-        <div className="flex justify-between">
+        <div className="flex justify-end">
           <DrizzleFilter simplifiedColumns={simplifiedColumns} />
-          <div className="flex-shrink">
-            <PageAsideToggle className="ml-2" />
-          </div>
         </div>
         <ObjectTable
           list={list}
@@ -187,6 +185,7 @@ export async function ListPage(props: {
         />
       </PageContent>
       <PageAside className="overflow-auto">
+        <PageAsideToggle className="ml-auto" />
         {obj && (
           <ObjectUpdateForm
             obj={obj}

@@ -57,7 +57,7 @@ const PageHeader = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex max-h-12 min-h-12 items-center justify-between gap-2 overflow-auto overflow-y-hidden border-b bg-page p-3 text-page-foreground",
+        "flex items-center justify-between gap-2 border-b bg-page p-3 text-page-foreground",
         state.asideOpen ? "" : "",
         className,
       )}
@@ -89,7 +89,7 @@ const PageNav = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "[&>a]:text-info-600 dark:[&>a]:text-info-400 ml-auto flex items-center gap-5 bg-page p-3 text-page-foreground [&>a]:underline",
+      "ml-auto flex items-center gap-3 bg-page text-page-foreground",
       className,
     )}
     {...props}
@@ -107,7 +107,7 @@ const PageContent = React.forwardRef<
       ref={ref}
       className={cn(
         "flex-grow overflow-auto bg-page p-3 text-page-foreground",
-        state.asideOpen ? "w-[30%] md:w-[50%]" : "",
+        state.asideOpen ? "" : "",
         className,
       )}
       {...props}
@@ -125,7 +125,7 @@ const PageFooter = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "z-20 flex max-h-12 min-h-12 items-center border-t bg-page px-3 text-page-foreground",
+        "z-0 flex items-center border-t bg-page p-3 text-page-foreground",
         state.asideOpen ? "" : "",
         className,
       )}
@@ -144,7 +144,7 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute inset-y-12 right-0 z-0 w-[70%] transform border-l bg-page p-3 text-page-foreground transition-transform duration-200 md:w-[50%] md:duration-0",
+        "absolute right-0 z-10 h-full w-[70%] transform border-l bg-page p-3 text-page-foreground transition-transform duration-200 md:w-[50%] md:duration-0",
         state.asideOpen ? "translate-x-0" : "translate-x-full",
         className,
       )}
