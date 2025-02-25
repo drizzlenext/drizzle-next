@@ -8,7 +8,7 @@ import { users } from "./schema/users";
 export const config: DrizzleCmsConfig = {
   basePath: "/cms",
   schema: {
-    users: { drizzleTable: users },
+    users: { drizzleTable: users, label: "Users" },
     posts: {
       drizzleTable: posts,
       formControlMap: { content: "textarea", updatedAt: "input" },

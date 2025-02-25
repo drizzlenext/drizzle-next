@@ -78,7 +78,7 @@ export function completeLayoutConfig(config: DrizzleCmsConfig) {
 
     Object.entries(conf.schema).forEach(([key, value]) => {
       dynamicTablesSidebar?.items?.push({
-        text: value.tableName,
+        text: value.label,
         link: `${config.basePath}/${value.path}`,
       });
     });

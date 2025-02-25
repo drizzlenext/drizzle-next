@@ -1,4 +1,4 @@
-import { JSX, ReactNode } from "react";
+import { JSX } from "react";
 
 export type Params = Promise<{ [key: string]: string }>;
 
