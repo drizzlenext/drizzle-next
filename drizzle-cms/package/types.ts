@@ -1,3 +1,5 @@
+import { JSX, ReactNode } from "react";
+
 export type Params = Promise<{ [key: string]: string }>;
 
 export type SearchParams = Promise<{ [key: string]: string | undefined }>;
@@ -14,12 +16,22 @@ export type FormControlMap = {
   [key: string]: FormControlType;
 };
 
+export type TableRowActionsProps = {
+  basePath: string;
+  curTable: string;
+  row: any;
+  DefaultRowActions: () => JSX.Element;
+};
+
+export type TableRowActionsSlot = (props: TableRowActionsProps) => JSX.Element;
+
 export type DrizzleTableConfig = {
   drizzleTable: any;
   tableName?: string;
   label?: string;
   path?: string;
   formControlMap?: FormControlMap;
+  TableRowActionsSlot?: TableRowActionsSlot;
 };
 
 export type SidebarItem = {
@@ -39,10 +51,23 @@ export type DrizzleCmsConfig = {
   sidebar: SidebarItem[];
 };
 
-export type DrizzleTableConfigComplete = Required<DrizzleTableConfig>;
+export type DrizzleTableConfigComplete = {
+  drizzleTable: any;
+  tableName: string;
+  label: string;
+  path: string;
+  formControlMap: FormControlMap;
+  TableRowActionsSlot?: TableRowActionsSlot;
+};
 
-export type DrizzleCmsConfigComplete = Required<DrizzleCmsConfig> & {
-  schema: { [key: string]: DrizzleTableConfigComplete };
+export type DrizzleCmsConfigComplete = {
+  basePath: string;
+  schema: {
+    [key: string]: DrizzleTableConfigComplete;
+  };
+  db: any;
+  dbDialect: "postgresql" | "mysql" | "sqlite";
+  sidebar: SidebarItem[];
 };
 
 export type DrizzleCmsLayoutConfig = {
@@ -59,13 +84,6 @@ export type ColumnDataTypeMap = {
 export interface SimplifiedColumn {
   name: string;
   dataType: string;
-}
-
-export interface ObjectTableConfig {
-  curTable: string;
-  basePath: string;
-  columns: SimplifiedColumn[];
-  curRow: Record<string, any>;
 }
 
 export interface Filter {

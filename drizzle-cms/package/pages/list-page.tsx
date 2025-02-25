@@ -164,12 +164,11 @@ export async function ListPage(props: {
         <DrizzleFilter simplifiedColumns={simplifiedColumns} />
         <ObjectTable
           list={list}
-          config={{
-            basePath: config.basePath,
-            columns: simplifiedColumns,
-            curTable: curTable,
-            curRow: obj,
-          }}
+          basePath={config.basePath}
+          columns={simplifiedColumns}
+          curTable={curTable}
+          curRow={obj}
+          TableRowActionsSlot={schema.TableRowActionsSlot}
         />
       </PageContent>
       <PageAside className="overflow-auto">

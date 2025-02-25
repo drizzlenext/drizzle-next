@@ -14,7 +14,7 @@ import {
   Input,
 } from "drizzle-ui";
 import Link from "next/link";
-import { ObjectTableConfig, SimplifiedColumn } from "../types";
+import { SimplifiedColumn, TableRowActionsSlot } from "../types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -24,23 +24,26 @@ interface CurrentCell {
   el: HTMLTableCellElement;
 }
 
-export function ObjectTable({
-  list,
-  config,
-}: {
+type ObjectTableProps = {
   list: Record<string, any>[];
-  config: ObjectTableConfig;
-}) {
+  curTable: string;
+  basePath: string;
+  columns: SimplifiedColumn[];
+  curRow: Record<string, any>;
+  TableRowActionsSlot?: TableRowActionsSlot;
+};
+
+export function ObjectTable(props: ObjectTableProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [curRow, setCurRow] = useState<Record<string, any>>(config.curRow);
+  const [curRow, setCurRow] = useState<Record<string, any>>(props.curRow);
   const [curCell, setCurCell] = useState<CurrentCell>();
-  const [curList, setCurList] = useState<Record<string, any>[]>(list);
+  const [curList, setCurList] = useState<Record<string, any>[]>(props.list);
 
   useEffect(() => {
-    setCurList(list);
-  }, [list]);
+    setCurList(props.list);
+  }, [props.list]);
 
   useEffect(() => {
     const inputElement = curCell?.el.querySelector("input");
@@ -109,7 +112,7 @@ export function ObjectTable({
       data[curCell.col.name] = value;
     }
 
-    const res = await fetch(`/api/${config.curTable}/${curCell.row.id}`, {
+    const res = await fetch(`/api/${props.curTable}/${curCell.row.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -156,7 +159,7 @@ export function ObjectTable({
     <Table className="border">
       <TableHeader>
         <TableRow>
-          {config.columns.map((col) => {
+          {props.columns.map((col) => {
             return (
               <TableHead
                 key={col.name}
@@ -180,7 +183,7 @@ export function ObjectTable({
               )}
               onClick={() => handleClick(row)}
             >
-              {config.columns.map((col) => {
+              {props.columns.map((col) => {
                 return (
                   <TableCell
                     key={col.name}
@@ -220,21 +223,27 @@ export function ObjectTable({
               })}
               <TableCell>
                 <TableRowActions onClick={(e) => e.stopPropagation()}>
-                  <Link
-                    href={`${config.basePath}/${config.curTable}/${row.id}`}
-                  >
-                    View
-                  </Link>
-                  <Link
-                    href={`${config.basePath}/${config.curTable}/${row.id}/edit`}
-                  >
-                    Edit
-                  </Link>
-                  <Link
-                    href={`${config.basePath}/${config.curTable}/${row.id}/delete`}
-                  >
-                    Delete
-                  </Link>
+                  {props.TableRowActionsSlot && (
+                    <props.TableRowActionsSlot
+                      basePath={props.basePath}
+                      curTable={props.curTable}
+                      row={row}
+                      DefaultRowActions={() => (
+                        <DefaultRowActions
+                          basePath={props.basePath}
+                          curTable={props.curTable}
+                          row={row}
+                        />
+                      )}
+                    />
+                  )}
+                  {!props.TableRowActionsSlot && (
+                    <DefaultRowActions
+                      basePath={props.basePath}
+                      curTable={props.curTable}
+                      row={row}
+                    />
+                  )}
                 </TableRowActions>
               </TableCell>
             </TableRow>
@@ -242,6 +251,26 @@ export function ObjectTable({
         })}
       </TableBody>
     </Table>
+  );
+}
+
+function DefaultRowActions(props: {
+  basePath: string;
+  curTable: string;
+  row: any;
+}) {
+  return (
+    <>
+      <Link href={`${props.basePath}/${props.curTable}/${props.row.id}`}>
+        View
+      </Link>
+      <Link href={`${props.basePath}/${props.curTable}/${props.row.id}/edit`}>
+        Edit
+      </Link>
+      <Link href={`${props.basePath}/${props.curTable}/${props.row.id}/delete`}>
+        Delete
+      </Link>
+    </>
   );
 }
 

@@ -43,6 +43,7 @@ export function completeDrizzleCmsConfig(config: DrizzleCmsConfig) {
       label: value.label || key,
       path: value.path || key,
       formControlMap: value.formControlMap || {},
+      TableRowActionsSlot: value.TableRowActionsSlot,
     };
   });
 
