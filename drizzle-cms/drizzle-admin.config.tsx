@@ -5,9 +5,9 @@ import {
   PostListPageActions,
   PostRowActions,
   PostViewPageActions,
-} from "./drizzle-cms.components";
+} from "./drizzle-admin.components";
 import { db } from "./lib/db";
-import { DrizzleCmsConfig } from "./package/types";
+import { DrizzleAdminConfig } from "./package/types";
 import { categories } from "./schema/categories";
 import { posts } from "./schema/posts";
 import { postsTags } from "./schema/posts-tags";
@@ -16,7 +16,7 @@ import { users } from "./schema/users";
 import Link from "next/link";
 import { Button } from "drizzle-ui";
 
-export const config: DrizzleCmsConfig = {
+export const config: DrizzleAdminConfig = {
   basePath: "/cms",
   schema: {
     users: { drizzleTable: users, label: "Users" },

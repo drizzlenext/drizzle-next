@@ -18,8 +18,8 @@ import { and, asc, desc, eq, like, getTableColumns } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
 import {
   ColumnDataTypeMap,
-  DrizzleCmsConfig,
-  DrizzleCmsConfigComplete,
+  DrizzleAdminConfig,
+  DrizzleAdminConfigComplete,
   Filter,
   Params,
   SearchParams,
@@ -31,13 +31,13 @@ import { OPERATOR_MAP } from "../constants/server-constants";
 export interface ListPageParams {
   curTable: string;
   simplifiedColumns: { name: string; dataType: any }[];
-  config: DrizzleCmsConfig;
+  config: DrizzleAdminConfig;
 }
 
 export async function ListPage(props: {
   params: Params;
   searchParams: SearchParams;
-  config: DrizzleCmsConfigComplete;
+  config: DrizzleAdminConfigComplete;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;

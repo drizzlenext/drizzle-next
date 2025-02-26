@@ -1,7 +1,7 @@
 import { PageContent, PageHeader, PageLayout, PageTitle } from "drizzle-ui";
 import {
-  DrizzleCmsConfig,
-  DrizzleCmsConfigComplete,
+  DrizzleAdminConfig,
+  DrizzleAdminConfigComplete,
   Params,
   SearchParams,
 } from "../types";
@@ -9,12 +9,12 @@ import {
 export async function RootPage(props: {
   params: Params;
   searchParams: SearchParams;
-  config: DrizzleCmsConfigComplete;
+  config: DrizzleAdminConfigComplete;
 }) {
   return (
     <PageLayout>
       <PageHeader>
-        <PageTitle>Drizzle CMS</PageTitle>
+        <PageTitle>Drizzle Admin</PageTitle>
       </PageHeader>
       <PageContent></PageContent>
     </PageLayout>

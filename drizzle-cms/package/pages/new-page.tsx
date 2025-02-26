@@ -1,8 +1,8 @@
 import { PageContent, PageHeader, PageLayout, PageTitle } from "drizzle-ui";
 import {
   ColumnDataTypeMap,
-  DrizzleCmsConfig,
-  DrizzleCmsConfigComplete,
+  DrizzleAdminConfig,
+  DrizzleAdminConfigComplete,
   Params,
   SearchParams,
 } from "../types";
@@ -16,7 +16,7 @@ import { ChevronRightIcon } from "lucide-react";
 export async function NewPage(props: {
   params: Params;
   searchParams: SearchParams;
-  config: DrizzleCmsConfigComplete;
+  config: DrizzleAdminConfigComplete;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;

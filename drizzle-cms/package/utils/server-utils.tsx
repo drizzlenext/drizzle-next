@@ -1,8 +1,8 @@
 import { kebabCase } from "change-case-all";
 import {
-  DrizzleCmsConfig,
-  DrizzleCmsConfigComplete,
-  DrizzleCmsLayoutConfig,
+  DrizzleAdminConfig,
+  DrizzleAdminConfigComplete,
+  DrizzleAdminLayoutConfig,
   DrizzleTableConfigComplete,
   SearchParams,
 } from "../types";
@@ -33,9 +33,9 @@ export function parseSearchParams(
   };
 }
 
-// function for populating drizzle cms config with default values
-// providing a complete config for drizzle cms
-export function completeDrizzleCmsConfig(config: DrizzleCmsConfig) {
+// function for populating drizzle admin config with default values
+// providing a complete config for drizzle admin
+export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
   const completeSchema: { [key: string]: DrizzleTableConfigComplete } = {};
 
   Object.entries(config.schema).forEach(([key, value]) => {
@@ -53,7 +53,7 @@ export function completeDrizzleCmsConfig(config: DrizzleCmsConfig) {
     };
   });
 
-  const completeConfig: DrizzleCmsConfigComplete = {
+  const completeConfig: DrizzleAdminConfigComplete = {
     basePath: config.basePath,
     schema: completeSchema,
     db: config.db,
@@ -64,13 +64,13 @@ export function completeDrizzleCmsConfig(config: DrizzleCmsConfig) {
   return completeConfig;
 }
 
-// function for generating the layout config from drizzle cms config
+// function for generating the layout config from drizzle admin config
 // adds table links to sidebar dynamically if the dynamic-tables item is present
-// can't use the cms config because it contains circular server-side references
+// can't use the admin config because it contains circular server-side references
 // layout is client-side
-export function completeLayoutConfig(config: DrizzleCmsConfig) {
-  const conf = completeDrizzleCmsConfig(config);
-  const completeConfig: DrizzleCmsLayoutConfig = {
+export function completeLayoutConfig(config: DrizzleAdminConfig) {
+  const conf = completeDrizzleAdminConfig(config);
+  const completeConfig: DrizzleAdminLayoutConfig = {
     basePath: conf.basePath,
     sidebar: conf.sidebar,
   };

@@ -18,14 +18,14 @@ import Link from "next/link";
 
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { DrizzleCmsLayoutConfig, SidebarItem } from "./types";
+import { DrizzleAdminLayoutConfig, SidebarItem } from "./types";
 
-export function DrizzleCmsLayoutClient({
+export function DrizzleAdminLayoutClient({
   children,
   config,
 }: {
   children: ReactNode;
-  config: DrizzleCmsLayoutConfig;
+  config: DrizzleAdminLayoutConfig;
 }) {
   const pathname = usePathname();
 
@@ -34,7 +34,7 @@ export function DrizzleCmsLayoutClient({
       <DashboardHeader>
         <DashboardTitle>
           <DashboardSidebarToggle />
-          drizzle-cms
+          Drizzle Admin
         </DashboardTitle>
         <DashboardNav>
           <DarkModeToggle />

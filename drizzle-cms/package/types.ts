@@ -1,4 +1,3 @@
-import { LucideIcon } from "lucide-react";
 import { JSX } from "react";
 
 export type Params = Promise<{ [key: string]: string }>;
@@ -56,7 +55,7 @@ export type SidebarItem = {
   icon?: JSX.Element;
 };
 
-export type DrizzleCmsConfig = {
+export type DrizzleAdminConfig = {
   basePath: string;
   schema: {
     [key: string]: DrizzleTableConfig;
@@ -79,7 +78,7 @@ export type DrizzleTableConfigComplete = {
   ListPageActionsSlot?: PageActionsSlot;
 };
 
-export type DrizzleCmsConfigComplete = {
+export type DrizzleAdminConfigComplete = {
   basePath: string;
   schema: {
     [key: string]: DrizzleTableConfigComplete;
@@ -89,7 +88,7 @@ export type DrizzleCmsConfigComplete = {
   sidebar: SidebarItem[];
 };
 
-export type DrizzleCmsLayoutConfig = {
+export type DrizzleAdminLayoutConfig = {
   basePath: string;
   sidebar: SidebarItem[];
 };

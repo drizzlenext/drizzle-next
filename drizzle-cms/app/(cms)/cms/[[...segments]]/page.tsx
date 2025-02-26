@@ -1,5 +1,5 @@
-import { config } from "@/drizzle-cms.config";
-import { DrizzleCms } from "@/package/drizzle-cms";
+import { config } from "@/drizzle-admin.config";
+import { DrizzleAdmin } from "@/package/drizzle-admin";
 import { Params, SearchParams } from "@/package/types";
 
 export default async function Page(props: {
@@ -7,7 +7,7 @@ export default async function Page(props: {
   searchParams: SearchParams;
 }) {
   return (
-    <DrizzleCms
+    <DrizzleAdmin
       params={props.params}
       searchParams={props.searchParams}
       config={config}

@@ -1,5 +1,5 @@
-export { DrizzleCms } from "./drizzle-cms";
-export { DrizzleCmsLayout } from "./drizzle-cms-layout";
+export { DrizzleAdmin } from "./drizzle-admin";
+export { DrizzleAdminLayout } from "./drizzle-admin-layout";
 export {
   DELETE_ROUTE as DELETE_REQUEST,
   GET_ROUTE as GET_REQUEST,

@@ -1,19 +1,19 @@
 import { ListPage } from "./pages/list-page";
-import { DrizzleCmsConfig, Params, SearchParams } from "./types";
+import { DrizzleAdminConfig, Params, SearchParams } from "./types";
 import { RootPage } from "./pages/root-page";
 import { ViewPage } from "./pages/view-page";
 import { EditPage } from "./pages/edit-page";
 import { NewPage } from "./pages/new-page";
 import { DeletePage } from "./pages/delete-page";
-import { completeDrizzleCmsConfig } from "./utils/server-utils";
+import { completeDrizzleAdminConfig } from "./utils/server-utils";
 
-export async function DrizzleCms(props: {
+export async function DrizzleAdmin(props: {
   params: Params;
   searchParams: SearchParams;
-  config: DrizzleCmsConfig;
+  config: DrizzleAdminConfig;
 }) {
   const params = await props.params;
-  const config = completeDrizzleCmsConfig(props.config);
+  const config = completeDrizzleAdminConfig(props.config);
 
   let page;
   if (!params.segments) {

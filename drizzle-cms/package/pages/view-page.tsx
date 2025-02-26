@@ -7,8 +7,8 @@ import {
   PageTitle,
 } from "drizzle-ui";
 import {
-  DrizzleCmsConfig,
-  DrizzleCmsConfigComplete,
+  DrizzleAdminConfig,
+  DrizzleAdminConfigComplete,
   Params,
   SearchParams,
 } from "../types";
@@ -21,7 +21,7 @@ import { ChevronRightIcon } from "lucide-react";
 export async function ViewPage(props: {
   params: Params;
   searchParams: SearchParams;
-  config: DrizzleCmsConfigComplete;
+  config: DrizzleAdminConfigComplete;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;

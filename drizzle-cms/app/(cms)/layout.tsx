@@ -1,6 +1,6 @@
-import { config } from "@/drizzle-cms.config";
-import { DrizzleCmsLayout } from "@/package/drizzle-cms-layout";
+import { config } from "@/drizzle-admin.config";
+import { DrizzleAdminLayout } from "@/package/drizzle-admin-layout";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <DrizzleCmsLayout config={config}>{children}</DrizzleCmsLayout>;
+  return <DrizzleAdminLayout config={config}>{children}</DrizzleAdminLayout>;
 }
