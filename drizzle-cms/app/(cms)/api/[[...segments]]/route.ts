@@ -1,14 +1,14 @@
 import { config } from "@/drizzle-cms.config";
 import {
-  DELETE_REQUEST,
-  GET_REQUEST,
-  PATCH_REQUEST,
-  POST_REQUEST,
-  PUT_REQUEST,
+  DELETE_ROUTE,
+  GET_ROUTE,
+  PATCH_ROUTE,
+  POST_ROUTE,
+  PUT_ROUTE,
 } from "@/package/drizzle-routes";
 
-export const POST = POST_REQUEST(config);
-export const GET = GET_REQUEST(config);
-export const PUT = PUT_REQUEST(config);
-export const PATCH = PATCH_REQUEST(config);
-export const DELETE = DELETE_REQUEST(config);
+export const POST = POST_ROUTE(config);
+export const GET = GET_ROUTE(config);
+export const PUT = PUT_ROUTE(config);
+export const PATCH = PATCH_ROUTE(config);
+export const DELETE = DELETE_ROUTE(config);

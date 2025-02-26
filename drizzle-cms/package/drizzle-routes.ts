@@ -12,7 +12,7 @@ const { createUpdateSchema, createInsertSchema } = createSchemaFactory({
   },
 });
 
-export function POST_REQUEST(config: DrizzleCmsConfig) {
+export function POST_ROUTE(config: DrizzleCmsConfig) {
   return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
@@ -50,7 +50,7 @@ export function POST_REQUEST(config: DrizzleCmsConfig) {
   });
 }
 
-export function GET_REQUEST(config: DrizzleCmsConfig) {
+export function GET_ROUTE(config: DrizzleCmsConfig) {
   return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
@@ -153,7 +153,7 @@ export function GET_REQUEST(config: DrizzleCmsConfig) {
   });
 }
 
-export function PUT_REQUEST(config: DrizzleCmsConfig) {
+export function PUT_ROUTE(config: DrizzleCmsConfig) {
   return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
@@ -198,7 +198,7 @@ export function PUT_REQUEST(config: DrizzleCmsConfig) {
   });
 }
 
-export function PATCH_REQUEST(config: DrizzleCmsConfig) {
+export function PATCH_ROUTE(config: DrizzleCmsConfig) {
   return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
@@ -240,7 +240,7 @@ export function PATCH_REQUEST(config: DrizzleCmsConfig) {
   });
 }
 
-export function DELETE_REQUEST(config: DrizzleCmsConfig) {
+export function DELETE_ROUTE(config: DrizzleCmsConfig) {
   return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
