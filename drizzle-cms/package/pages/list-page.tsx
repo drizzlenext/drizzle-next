@@ -147,7 +147,7 @@ export async function ListPage(props: {
   }
 
   return (
-    <PageLayout asideOpen={!!obj}>
+    <PageLayout>
       <PageHeader>
         <PageTitle className="flex gap-5 items-center">
           {capitalCase(curPath)}{" "}
