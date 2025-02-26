@@ -1,6 +1,6 @@
 "use client";
 
-import { capitalCase, kebabCase } from "change-case-all";
+import { capitalCase } from "change-case-all";
 import {
   Table,
   TableBody,
@@ -16,7 +16,7 @@ import {
 import Link from "next/link";
 import { SimplifiedColumn, TableRowActionsSlot } from "../types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface CurrentCell {
   row: Record<string, any>;
@@ -41,6 +41,77 @@ export function ObjectTable(props: ObjectTableProps) {
   const [curRow, setCurRow] = useState<Record<string, any>>(props.curRow);
   const [curCell, setCurCell] = useState<CurrentCell>();
   const [curList, setCurList] = useState<Record<string, any>[]>(props.list);
+
+  // start column resizing logic
+  const [columns, setColumns] = useState([
+    ...props.columns.map((col) => ({
+      name: col.name,
+      dataType: col.dataType,
+      width: 100,
+      minWidth: 50,
+      maxWidth: 320,
+    })),
+  ]);
+
+  const resizingState = useRef({
+    isResizing: false,
+    startX: 0,
+    startWidth: 100,
+    resizingColumn: null as number | null,
+  });
+
+  const handleMouseDown = (
+    e: React.MouseEvent<HTMLDivElement>,
+    index: number
+  ) => {
+    resizingState.current.isResizing = true;
+    resizingState.current.startX = e.clientX;
+    const th = e.currentTarget.closest("th");
+    if (th) {
+      resizingState.current.startWidth = th.offsetWidth;
+    }
+    resizingState.current.resizingColumn = index;
+
+    // Disable text selection while dragging
+    document.body.style.userSelect = "none";
+
+    // Listen for mousemove and mouseup events globally
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (
+      !resizingState.current.isResizing ||
+      resizingState.current.resizingColumn === null
+    )
+      return;
+
+    const delta = e.clientX - resizingState.current.startX;
+    const newWidth = Math.max(resizingState.current.startWidth + delta, 50); // Set a min-width of 50px
+
+    const newColumns = [...columns];
+    newColumns[resizingState.current.resizingColumn].width = newWidth;
+    newColumns[resizingState.current.resizingColumn].minWidth = newWidth;
+    newColumns[resizingState.current.resizingColumn].maxWidth = newWidth;
+    setColumns(newColumns);
+  };
+
+  const handleMouseUp = () => {
+    console.log("MOUSE UP");
+
+    resizingState.current.isResizing = false;
+    resizingState.current.resizingColumn = null;
+
+    // Restore text selection
+    document.body.style.userSelect = "";
+
+    // Clean up event listeners
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+  };
+
+  // end column resizing logic
 
   useEffect(() => {
     setCurList(props.list);
@@ -160,13 +231,29 @@ export function ObjectTable(props: ObjectTableProps) {
     <Table className="border">
       <TableHeader>
         <TableRow>
-          {props.columns.map((col) => {
+          {columns.map((col, index) => {
             return (
               <TableHead
                 key={col.name}
-                className="border text-nowrap overflow-clip max-w-28"
+                className="border text-nowrap overflow-clip relative"
+                style={{
+                  width: col.width,
+                  minWidth: col.minWidth,
+                  maxWidth: col.maxWidth,
+                }}
               >
                 <Sortable column={col.name}>{capitalCase(col.name)}</Sortable>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    width: "10px",
+                    cursor: "ew-resize",
+                  }}
+                  onMouseDown={(e) => handleMouseDown(e, index)}
+                ></div>
               </TableHead>
             );
           })}
@@ -184,15 +271,20 @@ export function ObjectTable(props: ObjectTableProps) {
               )}
               onClick={() => handleClick(row)}
             >
-              {props.columns.map((col) => {
+              {columns.map((col) => {
                 return (
                   <TableCell
                     key={col.name}
                     className={cn(
-                      "text-nowrap overflow-clip border select-none max-w-96",
+                      "text-nowrap overflow-clip border select-none",
                       isCurrentCell(row, col, curCell) && "p-0"
                     )}
                     onDoubleClick={(e) => handleDoubleClickCell(e, row, col)}
+                    style={{
+                      width: col.width,
+                      minWidth: col.minWidth,
+                      maxWidth: col.maxWidth,
+                    }}
                   >
                     {isCurrentCell(row, col, curCell) ? (
                       <TableCellInput
