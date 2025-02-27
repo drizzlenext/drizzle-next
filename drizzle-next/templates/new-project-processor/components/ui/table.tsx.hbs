@@ -5,9 +5,7 @@ const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <div className="w-full overflow-auto">
-    <table ref={ref} className={cn("w-full", className)} {...props} />
-  </div>
+  <table ref={ref} className={cn("w-full", className)} {...props} />
 ));
 Table.displayName = "Table";
 
@@ -39,14 +37,7 @@ const TableRow = React.forwardRef<
   HTMLTableRowElement,
   React.HTMLAttributes<HTMLTableRowElement>
 >(({ className, ...props }, ref) => (
-  <tr
-    ref={ref}
-    className={cn(
-      "border-b border-muted-400 hover:bg-muted-100 dark:border-muted-600 dark:hover:bg-muted-900",
-      className,
-    )}
-    {...props}
-  />
+  <tr ref={ref} className={cn("border-b", className)} {...props} />
 ));
 TableRow.displayName = "TableRow";
 
@@ -56,10 +47,7 @@ const TableHead = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <th
     ref={ref}
-    className={cn(
-      "border-b border-muted-400 p-2 text-left font-semibold dark:border-muted-600",
-      className,
-    )}
+    className={cn("border-b p-2 text-left font-semibold", className)}
     {...props}
   />
 ));
@@ -87,10 +75,7 @@ const TableRowActions = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "flex justify-end gap-2 text-info-700 underline dark:text-info-400",
-      className,
-    )}
+    className={cn("flex justify-end gap-2 underline", className)}
     {...props}
   />
 ));

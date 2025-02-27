@@ -29,7 +29,7 @@ export function SearchInput({ placeholder }: { placeholder?: string }) {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <Button type="submit">
+        <Button type="submit" size="icon" variant="ghost">
           <SearchIcon />
         </Button>
       </form>

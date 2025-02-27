@@ -98,12 +98,22 @@ export function Pagination({
         {count} {count === 1 ? "row" : "rows"}
       </div>
       <div>
-        <Button onClick={first} disabled={page <= 1}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={first}
+          disabled={page <= 1}
+        >
           <ChevronsLeftIcon />
         </Button>
       </div>
       <div>
-        <Button onClick={previous} disabled={page <= 1}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={previous}
+          disabled={page <= 1}
+        >
           <ChevronLeftIcon />
         </Button>
       </div>
@@ -118,12 +128,22 @@ export function Pagination({
       </div>
       <div className="text-nowrap">of {totalPages}</div>
       <div>
-        <Button onClick={next} disabled={page >= totalPages}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={next}
+          disabled={page >= totalPages}
+        >
           <ChevronRightIcon />
         </Button>
       </div>
       <div>
-        <Button onClick={last} disabled={page >= totalPages}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={last}
+          disabled={page >= totalPages}
+        >
           <ChevronsRightIcon />
         </Button>
       </div>

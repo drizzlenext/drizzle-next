@@ -22,10 +22,9 @@ export function DarkModeScript() {
       isServerInserted.current = true;
       return (
         <script
-          // prettier-ignore
-          dangerouslySetInnerHTML={ {
+          dangerouslySetInnerHTML={{
             __html: script,
-          } }
+          }}
         />
       );
     }

@@ -2,11 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-white text-black;
-  @apply dark:bg-black dark:text-white;
-}
-
 .lucide {
   stroke-width: 1.5px;
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #dddddd white;
+}
+
+.dark * {
+  scrollbar-width: auto;
+  scrollbar-color: #333333 black;
+}
+
+@layer base {
+  :root {
+    --background: theme(colors.white);
+    --foreground: theme(colors.black);
+    --primary: theme(colors.black);
+    --primary-foreground: theme(colors.white);
+    --muted: theme(colors.zinc.300);
+    --muted-foreground: theme(colors.black);
+    --destructive: theme(colors.red.600);
+    --destructive-foreground: theme(colors.white);
+    --info: theme(colors.blue.600);
+    --info-foreground: theme(colors.white);
+    --success: theme(colors.green.600);
+    --success-foreground: theme(colors.white);
+    --warning: theme(colors.yellow.600);
+    --warning-foreground: theme(colors.white);
+    --dashboard: theme(colors.white);
+    --dashboard-foreground: theme(colors.black);
+    --header: theme(colors.zinc.100);
+    --header-foreground: theme(colors.black);
+    --sidebar: theme(colors.zinc.50);
+    --sidebar-foreground: theme(colors.black);
+    --card: theme(colors.zinc.50);
+    --card-foreground: theme(colors.zinc.950);
+    --page: theme(colors.white);
+    --page-foreground: theme(colors.black);
+    --border: theme(colors.zinc.300);
+    --checkbox: theme(colors.black);
+    --input-border: theme(colors.zinc.500);
+    --input-background: theme(colors.zinc.50);
+    --input-ring: theme(colors.blue.500);
+    --rounded-alert: 6px;
+    --rounded-button: 4px;
+    --rounded-card: 12px;
+    --rounded-input: 0px;
+    --rounded-icon: 4px;
+  }
+
+  .dark {
+    --background: theme(colors.zinc.900);
+    --foreground: theme(colors.white);
+    --primary: theme(colors.white);
+    --primary-foreground: theme(colors.black);
+    --muted: theme(colors.zinc.800);
+    --muted-foreground: theme(colors.white);
+    --destructive: theme(colors.red.600);
+    --destructive-foreground: theme(colors.white);
+    --info: theme(colors.blue.600);
+    --info-foreground: theme(colors.white);
+    --success: theme(colors.green.600);
+    --success-foreground: theme(colors.white);
+    --warning: theme(colors.yellow.600);
+    --warning-foreground: theme(colors.white);
+    --dashboard: theme(colors.zinc.900);
+    --dashboard-foreground: theme(colors.white);
+    --header: theme(colors.zinc.900);
+    --header-foreground: theme(colors.white);
+    --sidebar: theme(colors.zinc.900);
+    --sidebar-foreground: theme(colors.white);
+    --card: theme(colors.zinc.950);
+    --card-foreground: theme(colors.zinc.50);
+    --page: theme(colors.zinc.900);
+    --page-foreground: theme(colors.white);
+    --border: theme(colors.zinc.700);
+    --checkbox: theme(colors.white);
+    --input-border: theme(colors.zinc.500);
+    --input-background: theme(colors.zinc.800);
+    --input-ring: theme(colors.blue.500);
+  }
 }

@@ -8,7 +8,7 @@ const Select = React.forwardRef<
   return (
     <select
       className={cn(
-        "w-full rounded border border-muted-400 bg-transparent px-3 py-1 focus:border-black focus:outline-none focus:ring-0 dark:border-muted-600 dark:focus:border-white",
+        "focus:border-input-ring border-input-border bg-input-background w-full border px-3 py-1 focus:outline-none focus:ring-0",
         className,
       )}
       ref={ref}
@@ -24,7 +24,7 @@ const SelectOption = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <option
-      className={cn("bg-white dark:bg-black", className)}
+      className={cn("bg-input-background text-foreground", className)}
       ref={ref}
       {...props}
     />

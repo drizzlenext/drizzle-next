@@ -2,27 +2,47 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 type ButtonVariant =
-  | "primary"
+  | "default"
   | "muted"
   | "success"
-  | "danger"
+  | "destructive"
   | "warning"
-  | "info";
+  | "info"
+  | "outline"
+  | "ghost";
+
+const buttonVariantMap: Record<ButtonVariant, string> = {
+  default: "bg-primary text-primary-foreground",
+  muted: "bg-muted text-muted-foreground",
+  success: "bg-success text-success-foreground",
+  destructive: "bg-destructive text-destructive-foreground",
+  warning: "bg-warning text-warning-foreground",
+  info: "bg-info text-info-foreground",
+  outline: "bg-transparent border border-input text-foreground hover:bg-muted",
+  ghost: "bg-transparent text-foreground hover:bg-muted",
+};
+
+type ButtonSizeVariant = "default" | "icon";
+
+const buttonSizeMap: Record<ButtonSizeVariant, string> = {
+  default: "min-w-9 min-h-9",
+  icon: "min-w-9 min-h-9 max-w-9 max-h-9 aspect-square py-0 px-0 flex items-center justify-center rounded-icon",
+};
 
 const Button = React.forwardRef<
   HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant }
->(({ className, variant, ...props }, ref) => {
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    variant?: ButtonVariant;
+    size?: ButtonSizeVariant;
+  }
+>(({ className, variant = "default", size = "default", ...props }, ref) => {
   return (
     <button
       className={cn(
-        "rounded bg-black px-3 py-1 text-white hover:opacity-80 disabled:opacity-50 dark:bg-white dark:text-black",
-        variant === "primary" && "bg-primary-600 dark:bg-primary-400",
-        variant === "muted" && "bg-muted-600 dark:bg-muted-400",
-        variant === "success" && "bg-success-600 dark:bg-success-400",
-        variant === "danger" && "bg-danger-600 dark:bg-danger-400",
-        variant === "warning" && "bg-warning-600 dark:bg-warning-400",
-        variant === "info" && "bg-info-600 dark:bg-info-400",
+        "rounded-button px-3 py-1 hover:opacity-90 disabled:opacity-50",
+        buttonVariantMap.default,
+        variant && buttonVariantMap[variant],
+        size && buttonSizeMap[size],
         className,
       )}
       ref={ref}

@@ -23,6 +23,9 @@ function copyFiles(srcDir: string, destDir: string) {
     } else {
       let content = fs.readFileSync(srcPath, "utf-8");
       content = content.replace(/.\/utils/g, "@/lib/utils");
+      // double curly braces is meaningful in handlebars. adding a space fixes the issue.
+      content = content.replace(/{{/g, "{ {");
+      content = content.replace(/}}/g, "} }");
       fs.writeFileSync(destPath, content);
       console.log(`Copied ${srcPath} to ${destPath}`);
     }
