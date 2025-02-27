@@ -23,20 +23,22 @@ export const config: DrizzleAdminConfig = {
     posts: {
       drizzleTable: posts,
       formControlMap: { content: "textarea", updatedAt: "input" },
-      TableRowActionsSlot: PostRowActions,
-      ViewPageActionsSlot: PostViewPageActions,
-      EditPageActionsSlot: PostEditPageActions,
-      DeletePageActionsSlot: PostDeletePageActions,
-      ListPageActionsSlot: (props) => {
-        return (
-          <>
-            <Link href={`${props.basePath}/${props.curPath}/new`}>
-              <Button className="rounded-2xl" variant="muted">
-                New
-              </Button>
-            </Link>
-          </>
-        );
+      components: {
+        TableRowActionsSlot: PostRowActions,
+        ViewPageActionsSlot: PostViewPageActions,
+        EditPageActionsSlot: PostEditPageActions,
+        DeletePageActionsSlot: PostDeletePageActions,
+        ListPageActionsSlot: (props) => {
+          return (
+            <>
+              <Link href={`${props.basePath}/${props.curPath}/new`}>
+                <Button className="rounded-2xl" variant="muted">
+                  New
+                </Button>
+              </Link>
+            </>
+          );
+        },
       },
     },
     categories: {

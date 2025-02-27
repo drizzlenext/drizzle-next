@@ -45,11 +45,13 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
       label: value.label || key,
       path: value.path || kebabCase(key),
       formControlMap: value.formControlMap || {},
-      TableRowActionsSlot: value.TableRowActionsSlot,
-      ViewPageActionsSlot: value.ViewPageActionsSlot,
-      ListPageActionsSlot: value.ListPageActionsSlot,
-      EditPageActionsSlot: value.EditPageActionsSlot,
-      DeletePageActionsSlot: value.DeletePageActionsSlot,
+      components: {
+        TableRowActionsSlot: value.components?.TableRowActionsSlot,
+        ViewPageActionsSlot: value.components?.ViewPageActionsSlot,
+        ListPageActionsSlot: value.components?.ListPageActionsSlot,
+        EditPageActionsSlot: value.components?.EditPageActionsSlot,
+        DeletePageActionsSlot: value.components?.DeletePageActionsSlot,
+      },
     };
   });
 

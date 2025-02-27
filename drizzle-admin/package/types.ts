@@ -40,11 +40,13 @@ export type DrizzleTableConfig = {
   label?: string;
   path?: string;
   formControlMap?: FormControlMap;
-  TableRowActionsSlot?: TableRowActionsSlot;
-  ViewPageActionsSlot?: PageActionsSlot;
-  EditPageActionsSlot?: PageActionsSlot;
-  DeletePageActionsSlot?: PageActionsSlot;
-  ListPageActionsSlot?: PageActionsSlot;
+  components?: {
+    TableRowActionsSlot?: TableRowActionsSlot;
+    ViewPageActionsSlot?: PageActionsSlot;
+    EditPageActionsSlot?: PageActionsSlot;
+    DeletePageActionsSlot?: PageActionsSlot;
+    ListPageActionsSlot?: PageActionsSlot;
+  };
 };
 
 export type SidebarItem = {
@@ -71,11 +73,13 @@ export type DrizzleTableConfigComplete = {
   label: string;
   path: string;
   formControlMap: FormControlMap;
-  TableRowActionsSlot?: TableRowActionsSlot;
-  ViewPageActionsSlot?: PageActionsSlot;
-  EditPageActionsSlot?: PageActionsSlot;
-  DeletePageActionsSlot?: PageActionsSlot;
-  ListPageActionsSlot?: PageActionsSlot;
+  components?: {
+    TableRowActionsSlot?: TableRowActionsSlot;
+    ViewPageActionsSlot?: PageActionsSlot;
+    EditPageActionsSlot?: PageActionsSlot;
+    DeletePageActionsSlot?: PageActionsSlot;
+    ListPageActionsSlot?: PageActionsSlot;
+  };
 };
 
 export type DrizzleAdminConfigComplete = {
