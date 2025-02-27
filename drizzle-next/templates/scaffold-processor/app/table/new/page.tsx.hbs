@@ -14,10 +14,10 @@ export default async function Page() {
     <PageLayout>
       <PageHeader>
         <PageTitle>New {{tableObj.singularCapitalCase}}</PageTitle>
+        <PageNav>
+          <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
+        </PageNav>
       </PageHeader>
-      <PageNav>
-        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
-      </PageNav>
       <PageContent>
         <{{tableObj.singularPascalCase}}CreateForm 
           {{#each referencesColumnList}}

@@ -22,12 +22,12 @@ export default async function Page(props: { params: Params }) {
     <PageLayout>
       <PageHeader>
         <PageTitle>{{tableObj.singularCapitalCase}}</PageTitle>
+        <PageNav>
+          <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
+          <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/edit`}>Edit</Link>
+          <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/delete`}>Delete</Link>
+        </PageNav>
       </PageHeader>
-      <PageNav>
-        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}`}>Back</Link>
-        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/edit`}>Edit</Link>
-        <Link href={`{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/delete`}>Delete</Link>
-      </PageNav>
       <PageContent>
         <p><strong>Id:</strong> { {{tableObj.singularCamelCase}}Obj.id }</p>
         {{#each validatedColumns}}
