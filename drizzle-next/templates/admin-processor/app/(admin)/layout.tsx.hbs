@@ -1,14 +1,10 @@
+import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
-import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
 import { isAdmin } from "@/lib/authorization";
-import { AdminLayout } from "@/components/layouts/admin/admin-layout";
-import { AdminHeader } from "@/components/layouts/admin/admin-header";
-import { AdminSidebar } from "@/components/layouts/admin/admin-sidebar";
-import { AdminContent } from "@/components/layouts/admin/admin-content";
-import { FlashMessage } from "@/components/ui/flash-message";
+import { AdminLayout } from "@/components/admin/admin-layout";
 
 export default async function Layout({
   children,
@@ -25,24 +21,15 @@ export default async function Layout({
     redirect("/admin-signin");
   }
 
-  const userObj = await db.query.{{userObj.pluralCamelCase}}.findFirst({
-    where: eq({{userObj.pluralCamelCase}}.id, session.user.id),
+  const userObj = await db.query.users.findFirst({
+    where: eq(users.id, session.user.id),
   });
 
   if (!userObj) {
     redirect("/admin-signin");
   }
 
-  return (
-    <AdminLayout>
-      <AdminHeader user={userObj} />
-      <AdminSidebar />
-      <AdminContent>
-        <FlashMessage />
-        {children}
-      </AdminContent>
-    </AdminLayout>
-  );
+  return <AdminLayout userObj={userObj}>{children}</AdminLayout>;
 }
 
 export const dynamic = "force-dynamic";

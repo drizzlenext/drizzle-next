@@ -632,9 +632,9 @@ export class ScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     insertTextBeforeIfNotExists(
-      "components/layouts/admin/admin-sidebar.tsx",
+      "components/admin/admin-layout.tsx",
       "// [CODE_MARK admin-sidebar-items]",
-      `  { title: "${tableObj.pluralCapitalCase}", url: "/admin/${tableObj.pluralKebabCase}", icon: Table2Icon },\n`
+      `  { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}", icon: Table2Icon },\n`
     );
   }
   addLinkToPrivateSidebar() {
