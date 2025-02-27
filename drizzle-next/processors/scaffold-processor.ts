@@ -642,9 +642,9 @@ export class ScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     insertTextBeforeIfNotExists(
-      "components/layouts/private/private-sidebar.tsx",
+      "components/private/private-layout.tsx",
       "// [CODE_MARK private-sidebar-items]",
-      `  { title: "${tableObj.pluralCapitalCase}", url: "/${tableObj.pluralKebabCase}", icon: Table2Icon },\n`
+      `  { text: "${tableObj.pluralCapitalCase}", link: "/${tableObj.pluralKebabCase}", icon: Table2Icon },\n`
     );
   }
   printCompletionMessage() {

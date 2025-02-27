@@ -184,9 +184,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
     this.addLayout();
     this.addNextAuthModuleAugmentation();
     this.addPrivateLayout();
-    this.addPrivateHeader();
-    this.addPrivateContent();
-    this.addPrivateSidebar();
     if (this.opts.authProviders.includes("credentials")) {
       this.addSignInForm();
       this.addSignInAction();
@@ -204,20 +201,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
     renderTemplate({
       inputPath: "auth-processor/components/auth/signin-form.tsx.hbs",
       outputPath: "components/auth/signin-form.tsx",
-    });
-  }
-
-  addPrivateHeader() {
-    const userObj = caseFactory("user", {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-    renderTemplate({
-      inputPath:
-        "auth-processor/components/layouts/private/private-header.tsx.hbs",
-      outputPath: "components/layouts/private/private-header.tsx",
-      data: {
-        userObj,
-      },
     });
   }
 
@@ -240,30 +223,10 @@ export class AuthProcessor implements DrizzleNextProcessor {
     });
   }
 
-  addPrivateSidebar() {
-    renderTemplateIfNotExists({
-      inputPath:
-        "auth-processor/components/layouts/private/private-sidebar.tsx.hbs",
-      outputPath: "components/layouts/private/private-sidebar.tsx",
-      data: {
-        userObj: caseFactory("user", { pluralize: this.opts.pluralizeEnabled }),
-      },
-    });
-  }
-
   addPrivateLayout() {
     renderTemplate({
-      inputPath:
-        "auth-processor/components/layouts/private/private-layout.tsx.hbs",
-      outputPath: "components/layouts/private/private-layout.tsx",
-    });
-  }
-
-  addPrivateContent() {
-    renderTemplate({
-      inputPath:
-        "auth-processor/components/layouts/private/private-content.tsx.hbs",
-      outputPath: "components/layouts/private/private-content.tsx",
+      inputPath: "auth-processor/components/private/private-layout.tsx.hbs",
+      outputPath: "components/private/private-layout.tsx",
     });
   }
 
