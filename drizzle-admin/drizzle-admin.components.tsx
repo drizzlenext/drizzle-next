@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { PageActionsSlot, TableRowActionsSlot } from "./package/types";
+import { PageActions, TableRowActions } from "./package/types";
 import { Button } from "drizzle-ui";
 
-export const PostRowActions: TableRowActionsSlot = (props) => {
+export const PostRowActions: TableRowActions = (props) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/images`}>
@@ -23,7 +23,7 @@ export const PostRowActions: TableRowActionsSlot = (props) => {
   );
 };
 
-export const PostViewPageActions: PageActionsSlot = (props) => {
+export const PostViewPageActions: PageActions = (props) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/edit`}>
@@ -33,7 +33,7 @@ export const PostViewPageActions: PageActionsSlot = (props) => {
   );
 };
 
-export const PostEditPageActions: PageActionsSlot = (props) => {
+export const PostEditPageActions: PageActions = (props) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/edit`}>
@@ -43,7 +43,7 @@ export const PostEditPageActions: PageActionsSlot = (props) => {
   );
 };
 
-export const PostDeletePageActions: PageActionsSlot = (props) => {
+export const PostDeletePageActions: PageActions = (props) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/edit`}>
@@ -53,7 +53,7 @@ export const PostDeletePageActions: PageActionsSlot = (props) => {
   );
 };
 
-export const PostListPageActions: PageActionsSlot = (props) => {
+export const PostListPageActions: PageActions = (props) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/new`}>

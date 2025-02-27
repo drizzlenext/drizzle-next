@@ -14,7 +14,10 @@ import {
   Input,
 } from "drizzle-ui";
 import Link from "next/link";
-import { SimplifiedColumn, TableRowActionsSlot } from "../types";
+import {
+  SimplifiedColumn,
+  TableRowActions as TableRowActionsType,
+} from "../types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -31,7 +34,7 @@ type ObjectTableProps = {
   basePath: string;
   columns: SimplifiedColumn[];
   curRow: Record<string, any>;
-  TableRowActionsSlot?: TableRowActionsSlot;
+  TableRowActions?: TableRowActionsType;
 };
 
 export function ObjectTable(props: ObjectTableProps) {
@@ -316,15 +319,15 @@ export function ObjectTable(props: ObjectTableProps) {
               })}
               <TableCell>
                 <TableRowActions onClick={(e) => e.stopPropagation()}>
-                  {props.TableRowActionsSlot && (
-                    <props.TableRowActionsSlot
+                  {props.TableRowActions && (
+                    <props.TableRowActions
                       basePath={props.basePath}
                       curTable={props.curTable}
                       curPath={props.curPath}
                       row={row}
                     />
                   )}
-                  {!props.TableRowActionsSlot && (
+                  {!props.TableRowActions && (
                     <DefaultRowActions
                       basePath={props.basePath}
                       curTable={props.curTable}

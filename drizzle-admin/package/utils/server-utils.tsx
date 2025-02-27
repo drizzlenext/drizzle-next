@@ -46,11 +46,11 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
       path: value.path || kebabCase(key),
       formControlMap: value.formControlMap || {},
       components: {
-        TableRowActionsSlot: value.components?.TableRowActionsSlot,
-        ViewPageActionsSlot: value.components?.ViewPageActionsSlot,
-        ListPageActionsSlot: value.components?.ListPageActionsSlot,
-        EditPageActionsSlot: value.components?.EditPageActionsSlot,
-        DeletePageActionsSlot: value.components?.DeletePageActionsSlot,
+        TableRowActions: value.components?.TableRowActions,
+        ViewPageActions: value.components?.ViewPageActions,
+        ListPageActions: value.components?.ListPageActions,
+        EditPageActions: value.components?.EditPageActions,
+        DeletePageActions: value.components?.DeletePageActions,
       },
     };
   });

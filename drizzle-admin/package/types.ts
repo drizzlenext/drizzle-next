@@ -23,7 +23,7 @@ export type TableRowActionsProps = {
   row: any;
 };
 
-export type TableRowActionsSlot = (props: TableRowActionsProps) => JSX.Element;
+export type TableRowActions = (props: TableRowActionsProps) => JSX.Element;
 
 export type PageActionsProps = {
   basePath: string;
@@ -32,7 +32,7 @@ export type PageActionsProps = {
   row?: any;
 };
 
-export type PageActionsSlot = (props: PageActionsProps) => JSX.Element;
+export type PageActions = (props: PageActionsProps) => JSX.Element;
 
 export type DrizzleTableConfig = {
   drizzleTable: any;
@@ -41,11 +41,11 @@ export type DrizzleTableConfig = {
   path?: string;
   formControlMap?: FormControlMap;
   components?: {
-    TableRowActionsSlot?: TableRowActionsSlot;
-    ViewPageActionsSlot?: PageActionsSlot;
-    EditPageActionsSlot?: PageActionsSlot;
-    DeletePageActionsSlot?: PageActionsSlot;
-    ListPageActionsSlot?: PageActionsSlot;
+    TableRowActions?: TableRowActions;
+    ViewPageActions?: PageActions;
+    EditPageActions?: PageActions;
+    DeletePageActions?: PageActions;
+    ListPageActions?: PageActions;
   };
 };
 
@@ -74,11 +74,11 @@ export type DrizzleTableConfigComplete = {
   path: string;
   formControlMap: FormControlMap;
   components?: {
-    TableRowActionsSlot?: TableRowActionsSlot;
-    ViewPageActionsSlot?: PageActionsSlot;
-    EditPageActionsSlot?: PageActionsSlot;
-    DeletePageActionsSlot?: PageActionsSlot;
-    ListPageActionsSlot?: PageActionsSlot;
+    TableRowActions?: TableRowActions;
+    ViewPageActions?: PageActions;
+    EditPageActions?: PageActions;
+    DeletePageActions?: PageActions;
+    ListPageActions?: PageActions;
   };
 };
 

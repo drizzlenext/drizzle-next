@@ -153,14 +153,14 @@ export async function ListPage(props: {
           {capitalCase(curPath)}{" "}
         </PageTitle>
         <PageNav className="flex-wrap px-0">
-          {drizzleTableConfig.components?.ListPageActionsSlot && (
-            <drizzleTableConfig.components.ListPageActionsSlot
+          {drizzleTableConfig.components?.ListPageActions && (
+            <drizzleTableConfig.components.ListPageActions
               basePath={config.basePath}
               curPath={curPath}
               curTable={curTable}
             />
           )}
-          {!drizzleTableConfig.components?.ListPageActionsSlot && (
+          {!drizzleTableConfig.components?.ListPageActions && (
             <Link href={`${config.basePath}/${curPath}/new`}>
               <Button className="rounded-2xl" variant="muted">
                 New
@@ -181,9 +181,7 @@ export async function ListPage(props: {
           curTable={curTable}
           curPath={curPath}
           curRow={obj}
-          TableRowActionsSlot={
-            drizzleTableConfig.components?.TableRowActionsSlot
-          }
+          TableRowActions={drizzleTableConfig.components?.TableRowActions}
         />
       </PageContent>
       <PageAside className="overflow-auto">

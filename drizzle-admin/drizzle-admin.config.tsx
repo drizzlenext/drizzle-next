@@ -24,11 +24,11 @@ export const config: DrizzleAdminConfig = {
       drizzleTable: posts,
       formControlMap: { content: "textarea", updatedAt: "input" },
       components: {
-        TableRowActionsSlot: PostRowActions,
-        ViewPageActionsSlot: PostViewPageActions,
-        EditPageActionsSlot: PostEditPageActions,
-        DeletePageActionsSlot: PostDeletePageActions,
-        ListPageActionsSlot: (props) => {
+        TableRowActions: PostRowActions,
+        ViewPageActions: PostViewPageActions,
+        EditPageActions: PostEditPageActions,
+        DeletePageActions: PostDeletePageActions,
+        ListPageActions: (props) => {
           return (
             <>
               <Link href={`${props.basePath}/${props.curPath}/new`}>
