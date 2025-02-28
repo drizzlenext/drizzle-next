@@ -37,7 +37,7 @@ const PageLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "relative flex h-[calc(100vh-3rem)] flex-col overflow-auto overflow-x-clip bg-page text-page-foreground",
+          "bg-page text-page-foreground relative flex h-[calc(100vh-3rem)] flex-col overflow-auto overflow-x-clip",
           state.asideOpen ? "" : "",
           className,
         )}
@@ -57,7 +57,7 @@ const PageHeader = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex items-center justify-between gap-2 border-b bg-page p-3 text-page-foreground",
+        "border-border bg-page text-page-foreground flex items-center justify-between gap-2 border-b p-3",
         state.asideOpen ? "" : "",
         className,
       )}
@@ -74,7 +74,7 @@ const PageTitle = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "text-nowrap bg-page font-bold text-page-foreground",
+      "bg-page text-page-foreground font-bold text-nowrap",
       className,
     )}
     {...props}
@@ -89,7 +89,7 @@ const PageNav = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "ml-auto flex items-center gap-3 bg-page text-page-foreground",
+      "bg-page text-page-foreground ml-auto flex items-center gap-3",
       className,
     )}
     {...props}
@@ -106,7 +106,7 @@ const PageContent = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex-grow overflow-auto bg-page p-3 text-page-foreground",
+        "bg-page text-page-foreground flex-grow overflow-auto p-3",
         state.asideOpen ? "" : "",
         className,
       )}
@@ -125,7 +125,7 @@ const PageFooter = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "z-0 flex items-center border-t bg-page p-3 text-page-foreground",
+        "bg-page text-page-foreground z-0 flex items-center border-t p-3",
         state.asideOpen ? "" : "",
         className,
       )}
@@ -144,7 +144,7 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute right-0 z-10 h-full w-[70%] transform border-l bg-page p-3 text-page-foreground transition-transform duration-200 md:w-[50%] md:duration-0",
+        "bg-page text-page-foreground absolute right-0 z-10 h-full w-[70%] transform border-l p-3 transition-transform duration-200 md:w-[50%] md:duration-0",
         state.asideOpen ? "translate-x-0" : "translate-x-full",
         className,
       )}

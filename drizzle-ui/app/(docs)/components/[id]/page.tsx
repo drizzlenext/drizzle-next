@@ -5,21 +5,14 @@ import { notFound } from "next/navigation";
 import { marked } from "marked";
 
 import { ComponentCode } from "@/components/component-layout/component-code";
-import { ComponentDescription } from "@/components/component-layout/component-description";
-import { ComponentPage } from "@/components/component-layout/component-page";
-import { ComponentPreview } from "@/components/component-layout/component-preview";
-import { ComponentTitle } from "@/components/component-layout/component-title";
-
 import { AlertDemo } from "@/components/component-demo/alert-demo";
 import { getFileContent } from "@/lib/file-utils";
-
 import { AvatarDemo } from "@/components/component-demo/avatar-demo";
 import { ButtonDemo } from "@/components/component-demo/button-demo";
 import { CardDemo } from "@/components/component-demo/card-demo";
 import { CheckboxDemo } from "@/components/component-demo/checkbox-demo";
 import { DarkModeDemo } from "@/components/component-demo/dark-mode-demo";
 import { FlashMessageDemo } from "@/components/component-demo/flash-message-demo";
-import { ComponentContent } from "@/components/component-layout/component-content";
 import { FormDemo } from "@/components/component-demo/form-demo";
 import { InputDemo } from "@/components/component-demo/input-demo";
 import { LabelDemo } from "@/components/component-demo/label-demo";
@@ -31,6 +24,7 @@ import { SortableDemo } from "@/components/component-demo/sortable-demo";
 import { TableDemo } from "@/components/component-demo/table-demo";
 import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 import { Suspense } from "react";
+import { PageContent, PageHeader, PageLayout, PageTitle } from "@/components";
 
 const componentMap: { [key: string]: React.ComponentType | null } = {
   alert: AlertDemo,
@@ -78,25 +72,36 @@ export default async function Page(props: { params: Params }) {
   const DynamicComponent = componentMap[params.id] || null;
 
   return (
-    <ComponentPage>
-      <ComponentTitle>{data.title}</ComponentTitle>
-      <ComponentDescription>{data.description}</ComponentDescription>
-      {htmlContent && <ComponentContent htmlContent={htmlContent} />}
-      {DynamicComponent && (
-        <ComponentPreview>
-          <Suspense>
-            <DynamicComponent />
-          </Suspense>
-        </ComponentPreview>
-      )}
-      <ComponentCode
-        language="bash"
-        code={`npx drizzle-ui@latest add ${params.id}`}
-        title="CLI Installation"
-      />
-      <ComponentCode language="ts" code={code} title="Manual Installation" />
-      <ComponentCode language="ts" code={usage} title="Usage" />
-    </ComponentPage>
+    <PageLayout>
+      <PageHeader>
+        <PageTitle>{data.title}</PageTitle>
+      </PageHeader>
+      <PageContent className="flex flex-col gap-5">
+        <div>{data.description}</div>
+        {htmlContent && (
+          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        )}
+        {DynamicComponent && (
+          <div className="preview">
+            <h2>Preview</h2>
+            <div className="not-prose border-muted-300 dark:border-muted-600 flex flex-col gap-5 rounded border p-5">
+              <Suspense>
+                <DynamicComponent />
+              </Suspense>
+            </div>
+          </div>
+        )}
+        <h2>Installation</h2>
+        <ComponentCode
+          language="bash"
+          code={`npx drizzle-ui@latest add ${params.id}`}
+        />
+        <h2>Usage</h2>
+        <ComponentCode language="ts" code={usage} />
+        <h2>Source Code</h2>
+        <ComponentCode language="ts" code={code} />
+      </PageContent>
+    </PageLayout>
   );
 }
 
