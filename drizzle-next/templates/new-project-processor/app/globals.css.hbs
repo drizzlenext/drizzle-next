@@ -1,19 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-.lucide {
-  stroke-width: 1.5px;
-}
-
-* {
-  scrollbar-width: auto;
-  scrollbar-color: #dddddd white;
-}
-
-.dark * {
-  scrollbar-width: auto;
-  scrollbar-color: #333333 black;
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-dashboard: var(--dashboard);
+  --color-dashboard-foreground: var(--dashboard-foreground);
+  --color-header: var(--header);
+  --color-header-foreground: var(--header-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-page: var(--page);
+  --color-page-foreground: var(--page-foreground);
+  --color-border: var(--border);
+  --color-checkbox: var(--checkbox);
+  --color-input-border: var(--input-border);
+  --color-input-background: var(--input-background);
+  --color-input-ring: var(--input-ring);
+  --radius-alert: var(--radius-alert);
+  --radius-button: var(--radius-button);
+  --radius-card: var(--radius-card);
+  --radius-input: var(--radius-input);
+  --radius-icon: var(--radius-icon);
 }
 
 @layer base {
@@ -47,11 +70,11 @@
     --input-border: theme(colors.zinc.500);
     --input-background: theme(colors.zinc.50);
     --input-ring: theme(colors.blue.500);
-    --rounded-alert: 6px;
-    --rounded-button: 4px;
-    --rounded-card: 12px;
-    --rounded-input: 0px;
-    --rounded-icon: 4px;
+    --radius-alert: 6px;
+    --radius-button: 4px;
+    --radius-card: 12px;
+    --radius-input: 0px;
+    --radius-icon: 4px;
   }
 
   .dark {
@@ -85,4 +108,18 @@
     --input-background: theme(colors.zinc.800);
     --input-ring: theme(colors.blue.500);
   }
+}
+
+.lucide {
+  stroke-width: 1.5px;
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #dddddd white;
+}
+
+.dark * {
+  scrollbar-width: auto;
+  scrollbar-color: #333333 black;
 }
