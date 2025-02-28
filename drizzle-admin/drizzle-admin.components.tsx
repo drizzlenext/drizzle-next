@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { PageActions, TableRowActions } from "./package/types";
 import { Button } from "drizzle-ui";
+import { Post } from "./schema/posts";
 
-export const PostRowActions: TableRowActions = (props) => {
+export const PostRowActions: TableRowActions<Post> = (props) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/images`}>
@@ -23,37 +24,37 @@ export const PostRowActions: TableRowActions = (props) => {
   );
 };
 
-export const PostViewPageActions: PageActions = (props) => {
+export const PostViewPageActions: PageActions<Post> = (props) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/edit`}>
+      <Link href={`${props.basePath}/${props.curPath}/${props.row?.id}/edit`}>
         Custom Page Action
       </Link>
     </>
   );
 };
 
-export const PostEditPageActions: PageActions = (props) => {
+export const PostEditPageActions: PageActions<Post> = (props) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/edit`}>
+      <Link href={`${props.basePath}/${props.curPath}/${props.row?.id}/edit`}>
         Custom Edit Page Action
       </Link>
     </>
   );
 };
 
-export const PostDeletePageActions: PageActions = (props) => {
+export const PostDeletePageActions: PageActions<Post> = (props) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/edit`}>
+      <Link href={`${props.basePath}/${props.curPath}/${props.row?.id}/edit`}>
         Custom Delete Page Action
       </Link>
     </>
   );
 };
 
-export const PostListPageActions: PageActions = (props) => {
+export const PostListPageActions: PageActions<Post> = (props) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/new`}>
