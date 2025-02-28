@@ -19,7 +19,6 @@ export {
   DashboardSidebarItem,
   DashboardContent,
 } from "./ui/dashboard-layout";
-export { FlashMessage } from "./ui/flash-message";
 export { Form, FormControl, FormMessage } from "./ui/form";
 export { Input } from "./ui/input";
 export { Label } from "./ui/label";

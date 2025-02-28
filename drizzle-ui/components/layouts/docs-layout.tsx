@@ -32,7 +32,6 @@ const items = [
   { title: "Checkbox", url: "/components/checkbox" },
   { title: "Dark Mode", url: "/components/dark-mode" },
   { title: "Dashboard Layout", url: "/components/dashboard-layout" },
-  { title: "Flash Message", url: "/components/flash-message" },
   { title: "Form", url: "/components/form" },
   { title: "Input", url: "/components/input" },
   { title: "Label", url: "/components/label" },
