@@ -2,11 +2,11 @@
 
 import hljs, { HighlightResult } from "highlight.js";
 import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "./button";
 import { CopyCheckIcon, CopyIcon } from "lucide-react";
 import "highlight.js/styles/github-dark.css";
 
-export function ComponentCode({
+export function CodeBlock({
   code,
   language,
 }: {
@@ -18,7 +18,7 @@ export function ComponentCode({
 
   useEffect(() => {
     setHighlightedCode(hljs.highlight(code, { language: language }));
-  }, [code]);
+  }, [code, language]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code).then(() => {

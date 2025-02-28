@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { marked } from "marked";
 
-import { ComponentCode } from "@/components/component-layout/component-code";
+import { CodeBlock } from "@/components/ui/code-block";
 import { AlertDemo } from "@/components/component-demo/alert-demo";
 import { getFileContent } from "@/lib/file-utils";
 import { AvatarDemo } from "@/components/component-demo/avatar-demo";
@@ -92,14 +92,14 @@ export default async function Page(props: { params: Params }) {
           </div>
         )}
         <h2>Installation</h2>
-        <ComponentCode
+        <CodeBlock
           language="bash"
           code={`npx drizzle-ui@latest add ${params.id}`}
         />
         <h2>Usage</h2>
-        <ComponentCode language="ts" code={usage} />
+        <CodeBlock language="ts" code={usage} />
         <h2>Source Code</h2>
-        <ComponentCode language="ts" code={code} />
+        <CodeBlock language="ts" code={code} />
       </PageContent>
     </PageLayout>
   );

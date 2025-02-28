@@ -4,6 +4,7 @@ export { Button } from "./ui/button";
 export { Card } from "./ui/card";
 export { Checkbox } from "./ui/checkbox";
 export { cn } from "./ui/utils";
+export { CodeBlock } from "./ui/code-block";
 export { DarkModeScript, DarkModeToggle } from "./ui/dark-mode";
 export {
   DashboardLayout,
