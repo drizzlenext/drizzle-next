@@ -317,7 +317,7 @@ export function ObjectTable(props: ObjectTableProps) {
                   </TableCell>
                 );
               })}
-              <TableCell>
+              <TableCell className="border border-border">
                 <TableRowActions onClick={(e) => e.stopPropagation()}>
                   {props.TableRowActions && (
                     <props.TableRowActions
