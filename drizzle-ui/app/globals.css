@@ -70,6 +70,8 @@
     --input-border: theme(colors.zinc.500);
     --input-background: theme(colors.zinc.50);
     --input-ring: theme(colors.blue.500);
+    --scrollbar-thumb: theme(colors.zinc.400);
+    --scrollbar-track: theme(colors.zinc.200);
     --radius-alert: 6px;
     --radius-button: 4px;
     --radius-card: 12px;
@@ -107,6 +109,8 @@
     --input-border: theme(colors.zinc.500);
     --input-background: theme(colors.zinc.800);
     --input-ring: theme(colors.blue.500);
+    --scrollbar-thumb: theme(colors.zinc.800);
+    --scrollbar-track: theme(colors.zinc.950);
   }
 }
 
@@ -116,10 +120,5 @@
 
 * {
   scrollbar-width: auto;
-  scrollbar-color: #dddddd white;
-}
-
-.dark * {
-  scrollbar-width: auto;
-  scrollbar-color: #333333 black;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }

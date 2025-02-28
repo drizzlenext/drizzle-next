@@ -74,15 +74,15 @@ export default async function Page(props: { params: Params }) {
       <PageHeader>
         <PageTitle>{data.title}</PageTitle>
       </PageHeader>
-      <PageContent className="flex flex-col gap-5">
-        <div>{data.description}</div>
+      <PageContent className="typography">
+        <div className="mb-5">{data.description}</div>
         {htmlContent && (
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         )}
         {DynamicComponent && (
-          <div className="preview">
+          <div className="mb-5">
             <h2>Preview</h2>
-            <div className="not-prose border-muted-300 dark:border-muted-600 flex flex-col gap-5 rounded border p-5">
+            <div className="border-border flex flex-col border p-5">
               <Suspense>
                 <DynamicComponent />
               </Suspense>

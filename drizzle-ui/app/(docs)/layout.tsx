@@ -1,3 +1,4 @@
+import "@/styles/typography.css";
 import { DocsLayout } from "@/components/layouts/docs-layout";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
