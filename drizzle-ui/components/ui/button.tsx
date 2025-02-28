@@ -18,7 +18,8 @@ const buttonVariantMap: Record<ButtonVariant, string> = {
   destructive: "bg-destructive text-destructive-foreground",
   warning: "bg-warning text-warning-foreground",
   info: "bg-info text-info-foreground",
-  outline: "bg-transparent border border-input text-foreground hover:bg-muted",
+  outline:
+    "bg-transparent border border-input-border text-foreground hover:bg-muted",
   ghost: "bg-transparent text-foreground hover:bg-muted",
 };
 

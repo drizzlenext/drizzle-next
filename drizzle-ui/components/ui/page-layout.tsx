@@ -125,7 +125,7 @@ const PageFooter = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-page text-page-foreground z-0 flex items-center border-t p-3",
+        "bg-page text-page-foreground border-border z-0 flex items-center border-t p-3",
         state.asideOpen ? "" : "",
         className,
       )}
@@ -144,7 +144,7 @@ const PageAside = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-page text-page-foreground absolute right-0 z-10 h-full w-[70%] transform border-l p-3 transition-transform duration-200 md:w-[50%] md:duration-0",
+        "border-border bg-page text-page-foreground absolute right-0 z-10 h-full w-[70%] transform border-l p-3 transition-transform duration-200 md:w-[50%] md:duration-0",
         state.asideOpen ? "translate-x-0" : "translate-x-full",
         className,
       )}
