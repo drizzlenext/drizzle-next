@@ -38,7 +38,7 @@ export function CodeBlock({
       </pre>
       <Button
         onClick={handleCopy}
-        className="absolute top-2 right-2 text-white hover:bg-zinc-700"
+        className="absolute top-0 right-0 text-white hover:bg-transparent"
         variant="ghost"
         size="icon"
       >
