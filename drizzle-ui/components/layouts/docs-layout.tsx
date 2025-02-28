@@ -44,6 +44,9 @@ const items = [
   { title: "Textarea", url: "/components/textarea" },
 ];
 
+const CopyIconSVGText = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
+const CopyCheckIconSVGText = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy-check"><path d="m12 15 2 2 4-4"/><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
+
 export function DocsLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
@@ -53,19 +56,18 @@ export function DocsLayout({ children }: { children: ReactNode }) {
     codeBlocks.forEach((codeBlock) => {
       const pre = codeBlock.parentElement;
       if (!pre) return;
-
       // Avoid duplicate buttons
       if (pre.querySelector(".copy-btn")) return;
 
       const button = document.createElement("button");
-      button.innerText = "Copy";
+      button.innerHTML = CopyIconSVGText;
       button.className =
-        "copy-btn absolute top-2 right-2 bg-white text-black p-1 rounded hover:bg-gray-200 text-sm";
+        "copy-btn absolute top-2 right-2 bg-transparent text-foreground hover:bg-muted min-w-9 min-h-9 max-w-9 max-h-9 aspect-square py-0 px-0 flex items-center justify-center rounded-icon cursor-pointer";
 
       button.onclick = async () => {
         await navigator.clipboard.writeText(codeBlock.textContent || "");
-        button.innerText = "Copied!";
-        setTimeout(() => (button.innerText = "Copy"), 2000);
+        button.innerHTML = CopyCheckIconSVGText;
+        setTimeout(() => (button.innerHTML = CopyIconSVGText), 2000);
       };
 
       pre.style.position = "relative";

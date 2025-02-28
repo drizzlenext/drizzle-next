@@ -4,7 +4,6 @@ import hljs, { HighlightResult } from "highlight.js";
 import { useEffect, useState } from "react";
 import { Button } from "./button";
 import { CopyCheckIcon, CopyIcon } from "lucide-react";
-import "highlight.js/styles/github-dark.css";
 
 export function CodeBlock({
   code,
@@ -28,11 +27,11 @@ export function CodeBlock({
   };
 
   return (
-    <div className="relative text-white dark:bg-zinc-800">
-      <pre className="overflow-auto p-3">
+    <div className="relative text-white">
+      <pre className="overflow-auto">
         {highlightedCode?.value && (
           <code
-            className={`language-${language}`}
+            className={`language-${language} hljs`}
             dangerouslySetInnerHTML={{ __html: highlightedCode?.value }}
           ></code>
         )}
