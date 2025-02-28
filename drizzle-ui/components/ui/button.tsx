@@ -39,7 +39,7 @@ const Button = React.forwardRef<
   return (
     <button
       className={cn(
-        "rounded-button px-3 py-1 hover:opacity-90 disabled:opacity-50",
+        "rounded-button cursor-pointer px-3 py-1 hover:opacity-90 disabled:opacity-50",
         buttonVariantMap.default,
         variant && buttonVariantMap[variant],
         size && buttonSizeMap[size],

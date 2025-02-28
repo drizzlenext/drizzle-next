@@ -34,7 +34,7 @@ const DashboardLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "grid h-screen grid-rows-[auto_1fr] bg-dashboard text-dashboard-foreground",
+          "bg-dashboard text-dashboard-foreground grid h-screen grid-rows-[auto_1fr]",
           state.sidebarOpen === undefined && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === true && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === false && "md:grid-cols-[0px_1fr]",
@@ -96,7 +96,7 @@ const DashboardHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex h-12 w-full items-center justify-between gap-2 border-b bg-header text-header-foreground md:col-span-2",
+      "bg-header text-header-foreground border-border flex h-12 w-full items-center justify-between gap-2 border-b md:col-span-2",
       className,
     )}
     {...props}
@@ -128,9 +128,9 @@ const DashboardNav = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute top-12 z-50 flex w-full origin-top transform flex-col items-center gap-0 border-b bg-background px-2 py-3 text-sm transition-transform duration-200 [&>a]:w-full [&>a]:py-1",
+        "bg-background absolute top-12 z-50 flex w-full origin-top transform flex-col items-center gap-0 border-b px-2 py-3 text-sm transition-transform duration-200 [&>a]:w-full [&>a]:py-1",
         state.navOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0",
-        "md:relative md:right-0 md:top-0 md:flex md:w-auto md:scale-100 md:flex-row md:items-center md:gap-5 md:border-none md:bg-transparent md:text-base md:opacity-100 md:dark:bg-transparent md:[&>a]:w-auto md:[&>a]:p-0 md:[&>a]:px-2",
+        "md:relative md:top-0 md:right-0 md:flex md:w-auto md:scale-100 md:flex-row md:items-center md:gap-5 md:border-none md:bg-transparent md:text-base md:opacity-100 md:dark:bg-transparent md:[&>a]:w-auto md:[&>a]:p-0 md:[&>a]:px-2",
         className,
       )}
       {...props}
@@ -177,7 +177,7 @@ const DashboardSidebar = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "fixed inset-y-12 z-20 h-full w-2/3 transform flex-col overflow-auto border-r bg-sidebar text-sm transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48 md:duration-0",
+        "bg-sidebar border-border fixed inset-y-12 z-20 h-full w-2/3 transform flex-col overflow-auto border-r text-sm transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48 md:duration-0",
         state.sidebarOpen === undefined && "-translate-x-full md:translate-x-0",
         state.sidebarOpen === true && "translate-x-0",
         state.sidebarOpen === false && "-translate-x-full",
@@ -216,7 +216,7 @@ const DashboardSidebarItem = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-row items-center gap-2 overflow-hidden text-nowrap px-3 py-1 font-normal hover:bg-muted",
+      "hover:bg-muted flex flex-row items-center gap-2 overflow-hidden px-3 py-1 font-normal text-nowrap",
       active && "bg-muted",
       className,
     )}
