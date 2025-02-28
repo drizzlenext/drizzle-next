@@ -34,7 +34,7 @@ type ObjectTableProps = {
   basePath: string;
   columns: SimplifiedColumn[];
   curRow: Record<string, any>;
-  TableRowActions?: TableRowActionsType;
+  TableRowActions?: TableRowActionsType<any>;
 };
 
 export function ObjectTable(props: ObjectTableProps) {
@@ -269,7 +269,7 @@ export function ObjectTable(props: ObjectTableProps) {
             <TableRow
               key={row.id}
               className={cn(
-                "hover:bg-zinc-100 dark:hover:bg-zinc-800",
+                "hover:bg-zinc-100 hover:dark:bg-zinc-800",
                 curRow?.id === row.id && "bg-zinc-100 dark:bg-zinc-800"
               )}
               onClick={() => handleClick(row)}
