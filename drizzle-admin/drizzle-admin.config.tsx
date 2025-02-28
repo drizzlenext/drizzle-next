@@ -17,7 +17,7 @@ import Link from "next/link";
 import { Button } from "drizzle-ui";
 
 export const config: DrizzleAdminConfig = {
-  basePath: "/cms",
+  basePath: "/admin",
   schema: {
     users: { drizzleTable: users, label: "Users" },
     posts: {
