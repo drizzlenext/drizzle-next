@@ -28,11 +28,11 @@ export function CodeBlock({
   };
 
   return (
-    <div className="relative p-5 text-white dark:bg-zinc-800">
-      <pre>
+    <div className="relative text-white dark:bg-zinc-800">
+      <pre className="overflow-auto p-3">
         {highlightedCode?.value && (
           <code
-            className={`language-${language} rounded`}
+            className={`language-${language}`}
             dangerouslySetInnerHTML={{ __html: highlightedCode?.value }}
           ></code>
         )}
