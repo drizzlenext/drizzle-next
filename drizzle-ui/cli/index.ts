@@ -26,30 +26,24 @@ program.command("init").action(async () => {
     }
     console.log(`Stdout: ${stdout}`);
 
-    const sourcePath = path.join(__dirname, "templates", "lib", "utils.ts.hbs");
-    const destinationPath = path.join(process.cwd(), "lib", "utils.ts");
-
     const libDir = path.join(process.cwd(), "lib");
     await fs.promises.mkdir(libDir, { recursive: true });
 
+    // copy utils
+    const sourcePath = path.join(__dirname, "drizzle-ui", "lib", "utils.ts");
+    const destinationPath = path.join(process.cwd(), "lib", "utils.ts");
     await copyFileAsync(sourcePath, destinationPath);
     console.log("utils.ts file copied successfully.");
 
-    const tailwindConfigSourcePath = path.join(
-      __dirname,
-      "templates",
-      "tailwind.config.ts.hbs",
-    );
+    // copy styles
+    const stylesSrcPath = path.join(__dirname, "drizzle-ui", "styles.css");
     const tailwindConfigDestinationPath = path.join(
       process.cwd(),
-      "tailwind.config.ts",
+      "app",
+      "globals.css",
     );
-
-    await copyFileAsync(
-      tailwindConfigSourcePath,
-      tailwindConfigDestinationPath,
-    );
-    console.log("tailwind.config.ts file copied successfully.");
+    await copyFileAsync(stylesSrcPath, tailwindConfigDestinationPath);
+    console.log("styles copied successfully.");
   } catch (error) {
     if (error instanceof Error) {
       console.error(`Error: ${error.message}`);
