@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { PageActions, TableRowActions } from "./package/types";
+import { PageActions, TableRowActions } from "./src/types";
 import { Button } from "drizzle-ui";
 import { Post } from "./schema/posts";
 

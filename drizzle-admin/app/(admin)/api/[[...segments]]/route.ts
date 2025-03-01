@@ -5,7 +5,7 @@ import {
   PATCH_ROUTE,
   POST_ROUTE,
   PUT_ROUTE,
-} from "@/package/drizzle-routes";
+} from "@/src/drizzle-routes";
 
 export const POST = POST_ROUTE(config);
 export const GET = GET_ROUTE(config);
