@@ -1,5 +1,5 @@
-import { DarkModeToggle } from "@/components/ui/dark-mode";
-import { DarkModeScript } from "@/components/ui/dark-mode";
+import { DarkModeToggle } from "@/src/components/ui/dark-mode";
+import { DarkModeScript } from "@/src/components/ui/dark-mode";
 
 export function DarkModeDemo() {
   return (

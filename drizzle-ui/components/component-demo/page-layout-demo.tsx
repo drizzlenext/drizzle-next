@@ -7,11 +7,11 @@ import {
   PageFooter,
   PageAside,
   PageAsideToggle,
-} from "@/components/ui/page-layout";
-import { SearchInput } from "@/components/ui/search-input";
-import { Pagination } from "@/components/ui/pagination";
+} from "@/src/components/ui/page-layout";
+import { SearchInput } from "@/src/components/ui/search-input";
+import { Pagination } from "@/src/components/ui/pagination";
 import { TableDemo } from "./table-demo";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/src/components/ui/button";
 
 export function PageLayoutDemo() {
   return (

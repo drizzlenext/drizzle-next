@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { DarkModeScript } from "@/components/ui/dark-mode";
+import { DarkModeScript } from "@/src/components/ui/dark-mode";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "highlight.js/styles/atom-one-dark.css";
 

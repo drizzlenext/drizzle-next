@@ -1,7 +1,7 @@
 ---
 title: Search Input
 description: A Search Input
-code: components/ui/search-input.tsx
+code: src/components/ui/search-input.tsx
 usage: components/component-demo/search-input-demo.tsx
 ---
 

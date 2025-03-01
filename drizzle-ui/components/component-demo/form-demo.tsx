@@ -1,7 +1,7 @@
-import { Form, FormControl, FormMessage } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormMessage } from "@/src/components/ui/form";
+import { Label } from "@/src/components/ui/label";
+import { Input } from "@/src/components/ui/input";
+import { Button } from "@/src/components/ui/button";
 
 export function FormDemo() {
   return (

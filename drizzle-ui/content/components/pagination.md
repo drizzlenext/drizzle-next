@@ -1,7 +1,7 @@
 ---
 title: Pagination
 description: A pagination component
-code: components/ui/pagination.tsx
+code: src/components/ui/pagination.tsx
 usage: components/component-demo/pagination-demo.tsx
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Sortable
 description: A sortable field
-code: components/ui/sortable.tsx
+code: src/components/ui/sortable.tsx
 usage: components/component-demo/sortable-demo.tsx
 ---
 

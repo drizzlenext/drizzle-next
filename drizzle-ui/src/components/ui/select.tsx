@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "./utils";
+import { cn } from "../../lib/utils";
 
 const Select = React.forwardRef<
   HTMLSelectElement,
@@ -8,7 +8,7 @@ const Select = React.forwardRef<
   return (
     <select
       className={cn(
-        "focus:border-input-ring border-input-border bg-input-background w-full border px-3 py-1 focus:outline-none focus:ring-0",
+        "focus:border-input-ring border-input-border bg-input-background w-full border px-3 py-1 focus:ring-0 focus:outline-none",
         className,
       )}
       ref={ref}

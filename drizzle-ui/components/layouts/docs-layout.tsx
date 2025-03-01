@@ -1,6 +1,6 @@
 "use client";
 
-import { DashboardLayout } from "@/components/ui/dashboard-layout";
+import { DashboardLayout } from "@/src/components/ui/dashboard-layout";
 import { ReactNode, useEffect } from "react";
 import { ArrowUpRightIcon } from "lucide-react";
 import {
@@ -13,11 +13,11 @@ import {
   DashboardSidebarGroup,
   DashboardSidebarItem,
   DashboardSidebarLabel,
-} from "@/components/ui/dashboard-layout";
+} from "@/src/components/ui/dashboard-layout";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DashboardContent } from "@/components/ui/dashboard-layout";
-import { DarkModeToggle } from "@/components/ui/dark-mode";
+import { DashboardContent } from "@/src/components/ui/dashboard-layout";
+import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 
 const pages = [
   { title: "Introduction", url: "/introduction" },

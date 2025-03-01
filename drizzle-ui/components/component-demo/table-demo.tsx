@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
   TableRowActions,
-} from "@/components/ui/table";
+} from "@/src/components/ui/table";
 import Link from "next/link";
 
 const data = Array.from({ length: 20 }, (_, index) => ({

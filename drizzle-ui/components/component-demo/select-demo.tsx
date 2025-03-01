@@ -1,4 +1,4 @@
-import { Select, SelectOption } from "@/components/ui/select";
+import { Select, SelectOption } from "@/src/components/ui/select";
 
 export function SelectDemo() {
   return (

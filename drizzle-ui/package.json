@@ -10,7 +10,7 @@
     "build:all": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:cli && npm run build:css",
     "build:esm": "rollup -c ./rollup.esm.mjs",
     "build:cjs": "rollup -c ./rollup.cjs.mjs",
-    "build:cli": "tsc --project ./tsconfig.cli.json && mkdir \"dist/cli/components/ui\" && cp -r components/ui dist/cli/components && cp -r cli/templates dist/cli",
+    "build:cli": "tsc --project ./tsconfig.cli.json && mkdir \"dist/cli/components/ui\" && cp -r src/components/ui dist/cli/components && cp -r cli/templates dist/cli",
     "clean": "rm -rf dist",
     "build:css": "@tailwindcss -i app/globals.css -o dist/styles.css"
   },
@@ -57,16 +57,16 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
-  "main": "dist/cjs/components/index.js",
+  "main": "dist/cjs/src/index.js",
   "exports": {
     ".": {
-      "import": "./dist/esm/components/index.js",
-      "require": "./dist/cjs/components/index.js",
+      "import": "./dist/esm/src/index.js",
+      "require": "./dist/cjs/src/index.js",
       "types": "./dist/index.d.ts"
     },
     "./styles": "./dist/styles.css"
   },
-  "module": "dist/esm/components/index.js",
+  "module": "dist/esm/src/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"

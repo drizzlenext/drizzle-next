@@ -1,4 +1,4 @@
-import { Alert } from "@/components/ui/alert";
+import { Alert } from "@/src/components/ui/alert";
 import {
   CheckIcon,
   InfoIcon,

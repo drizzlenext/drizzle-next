@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { DarkModeToggle } from "@/components/ui/dark-mode";
+import { Button } from "@/src/components/ui/button";
+import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 import { ArrowUpRightIcon, CloudDrizzleIcon } from "lucide-react";
 import Link from "next/link";
 

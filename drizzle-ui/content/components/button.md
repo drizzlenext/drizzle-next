@@ -1,6 +1,6 @@
 ---
 title: Button
 description: A button
-code: components/ui/button.tsx
+code: src/components/ui/button.tsx
 usage: components/component-demo/button-demo.tsx
 ---

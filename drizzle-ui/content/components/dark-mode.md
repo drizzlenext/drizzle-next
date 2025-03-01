@@ -1,7 +1,7 @@
 ---
 title: Dark Mode
 description: A dark mode toggle
-code: components/ui/dark-mode.tsx
+code: src/components/ui/dark-mode.tsx
 usage: components/component-demo/dark-mode-demo.tsx
 ---
 

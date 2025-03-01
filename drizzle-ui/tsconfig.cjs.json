@@ -15,5 +15,5 @@
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true
   },
-  "include": ["components/index.ts"]
+  "include": ["src/index.ts"]
 }

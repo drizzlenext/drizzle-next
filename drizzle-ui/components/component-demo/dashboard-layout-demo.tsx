@@ -12,10 +12,10 @@ import {
   DashboardTitle,
   DashboardNav,
   DashboardNavToggle,
-} from "@/components/ui/dashboard-layout";
+} from "@/src/components/ui/dashboard-layout";
 import { ArrowUpRightIcon, NotebookIcon, Table2Icon } from "lucide-react";
 import Link from "next/link";
-import { DarkModeToggle } from "@/components/ui/dark-mode";
+import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 import { usePathname } from "next/navigation";
 import { PageLayoutDemo } from "./page-layout-demo";
 

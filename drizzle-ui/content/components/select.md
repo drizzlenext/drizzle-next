@@ -1,7 +1,7 @@
 ---
 title: Select
 description: A select field
-code: components/ui/select.tsx
+code: src/components/ui/select.tsx
 usage: components/component-demo/select-demo.tsx
 ---
 

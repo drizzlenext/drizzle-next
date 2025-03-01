@@ -1,6 +1,6 @@
 "use client";
 
-import { Pagination } from "@/components/ui/pagination";
+import { Pagination } from "@/src/components/ui/pagination";
 import { useSearchParams } from "next/navigation";
 
 export function PaginationDemo() {

@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { marked } from "marked";
 
-import { CodeBlock } from "@/components/ui/code-block";
+import { CodeBlock } from "@/src/components/ui/code-block";
 import { AlertDemo } from "@/components/component-demo/alert-demo";
 import { getFileContent } from "@/lib/file-utils";
 import { AvatarDemo } from "@/components/component-demo/avatar-demo";
@@ -17,13 +17,13 @@ import { InputDemo } from "@/components/component-demo/input-demo";
 import { LabelDemo } from "@/components/component-demo/label-demo";
 import { PageLayoutDemo } from "@/components/component-demo/page-layout-demo";
 import { PaginationDemo } from "@/components/component-demo/pagination-demo";
-import { SearchInput } from "@/components/ui/search-input";
+import { SearchInput } from "@/src/components/ui/search-input";
 import { SelectDemo } from "@/components/component-demo/select-demo";
 import { SortableDemo } from "@/components/component-demo/sortable-demo";
 import { TableDemo } from "@/components/component-demo/table-demo";
 import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 import { Suspense } from "react";
-import { PageContent, PageHeader, PageLayout, PageTitle } from "@/components";
+import { PageContent, PageHeader, PageLayout, PageTitle } from "@/src/index";
 
 const componentMap: { [key: string]: React.ComponentType | null } = {
   alert: AlertDemo,
@@ -64,8 +64,14 @@ export default async function Page(props: { params: Params }) {
 
   const htmlContent = await marked(content);
 
-  const code = getFileContent(data.code).replace("./utils", "@/lib/utils");
-  const usage = getFileContent(data.usage);
+  const code = getFileContent(data.code).replace(
+    "../../lib/utils",
+    "@/lib/utils",
+  );
+  const usage = getFileContent(data.usage).replaceAll(
+    "@/src/components",
+    "@/components",
+  );
 
   const DynamicComponent = componentMap[params.id] || null;
 

@@ -10,7 +10,7 @@ import preserveDirectives from "rollup-preserve-directives";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
   {
-    input: "components/index.ts",
+    input: "src/index.ts",
     output: [
       {
         // file: packageJson.module,

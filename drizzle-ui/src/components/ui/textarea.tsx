@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "./utils";
+import { cn } from "../../lib/utils";
 
 const Textarea = React.forwardRef<
   HTMLTextAreaElement,
@@ -8,7 +8,7 @@ const Textarea = React.forwardRef<
   return (
     <textarea
       className={cn(
-        "rounded-input w-full border border-input-border bg-input-background p-2 focus:border-input-ring focus:outline-none focus:ring-0",
+        "rounded-input border-input-border bg-input-background focus:border-input-ring w-full border p-2 focus:ring-0 focus:outline-none",
         className,
       )}
       ref={ref}

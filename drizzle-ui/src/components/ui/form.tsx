@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "./utils";
+import { cn } from "../../lib/utils";
 
 const Form = React.forwardRef<HTMLFormElement, React.ComponentProps<"form">>(
   ({ className, ...props }, ref) => (
