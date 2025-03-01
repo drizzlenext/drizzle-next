@@ -1,6 +1,8 @@
 import { config } from "@/drizzle-admin.config";
-import { DrizzleAdmin } from "@/src/drizzle-admin";
-import { Params, SearchParams } from "@/src/types";
+import { DrizzleAdmin } from "drizzle-admin";
+
+export type Params = Promise<{ [key: string]: string }>;
+export type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
 export default async function Page(props: {
   params: Params;

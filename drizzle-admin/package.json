@@ -1,46 +1,52 @@
 {
   "name": "drizzle-admin",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf dist",
+    "build:all": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:esm": "rollup -c ./rollup.esm.mjs",
+    "build:cjs": "rollup -c ./rollup.cjs.mjs"
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^1.7.4",
-    "bcrypt": "^5.1.1",
-    "better-sqlite3": "^11.7.0",
     "change-case-all": "^2.1.0",
-    "clsx": "^2.1.1",
-    "dotenv": "^16.4.7",
-    "drizzle-orm": "^0.38.4",
-    "drizzle-ui": "file:../drizzle-ui",
     "drizzle-zod": "^0.7.0",
-    "lucide-react": "^0.473.0",
-    "next": "15.1.6",
-    "next-auth": "^5.0.0-beta.25",
-    "pluralize": "^8.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwind-merge": "^2.6.0",
-    "zod": "^3.24.1"
+    "pluralize": "^8.0.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@faker-js/faker": "^9.4.0",
-    "@tailwindcss/postcss": "^4.0.9",
-    "@types/bcrypt": "^5.0.2",
-    "@types/better-sqlite3": "^7.6.12",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "drizzle-kit": "^0.30.2",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.6",
-    "postcss": "^8",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+    "next": "^15.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "rollup": "^4.32.1",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-preserve-directives": "^1.1.3"
+  },
+  "peerDependencies": {
+    "drizzle-orm": "^0.40.0",
+    "next": "^15.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "main": "dist/cjs/code/drizzle-next/drizzle-admin/src/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/code/drizzle-next/drizzle-admin/src/index.js",
+      "require": "./dist/cjs/code/drizzle-next/drizzle-admin/src/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/styles.css"
+  },
+  "module": "dist/esm/code/drizzle-next/drizzle-admin/src/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "",
+  "license": "MIT",
+  "description": ""
 }
