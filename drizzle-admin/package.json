@@ -15,7 +15,8 @@
     "drizzle-zod": "^0.7.0",
     "highlight.js": "^11.11.1",
     "lucide-react": "^0.477.0",
-    "tailwind-merge": "^3.0.2"
+    "tailwind-merge": "^3.0.2",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.2",
@@ -39,16 +40,16 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
-  "main": "dist/cjs/code/drizzle-next/drizzle-admin/src/index.js",
+  "main": "dist/cjs/src/index.js",
   "exports": {
     ".": {
-      "import": "./dist/esm/code/drizzle-next/drizzle-admin/src/index.js",
-      "require": "./dist/cjs/code/drizzle-next/drizzle-admin/src/index.js",
+      "import": "./dist/esm/src/index.js",
+      "require": "./dist/cjs/src/index.js",
       "types": "./dist/index.d.ts"
     },
     "./styles": "./dist/styles.css"
   },
-  "module": "dist/esm/code/drizzle-next/drizzle-admin/src/index.js",
+  "module": "dist/esm/src/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
