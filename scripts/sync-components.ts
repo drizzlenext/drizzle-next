@@ -4,7 +4,7 @@ import * as path from "path";
 function copyFiles(
   srcDir: string,
   destDir: string,
-  opts?: { appendExt?: string; utilsPath: string }
+  opts: { appendExt?: string; utilsPath: string }
 ) {
   if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true });
