@@ -5,7 +5,7 @@ import {
   DrizzleAdminLayoutConfig,
   DrizzleTableConfigComplete,
   SearchParams,
-} from "../types";
+} from "../lib/types";
 import { Table2Icon } from "lucide-react";
 
 export function parseSearchParams(

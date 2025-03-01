@@ -2,7 +2,7 @@
 
 import { Alert, Button, Form, FormControl, Label } from "../drizzle-ui";
 import { useState } from "react";
-import { ColumnDataTypeMap } from "../types";
+import { ColumnDataTypeMap } from "../lib/types";
 import pluralize from "pluralize";
 
 interface UpdateStatus {

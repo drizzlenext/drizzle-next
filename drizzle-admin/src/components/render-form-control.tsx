@@ -1,7 +1,7 @@
 "use client";
 
 import { Checkbox, FormControl, Input, Label, Textarea } from "../drizzle-ui";
-import { FormControlMap } from "../types";
+import { FormControlMap } from "../lib/types";
 import { capitalCase } from "change-case-all";
 import { renderValue } from "../utils/shared-utils";
 

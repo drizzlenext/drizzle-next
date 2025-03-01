@@ -1,5 +1,5 @@
 import { DrizzleAdminLayoutClient } from "./drizzle-admin-layout-client";
-import { completeLayoutConfig } from "./utils/server-utils";
+import { completeLayoutConfig } from "../utils/server-utils";
 import { DrizzleAdminConfig } from "./types";
 
 export function DrizzleAdminLayout({

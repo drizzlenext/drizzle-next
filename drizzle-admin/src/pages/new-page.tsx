@@ -5,7 +5,7 @@ import {
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
-} from "../types";
+} from "../lib/types";
 import { camelCase, capitalCase } from "change-case-all";
 import pluralize from "pluralize";
 import { ObjectCreateForm } from "../components/object-create-form";

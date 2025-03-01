@@ -4,7 +4,7 @@ import {
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
-} from "../types";
+} from "../lib/types";
 
 export async function RootPage(props: {
   params: Params;

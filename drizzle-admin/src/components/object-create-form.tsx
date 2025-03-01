@@ -3,7 +3,7 @@
 import { Alert, Button, Form, FormControl, FormMessage } from "../drizzle-ui";
 import { getFormControlMap } from "../utils/client-utils";
 import { useState } from "react";
-import { ColumnDataTypeMap, FormControlMap } from "../types";
+import { ColumnDataTypeMap, FormControlMap } from "../lib/types";
 import { RenderFormControl } from "./render-form-control";
 
 interface UpdateStatus {

@@ -2,7 +2,7 @@
 
 import { Alert, Button, Form, FormControl } from "../drizzle-ui";
 import { useState } from "react";
-import { ColumnDataTypeMap, FormControlMap } from "../types";
+import { ColumnDataTypeMap, FormControlMap } from "../lib/types";
 import { RenderFormControl } from "./render-form-control";
 import { useEffect } from "react";
 import { getFormControlMap } from "../utils/client-utils";

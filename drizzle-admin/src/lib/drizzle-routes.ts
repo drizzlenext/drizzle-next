@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { DrizzleAdminConfig, Filter } from "./types";
 import { createSchemaFactory } from "drizzle-zod";
 import { and, asc, desc, eq, getTableColumns } from "drizzle-orm";
-import { parseSearchParams } from "./utils/server-utils";
-import { OPERATOR_MAP } from "./constants/server-constants";
+import { parseSearchParams } from "../utils/server-utils";
+import { OPERATOR_MAP } from "../constants/server-constants";
 
 const { createUpdateSchema, createInsertSchema } = createSchemaFactory({
   coerce: {
