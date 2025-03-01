@@ -4,12 +4,5 @@
   "version": "0.0.0",
   "author": "",
   "license": "MIT",
-  "description": "",
-  "workspaces": [
-    "drizzle-next",
-    "docs"
-  ],
-  "dependencies": {
-    "commander": "^13.1.0"
-  }
+  "description": ""
 }

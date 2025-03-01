@@ -1,13 +1,11 @@
 import { PageContent, PageHeader, PageLayout, PageTitle } from "../drizzle-ui";
 import {
   ColumnDataTypeMap,
-  DrizzleAdminConfig,
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
 } from "../lib/types";
 import { camelCase, capitalCase } from "change-case-all";
-import pluralize from "pluralize";
 import { ObjectCreateForm } from "../components/object-create-form";
 import { getTableColumns } from "drizzle-orm";
 import Link from "next/link";

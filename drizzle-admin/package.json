@@ -11,14 +11,18 @@
   },
   "dependencies": {
     "change-case-all": "^2.1.0",
+    "clsx": "^2.1.1",
     "drizzle-zod": "^0.7.0",
-    "pluralize": "^8.0.0"
+    "highlight.js": "^11.11.1",
+    "lucide-react": "^0.477.0",
+    "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.2",
     "@tailwindcss/cli": "^4.0.9",
+    "@types/react": "^19.0.10",
     "next": "^15.2.0",
     "postcss": "^8.5.3",
     "react": "^19.0.0",

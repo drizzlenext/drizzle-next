@@ -14,7 +14,6 @@ import { postsTags } from "./schema/posts-tags";
 import { tags } from "./schema/tags";
 import { users } from "./schema/users";
 import Link from "next/link";
-import { Button } from "drizzle-ui";
 
 export const config: DrizzleAdminConfig = {
   basePath: "/admin",
@@ -31,11 +30,7 @@ export const config: DrizzleAdminConfig = {
         ListPageActions: (props) => {
           return (
             <>
-              <Link href={`${props.basePath}/${props.curPath}/new`}>
-                <Button className="rounded-2xl" variant="muted">
-                  New
-                </Button>
-              </Link>
+              <Link href={`${props.basePath}/${props.curPath}/new`}>New</Link>
             </>
           );
         },

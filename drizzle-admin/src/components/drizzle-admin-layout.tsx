@@ -1,6 +1,7 @@
 import { DrizzleAdminLayoutClient } from "./drizzle-admin-layout-client";
 import { completeLayoutConfig } from "../lib/server-utils";
 import { DrizzleAdminConfig } from "../lib/types";
+import { DarkModeScript } from "../drizzle-ui";
 
 export function DrizzleAdminLayout({
   children,
@@ -13,6 +14,7 @@ export function DrizzleAdminLayout({
   return (
     <DrizzleAdminLayoutClient config={layoutConfig}>
       {children}
+      <DarkModeScript />
     </DrizzleAdminLayoutClient>
   );
 }

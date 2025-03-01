@@ -7,7 +7,6 @@ import {
   PageActionsProps,
   TableRowActionsProps,
 } from "drizzle-admin";
-import { Button } from "drizzle-ui";
 import { Post } from "./schema/posts";
 
 export const PostRowActions: TableRowActions<Post> = (
@@ -72,11 +71,7 @@ export const PostListPageActions: PageActions<Post> = (
 ) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/new`}>
-        <Button className="rounded-2xl" variant="muted">
-          New
-        </Button>
-      </Link>
+      <Link href={`${props.basePath}/${props.curPath}/new`}>New</Link>
     </>
   );
 };
