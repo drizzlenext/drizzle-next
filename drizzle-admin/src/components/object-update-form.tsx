@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ColumnDataTypeMap, FormControlMap } from "../lib/types";
 import { RenderFormControl } from "./render-form-control";
 import { useEffect } from "react";
-import { getFormControlMap } from "../utils/client-utils";
+import { getFormControlMap } from "../lib/client-utils";
 
 interface UpdateStatus {
   message?: string;

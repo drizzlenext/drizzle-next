@@ -1,5 +1,5 @@
-export { DrizzleAdmin } from "./lib/drizzle-admin";
-export { DrizzleAdminLayout } from "./lib/drizzle-admin-layout";
+export { DrizzleAdmin } from "./components/drizzle-admin";
+export { DrizzleAdminLayout } from "./components/drizzle-admin-layout";
 export {
   DELETE_ROUTE,
   GET_ROUTE,

@@ -13,7 +13,7 @@ import {
 } from "../drizzle-ui";
 import { ObjectTable } from "../components/object-table";
 import { DrizzleFilter } from "../components/drizzle-filter";
-import { parseSearchParams } from "../utils/server-utils";
+import { parseSearchParams } from "../lib/server-utils";
 import { and, asc, desc, eq, like, getTableColumns } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/sqlite-core";
 import {
@@ -26,7 +26,7 @@ import {
 } from "../lib/types";
 import Link from "next/link";
 import { ObjectUpdateForm } from "../components/object-update-form";
-import { OPERATOR_MAP } from "../constants/server-constants";
+import { OPERATOR_MAP } from "../lib/server-constants";
 
 export interface ListPageParams {
   curTable: string;

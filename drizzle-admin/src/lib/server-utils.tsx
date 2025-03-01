@@ -6,7 +6,6 @@ import {
   DrizzleTableConfigComplete,
   SearchParams,
 } from "../lib/types";
-import { Table2Icon } from "lucide-react";
 
 export function parseSearchParams(
   searchParams: Awaited<SearchParams> | { [key: string]: string }

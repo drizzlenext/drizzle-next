@@ -1,5 +1,5 @@
 import { ColumnDataTypeMap, FormControlMap } from "../lib/types";
-import { DEFAULT_FORM_CONTROLS } from "../constants/client-constants";
+import { DEFAULT_FORM_CONTROLS } from "../lib/client-constants";
 
 export function getFormControlMap(
   columnDataTypeMap: ColumnDataTypeMap,

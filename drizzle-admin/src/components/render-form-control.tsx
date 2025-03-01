@@ -3,7 +3,7 @@
 import { Checkbox, FormControl, Input, Label, Textarea } from "../drizzle-ui";
 import { FormControlMap } from "../lib/types";
 import { capitalCase } from "change-case-all";
-import { renderValue } from "../utils/shared-utils";
+import { renderValue } from "../lib/shared-utils";
 
 export function RenderFormControl({
   keyName,

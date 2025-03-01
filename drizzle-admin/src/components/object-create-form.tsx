@@ -1,7 +1,7 @@
 "use client";
 
 import { Alert, Button, Form, FormControl, FormMessage } from "../drizzle-ui";
-import { getFormControlMap } from "../utils/client-utils";
+import { getFormControlMap } from "../lib/client-utils";
 import { useState } from "react";
 import { ColumnDataTypeMap, FormControlMap } from "../lib/types";
 import { RenderFormControl } from "./render-form-control";

@@ -1,11 +1,11 @@
 import { ListPage } from "../pages/list-page";
-import { DrizzleAdminConfig, Params, SearchParams } from "./types";
+import { DrizzleAdminConfig, Params, SearchParams } from "../lib/types";
 import { RootPage } from "../pages/root-page";
 import { ViewPage } from "../pages/view-page";
 import { EditPage } from "../pages/edit-page";
 import { NewPage } from "../pages/new-page";
 import { DeletePage } from "../pages/delete-page";
-import { completeDrizzleAdminConfig } from "../utils/server-utils";
+import { completeDrizzleAdminConfig } from "../lib/server-utils";
 
 export async function DrizzleAdmin(props: {
   params: Params;

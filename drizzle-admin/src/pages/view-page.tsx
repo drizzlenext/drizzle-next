@@ -14,7 +14,7 @@ import {
 } from "../lib/types";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
-import { renderValue } from "../utils/shared-utils";
+import { renderValue } from "../lib/shared-utils";
 import { notFound } from "next/navigation";
 import { ChevronRightIcon } from "lucide-react";
 
