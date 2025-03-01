@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { MenuIcon, SidebarIcon, XIcon } from "lucide-react";
 import { Button } from "./button";
 

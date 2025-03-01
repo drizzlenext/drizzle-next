@@ -1,20 +1,10 @@
 import * as fs from "fs";
 import * as path from "path";
 
-const sourceDir = path.resolve(__dirname, "../drizzle-ui/components/ui");
-const targetDir = path.resolve(
-  __dirname,
-  "../drizzle-next/templates/new-project-processor/components/ui"
-);
-const targetDir2 = path.resolve(
-  __dirname,
-  "../drizzle-admin/package/components/ui"
-);
-
 function copyFiles(
   srcDir: string,
   destDir: string,
-  opts?: { appendExt?: string }
+  opts?: { appendExt?: string; utilsPath: string }
 ) {
   if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true });
@@ -31,7 +21,7 @@ function copyFiles(
       copyFiles(srcPath, destPath, opts);
     } else {
       let content = fs.readFileSync(srcPath, "utf-8");
-      content = content.replace(/.\/utils/g, "@/lib/utils");
+      content = content.replace(/..\/..\/lib\/utils/g, opts.utilsPath);
       // double curly braces is meaningful in handlebars. adding a space fixes the issue.
       content = content.replace(/{{/g, "{ {");
       content = content.replace(/}}/g, "} }");
@@ -41,19 +31,20 @@ function copyFiles(
   }
 }
 
-copyFiles(sourceDir, targetDir, { appendExt: ".hbs" });
-copyFiles(sourceDir, targetDir2);
-
-const sourceIndexFile = path.resolve(
+// copy the components from drizzle-ui over to drizzle-next
+const sourceDir = path.resolve(__dirname, "../drizzle-ui/src/components/ui");
+const targetDir = path.resolve(
   __dirname,
-  "../drizzle-ui/components/index.ts"
+  "../drizzle-next/templates/new-project-processor/components/ui"
 );
-const targetIndexFile = path.resolve(
-  __dirname,
-  "../drizzle-admin/package/components/index.ts"
-);
+copyFiles(sourceDir, targetDir, {
+  appendExt: ".hbs",
+  utilsPath: "@/lib/utils",
+});
 
-fs.copyFileSync(sourceIndexFile, targetIndexFile);
-console.log(`Copied ${sourceIndexFile} to ${targetIndexFile}`);
+// copy the entire drizzle-ui src dir over to drizzle-admin
+const sourceDir2 = path.resolve(__dirname, "../drizzle-ui/src");
+const targetDir2 = path.resolve(__dirname, "../drizzle-admin/src/drizzle-ui");
+copyFiles(sourceDir2, targetDir2, { utilsPath: "../../lib/utils" });
 
 console.log("Sync complete.");

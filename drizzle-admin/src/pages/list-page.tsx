@@ -10,7 +10,7 @@ import {
   PageNav,
   PageTitle,
   Pagination,
-} from "drizzle-ui";
+} from "../drizzle-ui";
 import { ObjectTable } from "../components/object-table";
 import { DrizzleFilter } from "../drizzle-filter";
 import { parseSearchParams } from "../utils/server-utils";

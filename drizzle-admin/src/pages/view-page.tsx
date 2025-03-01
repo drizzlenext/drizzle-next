@@ -5,7 +5,7 @@ import {
   PageLayout,
   PageNav,
   PageTitle,
-} from "drizzle-ui";
+} from "../drizzle-ui";
 import {
   DrizzleAdminConfig,
   DrizzleAdminConfigComplete,

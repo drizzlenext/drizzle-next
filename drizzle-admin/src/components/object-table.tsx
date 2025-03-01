@@ -12,7 +12,7 @@ import {
   TableRowActions,
   cn,
   Input,
-} from "drizzle-ui";
+} from "../drizzle-ui";
 import Link from "next/link";
 import {
   SimplifiedColumn,

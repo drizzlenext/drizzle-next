@@ -13,7 +13,8 @@ import {
   DashboardSidebarGroup,
   DashboardSidebarLabel,
   DarkModeToggle,
-} from "drizzle-ui";
+} from "./drizzle-ui";
+
 import Link from "next/link";
 
 import { ReactNode } from "react";

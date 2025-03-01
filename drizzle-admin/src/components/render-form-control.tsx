@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkbox, FormControl, Input, Label, Textarea } from "drizzle-ui";
+import { Checkbox, FormControl, Input, Label, Textarea } from "../drizzle-ui";
 import { FormControlMap } from "../types";
 import { capitalCase } from "change-case-all";
 import { renderValue } from "../utils/shared-utils";
@@ -32,8 +32,8 @@ export function RenderFormControl({
               value instanceof Date
                 ? value?.toISOString()
                 : typeof value === "string"
-                ? new Date(value).toISOString()
-                : undefined
+                  ? new Date(value).toISOString()
+                  : undefined
             }
             name={keyName}
             id={keyName}
@@ -50,8 +50,8 @@ export function RenderFormControl({
               value instanceof Date
                 ? value.toISOString()
                 : typeof value === "string"
-                ? new Date(value).toISOString()
-                : undefined
+                  ? new Date(value).toISOString()
+                  : undefined
             }
             name={keyName}
             id={keyName}

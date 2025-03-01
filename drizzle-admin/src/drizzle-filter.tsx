@@ -1,7 +1,7 @@
 "use client";
 
 import { capitalCase } from "change-case-all";
-import { Button, Input, Select, SelectOption } from "drizzle-ui";
+import { Button, Input, Select, SelectOption } from "./drizzle-ui";
 import { SimplifiedColumn } from "./types";
 import { useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";

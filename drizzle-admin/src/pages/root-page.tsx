@@ -1,4 +1,4 @@
-import { PageContent, PageHeader, PageLayout, PageTitle } from "drizzle-ui";
+import { PageContent, PageHeader, PageLayout, PageTitle } from "../drizzle-ui";
 import {
   DrizzleAdminConfig,
   DrizzleAdminConfigComplete,

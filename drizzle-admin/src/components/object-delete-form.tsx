@@ -1,6 +1,6 @@
 "use client";
 
-import { Alert, Button, Form, FormControl, Label } from "drizzle-ui";
+import { Alert, Button, Form, FormControl, Label } from "../drizzle-ui";
 import { useState } from "react";
 import { ColumnDataTypeMap } from "../types";
 import pluralize from "pluralize";
