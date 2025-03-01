@@ -7,7 +7,7 @@ import {
   PostViewPageActions,
 } from "./drizzle-admin.components";
 import { db } from "./lib/db";
-import { DrizzleAdminConfig } from "./src/types";
+import { DrizzleAdminConfig } from "drizzle-admin";
 import { categories } from "./schema/categories";
 import { posts } from "./schema/posts";
 import { postsTags } from "./schema/posts-tags";

@@ -238,7 +238,7 @@ export function ObjectTable(props: ObjectTableProps) {
             return (
               <TableHead
                 key={col.name}
-                className="border text-nowrap overflow-clip relative"
+                className="border text-nowrap overflow-hidden relative"
                 style={{
                   width: col.width,
                   minWidth: col.minWidth,
@@ -279,7 +279,7 @@ export function ObjectTable(props: ObjectTableProps) {
                   <TableCell
                     key={col.name}
                     className={cn(
-                      "text-nowrap overflow-clip border select-none border-border",
+                      "text-nowrap overflow-hidden border select-none border-border",
                       isCurrentCell(row, col, curCell) && "p-0"
                     )}
                     onDoubleClick={(e) => handleDoubleClickCell(e, row, col)}

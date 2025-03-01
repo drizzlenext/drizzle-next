@@ -7,3 +7,10 @@ export {
   POST_ROUTE,
   PUT_ROUTE,
 } from "./drizzle-routes";
+export {
+  type DrizzleAdminConfig,
+  type PageActions,
+  type PageActionsProps,
+  type TableRowActions,
+  type TableRowActionsProps,
+} from "./types";
