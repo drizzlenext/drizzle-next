@@ -52,7 +52,7 @@ export const config: DrizzleAdminConfig = {
   sidebar: [
     {
       text: "Custom Page",
-      link: "/cms/custom-page",
+      link: "/admin/custom-page",
       icon: <Table2Icon size={16} />,
     },
     {
