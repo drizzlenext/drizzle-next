@@ -42,6 +42,15 @@ copyFiles(sourceDir, targetDir, {
   utilsPath: "@/lib/utils",
 });
 
+// copy the styles from drizzle-ui over to drizzle-next
+const srcStyles = path.resolve(__dirname, "../drizzle-ui/src/styles.css");
+const destStyles = path.resolve(
+  __dirname,
+  "../drizzle-next/templates/new-project-processor/app/globals.css.hbs"
+);
+fs.copyFileSync(srcStyles, destStyles);
+console.log(`Copied ${srcStyles} to ${destStyles}`);
+
 // copy the entire drizzle-ui src dir over to drizzle-admin
 const sourceDir2 = path.resolve(__dirname, "../drizzle-ui/src");
 const targetDir2 = path.resolve(__dirname, "../drizzle-admin/src/drizzle-ui");
