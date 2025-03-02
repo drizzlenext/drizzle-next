@@ -7,7 +7,7 @@ export function ButtonDemo() {
       <Button>Default</Button>
       <Button variant="muted">Muted</Button>
       <Button variant="success">Success</Button>
-      <Button variant="destructive">Danger</Button>
+      <Button variant="destructive">Destructive</Button>
       <Button variant="warning">Warning</Button>
       <Button variant="info">Info</Button>
       <Button variant="outline">Outline</Button>
