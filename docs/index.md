@@ -41,14 +41,14 @@ features:
     details: Drizzle Next uses a set of minimal-dependency, and fully customizable, UI components (inspired by shadcn) that are copied into your project.
   - icon:
       src: https://cdn.simpleicons.org/tailwindcss/gray
-    title: TailwindCSS (optional)
-    details: TailwindCSS is a utility-first CSS framework that is the default of Next.js. You can opt out of TailwindCSS if you prefer to start with a blank slate.
+    title: TailwindCSS
+    details: TailwindCSS is a utility-first CSS framework that is the default of Next.js.
   - icon:
       src: https://cdn.simpleicons.org/auth0/gray
-    title: Auth.js (optional)
+    title: Auth.js
     details: Generate Auth.js configuration and setup using Credentials, GitHub, Google, and other providers. You can opt out of Auth.js if you prefer to roll your own authentication.
   - icon:
       src: https://cdn.simpleicons.org/stripe/gray
-    title: Stripe (optional)
+    title: Stripe
     details: Generate an initial setup for Stripe integration, including webhook and customer portal endpoints. This is an optional add-on extension.
 ---

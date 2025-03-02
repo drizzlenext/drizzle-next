@@ -34,29 +34,16 @@ export function renderTemplateIfNotExists({
   });
 }
 
-function stripClassNameAttributes(input: string): string {
-  return input
-    .replace(/className="([^"]*)"/g, 'className=""')
-    .replace(/className=\{[^}]*\}/gs, 'className=""');
-}
-
 export function renderTemplate({
   inputPath,
   outputPath,
   data,
-  stripClassNames,
 }: {
   inputPath: string;
   outputPath: string;
   data?: any;
-  stripClassNames?: boolean;
 }) {
   let content = compileTemplate({ inputPath, data });
-  if (stripClassNames ?? global.globalConfig.cssStrategy === "none") {
-    if (outputPath.endsWith(".tsx")) {
-      content = stripClassNameAttributes(content);
-    }
-  }
   const joinedOutputPath = path.join(process.cwd(), outputPath);
   const resolvedPath = path.resolve(joinedOutputPath);
   const dir = path.dirname(resolvedPath);
@@ -446,8 +433,6 @@ export function completeDrizzleNextConfig(
     dbDialect: partialConfig.dbDialect ?? "sqlite",
     dbPackage: partialConfig.dbPackage ?? "better-sqlite3",
     pkStrategy: partialConfig.pkStrategy ?? "uuidv4",
-    cssStrategy: partialConfig.cssStrategy ?? "tailwind",
-    colorPalette: partialConfig.colorPalette ?? "zinc",
     authEnabled: partialConfig.authSolution === "authjs",
     authSolution: partialConfig.authSolution ?? "none",
     authProviders: partialConfig.authProviders ?? [],

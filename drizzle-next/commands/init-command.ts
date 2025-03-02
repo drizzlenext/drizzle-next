@@ -43,38 +43,6 @@ initCommand
     ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"])
   )
   .addOption(
-    new Option("--css-strategy <strategy>", "css strategy").choices([
-      "tailwind",
-      "none",
-    ])
-  )
-  .addOption(
-    new Option("--color-palette <color>", "tailwind color palette").choices([
-      "slate",
-      "gray",
-      "zinc",
-      "neutral",
-      "stone",
-      "red",
-      "orange",
-      "amber",
-      "yellow",
-      "lime",
-      "green",
-      "emerald",
-      "teal",
-      "cyan",
-      "sky",
-      "blue",
-      "indigo",
-      "violet",
-      "purple",
-      "fuchsia",
-      "pink",
-      "rose",
-    ])
-  )
-  .addOption(
     new Option("--auth-solution <solution>", "authentication solution").choices(
       ["authjs", "none"]
     )
@@ -180,49 +148,6 @@ initCommand
             },
           ],
         }));
-      partialConfig.cssStrategy =
-        options.cssStrategy ||
-        (await select({
-          message: "Which css strategy would you like to use?",
-          choices: [
-            { value: "tailwind", description: "utility-first css framework" },
-            {
-              value: "none",
-              description: "no css is included",
-            },
-          ],
-        }));
-      if (partialConfig.cssStrategy === "tailwind") {
-        partialConfig.colorPalette =
-          options.colorPalette ||
-          (await select({
-            message: "Which color palette would you like to use?",
-            choices: [
-              { value: "slate" },
-              { value: "gray" },
-              { value: "zinc" },
-              { value: "neutral" },
-              { value: "stone" },
-              { value: "red" },
-              { value: "orange" },
-              { value: "amber" },
-              { value: "yellow" },
-              { value: "lime" },
-              { value: "green" },
-              { value: "emerald" },
-              { value: "teal" },
-              { value: "cyan" },
-              { value: "sky" },
-              { value: "blue" },
-              { value: "indigo" },
-              { value: "violet" },
-              { value: "purple" },
-              { value: "fuchsia" },
-              { value: "pink" },
-              { value: "rose" },
-            ],
-          }));
-      }
       partialConfig.authSolution =
         options.authSolution ||
         (await select({

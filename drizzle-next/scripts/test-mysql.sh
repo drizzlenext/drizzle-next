@@ -13,8 +13,6 @@ cd demo-mysql
 drizzle-next init --package-manager pnpm \
     --db-dialect mysql \
     --pk-strategy uuidv7 \
-    --css-strategy tailwind \
-    --color-palette orange \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \

@@ -5,8 +5,6 @@ export interface DrizzleNextConfig {
   dbDialect: DbDialect;
   dbPackage: DbPackage;
   pkStrategy: PkStrategy;
-  cssStrategy: CssStrategy;
-  colorPalette: ColorPalette;
   authEnabled: boolean;
   authSolution: AuthSolution;
   authProviders: AuthProvider[];
@@ -25,8 +23,6 @@ export type PkStrategy =
   | "uuidv4"
   | "nanoid"
   | "auto_increment";
-
-export type CssStrategy = "tailwind" | "none";
 
 export interface DrizzleNextProcessor {
   opts: DrizzleNextConfig;
@@ -115,27 +111,3 @@ export type AuthProvider =
   | "nodemailer";
 
 export type DbPackage = "pg" | "mysql2" | "better-sqlite3";
-
-export type ColorPalette =
-  | "slate"
-  | "gray"
-  | "zinc"
-  | "neutral"
-  | "stone"
-  | "red"
-  | "orange"
-  | "amber"
-  | "yellow"
-  | "lime"
-  | "green"
-  | "emerald"
-  | "teal"
-  | "cyan"
-  | "sky"
-  | "blue"
-  | "indigo"
-  | "violet"
-  | "purple"
-  | "fuchsia"
-  | "pink"
-  | "rose";

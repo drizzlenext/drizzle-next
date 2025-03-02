@@ -11,7 +11,7 @@ npx create-next-app@latest my-app --typescript --eslint --tailwind --app --no-sr
 ```
 
 :::tip
-The `--typescript`, `--app`, `--no-src-dir`, and `--no-import-alias` are required for Drizzle Next to work properly. `--tailwind` is recommended, however it is optional if you prefer to start with no styling applied.
+The `--typescript`, `--tailwind`, `--app`, `--no-src-dir`, and `--no-import-alias` are required for Drizzle Next to work properly.
 :::
 
 ## Step 2: Run the CLI
@@ -31,8 +31,6 @@ You will be asked a few questions to configure the app:
 ? Which package manager would you like to use? npm
 ? Which database dialect would you like to use? sqlite
 ? Which primary key generation strategy would you like to use? cuid2
-? Which css strategy would you like to use? tailwind
-? Which color palette would you like to use? indigo
 ? Which authentication solution would you like to use? authjs
 ? Which auth providers would you like to use? credentials,github,google
 ? Do you want to add an admin dashboard with role-based authorization? yes

@@ -35,8 +35,6 @@ if [ "$RESET" = true ]; then
 drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
     --pk-strategy cuid2 \
-    --css-strategy tailwind \
-    --color-palette indigo \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \
@@ -48,8 +46,6 @@ else
 drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
     --pk-strategy cuid2 \
-    --css-strategy tailwind \
-    --color-palette indigo \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --admin \

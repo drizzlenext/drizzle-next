@@ -11,8 +11,6 @@ cd ~/code/demo-sqlite
 drizzle-next init --package-manager pnpm \
     --db-dialect sqlite \
     --pk-strategy nanoid \
-    --css-strategy tailwind \
-    --color-palette blue \
     --auth-solution authjs \
     --auth-providers github,google,postmark,nodemailer,credentials \
     --no-admin \
