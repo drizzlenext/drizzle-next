@@ -42,6 +42,7 @@ export type DrizzleTableConfig = {
   label?: string;
   path?: string;
   formControlMap?: FormControlMap;
+  hiddenInSidebar?: boolean;
   components?: {
     TableRowActions?: TableRowActions<any>;
     ViewPageActions?: PageActions<any>;
@@ -55,7 +56,7 @@ export type SidebarItem = {
   text: string;
   link?: string;
   items?: SidebarItem[];
-  type?: "dynamic-tables";
+  type?: "from-schema";
   icon?: JSX.Element;
 };
 
@@ -75,6 +76,7 @@ export type DrizzleTableConfigComplete = {
   label: string;
   path: string;
   formControlMap: FormControlMap;
+  hiddenInSidebar: boolean;
   components?: {
     TableRowActions?: TableRowActions<any>;
     ViewPageActions?: PageActions<any>;

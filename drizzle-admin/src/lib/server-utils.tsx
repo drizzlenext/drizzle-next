@@ -44,6 +44,7 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
       label: value.label || key,
       path: value.path || kebabCase(key),
       formControlMap: value.formControlMap || {},
+      hiddenInSidebar: value.hiddenInSidebar || false,
       components: {
         TableRowActions: value.components?.TableRowActions,
         ViewPageActions: value.components?.ViewPageActions,
@@ -77,17 +78,19 @@ export function completeLayoutConfig(config: DrizzleAdminConfig) {
   };
 
   const dynamicTablesSidebar = completeConfig.sidebar.find(
-    (item) => item.type === "dynamic-tables"
+    (item) => item.type === "from-schema"
   );
 
   if (dynamicTablesSidebar) {
     dynamicTablesSidebar.items = [];
 
     Object.entries(conf.schema).forEach(([key, value]) => {
-      dynamicTablesSidebar?.items?.push({
-        text: value.label,
-        link: `${config.basePath}/${value.path}`,
-      });
+      if (!value.hiddenInSidebar) {
+        dynamicTablesSidebar?.items?.push({
+          text: value.label,
+          link: `${config.basePath}/${value.path}`,
+        });
+      }
     });
   }
 

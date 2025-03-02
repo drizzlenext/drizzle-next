@@ -45,6 +45,7 @@ export const config: DrizzleAdminConfig = {
     postsTags: {
       drizzleTable: postsTags,
       label: "posts tags",
+      hiddenInSidebar: true,
     },
   },
   db: db,
@@ -62,6 +63,6 @@ export const config: DrizzleAdminConfig = {
         { text: "A custom link", link: "/", icon: <TableIcon size={16} /> },
       ],
     },
-    { text: "Tables", type: "dynamic-tables" },
+    { text: "Tables", type: "from-schema" },
   ],
 };
