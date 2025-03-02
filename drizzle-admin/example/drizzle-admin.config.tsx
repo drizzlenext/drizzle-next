@@ -2,7 +2,6 @@ import { GroupIcon, Table2Icon, TableIcon } from "lucide-react";
 import {
   PostDeletePageActions,
   PostEditPageActions,
-  PostListPageActions,
   PostRowActions,
   PostViewPageActions,
 } from "./drizzle-admin.components";
