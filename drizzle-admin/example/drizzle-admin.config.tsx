@@ -22,7 +22,7 @@ export const config: DrizzleAdminConfig = {
       drizzleTable: posts,
       formControlMap: { content: "textarea", updatedAt: "input" },
       components: {
-        TableRowActions: PostRowActions,
+        RowActions: PostRowActions,
         ViewPageActions: PostViewPageActions,
         EditPageActions: PostEditPageActions,
         DeletePageActions: PostDeletePageActions,
