@@ -40,7 +40,6 @@ export type DrizzleTableConfig = {
   label?: string;
   path?: string;
   formControlMap?: FormControlMap;
-  hiddenInSidebar?: boolean;
   components?: {
     RowActions?: RowActions<any>;
     ViewPageActions?: PageActions<any>;
@@ -74,7 +73,6 @@ export type DrizzleTableConfigComplete = {
   label: string;
   path: string;
   formControlMap: FormControlMap;
-  hiddenInSidebar: boolean;
   components?: {
     RowActions?: RowActions<any>;
     ViewPageActions?: PageActions<any>;

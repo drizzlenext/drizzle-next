@@ -44,7 +44,6 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
       label: value.label || key,
       path: value.path || kebabCase(key),
       formControlMap: value.formControlMap || {},
-      hiddenInSidebar: value.hiddenInSidebar || false,
       components: {
         RowActions: value.components?.RowActions,
         ViewPageActions: value.components?.ViewPageActions,
@@ -67,32 +66,12 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
 }
 
 // function for generating the layout config from drizzle admin config
-// adds table links to sidebar dynamically if the dynamic-tables item is present
 // can't use the admin config because it contains circular server-side references
-// layout is client-side
 export function completeLayoutConfig(config: DrizzleAdminConfig) {
   const conf = completeDrizzleAdminConfig(config);
   const completeConfig: DrizzleAdminLayoutConfig = {
     basePath: conf.basePath,
     sidebar: conf.sidebar,
   };
-
-  const dynamicTablesSidebar = completeConfig.sidebar.find(
-    (item) => item.type === "from-schema"
-  );
-
-  if (dynamicTablesSidebar) {
-    dynamicTablesSidebar.items = [];
-
-    Object.entries(conf.schema).forEach(([key, value]) => {
-      if (!value.hiddenInSidebar) {
-        dynamicTablesSidebar?.items?.push({
-          text: value.label,
-          link: `${config.basePath}/${value.path}`,
-        });
-      }
-    });
-  }
-
   return completeConfig;
 }
