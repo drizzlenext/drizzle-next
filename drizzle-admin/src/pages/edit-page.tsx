@@ -11,7 +11,7 @@ import {
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
-} from "../lib/types";
+} from "../types/types";
 import { camelCase, capitalCase } from "change-case-all";
 import { eq, getTableColumns } from "drizzle-orm";
 import Link from "next/link";

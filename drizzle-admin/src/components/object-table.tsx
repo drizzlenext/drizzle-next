@@ -17,7 +17,7 @@ import Link from "next/link";
 import {
   SimplifiedColumn,
   TableRowActions as TableRowActionsType,
-} from "../lib/types";
+} from "../types/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 

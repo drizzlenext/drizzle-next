@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DrizzleAdminConfig } from "../lib/types";
+import { DrizzleAdminConfig } from "../types/types";
 import { createSchemaFactory } from "drizzle-zod";
 import { getEmptyDrizzleObject, withErrorHandling } from "./route-utils";
 

@@ -23,7 +23,7 @@ import {
   Filter,
   Params,
   SearchParams,
-} from "../lib/types";
+} from "../types/types";
 import Link from "next/link";
 import { ObjectUpdateForm } from "../components/object-update-form";
 import { OPERATOR_MAP } from "../lib/server-constants";

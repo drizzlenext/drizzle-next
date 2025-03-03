@@ -1,5 +1,5 @@
 import { ListPage } from "../pages/list-page";
-import { DrizzleAdminConfig, Params, SearchParams } from "../lib/types";
+import { DrizzleAdminConfig, Params, SearchParams } from "../types/types";
 import { RootPage } from "../pages/root-page";
 import { ViewPage } from "../pages/view-page";
 import { EditPage } from "../pages/edit-page";

@@ -1,5 +1,5 @@
 import { ColumnDataType } from "drizzle-orm";
-import { FormControlType } from "../lib/types";
+import { FormControlType } from "../types/types";
 
 export const DEFAULT_FORM_CONTROLS: Record<ColumnDataType, FormControlType> = {
   string: "input",

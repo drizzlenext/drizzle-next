@@ -19,7 +19,7 @@ import Link from "next/link";
 
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { DrizzleAdminLayoutConfig, SidebarItem } from "../lib/types";
+import { DrizzleAdminLayoutConfig, SidebarItem } from "../types/types";
 
 export function DrizzleAdminLayoutClient({
   children,

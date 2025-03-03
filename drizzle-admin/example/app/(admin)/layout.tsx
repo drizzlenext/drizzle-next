@@ -1,5 +1,5 @@
 import { config } from "@/drizzle-admin.config";
-import { DrizzleAdminLayout } from "drizzle-admin";
+import { DrizzleAdminLayout } from "drizzle-admin/components";
 import "drizzle-admin/styles";
 
 export default function Layout({ children }: { children: React.ReactNode }) {

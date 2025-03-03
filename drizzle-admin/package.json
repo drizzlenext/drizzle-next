@@ -42,15 +42,20 @@
   },
   "main": "dist/cjs/src/index.js",
   "exports": {
-    ".": {
+    "./components": {
       "import": "./dist/esm/src/index.js",
       "require": "./dist/cjs/src/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/esm/types/components/index.d.ts"
     },
     "./routes": {
       "import": "./dist/esm/src/index.js",
       "require": "./dist/cjs/src/index.js",
       "types": "./dist/esm/types/routes/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/esm/src/index.js",
+      "require": "./dist/cjs/src/index.js",
+      "types": "./dist/esm/types/types/index.d.ts"
     },
     "./styles": "./dist/styles.css"
   },

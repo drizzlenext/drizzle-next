@@ -11,7 +11,7 @@ import {
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
-} from "../lib/types";
+} from "../types/types";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { renderValue } from "../lib/shared-utils";

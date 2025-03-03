@@ -5,7 +5,7 @@ import {
   DrizzleAdminLayoutConfig,
   DrizzleTableConfigComplete,
   SearchParams,
-} from "../lib/types";
+} from "../types/types";
 
 export function parseSearchParams(
   searchParams: Awaited<SearchParams> | { [key: string]: string }

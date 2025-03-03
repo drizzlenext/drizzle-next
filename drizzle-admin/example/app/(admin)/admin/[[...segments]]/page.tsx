@@ -1,5 +1,5 @@
 import { config } from "@/drizzle-admin.config";
-import { DrizzleAdmin } from "drizzle-admin";
+import { DrizzleAdmin } from "drizzle-admin/components";
 
 export type Params = Promise<{ [key: string]: string }>;
 export type SearchParams = Promise<{ [key: string]: string | undefined }>;

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DrizzleAdminConfig, Filter } from "../lib/types";
+import { DrizzleAdminConfig, Filter } from "../types/types";
 import { and, asc, desc, eq } from "drizzle-orm";
 import { parseSearchParams } from "../lib/server-utils";
 import { OPERATOR_MAP } from "../lib/server-constants";

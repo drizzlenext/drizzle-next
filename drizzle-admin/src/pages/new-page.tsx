@@ -4,7 +4,7 @@ import {
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
-} from "../lib/types";
+} from "../types/types";
 import { camelCase, capitalCase } from "change-case-all";
 import { ObjectCreateForm } from "../components/object-create-form";
 import { getTableColumns } from "drizzle-orm";

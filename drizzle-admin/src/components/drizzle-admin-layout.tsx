@@ -1,6 +1,6 @@
 import { DrizzleAdminLayoutClient } from "./drizzle-admin-layout-client";
 import { completeLayoutConfig } from "../lib/server-utils";
-import { DrizzleAdminConfig } from "../lib/types";
+import { DrizzleAdminConfig } from "../types/types";
 import { DarkModeScript } from "../drizzle-ui";
 
 export function DrizzleAdminLayout({

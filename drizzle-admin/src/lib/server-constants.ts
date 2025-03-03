@@ -1,6 +1,6 @@
 import { eq, gt, gte, like, lt, lte, ne, ilike } from "drizzle-orm";
 import { ColumnDataType } from "drizzle-orm";
-import { FormControlType } from "../lib/types";
+import { FormControlType } from "../types/types";
 
 export const OPERATOR_MAP = {
   "=": eq,

@@ -2,7 +2,7 @@
 
 import { capitalCase } from "change-case-all";
 import { Button, Input, Select, SelectOption } from "../drizzle-ui";
-import { SimplifiedColumn } from "../lib/types";
+import { SimplifiedColumn } from "../types/types";
 import { useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
