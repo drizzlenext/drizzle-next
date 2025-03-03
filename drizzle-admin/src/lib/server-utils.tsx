@@ -46,7 +46,7 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
       formControlMap: value.formControlMap || {},
       hiddenInSidebar: value.hiddenInSidebar || false,
       components: {
-        TableRowActions: value.components?.TableRowActions,
+        RowActions: value.components?.RowActions,
         ViewPageActions: value.components?.ViewPageActions,
         ListPageActions: value.components?.ListPageActions,
         EditPageActions: value.components?.EditPageActions,

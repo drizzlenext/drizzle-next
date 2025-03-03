@@ -16,16 +16,14 @@ export type FormControlMap = {
   [key: string]: FormControlType;
 };
 
-export type TableRowActionsProps<T> = {
+export type RowActionsProps<T> = {
   basePath: string;
   curTable: string;
   curPath: string;
   row: T;
 };
 
-export type TableRowActions<T> = (
-  props: TableRowActionsProps<T>
-) => JSX.Element;
+export type RowActions<T> = (props: RowActionsProps<T>) => JSX.Element;
 
 export type PageActionsProps<T> = {
   basePath: string;
@@ -44,7 +42,7 @@ export type DrizzleTableConfig = {
   formControlMap?: FormControlMap;
   hiddenInSidebar?: boolean;
   components?: {
-    TableRowActions?: TableRowActions<any>;
+    RowActions?: RowActions<any>;
     ViewPageActions?: PageActions<any>;
     EditPageActions?: PageActions<any>;
     DeletePageActions?: PageActions<any>;
@@ -78,7 +76,7 @@ export type DrizzleTableConfigComplete = {
   formControlMap: FormControlMap;
   hiddenInSidebar: boolean;
   components?: {
-    TableRowActions?: TableRowActions<any>;
+    RowActions?: RowActions<any>;
     ViewPageActions?: PageActions<any>;
     EditPageActions?: PageActions<any>;
     DeletePageActions?: PageActions<any>;

@@ -8,9 +8,7 @@ export default function Page() {
           <h1 className="text-4xl font-mono flex gap-2 items-center">
             Drizzle Admin Example
           </h1>
-          <Link href="/admin">
-            Admin Dashboard
-          </Link>
+          <Link href="/admin">Admin Dashboard</Link>
         </main>
       </div>
     </div>

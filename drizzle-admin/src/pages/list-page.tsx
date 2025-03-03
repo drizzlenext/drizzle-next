@@ -181,7 +181,7 @@ export async function ListPage(props: {
           curTable={curTable}
           curPath={curPath}
           curRow={obj}
-          TableRowActions={drizzleTableConfig.components?.TableRowActions}
+          RowActions={drizzleTableConfig.components?.RowActions}
         />
       </PageContent>
       <PageAside className="overflow-auto">
