@@ -3,14 +3,14 @@
 import Link from "next/link";
 import {
   PageActions,
-  TableRowActions,
+  RowActions,
   PageActionsProps,
-  TableRowActionsProps,
+  RowActionsProps,
 } from "drizzle-admin/types";
 import { Post } from "./schema/posts";
 
-export const PostRowActions: TableRowActions<Post> = (
-  props: TableRowActionsProps<Post>
+export const PostRowActions: RowActions<Post> = (
+  props: RowActionsProps<Post>
 ) => {
   return (
     <>
