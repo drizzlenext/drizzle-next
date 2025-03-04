@@ -1,20 +1,16 @@
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { auth } from "@/lib/auth";
 import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
 import { PrivateLayout } from "@/components/layouts/private-layout";
+import { authorize } from "@/services/auth/auth-service";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
-
-  if (!session?.user?.id) {
-    redirect("/signin");
-  }
+  const session = await authorize("user");
 
   const userObj = await db.query.{{userObj.pluralCamelCase}}.findFirst({
     where: eq({{userObj.pluralCamelCase}}.id, session.user.id),

@@ -35,17 +35,14 @@ export class AdminProcessor implements DrizzleNextProcessor {
       outputPath: "app/(admin)/layout.tsx",
       data: { userObj },
     });
-
     renderTemplate({
       inputPath: "admin-processor/app/(admin)/admin/page.tsx.hbs",
       outputPath: "app/(admin)/admin/page.tsx",
     });
-
     renderTemplate({
       inputPath: "admin-processor/app/(auth)/admin-signin/page.tsx.hbs",
       outputPath: "app/(auth)/admin-signin/page.tsx",
     });
-
     renderTemplate({
       inputPath: `admin-processor/scripts/grant-admin.ts.hbs`,
       outputPath: "scripts/grant-admin.ts",
@@ -53,22 +50,14 @@ export class AdminProcessor implements DrizzleNextProcessor {
         userObj,
       },
     });
-
     renderTemplate({
       inputPath: "admin-processor/app/(admin)/admin/settings/page.tsx.hbs",
       outputPath: "app/(admin)/admin/settings/page.tsx",
     });
-
-    renderTemplate({
-      inputPath: "admin-processor/lib/authorization.ts.hbs",
-      outputPath: "lib/authorization.ts",
-    });
-
     renderTemplate({
       inputPath: "admin-processor/components/auth/admin-signin-form.tsx.hbs",
       outputPath: "components/auth/admin-signin-form.tsx",
     });
-
     renderTemplate({
       inputPath: "admin-processor/services/auth/admin-signin-action.ts.hbs",
       outputPath: "services/auth/admin-signin-action.ts",
@@ -76,12 +65,10 @@ export class AdminProcessor implements DrizzleNextProcessor {
         userObj,
       },
     });
-
     renderTemplate({
       inputPath: "admin-processor/scripts/create-password-hash.ts.hbs",
       outputPath: "scripts/create-password-hash.ts",
     });
-
     renderTemplate({
       inputPath: "admin-processor/components/layouts/admin-layout.tsx.hbs",
       outputPath: "components/layouts/admin-layout.tsx",
