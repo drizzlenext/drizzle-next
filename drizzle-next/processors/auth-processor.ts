@@ -169,39 +169,67 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   async render() {
     this.addAuthConfig();
-    this.addAuthRouteHandler();
     // this.addAuthMiddleware();
     this.appendSecretsToEnv();
     this.addLayout();
-    this.addPrivateDashboard();
-    this.addCustomSignInPage();
-    this.addProfilePage();
     this.addAuthSchema();
-    this.addAuthTrustHostToEnv();
-    this.appendAuthSecretToEnv();
-    this.addSignOutPage();
     this.addUserSchema();
     this.addLayout();
-    this.addNextAuthModuleAugmentation();
-    this.addPrivateLayout();
+
+    renderTemplate({
+      inputPath: "auth-processor/lib/auth-utils.ts.hbs",
+      outputPath: "lib/auth-utils.ts",
+    });
+    renderTemplate({
+      inputPath: "auth-processor/components/private/private-layout.tsx.hbs",
+      outputPath: "components/private/private-layout.tsx",
+    });
+    renderTemplate({
+      inputPath: "auth-processor/app/api/auth/[...nextauth]/route.ts.hbs",
+      outputPath: "app/api/auth/[...nextauth]/route.ts",
+    });
+    renderTemplate({
+      inputPath: "auth-processor/app/(private)/dashboard/page.tsx.hbs",
+      outputPath: "app/(private)/dashboard/page.tsx",
+    });
+    renderTemplate({
+      inputPath: "auth-processor/app/(auth)/signin/page.tsx.hbs",
+      outputPath: "app/(auth)/signin/page.tsx",
+      data: {
+        providers: {
+          google: this.opts.authProviders.includes("google"),
+          github: this.opts.authProviders.includes("github"),
+          credentials: this.opts.authProviders.includes("credentials"),
+          postmark: this.opts.authProviders.includes("postmark"),
+          nodemailer: this.opts.authProviders.includes("nodemailer"),
+        },
+      },
+    });
+    renderTemplate({
+      inputPath: "auth-processor/app/(private)/profile/page.tsx.hbs",
+      outputPath: "app/(private)/profile/page.tsx",
+    });
+    renderTemplate({
+      inputPath: "auth-processor/app/(auth)/signout/page.tsx.hbs",
+      outputPath: "app/(auth)/signout/page.tsx",
+    });
+    renderTemplate({
+      inputPath: "auth-processor/types/next-auth.d.ts.hbs",
+      outputPath: "types/next-auth.d.ts",
+    });
+    appendToEnvLocal("AUTH_TRUST_HOST", "http://localhost:3000");
+    appendToEnvLocal("AUTH_SECRET", "secret");
+
     if (this.opts.authProviders.includes("credentials")) {
-      this.addSignInForm();
-      this.addSignInAction();
+      renderTemplate({
+        inputPath: "auth-processor/components/auth/signin-form.tsx.hbs",
+        outputPath: "components/auth/signin-form.tsx",
+      });
+      renderTemplate({
+        inputPath: "auth-processor/actions/auth/signin-action.ts.hbs",
+        outputPath: "actions/auth/signin-action.ts",
+      });
     }
-  }
-
-  addSignInAction() {
-    renderTemplate({
-      inputPath: "auth-processor/actions/auth/signin-action.ts.hbs",
-      outputPath: "actions/auth/signin-action.ts",
-    });
-  }
-
-  addSignInForm() {
-    renderTemplate({
-      inputPath: "auth-processor/components/auth/signin-form.tsx.hbs",
-      outputPath: "components/auth/signin-form.tsx",
-    });
   }
 
   validateOptions() {
@@ -210,24 +238,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
         throw new Error("invalid provider: " + provider);
       }
     }
-  }
-
-  appendAuthSecretToEnv() {
-    appendToEnvLocal("AUTH_SECRET", "secret");
-  }
-
-  addSignOutPage() {
-    renderTemplate({
-      inputPath: "auth-processor/app/(auth)/signout/page.tsx.hbs",
-      outputPath: "app/(auth)/signout/page.tsx",
-    });
-  }
-
-  addPrivateLayout() {
-    renderTemplate({
-      inputPath: "auth-processor/components/private/private-layout.tsx.hbs",
-      outputPath: "components/private/private-layout.tsx",
-    });
   }
 
   addAuthConfig() {
@@ -271,13 +281,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
     });
   }
 
-  addAuthRouteHandler() {
-    renderTemplate({
-      inputPath: "auth-processor/app/api/auth/[...nextauth]/route.ts.hbs",
-      outputPath: "app/api/auth/[...nextauth]/route.ts",
-    });
-  }
-
   // addAuthMiddleware() {
   //   renderTemplate({
   //     inputPath: "middleware.ts.hbs",
@@ -303,36 +306,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
       data: {
         userObj,
       },
-    });
-  }
-
-  addPrivateDashboard() {
-    renderTemplate({
-      inputPath: "auth-processor/app/(private)/dashboard/page.tsx.hbs",
-      outputPath: "app/(private)/dashboard/page.tsx",
-    });
-  }
-
-  addCustomSignInPage() {
-    renderTemplate({
-      inputPath: "auth-processor/app/(auth)/signin/page.tsx.hbs",
-      outputPath: "app/(auth)/signin/page.tsx",
-      data: {
-        providers: {
-          google: this.opts.authProviders.includes("google"),
-          github: this.opts.authProviders.includes("github"),
-          credentials: this.opts.authProviders.includes("credentials"),
-          postmark: this.opts.authProviders.includes("postmark"),
-          nodemailer: this.opts.authProviders.includes("nodemailer"),
-        },
-      },
-    });
-  }
-
-  addProfilePage() {
-    renderTemplate({
-      inputPath: "auth-processor/app/(private)/profile/page.tsx.hbs",
-      outputPath: "app/(private)/profile/page.tsx",
     });
   }
 
@@ -391,10 +364,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
     });
   }
 
-  addAuthTrustHostToEnv() {
-    appendToEnvLocal("AUTH_TRUST_HOST", "http://localhost:3000");
-  }
-
   addUserSchema() {
     const userSchemaStrategy: Record<DbDialect, string> = {
       postgresql: "auth-processor/schema/users.ts.postgresql.hbs",
@@ -441,13 +410,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
     insertSchemaToSchemaIndex("user", {
       pluralize: this.opts.pluralizeEnabled,
-    });
-  }
-
-  addNextAuthModuleAugmentation() {
-    renderTemplate({
-      inputPath: "auth-processor/types/next-auth.d.ts.hbs",
-      outputPath: "types/next-auth.d.ts",
     });
   }
 

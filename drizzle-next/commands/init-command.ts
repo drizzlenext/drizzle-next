@@ -179,8 +179,7 @@ initCommand
         partialConfig.adminEnabled =
           options.admin ??
           (await confirm({
-            message:
-              "Do you want to add an admin dashboard with role-based authorization?",
+            message: "Do you want to add an admin dashboard?",
             default: true,
           }));
       }

@@ -1,0 +1,24 @@
+import { Session } from "next-auth";
+import { auth } from "./auth";
+import { redirect } from "next/navigation";
+
+export async function getSession(): Promise<Session | null> {
+  const session = await auth();
+  return session;
+}
+
+export async function authenticate(): Promise<Session> {
+  const session = await getSession();
+  if (!session?.user?.id) {
+    redirect("/signin");
+  }
+  return session;
+}
+
+export async function authorize(): Promise<Session> {
+  const session = await authenticate();
+  if (session.user.role !== "admin") {
+    throw new Error("unauthorized");
+  }
+  return session;
+}
