@@ -9,9 +9,9 @@ import {
   TableRowActions,
 } from "@/components/ui/table";
 import { Sortable } from "@/components/ui/sortable";
-import { {{tableObj.pluralPascalCase}}WithRelationsList } from "@/services/{{tableObj.pluralKebabCase}}/get-{{tableObj.singularKebabCase}}";
+import { {{tableObj.pluralPascalCase}}List } from "@/services/{{tableObj.pluralKebabCase}}/get-{{tableObj.singularKebabCase}}";
 
-export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelCase}}List }: { {{tableObj.singularCamelCase}}List: {{tableObj.pluralPascalCase}}WithRelationsList }) {
+export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelCase}}List }: { {{tableObj.singularCamelCase}}List: {{tableObj.pluralPascalCase}}List }) {
   return (
     <Table>
       <TableHeader>

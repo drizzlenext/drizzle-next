@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 {{#if hasFileDataType}}
 import { config } from "@/lib/config";
 {{/if}}
-import { get{{tableObj.singularPascalCase}}WithRelations } from "@/services/{{tableObj.pluralKebabCase}}/get-{{tableObj.singularKebabCase}}";
+import { get{{tableObj.singularPascalCase}}Obj } from "@/services/{{tableObj.pluralKebabCase}}/get-{{tableObj.singularKebabCase}}";
 import { PageLayout, PageHeader, PageTitle, PageContent, PageNav } from "@/components/ui/page-layout";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
@@ -12,7 +12,7 @@ export default async function Page(props: { params: Params }) {
   const params = await props.params;
   const { id } = params;
 
-  const {{tableObj.singularCamelCase}}Obj = await get{{tableObj.singularPascalCase}}WithRelations(id);
+  const {{tableObj.singularCamelCase}}Obj = await get{{tableObj.singularPascalCase}}Obj(id);
 
   if (!{{tableObj.singularCamelCase}}Obj) {
     notFound();
