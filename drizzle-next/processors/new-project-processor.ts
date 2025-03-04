@@ -53,8 +53,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
     renderTemplate({
       inputPath:
-        "new-project-processor/components/public/public-layout.tsx.hbs",
-      outputPath: "components/public/public-layout.tsx",
+        "new-project-processor/components/layouts/public-layout.tsx.hbs",
+      outputPath: "components/layouts/public-layout.tsx",
     });
     renderTemplate({
       inputPath: "new-project-processor/app/(public)/layout.tsx.hbs",

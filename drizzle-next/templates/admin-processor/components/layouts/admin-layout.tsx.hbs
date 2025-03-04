@@ -12,9 +12,9 @@ import {
 } from "@/components/ui/dashboard-layout";
 import {
   User2Icon,
+  GaugeIcon,
   LogOutIcon,
-  LayoutDashboardIcon,
-  UserIcon,
+  SettingsIcon,
   Table2Icon,
 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
@@ -23,14 +23,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const items = [
-  { text: "Dashboard", link: "/dashboard", icon: LayoutDashboardIcon },
-  { text: "Account", link: "/account", icon: CreditCardIcon },
-  // [CODE_MARK private-sidebar-items]
-  { text: "Profile", link: "/profile", icon: UserIcon },
+  { text: "Admin", link: "/admin", icon: GaugeIcon },
+  { text: "Settings", link: "/admin/settings", icon: SettingsIcon },
   { text: "Sign out", link: "/signout", icon: LogOutIcon },
 ];
 
-export function PrivateLayout({
+export function AdminLayout({
   userObj,
   children,
 }: {

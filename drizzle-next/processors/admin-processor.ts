@@ -83,8 +83,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "admin-processor/components/admin/admin-layout.tsx.hbs",
-      outputPath: "components/admin/admin-layout.tsx",
+      inputPath: "admin-processor/components/layouts/admin-layout.tsx.hbs",
+      outputPath: "components/layouts/admin-layout.tsx",
     });
 
     const strategies: Record<DbDialect, string[]> = {

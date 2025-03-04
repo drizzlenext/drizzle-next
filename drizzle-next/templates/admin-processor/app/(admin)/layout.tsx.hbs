@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
 import { isAdmin } from "@/lib/authorization";
-import { AdminLayout } from "@/components/admin/admin-layout";
+import { AdminLayout } from "@/components/layouts/admin-layout";
 
 export default async function Layout({
   children,
