@@ -14,7 +14,7 @@ cd demo-postgresql
 drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
     --pk-strategy auto_increment \
-    --auth-solution none \
+    --no-auth \
     --latest
 cp ~/code/drizzle-next-env/.env.postgresql .env
 drizzle-next add tiptap

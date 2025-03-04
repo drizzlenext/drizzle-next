@@ -42,31 +42,8 @@ initCommand
       "primary key generation strategy"
     ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"])
   )
-  .addOption(
-    new Option("--auth-solution <solution>", "authentication solution").choices(
-      ["authjs", "none"]
-    )
-  )
-  .option(
-    "--auth-providers <providers>",
-    `comma-separated list of auth providers (choices: "credentials", "github", "google", "postmark", "nodemailer")`,
-    (value: string, dummyPrevious: any) => {
-      const authProviders = value.split(",");
-      const validProviders = new Set([
-        "credentials",
-        "github",
-        "google",
-        "postmark",
-        "nodemailer",
-      ]);
-      for (const p of authProviders) {
-        if (!validProviders.has(p)) {
-          throw new Error("invalid auth provider: " + p);
-        }
-      }
-      return authProviders;
-    }
-  )
+  .option("--auth", "install auth.js authentication")
+  .option("--no-auth", "skip installation of auth.js")
   .option("--admin", "generate admin dashboard with role-based authorization")
   .option("--no-admin", "skip generation of admin dashboard")
   .option("--no-pluralize", "disable the pluralization of variable names", true)
@@ -148,34 +125,20 @@ initCommand
             },
           ],
         }));
-      partialConfig.authSolution =
-        options.authSolution ||
-        (await select({
-          message: "Which authentication solution would you like to use?",
-          choices: [{ value: "authjs" }, { value: "none" }],
+      partialConfig.authEnabled =
+        options.auth ||
+        (await confirm({
+          message: "Do you want to add Auth.js authentication?",
+          default: true,
         }));
       if (
         partialConfig.pkStrategy === "auto_increment" &&
-        partialConfig.authSolution === "authjs"
+        partialConfig.authEnabled
       ) {
         log.red("auto_increment is not compatible with authjs");
         process.exit(1);
       }
-      if (partialConfig.authSolution === "authjs") {
-        partialConfig.authProviders =
-          options.authProviders ||
-          (await checkbox({
-            message: "Which auth providers would you like to use?",
-            choices: [
-              { name: "credentials", value: "credentials", checked: true },
-              { name: "github", value: "github" },
-              { name: "google", value: "google" },
-              { name: "postmark", value: "postmark" },
-              { name: "nodemailer", value: "nodemailer" },
-            ],
-          }));
-      }
-      if (partialConfig.authSolution !== "none") {
+      if (partialConfig.authEnabled) {
         partialConfig.adminEnabled =
           options.admin ??
           (await confirm({
@@ -210,7 +173,7 @@ initCommand
       let authProcessor;
       let adminProcessor;
 
-      if (completeConfig.authSolution !== "none") {
+      if (completeConfig.authEnabled) {
         authProcessor = new AuthProcessor(completeConfig);
         processors.push(authProcessor);
       }
@@ -229,8 +192,9 @@ initCommand
         devDependencies.push(...processor.devDependencies);
       }
 
-      for (const authProvider of completeConfig.authProviders) {
-        const authStrategy = authStrategyMap[authProvider];
+      for (const authProvider in authStrategyMap) {
+        const authStrategy =
+          authStrategyMap[authProvider as keyof typeof authStrategyMap];
         dependencies.push(...authStrategy.dependencies);
         devDependencies.push(...authStrategy.devDependencies);
       }

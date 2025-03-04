@@ -5,9 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormMessage } from "@/components/ui/form";
-{{#if providers.credentials}}
 import { SignInForm } from "@/components/auth/signin-form";
-{{/if}}
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
@@ -23,10 +21,7 @@ export default async function Page(props: {
           <CardTitle>Sign In</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-10">
-        {{#if providers.credentials}}
           <SignInForm />
-        {{/if}}
-        {{#if providers.postmark}}
           <Form
             className="flex flex-col gap-5"
             action={async (formData) => {
@@ -40,8 +35,6 @@ export default async function Page(props: {
             <Input type="text" name="email" placeholder="Email" />
             <Button type="submit" className="w-full">Sign in with Postmark</Button>
           </Form>
-        {{/if}}
-        {{#if providers.nodemailer}}
           <Form
             className="flex flex-col gap-5"
             action={async (formData) => {
@@ -55,8 +48,6 @@ export default async function Page(props: {
             <Input type="text" name="email" placeholder="Email" />
             <Button type="submit" className="w-full">Sign in with Nodemailer</Button>
           </Form>
-        {{/if}}
-        {{#if providers.google}}
           <Form
             key={"google"}
             action={async () => {
@@ -77,8 +68,6 @@ export default async function Page(props: {
               Sign in with Google
             </Button>
           </Form>
-        {{/if}}
-        {{#if providers.github}}
           <Form
             key={"github"}
             action={async () => {
@@ -99,7 +88,6 @@ export default async function Page(props: {
               Sign in with GitHub
             </Button>
           </Form>
-        {{/if}}
         {searchParams.error && (
           <FormMessage>Sign In failed</FormMessage>
         )}

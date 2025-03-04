@@ -20,8 +20,6 @@ import { dialectStrategyFactory } from "../lib/strategy-factory";
 import { caseFactory } from "../lib/case-utils";
 
 interface AuthStrategy {
-  importTemplatePath: string;
-  authTemplatePath: string;
   appendPlaceholdersToEnvLocal: () => void;
   dependencies: string[];
   devDependencies: string[];
@@ -39,8 +37,6 @@ interface AuthStrategyMap {
 
 export const authStrategyMap: AuthStrategyMap = {
   github: {
-    importTemplatePath: "auth-processor/lib/auth.ts.github.imports.hbs",
-    authTemplatePath: "auth-processor/lib/auth.ts.github.hbs",
     printCompletionMessage: function (): void {
       log.task("setup github provider");
       log.subtask(
@@ -59,8 +55,6 @@ export const authStrategyMap: AuthStrategyMap = {
     },
   },
   google: {
-    importTemplatePath: "auth-processor/lib/auth.ts.google.imports.hbs",
-    authTemplatePath: "auth-processor/lib/auth.ts.google.hbs",
     printCompletionMessage: function (): void {
       log.task("setup google provider");
       log.subtask(
@@ -79,8 +73,6 @@ export const authStrategyMap: AuthStrategyMap = {
     },
   },
   credentials: {
-    importTemplatePath: "auth-processor/lib/auth.ts.credentials.imports.hbs",
-    authTemplatePath: "auth-processor/lib/auth.ts.credentials.hbs",
     dependencies: ["bcrypt"],
     devDependencies: ["@types/bcrypt"],
     printCompletionMessage: function (): void {
@@ -93,8 +85,6 @@ export const authStrategyMap: AuthStrategyMap = {
     appendPlaceholdersToEnvLocal: function (): void {},
   },
   postmark: {
-    importTemplatePath: "auth-processor/lib/auth.ts.postmark.imports.hbs",
-    authTemplatePath: "auth-processor/lib/auth.ts.postmark.hbs",
     printCompletionMessage: function (): void {
       log.task("setup postmark provider");
       log.subtask("go to postmark > server > api tokens");
@@ -110,8 +100,6 @@ export const authStrategyMap: AuthStrategyMap = {
     },
   },
   nodemailer: {
-    importTemplatePath: "auth-processor/lib/auth.ts.nodemailer.imports.hbs",
-    authTemplatePath: "auth-processor/lib/auth.ts.nodemailer.hbs",
     dependencies: ["nodemailer"],
     printCompletionMessage: function (): void {
       log.task("setup nodemailer provider");
@@ -163,7 +151,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   async init() {
     log.init("initializing auth...");
-    this.validateOptions();
     await this.render();
   }
 
@@ -195,15 +182,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
     renderTemplate({
       inputPath: "auth-processor/app/(auth)/signin/page.tsx.hbs",
       outputPath: "app/(auth)/signin/page.tsx",
-      data: {
-        providers: {
-          google: this.opts.authProviders.includes("google"),
-          github: this.opts.authProviders.includes("github"),
-          credentials: this.opts.authProviders.includes("credentials"),
-          postmark: this.opts.authProviders.includes("postmark"),
-          nodemailer: this.opts.authProviders.includes("nodemailer"),
-        },
-      },
     });
     renderTemplate({
       inputPath: "auth-processor/app/(private)/profile/page.tsx.hbs",
@@ -217,54 +195,23 @@ export class AuthProcessor implements DrizzleNextProcessor {
       inputPath: "auth-processor/types/next-auth.d.ts.hbs",
       outputPath: "types/next-auth.d.ts",
     });
+    renderTemplate({
+      inputPath: "auth-processor/components/auth/signin-form.tsx.hbs",
+      outputPath: "components/auth/signin-form.tsx",
+    });
+    renderTemplate({
+      inputPath: "auth-processor/actions/auth/signin-action.ts.hbs",
+      outputPath: "actions/auth/signin-action.ts",
+    });
     appendToEnvLocal("AUTH_TRUST_HOST", "http://localhost:3000");
     appendToEnvLocal("AUTH_SECRET", "secret");
-
-    if (this.opts.authProviders.includes("credentials")) {
-      renderTemplate({
-        inputPath: "auth-processor/components/auth/signin-form.tsx.hbs",
-        outputPath: "components/auth/signin-form.tsx",
-      });
-      renderTemplate({
-        inputPath: "auth-processor/actions/auth/signin-action.ts.hbs",
-        outputPath: "actions/auth/signin-action.ts",
-      });
-    }
-  }
-
-  validateOptions() {
-    for (const provider of this.opts.authProviders) {
-      if (!(provider in authStrategyMap)) {
-        throw new Error("invalid provider: " + provider);
-      }
-    }
   }
 
   addAuthConfig() {
-    let importsCode = "";
-    let providersCode = "";
-    const userObj = caseFactory("user", {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-    for (const provider of this.opts.authProviders) {
-      const strategy = authStrategyMap[provider];
-      importsCode += compileTemplate({
-        inputPath: strategy.importTemplatePath,
-        data: {},
-      });
-      importsCode += "\n";
-      providersCode += compileTemplate({
-        inputPath: strategy.authTemplatePath,
-        data: { userObj },
-      });
-      providersCode += "\n";
-    }
     renderTemplate({
       inputPath: "auth-processor/lib/auth.ts.hbs",
       outputPath: "lib/auth.ts",
       data: {
-        importsCode: importsCode,
-        providersCode: providersCode,
         pkStrategyImport: pkStrategyImportTemplates[this.opts.pkStrategy],
         pkKeyValTemplate: pkKeyValTemplates[this.opts.pkStrategy],
         userObj: caseFactory("user", { pluralize: this.opts.pluralizeEnabled }),
@@ -281,17 +228,9 @@ export class AuthProcessor implements DrizzleNextProcessor {
     });
   }
 
-  // addAuthMiddleware() {
-  //   renderTemplate({
-  //     inputPath: "middleware.ts.hbs",
-  //     outputPath: "middleware.ts",
-  //     data: {},
-  //   });
-  // }
-
   appendSecretsToEnv() {
-    for (const provider of this.opts.authProviders) {
-      const strategy = authStrategyMap[provider];
+    for (const provider in authStrategyMap) {
+      const strategy = authStrategyMap[provider as keyof AuthStrategyMap];
       strategy.appendPlaceholdersToEnvLocal();
     }
   }
@@ -415,8 +354,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   printCompletionMessage() {
     log.checklist("auth checklist");
-    for (const provider of this.opts.authProviders) {
-      const authStrategy = authStrategyMap[provider];
+    for (const provider in authStrategyMap) {
+      const authStrategy = authStrategyMap[provider as keyof AuthStrategyMap];
       authStrategy.printCompletionMessage();
     }
   }

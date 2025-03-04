@@ -433,10 +433,8 @@ export function completeDrizzleNextConfig(
     dbDialect: partialConfig.dbDialect ?? "sqlite",
     dbPackage: partialConfig.dbPackage ?? "better-sqlite3",
     pkStrategy: partialConfig.pkStrategy ?? "uuidv4",
-    authEnabled: partialConfig.authSolution === "authjs",
-    authSolution: partialConfig.authSolution ?? "none",
-    authProviders: partialConfig.authProviders ?? [],
-    adminEnabled: partialConfig.adminEnabled ?? false,
+    authEnabled: partialConfig.authEnabled ?? true,
+    adminEnabled: partialConfig.adminEnabled ?? true,
     install: partialConfig.install ?? true,
     pluralizeEnabled: partialConfig.pluralizeEnabled ?? true,
   };

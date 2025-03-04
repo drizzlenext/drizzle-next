@@ -35,8 +35,7 @@ if [ "$RESET" = true ]; then
 drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
     --pk-strategy cuid2 \
-    --auth-solution authjs \
-    --auth-providers github,google,postmark,nodemailer,credentials \
+    --auth \
     --admin \
     --latest
 drizzle-next add tiptap
@@ -46,8 +45,7 @@ else
 drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
     --pk-strategy cuid2 \
-    --auth-solution authjs \
-    --auth-providers github,google,postmark,nodemailer,credentials \
+    --auth \
     --admin \
     --latest \
     --no-install

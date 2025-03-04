@@ -7,7 +7,12 @@ import { {{userObj.singularPascalCase}}, {{userObj.pluralCamelCase}} } from "@/s
 import { {{accountObj.pluralCamelCase}}, {{sessionObj.pluralCamelCase}}, {{verificationTokenObj.pluralCamelCase}} } from "@/schema/auth-tables";
 import { Adapter } from "next-auth/adapters";
 {{pkStrategyImport}}
-{{importsCode}}
+import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
+import Postmark from "next-auth/providers/postmark";
+import Nodemailer from "next-auth/providers/nodemailer";
+import Credentials from "next-auth/providers/credentials";
+import bcrypt from "bcrypt";
 
 const adapter = {
   ...(DrizzleAdapter(db, {
@@ -32,7 +37,37 @@ const adapter = {
 };
 
 const providers: Provider[] = [
-{{providersCode}}
+    GitHub,
+    Google,
+    Postmark({ from: "noreply@example.com" }),
+    Nodemailer({
+      server: process.env.EMAIL_SERVER,
+      from: process.env.EMAIL_FROM,
+    }),
+    Credentials({
+      credentials: {
+        email: {},
+        password: { type: "password" },
+      },
+      authorize: async (credentials) => {
+        const email = credentials.email as string;
+        const password = credentials.password as string;
+        const userObj = await db.query.users.findFirst({
+          where: eq(users.email, email),
+        });
+        if (!userObj) {
+          throw new Error("User not found.");
+        }
+        if (!userObj.password) {
+          throw new Error("Password not found.");
+        }
+        const valid = bcrypt.compareSync(password, userObj.password);
+        if (!valid) {
+          throw new Error("Invalid password.");
+        }
+        return userObj;
+      },
+    }),
 ]
 
 export const { handlers, auth, signIn, signOut } = NextAuth({

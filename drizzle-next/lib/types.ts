@@ -6,14 +6,10 @@ export interface DrizzleNextConfig {
   dbPackage: DbPackage;
   pkStrategy: PkStrategy;
   authEnabled: boolean;
-  authSolution: AuthSolution;
-  authProviders: AuthProvider[];
   adminEnabled: boolean;
   install: boolean;
   pluralizeEnabled: boolean;
 }
-
-export type AuthSolution = "authjs" | "none";
 
 export type PackageManager = "npm" | "pnpm" | "bun";
 
@@ -102,12 +98,5 @@ export interface DbPackageStrategy extends DrizzleNextProcessor {
   copyDbInstance(): void;
   printCompletionMessage(): void;
 }
-
-export type AuthProvider =
-  | "github"
-  | "google"
-  | "credentials"
-  | "postmark"
-  | "nodemailer";
 
 export type DbPackage = "pg" | "mysql2" | "better-sqlite3";
