@@ -32,12 +32,6 @@ integer, real, text, boolean, bigint, timestamp
     "-c, --columns <columns...>",
     "space separated list of columns in the format of column_name:data_type"
   )
-  .addOption(
-    new Option(
-      "-a, --authorization-level <authorizationLevel>",
-      "the authorization level of this scaffold"
-    ).choices(["admin", "private", "public"])
-  )
   .option("--no-db", "skip the generation of drizzle database table", true)
   .option(
     "--no-ui",
@@ -52,41 +46,10 @@ integer, real, text, boolean, bigint, timestamp
       process.exit(1);
     }
     const drizzleNextConfig: DrizzleNextConfig = loadDrizzleNextConfig();
-    const authorizationLevel: AuthorizationLevel =
-      options.authorizationLevel ||
-      (await select({
-        message:
-          "Which authorization level would you like to use for this scaffold?",
-        choices: [
-          {
-            value: "admin",
-            description:
-              "Requires authentication and administrative privileges.",
-          },
-          {
-            value: "private",
-            description: "Requires user authentication.",
-          },
-          {
-            value: "public",
-            description: "Accessible by anyone without authentication.",
-          },
-        ],
-      }));
-
-    if (authorizationLevel === "admin" && !fs.existsSync("app/(admin)")) {
-      log.red("(admin) route group not found. authorization must be enabled.");
-      process.exit(1);
-    }
-    if (authorizationLevel === "private" && !fs.existsSync("app/(private)")) {
-      log.red("(private) route group not found. auth must be enabled.");
-      process.exit(1);
-    }
 
     const scaffoldProcessor = new ScaffoldProcessor({
       table: table,
       columns: options.columns,
-      authorizationLevel: authorizationLevel,
       enableCompletionMessage: true,
       enableUiScaffold: options.ui,
       enableDbScaffold: options.db,

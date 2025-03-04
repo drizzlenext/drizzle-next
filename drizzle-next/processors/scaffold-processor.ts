@@ -173,12 +173,6 @@ export class ScaffoldProcessor {
       this.addDeleteForm();
       this.addTableComponent();
       this.addQueries();
-      if (this.opts.authorizationLevel === "admin") {
-        this.addLinkToAdminSidebar();
-      }
-      if (this.opts.authorizationLevel === "private") {
-        this.addLinkToPrivateSidebar();
-      }
     }
     if (this.opts.enableCompletionMessage) {
       this.printCompletionMessage();
@@ -299,13 +293,9 @@ export class ScaffoldProcessor {
     });
     renderTemplate({
       inputPath: "scaffold-processor/app/table/page.tsx.hbs",
-      outputPath: `app/${this.authorizationRouteGroup()}${
-        tableObj.pluralKebabCase
-      }/page.tsx`,
+      outputPath: `app/${tableObj.pluralKebabCase}/page.tsx`,
       data: {
         tableObj: tableObj,
-        isAdmin: this.opts.authorizationLevel === "admin",
-        authorizationLevel: this.opts.authorizationLevel,
       },
     });
   }
@@ -316,16 +306,13 @@ export class ScaffoldProcessor {
     const hasFileDataType = this.hasFileDataType();
     renderTemplate({
       inputPath: "scaffold-processor/app/table/[id]/page.tsx.hbs",
-      outputPath: `app/${this.authorizationRouteGroup()}${
-        tableObj.pluralKebabCase
-      }/[id]/page.tsx`,
+      outputPath: `app/${tableObj.pluralKebabCase}/[id]/page.tsx`,
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithTimestamps,
         hasFileDataType,
         pkStrategyJsType:
           this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
-        isAdmin: this.opts.authorizationLevel === "admin",
       },
     });
   }
@@ -343,16 +330,12 @@ export class ScaffoldProcessor {
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
       inputPath: "scaffold-processor/app/table/[id]/edit/page.tsx.hbs",
-      outputPath: `app/${this.authorizationRouteGroup()}${
-        tableObj.pluralKebabCase
-      }/[id]/edit/page.tsx`,
+      outputPath: `app/${tableObj.pluralKebabCase}/[id]/edit/page.tsx`,
       data: {
         tableObj: tableObj,
-        authorizationLevel: this.opts.authorizationLevel,
         referencesColumnList: referencesColumnList,
         pkStrategyJsType:
           this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
-        isAdmin: this.opts.authorizationLevel === "admin",
       },
     });
   }
@@ -363,14 +346,10 @@ export class ScaffoldProcessor {
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
       inputPath: "scaffold-processor/app/table/new/page.tsx.hbs",
-      outputPath: `app/${this.authorizationRouteGroup()}${
-        tableObj.pluralKebabCase
-      }/new/page.tsx`,
+      outputPath: `app/${tableObj.pluralKebabCase}/new/page.tsx`,
       data: {
         tableObj: tableObj,
-        authorizationLevel: this.opts.authorizationLevel,
         referencesColumnList: referencesColumnList,
-        isAdmin: this.opts.authorizationLevel === "admin",
       },
     });
   }
@@ -380,15 +359,11 @@ export class ScaffoldProcessor {
     });
     renderTemplate({
       inputPath: "scaffold-processor/app/table/[id]/delete/page.tsx.hbs",
-      outputPath: `app/${this.authorizationRouteGroup()}${
-        tableObj.pluralKebabCase
-      }/[id]/delete/page.tsx`,
+      outputPath: `app/${tableObj.pluralKebabCase}/[id]/delete/page.tsx`,
       data: {
         tableObj: tableObj,
-        authorizationLevel: this.opts.authorizationLevel,
         pkStrategyJsType:
           this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
-        isAdmin: this.opts.authorizationLevel === "admin",
       },
     });
   }
@@ -417,9 +392,6 @@ export class ScaffoldProcessor {
       data: {
         tableObj: tableObj,
         columns: columns,
-        isNotPublic: this.opts.authorizationLevel !== "public",
-        isPrivate: this.opts.authorizationLevel === "private",
-        isAdmin: this.opts.authorizationLevel === "admin",
         uploadColumnNames: uploadColumnNames,
         importFileUtils: uploadColumnNames.length > 0,
         validatedColumns: this.validatedColumns,
@@ -452,9 +424,6 @@ export class ScaffoldProcessor {
       data: {
         tableObj: tableObj,
         columns: columns,
-        isNotPublic: this.opts.authorizationLevel !== "public",
-        isPrivate: this.opts.authorizationLevel === "private",
-        isAdmin: this.opts.authorizationLevel === "admin",
         uploadColumnNames: uploadColumnNames,
         importFileUtils: uploadColumnNames.length > 0,
         validatedColumns: this.validatedColumnsWithIdAndTimestamps,
@@ -471,9 +440,6 @@ export class ScaffoldProcessor {
       outputPath: `services/${tableObj.pluralKebabCase}/delete-${tableObj.singularKebabCase}.ts`,
       data: {
         tableObj: tableObj,
-        isNotPublic: this.opts.authorizationLevel !== "public",
-        isPrivate: this.opts.authorizationLevel === "private",
-        isAdmin: this.opts.authorizationLevel === "admin",
         validatedColumns: this.validatedColumnsWithIdAndTimestamps,
       },
     });
@@ -487,12 +453,11 @@ export class ScaffoldProcessor {
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
       inputPath: "scaffold-processor/components/table/create-form.tsx.hbs",
-      outputPath: `components/${this.opts.authorizationLevel}/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-create-form.tsx`,
+      outputPath: `components/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-create-form.tsx`,
       data: {
         tableObj: tableObj,
         formControlsImports: formControlsImports,
         formControls: formControlsHtml,
-        authorizationLevel: this.opts.authorizationLevel,
         referencesColumnList: referencesColumnList,
         hasReferences: referencesColumnList.length > 0,
       },
@@ -552,12 +517,11 @@ export class ScaffoldProcessor {
     const hasFileDataType = this.hasFileDataType();
     renderTemplate({
       inputPath: "scaffold-processor/components/table/update-form.tsx.hbs",
-      outputPath: `components/${this.opts.authorizationLevel}/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-update-form.tsx`,
+      outputPath: `components/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-update-form.tsx`,
       data: {
         tableObj: tableObj,
         formControlsImports: formControlsImports,
         formControls: formControlsHtml,
-        authorizationLevel: this.opts.authorizationLevel,
         referencesColumnList: referencesColumnList,
         hasFileDataType: hasFileDataType,
       },
@@ -569,10 +533,9 @@ export class ScaffoldProcessor {
     });
     renderTemplate({
       inputPath: "scaffold-processor/components/table/delete-form.tsx.hbs",
-      outputPath: `components/${this.opts.authorizationLevel}/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-delete-form.tsx`,
+      outputPath: `components/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-delete-form.tsx`,
       data: {
         tableObj: tableObj,
-        authorizationLevel: this.opts.authorizationLevel,
       },
     });
   }
@@ -583,11 +546,10 @@ export class ScaffoldProcessor {
 
     renderTemplate({
       inputPath: "scaffold-processor/components/table/table-component.tsx.hbs",
-      outputPath: `components/${this.opts.authorizationLevel}/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-table.tsx`,
+      outputPath: `components/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-table.tsx`,
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithTimestamps,
-        isAdmin: this.opts.authorizationLevel === "admin",
       },
     });
   }
@@ -652,20 +614,6 @@ export class ScaffoldProcessor {
     log.checklist("scaffold checklist");
     log.cmdtask("npx drizzle-kit generate");
     log.cmdtask("npx drizzle-kit migrate");
-  }
-  authorizationRouteGroup() {
-    switch (this.opts.authorizationLevel) {
-      case "admin":
-        return "(admin)/admin/";
-      case "private":
-        return "(private)/";
-      case "public":
-        return "(public)/";
-      default:
-        throw new Error(
-          "invalid authorization level " + this.opts.authorizationLevel
-        );
-    }
   }
   addQueries() {
     const tableObj = caseFactory(this.opts.table, {

@@ -41,7 +41,6 @@ export type AuthorizationLevel = "admin" | "private" | "public";
 export interface ScaffoldProcessorOpts extends DrizzleNextConfig {
   table: string;
   columns: string[];
-  authorizationLevel: AuthorizationLevel;
   enableCompletionMessage: boolean;
   enableUiScaffold: boolean;
   enableDbScaffold: boolean;

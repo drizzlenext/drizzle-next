@@ -7,8 +7,8 @@ import { PageLayout, PageHeader, PageTitle, PageNav, PageContent, PageFooter } f
 import { Button } from "@/components/ui/button";
 import { parseSearchParams } from "@/lib/search-params-utils";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
-import { {{tableObj.singularPascalCase}}Table } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-table";
-import { get{{tableObj.pluralPascalCase}}WithRelationsList } from "@/services/{{tableObj.singularKebabCase}}/get-{{tableObj.singularKebabCase}}";
+import { {{tableObj.singularPascalCase}}Table } from "@/components/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-table";
+import { get{{tableObj.pluralPascalCase}}WithRelationsList } from "@/services/{{tableObj.pluralKebabCase}}/get-{{tableObj.singularKebabCase}}";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
@@ -40,7 +40,7 @@ export default async function Page(props: {
       <PageHeader>
         <PageTitle>{{tableObj.pluralCapitalCase}}</PageTitle>
         <PageNav>
-          <Link href="{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/new">
+          <Link href="/{{tableObj.pluralKebabCase}}/new">
             <Button variant="info">New</Button>
           </Link>
         </PageNav>

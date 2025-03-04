@@ -9,12 +9,6 @@ import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCas
 {{#if importFileUtils}}
 import { uploadFile } from "@/lib/file-utils";
 {{/if}}
-{{#if isNotPublic}}
-import { auth } from "@/lib/auth";
-{{/if}}
-{{#if isAdmin}}
-import { isAdmin } from "@/lib/authorization";
-{{/if}}
 
 const update{{tableObj.singularPascalCase}}Schema = z.object({
   {{#each validatedColumns}}
@@ -37,20 +31,6 @@ export async function update{{tableObj.singularPascalCase}}(
   prevState: Update{{tableObj.singularPascalCase}}State,
   formData: FormData
 ): Promise<Update{{tableObj.singularPascalCase}}State> {
-{{#if isNotPublic}}
-  const session = await auth();
-
-  if (!session?.user?.id) {
-    throw new Error("unauthenticated");
-  }
-{{/if}}
-
-{{#if isAdmin}}
-  if (!isAdmin(session)) {
-    throw new Error("unauthorized");
-  }
-{{/if}}
-
 {{#each uploadColumnNames}}
   const {{this.singularCamelCase}}File = formData.get("{{this.originalCamelCase}}") as File;
 
@@ -96,8 +76,8 @@ export async function update{{tableObj.singularPascalCase}}(
     }
   }
 
-  revalidatePath("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}");
-  revalidatePath("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id);
-  revalidatePath("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id + "/edit");
-  redirect("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id + "?notice={{tableObj.singularPascalCase}} was successfully updated");
+  revalidatePath("/{{tableObj.pluralKebabCase}}");
+  revalidatePath("/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id);
+  revalidatePath("/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id + "/edit");
+  redirect("/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id + "?notice={{tableObj.singularPascalCase}} was successfully updated");
 }

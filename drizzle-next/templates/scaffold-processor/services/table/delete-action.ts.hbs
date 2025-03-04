@@ -6,12 +6,6 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
-{{#if isNotPublic}}
-import { auth } from "@/lib/auth";
-{{/if}}
-{{#if isAdmin}}
-import { isAdmin } from "@/lib/authorization";
-{{/if}}
 
 const delete{{tableObj.singularPascalCase}}Schema = z.object({
   {{#each validatedColumns}}
@@ -34,20 +28,6 @@ export async function delete{{tableObj.singularPascalCase}}(
   prevState: Delete{{tableObj.singularPascalCase}}State,
   formData: FormData
 ): Promise<Delete{{tableObj.singularPascalCase}}State> {
-{{#if isNotPublic}}
-  const session = await auth();
-
-  if (!session?.user?.id) {
-    throw new Error("unauthenticated");
-  }
-{{/if}}
-
-{{#if isAdmin}}
-  if (!isAdmin(session)) {
-    throw new Error("unauthorized");
-  }
-{{/if}}
-
   const validatedFields = delete{{tableObj.singularPascalCase}}Schema.safeParse({
     id: formData.get("id"),
   });
@@ -68,6 +48,6 @@ export async function delete{{tableObj.singularPascalCase}}(
     }
   }
 
-  revalidatePath("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}");
-  redirect("{{#if isAdmin}}/admin{{/if}}/{{tableObj.pluralKebabCase}}?notice={{tableObj.singularPascalCase}} was successfully deleted");
+  revalidatePath("/{{tableObj.pluralKebabCase}}");
+  redirect("/{{tableObj.pluralKebabCase}}?notice={{tableObj.singularPascalCase}} was successfully deleted");
 }
