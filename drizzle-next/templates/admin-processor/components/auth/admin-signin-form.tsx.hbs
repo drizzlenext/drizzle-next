@@ -4,7 +4,10 @@ import { startTransition, useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AdminSignInState, adminSignInAction } from "@/services/auth/admin-signin-action";
+import {
+  AdminSignInState,
+  adminSignInAction,
+} from "@/services/auth/admin-signin-action";
 import { Form, FormControl, FormMessage } from "@/components/ui/form";
 
 export function AdminSignInForm() {
@@ -18,7 +21,11 @@ export function AdminSignInForm() {
   }
 
   return (
-    <Form key={"credentials"} onSubmit={handleSubmit}>
+    <Form
+      key={"credentials"}
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-2"
+    >
       <FormControl>
         <Label htmlFor="email">Email</Label>
         <Input type="text" name="email" id="email" />

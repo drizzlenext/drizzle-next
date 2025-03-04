@@ -20,20 +20,13 @@ export function SignInForm() {
     <Form
       key={"credentials"}
       onSubmit={handleSubmit}
+      className="flex flex-col gap-2"
     >
       <FormControl>
-        <Input
-          type="text"
-          name="email"
-          placeholder="Email"
-        />
+        <Input type="text" name="email" placeholder="Email" />
       </FormControl>
       <FormControl>
-        <Input
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
+        <Input type="password" name="password" placeholder="Password" />
       </FormControl>
       <Button className="w-full" type="submit">
         Sign in with Credentials

@@ -7,23 +7,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormMessage } from "@/components/ui/form";
 import { SignInForm } from "@/components/auth/signin-form";
 
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
-export default async function Page(props: {
-  searchParams: SearchParams;
-}) {
+export default async function Page(props: { searchParams: SearchParams }) {
   const searchParams = await props.searchParams;
 
   return (
-    <div className="flex min-h-screen justify-center items-center">
+    <div className="flex min-h-screen items-center justify-center">
       <Card className="w-80">
         <CardHeader>
           <CardTitle>Sign In</CardTitle>
         </CardHeader>
-        <CardContent className="flex flex-col gap-10">
+        <CardContent className="flex flex-col gap-5">
           <SignInForm />
           <Form
-            className="flex flex-col gap-5"
+            className="flex flex-col gap-2"
             action={async (formData) => {
               "use server";
               await signIn("postmark", {
@@ -33,10 +31,12 @@ export default async function Page(props: {
             }}
           >
             <Input type="text" name="email" placeholder="Email" />
-            <Button type="submit" className="w-full">Sign in with Postmark</Button>
+            <Button type="submit" className="w-full">
+              Sign in with Postmark
+            </Button>
           </Form>
           <Form
-            className="flex flex-col gap-5"
+            className="flex flex-col gap-2"
             action={async (formData) => {
               "use server";
               await signIn("nodemailer", {
@@ -46,7 +46,9 @@ export default async function Page(props: {
             }}
           >
             <Input type="text" name="email" placeholder="Email" />
-            <Button type="submit" className="w-full">Sign in with Nodemailer</Button>
+            <Button type="submit" className="w-full">
+              Sign in with Nodemailer
+            </Button>
           </Form>
           <Form
             key={"google"}
@@ -88,9 +90,7 @@ export default async function Page(props: {
               Sign in with GitHub
             </Button>
           </Form>
-        {searchParams.error && (
-          <FormMessage>Sign In failed</FormMessage>
-        )}
+          {searchParams.error && <FormMessage>Sign In failed</FormMessage>}
         </CardContent>
       </Card>
     </div>
