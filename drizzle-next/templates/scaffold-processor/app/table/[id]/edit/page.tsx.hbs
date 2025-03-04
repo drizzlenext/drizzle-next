@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 {{/if}}
 import { {{tableObj.singularPascalCase}}UpdateForm } from "@/components/{{authorizationLevel}}/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-update-form";
-import { get{{tableObj.singularPascalCase}}WithRelations } from "@/queries/{{tableObj.singularKebabCase}}-queries";
+import { get{{tableObj.singularPascalCase}}WithRelations } from "@/services/{{tableObj.singularKebabCase}}/get-{{tableObj.singularKebabCase}}";
 import { PageLayout, PageHeader, PageTitle, PageContent, PageNav } from "@/components/ui/page-layout";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;

@@ -413,7 +413,7 @@ export class ScaffoldProcessor {
 
     renderTemplate({
       inputPath: "scaffold-processor/services/table/create-action.ts.hbs",
-      outputPath: `services/${this.opts.authorizationLevel}/${tableObj.pluralKebabCase}/create-${tableObj.singularKebabCase}.ts`,
+      outputPath: `services/${tableObj.pluralKebabCase}/create-${tableObj.singularKebabCase}.ts`,
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -448,7 +448,7 @@ export class ScaffoldProcessor {
 
     renderTemplate({
       inputPath: "scaffold-processor/services/table/update-action.ts.hbs",
-      outputPath: `services/${this.opts.authorizationLevel}/${tableObj.pluralKebabCase}/update-${tableObj.singularKebabCase}.ts`,
+      outputPath: `services/${tableObj.pluralKebabCase}/update-${tableObj.singularKebabCase}.ts`,
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -468,7 +468,7 @@ export class ScaffoldProcessor {
 
     renderTemplate({
       inputPath: "scaffold-processor/services/table/delete-action.ts.hbs",
-      outputPath: `services/${this.opts.authorizationLevel}/${tableObj.pluralKebabCase}/delete-${tableObj.singularKebabCase}.ts`,
+      outputPath: `services/${tableObj.pluralKebabCase}/delete-${tableObj.singularKebabCase}.ts`,
       data: {
         tableObj: tableObj,
         isNotPublic: this.opts.authorizationLevel !== "public",
@@ -672,8 +672,8 @@ export class ScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "scaffold-processor/queries/table-queries.ts.hbs",
-      outputPath: `queries/${tableObj.singularKebabCase}-queries.ts`,
+      inputPath: "scaffold-processor/services/table/get-action.ts.hbs",
+      outputPath: `services/${tableObj.pluralKebabCase}/get-${tableObj.singularKebabCase}.ts`,
       data: {
         tableObj,
         pkStrategyJsType:
