@@ -70,8 +70,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
 
     renderTemplate({
-      inputPath: "admin-processor/actions/auth/admin-signin-action.ts.hbs",
-      outputPath: "actions/auth/admin-signin-action.ts",
+      inputPath: "admin-processor/services/auth/admin-signin-action.ts.hbs",
+      outputPath: "services/auth/admin-signin-action.ts",
       data: {
         userObj,
       },
@@ -116,7 +116,6 @@ export class AdminProcessor implements DrizzleNextProcessor {
 
     const userScaffold = new ScaffoldProcessor({
       ...this.opts,
-      authorizationLevel: "admin",
       columns: strategies[this.opts.dbDialect],
       table: this.opts.pluralizeEnabled ? "users" : "user",
       enableCompletionMessage: false,

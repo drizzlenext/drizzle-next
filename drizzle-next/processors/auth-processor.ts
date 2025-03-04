@@ -200,8 +200,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
       outputPath: "components/auth/signin-form.tsx",
     });
     renderTemplate({
-      inputPath: "auth-processor/actions/auth/signin-action.ts.hbs",
-      outputPath: "actions/auth/signin-action.ts",
+      inputPath: "auth-processor/services/auth/signin-action.ts.hbs",
+      outputPath: "services/auth/signin-action.ts",
     });
     appendToEnvLocal("AUTH_TRUST_HOST", "http://localhost:3000");
     appendToEnvLocal("AUTH_SECRET", "secret");
