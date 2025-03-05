@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { db } from "@/lib/db";
@@ -22,6 +21,7 @@ export interface Create{{tableObj.singularPascalCase}}State {
     {{/each}}
   };
   message?: string;
+  status?: "success" | "error";
 }
 
 export async function create{{tableObj.singularPascalCase}}(
@@ -58,6 +58,7 @@ export async function create{{tableObj.singularPascalCase}}(
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: "Invalid data",
+      status: "error",
     };
   }
 
@@ -67,9 +68,14 @@ export async function create{{tableObj.singularPascalCase}}(
     console.error(error);
     return {
       message: "Database error",
+      status: "error",
     }
   }
 
   revalidatePath("/{{tableObj.pluralKebabCase}}");
-  redirect("/{{tableObj.pluralKebabCase}}?notice={{tableObj.singularPascalCase}} was successfully created");
+  
+  return {
+    message: "{{tableObj.singularCapitalCase}} created successfully",
+    status: "success"
+  }
 }

@@ -1,21 +1,29 @@
 "use client";
 
+import { notFound } from "next/navigation";
 import { delete{{tableObj.singularPascalCase}}, Delete{{tableObj.singularPascalCase}}State } from "@/services/{{tableObj.pluralKebabCase}}/delete-{{tableObj.singularKebabCase}}";
 import { Button } from "@/components/ui/button";
 import { startTransition, useActionState } from "react";
 import { {{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
-import { Form, FormControl } from "@/components/ui/form";
+import { Form, FormControl, FormMessage } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
-import { Alert } from "@/components/ui/alert";
 
-export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularCamelCase}} }: { {{tableObj.singularCamelCase}}: {{tableObj.singularPascalCase}} }) {
+export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularCamelCase}} }: { {{tableObj.singularCamelCase}}?: {{tableObj.singularPascalCase}} }) {
   const initialState: Delete{{tableObj.singularPascalCase}}State = {};
   const [state, dispatch] = useActionState(delete{{tableObj.singularPascalCase}}, initialState);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    startTransition(() => dispatch(formData))
+    startTransition(() => dispatch(formData));
+  }
+
+  if (!{{tableObj.singularCamelCase}} && state.message) {
+    return <FormMessage variant={state.status}>{state.message}</FormMessage>
+  }
+
+  if (!{{tableObj.singularCamelCase}}) {
+    notFound();
   }
 
   return (
@@ -29,7 +37,7 @@ export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularC
           Delete
         </Button>
       </FormControl>
-      {state.message && <Alert variant="destructive">{state.message}</Alert>}
+      {state.message && <FormMessage variant={state.status}>{state.message}</FormMessage>}
     </Form>
   );
 }

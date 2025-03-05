@@ -5,7 +5,6 @@ import { create{{tableObj.singularPascalCase}}, Create{{tableObj.singularPascalC
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormMessage } from "@/components/ui/form";
-import { Alert } from "@/components/ui/alert";
 {{formControlsImports}}
 {{#each referencesColumnList}}
 import { {{this.referenceTableVars.singularPascalCase}} } from "@/schema/{{this.referenceTableVars.pluralKebabCase}}";
@@ -35,7 +34,7 @@ export function {{tableObj.singularPascalCase}}CreateForm({{#if hasReferences}}{
       <FormControl>
         <Button type="submit">Submit</Button>
       </FormControl>
-      {state.message && <Alert variant="destructive">{state.message}</Alert>}
+      {state.message && <FormMessage variant={state.status}>{state.message}</FormMessage>}
     </Form>
   );
 }

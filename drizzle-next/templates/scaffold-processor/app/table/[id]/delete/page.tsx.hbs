@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { {{tableObj.singularPascalCase}}DeleteForm } from "@/components/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-delete-form";
 import { db } from "@/lib/db";
@@ -13,17 +12,12 @@ export default async function Page(props: { params: Params }) {
   const { id } = params;
   const {{tableObj.singularCamelCase}}Obj = await db.query.{{tableObj.pluralCamelCase}}.findFirst({ where: eq({{tableObj.pluralCamelCase}}.id, id) });
 
-  if (!{{tableObj.singularCamelCase}}Obj) {
-    notFound();
-  }
-
   return (
     <PageLayout>
       <PageHeader>
         <PageTitle>Delete {{tableObj.singularCapitalCase}}</PageTitle>
         <PageNav>
           <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
-          <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>Show</Link>
         </PageNav>
       </PageHeader>
       <PageContent>

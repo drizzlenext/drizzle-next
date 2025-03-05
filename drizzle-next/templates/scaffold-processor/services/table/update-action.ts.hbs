@@ -2,7 +2,6 @@
 
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
@@ -25,6 +24,7 @@ export interface Update{{tableObj.singularPascalCase}}State {
     {{/each}}
   };
   message?: string;
+  status?: "success" | "error";
 }
 
 export async function update{{tableObj.singularPascalCase}}(
@@ -61,6 +61,7 @@ export async function update{{tableObj.singularPascalCase}}(
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: "Invalid data",
+      status: "error",
     };
   }
 
@@ -73,11 +74,16 @@ export async function update{{tableObj.singularPascalCase}}(
     console.error(error);
     return {
       message: "Database error",
+      status: "error",
     }
   }
 
   revalidatePath("/{{tableObj.pluralKebabCase}}");
   revalidatePath("/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id);
   revalidatePath("/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id + "/edit");
-  redirect("/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id + "?notice={{tableObj.singularPascalCase}} was successfully updated");
+
+  return {
+    message: "{{tableObj.singularCapitalCase}} updated successfully",
+    status: "success",
+  }
 }

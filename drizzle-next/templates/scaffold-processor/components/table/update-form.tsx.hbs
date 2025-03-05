@@ -8,7 +8,6 @@ import { update{{tableObj.singularPascalCase}}, Update{{tableObj.singularPascalC
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormMessage } from "@/components/ui/form";
-import { Alert } from "@/components/ui/alert";
 {{formControlsImports}}
 {{#if hasFileDataType}}
 import { config } from "@/lib/config";
@@ -44,7 +43,7 @@ export function {{tableObj.singularPascalCase}}UpdateForm({
         <FormControl>
           <Button type="submit">Submit</Button>
         </FormControl>
-        {state.message && <Alert variant="destructive">{state.message}</Alert>}
+        {state.message && <FormMessage variant={state.status}>{state.message}</FormMessage>}
       </Form>
   );
 }

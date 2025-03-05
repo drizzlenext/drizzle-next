@@ -7,6 +7,6 @@
         )}
         <Input type="file" name="{{validatedColumn.caseVariants.originalCamelCase}}" id="{{validatedColumn.caseVariants.originalCamelCase}}" />
         {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
-          <FormMessage key={error}>{error}</FormMessage>
+          <FormMessage key={error} variant="error">{error}</FormMessage>
         ))}
       </FormControl>

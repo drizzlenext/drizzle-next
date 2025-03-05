@@ -8,6 +8,6 @@
         ))}
         </Select>
         {state.errors?.{{validatedColumn.caseVariants.singularCamelCase}}?.map((error) => (
-          <FormMessage key={error}>{error}</FormMessage>
+          <FormMessage key={error} variant="error">{error}</FormMessage>
         ))}
       </FormControl>
