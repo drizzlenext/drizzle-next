@@ -17,17 +17,14 @@ export async function NewPage(props: {
   config: DrizzleAdminConfigComplete;
 }) {
   const params = await props.params;
-  const searchParams = await props.searchParams;
   const config = props.config;
   const curPath = params.segments[0];
   const curTable = camelCase(curPath);
-  const id = params.segments[1];
   const drizzleTableConfig = config.schema[curTable];
   const drizzleTable = drizzleTableConfig.drizzleTable;
-  const db = props.config.db;
-
   const cols = getTableColumns(drizzleTable);
   const columnDataTypeMap: ColumnDataTypeMap = {};
+
   for (const col in cols) {
     columnDataTypeMap[col] = drizzleTable[col].dataType;
   }

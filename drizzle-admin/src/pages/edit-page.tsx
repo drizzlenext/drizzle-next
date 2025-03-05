@@ -24,7 +24,6 @@ export async function EditPage(props: {
   config: DrizzleAdminConfigComplete;
 }) {
   const params = await props.params;
-  const searchParams = await props.searchParams;
   const config = props.config;
   const curPath = params.segments[0];
   const curTable = camelCase(curPath);

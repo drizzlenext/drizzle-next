@@ -42,8 +42,19 @@ export async function ListPage(props: {
   const params = await props.params;
   const searchParams = await props.searchParams;
   const filtersParam = searchParams.filters;
-
   let filters: Array<Filter> = [];
+  const config = props.config;
+  const db = props.config.db;
+  const curPath = params.segments[0];
+  const curTable = camelCase(curPath);
+  const drizzleTableConfig = config.schema[curTable];
+  const drizzleTable = drizzleTableConfig.drizzleTable;
+  let orderBy;
+  const tableConf = getTableConfig(drizzleTable);
+  const whereClause = [];
+  let obj;
+  const cols = getTableColumns(drizzleTable);
+  const columnDataTypeMap: ColumnDataTypeMap = {};
 
   if (filtersParam) {
     try {
@@ -55,16 +66,6 @@ export async function ListPage(props: {
     }
   }
 
-  const config = props.config;
-  const db = props.config.db;
-
-  const curPath = params.segments[0];
-  const curTable = camelCase(curPath);
-
-  const drizzleTableConfig = config.schema[curTable];
-
-  const drizzleTable = drizzleTableConfig.drizzleTable;
-
   const {
     page = 1,
     pageIndex = 0,
@@ -73,8 +74,6 @@ export async function ListPage(props: {
     sortKey = "createdAt",
     sortOrder = "desc",
   } = parseSearchParams(searchParams);
-
-  let orderBy;
 
   if (sortKey && sortKey in drizzleTable) {
     switch (sortOrder) {
@@ -89,13 +88,9 @@ export async function ListPage(props: {
     }
   }
 
-  const tableConf = getTableConfig(drizzleTable);
-
   if (config.dbDialect === "sqlite" || config.dbDialect === "mysql") {
     OPERATOR_MAP["Contains - Case Insensitive"] = like;
   }
-
-  const whereClause = [];
 
   for (const filter of filters) {
     if (!filter.column && !filter.operator && !filter.value) continue;
@@ -117,7 +112,6 @@ export async function ListPage(props: {
   }
 
   const count = await db.$count(drizzleTable, and(...whereClause));
-
   const totalPages = Math.ceil(count / pageSize);
 
   const list = await db.query[curTable].findMany({
@@ -133,13 +127,10 @@ export async function ListPage(props: {
     };
   });
 
-  const cols = getTableColumns(drizzleTable);
-  const columnDataTypeMap: ColumnDataTypeMap = {};
   for (const col in cols) {
     columnDataTypeMap[col] = drizzleTable[col].dataType;
   }
 
-  let obj;
   if (searchParams.id) {
     obj = await db.query[curTable].findFirst({
       where: eq(drizzleTable.id, searchParams.id),
