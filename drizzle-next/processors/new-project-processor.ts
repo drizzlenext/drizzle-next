@@ -149,10 +149,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       outputPath: "components/ui/alert.tsx",
     });
     renderTemplate({
-      inputPath: "new-project-processor/components/ui/flash-message.tsx.hbs",
-      outputPath: "components/ui/flash-message.tsx",
-    });
-    renderTemplate({
       inputPath: "new-project-processor/lib/utils.ts.hbs",
       outputPath: "lib/utils.ts",
     });
