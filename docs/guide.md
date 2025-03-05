@@ -344,7 +344,7 @@ Regardless of whether you pass in `foo_bar` or `foo_bars` as the table name, the
 | Drizzle column property names      | original | camel case   | fooBar      |
 | Drizzle foreign key property names | singular | camel case   | fooBarId    |
 | Drizzle findMany variable names    | singular | camel case   | fooBarList  |
-| Drizzle findFirst variable names   | singular | camel case   | fooBarObj   |
+| Drizzle findFirst variable names   | singular | camel case   | fooBarRow   |
 | File names                         | any      | kebab case   | foo-bar.ts  |
 | Form input names                   | original | camel case   | fooBar      |
 | React array props                  | singular | camel case   | fooBarList  |
@@ -373,7 +373,7 @@ If you pass in `foo_bars` as the table name, it will always use the plural form.
 | Drizzle column property names      | original | camel case   | fooBar      | fooBars      |
 | Drizzle foreign key property names | original | camel case   | fooBarId    | fooBarsId    |
 | Drizzle findMany variable names    | original | camel case   | fooBarList  | fooBarsList  |
-| Drizzle findFirst variable names   | original | camel case   | fooBarObj   | fooBarsObj   |
+| Drizzle findFirst variable names   | original | camel case   | fooBarRow   | fooBarsRow   |
 | File names                         | any      | kebab case   | foo-bar.ts  | foo-bars.ts  |
 | Form input names                   | original | camel case   | fooBar      | fooBars      |
 | React array props                  | original | camel case   | fooBarList  | fooBarsList  |

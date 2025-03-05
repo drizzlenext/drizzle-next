@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 
-export type {{tableObj.singularPascalCase}}Obj = Awaited<
+export type {{tableObj.singularPascalCase}}Row = Awaited<
   ReturnType<typeof get{{tableObj.singularPascalCase}}ById>
 >;
 

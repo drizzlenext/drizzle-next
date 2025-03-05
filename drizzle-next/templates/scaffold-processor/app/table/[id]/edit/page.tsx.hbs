@@ -12,9 +12,9 @@ type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 export default async function Page(props: { params: Params }) {
   const params = await props.params;
   const { id } = params;
-  const {{tableObj.singularCamelCase}}Obj = await get{{tableObj.singularPascalCase}}ById(id);
+  const {{tableObj.singularCamelCase}}Row = await get{{tableObj.singularPascalCase}}ById(id);
 
-  if (!{{tableObj.singularCamelCase}}Obj) {
+  if (!{{tableObj.singularCamelCase}}Row) {
     notFound();
   }
 
@@ -28,12 +28,12 @@ export default async function Page(props: { params: Params }) {
         <PageTitle>Editing {{tableObj.singularCapitalCase}}</PageTitle>
         <PageNav>
           <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
-          <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>Show</Link>
+          <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }`}>Show</Link>
         </PageNav>
       </PageHeader>
       <PageContent>
         <{{tableObj.singularPascalCase}}UpdateForm 
-          {{tableObj.singularCamelCase}}={ {{tableObj.singularCamelCase}}Obj }
+          {{tableObj.singularCamelCase}}={ {{tableObj.singularCamelCase}}Row }
           {{#each referencesColumnList}}
           {{this.referenceTableVars.singularCamelCase}}List={ {{this.referenceTableVars.singularCamelCase}}List }
           {{/each}}
