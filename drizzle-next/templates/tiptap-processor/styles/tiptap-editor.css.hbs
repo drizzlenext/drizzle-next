@@ -1,98 +1,58 @@
 /* tiptap editor */
-
 .tiptap h1 {
   font-size: 40px;
 }
-
 .tiptap h2 {
   font-size: 32px;
 }
-
 .tiptap h3 {
   font-size: 24px;
 }
-
 .tiptap ul li {
   list-style-type: disc;
   margin-left: 20px;
 }
-
 .tiptap ol li {
   list-style-type: decimal;
   margin-left: 20px;
 }
-
 .tiptap a {
   font-weight: bold;
   text-decoration: underline;
 }
-
 .tiptap pre {
-  color: #fff;
-  background-color: #333;
-  border-radius: 5px;
+  color: white;
+  background-color: black;
   padding: 5px;
 }
-.dark .tiptap pre {
-  color: #fff;
-  background-color: #333;
-  border-radius: 5px;
-  padding: 5px;
-}
-
 .ProseMirror:focus {
   outline: none;
 }
 
 /* tiptap ui */
-
 .tiptap-container {
-  border: 1px solid #9ca3af;
-  border-radius: 4px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-input);
+  background-color: var(--input-background);
 }
-.dark .tiptap-container {
-  border: 1px solid #4b5563;
-}
-
 .tiptap-toolbar {
-  border-bottom: 1px solid #9ca3af;
-  border-end-end-radius: 4px;
+  border-bottom: 1px solid var(--input-border);
+  border-end-end-radius: var(--radius-input);
+  background-color: var(--background);
 }
-.dark .tiptap-toolbar {
-  border-bottom: 1px solid #4b5563;
-}
-
 .tiptap-btn {
   padding: 5px;
-  color: #000;
-  border-radius: 4px;
+  color: var(--foreground);
+  border-radius: var(--input-border);
+  cursor: pointer;
+  background-color: var(--background);
 }
-.dark .tiptap-btn {
-  color: #fff;
-  background-color: #000;
-  padding: 5px;
-}
-
 .tiptap-btn.active {
-  background-color: #ccc;
+  background-color: var(--muted);
 }
-.dark .tiptap-btn.active {
-  color: #fff;
-  background-color: #333;
-}
-
 .tiptap-btn.inactive {
-  background-color: #fff;
+  background-color: var(--background);
 }
-.dark .tiptap-btn.inactive {
-  color: #fff;
-  background-color: #000;
-}
-
 .tiptap-btn:disabled {
-  color: #999;
-}
-.dark .tiptap-btn:disabled {
-  color: #fff;
-  color: #999;
+  color: var(--muted);
 }

@@ -18,7 +18,7 @@ describe("shadriz e2e test", () => {
 
   it("home page", () => {
     cy.visit("http://localhost:3000");
-    cy.contains("drizzle-next");
+    cy.contains("Drizzle Next");
   });
 
   it("user happy path", () => {
