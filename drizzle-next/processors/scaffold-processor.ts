@@ -620,8 +620,17 @@ export class ScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "scaffold-processor/services/table/get-action.ts.hbs",
-      outputPath: `services/${tableObj.pluralKebabCase}/get-${tableObj.singularKebabCase}.ts`,
+      inputPath: "scaffold-processor/services/table/get-by-id-action.ts.hbs",
+      outputPath: `services/${tableObj.pluralKebabCase}/get-${tableObj.singularKebabCase}-by-id.ts`,
+      data: {
+        tableObj,
+        pkStrategyJsType:
+          this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
+      },
+    });
+    renderTemplate({
+      inputPath: "scaffold-processor/services/table/get-list-action.ts.hbs",
+      outputPath: `services/${tableObj.pluralKebabCase}/get-${tableObj.singularKebabCase}-list.ts`,
       data: {
         tableObj,
         pkStrategyJsType:

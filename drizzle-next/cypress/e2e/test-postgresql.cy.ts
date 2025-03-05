@@ -53,7 +53,7 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="timestampType"]').type("2008");
     cy.get('input[name="dateType"]').type("2024-08-08");
     cy.get('button[type="submit"]').click();
-    cy.get("td").contains("foobar");
+    cy.contains("Admin Scaffold created successfully").should("exist");
   });
 
   it("create category", () => {
@@ -62,7 +62,7 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="name"]').type("my_category");
     cy.get('button[type="submit"]').click();
     cy.contains("Categor").should("exist");
-    cy.contains("my_category").should("exist");
+    cy.contains("Category created successfully").should("exist");
   });
 
   it("create post", () => {
@@ -75,6 +75,6 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="publishedAt"]').type("2008-08-08", { force: true });
     cy.get(".tiptap.ProseMirror").type("hello", { force: true });
     cy.contains("Submit").click();
-    cy.contains("Post").should("exist");
+    cy.contains("Post created successfully").should("exist");
   });
 });

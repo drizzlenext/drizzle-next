@@ -1,12 +1,12 @@
-import { eq, asc, desc, SQL } from "drizzle-orm";
+import { asc, desc, SQL } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { {{tableObj.singularPascalCase}}, {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 
-export type {{tableObj.pluralPascalCase}}List = Awaited<
-  ReturnType<typeof get{{tableObj.pluralPascalCase}}List>
+export type {{tableObj.singularPascalCase}}List = Awaited<
+  ReturnType<typeof get{{tableObj.singularPascalCase}}List>
 >;
 
-export async function get{{tableObj.pluralPascalCase}}List({
+export async function get{{tableObj.singularPascalCase}}List({
   filters,
   limit,
   offset,
@@ -37,16 +37,5 @@ export async function get{{tableObj.pluralPascalCase}}List({
     limit: limit,
     offset: offset,
     with: undefined
-  });
-}
-
-export type {{tableObj.singularPascalCase}}Obj = Awaited<
-  ReturnType<typeof get{{tableObj.singularPascalCase}}Obj>
->;
-
-export async function get{{tableObj.singularPascalCase}}Obj(id: {{pkStrategyJsType}}) {
-  return await db.query.{{tableObj.pluralCamelCase}}.findFirst({
-    where: eq({{tableObj.pluralCamelCase}}.id, id),
-    with: undefined,
   });
 }
