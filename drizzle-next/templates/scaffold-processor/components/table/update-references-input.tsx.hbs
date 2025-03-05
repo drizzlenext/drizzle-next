@@ -1,6 +1,6 @@
       <FormControl>
         <Label htmlFor="{{validatedColumn.caseVariants.originalCamelCase}}">{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
-        <Input name="{{validatedColumn.caseVariants.singularCamelCase}}" id="{{validatedColumn.caseVariants.originalCamelCase}}" defaultValue={ {{tableObj.singularCamelCase}}.{{validatedColumn.caseVariants.singularCamelCase}} ?? "" } />
+        <Input name="{{validatedColumn.caseVariants.singularCamelCase}}" id="{{validatedColumn.caseVariants.originalCamelCase}}" defaultValue={ {{tableObj.singularCamelCase}}Row.{{validatedColumn.caseVariants.singularCamelCase}} ?? "" } />
         {state.errors?.{{validatedColumn.caseVariants.singularCamelCase}}?.map((error) => (
           <FormMessage key={error} variant="error">{error}</FormMessage>
         ))}

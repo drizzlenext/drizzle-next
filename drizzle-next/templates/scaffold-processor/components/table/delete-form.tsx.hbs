@@ -8,7 +8,7 @@ import { {{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebab
 import { Form, FormControl, FormMessage } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 
-export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularCamelCase}} }: { {{tableObj.singularCamelCase}}?: {{tableObj.singularPascalCase}} }) {
+export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularCamelCase}}Row }: { {{tableObj.singularCamelCase}}Row?: {{tableObj.singularPascalCase}} }) {
   const initialState: Delete{{tableObj.singularPascalCase}}State = {};
   const [state, dispatch] = useActionState(delete{{tableObj.singularPascalCase}}, initialState);
 
@@ -18,19 +18,19 @@ export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularC
     startTransition(() => dispatch(formData));
   }
 
-  if (!{{tableObj.singularCamelCase}} && state.message) {
+  if (!{{tableObj.singularCamelCase}}Row && state.message) {
     return <FormMessage variant={state.status}>{state.message}</FormMessage>
   }
 
-  if (!{{tableObj.singularCamelCase}}) {
+  if (!{{tableObj.singularCamelCase}}Row) {
     notFound();
   }
 
   return (
     <Form onSubmit={handleSubmit}>
       <FormControl>
-        <Label htmlFor="id">Id: { {{tableObj.singularCamelCase}}.id }</Label>
-        <input type="hidden" name="id" id="id" value={ {{tableObj.singularCamelCase}}.id } />
+        <Label htmlFor="id">Id: { {{tableObj.singularCamelCase}}Row.id }</Label>
+        <input type="hidden" name="id" id="id" value={ {{tableObj.singularCamelCase}}Row.id } />
       </FormControl>
       <FormControl>
         <Button variant="destructive" type="submit">
