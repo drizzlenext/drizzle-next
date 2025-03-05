@@ -7,7 +7,6 @@ import {
   PageTitle,
 } from "../drizzle-ui";
 import {
-  DrizzleAdminConfig,
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,

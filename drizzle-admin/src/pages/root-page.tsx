@@ -1,6 +1,5 @@
 import { PageContent, PageHeader, PageLayout, PageTitle } from "../drizzle-ui";
 import {
-  DrizzleAdminConfig,
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,

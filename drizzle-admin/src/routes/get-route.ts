@@ -9,21 +9,20 @@ export function GET_ROUTE(config: DrizzleAdminConfig) {
   return withErrorHandling(async function (request: NextRequest) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
-
     const param0 = segments[0];
-    if (param0 !== "api") {
-      return NextResponse.json({ message: "not found" }, { status: 404 });
-    }
     const curTable = segments[1];
     const id = segments[2];
     const db = config.db;
+    const schema = config.schema[curTable];
+    const drizzleSchema = schema.drizzleTable;
+
+    if (param0 !== "api") {
+      return NextResponse.json({ message: "not found" }, { status: 404 });
+    }
 
     if (!(curTable in db.query)) {
       return NextResponse.json({ message: `not found` }, { status: 404 });
     }
-
-    const schema = config.schema[curTable];
-    const drizzleSchema = schema.drizzleTable;
 
     // handle object
     if (id) {
@@ -34,9 +33,11 @@ export function GET_ROUTE(config: DrizzleAdminConfig) {
     }
 
     // handle list
-
     const queryParams = Object.fromEntries(url.searchParams.entries());
     const filtersParam = queryParams.filters;
+    let orderBy;
+    let filters: Array<Filter> = [];
+    const whereClause: any = [];
 
     const {
       page = 1,
@@ -46,8 +47,6 @@ export function GET_ROUTE(config: DrizzleAdminConfig) {
       sortKey = "createdAt",
       sortOrder = "desc",
     } = parseSearchParams(queryParams);
-
-    let orderBy;
 
     if (sortKey && sortKey in drizzleSchema) {
       switch (sortOrder) {
@@ -62,8 +61,6 @@ export function GET_ROUTE(config: DrizzleAdminConfig) {
       }
     }
 
-    let filters: Array<Filter> = [];
-
     if (filtersParam) {
       try {
         filters = JSON.parse(filtersParam);
@@ -74,8 +71,6 @@ export function GET_ROUTE(config: DrizzleAdminConfig) {
         );
       }
     }
-
-    const whereClause: any = [];
 
     for (const filter of filters) {
       if (!filter.column && !filter.operator && !filter.value) continue;
@@ -104,6 +99,7 @@ export function GET_ROUTE(config: DrizzleAdminConfig) {
       orderBy: orderBy,
       where: and(...whereClause),
     });
+
     return NextResponse.json({ count: count, data: data });
   });
 }

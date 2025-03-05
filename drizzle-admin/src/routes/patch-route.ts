@@ -5,10 +5,7 @@ import { eq } from "drizzle-orm";
 import { withErrorHandling } from "./route-utils";
 
 const { createUpdateSchema } = createSchemaFactory({
-  coerce: {
-    date: true,
-    boolean: true,
-  },
+  coerce: true,
 });
 
 export function PATCH_ROUTE(config: DrizzleAdminConfig) {
@@ -17,18 +14,17 @@ export function PATCH_ROUTE(config: DrizzleAdminConfig) {
     const segments = url.pathname.split("/").filter(Boolean);
     const body = await request.json();
     const param0 = segments[0];
-    if (param0 !== "api") {
-      return NextResponse.json({ message: "not found" }, { status: 404 });
-    }
     const curTable = segments[1];
     const id = segments[2];
     const db = config.db;
     const schema = config.schema[curTable];
     const drizzleSchema = schema.drizzleTable;
-
     const patchSchema = createUpdateSchema(drizzleSchema);
-
     const validatedFields = patchSchema.safeParse(body);
+
+    if (param0 !== "api") {
+      return NextResponse.json({ message: "not found" }, { status: 404 });
+    }
 
     if (!validatedFields.success) {
       return NextResponse.json(validatedFields.error.flatten().fieldErrors, {
@@ -41,7 +37,7 @@ export function PATCH_ROUTE(config: DrizzleAdminConfig) {
     });
 
     if (!obj) {
-      return NextResponse.json({ message: "not found" }, { status: 404 });
+      return NextResponse.json({ message: "Not found" }, { status: 404 });
     }
 
     await db

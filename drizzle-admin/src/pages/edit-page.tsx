@@ -7,7 +7,6 @@ import {
 } from "../drizzle-ui";
 import {
   ColumnDataTypeMap,
-  DrizzleAdminConfig,
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,

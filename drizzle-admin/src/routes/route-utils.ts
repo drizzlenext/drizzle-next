@@ -20,7 +20,7 @@ export function withErrorHandling(
     } catch (error) {
       console.error(error);
       return NextResponse.json(
-        { message: "Internal Server Error" },
+        { message: "Internal server error" },
         { status: 500 }
       );
     }

@@ -5,10 +5,7 @@ import { eq } from "drizzle-orm";
 import { getEmptyDrizzleObject, withErrorHandling } from "./route-utils";
 
 const { createUpdateSchema } = createSchemaFactory({
-  coerce: {
-    date: true,
-    boolean: true,
-  },
+  coerce: true,
 });
 
 export function PUT_ROUTE(config: DrizzleAdminConfig) {
@@ -17,41 +14,40 @@ export function PUT_ROUTE(config: DrizzleAdminConfig) {
     const segments = url.pathname.split("/").filter(Boolean);
     const body = await request.json();
     const param0 = segments[0];
-    if (param0 !== "api") {
-      return new NextResponse(JSON.stringify({ message: "not found" }), {
-        status: 404,
-      });
-    }
     const curTable = segments[1];
     const id = segments[2];
     const db = config.db;
     const schema = config.schema[curTable];
     const drizzleSchema = schema.drizzleTable;
-
     const obj = getEmptyDrizzleObject(drizzleSchema);
-
     const updateSchema = createUpdateSchema(drizzleSchema);
-
     const validatedFields = updateSchema.safeParse({ ...obj, ...body });
 
-    if (!validatedFields.success) {
-      return NextResponse.json(validatedFields.error.flatten().fieldErrors, {
-        status: 400,
+    if (param0 !== "api") {
+      return new NextResponse(JSON.stringify({ message: "not found" }), {
+        status: 404,
       });
     }
 
     if (!(curTable in db.query)) {
-      console.error(`invalid resource ${curTable}`);
-      return NextResponse.json(
-        { message: `invalid resource ${curTable}` },
-        { status: 500 }
-      );
+      return NextResponse.json({ message: `Not found` }, { status: 404 });
+    }
+
+    if (!validatedFields.success) {
+      const res = {
+        message: "Invalid data",
+        error: validatedFields.error.flatten().fieldErrors,
+      };
+      return NextResponse.json(res, {
+        status: 400,
+      });
     }
 
     await db
       .update(drizzleSchema)
       .set(validatedFields.data)
       .where(eq(drizzleSchema.id, id));
+
     return NextResponse.json({ message: `Update success` });
   });
 }

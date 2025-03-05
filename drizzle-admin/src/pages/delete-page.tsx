@@ -7,7 +7,6 @@ import {
 } from "../drizzle-ui";
 import {
   ColumnDataTypeMap,
-  DrizzleAdminConfig,
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
@@ -76,11 +75,7 @@ export async function DeletePage(props: {
         </PageNav>
       </PageHeader>
       <PageContent>
-        <ObjectDeleteForm
-          obj={obj}
-          curTable={curTable}
-          columnInfoMap={columnInfoMap}
-        />
+        <ObjectDeleteForm obj={obj} curTable={curTable} />
       </PageContent>
     </PageLayout>
   );

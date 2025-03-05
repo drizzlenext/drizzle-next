@@ -1,6 +1,6 @@
 "use client";
 
-import { Alert, Button, Form, FormControl } from "../drizzle-ui";
+import { Button, Form, FormControl, FormMessage } from "../drizzle-ui";
 import { useState } from "react";
 import { ColumnDataTypeMap, FormControlMap } from "../types/types";
 import { RenderFormControl } from "./render-form-control";
@@ -9,15 +9,10 @@ import { getFormControlMap } from "../lib/client-utils";
 
 interface UpdateStatus {
   message?: string;
-  status?: "success" | "destructive";
-}
-
-function getStatus(statusCode: number) {
-  if (statusCode >= 200 && statusCode <= 299) {
-    return "success";
-  } else if (statusCode >= 400 && statusCode <= 599) {
-    return "destructive";
-  }
+  status?: "success" | "error";
+  error?: {
+    [key: string]: string[];
+  };
 }
 
 export function ObjectUpdateForm({
@@ -60,16 +55,19 @@ export function ObjectUpdateForm({
       },
       body: JSON.stringify(data),
     });
-    const json = await res.json();
-    setState({ message: json.message, status: getStatus(res.status) });
     if (res.ok) {
-      const res = await fetch(`/api/${curTable}/${obj.id}`);
       const json = await res.json();
-      setCurObj(json.data);
+      setState({ message: json.message, status: "success" });
+      const res2 = await fetch(`/api/${curTable}/${obj.id}`);
+      const json2 = await res2.json();
+      setCurObj(json2.data);
       const event = new CustomEvent("objectUpdateFormSubmitted", {
-        detail: json.data,
+        detail: json2.data,
       });
       window.dispatchEvent(event);
+    } else {
+      const json = await res.json();
+      setState({ message: json.message, error: json.error, status: "error" });
     }
   }
 
@@ -80,11 +78,6 @@ export function ObjectUpdateForm({
 
   return (
     <Form onSubmit={handleSubmit} className="flex flex-col gap-2">
-      {state.message && (
-        <Alert variant={state.status} className="mb-5">
-          {state.message}
-        </Alert>
-      )}
       <input type="hidden" name="curTable" defaultValue={curTable} />
       {Object.entries(curObj).map(([key, value]) => {
         return (
@@ -94,11 +87,17 @@ export function ObjectUpdateForm({
               value={value}
               formControlMap={mergedFormControlMap}
             />
+            {state?.error && state.error[key] && (
+              <FormMessage variant="error">{state.error[key]}</FormMessage>
+            )}
           </div>
         );
       })}
-      <FormControl>
+      <FormControl className="flex flex-row gap-2 items-center">
         <Button type="submit">Submit</Button>
+        {state.message && (
+          <FormMessage variant={state.status}>{state.message}</FormMessage>
+        )}
       </FormControl>
     </Form>
   );

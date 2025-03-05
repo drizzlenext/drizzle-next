@@ -1,29 +1,27 @@
 "use client";
 
-import { Alert, Button, Form, FormControl, Label } from "../drizzle-ui";
+import { Button, Form, FormControl, FormMessage, Label } from "../drizzle-ui";
 import { useState } from "react";
-import { ColumnDataTypeMap } from "../types/types";
+import { capitalCase } from "change-case-all";
+import { renderValue } from "../lib/shared-utils";
 
-interface UpdateStatus {
+interface DeleteStatus {
   message?: string;
-  status?: "success" | "destructive";
+  status?: "success" | "error";
 }
 
 export function ObjectDeleteForm({
   obj,
   curTable,
-  columnInfoMap,
 }: {
   obj: any;
   curTable: string;
-  columnInfoMap: ColumnDataTypeMap;
 }) {
-  const [state, setState] = useState<UpdateStatus>({});
+  const [state, setState] = useState<DeleteStatus>({});
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    // api call
     const data = Object.fromEntries(formData.entries());
 
     const res = await fetch(`/api/${curTable}/${obj.id}`, {
@@ -34,15 +32,15 @@ export function ObjectDeleteForm({
       body: JSON.stringify(data),
     });
     const json = await res.json();
-    setState({ message: json.message, status: json.status });
+    if (res.ok) {
+      setState({ message: json.message, status: "success" });
+    } else {
+      setState({ message: json.message, status: "error" });
+    }
   }
 
   if (state.message) {
-    return (
-      <Alert variant={state.status} className="mb-5">
-        {state.message}
-      </Alert>
-    );
+    return <FormMessage variant={state.status}>{state.message}</FormMessage>;
   }
 
   return (
@@ -51,6 +49,13 @@ export function ObjectDeleteForm({
       <FormControl>
         <Label>Confirm delete?</Label>
       </FormControl>
+
+      {Object.entries(obj).map(([key, value]) => (
+        <div key={key}>
+          <strong>{capitalCase(key)}</strong>: {renderValue(value)}
+        </div>
+      ))}
+
       <div>
         <Button type="submit" variant="destructive">
           Delete
