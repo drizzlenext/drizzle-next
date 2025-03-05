@@ -589,26 +589,6 @@ export class ScaffoldProcessor {
     }
     return html;
   }
-  addLinkToAdminSidebar() {
-    const tableObj = caseFactory(this.opts.table, {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-    insertTextBeforeIfNotExists(
-      "components/admin/admin-layout.tsx",
-      "// [CODE_MARK admin-sidebar-items]",
-      `  { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}", icon: Table2Icon },\n`
-    );
-  }
-  addLinkToPrivateSidebar() {
-    const tableObj = caseFactory(this.opts.table, {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-    insertTextBeforeIfNotExists(
-      "components/private/private-layout.tsx",
-      "// [CODE_MARK private-sidebar-items]",
-      `  { text: "${tableObj.pluralCapitalCase}", link: "/${tableObj.pluralKebabCase}", icon: Table2Icon },\n`
-    );
-  }
   printCompletionMessage() {
     log.success("scaffold success: " + this.opts.table);
     log.checklist("scaffold checklist");

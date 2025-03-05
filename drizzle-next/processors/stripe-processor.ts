@@ -47,7 +47,6 @@ export class StripeProcessor implements DrizzleNextProcessor {
     this.addConfirmationPage();
     this.addCreateProductScripts();
     this.scaffold();
-    this.addLinkToPrivateSidebar();
     this.addStripeCustomerIdToUsersSchema();
   }
 
@@ -152,7 +151,6 @@ export class StripeProcessor implements DrizzleNextProcessor {
     };
     const stripeWebhooksProcessor = new ScaffoldProcessor({
       ...this.opts,
-      authorizationLevel: "admin",
       columns: stripeWebhooksColumns[this.opts.dbDialect],
       table: "stripe_webhooks",
       enableCompletionMessage: false,
@@ -192,7 +190,6 @@ export class StripeProcessor implements DrizzleNextProcessor {
     };
     const productsProcessor = new ScaffoldProcessor({
       ...this.opts,
-      authorizationLevel: "admin",
       columns: productsColumns[this.opts.dbDialect],
       table: "products",
       enableCompletionMessage: false,
@@ -220,7 +217,6 @@ export class StripeProcessor implements DrizzleNextProcessor {
     };
     const paymentsProcessor = new ScaffoldProcessor({
       ...this.opts,
-      authorizationLevel: "admin",
       columns: paymentsColumns[this.opts.dbDialect],
       table: "payments",
       enableCompletionMessage: false,
@@ -228,20 +224,6 @@ export class StripeProcessor implements DrizzleNextProcessor {
       enableDbScaffold: true,
     });
     paymentsProcessor.process();
-  }
-
-  addLinkToPrivateSidebar() {
-    insertTextAfterIfNotExists(
-      "components/private/private-layout.tsx",
-      `"use client";`,
-      `\n\nimport { CreditCardIcon } from "lucide-react";`
-    );
-
-    insertTextBeforeIfNotExists(
-      "components/private/private-layout.tsx",
-      "// [CODE_MARK private-sidebar-items]",
-      `  { text: "Account", link: "/account", icon: CreditCardIcon },`
-    );
   }
 
   addStripeCustomerIdToUsersSchema() {
