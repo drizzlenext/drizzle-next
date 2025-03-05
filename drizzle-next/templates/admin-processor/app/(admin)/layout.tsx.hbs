@@ -12,15 +12,15 @@ export default async function Layout({
 }) {
   const session = await authorize("admin");
 
-  const userObj = await db.query.users.findFirst({
+  const userRow = await db.query.users.findFirst({
     where: eq(users.id, session.user.id),
   });
 
-  if (!userObj) {
+  if (!userRow) {
     redirect("/admin-signin");
   }
 
-  return <AdminLayout userObj={userObj}>{children}</AdminLayout>;
+  return <AdminLayout userRow={userRow}>{children}</AdminLayout>;
 }
 
 export const dynamic = "force-dynamic";

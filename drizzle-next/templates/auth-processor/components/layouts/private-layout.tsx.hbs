@@ -31,10 +31,10 @@ const items = [
 ];
 
 export function PrivateLayout({
-  userObj,
+  userRow,
   children,
 }: {
-  userObj: User;
+  userRow: User;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
@@ -44,7 +44,7 @@ export function PrivateLayout({
       <DashboardHeader>
         <DashboardTitle>Drizzle Next</DashboardTitle>
         <DashboardNav>
-          <Avatar src={userObj.image}>
+          <Avatar src={userRow.image}>
             <User2Icon />
           </Avatar>
         </DashboardNav>

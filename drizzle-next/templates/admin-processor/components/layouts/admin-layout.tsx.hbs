@@ -29,10 +29,10 @@ const items = [
 ];
 
 export function AdminLayout({
-  userObj,
+  userRow,
   children,
 }: {
-  userObj: User;
+  userRow: User;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
@@ -42,7 +42,7 @@ export function AdminLayout({
       <DashboardHeader>
         <DashboardTitle>Drizzle Next</DashboardTitle>
         <DashboardNav>
-          <Avatar src={userObj.image}>
+          <Avatar src={userRow.image}>
             <User2Icon />
           </Avatar>
         </DashboardNav>

@@ -16,11 +16,11 @@ export async function adminSignInAction(
 ): Promise<AdminSignInState> {
   "use server";
   try {
-    const userObj = await db.query.{{userObj.pluralCamelCase}}.findFirst({
+    const userRow = await db.query.{{userObj.pluralCamelCase}}.findFirst({
       where: eq({{userObj.pluralCamelCase}}.email, formData.get("email") as string),
     });
 
-    if (userObj?.role !== "admin") {
+    if (userRow?.role !== "admin") {
       return {
         message: "Unauthorized",
       };
