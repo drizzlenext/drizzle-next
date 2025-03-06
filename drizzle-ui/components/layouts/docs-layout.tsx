@@ -37,6 +37,7 @@ const items = [
   { title: "Label", url: "/components/label" },
   { title: "Page Layout", url: "/components/page-layout" },
   { title: "Pagination", url: "/components/pagination" },
+  { title: "Rich Text Editor", url: "/components/rich-text-editor" },
   { title: "Search Input", url: "/components/search-input" },
   { title: "Select", url: "/components/select" },
   { title: "Sortable", url: "/components/sortable" },

@@ -16,7 +16,15 @@
   },
   "dependencies": {
     "@next/third-parties": "^15.1.6",
+    "@tiptap/core": "^2.11.5",
+    "@tiptap/extension-code-block-lowlight": "^2.11.5",
+    "@tiptap/extension-image": "^2.11.5",
+    "@tiptap/extension-link": "^2.11.5",
+    "@tiptap/extension-text-align": "^2.11.5",
+    "@tiptap/react": "^2.11.5",
+    "@tiptap/starter-kit": "^2.11.5",
     "commander": "^13.1.0",
+    "lowlight": "^3.3.0",
     "next": "15.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -29,6 +37,7 @@
     "@tailwindcss/cli": "^4.0.9",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.16",
+    "@types/highlight.js": "^9.12.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

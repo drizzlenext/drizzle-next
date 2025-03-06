@@ -22,6 +22,7 @@ import { SelectDemo } from "@/components/component-demo/select-demo";
 import { SortableDemo } from "@/components/component-demo/sortable-demo";
 import { TableDemo } from "@/components/component-demo/table-demo";
 import { TextareaDemo } from "@/components/component-demo/textarea-demo";
+import { RichTextEditorDemo } from "@/components/component-demo/rich-text-editor-demo";
 import { Suspense } from "react";
 import { PageContent, PageHeader, PageLayout, PageTitle } from "@/src/index";
 
@@ -43,6 +44,7 @@ const componentMap: { [key: string]: React.ComponentType | null } = {
   sortable: SortableDemo,
   table: TableDemo,
   textarea: TextareaDemo,
+  "rich-text-editor": RichTextEditorDemo,
 };
 
 type Params = Promise<{ id: string }>;
@@ -64,10 +66,9 @@ export default async function Page(props: { params: Params }) {
 
   const htmlContent = await marked(content);
 
-  const code = getFileContent(data.code).replace(
-    "../../lib/utils",
-    "@/lib/utils",
-  );
+  const code = getFileContent(data.code)
+    .replace("../../lib/utils", "@/lib/utils")
+    .replace("../../styles/tiptap.css", "@/styles/tiptap.css");
   const usage = getFileContent(data.usage).replaceAll(
     "@/src/components",
     "@/components",
@@ -96,10 +97,29 @@ export default async function Page(props: { params: Params }) {
           </div>
         )}
         <h2>Installation</h2>
+        <p>Add component:</p>
         <CodeBlock
           language="bash"
           code={`npx drizzle-ui@latest add ${params.id}`}
         />
+        {data.dependencies && (
+          <>
+            <p>Install dependencies:</p>
+            <CodeBlock
+              language="bash"
+              code={`npm i ${data.dependencies.join(" ")}`}
+            />
+          </>
+        )}
+        {data.dev_dependencies && (
+          <>
+            <p>Install dev dependencies:</p>
+            <CodeBlock
+              language="bash"
+              code={`npm i -D ${data.dev_dependencies.join(" ")}`}
+            />
+          </>
+        )}
         <h2>Usage</h2>
         <CodeBlock language="ts" code={usage} />
         <h2>Source Code</h2>
