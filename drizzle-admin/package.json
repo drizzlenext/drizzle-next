@@ -7,13 +7,21 @@
     "build:all": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:css",
     "build:esm": "rollup -c ./rollup.esm.mjs",
     "build:cjs": "rollup -c ./rollup.cjs.mjs",
-    "build:css": "@tailwindcss -i src/drizzle-ui/styles/globals.css -o dist/styles.css"
+    "build:css": "@tailwindcss -i src/styles/styles.css -o dist/styles.css"
   },
   "dependencies": {
+    "@tiptap/core": "^2.11.5",
+    "@tiptap/extension-code-block-lowlight": "^2.11.5",
+    "@tiptap/extension-image": "^2.11.5",
+    "@tiptap/extension-link": "^2.11.5",
+    "@tiptap/extension-text-align": "^2.11.5",
+    "@tiptap/react": "^2.11.5",
+    "@tiptap/starter-kit": "^2.11.5",
     "change-case-all": "^2.1.0",
     "clsx": "^2.1.1",
     "drizzle-zod": "^0.7.0",
     "highlight.js": "^11.11.1",
+    "lowlight": "^3.3.0",
     "lucide-react": "^0.477.0",
     "tailwind-merge": "^3.0.2",
     "zod": "^3.24.2"
@@ -23,6 +31,7 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.2",
     "@tailwindcss/cli": "^4.0.9",
+    "@types/highlight.js": "^9.12.4",
     "@types/react": "^19.0.10",
     "next": "^15.2.0",
     "postcss": "^8.5.3",

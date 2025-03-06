@@ -1,6 +1,13 @@
 "use client";
 
-import { Checkbox, FormControl, Input, Label, Textarea } from "../drizzle-ui";
+import {
+  Checkbox,
+  FormControl,
+  Input,
+  Label,
+  RichTextEditor,
+  Textarea,
+} from "../drizzle-ui";
 import { FormControlMap } from "../types/types";
 import { capitalCase } from "change-case-all";
 import { renderValue } from "../lib/shared-utils";
@@ -90,6 +97,13 @@ export function RenderFormControl({
             name={keyName}
             id={keyName}
           />
+        </FormControl>
+      );
+    case "richtext":
+      return (
+        <FormControl>
+          <Label htmlFor={keyName}>{capitalCase(keyName)}</Label>
+          <RichTextEditor id={keyName} name={keyName} html={value} />
         </FormControl>
       );
     default:

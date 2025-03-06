@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@import "../drizzle-ui/styles/styles.css";
+@import "../drizzle-ui/styles/rich-text-editor.css";
+@import "../drizzle-ui/styles/typography.css";

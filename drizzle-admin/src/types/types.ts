@@ -10,7 +10,8 @@ export type FormControlType =
   | "checkbox"
   | "date"
   | "datetime-local"
-  | "number";
+  | "number"
+  | "richtext";
 
 export type FormControlMap = {
   [key: string]: FormControlType;

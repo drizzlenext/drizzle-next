@@ -20,7 +20,7 @@ export const config: DrizzleAdminConfig = {
     users: { drizzleTable: users, label: "Users" },
     posts: {
       drizzleTable: posts,
-      formControlMap: { content: "textarea", updatedAt: "input" },
+      formControlMap: { content: "richtext", updatedAt: "input" },
       components: {
         RowActions: PostRowActions,
         ViewPageActions: PostViewPageActions,

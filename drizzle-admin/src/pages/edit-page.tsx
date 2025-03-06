@@ -77,6 +77,7 @@ export async function EditPage(props: {
           obj={obj}
           curTable={curTable}
           columnDataTypeMap={columnDataTypeMap}
+          formControlMap={drizzleTableConfig.formControlMap}
         />
       </PageContent>
     </PageLayout>
