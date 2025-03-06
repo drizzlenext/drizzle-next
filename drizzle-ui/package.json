@@ -12,7 +12,7 @@
     "build:cjs": "rollup -c ./rollup.cjs.mjs",
     "build:cli": "tsc --project ./tsconfig.cli.json && mkdir \"dist/cli/drizzle-ui\" && cp -r src/* dist/cli/drizzle-ui",
     "clean": "rm -rf dist",
-    "build:css": "@tailwindcss -i app/globals.css -o dist/styles.css"
+    "build:css": "@tailwindcss -i src/styles/styles.css -o dist/styles.css"
   },
   "dependencies": {
     "@next/third-parties": "^15.1.6",

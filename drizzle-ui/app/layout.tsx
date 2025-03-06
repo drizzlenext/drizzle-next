@@ -4,6 +4,8 @@ import "./globals.css";
 import { DarkModeScript } from "@/src/components/ui/dark-mode";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "highlight.js/styles/atom-one-dark.css";
+import "@/src/styles/styles.css";
+import "@/src/styles/typography.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

@@ -1,0 +1,58 @@
+/* rich text editor */
+.rich-text-editor-container {
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-input);
+  background-color: var(--input-background);
+}
+.rich-text-editor-toolbar {
+  border-bottom: 1px solid var(--input-border);
+  border-end-end-radius: var(--radius-input);
+  background-color: var(--background);
+}
+.rich-text-editor-btn {
+  padding: 5px;
+  color: var(--foreground);
+  border-radius: var(--input-border);
+  cursor: pointer;
+  background-color: var(--background);
+}
+.rich-text-editor-btn.active {
+  background-color: var(--muted);
+}
+.rich-text-editor-btn.inactive {
+  background-color: var(--background);
+}
+.rich-text-editor-btn:disabled {
+  color: var(--muted);
+}
+
+/* tiptap */
+.tiptap h1 {
+  font-size: 40px;
+}
+.tiptap h2 {
+  font-size: 32px;
+}
+.tiptap h3 {
+  font-size: 24px;
+}
+.tiptap ul li {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+.tiptap ol li {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+.tiptap a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.tiptap pre {
+  color: white;
+  background-color: black;
+  padding: 5px;
+}
+.ProseMirror:focus {
+  outline: none;
+}

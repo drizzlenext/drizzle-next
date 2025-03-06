@@ -14,8 +14,12 @@ function copyFiles(
 
   for (const entry of entries) {
     const srcPath = path.join(srcDir, entry.name);
-    const ext = opts?.appendExt ? opts.appendExt : "";
-    const destPath = path.join(destDir, entry.name + ext);
+    const destPath = entry.isDirectory()
+      ? path.join(destDir, entry.name)
+      : path.join(
+          destDir,
+          entry.name + (opts?.appendExt ? opts.appendExt : "")
+        );
 
     if (entry.isDirectory()) {
       copyFiles(srcPath, destPath, opts);
@@ -31,25 +35,16 @@ function copyFiles(
   }
 }
 
-// copy the components from drizzle-ui over to drizzle-next
-const sourceDir = path.resolve(__dirname, "../drizzle-ui/src/components/ui");
+// copy the entire drizzle-ui src over to drizzle-next as hbs templates
+const sourceDir = path.resolve(__dirname, "../drizzle-ui/src");
 const targetDir = path.resolve(
   __dirname,
-  "../drizzle-next/templates/new-project-processor/components/ui"
+  "../drizzle-next/templates/drizzle-ui"
 );
 copyFiles(sourceDir, targetDir, {
   appendExt: ".hbs",
   utilsPath: "@/lib/utils",
 });
-
-// copy the styles from drizzle-ui over to drizzle-next
-const srcStyles = path.resolve(__dirname, "../drizzle-ui/src/styles.css");
-const destStyles = path.resolve(
-  __dirname,
-  "../drizzle-next/templates/new-project-processor/app/globals.css.hbs"
-);
-fs.copyFileSync(srcStyles, destStyles);
-console.log(`Copied ${srcStyles} to ${destStyles}`);
 
 // copy the entire drizzle-ui src dir over to drizzle-admin
 const sourceDir2 = path.resolve(__dirname, "../drizzle-ui/src");

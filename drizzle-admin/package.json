@@ -7,7 +7,7 @@
     "build:all": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:css",
     "build:esm": "rollup -c ./rollup.esm.mjs",
     "build:cjs": "rollup -c ./rollup.cjs.mjs",
-    "build:css": "@tailwindcss -i src/drizzle-ui/styles.css -o dist/styles.css"
+    "build:css": "@tailwindcss -i src/drizzle-ui/styles/globals.css -o dist/styles.css"
   },
   "dependencies": {
     "change-case-all": "^2.1.0",
