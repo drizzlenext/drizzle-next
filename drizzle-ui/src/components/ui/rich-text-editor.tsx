@@ -23,7 +23,6 @@ import {
   ListOrderedIcon,
   UnlinkIcon,
 } from "lucide-react";
-import "../../styles/tiptap.css";
 
 import css from "highlight.js/lib/languages/css";
 import js from "highlight.js/lib/languages/javascript";
@@ -118,17 +117,17 @@ export const RichTextEditor = ({
   }
 
   return (
-    <div className="tiptap-container">
+    <div className="rich-text-editor-container">
       {/* Toolbar */}
-      <div className="tiptap-toolbar">
+      <div className="rich-text-editor-toolbar">
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
           className={
             editor.isActive("bold")
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <BoldIcon />
@@ -139,8 +138,8 @@ export const RichTextEditor = ({
           disabled={!editor.can().chain().focus().toggleItalic().run()}
           className={
             editor.isActive("italic")
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <ItalicIcon />
@@ -155,8 +154,8 @@ export const RichTextEditor = ({
           }
           className={
             editor.isActive("heading", { level: 1 })
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <Heading1Icon />
@@ -171,8 +170,8 @@ export const RichTextEditor = ({
           }
           className={
             editor.isActive("heading", { level: 2 })
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <Heading2Icon />
@@ -187,8 +186,8 @@ export const RichTextEditor = ({
           }
           className={
             editor.isActive("heading", { level: 3 })
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <Heading3Icon />
@@ -198,8 +197,8 @@ export const RichTextEditor = ({
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
           className={
             editor.isActive({ textAlign: "left" })
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <AlignLeftIcon />
@@ -209,8 +208,8 @@ export const RichTextEditor = ({
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
           className={
             editor.isActive({ textAlign: "center" })
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <AlignCenterIcon />
@@ -220,8 +219,8 @@ export const RichTextEditor = ({
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
           className={
             editor.isActive({ textAlign: "right" })
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <AlignRightIcon />
@@ -231,8 +230,8 @@ export const RichTextEditor = ({
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={
             editor.isActive("bulletList")
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <ListIcon />
@@ -242,8 +241,8 @@ export const RichTextEditor = ({
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={
             editor.isActive("orderedList")
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <ListOrderedIcon />
@@ -253,8 +252,8 @@ export const RichTextEditor = ({
           onClick={() => editor.chain().focus().toggleCode().run()}
           className={
             editor.isActive("code")
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <CodeIcon />
@@ -262,7 +261,7 @@ export const RichTextEditor = ({
         <button
           type="button"
           onClick={addImage}
-          className="tiptap-btn inactive"
+          className="rich-text-editor-btn inactive"
         >
           <ImageIcon />
         </button>
@@ -271,8 +270,8 @@ export const RichTextEditor = ({
           onClick={setLink}
           className={
             editor.isActive("link")
-              ? "tiptap-btn active"
-              : "tiptap-btn inactive"
+              ? "rich-text-editor-btn active"
+              : "rich-text-editor-btn inactive"
           }
         >
           <LinkIcon />
@@ -281,21 +280,15 @@ export const RichTextEditor = ({
           type="button"
           onClick={() => editor.chain().focus().unsetLink().run()}
           disabled={!editor.isActive("link")}
-          className={"tiptap-btn"}
+          className={"rich-text-editor-btn"}
         >
           <UnlinkIcon />
         </button>
       </div>
-
       <div className="p-3">
         <EditorContent editor={editor} />
       </div>
-
       <input type="hidden" name={name} id={id} value={editorContent} />
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css"
-      />
     </div>
   );
 };
