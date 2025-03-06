@@ -1,7 +1,9 @@
 ---
 title: Rich Text Editor
 description: A rich text editor based on the Tiptap editor
-code: src/components/ui/rich-text-editor.tsx
+code:
+  - src/components/ui/rich-text-editor.tsx
+  - src/styles/rich-text-editor.css
 usage: components/component-demo/rich-text-editor-demo.tsx
 dependencies:
   - "@tiptap/core"

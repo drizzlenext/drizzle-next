@@ -66,13 +66,26 @@ export default async function Page(props: { params: Params }) {
 
   const htmlContent = await marked(content);
 
-  const code = getFileContent(data.code)
-    .replace("../../lib/utils", "@/lib/utils")
-    .replace("../../styles/tiptap.css", "@/styles/tiptap.css");
-  const usage = getFileContent(data.usage).replaceAll(
-    "@/src/components",
-    "@/components",
-  );
+  const codeProp = data.code;
+
+  const codeBlocks = [];
+  if (typeof codeProp === "string") {
+    const code = convertRelativeImportsToAlias(getFileContent(data.code));
+    codeBlocks.push({
+      code: code,
+      path: data.code,
+    });
+  } else if (codeProp instanceof Array) {
+    for (const codePath of codeProp) {
+      const code = convertRelativeImportsToAlias(getFileContent(codePath));
+      codeBlocks.push({
+        code: code,
+        path: codePath,
+      });
+    }
+  }
+
+  const usage = getFileContent(data.usage).replaceAll("@/src/", "@/");
 
   const DynamicComponent = componentMap[params.id] || null;
 
@@ -123,7 +136,15 @@ export default async function Page(props: { params: Params }) {
         <h2>Usage</h2>
         <CodeBlock language="ts" code={usage} />
         <h2>Source Code</h2>
-        <CodeBlock language="ts" code={code} />
+        {codeBlocks.map((codeBlock) => (
+          <div key={codeBlock.path}>
+            <p>{codeBlock.path.split("/").slice(1).join("/")}</p>
+            <CodeBlock
+              language={getExtFromPath(codeBlock.path)}
+              code={codeBlock.code}
+            />
+          </div>
+        ))}
       </PageContent>
     </PageLayout>
   );
@@ -136,4 +157,14 @@ export async function generateStaticParams() {
   return filenames.map((filename) => ({
     id: filename.replace(/\.md$/, ""),
   }));
+}
+
+function getExtFromPath(filePath: string): string {
+  return path.extname(filePath).slice(1);
+}
+
+function convertRelativeImportsToAlias(filePath: string) {
+  return filePath
+    .replace("../../lib/", "@/lib/")
+    .replace("../../styles/", "@/styles/");
 }
