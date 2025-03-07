@@ -43,7 +43,7 @@ export function DrizzleAdminLayoutClient({
         <DashboardNavToggle />
       </DashboardHeader>
       <DashboardSidebar>
-        {renderSidebarItems(pathname, config.sidebar)}
+        {pathname && renderSidebarItems(pathname, config.sidebar)}
       </DashboardSidebar>
       <DashboardContent>{children}</DashboardContent>
     </DashboardLayout>
