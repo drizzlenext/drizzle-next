@@ -150,7 +150,7 @@ export function ObjectTable(props: ObjectTableProps) {
 
   function handleClick(row: any) {
     setCurRow(row);
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams ?? "");
     params.set("id", row.id);
     router.push(`${pathname}?${params.toString()}`);
     const event = new CustomEvent("rowClick", { detail: row });

@@ -6,7 +6,7 @@ import {
   RowActions,
   PageActionsProps,
   RowActionsProps,
-} from "drizzle-admin/types";
+} from "./src/types/types";
 import { Post } from "./schema/posts";
 
 export const PostRowActions: RowActions<Post> = (
