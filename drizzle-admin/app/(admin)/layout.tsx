@@ -1,7 +1,9 @@
 import { config } from "@/drizzle-admin.config";
-import { DrizzleAdminLayout } from "@/src/components";
+import { AdminLayout } from "./admin-layout";
 import "drizzle-admin/styles";
+import { completeLayoutConfig } from "@/src/lib/server-utils";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <DrizzleAdminLayout config={config}>{children}</DrizzleAdminLayout>;
+  const layoutConfig = completeLayoutConfig(config);
+  return <AdminLayout config={layoutConfig}>{children}</AdminLayout>;
 }
