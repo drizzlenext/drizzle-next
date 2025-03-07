@@ -7,7 +7,8 @@
     "build:all": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:css",
     "build:esm": "rollup -c ./rollup.esm.mjs",
     "build:cjs": "rollup -c ./rollup.cjs.mjs",
-    "build:css": "@tailwindcss -i src/styles/styles.css -o dist/styles.css"
+    "build:css": "@tailwindcss -i src/styles/styles.css -o dist/styles.css",
+    "dev": "next dev"
   },
   "dependencies": {
     "@tiptap/core": "^2.11.5",
@@ -31,6 +32,7 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.2",
     "@tailwindcss/cli": "^4.0.9",
+    "@tailwindcss/postcss": "^4.0.9",
     "@types/highlight.js": "^9.12.4",
     "@types/react": "^19.0.10",
     "next": "^15.2.0",
