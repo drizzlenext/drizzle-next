@@ -5,27 +5,56 @@ import {
   DashboardHeader,
   DashboardLayout,
   DashboardSidebar,
-  DashboardSidebarGroup,
-  DashboardSidebarLabel,
-  DashboardSidebarItem,
   DashboardSidebarToggle,
   DashboardTitle,
   DashboardNav,
   DashboardNavToggle,
+  DashboardSidebarList,
 } from "@/src/components/ui/dashboard-layout";
-import { ArrowUpRightIcon, NotebookIcon, Table2Icon } from "lucide-react";
+import {
+  AlertTriangleIcon,
+  ArrowUpRightIcon,
+  BookIcon,
+  ComponentIcon,
+  UserCircleIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 import { usePathname } from "next/navigation";
 import { PageLayoutDemo } from "./page-layout-demo";
 
 const items = [
-  { text: "Introduction", link: "/introduction", icon: Table2Icon },
-  { text: "Installation", link: "/installation", icon: Table2Icon },
   {
-    text: "Dashboard Layout",
-    link: "/components/dashboard-layout",
-    icon: Table2Icon,
+    text: "Docs",
+    icon: BookIcon,
+    items: [
+      { text: "Introduction", link: "/introduction" },
+      { text: "Installation", link: "/installation" },
+    ],
+  },
+  {
+    text: "Components",
+    icon: ComponentIcon,
+    items: [
+      { text: "Alert", link: "/components/alert", icon: AlertTriangleIcon },
+      { text: "Avatar", link: "/components/avatar", icon: UserCircleIcon },
+      { text: "Button", link: "/components/button" },
+      { text: "Card", link: "/components/card" },
+      { text: "Checkbox", link: "/components/checkbox" },
+      { text: "Dark Mode", link: "/components/dark-mode" },
+      { text: "Dashboard Layout", link: "/components/dashboard-layout" },
+      { text: "Form", link: "/components/form" },
+      { text: "Input", link: "/components/input" },
+      { text: "Label", link: "/components/label" },
+      { text: "Page Layout", link: "/components/page-layout" },
+      { text: "Pagination", link: "/components/pagination" },
+      { text: "Rich Text Editor", link: "/components/rich-text-editor" },
+      { text: "Search Input", link: "/components/search-input" },
+      { text: "Select", link: "/components/select" },
+      { text: "Sortable", link: "/components/sortable" },
+      { text: "Table", link: "/components/table" },
+      { text: "Textarea", link: "/components/textarea" },
+    ],
   },
 ];
 
@@ -53,18 +82,7 @@ export function DashboardLayoutDemo() {
         <DashboardNavToggle />
       </DashboardHeader>
       <DashboardSidebar>
-        <DashboardSidebarGroup>
-          <DashboardSidebarLabel>
-            <NotebookIcon /> Documentation
-          </DashboardSidebarLabel>
-          {items.map((item) => (
-            <Link key={item.link} href={item.link}>
-              <DashboardSidebarItem active={pathname === item.link}>
-                <item.icon className="h-4 w-4" /> {item.text}
-              </DashboardSidebarItem>
-            </Link>
-          ))}
-        </DashboardSidebarGroup>
+        <DashboardSidebarList pathname={pathname} items={items} />
       </DashboardSidebar>
       <DashboardContent>
         <PageLayoutDemo />

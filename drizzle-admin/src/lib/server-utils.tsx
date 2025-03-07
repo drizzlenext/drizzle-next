@@ -2,7 +2,6 @@ import { kebabCase } from "change-case-all";
 import {
   DrizzleAdminConfig,
   DrizzleAdminConfigComplete,
-  DrizzleAdminLayoutConfig,
   DrizzleTableConfigComplete,
   SearchParams,
 } from "../types/types";
@@ -59,19 +58,7 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
     schema: completeSchema,
     db: config.db,
     dbDialect: config.dbDialect,
-    sidebar: config.sidebar,
   };
 
-  return completeConfig;
-}
-
-// function for generating the layout config from drizzle admin config
-// can't use the admin config because it contains circular server-side references
-export function completeLayoutConfig(config: DrizzleAdminConfig) {
-  const conf = completeDrizzleAdminConfig(config);
-  const completeConfig: DrizzleAdminLayoutConfig = {
-    basePath: conf.basePath,
-    sidebar: conf.sidebar,
-  };
   return completeConfig;
 }

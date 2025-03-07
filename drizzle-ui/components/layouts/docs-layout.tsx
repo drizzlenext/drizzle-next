@@ -1,6 +1,9 @@
 "use client";
 
-import { DashboardLayout } from "@/src/components/ui/dashboard-layout";
+import {
+  DashboardLayout,
+  DashboardSidebarList,
+} from "@/src/components/ui/dashboard-layout";
 import { ReactNode, useEffect } from "react";
 import { ArrowUpRightIcon } from "lucide-react";
 import {
@@ -10,39 +13,43 @@ import {
   DashboardSidebarToggle,
   DashboardTitle,
   DashboardSidebar,
-  DashboardSidebarGroup,
-  DashboardSidebarItem,
-  DashboardSidebarLabel,
 } from "@/src/components/ui/dashboard-layout";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DashboardContent } from "@/src/components/ui/dashboard-layout";
 import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 
-const pages = [
-  { title: "Introduction", url: "/introduction" },
-  { title: "Installation", url: "/installation" },
-];
-
 const items = [
-  { title: "Alert", url: "/components/alert" },
-  { title: "Avatar", url: "/components/avatar" },
-  { title: "Button", url: "/components/button" },
-  { title: "Card", url: "/components/card" },
-  { title: "Checkbox", url: "/components/checkbox" },
-  { title: "Dark Mode", url: "/components/dark-mode" },
-  { title: "Dashboard Layout", url: "/components/dashboard-layout" },
-  { title: "Form", url: "/components/form" },
-  { title: "Input", url: "/components/input" },
-  { title: "Label", url: "/components/label" },
-  { title: "Page Layout", url: "/components/page-layout" },
-  { title: "Pagination", url: "/components/pagination" },
-  { title: "Rich Text Editor", url: "/components/rich-text-editor" },
-  { title: "Search Input", url: "/components/search-input" },
-  { title: "Select", url: "/components/select" },
-  { title: "Sortable", url: "/components/sortable" },
-  { title: "Table", url: "/components/table" },
-  { title: "Textarea", url: "/components/textarea" },
+  {
+    text: "Docs",
+    items: [
+      { text: "Introduction", link: "/introduction" },
+      { text: "Installation", link: "/installation" },
+    ],
+  },
+  {
+    text: "Components",
+    items: [
+      { text: "Alert", link: "/components/alert" },
+      { text: "Avatar", link: "/components/avatar" },
+      { text: "Button", link: "/components/button" },
+      { text: "Card", link: "/components/card" },
+      { text: "Checkbox", link: "/components/checkbox" },
+      { text: "Dark Mode", link: "/components/dark-mode" },
+      { text: "Dashboard Layout", link: "/components/dashboard-layout" },
+      { text: "Form", link: "/components/form" },
+      { text: "Input", link: "/components/input" },
+      { text: "Label", link: "/components/label" },
+      { text: "Page Layout", link: "/components/page-layout" },
+      { text: "Pagination", link: "/components/pagination" },
+      { text: "Rich Text Editor", link: "/components/rich-text-editor" },
+      { text: "Search Input", link: "/components/search-input" },
+      { text: "Select", link: "/components/select" },
+      { text: "Sortable", link: "/components/sortable" },
+      { text: "Table", link: "/components/table" },
+      { text: "Textarea", link: "/components/textarea" },
+    ],
+  },
 ];
 
 const CopyIconSVGText = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
@@ -97,26 +104,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
         <DashboardNavToggle />
       </DashboardHeader>
       <DashboardSidebar>
-        <DashboardSidebarGroup>
-          <DashboardSidebarLabel>Docs</DashboardSidebarLabel>
-          {pages.map((item) => (
-            <Link key={item.title} href={item.url}>
-              <DashboardSidebarItem active={pathname === item.url}>
-                {item.title}
-              </DashboardSidebarItem>
-            </Link>
-          ))}
-        </DashboardSidebarGroup>
-        <DashboardSidebarGroup>
-          <DashboardSidebarLabel>Components</DashboardSidebarLabel>
-          {items.map((item) => (
-            <Link key={item.title} href={item.url}>
-              <DashboardSidebarItem active={pathname === item.url}>
-                {item.title}
-              </DashboardSidebarItem>
-            </Link>
-          ))}
-        </DashboardSidebarGroup>
+        <DashboardSidebarList pathname={pathname} items={items} />
       </DashboardSidebar>
       <DashboardContent>{children}</DashboardContent>
     </DashboardLayout>

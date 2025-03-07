@@ -1,4 +1,5 @@
-import { JSX } from "react";
+import { LucideProps } from "lucide-react";
+import { ForwardRefExoticComponent, JSX, RefAttributes } from "react";
 
 export type Params = Promise<{ [key: string]: string }>;
 
@@ -55,7 +56,9 @@ export type SidebarItem = {
   link?: string;
   items?: SidebarItem[];
   type?: "from-schema";
-  icon?: JSX.Element;
+  icon?: ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+  >;
 };
 
 export type DrizzleAdminConfig = {
@@ -65,7 +68,6 @@ export type DrizzleAdminConfig = {
   };
   db: any;
   dbDialect: "postgresql" | "mysql" | "sqlite";
-  sidebar: SidebarItem[];
 };
 
 export type DrizzleTableConfigComplete = {
@@ -90,12 +92,6 @@ export type DrizzleAdminConfigComplete = {
   };
   db: any;
   dbDialect: "postgresql" | "mysql" | "sqlite";
-  sidebar: SidebarItem[];
-};
-
-export type DrizzleAdminLayoutConfig = {
-  basePath: string;
-  sidebar: SidebarItem[];
 };
 
 export type ColumnDataType = "string" | "boolean" | "number" | "date";

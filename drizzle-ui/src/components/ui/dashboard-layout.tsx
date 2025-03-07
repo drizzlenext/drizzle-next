@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import { cn } from "../../lib/utils";
-import { MenuIcon, SidebarIcon, XIcon } from "lucide-react";
+import { LucideProps, MenuIcon, SidebarIcon, XIcon } from "lucide-react";
 import { Button } from "./button";
+import Link from "next/link";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 // the sidebarOpen flag must begin as undefined
 // to handle different starting states for sm and md resolutions
@@ -237,6 +239,55 @@ const DashboardContent = React.forwardRef<
 ));
 DashboardContent.displayName = "DashboardContent";
 
+export type SidebarItem = {
+  text: string;
+  link?: string;
+  items?: SidebarItem[];
+  icon?: ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+  >;
+};
+
+const DashboardSidebarList = (props: {
+  pathname: string;
+  items?: SidebarItem[];
+}) => {
+  const { pathname, items } = props;
+  if (!items) return null;
+
+  return (
+    <DashboardSidebarGroup>
+      {items.map((item) => {
+        if (item.link) {
+          return (
+            <div key={item.text}>
+              <Link href={item.link}>
+                <DashboardSidebarItem active={pathname === item.link}>
+                  {item.icon ? <item.icon size={16} /> : null}
+                  {item.text}
+                </DashboardSidebarItem>
+              </Link>
+
+              <DashboardSidebarList pathname={pathname} items={item.items} />
+            </div>
+          );
+        } else {
+          return (
+            <div key={item.text}>
+              <DashboardSidebarLabel>
+                {item.icon ? <item.icon size={16} /> : null}
+                {item.text}
+              </DashboardSidebarLabel>
+
+              <DashboardSidebarList pathname={pathname} items={item.items} />
+            </div>
+          );
+        }
+      })}
+    </DashboardSidebarGroup>
+  );
+};
+
 export {
   DashboardLayout,
   DashboardSidebarToggle,
@@ -249,4 +300,5 @@ export {
   DashboardSidebarLabel,
   DashboardSidebarItem,
   DashboardContent,
+  DashboardSidebarList,
 };

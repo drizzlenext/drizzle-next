@@ -18,6 +18,7 @@ export {
   DashboardSidebarLabel,
   DashboardSidebarItem,
   DashboardContent,
+  DashboardSidebarList,
 } from "./components/ui/dashboard-layout";
 export { Form, FormControl, FormMessage } from "./components/ui/form";
 export { Input } from "./components/ui/input";

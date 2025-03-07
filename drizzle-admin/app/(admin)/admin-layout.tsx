@@ -7,27 +7,47 @@ import {
   DashboardSidebarToggle,
   DashboardContent,
   DashboardSidebar,
-  DashboardSidebarItem,
   DashboardNav,
   DashboardNavToggle,
-  DashboardSidebarGroup,
-  DashboardSidebarLabel,
   DarkModeToggle,
+  DashboardSidebarList,
 } from "../../src/drizzle-ui";
-
-import Link from "next/link";
-
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { DrizzleAdminLayoutConfig, SidebarItem } from "../../src/types/types";
+import { Table2Icon, UserIcon } from "lucide-react";
 
-export function AdminLayout({
-  children,
-  config,
-}: {
-  children: ReactNode;
-  config: DrizzleAdminLayoutConfig;
-}) {
+const items = [
+  {
+    text: "Custom Page",
+    link: "/admin/custom-page",
+    icon: Table2Icon,
+  },
+  {
+    text: "Custom Group",
+    icon: Table2Icon,
+    items: [{ text: "A custom link", link: "/", icon: Table2Icon }],
+  },
+  {
+    text: "Tables",
+    items: [
+      { text: "Users", link: "/admin/users", icon: UserIcon },
+      { text: "Posts", link: "/admin/posts", icon: Table2Icon },
+      {
+        text: "Categories",
+        link: "/admin/categories",
+        icon: Table2Icon,
+      },
+      { text: "Tags", link: "/admin/tags", icon: Table2Icon },
+      {
+        text: "Post Tags",
+        link: "/admin/posts-tags",
+        icon: Table2Icon,
+      },
+    ],
+  },
+];
+
+export function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   return (
@@ -43,45 +63,9 @@ export function AdminLayout({
         <DashboardNavToggle />
       </DashboardHeader>
       <DashboardSidebar>
-        {pathname && renderSidebarItems(pathname, config.sidebar)}
+        {pathname && <DashboardSidebarList pathname={pathname} items={items} />}
       </DashboardSidebar>
       <DashboardContent>{children}</DashboardContent>
     </DashboardLayout>
-  );
-}
-
-function renderSidebarItems(pathname: string, sidebarItems?: SidebarItem[]) {
-  if (!sidebarItems) return null;
-
-  return (
-    <DashboardSidebarGroup>
-      {sidebarItems.map((item) => {
-        if (item.link) {
-          return (
-            <div key={item.text}>
-              <Link href={item.link}>
-                <DashboardSidebarItem active={pathname === item.link}>
-                  {item.icon ? item.icon : null}
-                  {item.text}
-                </DashboardSidebarItem>
-              </Link>
-
-              {renderSidebarItems(pathname, item.items)}
-            </div>
-          );
-        } else {
-          return (
-            <div key={item.text}>
-              <DashboardSidebarLabel>
-                {item.icon ? item.icon : null}
-                {item.text}
-              </DashboardSidebarLabel>
-
-              {renderSidebarItems(pathname, item.items)}
-            </div>
-          );
-        }
-      })}
-    </DashboardSidebarGroup>
   );
 }
