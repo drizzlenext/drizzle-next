@@ -15,7 +15,9 @@ import { ObjectTable } from "../components/object-table";
 import { DrizzleFilter } from "../components/drizzle-filter";
 import { parseSearchParams } from "../lib/server-utils";
 import { and, asc, desc, eq, like, getTableColumns } from "drizzle-orm";
-import { getTableConfig } from "drizzle-orm/sqlite-core";
+import { getTableConfig as getTableConfigForSqlite } from "drizzle-orm/sqlite-core";
+import { getTableConfig as getTableConfigForMysql } from "drizzle-orm/mysql-core";
+import { getTableConfig as getTableConfigForPostgresql } from "drizzle-orm/pg-core";
 import {
   ColumnDataTypeMap,
   DrizzleAdminConfig,
@@ -50,6 +52,22 @@ export async function ListPage(props: {
   const drizzleTableConfig = config.schema[curTable];
   const drizzleTable = drizzleTableConfig.drizzleTable;
   let orderBy;
+  let getTableConfig;
+  switch (config.dbDialect) {
+    case "sqlite":
+      getTableConfig = getTableConfigForSqlite;
+      break;
+    case "postgresql":
+      getTableConfig = getTableConfigForPostgresql;
+      break;
+    case "mysql":
+      getTableConfig = getTableConfigForMysql;
+      break;
+    default:
+      const exhaustiveCheck: never = config.dbDialect;
+      throw new Error(`unhandled case: ${exhaustiveCheck}`);
+  }
+  // @ts-expect-error err
   const tableConf = getTableConfig(drizzleTable);
   const whereClause = [];
   let obj;
@@ -120,7 +138,7 @@ export async function ListPage(props: {
     orderBy: orderBy,
     where: and(...whereClause),
   });
-  const simplifiedColumns = tableConf.columns.map((col) => {
+  const simplifiedColumns = tableConf.columns.map((col: any) => {
     return {
       name: col.name,
       dataType: col.dataType,
