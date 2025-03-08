@@ -51,15 +51,6 @@ export type DrizzleTableConfig = {
   };
 };
 
-export type DrizzleAdminConfig = {
-  basePath: string;
-  schema: {
-    [key: string]: DrizzleTableConfig;
-  };
-  db: any;
-  dbDialect: "postgresql" | "mysql" | "sqlite";
-};
-
 export type DrizzleTableConfigComplete = {
   drizzleTable: any;
   tableName: string;
@@ -73,6 +64,15 @@ export type DrizzleTableConfigComplete = {
     DeletePageActions?: PageActions<any>;
     ListPageActions?: PageActions<any>;
   };
+};
+
+export type DrizzleAdminConfig = {
+  basePath: string;
+  schema: {
+    [key: string]: DrizzleTableConfig;
+  };
+  db: any;
+  dbDialect: "postgresql" | "mysql" | "sqlite";
 };
 
 export type DrizzleAdminConfigComplete = {
