@@ -1,5 +1,6 @@
 import { LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, JSX, RefAttributes } from "react";
+import { NavItem } from "../drizzle-ui";
 
 export type Params = Promise<{ [key: string]: string }>;
 
@@ -98,6 +99,11 @@ export type ColumnDataType = "string" | "boolean" | "number" | "date";
 
 export type ColumnDataTypeMap = {
   [key: string]: ColumnDataType;
+};
+
+export type DrizzleLayoutConfig = {
+  nav: NavItem[];
+  sidebar: SidebarItem[];
 };
 
 export interface SimplifiedColumn {

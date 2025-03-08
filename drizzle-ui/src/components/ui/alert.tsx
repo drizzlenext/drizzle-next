@@ -11,7 +11,7 @@ type AlertVariant =
 
 const alertVariantMap: Record<AlertVariant, string> = {
   default: "border-primary text-primary",
-  muted: "border-muted text-muted",
+  muted: "border-muted text-muted-foreground",
   success: "border-success text-success",
   destructive: "border-destructive text-destructive",
   warning: "border-warning text-warning",

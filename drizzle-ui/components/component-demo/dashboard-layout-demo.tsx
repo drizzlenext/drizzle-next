@@ -10,18 +10,47 @@ import {
   DashboardNav,
   DashboardNavToggle,
   DashboardSidebarList,
+  DashboardNavList,
 } from "@/src/components/ui/dashboard-layout";
 import {
   AlertTriangleIcon,
+  ArrowUpDownIcon,
   ArrowUpRightIcon,
   BookIcon,
+  BookOpenTextIcon,
+  CheckSquareIcon,
   ComponentIcon,
+  FormInputIcon,
+  IdCardIcon,
+  MoonStarIcon,
+  NotepadTextIcon,
+  PanelsTopLeftIcon,
+  PanelTopIcon,
+  SearchIcon,
+  SquareMousePointerIcon,
+  SquarePenIcon,
+  SquarePowerIcon,
+  TableIcon,
+  TagIcon,
+  TextIcon,
   UserCircleIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 import { usePathname } from "next/navigation";
 import { PageLayoutDemo } from "./page-layout-demo";
+
+const nav = [
+  {
+    text: "Docs",
+    link: "/introduction",
+  },
+  {
+    text: "Drizzle Next",
+    link: "https://www.drizzle-next.com",
+    icon: ArrowUpRightIcon,
+  },
+];
 
 const items = [
   {
@@ -38,22 +67,46 @@ const items = [
     items: [
       { text: "Alert", link: "/components/alert", icon: AlertTriangleIcon },
       { text: "Avatar", link: "/components/avatar", icon: UserCircleIcon },
-      { text: "Button", link: "/components/button" },
-      { text: "Card", link: "/components/card" },
-      { text: "Checkbox", link: "/components/checkbox" },
-      { text: "Dark Mode", link: "/components/dark-mode" },
-      { text: "Dashboard Layout", link: "/components/dashboard-layout" },
-      { text: "Form", link: "/components/form" },
-      { text: "Input", link: "/components/input" },
-      { text: "Label", link: "/components/label" },
-      { text: "Page Layout", link: "/components/page-layout" },
-      { text: "Pagination", link: "/components/pagination" },
-      { text: "Rich Text Editor", link: "/components/rich-text-editor" },
-      { text: "Search Input", link: "/components/search-input" },
-      { text: "Select", link: "/components/select" },
-      { text: "Sortable", link: "/components/sortable" },
-      { text: "Table", link: "/components/table" },
-      { text: "Textarea", link: "/components/textarea" },
+      { text: "Button", link: "/components/button", icon: SquarePowerIcon },
+      { text: "Card", link: "/components/card", icon: IdCardIcon },
+      { text: "Checkbox", link: "/components/checkbox", icon: CheckSquareIcon },
+      { text: "Dark Mode", link: "/components/dark-mode", icon: MoonStarIcon },
+      {
+        text: "Dashboard Layout",
+        link: "/components/dashboard-layout",
+        icon: PanelsTopLeftIcon,
+      },
+      { text: "Form", link: "/components/form", icon: NotepadTextIcon },
+      { text: "Input", link: "/components/input", icon: FormInputIcon },
+      { text: "Label", link: "/components/label", icon: TagIcon },
+      {
+        text: "Page Layout",
+        link: "/components/page-layout",
+        icon: PanelTopIcon,
+      },
+      {
+        text: "Pagination",
+        link: "/components/pagination",
+        icon: BookOpenTextIcon,
+      },
+      {
+        text: "Rich Text Editor",
+        link: "/components/rich-text-editor",
+        icon: SquarePenIcon,
+      },
+      {
+        text: "Search Input",
+        link: "/components/search-input",
+        icon: SearchIcon,
+      },
+      {
+        text: "Select",
+        link: "/components/select",
+        icon: SquareMousePointerIcon,
+      },
+      { text: "Sortable", link: "/components/sortable", icon: ArrowUpDownIcon },
+      { text: "Table", link: "/components/table", icon: TableIcon },
+      { text: "Textarea", link: "/components/textarea", icon: TextIcon },
     ],
   },
 ];
@@ -69,20 +122,13 @@ export function DashboardLayoutDemo() {
           <Link href="/">drizzle-ui</Link>
         </DashboardTitle>
         <DashboardNav>
-          <Link href="/introduction">Docs</Link>
-          <Link
-            href="https://www.drizzle-next.com"
-            className="flex items-center gap-1"
-            target="_blank"
-          >
-            Drizzle Next <ArrowUpRightIcon className="text-muted-500 h-4 w-4" />
-          </Link>
+          <DashboardNavList items={nav} pathname={pathname} />
           <DarkModeToggle />
         </DashboardNav>
         <DashboardNavToggle />
       </DashboardHeader>
       <DashboardSidebar>
-        <DashboardSidebarList pathname={pathname} items={items} />
+        <DashboardSidebarList items={items} pathname={pathname} />
       </DashboardSidebar>
       <DashboardContent>
         <PageLayoutDemo />

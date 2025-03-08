@@ -19,6 +19,9 @@ export {
   DashboardSidebarItem,
   DashboardContent,
   DashboardSidebarList,
+  DashboardNavList,
+  type SidebarItem,
+  type NavItem,
 } from "./components/ui/dashboard-layout";
 export { Form, FormControl, FormMessage } from "./components/ui/form";
 export { Input } from "./components/ui/input";
