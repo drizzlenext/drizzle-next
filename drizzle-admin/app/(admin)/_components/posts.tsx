@@ -2,14 +2,16 @@
 
 import Link from "next/link";
 import {
-  PageNav,
-  RowNav,
-  PageNavProps,
-  RowNavProps,
+  AdminPageNav,
+  AdminRowNav,
+  AdminPageNavProps,
+  AdminRowNavProps,
 } from "../../../src/types/types";
 import { Post } from "../../../schema/posts";
 
-export const PostRowNav: RowNav<Post> = (props: RowNavProps<Post>) => {
+export const PostRowNav: AdminRowNav<Post> = (
+  props: AdminRowNavProps<Post>
+) => {
   return (
     <>
       <Link
@@ -34,7 +36,9 @@ export const PostRowNav: RowNav<Post> = (props: RowNavProps<Post>) => {
   );
 };
 
-export const PostViewPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
+export const PostViewPageNav: AdminPageNav<Post> = (
+  props: AdminPageNavProps<Post>
+) => {
   return (
     <>
       <Link
@@ -46,7 +50,9 @@ export const PostViewPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   );
 };
 
-export const PostEditPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
+export const PostEditPageNav: AdminPageNav<Post> = (
+  props: AdminPageNavProps<Post>
+) => {
   return (
     <>
       <Link
@@ -58,7 +64,9 @@ export const PostEditPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   );
 };
 
-export const PostDeletePageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
+export const PostDeletePageNav: AdminPageNav<Post> = (
+  props: AdminPageNavProps<Post>
+) => {
   return (
     <>
       <Link
@@ -70,7 +78,9 @@ export const PostDeletePageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   );
 };
 
-export const PostListPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
+export const PostListPageNav: AdminPageNav<Post> = (
+  props: AdminPageNavProps<Post>
+) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.resourcePath}/new`}>

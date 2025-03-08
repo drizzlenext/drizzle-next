@@ -18,21 +18,21 @@ export type FormControlMap = {
   [key: string]: FormControlType;
 };
 
-export type RowNavProps<T> = {
+export type AdminRowNavProps<T> = {
   basePath: string;
   resourcePath: string;
   row: T;
 };
 
-export type RowNav<T> = (props: RowNavProps<T>) => JSX.Element;
+export type AdminRowNav<T> = (props: AdminRowNavProps<T>) => JSX.Element;
 
-export type PageNavProps<T> = {
+export type AdminPageNavProps<T> = {
   basePath: string;
   resourcePath: string;
   row?: T;
 };
 
-export type PageNav<T> = (props: PageNavProps<T>) => JSX.Element;
+export type AdminPageNav<T> = (props: AdminPageNavProps<T>) => JSX.Element;
 
 export type DrizzleTableConfig = {
   drizzleTable: any;
@@ -40,11 +40,11 @@ export type DrizzleTableConfig = {
   path?: string;
   formControlMap?: FormControlMap;
   components?: {
-    RowNav?: RowNav<any>;
-    ViewPageNav?: PageNav<any>;
-    EditPageNav?: PageNav<any>;
-    DeletePageNav?: PageNav<any>;
-    ListPageNav?: PageNav<any>;
+    RowNav?: AdminRowNav<any>;
+    ViewPageNav?: AdminPageNav<any>;
+    EditPageNav?: AdminPageNav<any>;
+    DeletePageNav?: AdminPageNav<any>;
+    ListPageNav?: AdminPageNav<any>;
   };
 };
 
@@ -54,11 +54,11 @@ export type DrizzleTableConfigComplete = {
   path: string;
   formControlMap: FormControlMap;
   components?: {
-    RowNav?: RowNav<any>;
-    ViewPageNav?: PageNav<any>;
-    EditPageNav?: PageNav<any>;
-    DeletePageNav?: PageNav<any>;
-    ListPageNav?: PageNav<any>;
+    RowNav?: AdminRowNav<any>;
+    ViewPageNav?: AdminPageNav<any>;
+    EditPageNav?: AdminPageNav<any>;
+    DeletePageNav?: AdminPageNav<any>;
+    ListPageNav?: AdminPageNav<any>;
   };
 };
 
