@@ -39,7 +39,6 @@ export type PageNav<T> = (props: PageNavProps<T>) => JSX.Element;
 export type DrizzleTableConfig = {
   drizzleTable: any;
   tableName?: string;
-  label?: string;
   path?: string;
   formControlMap?: FormControlMap;
   components?: {
@@ -54,7 +53,6 @@ export type DrizzleTableConfig = {
 export type DrizzleTableConfigComplete = {
   drizzleTable: any;
   tableName: string;
-  label: string;
   path: string;
   formControlMap: FormControlMap;
   components?: {

@@ -40,7 +40,6 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
     completeSchema[key] = {
       drizzleTable: value.drizzleTable,
       tableName: value.tableName || key,
-      label: value.label || key,
       path: value.path || kebabCase(key),
       formControlMap: value.formControlMap || {},
       components: {

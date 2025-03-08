@@ -9,7 +9,7 @@ import { postsTable } from "./_tables/posts";
 export const config: DrizzleAdminConfig = {
   basePath: "/admin",
   schema: {
-    users: { drizzleTable: users, label: "Users" },
+    users: { drizzleTable: users },
     posts: postsTable,
     categories: {
       drizzleTable: categories,
@@ -19,7 +19,6 @@ export const config: DrizzleAdminConfig = {
     },
     postsTags: {
       drizzleTable: postsTags,
-      label: "posts tags",
     },
   },
   db: db,
