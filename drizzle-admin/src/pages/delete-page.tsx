@@ -63,8 +63,8 @@ export async function DeletePage(props: {
           Delete
         </PageTitle>
         <PageNav>
-          {drizzleTableConfig.components?.DeletePageActions && (
-            <drizzleTableConfig.components.DeletePageActions
+          {drizzleTableConfig.components?.DeletePageNav && (
+            <drizzleTableConfig.components.DeletePageNav
               basePath={config.basePath}
               curPath={curPath}
               curTable={curTable}

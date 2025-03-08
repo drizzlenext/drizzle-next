@@ -48,15 +48,15 @@ export async function ViewPage(props: {
           <ChevronRightIcon /> {obj.id}
         </PageTitle>
         <PageNav>
-          {drizzleTableConfig.components?.ViewPageActions && (
-            <drizzleTableConfig.components.ViewPageActions
+          {drizzleTableConfig.components?.ViewPageNav && (
+            <drizzleTableConfig.components.ViewPageNav
               basePath={config.basePath}
               curPath={curPath}
               curTable={curTable}
               row={obj}
             />
           )}
-          {!drizzleTableConfig.components?.ViewPageActions && (
+          {!drizzleTableConfig.components?.ViewPageNav && (
             <DefaultPageActions
               basePath={config.basePath}
               curPath={curPath}

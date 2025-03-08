@@ -62,8 +62,8 @@ export async function EditPage(props: {
           <ChevronRightIcon /> Edit
         </PageTitle>
         <PageNav>
-          {drizzleTableConfig.components?.EditPageActions && (
-            <drizzleTableConfig.components.EditPageActions
+          {drizzleTableConfig.components?.EditPageNav && (
+            <drizzleTableConfig.components.EditPageNav
               basePath={config.basePath}
               curPath={curPath}
               curTable={curTable}

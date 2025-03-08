@@ -43,11 +43,11 @@ export type DrizzleTableConfig = {
   path?: string;
   formControlMap?: FormControlMap;
   components?: {
-    RowActions?: RowNav<any>;
-    ViewPageActions?: PageNav<any>;
-    EditPageActions?: PageNav<any>;
-    DeletePageActions?: PageNav<any>;
-    ListPageActions?: PageNav<any>;
+    RowNav?: RowNav<any>;
+    ViewPageNav?: PageNav<any>;
+    EditPageNav?: PageNav<any>;
+    DeletePageNav?: PageNav<any>;
+    ListPageNav?: PageNav<any>;
   };
 };
 
@@ -58,11 +58,11 @@ export type DrizzleTableConfigComplete = {
   path: string;
   formControlMap: FormControlMap;
   components?: {
-    RowActions?: RowNav<any>;
-    ViewPageActions?: PageNav<any>;
-    EditPageActions?: PageNav<any>;
-    DeletePageActions?: PageNav<any>;
-    ListPageActions?: PageNav<any>;
+    RowNav?: RowNav<any>;
+    ViewPageNav?: PageNav<any>;
+    EditPageNav?: PageNav<any>;
+    DeletePageNav?: PageNav<any>;
+    ListPageNav?: PageNav<any>;
   };
 };
 

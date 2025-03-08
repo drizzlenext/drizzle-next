@@ -21,11 +21,11 @@ export const config: DrizzleAdminConfig = {
       drizzleTable: posts,
       formControlMap: { content: "richtext", updatedAt: "input" },
       components: {
-        RowActions: PostRowNav,
-        ViewPageActions: PostViewPageNav,
-        EditPageActions: PostEditPageNav,
-        DeletePageActions: PostDeletePageNav,
-        ListPageActions: (props) => {
+        RowNav: PostRowNav,
+        ViewPageNav: PostViewPageNav,
+        EditPageNav: PostEditPageNav,
+        DeletePageNav: PostDeletePageNav,
+        ListPageNav: (props) => {
           return (
             <>
               <Link href={`${props.basePath}/${props.curPath}/new`}>New</Link>
