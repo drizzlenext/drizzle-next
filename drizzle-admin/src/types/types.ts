@@ -18,23 +18,23 @@ export type FormControlMap = {
   [key: string]: FormControlType;
 };
 
-export type RowActionsProps<T> = {
+export type RowNavProps<T> = {
   basePath: string;
   curTable: string;
   curPath: string;
   row: T;
 };
 
-export type RowActions<T> = (props: RowActionsProps<T>) => JSX.Element;
+export type RowNav<T> = (props: RowNavProps<T>) => JSX.Element;
 
-export type PageActionsProps<T> = {
+export type PageNavProps<T> = {
   basePath: string;
   curTable: string;
   curPath: string;
   row?: T;
 };
 
-export type PageActions<T> = (props: PageActionsProps<T>) => JSX.Element;
+export type PageNav<T> = (props: PageNavProps<T>) => JSX.Element;
 
 export type DrizzleTableConfig = {
   drizzleTable: any;
@@ -43,11 +43,11 @@ export type DrizzleTableConfig = {
   path?: string;
   formControlMap?: FormControlMap;
   components?: {
-    RowActions?: RowActions<any>;
-    ViewPageActions?: PageActions<any>;
-    EditPageActions?: PageActions<any>;
-    DeletePageActions?: PageActions<any>;
-    ListPageActions?: PageActions<any>;
+    RowActions?: RowNav<any>;
+    ViewPageActions?: PageNav<any>;
+    EditPageActions?: PageNav<any>;
+    DeletePageActions?: PageNav<any>;
+    ListPageActions?: PageNav<any>;
   };
 };
 
@@ -58,11 +58,11 @@ export type DrizzleTableConfigComplete = {
   path: string;
   formControlMap: FormControlMap;
   components?: {
-    RowActions?: RowActions<any>;
-    ViewPageActions?: PageActions<any>;
-    EditPageActions?: PageActions<any>;
-    DeletePageActions?: PageActions<any>;
-    ListPageActions?: PageActions<any>;
+    RowActions?: RowNav<any>;
+    ViewPageActions?: PageNav<any>;
+    EditPageActions?: PageNav<any>;
+    DeletePageActions?: PageNav<any>;
+    ListPageActions?: PageNav<any>;
   };
 };
 

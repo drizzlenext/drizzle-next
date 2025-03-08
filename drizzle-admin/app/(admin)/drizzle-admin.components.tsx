@@ -2,16 +2,14 @@
 
 import Link from "next/link";
 import {
-  PageActions,
-  RowActions,
-  PageActionsProps,
-  RowActionsProps,
+  PageNav,
+  RowNav,
+  PageNavProps,
+  RowNavProps,
 } from "../../src/types/types";
 import { Post } from "../../schema/posts";
 
-export const PostRowActions: RowActions<Post> = (
-  props: RowActionsProps<Post>
-) => {
+export const PostRowNav: RowNav<Post> = (props: RowNavProps<Post>) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/images`}>
@@ -30,9 +28,7 @@ export const PostRowActions: RowActions<Post> = (
   );
 };
 
-export const PostViewPageActions: PageActions<Post> = (
-  props: PageActionsProps<Post>
-) => {
+export const PostViewPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/${props.row?.id}/edit`}>
@@ -42,9 +38,7 @@ export const PostViewPageActions: PageActions<Post> = (
   );
 };
 
-export const PostEditPageActions: PageActions<Post> = (
-  props: PageActionsProps<Post>
-) => {
+export const PostEditPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/${props.row?.id}/edit`}>
@@ -54,9 +48,7 @@ export const PostEditPageActions: PageActions<Post> = (
   );
 };
 
-export const PostDeletePageActions: PageActions<Post> = (
-  props: PageActionsProps<Post>
-) => {
+export const PostDeletePageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/${props.row?.id}/edit`}>
@@ -66,9 +58,7 @@ export const PostDeletePageActions: PageActions<Post> = (
   );
 };
 
-export const PostListPageActions: PageActions<Post> = (
-  props: PageActionsProps<Post>
-) => {
+export const PostListPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   return (
     <>
       <Link href={`${props.basePath}/${props.curPath}/new`}>New</Link>

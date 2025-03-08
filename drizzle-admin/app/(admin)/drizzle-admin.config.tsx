@@ -1,8 +1,8 @@
 import {
-  PostDeletePageActions,
-  PostEditPageActions,
-  PostRowActions,
-  PostViewPageActions,
+  PostDeletePageNav,
+  PostEditPageNav,
+  PostRowNav,
+  PostViewPageNav,
 } from "./drizzle-admin.components";
 import { db } from "../../lib/db";
 import { DrizzleAdminConfig } from "../../src/types/types";
@@ -21,10 +21,10 @@ export const config: DrizzleAdminConfig = {
       drizzleTable: posts,
       formControlMap: { content: "richtext", updatedAt: "input" },
       components: {
-        RowActions: PostRowActions,
-        ViewPageActions: PostViewPageActions,
-        EditPageActions: PostEditPageActions,
-        DeletePageActions: PostDeletePageActions,
+        RowActions: PostRowNav,
+        ViewPageActions: PostViewPageNav,
+        EditPageActions: PostEditPageNav,
+        DeletePageActions: PostDeletePageNav,
         ListPageActions: (props) => {
           return (
             <>

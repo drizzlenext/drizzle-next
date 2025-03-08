@@ -14,7 +14,7 @@ import {
   Input,
 } from "../drizzle-ui";
 import Link from "next/link";
-import { SimplifiedColumn, RowActions } from "../types/types";
+import { SimplifiedColumn, RowNav } from "../types/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -31,7 +31,7 @@ type ObjectTableProps = {
   basePath: string;
   columns: SimplifiedColumn[];
   curRow: Record<string, any>;
-  RowActions?: RowActions<any>;
+  RowActions?: RowNav<any>;
 };
 
 export function ObjectTable(props: ObjectTableProps) {
