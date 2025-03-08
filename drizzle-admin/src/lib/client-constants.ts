@@ -11,4 +11,10 @@ export const DEFAULT_FORM_CONTROLS: Record<ColumnDataType, FormControlType> = {
   date: "datetime-local",
   custom: "input",
   buffer: "input",
+  dateDuration: "input",
+  duration: "input",
+  relDuration: "input",
+  localTime: "input",
+  localDate: "input",
+  localDateTime: "input",
 };
