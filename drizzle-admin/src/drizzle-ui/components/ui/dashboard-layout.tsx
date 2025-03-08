@@ -5,25 +5,21 @@ import { cn } from "../../lib/utils";
 import { MenuIcon, SidebarIcon, XIcon } from "lucide-react";
 import { Button } from "./button";
 import Link from "next/link";
-import { LucideProps } from "lucide-react";
-import { ForwardRefExoticComponent, RefAttributes } from "react";
-
-type Icon = ForwardRefExoticComponent<
-  Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
->;
 
 type NavItem = {
   text: string;
   link: string;
   target?: React.HTMLAttributeAnchorTarget;
-  icon?: Icon;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon?: any;
 };
 
 type SidebarItem = {
   text: string;
   link?: string;
   items?: SidebarItem[];
-  icon?: Icon;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon?: any;
 };
 
 // the sidebarOpen flag must begin as undefined
@@ -51,7 +47,7 @@ const DashboardLayout = React.forwardRef<
   const [state, setState] = React.useState({} as DashboardLayoutState);
 
   return (
-    <DashboardLayoutContext.Provider value={{ state, setState }}>
+    <DashboardLayoutContext.Provider value={ { state, setState } }>
       <div
         ref={ref}
         className={cn(
@@ -59,7 +55,7 @@ const DashboardLayout = React.forwardRef<
           state.sidebarOpen === undefined && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === true && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === false && "md:grid-cols-[0px_1fr]",
-          className
+          className,
         )}
         {...props}
       />
@@ -118,7 +114,7 @@ const DashboardHeader = React.forwardRef<
     ref={ref}
     className={cn(
       "bg-header text-header-foreground border-border flex h-12 w-full items-center justify-between gap-2 border-b md:col-span-2",
-      className
+      className,
     )}
     {...props}
   />
@@ -133,7 +129,7 @@ const DashboardTitle = React.forwardRef<
     ref={ref}
     className={cn(
       "flex items-center gap-2 px-2 font-mono font-bold",
-      className
+      className,
     )}
     {...props}
   />
@@ -152,7 +148,7 @@ const DashboardNav = React.forwardRef<
         "bg-background border-border absolute top-12 z-50 flex w-full origin-top transform flex-col items-center gap-2 border-b px-2 py-3 text-sm transition-transform duration-200 [&>a]:w-full [&>a]:py-1",
         state.navOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0",
         "md:relative md:top-0 md:right-0 md:flex md:w-auto md:scale-100 md:flex-row md:items-center md:gap-5 md:border-none md:bg-transparent md:text-base md:opacity-100 md:dark:bg-transparent md:[&>a]:w-auto md:[&>a]:p-0 md:[&>a]:px-2",
-        className
+        className,
       )}
       {...props}
     />
@@ -202,7 +198,7 @@ const DashboardSidebar = React.forwardRef<
         state.sidebarOpen === undefined && "-translate-x-full md:translate-x-0",
         state.sidebarOpen === true && "translate-x-0",
         state.sidebarOpen === false && "-translate-x-full",
-        className
+        className,
       )}
       {...props}
     />
@@ -239,7 +235,7 @@ const DashboardSidebarItem = React.forwardRef<
     className={cn(
       "hover:bg-muted flex flex-row items-center gap-2 overflow-hidden px-3 py-1 font-normal text-nowrap",
       active && "bg-muted",
-      className
+      className,
     )}
     {...props}
   />
@@ -312,8 +308,8 @@ const DashboardNavList = (props: {
             <Link
               href={item.link}
               className={cn(
-                "hover:text-primary flex items-center gap-1 font-semibold",
-                pathname === item.link && "text-primary"
+                "hover:text-primary flex items-center gap-0.5 font-semibold",
+                pathname === item.link && "text-primary",
               )}
             >
               {item.text}

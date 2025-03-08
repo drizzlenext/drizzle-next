@@ -5,25 +5,21 @@ import { cn } from "../../lib/utils";
 import { MenuIcon, SidebarIcon, XIcon } from "lucide-react";
 import { Button } from "./button";
 import Link from "next/link";
-import { LucideProps } from "lucide-react";
-import { ForwardRefExoticComponent, RefAttributes } from "react";
-
-type Icon = ForwardRefExoticComponent<
-  Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
->;
 
 type NavItem = {
   text: string;
   link: string;
   target?: React.HTMLAttributeAnchorTarget;
-  icon?: Icon;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon?: any;
 };
 
 type SidebarItem = {
   text: string;
   link?: string;
   items?: SidebarItem[];
-  icon?: Icon;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon?: any;
 };
 
 // the sidebarOpen flag must begin as undefined

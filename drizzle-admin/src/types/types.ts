@@ -1,6 +1,5 @@
-import { LucideProps } from "lucide-react";
-import { ForwardRefExoticComponent, JSX, RefAttributes } from "react";
-import { NavItem } from "../drizzle-ui";
+import { JSX } from "react";
+import { NavItem, SidebarItem } from "../drizzle-ui";
 
 export type Params = Promise<{ [key: string]: string }>;
 
@@ -50,16 +49,6 @@ export type DrizzleTableConfig = {
     DeletePageActions?: PageActions<any>;
     ListPageActions?: PageActions<any>;
   };
-};
-
-export type SidebarItem = {
-  text: string;
-  link?: string;
-  items?: SidebarItem[];
-  type?: "from-schema";
-  icon?: ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
-  >;
 };
 
 export type DrizzleAdminConfig = {

@@ -1,4 +1,3 @@
-import { GroupIcon, Table2Icon, TableIcon, UserIcon } from "lucide-react";
 import {
   PostDeletePageActions,
   PostEditPageActions,
@@ -48,36 +47,4 @@ export const config: DrizzleAdminConfig = {
   },
   db: db,
   dbDialect: "sqlite",
-  sidebar: [
-    {
-      text: "Custom Page",
-      link: "/admin/custom-page",
-      icon: <Table2Icon size={16} />,
-    },
-    {
-      text: "Custom Group",
-      icon: <GroupIcon size={16} />,
-      items: [
-        { text: "A custom link", link: "/", icon: <TableIcon size={16} /> },
-      ],
-    },
-    {
-      text: "Tables",
-      items: [
-        { text: "Users", link: "/admin/users", icon: <UserIcon size={16} /> },
-        { text: "Posts", link: "/admin/posts", icon: <Table2Icon size={16} /> },
-        {
-          text: "Categories",
-          link: "/admin/categories",
-          icon: <Table2Icon size={16} />,
-        },
-        { text: "Tags", link: "/admin/tags", icon: <Table2Icon size={16} /> },
-        {
-          text: "Post Tags",
-          link: "/admin/posts-tags",
-          icon: <Table2Icon size={16} />,
-        },
-      ],
-    },
-  ],
 };

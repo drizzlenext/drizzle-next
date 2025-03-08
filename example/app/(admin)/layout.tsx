@@ -1,7 +1,12 @@
-import { config } from "@/drizzle-admin.config";
-import { DrizzleAdminLayout } from "drizzle-admin/components";
 import "drizzle-admin/styles";
+import { AdminLayout } from "./admin-layout";
+import { DarkModeScript } from "drizzle-admin/drizzle-ui";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <DrizzleAdminLayout config={config}>{children}</DrizzleAdminLayout>;
+  return (
+    <AdminLayout>
+      {children}
+      <DarkModeScript />
+    </AdminLayout>
+  );
 }
