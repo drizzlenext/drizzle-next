@@ -1,4 +1,4 @@
-import { config } from "@/drizzle-admin.config";
+import { config } from "@/app/(admin)/drizzle-admin.config";
 import { DrizzleAdmin } from "@/src/components";
 
 export type Params = Promise<{ [key: string]: string }>;

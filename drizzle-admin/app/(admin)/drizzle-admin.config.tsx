@@ -4,13 +4,13 @@ import {
   PostRowActions,
   PostViewPageActions,
 } from "./drizzle-admin.components";
-import { db } from "./lib/db";
-import { DrizzleAdminConfig } from "./src/types/types";
-import { categories } from "./schema/categories";
-import { posts } from "./schema/posts";
-import { postsTags } from "./schema/posts-tags";
-import { tags } from "./schema/tags";
-import { users } from "./schema/users";
+import { db } from "../../lib/db";
+import { DrizzleAdminConfig } from "../../src/types/types";
+import { categories } from "../../schema/categories";
+import { posts } from "../../schema/posts";
+import { postsTags } from "../../schema/posts-tags";
+import { tags } from "../../schema/tags";
+import { users } from "../../schema/users";
 import Link from "next/link";
 
 export const config: DrizzleAdminConfig = {

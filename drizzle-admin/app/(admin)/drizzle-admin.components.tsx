@@ -6,8 +6,8 @@ import {
   RowActions,
   PageActionsProps,
   RowActionsProps,
-} from "./src/types/types";
-import { Post } from "./schema/posts";
+} from "../../src/types/types";
+import { Post } from "../../schema/posts";
 
 export const PostRowActions: RowActions<Post> = (
   props: RowActionsProps<Post>
