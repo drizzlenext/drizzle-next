@@ -12,16 +12,22 @@ import { Post } from "../../../schema/posts";
 export const PostRowNav: RowNav<Post> = (props: RowNavProps<Post>) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/images`}>
+      <Link
+        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/images`}
+      >
         Images
       </Link>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}`}>
+      <Link href={`${props.basePath}/${props.resourcePath}/${props.row.id}`}>
         View
       </Link>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/edit`}>
+      <Link
+        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/edit`}
+      >
         Edit
       </Link>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/delete`}>
+      <Link
+        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/delete`}
+      >
         Delete
       </Link>
     </>
@@ -31,8 +37,10 @@ export const PostRowNav: RowNav<Post> = (props: RowNavProps<Post>) => {
 export const PostViewPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row?.id}/edit`}>
-        Custom Page Action
+      <Link
+        href={`${props.basePath}/${props.resourcePath}/${props.row?.id}/edit`}
+      >
+        Custom Edit
       </Link>
     </>
   );
@@ -41,8 +49,10 @@ export const PostViewPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
 export const PostEditPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row?.id}/edit`}>
-        Custom Edit Page Action
+      <Link
+        href={`${props.basePath}/${props.resourcePath}/${props.row?.id}/edit`}
+      >
+        Custom Edit
       </Link>
     </>
   );
@@ -51,8 +61,10 @@ export const PostEditPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
 export const PostDeletePageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row?.id}/edit`}>
-        Custom Delete Page Action
+      <Link
+        href={`${props.basePath}/${props.resourcePath}/${props.row?.id}/edit`}
+      >
+        Custom Delete
       </Link>
     </>
   );
@@ -61,7 +73,9 @@ export const PostDeletePageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
 export const PostListPageNav: PageNav<Post> = (props: PageNavProps<Post>) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/new`}>New</Link>
+      <Link href={`${props.basePath}/${props.resourcePath}/new`}>
+        Custom New
+      </Link>
     </>
   );
 };

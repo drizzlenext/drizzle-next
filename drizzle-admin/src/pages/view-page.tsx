@@ -24,8 +24,8 @@ export async function ViewPage(props: {
 }) {
   const params = await props.params;
   const config = props.config;
-  const curPath = params.segments[0];
-  const curTable = camelCase(curPath);
+  const resourcePath = params.segments[0];
+  const curTable = camelCase(resourcePath);
   const id = params.segments[1];
   const drizzleTableConfig = config.schema[curTable];
   const drizzleTable = drizzleTableConfig.drizzleTable;
@@ -42,8 +42,11 @@ export async function ViewPage(props: {
     <PageLayout>
       <PageHeader>
         <PageTitle className="flex items-center">
-          <Link href={`${config.basePath}/${curPath}`} className="underline">
-            {capitalCase(curPath)}
+          <Link
+            href={`${config.basePath}/${resourcePath}`}
+            className="underline"
+          >
+            {capitalCase(resourcePath)}
           </Link>{" "}
           <ChevronRightIcon /> {obj.id}
         </PageTitle>
@@ -51,15 +54,14 @@ export async function ViewPage(props: {
           {drizzleTableConfig.components?.ViewPageNav && (
             <drizzleTableConfig.components.ViewPageNav
               basePath={config.basePath}
-              curPath={curPath}
-              curTable={curTable}
+              resourcePath={resourcePath}
               row={obj}
             />
           )}
           {!drizzleTableConfig.components?.ViewPageNav && (
             <DefaultPageActions
               basePath={config.basePath}
-              curPath={curPath}
+              resourcePath={resourcePath}
               obj={obj}
             />
           )}
@@ -78,15 +80,19 @@ export async function ViewPage(props: {
 
 function DefaultPageActions(props: {
   basePath: string;
-  curPath: string;
+  resourcePath: string;
   obj: any;
 }) {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/${props.obj.id}/edit`}>
+      <Link
+        href={`${props.basePath}/${props.resourcePath}/${props.obj.id}/edit`}
+      >
         Edit
       </Link>
-      <Link href={`${props.basePath}/${props.curPath}/${props.obj.id}/delete`}>
+      <Link
+        href={`${props.basePath}/${props.resourcePath}/${props.obj.id}/delete`}
+      >
         Delete
       </Link>
     </>

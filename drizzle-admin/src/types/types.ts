@@ -20,8 +20,7 @@ export type FormControlMap = {
 
 export type RowNavProps<T> = {
   basePath: string;
-  curTable: string;
-  curPath: string;
+  resourcePath: string;
   row: T;
 };
 
@@ -29,8 +28,7 @@ export type RowNav<T> = (props: RowNavProps<T>) => JSX.Element;
 
 export type PageNavProps<T> = {
   basePath: string;
-  curTable: string;
-  curPath: string;
+  resourcePath: string;
   row?: T;
 };
 

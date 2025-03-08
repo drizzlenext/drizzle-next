@@ -47,8 +47,8 @@ export async function ListPage(props: {
   let filters: Array<Filter> = [];
   const config = props.config;
   const db = props.config.db;
-  const curPath = params.segments[0];
-  const curTable = camelCase(curPath);
+  const resourcePath = params.segments[0];
+  const curTable = camelCase(resourcePath);
   const drizzleTableConfig = config.schema[curTable];
   const drizzleTable = drizzleTableConfig.drizzleTable;
   let orderBy;
@@ -159,18 +159,17 @@ export async function ListPage(props: {
     <PageLayout>
       <PageHeader>
         <PageTitle className="flex gap-5 items-center">
-          {capitalCase(curPath)}{" "}
+          {capitalCase(resourcePath)}{" "}
         </PageTitle>
         <PageNav className="flex-wrap px-0">
           {drizzleTableConfig.components?.ListPageNav && (
             <drizzleTableConfig.components.ListPageNav
               basePath={config.basePath}
-              curPath={curPath}
-              curTable={curTable}
+              resourcePath={resourcePath}
             />
           )}
           {!drizzleTableConfig.components?.ListPageNav && (
-            <Link href={`${config.basePath}/${curPath}/new`}>
+            <Link href={`${config.basePath}/${resourcePath}/new`}>
               <Button className="rounded-2xl" variant="muted">
                 New
               </Button>
@@ -188,7 +187,7 @@ export async function ListPage(props: {
           basePath={config.basePath}
           columns={simplifiedColumns}
           curTable={curTable}
-          curPath={curPath}
+          resourcePath={resourcePath}
           curRow={obj}
           RowActions={drizzleTableConfig.components?.RowNav}
         />

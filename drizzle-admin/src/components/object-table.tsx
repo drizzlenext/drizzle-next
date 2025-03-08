@@ -26,7 +26,7 @@ interface CurrentCell {
 
 type ObjectTableProps = {
   list: Record<string, any>[];
-  curPath: string;
+  resourcePath: string;
   curTable: string;
   basePath: string;
   columns: SimplifiedColumn[];
@@ -319,16 +319,14 @@ export function ObjectTable(props: ObjectTableProps) {
                   {props.RowActions && (
                     <props.RowActions
                       basePath={props.basePath}
-                      curTable={props.curTable}
-                      curPath={props.curPath}
+                      resourcePath={props.resourcePath}
                       row={row}
                     />
                   )}
                   {!props.RowActions && (
                     <DefaultRowActions
                       basePath={props.basePath}
-                      curTable={props.curTable}
-                      curPath={props.curPath}
+                      resourcePath={props.resourcePath}
                       row={row}
                     />
                   )}
@@ -344,19 +342,22 @@ export function ObjectTable(props: ObjectTableProps) {
 
 function DefaultRowActions(props: {
   basePath: string;
-  curTable: string;
-  curPath: string;
+  resourcePath: string;
   row: any;
 }) {
   return (
     <>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}`}>
+      <Link href={`${props.basePath}/${props.resourcePath}/${props.row.id}`}>
         View
       </Link>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/edit`}>
+      <Link
+        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/edit`}
+      >
         Edit
       </Link>
-      <Link href={`${props.basePath}/${props.curPath}/${props.row.id}/delete`}>
+      <Link
+        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/delete`}
+      >
         Delete
       </Link>
     </>

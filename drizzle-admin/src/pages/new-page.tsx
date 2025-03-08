@@ -18,8 +18,8 @@ export async function NewPage(props: {
 }) {
   const params = await props.params;
   const config = props.config;
-  const curPath = params.segments[0];
-  const curTable = camelCase(curPath);
+  const resourcePath = params.segments[0];
+  const curTable = camelCase(resourcePath);
   const drizzleTableConfig = config.schema[curTable];
   const drizzleTable = drizzleTableConfig.drizzleTable;
   const cols = getTableColumns(drizzleTable);
@@ -33,8 +33,11 @@ export async function NewPage(props: {
     <PageLayout>
       <PageHeader>
         <PageTitle className="flex items-center">
-          <Link href={`${config.basePath}/${curPath}`} className="underline">
-            {capitalCase(curPath)}
+          <Link
+            href={`${config.basePath}/${resourcePath}`}
+            className="underline"
+          >
+            {capitalCase(resourcePath)}
           </Link>
           <ChevronRightIcon />
           New
