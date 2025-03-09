@@ -3,14 +3,16 @@ import { DrizzleAdminConfig } from "../../src/types/types";
 import { categories } from "../../schema/categories";
 import { postsTags } from "../../schema/posts-tags";
 import { tags } from "../../schema/tags";
-import { users } from "../../schema/users";
-import { postsTable } from "./_tables/posts";
+import { usersTable } from "./_tables/users-table";
+import { posts } from "@/schema/posts";
 
 export const config: DrizzleAdminConfig = {
   basePath: "/admin",
   schema: {
-    users: { drizzleTable: users },
-    posts: postsTable,
+    users: usersTable,
+    posts: {
+      drizzleTable: posts,
+    },
     categories: {
       drizzleTable: categories,
     },

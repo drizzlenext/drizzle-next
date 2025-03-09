@@ -6,19 +6,14 @@ import {
   AdminRowNav,
   AdminPageNavProps,
   AdminRowNavProps,
-} from "@/src/types/types";
-import { Post } from "@/schema/posts";
+} from "@/src/types";
+import { User } from "@/schema/users";
 
-export const PostRowNav: AdminRowNav<Post> = (
-  props: AdminRowNavProps<Post>
+export const UserRowNav: AdminRowNav<User> = (
+  props: AdminRowNavProps<User>
 ) => {
   return (
     <>
-      <Link
-        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/images`}
-      >
-        Images
-      </Link>
       <Link href={`${props.basePath}/${props.resourcePath}/${props.row.id}`}>
         View
       </Link>
@@ -36,56 +31,54 @@ export const PostRowNav: AdminRowNav<Post> = (
   );
 };
 
-export const PostViewPageNav: AdminPageNav<Post> = (
-  props: AdminPageNavProps<Post>
+export const UserViewPageNav: AdminPageNav<User> = (
+  props: AdminPageNavProps<User>
 ) => {
   return (
     <>
       <Link
         href={`${props.basePath}/${props.resourcePath}/${props.row?.id}/edit`}
       >
-        Custom Edit
+        Edit
       </Link>
     </>
   );
 };
 
-export const PostEditPageNav: AdminPageNav<Post> = (
-  props: AdminPageNavProps<Post>
+export const UserEditPageNav: AdminPageNav<User> = (
+  props: AdminPageNavProps<User>
 ) => {
   return (
     <>
       <Link
         href={`${props.basePath}/${props.resourcePath}/${props.row?.id}/edit`}
       >
-        Custom Edit
+        Edit
       </Link>
     </>
   );
 };
 
-export const PostDeletePageNav: AdminPageNav<Post> = (
-  props: AdminPageNavProps<Post>
+export const UserDeletePageNav: AdminPageNav<User> = (
+  props: AdminPageNavProps<User>
 ) => {
   return (
     <>
       <Link
         href={`${props.basePath}/${props.resourcePath}/${props.row?.id}/edit`}
       >
-        Custom Delete
+        Edit
       </Link>
     </>
   );
 };
 
-export const PostListPageNav: AdminPageNav<Post> = (
-  props: AdminPageNavProps<Post>
+export const UserListPageNav: AdminPageNav<User> = (
+  props: AdminPageNavProps<User>
 ) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.resourcePath}/new`}>
-        Custom New
-      </Link>
+      <Link href={`${props.basePath}/${props.resourcePath}/new`}>New</Link>
     </>
   );
 };

@@ -145,6 +145,10 @@ export class AdminProcessor implements DrizzleNextProcessor {
         dbDialect: this.opts.dbDialect,
       },
     });
+    renderTemplate({
+      inputPath: "admin-processor/app/(admin)/admin/page.tsx.hbs",
+      outputPath: "app/(admin)/admin/page.tsx",
+    });
   }
 
   printCompletionMessage() {

@@ -16,11 +16,11 @@ import {
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { DrizzleLayoutConfig } from "drizzle-admin/types";
-import { LogOutIcon, SettingsIcon, Table2Icon, UserIcon } from "lucide-react";
+import { LogOutIcon, Table2Icon, UserIcon } from "lucide-react";
 
 const config: DrizzleLayoutConfig = {
   nav: [
-    { text: "Settings", link: "/admin/settings", icon: SettingsIcon },
+    { text: "Settings", link: "/admin/settings" },
     { text: "Sign Out", link: "/signout", icon: LogOutIcon },
   ],
   sidebar: [

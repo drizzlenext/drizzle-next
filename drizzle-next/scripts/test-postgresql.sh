@@ -41,6 +41,7 @@ drizzle-next init --package-manager pnpm \
 drizzle-next add tiptap
 drizzle-next add stripe
 pnpm i -D prettier prettier-plugin-tailwindcss
+pnpm i ../drizzle-next/drizzle-admin
 else
 drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
