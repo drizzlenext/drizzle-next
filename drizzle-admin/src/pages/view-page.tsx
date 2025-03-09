@@ -28,6 +28,9 @@ export async function ViewPage(props: {
   const curTable = camelCase(resourcePath);
   const id = params.segments[1];
   const drizzleTableConfig = config.schema[curTable];
+  if (!drizzleTableConfig) {
+    notFound();
+  }
   const drizzleTable = drizzleTableConfig.drizzleTable;
   const db = props.config.db;
   const obj = await db.query[curTable].findFirst({

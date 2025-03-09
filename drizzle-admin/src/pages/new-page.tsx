@@ -10,6 +10,7 @@ import { ObjectCreateForm } from "../components/object-create-form";
 import { getTableColumns } from "drizzle-orm";
 import Link from "next/link";
 import { ChevronRightIcon } from "lucide-react";
+import { notFound } from "next/navigation";
 
 export async function NewPage(props: {
   params: Params;
@@ -21,6 +22,9 @@ export async function NewPage(props: {
   const resourcePath = params.segments[0];
   const curTable = camelCase(resourcePath);
   const drizzleTableConfig = config.schema[curTable];
+  if (!drizzleTableConfig) {
+    notFound();
+  }
   const drizzleTable = drizzleTableConfig.drizzleTable;
   const cols = getTableColumns(drizzleTable);
   const columnDataTypeMap: ColumnDataTypeMap = {};

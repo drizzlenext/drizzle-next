@@ -29,6 +29,7 @@ import {
 import Link from "next/link";
 import { ObjectUpdateForm } from "../components/object-update-form";
 import { OPERATOR_MAP } from "../lib/server-constants";
+import { notFound } from "next/navigation";
 
 export interface ListPageParams {
   curTable: string;
@@ -50,6 +51,9 @@ export async function ListPage(props: {
   const resourcePath = params.segments[0];
   const curTable = camelCase(resourcePath);
   const drizzleTableConfig = config.schema[curTable];
+  if (!drizzleTableConfig) {
+    notFound();
+  }
   const drizzleTable = drizzleTableConfig.drizzleTable;
   let orderBy;
   let getTableConfig;
