@@ -30,11 +30,11 @@ export const log = {
   },
 
   init(str: string) {
-    console.log(chalk.bold.blue(str));
+    console.log(chalk.bold.blueBright(str));
   },
 
   checklist(str: string) {
-    console.log(chalk.bold.yellowBright(str));
+    console.log(chalk.bold.magentaBright.underline(str));
   },
 
   task(str: string) {

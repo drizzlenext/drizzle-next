@@ -590,7 +590,7 @@ export class ScaffoldProcessor {
     return html;
   }
   printCompletionMessage() {
-    log.success("scaffold success: " + this.opts.table);
+    log.success("successfully scaffolded " + this.opts.table);
     log.checklist("scaffold checklist");
     log.cmdtask("npx drizzle-kit generate");
     log.cmdtask("npx drizzle-kit migrate");
