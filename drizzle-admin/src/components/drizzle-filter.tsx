@@ -38,7 +38,7 @@ export function DrizzleFilter({
       router.push(`${pathname}`);
       return;
     }
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams ?? "");
     params.set("filters", JSON.stringify([filter]));
     router.push(`${pathname}?${params.toString()}`);
   }
@@ -46,7 +46,7 @@ export function DrizzleFilter({
   function clearOne(index: number) {
     setFilters((prev) => prev.filter((_, i) => i !== index));
     // Code to run after setState
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams ?? "");
     params.set("filters", JSON.stringify([filters]));
     router.push(`${pathname}?${params.toString()}`);
   }
