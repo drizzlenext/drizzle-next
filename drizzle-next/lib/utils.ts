@@ -24,7 +24,7 @@ export function renderTemplateIfNotExists({
 }) {
   const joinedOutputPath = path.join(process.cwd(), outputPath);
   if (fs.existsSync(joinedOutputPath)) {
-    log.gray("create skipped. file exists: " + outputPath);
+    log.gray(`skip create ${outputPath} (file exists)`);
     return;
   }
   renderTemplate({
@@ -137,9 +137,9 @@ export function appendToFileIfTextNotExists(
   const fileContent = fs.readFileSync(filePath, "utf-8");
   if (fileContent.includes(textToSearch)) {
     log.gray(
-      `append skipped. text exists: ${filePath} - ${textToSearch
+      `skip append ${filePath} \`${textToSearch
         .trim()
-        .substring(0, 30)}...`
+        .substring(0, 30)}...\` (text exists)`
     );
   } else {
     appendToFile(filePath, "\n" + textToAppend);
@@ -161,7 +161,9 @@ export function appendToFile(filePath: string, textToAppend: string) {
   try {
     const joinedFilePath = path.join(process.cwd(), filePath);
     fs.appendFileSync(joinedFilePath, textToAppend);
-    log.log(`append ${filePath} - ${textToAppend.trim().substring(0, 30)}...`);
+    log.log(
+      `append ${filePath} \`${textToAppend.trim().substring(0, 30)}...\``
+    );
   } catch (error) {
     console.error(error);
   }
@@ -188,7 +190,7 @@ export function prependToFileIfNotExists(
   textToPrepend: string
 ) {
   if (checkIfTextExistsInFile(filePath, textToPrepend)) {
-    log.gray(
+    log.log(
       `- ${filePath} - text exists: ${textToPrepend.trim().substring(0, 30)}...`
     );
     return;
@@ -213,9 +215,9 @@ export function insertTextBeforeIfNotExists(
 ) {
   if (checkIfTextExistsInFile(filePath, newText)) {
     log.gray(
-      `insert skipped. text exists: ${filePath} - ${newText
+      `skip insert ${filePath} \`${newText
         .trim()
-        .substring(0, 30)}...`
+        .substring(0, 30)}...\` (text exists)`
     );
     return;
   }
@@ -295,7 +297,9 @@ export function insertTextAfterIfNotExists(
 
   if (newTextIndex > -1) {
     log.gray(
-      `insert skipped: ${filePath} - ${newText.trim().substring(0, 30)}...`
+      `skip insert ${filePath} \`${newText
+        .trim()
+        .substring(0, 30)}...\` (text exists)`
     );
     return;
   }
