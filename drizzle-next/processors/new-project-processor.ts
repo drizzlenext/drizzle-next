@@ -5,6 +5,7 @@ import {
   appendToFileIfTextNotExists,
   renderTemplate,
   renderTemplateIfNotExists,
+  writeDrizzleNextConfig,
 } from "../lib/utils";
 
 export class NewProjectProcessor implements DrizzleNextProcessor {
@@ -39,6 +40,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
   }
 
   async render() {
+    writeDrizzleNextConfig(this.opts);
+
     this.renderDrizzleUI();
 
     renderTemplate({

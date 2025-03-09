@@ -1,9 +1,7 @@
 import {
   appendToEnvLocal,
-  compileTemplate,
   insertSchemaToSchemaIndex,
   renderTemplate,
-  renderTemplateIfNotExists,
 } from "../lib/utils";
 import { log } from "../lib/log";
 import {

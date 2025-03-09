@@ -24,7 +24,7 @@ export function renderTemplateIfNotExists({
 }) {
   const joinedOutputPath = path.join(process.cwd(), outputPath);
   if (fs.existsSync(joinedOutputPath)) {
-    log.gray("- " + outputPath + " - file exists");
+    log.gray("create skipped. file exists: " + outputPath);
     return;
   }
   renderTemplate({
@@ -51,7 +51,7 @@ export function renderTemplate({
     fs.mkdirSync(dir, { recursive: true });
   }
   fs.writeFileSync(resolvedPath, content);
-  log.green("+ " + outputPath);
+  log.log("create " + outputPath);
 }
 
 export function compileTemplate({
@@ -70,7 +70,7 @@ export function compileTemplate({
 
 export function runCommand(command: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    log.blue("> " + command);
+    log.log("execute: " + command);
     exec(command, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error: ${stderr}`);
@@ -85,7 +85,7 @@ export function runCommand(command: string): Promise<void> {
 }
 
 export async function spawnCommand(command: string): Promise<void> {
-  log.blue("> " + command);
+  log.log("execute: " + command);
   const child = spawn(command, [], { shell: true });
 
   child.stdout.on("data", (data) => {
@@ -112,7 +112,7 @@ export async function spawnCommand(command: string): Promise<void> {
 }
 
 export function spawnSyncCommand(command: string) {
-  log.blue("> " + command);
+  log.log("execute: " + command);
   const result = spawnSync(command, [], {
     stdio: "inherit", // Directly inherits stdio from the parent, enabling interaction
     shell: true, // Optional: Use the shell to interpret the command (useful for complex commands)
@@ -137,7 +137,9 @@ export function appendToFileIfTextNotExists(
   const fileContent = fs.readFileSync(filePath, "utf-8");
   if (fileContent.includes(textToSearch)) {
     log.gray(
-      `- ${filePath} - text exists: ${textToSearch.trim().substring(0, 30)}...`
+      `append skipped. text exists: ${filePath} - ${textToSearch
+        .trim()
+        .substring(0, 30)}...`
     );
   } else {
     appendToFile(filePath, "\n" + textToAppend);
@@ -159,11 +161,7 @@ export function appendToFile(filePath: string, textToAppend: string) {
   try {
     const joinedFilePath = path.join(process.cwd(), filePath);
     fs.appendFileSync(joinedFilePath, textToAppend);
-    log.yellow(
-      `M ${filePath} - text appended: ${textToAppend
-        .trim()
-        .substring(0, 30)}...`
-    );
+    log.log(`append ${filePath} - ${textToAppend.trim().substring(0, 30)}...`);
   } catch (error) {
     console.error(error);
   }
@@ -175,10 +173,8 @@ export function prependToFile(filePath: string, textToPrepend: string) {
     const fileContent = fs.readFileSync(joinedFilePath, "utf-8");
     const updatedContent = textToPrepend + fileContent;
     fs.writeFileSync(joinedFilePath, updatedContent, "utf-8");
-    log.yellow(
-      "M " +
-        filePath +
-        ` - text prepended: ${textToPrepend.trim().substring(0, 30)}...`
+    log.log(
+      `prepend ${filePath} - ${textToPrepend.trim().substring(0, 30)}...`
     );
   } catch (error: any) {
     console.error(
@@ -204,7 +200,7 @@ export function writeToFile(filePath: string, text: string) {
   try {
     const joinedFilePath = path.join(process.cwd(), filePath);
     fs.writeFileSync(joinedFilePath, text, "utf-8");
-    log.green("+ " + filePath);
+    log.log("create " + filePath);
   } catch (error: any) {
     console.error(`Error while writing content to the file: ${error.message}`);
   }
@@ -217,7 +213,9 @@ export function insertTextBeforeIfNotExists(
 ) {
   if (checkIfTextExistsInFile(filePath, newText)) {
     log.gray(
-      `- ${filePath} - text exists: ${newText.trim().substring(0, 30)}...`
+      `insert skipped. text exists: ${filePath} - ${newText
+        .trim()
+        .substring(0, 30)}...`
     );
     return;
   }
@@ -249,9 +247,7 @@ export function insertTextBefore(
   // Write the updated content back to the file
   fs.writeFileSync(filePath, updatedContent, "utf8");
 
-  log.yellow(
-    "M " + filePath + ` - text inserted: ${newText.trim().substring(0, 30)}...`
-  );
+  log.log(`insert ${filePath} - ${newText.trim().substring(0, 30)}...`);
 }
 
 export function insertTextAfter(
@@ -281,9 +277,7 @@ export function insertTextAfter(
   // Write the updated content back to the file
   fs.writeFileSync(filePath, updatedContent, "utf8");
 
-  log.yellow(
-    "M " + filePath + ` - text inserted: ${newText.trim().substring(0, 30)}...`
-  );
+  log.log(`insert ${filePath} - ${newText.trim().substring(0, 30)}...`);
 }
 
 export function insertTextAfterIfNotExists(
@@ -301,7 +295,7 @@ export function insertTextAfterIfNotExists(
 
   if (newTextIndex > -1) {
     log.gray(
-      `- ${filePath} - text exists: ${newText.trim().substring(0, 30)}...`
+      `insert skipped: ${filePath} - ${newText.trim().substring(0, 30)}...`
     );
     return;
   }

@@ -9,7 +9,6 @@ import {
   compileTemplate,
   renderTemplate,
   insertSchemaToSchemaIndex,
-  insertTextBeforeIfNotExists,
 } from "../lib/utils";
 import { log } from "../lib/log";
 import { pkStrategyImportTemplates } from "../lib/pk-strategy";
@@ -153,6 +152,7 @@ export class ScaffoldProcessor {
     if (!this.opts.enableDbScaffold && !this.opts.enableUiScaffold) {
       throw new Error("ui and db scaffold are both skipped. nothing to do.");
     }
+    log.init(`scaffolding ${this.opts.table}...`);
     if (this.opts.enableDbScaffold) {
       this.addSchema();
       insertSchemaToSchemaIndex(this.opts.table, {

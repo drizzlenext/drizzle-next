@@ -6,7 +6,7 @@ import {
   DrizzleNextConfig,
   DrizzleNextProcessor,
 } from "../lib/types";
-import { renderTemplate, renderTemplateIfNotExists } from "../lib/utils";
+import { renderTemplate } from "../lib/utils";
 import { ScaffoldProcessor } from "./scaffold-processor";
 import { caseFactory } from "../lib/case-utils";
 
@@ -131,13 +131,12 @@ export class AdminProcessor implements DrizzleNextProcessor {
       },
     });
     renderTemplate({
-      inputPath:
-        "admin-processor/app/(admin)/admin/[[...segments]]/page.tsx.hbs",
-      outputPath: "app/(admin)/admin/[[...segments]]/page.tsx",
+      inputPath: "admin-processor/app/(admin)/admin/[...segments]/page.tsx.hbs",
+      outputPath: "app/(admin)/admin/[...segments]/page.tsx",
     });
     renderTemplate({
-      inputPath: "admin-processor/app/(admin)/api/[[...segments]]/route.ts.hbs",
-      outputPath: "app/(admin)/api/[[...segments]]/route.ts",
+      inputPath: "admin-processor/app/(admin)/api/[...segments]/route.ts.hbs",
+      outputPath: "app/(admin)/api/[...segments]/route.ts",
     });
     renderTemplate({
       inputPath: "admin-processor/app/(admin)/drizzle-admin.config.ts.hbs",

@@ -29,6 +29,7 @@ export class TiptapProcessor implements DrizzleNextProcessor {
   }
 
   async init(): Promise<void> {
+    log.init("initializing tiptap...");
     await this.render();
   }
   async render(): Promise<void> {

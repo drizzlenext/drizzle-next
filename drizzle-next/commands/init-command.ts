@@ -1,13 +1,12 @@
 import { Command, Option } from "commander";
 import { log } from "../lib/log";
 import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
-import { checkbox, select, confirm } from "@inquirer/prompts";
+import { select, confirm } from "@inquirer/prompts";
 import {
   completeDrizzleNextConfig,
   installDependencies,
   installDevDependencies,
   preflightChecks,
-  writeDrizzleNextConfig,
 } from "../lib/utils";
 import { packageStrategyFactory } from "../lib/strategy-factory";
 import { AuthProcessor, authStrategyMap } from "../processors/auth-processor";
@@ -156,8 +155,6 @@ initCommand
       const processors: DrizzleNextProcessor[] = [];
 
       const completeConfig = completeDrizzleNextConfig(partialConfig);
-
-      writeDrizzleNextConfig(completeConfig);
 
       const newProjectProcessor = new NewProjectProcessor(completeConfig);
 
