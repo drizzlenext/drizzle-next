@@ -214,11 +214,11 @@ initCommand
         await processor.init();
       }
 
+      log.success("successfully initialized drizzle-next");
+
       for (const processor of processors) {
         processor.printCompletionMessage();
       }
-
-      log.success("successfully initialized drizzle-next");
     } catch (error) {
       log.red(`${error}`);
     }

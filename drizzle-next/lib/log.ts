@@ -34,7 +34,7 @@ export const log = {
   },
 
   checklist(str: string) {
-    console.log(chalk.bold.magentaBright.underline(str));
+    console.log(chalk.magentaBright.underline(str));
   },
 
   task(str: string) {
