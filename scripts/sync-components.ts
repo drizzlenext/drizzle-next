@@ -1,10 +1,19 @@
+/**
+ * this script syncs the following:
+ * - drizzle-ui files to drizzle-next as hbs template
+ * - drizzle-ui files to drizzle-admin
+ * - the (admin) route group files of drizzle-admin over to example
+ *
+ * paths and various texts can be replaced via a replaceFn
+ */
+
 import * as fs from "fs";
 import * as path from "path";
 
 function copyFiles(
   srcDir: string,
   destDir: string,
-  opts: { appendExt?: string; utilsPath: string }
+  opts: { appendExt?: string; replaceFn?: (content: string) => string }
 ) {
   if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true });
@@ -25,10 +34,9 @@ function copyFiles(
       copyFiles(srcPath, destPath, opts);
     } else {
       let content = fs.readFileSync(srcPath, "utf-8");
-      content = content.replace(/..\/..\/lib\/utils/g, opts.utilsPath);
-      // double curly braces is meaningful in handlebars. adding a space fixes the issue.
-      content = content.replace(/{{/g, "{ {");
-      content = content.replace(/}}/g, "} }");
+      if (opts.replaceFn) {
+        content = opts.replaceFn(content);
+      }
       fs.writeFileSync(destPath, content);
       console.log(`Copied ${srcPath} to ${destPath}`);
     }
@@ -43,12 +51,42 @@ const targetDir = path.resolve(
 );
 copyFiles(sourceDir, targetDir, {
   appendExt: ".hbs",
-  utilsPath: "@/lib/utils",
+  replaceFn: (content) => {
+    content = content.replaceAll(/..\/..\/lib\/utils/g, "@/lib/utils");
+    // double curly braces is meaningful in handlebars
+    content = content.replaceAll(/{{/g, "{ {");
+    content = content.replaceAll(/}}/g, "} }");
+    return content;
+  },
 });
 
 // copy the entire drizzle-ui src dir over to drizzle-admin
 const sourceDir2 = path.resolve(__dirname, "../drizzle-ui/src");
 const targetDir2 = path.resolve(__dirname, "../drizzle-admin/src/drizzle-ui");
-copyFiles(sourceDir2, targetDir2, { utilsPath: "../../lib/utils" });
+copyFiles(sourceDir2, targetDir2, {
+  replaceFn: (content) => {
+    content = content.replaceAll(/{{/g, "{ {");
+    content = content.replaceAll(/}}/g, "} }");
+    return content;
+  },
+});
+
+// copy the entire (admin) route group from drizzle-admin to example
+const sourceDir3 = path.resolve(__dirname, "../drizzle-admin/app/(admin)");
+const targetDir3 = path.resolve(__dirname, "../example/app/(admin)");
+copyFiles(sourceDir3, targetDir3, {
+  replaceFn: (content) => {
+    content = content.replaceAll(
+      `@/src/styles/styles.css`,
+      `drizzle-admin/styles`
+    );
+    content = content.replaceAll(
+      "Drizzle Admin Development",
+      "Drizzle Admin Example"
+    );
+    content = content.replaceAll("@/src", "drizzle-admin");
+    return content;
+  },
+});
 
 console.log("Sync complete.");

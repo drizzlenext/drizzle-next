@@ -15,7 +15,7 @@ import {
 } from "@/src/drizzle-ui";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { DrizzleLayoutConfig } from "@/src";
+import { DrizzleLayoutConfig } from "@/src/types";
 import {
   GaugeIcon,
   GroupIcon,
