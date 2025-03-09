@@ -6,8 +6,8 @@ import {
   AdminRowNav,
   AdminPageNavProps,
   AdminRowNavProps,
-} from "../../../src/types/types";
-import { Post } from "../../../schema/posts";
+} from "@/src/types/types";
+import { Post } from "@/schema/posts";
 
 export const PostRowNav: AdminRowNav<Post> = (
   props: AdminRowNavProps<Post>

@@ -12,7 +12,7 @@ import {
   DarkModeToggle,
   DashboardSidebarList,
   DashboardNavList,
-} from "../../src/drizzle-ui";
+} from "@/src/drizzle-ui";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { DrizzleLayoutConfig } from "@/src";

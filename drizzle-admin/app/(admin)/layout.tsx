@@ -1,5 +1,5 @@
 import { DarkModeScript } from "@/src";
-import { AdminLayout } from "./admin-layout";
+import { AdminLayout } from "./_layouts/admin-layout";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
