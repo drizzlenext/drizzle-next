@@ -70,7 +70,7 @@ export function compileTemplate({
 
 export function runCommand(command: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    log.log("execute: " + command);
+    log.exec(command);
     exec(command, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error: ${stderr}`);
@@ -85,7 +85,7 @@ export function runCommand(command: string): Promise<void> {
 }
 
 export async function spawnCommand(command: string): Promise<void> {
-  log.log("execute: " + command);
+  log.exec(command);
   const child = spawn(command, [], { shell: true });
 
   child.stdout.on("data", (data) => {
@@ -112,7 +112,7 @@ export async function spawnCommand(command: string): Promise<void> {
 }
 
 export function spawnSyncCommand(command: string) {
-  log.log("execute: " + command);
+  log.exec(command);
   const result = spawnSync(command, [], {
     stdio: "inherit", // Directly inherits stdio from the parent, enabling interaction
     shell: true, // Optional: Use the shell to interpret the command (useful for complex commands)

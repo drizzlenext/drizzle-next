@@ -26,7 +26,7 @@ export const log = {
   },
 
   success(str: string) {
-    console.log(chalk.greenBright("✓ ") + str);
+    console.log(chalk.greenBright(str));
   },
 
   init(str: string) {
@@ -51,5 +51,9 @@ export const log = {
 
   cmdsubtask(str: string) {
     console.log("  - terminal: " + str);
+  },
+
+  exec(str: string) {
+    console.log("> " + str);
   },
 };
