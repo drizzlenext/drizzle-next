@@ -36,10 +36,6 @@ export class AdminProcessor implements DrizzleNextProcessor {
       data: { userObj },
     });
     renderTemplate({
-      inputPath: "admin-processor/app/(admin)/admin/page.tsx.hbs",
-      outputPath: "app/(admin)/admin/page.tsx",
-    });
-    renderTemplate({
       inputPath: "admin-processor/app/(auth)/admin-signin/page.tsx.hbs",
       outputPath: "app/(auth)/admin-signin/page.tsx",
     });
@@ -140,8 +136,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
       outputPath: "app/(admin)/admin/[[...segments]]/page.tsx",
     });
     renderTemplate({
-      inputPath: "admin-processor/app/(admin)/api/[[...segments]]/page.tsx.hbs",
-      outputPath: "app/(admin)/api/[[...segments]]/page.tsx",
+      inputPath: "admin-processor/app/(admin)/api/[[...segments]]/route.ts.hbs",
+      outputPath: "app/(admin)/api/[[...segments]]/route.ts",
     });
     renderTemplate({
       inputPath: "admin-processor/app/(admin)/drizzle-admin.config.ts.hbs",
