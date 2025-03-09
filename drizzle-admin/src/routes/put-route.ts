@@ -3,6 +3,7 @@ import { DrizzleAdminConfig } from "../types/types";
 import { createSchemaFactory } from "drizzle-zod";
 import { eq } from "drizzle-orm";
 import { getEmptyDrizzleObject, withErrorHandling } from "./route-utils";
+import { camelCase } from "change-case-all";
 
 const { createUpdateSchema } = createSchemaFactory({
   coerce: true,
@@ -14,10 +15,15 @@ export function PUT_ROUTE(config: DrizzleAdminConfig) {
     const segments = url.pathname.split("/").filter(Boolean);
     const body = await request.json();
     const param0 = segments[0];
-    const curTable = segments[1];
+    const curTable = camelCase(segments[1]);
     const id = segments[2];
     const db = config.db;
     const schema = config.schema[curTable];
+
+    if (!schema) {
+      return NextResponse.json({ message: "not found" }, { status: 404 });
+    }
+
     const drizzleSchema = schema.drizzleTable;
     const obj = getEmptyDrizzleObject(drizzleSchema);
     const updateSchema = createUpdateSchema(drizzleSchema);
