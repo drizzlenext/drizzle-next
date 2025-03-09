@@ -218,7 +218,6 @@ initCommand
         processor.printCompletionMessage();
       }
 
-      log.log("");
       log.success("drizzle-next init success");
     } catch (error) {
       log.red(`${error}`);

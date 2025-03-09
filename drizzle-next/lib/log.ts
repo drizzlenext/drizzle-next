@@ -34,22 +34,22 @@ export const log = {
   },
 
   checklist(str: string) {
-    console.log("\n" + chalk.bold(str.toUpperCase()));
+    console.log(chalk.bold.yellowBright(str));
   },
 
   task(str: string) {
-    console.log("□ " + str);
+    console.log("- " + str);
   },
 
   cmdtask(str: string) {
-    console.log("□ run: " + str);
+    console.log("- terminal: " + str);
   },
 
   subtask(str: string) {
-    console.log("  □ " + str);
+    console.log("  - " + str);
   },
 
   cmdsubtask(str: string) {
-    console.log("  □ run: " + str);
+    console.log("  - terminal: " + str);
   },
 };
