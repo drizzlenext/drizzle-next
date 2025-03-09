@@ -1,0 +1,69 @@
+"use client";
+
+import {
+  DashboardLayout,
+  DashboardHeader,
+  DashboardTitle,
+  DashboardSidebarToggle,
+  DashboardContent,
+  DashboardSidebar,
+  DashboardNav,
+  DashboardNavToggle,
+  DarkModeToggle,
+  DashboardSidebarList,
+  DashboardNavList,
+} from "drizzle-admin/drizzle-ui";
+import { ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { DrizzleLayoutConfig } from "drizzle-admin/types";
+import { LogOutIcon, SettingsIcon, Table2Icon, UserIcon } from "lucide-react";
+
+const config: DrizzleLayoutConfig = {
+  nav: [
+    { text: "Settings", link: "/settings", icon: SettingsIcon },
+    { text: "Sign Out", link: "/signout", icon: LogOutIcon },
+  ],
+  sidebar: [
+    {
+      text: "Admin",
+      link: "/admin",
+      icon: Table2Icon,
+    },
+    {
+      text: "Tables",
+      items: [
+        { text: "Users", link: "/admin/users", icon: UserIcon },
+        { text: "Posts", link: "/admin/posts", icon: Table2Icon },
+        {
+          text: "Categories",
+          link: "/admin/categories",
+          icon: Table2Icon,
+        },
+      ],
+    },
+  ],
+};
+
+export function AdminLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+
+  return (
+    <DashboardLayout>
+      <DashboardHeader>
+        <DashboardTitle>
+          <DashboardSidebarToggle />
+          Drizzle Admin
+        </DashboardTitle>
+        <DashboardNav>
+          <DashboardNavList items={config.nav} pathname={pathname} />
+          <DarkModeToggle />
+        </DashboardNav>
+        <DashboardNavToggle />
+      </DashboardHeader>
+      <DashboardSidebar>
+        <DashboardSidebarList items={config.sidebar} pathname={pathname} />
+      </DashboardSidebar>
+      <DashboardContent>{children}</DashboardContent>
+    </DashboardLayout>
+  );
+}

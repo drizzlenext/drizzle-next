@@ -1,0 +1,12 @@
+import { db } from "@/lib/db";
+import { DrizzleAdminConfig } from "drizzle-admin/types";
+import { users } from "@/schema/users";
+
+export const config: DrizzleAdminConfig = {
+  basePath: "/admin",
+  schema: {
+    users: { drizzleTable: users },
+  },
+  db: db,
+  dbDialect: "{{dbDialect}}",
+};

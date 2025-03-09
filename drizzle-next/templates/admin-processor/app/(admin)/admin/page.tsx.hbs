@@ -1,11 +1,16 @@
-import { PageLayout, PageHeader, PageTitle } from "@/components/ui/page-layout";
+type Params = Promise<{ id: string }>;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
-export default function Page() {
+export default async function Page(props: {
+  params: Params;
+  searchParams: SearchParams;
+}) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   return (
-    <PageLayout>
-      <PageHeader>
-        <PageTitle>Admin</PageTitle>
-      </PageHeader>
-    </PageLayout>
+    <div>
+      <p>params: {JSON.stringify(params)}</p>
+      <p>searchParams: {JSON.stringify(searchParams)}</p>
+    </div>
   );
 }

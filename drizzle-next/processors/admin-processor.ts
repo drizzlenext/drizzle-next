@@ -69,10 +69,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
       inputPath: "admin-processor/scripts/create-password-hash.ts.hbs",
       outputPath: "scripts/create-password-hash.ts",
     });
-    renderTemplate({
-      inputPath: "admin-processor/components/layouts/admin-layout.tsx.hbs",
-      outputPath: "components/layouts/admin-layout.tsx",
-    });
+
+    this.renderDrizzleAdmin();
 
     const strategies: Record<DbDialect, string[]> = {
       postgresql: [
@@ -111,6 +109,47 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
 
     userScaffold.process();
+  }
+
+  renderDrizzleAdmin() {
+    const userObj = caseFactory("user", {
+      pluralize: this.opts.pluralizeEnabled,
+    });
+    renderTemplate({
+      inputPath:
+        "admin-processor/app/(admin)/_components/users-components.tsx.hbs",
+      outputPath: "app/(admin)/_components/users-components.tsx",
+      data: {
+        userObj: userObj,
+      },
+    });
+    renderTemplate({
+      inputPath: "admin-processor/app/(admin)/_layouts/admin-layout.tsx.hbs",
+      outputPath: "app/(admin)/_layouts/admin-layout.tsx",
+    });
+    renderTemplate({
+      inputPath: "admin-processor/app/(admin)/_tables/users-table.tsx.hbs",
+      outputPath: "/app/(admin)/_tables/users-table.tsx",
+      data: {
+        userObj: userObj,
+      },
+    });
+    renderTemplate({
+      inputPath:
+        "admin-processor/app/(admin)/admin/[[...segments]]/page.tsx.hbs",
+      outputPath: "app/(admin)/admin/[[...segments]]/page.tsx",
+    });
+    renderTemplate({
+      inputPath: "admin-processor/app/(admin)/api/[[...segments]]/page.tsx.hbs",
+      outputPath: "app/(admin)/api/[[...segments]]/page.tsx",
+    });
+    renderTemplate({
+      inputPath: "admin-processor/app/(admin)/drizzle-admin.config.ts.hbs",
+      outputPath: "app/(admin)/drizzle-admin.config.ts",
+      data: {
+        dbDialect: this.opts.dbDialect,
+      },
+    });
   }
 
   printCompletionMessage() {
