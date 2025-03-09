@@ -16,7 +16,16 @@ import {
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { DrizzleLayoutConfig } from "@/src";
-import { LogOutIcon, SettingsIcon, Table2Icon, UserIcon } from "lucide-react";
+import {
+  GaugeIcon,
+  GroupIcon,
+  HomeIcon,
+  LogOutIcon,
+  NotebookTextIcon,
+  SettingsIcon,
+  Table2Icon,
+  UserIcon,
+} from "lucide-react";
 
 const config: DrizzleLayoutConfig = {
   nav: [
@@ -25,14 +34,21 @@ const config: DrizzleLayoutConfig = {
   ],
   sidebar: [
     {
-      text: "Custom Page",
-      link: "/admin/custom-page",
-      icon: Table2Icon,
+      text: "Admin",
+      link: "/admin",
+      icon: GaugeIcon,
     },
+    { text: "Home", link: "/", icon: HomeIcon },
     {
       text: "Custom Group",
-      icon: Table2Icon,
-      items: [{ text: "A custom link", link: "/", icon: Table2Icon }],
+      icon: GroupIcon,
+      items: [
+        {
+          text: "Custom Page",
+          link: "/admin/custom-page",
+          icon: NotebookTextIcon,
+        },
+      ],
     },
     {
       text: "Tables",
