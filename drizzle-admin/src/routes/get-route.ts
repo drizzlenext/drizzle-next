@@ -11,6 +11,11 @@ export function GET_ROUTE(config: DrizzleAdminConfig) {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);
     const param0 = segments[0];
+
+    if (!segments[1]) {
+      return NextResponse.json({ message: "Drizzle Admin API" });
+    }
+
     const curTable = camelCase(segments[1]);
     const id = segments[2];
     const db = config.db;
