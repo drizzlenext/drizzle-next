@@ -218,7 +218,7 @@ initCommand
         processor.printCompletionMessage();
       }
 
-      log.success("drizzle-next init success");
+      log.success("successfully initialized drizzle-next");
     } catch (error) {
       log.red(`${error}`);
     }

@@ -26,7 +26,7 @@ export const log = {
   },
 
   success(str: string) {
-    console.log(chalk.greenBright("✓ " + str));
+    console.log(chalk.greenBright("✓ ") + str);
   },
 
   init(str: string) {
