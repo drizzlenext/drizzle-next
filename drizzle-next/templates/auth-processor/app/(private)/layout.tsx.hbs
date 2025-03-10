@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
 import { PrivateLayout } from "@/app/(private)/_components/private-layout";
-import { authorize } from "@/services/auth/auth-service";
+import { authorize } from "@/lib/authorize";
 
 export default async function Layout({
   children,
