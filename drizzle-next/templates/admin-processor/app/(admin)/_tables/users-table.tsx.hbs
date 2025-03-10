@@ -1,4 +1,4 @@
-import { users } from "@/schema/users";
+import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
 import { DrizzleTableConfig } from "drizzle-admin/types";
 import {
   UserDeletePageNav,
@@ -6,10 +6,10 @@ import {
   UserListPageNav,
   UserRowNav,
   UserViewPageNav,
-} from "@/app/(admin)/_components/users-components";
+} from "@/app/(admin)/_components/{{userObj.pluralKebabCase}}-components";
 
 export const {{userObj.pluralCamelCase}}Table: DrizzleTableConfig = {
-  drizzleTable: users,
+  drizzleTable: {{userObj.pluralCamelCase}},
   formControlMap: {},
   components: {
     RowNav: UserRowNav,

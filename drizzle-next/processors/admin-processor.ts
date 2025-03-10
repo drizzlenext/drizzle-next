@@ -143,6 +143,7 @@ export class AdminProcessor implements DrizzleNextProcessor {
       outputPath: "app/(admin)/drizzle-admin.config.ts",
       data: {
         dbDialect: this.opts.dbDialect,
+        userObj: userObj,
       },
     });
     renderTemplate({

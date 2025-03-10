@@ -1,11 +1,11 @@
 import { db } from "@/lib/db";
 import { DrizzleAdminConfig } from "drizzle-admin/types";
-import { users } from "@/schema/users";
+import { {{userObj.pluralCamelCase}}Table } from "./_tables/users-table";
 
 export const config: DrizzleAdminConfig = {
   basePath: "/admin",
   schema: {
-    users: { drizzleTable: users },
+    {{userObj.pluralCamelCase}}: {{userObj.pluralCamelCase}}Table,
   },
   db: db,
   dbDialect: "{{dbDialect}}",
