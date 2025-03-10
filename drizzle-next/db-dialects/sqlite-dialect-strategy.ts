@@ -8,9 +8,8 @@ const sqliteDataTypeStrategies: DataTypeStrategyMap = {
   integer: {
     jsType: "number",
     sqlType: "integer",
-    formTemplate: "scaffold-processor/components/table/create-input.tsx.hbs",
-    updateFormTemplate:
-      "scaffold-processor/components/table/update-input.tsx.hbs",
+    formTemplate: "scaffold-processor/form-controls/create-input.tsx.hbs",
+    updateFormTemplate: "scaffold-processor/form-controls/update-input.tsx.hbs",
     getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts) {
       return `${opts.keyName}: integer()`;
     },
@@ -20,9 +19,8 @@ const sqliteDataTypeStrategies: DataTypeStrategyMap = {
   real: {
     jsType: "number",
     sqlType: "real",
-    formTemplate: "scaffold-processor/components/table/create-input.tsx.hbs",
-    updateFormTemplate:
-      "scaffold-processor/components/table/update-input.tsx.hbs",
+    formTemplate: "scaffold-processor/form-controls/create-input.tsx.hbs",
+    updateFormTemplate: "scaffold-processor/form-controls/update-input.tsx.hbs",
     getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts): string {
       return `${opts.keyName}: real()`;
     },
@@ -32,9 +30,8 @@ const sqliteDataTypeStrategies: DataTypeStrategyMap = {
   text: {
     jsType: "string",
     sqlType: "text",
-    formTemplate: "scaffold-processor/components/table/create-input.tsx.hbs",
-    updateFormTemplate:
-      "scaffold-processor/components/table/update-input.tsx.hbs",
+    formTemplate: "scaffold-processor/form-controls/create-input.tsx.hbs",
+    updateFormTemplate: "scaffold-processor/form-controls/update-input.tsx.hbs",
     getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts): string {
       return `${opts.keyName}: text()`;
     },
@@ -44,9 +41,9 @@ const sqliteDataTypeStrategies: DataTypeStrategyMap = {
   boolean: {
     jsType: "boolean",
     sqlType: "integer",
-    formTemplate: "scaffold-processor/components/table/create-checkbox.tsx.hbs",
+    formTemplate: "scaffold-processor/form-controls/create-checkbox.tsx.hbs",
     updateFormTemplate:
-      "scaffold-processor/components/table/update-checkbox.tsx.hbs",
+      "scaffold-processor/form-controls/update-checkbox.tsx.hbs",
     getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts): string {
       return `${opts.keyName}: integer({ mode: "boolean" } )`;
     },
@@ -56,9 +53,8 @@ const sqliteDataTypeStrategies: DataTypeStrategyMap = {
   bigint: {
     jsType: "number",
     sqlType: "blob",
-    formTemplate: "scaffold-processor/components/table/create-input.tsx.hbs",
-    updateFormTemplate:
-      "scaffold-processor/components/table/update-input.tsx.hbs",
+    formTemplate: "scaffold-processor/form-controls/create-input.tsx.hbs",
+    updateFormTemplate: "scaffold-processor/form-controls/update-input.tsx.hbs",
     getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts): string {
       return `${opts.keyName}: blob({ mode: "bigint" })`;
     },
@@ -68,9 +64,9 @@ const sqliteDataTypeStrategies: DataTypeStrategyMap = {
   timestamp: {
     jsType: "string",
     sqlType: "integer",
-    formTemplate: "scaffold-processor/components/table/create-input.tsx.hbs",
+    formTemplate: "scaffold-processor/form-controls/create-input.tsx.hbs",
     updateFormTemplate:
-      "scaffold-processor/components/table/update-input-timestamp.tsx.hbs",
+      "scaffold-processor/form-controls/update-input-timestamp.tsx.hbs",
     getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts): string {
       return `${opts.keyName}: integer({ mode: "timestamp" })`;
     },
@@ -81,9 +77,9 @@ const sqliteDataTypeStrategies: DataTypeStrategyMap = {
     jsType: "string",
     sqlType: "text",
     formTemplate:
-      "scaffold-processor/components/table/create-references-input.tsx.hbs",
+      "scaffold-processor/form-controls/create-references-input.tsx.hbs",
     updateFormTemplate:
-      "scaffold-processor/components/table/update-references-input.tsx.hbs",
+      "scaffold-processor/form-controls/update-references-input.tsx.hbs",
     getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts): string {
       return `${opts.keyName}: ${opts.fkStrategyTemplate}.references(() => ${opts.referencesTable}.id)`;
     },
@@ -94,9 +90,9 @@ const sqliteDataTypeStrategies: DataTypeStrategyMap = {
     jsType: "string",
     sqlType: "text",
     formTemplate:
-      "scaffold-processor/components/table/create-references-select.tsx.hbs",
+      "scaffold-processor/form-controls/create-references-select.tsx.hbs",
     updateFormTemplate:
-      "scaffold-processor/components/table/update-references-select.tsx.hbs",
+      "scaffold-processor/form-controls/update-references-select.tsx.hbs",
     getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts): string {
       return `${opts.keyName}: ${opts.fkStrategyTemplate}.references(() => ${opts.referencesTable}.id)`;
     },
@@ -106,9 +102,8 @@ const sqliteDataTypeStrategies: DataTypeStrategyMap = {
   file: {
     jsType: "string",
     sqlType: "text",
-    formTemplate: "scaffold-processor/components/table/create-file.tsx.hbs",
-    updateFormTemplate:
-      "scaffold-processor/components/table/update-file.tsx.hbs",
+    formTemplate: "scaffold-processor/form-controls/create-file.tsx.hbs",
+    updateFormTemplate: "scaffold-processor/form-controls/update-file.tsx.hbs",
     getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts): string {
       return `${opts.keyName}: text()`;
     },

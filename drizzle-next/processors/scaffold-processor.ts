@@ -292,8 +292,8 @@ export class ScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "scaffold-processor/app/table/page.tsx.hbs",
-      outputPath: `app/${tableObj.pluralKebabCase}/page.tsx`,
+      inputPath: "scaffold-processor/app/(development)/table/page.tsx.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/page.tsx`,
       data: {
         tableObj: tableObj,
       },
@@ -305,8 +305,8 @@ export class ScaffoldProcessor {
     });
     const hasFileDataType = this.hasFileDataType();
     renderTemplate({
-      inputPath: "scaffold-processor/app/table/[id]/page.tsx.hbs",
-      outputPath: `app/${tableObj.pluralKebabCase}/[id]/page.tsx`,
+      inputPath: "scaffold-processor/app/(development)/table/[id]/page.tsx.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/[id]/page.tsx`,
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithTimestamps,
@@ -329,8 +329,9 @@ export class ScaffoldProcessor {
     });
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
-      inputPath: "scaffold-processor/app/table/[id]/edit/page.tsx.hbs",
-      outputPath: `app/${tableObj.pluralKebabCase}/[id]/edit/page.tsx`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/[id]/edit/page.tsx.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/[id]/edit/page.tsx`,
       data: {
         tableObj: tableObj,
         referencesColumnList: referencesColumnList,
@@ -345,8 +346,8 @@ export class ScaffoldProcessor {
     });
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
-      inputPath: "scaffold-processor/app/table/new/page.tsx.hbs",
-      outputPath: `app/${tableObj.pluralKebabCase}/new/page.tsx`,
+      inputPath: "scaffold-processor/app/(development)/table/new/page.tsx.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/new/page.tsx`,
       data: {
         tableObj: tableObj,
         referencesColumnList: referencesColumnList,
@@ -358,8 +359,9 @@ export class ScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "scaffold-processor/app/table/[id]/delete/page.tsx.hbs",
-      outputPath: `app/${tableObj.pluralKebabCase}/[id]/delete/page.tsx`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/[id]/delete/page.tsx.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/[id]/delete/page.tsx`,
       data: {
         tableObj: tableObj,
         pkStrategyJsType:
@@ -387,8 +389,9 @@ export class ScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath: "scaffold-processor/services/table/create-action.ts.hbs",
-      outputPath: `services/${tableObj.pluralKebabCase}/create-${tableObj.singularKebabCase}.ts`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/_actions/create-action.ts.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_actions/create-${tableObj.singularKebabCase}.ts`,
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -419,8 +422,9 @@ export class ScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath: "scaffold-processor/services/table/update-action.ts.hbs",
-      outputPath: `services/${tableObj.pluralKebabCase}/update-${tableObj.singularKebabCase}.ts`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/_actions/update-action.ts.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_actions/update-${tableObj.singularKebabCase}.ts`,
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -436,8 +440,9 @@ export class ScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath: "scaffold-processor/services/table/delete-action.ts.hbs",
-      outputPath: `services/${tableObj.pluralKebabCase}/delete-${tableObj.singularKebabCase}.ts`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/_actions/delete-action.ts.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_actions/delete-${tableObj.singularKebabCase}.ts`,
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithIdAndTimestamps,
@@ -452,8 +457,9 @@ export class ScaffoldProcessor {
     });
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
-      inputPath: "scaffold-processor/components/table/create-form.tsx.hbs",
-      outputPath: `components/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-create-form.tsx`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/_components/create-form.tsx.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-create-form.tsx`,
       data: {
         tableObj: tableObj,
         formControlsImports: formControlsImports,
@@ -516,8 +522,9 @@ export class ScaffoldProcessor {
     const referencesColumnList = this.getReferencesColumnList("references_");
     const hasFileDataType = this.hasFileDataType();
     renderTemplate({
-      inputPath: "scaffold-processor/components/table/update-form.tsx.hbs",
-      outputPath: `components/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-update-form.tsx`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/_components/update-form.tsx.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-update-form.tsx`,
       data: {
         tableObj: tableObj,
         formControlsImports: formControlsImports,
@@ -532,8 +539,9 @@ export class ScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "scaffold-processor/components/table/delete-form.tsx.hbs",
-      outputPath: `components/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-delete-form.tsx`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/_components/delete-form.tsx.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-delete-form.tsx`,
       data: {
         tableObj: tableObj,
       },
@@ -545,8 +553,9 @@ export class ScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath: "scaffold-processor/components/table/table-component.tsx.hbs",
-      outputPath: `components/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-table.tsx`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/_components/table-component.tsx.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-table.tsx`,
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithTimestamps,
@@ -561,8 +570,7 @@ export class ScaffoldProcessor {
     let html = "";
 
     html += compileTemplate({
-      inputPath:
-        "scaffold-processor/components/table/update-input-hidden.tsx.hbs",
+      inputPath: "scaffold-processor/form-controls/update-input-hidden.tsx.hbs",
       data: { tableObj: tableObj },
     });
 
@@ -600,8 +608,9 @@ export class ScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "scaffold-processor/services/table/get-by-id-action.ts.hbs",
-      outputPath: `services/${tableObj.pluralKebabCase}/get-${tableObj.singularKebabCase}-by-id.ts`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/_lib/get-by-id-action.ts.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_lib/get-${tableObj.singularKebabCase}-by-id.ts`,
       data: {
         tableObj,
         pkStrategyJsType:
@@ -609,8 +618,9 @@ export class ScaffoldProcessor {
       },
     });
     renderTemplate({
-      inputPath: "scaffold-processor/services/table/get-list-action.ts.hbs",
-      outputPath: `services/${tableObj.pluralKebabCase}/get-${tableObj.singularKebabCase}-list.ts`,
+      inputPath:
+        "scaffold-processor/app/(development)/table/_lib/get-list-action.ts.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_lib/get-${tableObj.singularKebabCase}-list.ts`,
       data: {
         tableObj,
         pkStrategyJsType:

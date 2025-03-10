@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 {{#if referencesColumnList.length}}
 import { db } from "@/lib/db";
 {{/if}}
-import { {{tableObj.singularPascalCase}}UpdateForm } from "@/components/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-update-form";
-import { get{{tableObj.singularPascalCase}}ById } from "@/services/{{tableObj.pluralKebabCase}}/get-{{tableObj.singularKebabCase}}-by-id";
+import { {{tableObj.singularPascalCase}}UpdateForm } from "../../_components/{{tableObj.singularKebabCase}}-update-form";
+import { get{{tableObj.singularPascalCase}}ById } from "../../_lib/get-{{tableObj.singularKebabCase}}-by-id";
 import { PageLayout, PageHeader, PageTitle, PageContent, PageNav } from "@/components/ui/page-layout";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;

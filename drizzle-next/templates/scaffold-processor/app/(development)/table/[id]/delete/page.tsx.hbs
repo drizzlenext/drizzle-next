@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { eq } from "drizzle-orm";
-import { {{tableObj.singularPascalCase}}DeleteForm } from "@/components/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-delete-form";
+import { {{tableObj.singularPascalCase}}DeleteForm } from "../../_components/{{tableObj.singularKebabCase}}-delete-form";
 import { db } from "@/lib/db";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 import { PageLayout, PageHeader, PageTitle, PageContent, PageNav } from "@/components/ui/page-layout";

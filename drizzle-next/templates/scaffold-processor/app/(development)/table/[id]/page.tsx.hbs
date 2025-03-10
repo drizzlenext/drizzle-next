@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 {{#if hasFileDataType}}
 import { config } from "@/lib/config";
 {{/if}}
-import { get{{tableObj.singularPascalCase}}ById } from "@/services/{{tableObj.pluralKebabCase}}/get-{{tableObj.singularKebabCase}}-by-id";
+import { get{{tableObj.singularPascalCase}}ById } from "../_lib/get-{{tableObj.singularKebabCase}}-by-id";
 import { PageLayout, PageHeader, PageTitle, PageContent, PageNav } from "@/components/ui/page-layout";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
