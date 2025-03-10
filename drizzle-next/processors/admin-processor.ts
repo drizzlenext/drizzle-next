@@ -51,8 +51,9 @@ export class AdminProcessor implements DrizzleNextProcessor {
       outputPath: "app/(admin)/admin/settings/page.tsx",
     });
     renderTemplate({
-      inputPath: "admin-processor/components/auth/admin-signin-form.tsx.hbs",
-      outputPath: "components/auth/admin-signin-form.tsx",
+      inputPath:
+        "admin-processor/app/(auth)/_components/admin-signin-form.tsx.hbs",
+      outputPath: "app/(auth)/_components/admin-signin-form.tsx",
     });
     renderTemplate({
       inputPath: "admin-processor/services/auth/admin-signin-action.ts.hbs",
