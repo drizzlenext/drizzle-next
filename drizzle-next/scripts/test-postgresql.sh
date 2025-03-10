@@ -71,5 +71,7 @@ npx tsx scripts/grant-admin.ts admin@example.com
 npx tsx scripts/create-dynamic-product.ts
 fi
 
+sed -i 's/next dev --turbopack/next dev/' package.json
+
 npm run build
 npm run dev

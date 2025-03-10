@@ -166,8 +166,9 @@ export class AuthProcessor implements DrizzleNextProcessor {
       outputPath: "services/auth/auth-service.ts",
     });
     renderTemplate({
-      inputPath: "auth-processor/components/layouts/private-layout.tsx.hbs",
-      outputPath: "components/layouts/private-layout.tsx",
+      inputPath:
+        "auth-processor/app/(private)/_components/private-layout.tsx.hbs",
+      outputPath: "app/(private)/_components/private-layout.tsx",
     });
     renderTemplate({
       inputPath: "auth-processor/app/api/auth/[...nextauth]/route.ts.hbs",
@@ -194,8 +195,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
       outputPath: "types/next-auth.d.ts",
     });
     renderTemplate({
-      inputPath: "auth-processor/components/auth/signin-form.tsx.hbs",
-      outputPath: "components/auth/signin-form.tsx",
+      inputPath: "auth-processor/app/(auth)/_components/signin-form.tsx.hbs",
+      outputPath: "app/(auth)/_components/signin-form.tsx",
     });
     renderTemplate({
       inputPath: "auth-processor/services/auth/signin-action.ts.hbs",

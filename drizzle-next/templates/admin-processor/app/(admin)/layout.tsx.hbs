@@ -2,7 +2,7 @@ import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
-import { AdminLayout } from "@/app/(admin)/_layouts/admin-layout";
+import { AdminLayout } from "@/app/(admin)/_components/admin-layout";
 import { authorize } from "@/services/auth/auth-service";
 import { DarkModeScript } from "drizzle-admin/drizzle-ui";
 import "drizzle-admin/styles";
