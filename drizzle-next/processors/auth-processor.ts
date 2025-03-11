@@ -38,7 +38,7 @@ export const authStrategyMap: AuthStrategyMap = {
     printCompletionMessage: function (): void {
       log.task("setup github provider");
       log.subtask(
-        "go to github > settings > developer settings > oauth apps > new oauth app"
+        "go to github > settings > developer settings > oauth apps > new oauth app",
       );
       log.subtask("callback: http://localhost:3000/api/auth/callback/github");
       log.subtask("update AUTH_GITHUB_ID in .env");
@@ -56,7 +56,7 @@ export const authStrategyMap: AuthStrategyMap = {
     printCompletionMessage: function (): void {
       log.task("setup google provider");
       log.subtask(
-        "go to console.cloud.google.com > new project > oauth consent screen + 2.0 client"
+        "go to console.cloud.google.com > new project > oauth consent screen + 2.0 client",
       );
       log.subtask("callback: http://localhost:3000/api/auth/callback/google");
       log.subtask("update AUTH_GOOGLE_ID in .env");
@@ -76,7 +76,7 @@ export const authStrategyMap: AuthStrategyMap = {
     printCompletionMessage: function (): void {
       log.task("create test user for credentials provider");
       log.cmdsubtask(
-        "npx tsx scripts/create-user.ts user@example.com password123"
+        "npx tsx scripts/create-user.ts user@example.com password123",
       );
     },
     textToSearchInEnv: undefined,
@@ -109,7 +109,7 @@ export const authStrategyMap: AuthStrategyMap = {
     appendPlaceholdersToEnvLocal: function (): void {
       appendToEnvLocal(
         "EMAIL_SERVER",
-        "smtps://username:password@smtp.example.com:465"
+        "smtps://username:password@smtp.example.com:465",
       );
       appendToEnvLocal("EMAIL_FROM", "noreply@example.com");
     },
@@ -161,6 +161,10 @@ export class AuthProcessor implements DrizzleNextProcessor {
     this.addUserSchema();
     this.addLayout();
 
+    const userObj = caseFactory("user", {
+      pluralize: this.opts.pluralizeEnabled,
+    });
+
     renderTemplate({
       inputPath: "auth-processor/lib/authorize.ts.hbs",
       outputPath: "lib/authorize.ts",
@@ -169,6 +173,9 @@ export class AuthProcessor implements DrizzleNextProcessor {
       inputPath:
         "auth-processor/app/(private)/_components/private-layout.tsx.hbs",
       outputPath: "app/(private)/_components/private-layout.tsx",
+      data: {
+        userObj: userObj,
+      },
     });
     renderTemplate({
       inputPath: "auth-processor/app/api/auth/[...nextauth]/route.ts.hbs",

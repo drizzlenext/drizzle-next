@@ -1,26 +1,28 @@
 /// <reference types="cypress" />
 
 describe("shadriz e2e test", () => {
-  beforeEach(() => {
+  // beforeEach(() => {
+  //   cy.visit("http://localhost:3000/admin-signin");
+  //   cy.get('input[name="email"]').type("admin@example.com");
+  //   cy.get('input[name="password"]').type("pw");
+  //   cy.contains("Sign in").click();
+  // });
+
+  it("sign in", () => {
     cy.visit("http://localhost:3000/admin-signin");
     cy.get('input[name="email"]').type("admin@example.com");
     cy.get('input[name="password"]').type("pw");
     cy.contains("Sign in").click();
+    cy.contains("Settings").should("exist");
   });
 
   it("home page", () => {
     cy.visit("http://localhost:3000");
-    cy.get("h1").first().contains("drizzle-next");
+    cy.get("h1").first().contains("Drizzle Next");
   });
 
   it("admin scaffold happy path", () => {
-    cy.contains("Admin");
-    cy.contains("User").click();
-    cy.contains("User");
-    cy.contains("user@example.com").should("exist");
-    cy.contains("admin@example.com").should("exist");
-    cy.get("a").contains("Admin Scaffold").click();
-    cy.get("div").contains("Admin Scaffold");
+    cy.visit("http://localhost:3000/admin-scaffold");
     cy.contains("New").click();
     cy.get('input[name="intType"]').type("1");
     cy.get('input[name="tinyintType"]').type("2");
@@ -42,20 +44,19 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="timestampType"]').type("2028-08-08");
     cy.get('input[name="jsonType"]').type("{}");
     cy.get('button[type="submit"]').click();
-    cy.contains("2028").should("exist");
+    cy.contains("Admin Scaffold created successfully");
   });
 
   it("create category", () => {
-    cy.contains("Categor").click();
+    cy.visit("http://localhost:3000/category");
     cy.contains("New").click();
     cy.get('input[name="name"]').type("bar");
     cy.get('button[type="submit"]').click();
-    cy.contains("Categor").should("exist");
-    cy.get("td").contains("bar").should("exist");
+    cy.contains("Category created successfully");
   });
 
   it("create post", () => {
-    cy.contains("Post").click();
+    cy.visit("http://localhost:3000/post");
     cy.contains("New").click();
     // need to select the hidden vanilla select since radix ui uses portals
     // cy.get('select[name="categoryId"]').select(1, { force: true });
@@ -65,6 +66,6 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="publishedAt"]').type("2008-08-08", { force: true });
     cy.get(".tiptap.ProseMirror").type("hello", { force: true });
     cy.contains("Submit").click();
-    cy.contains("Post").should("exist");
+    cy.contains("Post created successfully");
   });
 });

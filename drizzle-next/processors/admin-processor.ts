@@ -114,9 +114,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath:
-        "admin-processor/app/(admin)/_components/users-components.tsx.hbs",
-      outputPath: "app/(admin)/_components/users-components.tsx",
+      inputPath: `admin-processor/app/(admin)/_components/users-components.tsx.hbs`,
+      outputPath: `app/(admin)/_components/${userObj.pluralCamelCase}-components.tsx`,
       data: {
         userObj: userObj,
       },
@@ -124,10 +123,13 @@ export class AdminProcessor implements DrizzleNextProcessor {
     renderTemplate({
       inputPath: "admin-processor/app/(admin)/_components/admin-layout.tsx.hbs",
       outputPath: "app/(admin)/_components/admin-layout.tsx",
+      data: {
+        userObj: userObj,
+      },
     });
     renderTemplate({
-      inputPath: "admin-processor/app/(admin)/_lib/users-table.config.ts.hbs",
-      outputPath: "/app/(admin)/_lib/users-table.config.ts",
+      inputPath: `admin-processor/app/(admin)/_lib/users-table.config.ts.hbs`,
+      outputPath: `/app/(admin)/_lib/${userObj.pluralCamelCase}-table.config.ts`,
       data: {
         userObj: userObj,
       },

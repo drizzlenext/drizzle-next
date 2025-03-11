@@ -52,8 +52,8 @@ const providers: Provider[] = [
       authorize: async (credentials) => {
         const email = credentials.email as string;
         const password = credentials.password as string;
-        const userRow = await db.query.users.findFirst({
-          where: eq(users.email, email),
+        const userRow = await db.query.{{userObj.pluralCamelCase}}.findFirst({
+          where: eq({{userObj.pluralCamelCase}}.email, email),
         });
         if (!userRow) {
           throw new Error("User not found.");

@@ -32,13 +32,7 @@ const config: DrizzleLayoutConfig = {
     {
       text: "Tables",
       items: [
-        { text: "Users", link: "/admin/users", icon: UserIcon },
-        { text: "Posts", link: "/admin/posts", icon: Table2Icon },
-        {
-          text: "Categories",
-          link: "/admin/categories",
-          icon: Table2Icon,
-        },
+        { text: "Users", link: "/admin/{{userObj.pluralCamelCase}}", icon: UserIcon },
       ],
     },
   ],
