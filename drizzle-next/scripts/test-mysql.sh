@@ -36,4 +36,5 @@ npx tsx scripts/grant-admin.ts admin@example.com
 sed -i 's/next dev --turbopack/next dev/' package.json
 
 npm run build
-npm run start
+npm run dev
+# npm run start

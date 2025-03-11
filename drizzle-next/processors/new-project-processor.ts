@@ -81,12 +81,16 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       inputPath: "new-project-processor/lib/search-params-utils.ts.hbs",
       outputPath: "lib/search-params-utils.ts",
     });
+    renderTemplate({
+      inputPath: "new-project-processor/app/(development)/layout.tsx.hbs",
+      outputPath: "app/(development)/layout.tsx",
+    });
 
     appendToFileIfTextNotExists(".gitignore", "uploads/", "uploads/");
 
     appendToEnvLocal(
       "NEXT_PUBLIC_UPLOAD_BASE_URL",
-      "http://localhost:3000/uploads"
+      "http://localhost:3000/uploads",
     );
   }
 
