@@ -17,10 +17,11 @@ drizzle-next init --package-manager pnpm \
 cp ~/code/drizzle-next-env/.env.sqlite .env
 cp ~/code/drizzle-next/drizzle-next/templates/test-scripts/load-fake-data.ts.hbs scripts/load-fake-data.ts
 drizzle-next add tiptap
-drizzle-next scaffold -a private private_scaffold -c text_type:text integer_type:integer real_type:real boolean_type:boolean file_type:file timestamp_type:timestamp
-drizzle-next scaffold -a public public_scaffold -c text_type:text integer_type:integer real_type:real boolean_type:boolean file_type:file timestamp_type:timestamp
-drizzle-next scaffold -a private category -c name:text
-drizzle-next scaffold -a private post -c category_id:references_select title:text likes:integer published_at:timestamp content:text_tiptap
+# pnpm i ../drizzle-next/drizzle-admin
+drizzle-next scaffold private_scaffold -c text_type:text integer_type:integer real_type:real boolean_type:boolean file_type:file timestamp_type:timestamp
+drizzle-next scaffold public_scaffold -c text_type:text integer_type:integer real_type:real boolean_type:boolean file_type:file timestamp_type:timestamp
+drizzle-next scaffold category -c name:text
+drizzle-next scaffold post -c category_id:references_select title:text likes:integer published_at:timestamp content:text_tiptap
 # drizzle-next add stripe
 npx drizzle-kit generate
 npx drizzle-kit migrate
@@ -30,4 +31,5 @@ npx tsx scripts/create-user.ts admin@example.com pw
 # npx tsx scripts/create-price.ts
 pnpm add -D @faker-js/faker
 npm run build
-npm run start
+# npm run start
+npm run dev

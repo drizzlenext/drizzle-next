@@ -1,21 +1,20 @@
 /// <reference types="cypress" />
 
 describe("shadriz e2e test", () => {
-  beforeEach(() => {
-    cy.visit("http://localhost:3000/signin");
-    cy.get('input[name="email"]').first().type("admin@example.com");
-    cy.get('input[name="password"]').first().type("pw");
-    cy.contains("Sign in with Credentials").click();
-  });
+  // beforeEach(() => {
+  //   cy.visit("http://localhost:3000/signin");
+  //   cy.get('input[name="email"]').first().type("admin@example.com");
+  //   cy.get('input[name="password"]').first().type("pw");
+  //   cy.contains("Sign in with Credentials").click();
+  // });
 
   it("home page", () => {
     cy.visit("http://localhost:3000");
-    cy.get("h1").first().contains("drizzle-next");
+    cy.get("h1").first().contains("Drizzle Next");
   });
 
   it("private scaffold happy path", () => {
-    cy.contains("Dashboard").click();
-    cy.contains("Private Scaffold").click();
+    cy.visit("http://localhost:3000/private-scaffolds");
     cy.contains("New").click();
     cy.get('input[name="integerType"]').type("1");
     cy.get('input[name="realType"]').type("2");
@@ -23,22 +22,19 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="textType"]').type("foobar");
     cy.get('input[name="timestampType"]').type("2008");
     cy.get('button[type="submit"]').click();
-    cy.get("td").contains("foobar");
+    cy.contains("Private Scaffold created successfully");
   });
 
   it("create category", () => {
-    cy.contains("Dashboard").click();
-    cy.contains("Categor").click();
+    cy.visit("http://localhost:3000/categories");
     cy.contains("New").click();
     cy.get('input[name="name"]').type("my_category");
     cy.get('button[type="submit"]').click();
-    cy.contains("Categor").should("exist");
-    cy.contains("my_category").should("exist");
+    cy.contains("Category created successfully");
   });
 
   it("create post", () => {
-    cy.contains("Dashboard").click();
-    cy.contains("Post").click();
+    cy.visit("http://localhost:3000/posts");
     cy.contains("New").click();
     // need to select the hidden vanilla select since radix ui uses portals
     cy.get('select[name="categoryId"]').select(0, { force: true });
@@ -47,6 +43,6 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="publishedAt"]').type("2008-08-08", { force: true });
     cy.get(".tiptap.ProseMirror").type("hello", { force: true });
     cy.contains("Submit").click();
-    cy.contains("Post").should("exist");
+    cy.contains("Post created successfully");
   });
 });
