@@ -126,8 +126,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
       outputPath: "app/(admin)/_components/admin-layout.tsx",
     });
     renderTemplate({
-      inputPath: "admin-processor/app/(admin)/_tables/users-table.tsx.hbs",
-      outputPath: "/app/(admin)/_tables/users-table.tsx",
+      inputPath: "admin-processor/app/(admin)/_lib/users-table.config.ts.hbs",
+      outputPath: "/app/(admin)/_lib/users-table.config.ts",
       data: {
         userObj: userObj,
       },

@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { DrizzleAdminConfig } from "drizzle-admin/types";
-import { {{userObj.pluralCamelCase}}Table } from "./_tables/users-table";
+import { {{userObj.pluralCamelCase}}Table } from "./_lib/users-table.config";
 
 export const config: DrizzleAdminConfig = {
   basePath: "/admin",
