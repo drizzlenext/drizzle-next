@@ -25,21 +25,21 @@ initCommand
   .addOption(
     new Option(
       "--package-manager <manager>",
-      "package manager for this project"
-    ).choices(["npm", "pnpm", "bun"])
+      "package manager for this project",
+    ).choices(["npm", "pnpm", "bun"]),
   )
   .addOption(
     new Option("--db-dialect <dialect>", "database dialect").choices([
       "sqlite",
       "postgresql",
       "mysql",
-    ])
+    ]),
   )
   .addOption(
     new Option(
       "--pk-strategy <strategy>",
-      "primary key generation strategy"
-    ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"])
+      "primary key generation strategy",
+    ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"]),
   )
   .option("--auth", "install auth.js authentication")
   .option("--no-auth", "skip installation of auth.js")
@@ -125,7 +125,7 @@ initCommand
           ],
         }));
       partialConfig.authEnabled =
-        options.auth ||
+        options.auth ??
         (await confirm({
           message: "Do you want to add Auth.js authentication?",
           default: true,
@@ -144,11 +144,15 @@ initCommand
             message: "Do you want to add an admin dashboard?",
             default: true,
           }));
+      } else {
+        partialConfig.adminEnabled = false;
       }
 
       partialConfig.pluralizeEnabled = options.pluralize;
 
       partialConfig.install = options.install;
+
+      console.log(partialConfig);
 
       // process
 

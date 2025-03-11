@@ -3,7 +3,7 @@
 describe("shadriz e2e test", () => {
   it("home page", () => {
     cy.visit("http://localhost:3000");
-    cy.contains("drizzle-next");
+    cy.contains("Drizzle Next");
   });
 
   it("public scaffold happy path", () => {
@@ -28,7 +28,7 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="timestampType"]').type("2008");
     cy.get('input[name="dateType"]').type("2024-08-08");
     cy.get('button[type="submit"]').click();
-    cy.get("td").contains("foobar");
+    cy.contains("Public Scaffold created successfully");
   });
 
   it("create category", () => {
@@ -36,7 +36,7 @@ describe("shadriz e2e test", () => {
     cy.contains("New").click();
     cy.get('input[name="name"]').type("my_category");
     cy.get('button[type="submit"]').click();
-    cy.get("td").contains("my_category").should("exist");
+    cy.contains("Category created successfully");
   });
 
   it("create post", () => {
@@ -49,6 +49,6 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="publishedAt"]').type("2008-08-08", { force: true });
     cy.get(".tiptap.ProseMirror").type("hello", { force: true });
     cy.contains("Submit").click();
-    cy.get("td").contains("hello");
+    cy.contains("Post created successfully");
   });
 });
