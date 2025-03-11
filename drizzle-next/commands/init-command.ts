@@ -152,8 +152,6 @@ initCommand
 
       partialConfig.install = options.install;
 
-      console.log(partialConfig);
-
       // process
 
       const processors: DrizzleNextProcessor[] = [];

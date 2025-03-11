@@ -9,6 +9,8 @@ import {
   compileTemplate,
   renderTemplate,
   insertSchemaToSchemaIndex,
+  insertTextAfterIfNotExists,
+  prependToFileIfNotExists,
 } from "../lib/utils";
 import { log } from "../lib/log";
 import { pkStrategyImportTemplates } from "../lib/pk-strategy";
@@ -174,6 +176,9 @@ export class ScaffoldProcessor {
       this.addTableComponent();
       this.addQueries();
     }
+    if (this.opts.adminEnabled) {
+      this.updateDrizzleAdminFiles();
+    }
     if (this.opts.enableCompletionMessage) {
       this.printCompletionMessage();
     }
@@ -222,7 +227,7 @@ export class ScaffoldProcessor {
   generateImportsCodeFromColumns() {
     const dataTypeSet = new Set<string>();
     dataTypeSet.add(
-      this.dbDialectStrategy.pkStrategyDataTypes[this.opts.pkStrategy]
+      this.dbDialectStrategy.pkStrategyDataTypes[this.opts.pkStrategy],
     );
     let referenceImportsCode = "";
     for (const validatedColumn of this.validatedColumns) {
@@ -319,7 +324,7 @@ export class ScaffoldProcessor {
   hasFileDataType() {
     return (
       this.validatedColumns.filter((validatedColumn) =>
-        validatedColumn.dataType.startsWith("file")
+        validatedColumn.dataType.startsWith("file"),
       ).length > 0
     );
   }
@@ -381,7 +386,7 @@ export class ScaffoldProcessor {
       .map((validatedColumn) =>
         caseFactory(validatedColumn.columnName, {
           pluralize: this.opts.pluralizeEnabled,
-        })
+        }),
       );
 
     const tableObj = caseFactory(this.opts.table, {
@@ -414,7 +419,7 @@ export class ScaffoldProcessor {
       .map((validatedColumn) =>
         caseFactory(validatedColumn.columnName, {
           pluralize: this.opts.pluralizeEnabled,
-        })
+        }),
       );
 
     const tableObj = caseFactory(this.opts.table, {
@@ -508,7 +513,7 @@ export class ScaffoldProcessor {
   getReferencesColumnList(startsWith: "references" | "references_") {
     const referencesColumnList = this.validatedColumns
       .filter((validatedColumn) =>
-        validatedColumn.dataType.startsWith(startsWith)
+        validatedColumn.dataType.startsWith(startsWith),
       )
       .map((validatedColumn) => validatedColumn);
     return referencesColumnList;
@@ -627,5 +632,28 @@ export class ScaffoldProcessor {
           this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
       },
     });
+  }
+  updateDrizzleAdminFiles() {
+    const tableObj = caseFactory(this.opts.table, {
+      pluralize: this.opts.pluralizeEnabled,
+    });
+    if (tableObj.singularCamelCase === "user") {
+      // skipping user object since it has already been scaffolded by auth processor
+      return;
+    }
+    insertTextAfterIfNotExists(
+      "app/(admin)/_components/admin-layout.tsx",
+      "sidebar: [",
+      `\n    { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}" },`,
+    );
+    insertTextAfterIfNotExists(
+      "app/(admin)/drizzle-admin.config.ts",
+      "schema: {",
+      `\n    ${tableObj.pluralCamelCase}: { drizzleTable: ${tableObj.pluralCamelCase} },`,
+    );
+    prependToFileIfNotExists(
+      "app/(admin)/drizzle-admin.config.ts",
+      `import { ${tableObj.pluralCamelCase} } from "@/schema/${tableObj.pluralKebabCase}";\n`,
+    );
   }
 }
