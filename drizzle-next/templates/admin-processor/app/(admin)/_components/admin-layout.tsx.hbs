@@ -16,7 +16,7 @@ import {
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { DrizzleLayoutConfig } from "drizzle-admin/types";
-import { LogOutIcon, Table2Icon, UserIcon } from "lucide-react";
+import { LogOutIcon, UserIcon, LayoutDashboardIcon } from "lucide-react";
 
 const config: DrizzleLayoutConfig = {
   nav: [
@@ -26,13 +26,13 @@ const config: DrizzleLayoutConfig = {
   sidebar: [
     {
       text: "Admin",
-      link: "/admin",
-      icon: Table2Icon,
-    },
-    {
-      text: "Tables",
       items: [
-        { text: "Users", link: "/admin/{{userObj.pluralCamelCase}}", icon: UserIcon },
+        {
+          text: "Dashboard",
+          link: "/admin",
+          icon: LayoutDashboardIcon,
+        },
+        { text: "Users", link: "/admin/users", icon: UserIcon },
       ],
     },
   ],
