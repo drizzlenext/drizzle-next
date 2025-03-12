@@ -29,14 +29,14 @@ export async function create{{tableObj.singularPascalCase}}(
   formData: FormData
 ): Promise<Create{{tableObj.singularPascalCase}}State> {
 {{#each uploadColumnNames}}
-  const {{this.singularCamelCase}}File = formData.get("{{this.originalCamelCase}}") as File;
+  const {{this.originalCamelCase}}File = formData.get("{{this.originalCamelCase}}") as File;
 
-  let {{this.singularCamelCase}}Uri;
+  let {{this.originalCamelCase}}Uri;
 
-  if ({{this.singularCamelCase}}File.size) {
-    {{this.singularCamelCase}}Uri = await uploadFile({
-      file: {{this.singularCamelCase}}File,
-      dir: "{{../tableObj.pluralKebabCase}}"
+  if ({{this.originalCamelCase}}File.size) {
+    {{this.originalCamelCase}}Uri = await uploadFile({
+      file: {{this.originalCamelCase}}File,
+      dir: "{{../tableObj.pluralKebabCase}}/{{this.originalKebabCase}}"
     })
   }
 {{/each}}

@@ -1,3 +1,7 @@
+/**
+ * usage example: tsx scripts/merge-package-json.ts package-pinned.json ~/code/demo-postgresql/package.json package-pinned.json
+ */
+
 // Import required modules
 import fs from "fs";
 import path from "path";
@@ -48,8 +52,6 @@ function mergePackageJson(
 
     // Create the merged package.json object
     const mergedPackage = {
-      ...package1,
-      ...package2,
       dependencies: mergedDependencies,
       devDependencies: mergedDevDependencies,
     };

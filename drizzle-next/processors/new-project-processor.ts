@@ -18,6 +18,7 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     "lucide-react",
     "clsx",
     "tailwind-merge",
+    "mime"
   ];
 
   devDependencies = ["drizzle-kit"];
@@ -85,8 +86,12 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       inputPath: "new-project-processor/app/(development)/layout.tsx.hbs",
       outputPath: "app/(development)/layout.tsx",
     });
+    renderTemplate({
+      inputPath: "new-project-processor/app/uploads/[...segments]/route.ts.hbs",
+      outputPath: "app/uploads/[...segments]/route.ts"
+    });
 
-    appendToFileIfTextNotExists(".gitignore", "uploads/", "uploads/");
+    appendToFileIfTextNotExists(".gitignore", "/uploads", "/uploads");
 
     appendToEnvLocal(
       "NEXT_PUBLIC_UPLOAD_BASE_URL",

@@ -5,6 +5,7 @@ export interface Cases {
   original: string;
   originalCamelCase: string;
   originalCapitalCase: string;
+  originalKebabCase: string;
   singularCapitalCase: string;
   pluralCapitalCase: string;
   singularSnakeCase: string;
@@ -38,6 +39,7 @@ export function caseFactory(str: string, opts: CaseFactoryOpts) {
       original: str,
       originalCamelCase: Case.camel(str),
       originalCapitalCase: Case.capital(str),
+      originalKebabCase: Case.kebab(str),
       singularCapitalCase: Case.capital(pluralize.singular(str)),
       pluralCapitalCase: Case.capital(pluralize.plural(str)),
       singularSnakeCase: Case.snake(pluralize.singular(str)),
@@ -54,6 +56,7 @@ export function caseFactory(str: string, opts: CaseFactoryOpts) {
       original: str,
       originalCamelCase: Case.camel(str),
       originalCapitalCase: Case.capital(str),
+      originalKebabCase: Case.kebab(str),
       singularCapitalCase: Case.capital(str),
       pluralCapitalCase: Case.capital(str),
       singularSnakeCase: Case.snake(str),
