@@ -32,6 +32,6 @@ export function DELETE_ROUTE(config: DrizzleAdminConfig) {
 
     await db.delete(drizzleSchema).where(eq(drizzleSchema.id, id));
 
-    return NextResponse.json({ message: "Delete success" });
+    return NextResponse.json({ message: "Deleted successfully" });
   });
 }

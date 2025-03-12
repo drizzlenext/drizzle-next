@@ -51,6 +51,6 @@ export function PATCH_ROUTE(config: DrizzleAdminConfig) {
       .set(validatedFields.data)
       .where(eq(drizzleSchema.id, id));
 
-    return NextResponse.json({ message: `Patch success` });
+    return NextResponse.json({ message: `Patched successfully` });
   });
 }

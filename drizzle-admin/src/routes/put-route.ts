@@ -54,6 +54,6 @@ export function PUT_ROUTE(config: DrizzleAdminConfig) {
       .set(validatedFields.data)
       .where(eq(drizzleSchema.id, id));
 
-    return NextResponse.json({ message: `Update success` });
+    return NextResponse.json({ message: `Updated successfully` });
   });
 }

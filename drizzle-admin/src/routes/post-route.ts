@@ -49,6 +49,6 @@ export function POST_ROUTE(config: DrizzleAdminConfig) {
     }
 
     await db.insert(drizzleTable).values(validatedFields.data);
-    return NextResponse.json({ message: `Create success` });
+    return NextResponse.json({ message: `Created successfully` });
   });
 }

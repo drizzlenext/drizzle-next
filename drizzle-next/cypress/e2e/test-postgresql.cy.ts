@@ -8,12 +8,17 @@ describe("shadriz e2e test", () => {
   //   cy.contains("Sign in").click();
   // });
 
-  it("sign in", () => {
+  it("sign in and test admin dashboard", () => {
     cy.visit("http://localhost:3000/admin-signin");
     cy.get('input[name="email"]').type("admin@example.com");
     cy.get('input[name="password"]').type("pw");
     cy.contains("Sign in").click();
     cy.contains("Settings").should("exist");
+    cy.get("a").contains("Categories").click();
+    cy.get("a").contains("New").click();
+    cy.get(`input[name="name"]`).type("my_category");
+    cy.get("button").contains("Submit").click();
+    cy.contains("Created successfully")
   });
 
   it("home page", () => {
