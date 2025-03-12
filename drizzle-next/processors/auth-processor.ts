@@ -15,7 +15,6 @@ import {
   pkStrategyImportTemplates,
 } from "../lib/pk-strategy";
 import { dialectStrategyFactory } from "../lib/strategy-factory";
-import { caseFactory } from "../lib/case-utils";
 
 interface AuthStrategy {
   appendPlaceholdersToEnvLocal: () => void;
@@ -217,15 +216,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
       data: {
         pkStrategyImport: pkStrategyImportTemplates[this.opts.pkStrategy],
         pkKeyValTemplate: pkKeyValTemplates[this.opts.pkStrategy],
-        accountObj: caseFactory("account", {
-          pluralize: this.opts.pluralizeEnabled,
-        }),
-        sessionObj: caseFactory("session", {
-          pluralize: this.opts.pluralizeEnabled,
-        }),
-        verificationTokenObj: caseFactory("verificationToken", {
-          pluralize: this.opts.pluralizeEnabled,
-        }),
       },
     });
   }
@@ -275,18 +265,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
         updatedAtTemplate: this.dbDialectStrategy.updatedAtTemplate,
         fkDataTypeImportCode: fkDataTypeImportCode,
         fkStrategyTemplate: fkStrategyTemplate,
-        accountObj: caseFactory("account", {
-          pluralize: this.opts.pluralizeEnabled,
-        }),
-        sessionObj: caseFactory("session", {
-          pluralize: this.opts.pluralizeEnabled,
-        }),
-        verificationTokenObj: caseFactory("verificationToken", {
-          pluralize: this.opts.pluralizeEnabled,
-        }),
-        authenticatorObj: caseFactory("authenticator", {
-          pluralize: this.opts.pluralizeEnabled,
-        }),
       },
     });
 

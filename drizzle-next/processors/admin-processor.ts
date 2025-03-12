@@ -8,7 +8,6 @@ import {
 } from "../lib/types";
 import { renderTemplate } from "../lib/utils";
 import { ScaffoldProcessor } from "./scaffold-processor";
-import { caseFactory } from "../lib/case-utils";
 
 export class AdminProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
@@ -27,9 +26,6 @@ export class AdminProcessor implements DrizzleNextProcessor {
   }
 
   async render(): Promise<void> {
-    const userObj = caseFactory("user", {
-      pluralize: this.opts.pluralizeEnabled,
-    });
     renderTemplate({
       inputPath: "admin-processor/app/(admin)/layout.tsx.hbs",
       outputPath: "app/(admin)/layout.tsx",
@@ -97,15 +93,13 @@ export class AdminProcessor implements DrizzleNextProcessor {
       enableCompletionMessage: false,
       enableUiScaffold: true,
       enableDbScaffold: false,
+      pluralizeEnabled: true
     });
 
     userScaffold.process();
   }
 
   renderDrizzleAdmin() {
-    const userObj = caseFactory("user", {
-      pluralize: this.opts.pluralizeEnabled,
-    });
     renderTemplate({
       inputPath: `admin-processor/app/(admin)/_components/users-components.tsx.hbs`,
       outputPath: `app/(admin)/_components/users-components.tsx`,

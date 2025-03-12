@@ -634,13 +634,12 @@ export class ScaffoldProcessor {
     });
   }
   updateDrizzleAdminFiles() {
+    if (this.opts.table === "users") {
+      return;
+    }
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
     });
-    if (tableObj.singularCamelCase === "user") {
-      // skipping user object since it has already been scaffolded by auth processor
-      return;
-    }
     insertTextAfterIfNotExists(
       "app/(admin)/_components/admin-layout.tsx",
       "sidebar: [",
