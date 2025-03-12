@@ -63,8 +63,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       outputPath: "app/(public)/layout.tsx",
     });
     renderTemplate({
-      inputPath: "new-project-processor/lib/file-utils.ts.hbs",
-      outputPath: "lib/file-utils.ts",
+      inputPath: "new-project-processor/lib/upload.ts.hbs",
+      outputPath: "lib/upload.ts",
     });
     renderTemplateIfNotExists({
       inputPath: "new-project-processor/.env.hbs",
@@ -79,8 +79,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       outputPath: "eslint.config.mjs",
     });
     renderTemplate({
-      inputPath: "new-project-processor/lib/search-params-utils.ts.hbs",
-      outputPath: "lib/search-params-utils.ts",
+      inputPath: "new-project-processor/lib/search-params.ts.hbs",
+      outputPath: "lib/search-params.ts",
     });
     renderTemplate({
       inputPath: "new-project-processor/app/(development)/layout.tsx.hbs",

@@ -5,7 +5,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 {{#if importFileUtils}}
-import { uploadFile } from "@/lib/file-utils";
+import { uploadFile } from "@/lib/upload";
 {{/if}}
 
 const insert{{tableObj.singularPascalCase}}Schema = z.object({
