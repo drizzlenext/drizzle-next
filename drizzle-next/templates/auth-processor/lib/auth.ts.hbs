@@ -3,8 +3,8 @@ import NextAuth from "next-auth"
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import type { Provider } from "next-auth/providers";
 import { eq } from "drizzle-orm";
-import { {{userObj.singularPascalCase}}, {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
-import { {{accountObj.pluralCamelCase}}, {{sessionObj.pluralCamelCase}}, {{verificationTokenObj.pluralCamelCase}} } from "@/schema/auth-tables";
+import { users } from "@/schema/users";
+import { accounts, sessions, verificationTokens } from "@/schema/auth-tables";
 import { Adapter } from "next-auth/adapters";
 {{pkStrategyImport}}
 import GitHub from "next-auth/providers/github";
@@ -16,12 +16,12 @@ import bcrypt from "bcrypt";
 
 const adapter = {
   ...(DrizzleAdapter(db, {
-    usersTable: {{userObj.pluralCamelCase}},
-    accountsTable: {{accountObj.pluralCamelCase}},
-    sessionsTable: {{sessionObj.pluralCamelCase}},
-    verificationTokensTable: {{verificationTokenObj.pluralCamelCase}},
+    usersTable: users,
+    accountsTable: accounts,
+    sessionsTable: sessions,
+    verificationTokensTable: verificationTokens,
   }) as Adapter),
-  createUser: async (data: User) => {
+  createUser: async (data: any) => {
     const newUser = {
       {{pkKeyValTemplate}}
       email: data.email,
@@ -31,7 +31,7 @@ const adapter = {
       role: "user"
     };
 
-    await db.insert({{userObj.pluralCamelCase}}).values(newUser);
+    await db.insert(users).values(newUser);
     return newUser;
   },
 };
@@ -52,8 +52,8 @@ const providers: Provider[] = [
       authorize: async (credentials) => {
         const email = credentials.email as string;
         const password = credentials.password as string;
-        const userRow = await db.query.{{userObj.pluralCamelCase}}.findFirst({
-          where: eq({{userObj.pluralCamelCase}}.email, email),
+        const userRow = await db.query.users.findFirst({
+          where: eq(users.email, email),
         });
         if (!userRow) {
           throw new Error("User not found.");

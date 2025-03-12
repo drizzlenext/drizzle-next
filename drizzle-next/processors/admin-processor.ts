@@ -33,7 +33,6 @@ export class AdminProcessor implements DrizzleNextProcessor {
     renderTemplate({
       inputPath: "admin-processor/app/(admin)/layout.tsx.hbs",
       outputPath: "app/(admin)/layout.tsx",
-      data: { userObj },
     });
     renderTemplate({
       inputPath: "admin-processor/app/(auth)/admin-signin/page.tsx.hbs",
@@ -42,9 +41,6 @@ export class AdminProcessor implements DrizzleNextProcessor {
     renderTemplate({
       inputPath: `admin-processor/scripts/grant-admin.ts.hbs`,
       outputPath: "scripts/grant-admin.ts",
-      data: {
-        userObj,
-      },
     });
     renderTemplate({
       inputPath: "admin-processor/app/(admin)/admin/settings/page.tsx.hbs",
@@ -59,9 +55,6 @@ export class AdminProcessor implements DrizzleNextProcessor {
       inputPath:
         "admin-processor/app/(auth)/_actions/admin-signin-action.ts.hbs",
       outputPath: "app/(auth)/_actions/admin-signin-action.ts",
-      data: {
-        userObj,
-      },
     });
     renderTemplate({
       inputPath: "admin-processor/scripts/create-password-hash.ts.hbs",
@@ -100,7 +93,7 @@ export class AdminProcessor implements DrizzleNextProcessor {
     const userScaffold = new ScaffoldProcessor({
       ...this.opts,
       columns: strategies[this.opts.dbDialect],
-      table: this.opts.pluralizeEnabled ? "users" : "user",
+      table: "users",
       enableCompletionMessage: false,
       enableUiScaffold: true,
       enableDbScaffold: false,
@@ -115,24 +108,15 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
     renderTemplate({
       inputPath: `admin-processor/app/(admin)/_components/users-components.tsx.hbs`,
-      outputPath: `app/(admin)/_components/${userObj.pluralCamelCase}-components.tsx`,
-      data: {
-        userObj: userObj,
-      },
+      outputPath: `app/(admin)/_components/users-components.tsx`,
     });
     renderTemplate({
       inputPath: "admin-processor/app/(admin)/_components/admin-layout.tsx.hbs",
       outputPath: "app/(admin)/_components/admin-layout.tsx",
-      data: {
-        userObj: userObj,
-      },
     });
     renderTemplate({
       inputPath: `admin-processor/app/(admin)/_lib/users-table.config.ts.hbs`,
-      outputPath: `/app/(admin)/_lib/${userObj.pluralCamelCase}-table.config.ts`,
-      data: {
-        userObj: userObj,
-      },
+      outputPath: `/app/(admin)/_lib/users-table.config.ts`,
     });
     renderTemplate({
       inputPath: "admin-processor/app/(admin)/admin/[...segments]/page.tsx.hbs",
@@ -147,7 +131,6 @@ export class AdminProcessor implements DrizzleNextProcessor {
       outputPath: "app/(admin)/drizzle-admin.config.ts",
       data: {
         dbDialect: this.opts.dbDialect,
-        userObj: userObj,
       },
     });
     renderTemplate({

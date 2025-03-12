@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}";
+import { users } from "@/schema/users";
 import { PrivateLayout } from "@/app/(private)/_components/private-layout";
 import { authorize } from "@/lib/authorize";
 
@@ -12,8 +12,8 @@ export default async function Layout({
 }) {
   const session = await authorize("user");
 
-  const userRow = await db.query.{{userObj.pluralCamelCase}}.findFirst({
-    where: eq({{userObj.pluralCamelCase}}.id, session.user.id),
+  const userRow = await db.query.users.findFirst({
+    where: eq(users.id, session.user.id),
   });
 
   if (!userRow) {

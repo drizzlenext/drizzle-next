@@ -4,7 +4,7 @@ import {
 } from "drizzle-orm/mysql-core"
 {{pkStrategyImport}}
 
-export const {{userObj.pluralCamelCase}} = mysqlTable("{{userObj.pluralSnakeCase}}", {
+export const users = mysqlTable("users", {
   {{pkText}}
   name: varchar({ length: 255 }),
   email: varchar({ length: 255 }).notNull(),
@@ -20,4 +20,4 @@ export const {{userObj.pluralCamelCase}} = mysqlTable("{{userObj.pluralSnakeCase
   // [CODE_MARK users-table]
 })
 
-export type {{userObj.singularPascalCase}} = typeof {{userObj.pluralCamelCase}}.$inferSelect;
+export type User = typeof users.$inferSelect;

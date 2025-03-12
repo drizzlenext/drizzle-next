@@ -4,7 +4,7 @@ import {
 } from "drizzle-orm/pg-core"
 {{pkStrategyImport}}
 
-export const {{userObj.pluralCamelCase}} = pgTable("{{userObj.pluralSnakeCase}}", {
+export const users = pgTable("users", {
   {{pkText}}
   name: text(),
   email: text().notNull(),
@@ -17,4 +17,4 @@ export const {{userObj.pluralCamelCase}} = pgTable("{{userObj.pluralSnakeCase}}"
   // [CODE_MARK users-table]
 })
  
-export type {{userObj.singularPascalCase}} = typeof {{userObj.pluralCamelCase}}.$inferSelect;
+export type User = typeof users.$inferSelect;

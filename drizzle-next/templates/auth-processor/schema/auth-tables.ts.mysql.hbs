@@ -8,14 +8,14 @@ import {
   {{fkDataTypeImportCode}}
 } from "drizzle-orm/mysql-core"
 import type { AdapterAccountType } from "next-auth/adapters"
-import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}"
+import { users } from "@/schema/users"
 
-export const {{accountObj.pluralCamelCase}} = mysqlTable(
-  "{{accountObj.pluralSnakeCase}}",
+export const accounts = mysqlTable(
+  "accounts",
   {
     userId: {{fkStrategyTemplate}}
       .notNull()
-      .references(() => {{userObj.pluralCamelCase}}.id, { onDelete: "cascade" }),
+      .references(() => users.id, { onDelete: "cascade" }),
     type: varchar({ length: 255 })
       .$type<AdapterAccountType>()
       .notNull(),
@@ -36,16 +36,16 @@ export const {{accountObj.pluralCamelCase}} = mysqlTable(
   })
 )
  
-export const {{sessionObj.pluralCamelCase}} = mysqlTable("{{sessionObj.pluralSnakeCase}}", {
+export const sessions = mysqlTable("sessions", {
   sessionToken: varchar({ length: 255 }).primaryKey(),
   userId: {{fkStrategyTemplate}}
     .notNull()
-    .references(() => {{userObj.pluralCamelCase}}.id, { onDelete: "cascade" }),
+    .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp({ mode: "date" }).notNull(),
 })
  
-export const {{verificationTokenObj.pluralCamelCase}} = mysqlTable(
-  "{{verificationTokenObj.pluralSnakeCase}}",
+export const verificationTokens = mysqlTable(
+  "verification_tokens",
   {
     identifier: varchar({ length: 255 }).notNull(),
     token: varchar({ length: 255 }).notNull(),
@@ -58,13 +58,13 @@ export const {{verificationTokenObj.pluralCamelCase}} = mysqlTable(
   })
 )
  
-export const {{authenticatorObj.pluralCamelCase}} = mysqlTable(
-  "{{authenticatorObj.pluralSnakeCase}}",
+export const authenticators = mysqlTable(
+  "authenticators",
   {
     credentialID: varchar({ length: 255 }).notNull().unique(),
     userId: {{fkStrategyTemplate}}
       .notNull()
-      .references(() => {{userObj.pluralCamelCase}}.id, { onDelete: "cascade" }),
+      .references(() => users.id, { onDelete: "cascade" }),
     providerAccountId: varchar({ length: 255 }).notNull(),
     credentialPublicKey: varchar({
       length: 255,

@@ -8,14 +8,14 @@ import {
   {{fkDataTypeImportCode}}
 } from "drizzle-orm/pg-core"
 import type { AdapterAccountType } from "next-auth/adapters"
-import { {{userObj.pluralCamelCase}} } from "@/schema/{{userObj.pluralKebabCase}}"
+import { users } from "@/schema/users"
  
-export const {{accountObj.pluralCamelCase}} = pgTable(
-  "{{accountObj.pluralSnakeCase}}",
+export const accounts = pgTable(
+  "accounts",
   {
     userId: {{fkStrategyTemplate}}
       .notNull()
-      .references(() => {{userObj.pluralCamelCase}}.id, { onDelete: "cascade" }),
+      .references(() => users.id, { onDelete: "cascade" }),
     type: text().$type<AdapterAccountType>().notNull(),
     provider: text().notNull(),
     providerAccountId: text().notNull(),
@@ -34,16 +34,16 @@ export const {{accountObj.pluralCamelCase}} = pgTable(
   })
 )
  
-export const {{sessionObj.pluralCamelCase}} = pgTable("{{sessionObj.pluralSnakeCase}}", {
+export const sessions = pgTable("sessions", {
   sessionToken: text().primaryKey(),
   userId: {{fkStrategyTemplate}}
     .notNull()
-    .references(() => {{userObj.pluralCamelCase}}.id, { onDelete: "cascade" }),
+    .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp({ mode: "date" }).notNull(),
 })
  
-export const {{verificationTokenObj.pluralCamelCase}} = pgTable(
-  "{{verificationTokenObj.pluralSnakeCase}}",
+export const verificationTokens = pgTable(
+  "verification_tokens",
   {
     identifier: text().notNull(),
     token: text().notNull(),
@@ -56,13 +56,13 @@ export const {{verificationTokenObj.pluralCamelCase}} = pgTable(
   })
 )
  
-export const {{authenticatorObj.pluralCamelCase}} = pgTable(
-  "{{authenticatorObj.pluralSnakeCase}}",
+export const authenticators = pgTable(
+  "authenticators",
   {
     credentialID: text().notNull().unique(),
     userId: {{fkStrategyTemplate}}
       .notNull()
-      .references(() => {{userObj.pluralCamelCase}}.id, { onDelete: "cascade" }),
+      .references(() => users.id, { onDelete: "cascade" }),
     providerAccountId: text().notNull(),
     credentialPublicKey: text().notNull(),
     counter: integer().notNull(),

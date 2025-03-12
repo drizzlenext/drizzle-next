@@ -161,10 +161,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
     this.addUserSchema();
     this.addLayout();
 
-    const userObj = caseFactory("user", {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-
     renderTemplate({
       inputPath: "auth-processor/lib/authorize.ts.hbs",
       outputPath: "lib/authorize.ts",
@@ -173,9 +169,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
       inputPath:
         "auth-processor/app/(private)/_components/private-layout.tsx.hbs",
       outputPath: "app/(private)/_components/private-layout.tsx",
-      data: {
-        userObj: userObj,
-      },
     });
     renderTemplate({
       inputPath: "auth-processor/app/api/auth/[...nextauth]/route.ts.hbs",
@@ -224,7 +217,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
       data: {
         pkStrategyImport: pkStrategyImportTemplates[this.opts.pkStrategy],
         pkKeyValTemplate: pkKeyValTemplates[this.opts.pkStrategy],
-        userObj: caseFactory("user", { pluralize: this.opts.pluralizeEnabled }),
         accountObj: caseFactory("account", {
           pluralize: this.opts.pluralizeEnabled,
         }),
@@ -246,15 +238,9 @@ export class AuthProcessor implements DrizzleNextProcessor {
   }
 
   addLayout() {
-    const userObj = caseFactory("user", {
-      pluralize: this.opts.pluralizeEnabled,
-    });
     renderTemplate({
       inputPath: "auth-processor/app/(private)/layout.tsx.hbs",
       outputPath: "app/(private)/layout.tsx",
-      data: {
-        userObj,
-      },
     });
   }
 
@@ -279,14 +265,10 @@ export class AuthProcessor implements DrizzleNextProcessor {
     const fkDataTypeImportCode =
       fkDataTypeImport[pkStrategyDataType as keyof typeof fkDataTypeImport];
 
-    const userObj = caseFactory("user", {
-      pluralize: this.opts.pluralizeEnabled,
-    });
     renderTemplate({
       inputPath: authDbDialectStrategy[this.opts.dbDialect].authSchemaTemplate,
       outputPath: "schema/auth-tables.ts",
       data: {
-        userObj,
         pkText: pkText,
         pkStrategyImport: pkStrategyImport,
         createdAtTemplate: this.dbDialectStrategy.createdAtTemplate,
@@ -338,16 +320,10 @@ export class AuthProcessor implements DrizzleNextProcessor {
     for (const dataType of dataTypeImports) {
       dataTypeImportsCode += "  " + dataType + ",\n";
     }
-    const userObj = caseFactory("user", {
-      pluralize: this.opts.pluralizeEnabled,
-    });
     renderTemplate({
       inputPath: userSchemaStrategy[this.opts.dbDialect],
-      outputPath: this.opts.pluralizeEnabled
-        ? "schema/users.ts"
-        : "schema/user.ts",
+      outputPath: "schema/users.ts",
       data: {
-        userObj: userObj,
         pkText: pkText,
         pkStrategyImport: pkStrategyImport,
         pkStrategyDataType: pkStrategyDataType,
@@ -357,8 +333,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
       },
     });
 
-    insertSchemaToSchemaIndex("user", {
-      pluralize: this.opts.pluralizeEnabled,
+    insertSchemaToSchemaIndex("users", {
+      pluralize: true,
     });
   }
 
