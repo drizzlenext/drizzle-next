@@ -12,7 +12,8 @@ export type FormControlType =
   | "date"
   | "datetime-local"
   | "number"
-  | "richtext";
+  | "richtext"
+  | "file";
 
 export type FormControlMap = {
   [key: string]: FormControlType;

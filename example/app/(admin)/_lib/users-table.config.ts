@@ -1,5 +1,5 @@
 import { users } from "@/schema/users";
-import { DrizzleTableConfig } from "@/src/types";
+import { DrizzleTableConfig } from "drizzle-admin/types";
 import {
   UserDeletePageNav,
   UserEditPageNav,
@@ -10,7 +10,7 @@ import {
 
 export const usersTable: DrizzleTableConfig = {
   drizzleTable: users,
-  formControlMap: {},
+  formControlMap: { image: "file" },
   components: {
     RowNav: UserRowNav,
     ViewPageNav: UserViewPageNav,

@@ -3,7 +3,7 @@ import { DrizzleAdminConfig } from "@/src/types";
 import { categories } from "../../schema/categories";
 import { postsTags } from "../../schema/posts-tags";
 import { tags } from "../../schema/tags";
-import { usersTable } from "./_tables/users-table";
+import { usersTable } from "./_lib/users-table.config";
 import { posts } from "@/schema/posts";
 
 export const config: DrizzleAdminConfig = {

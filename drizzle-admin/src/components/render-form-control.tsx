@@ -106,6 +106,13 @@ export function RenderFormControl({
           <RichTextEditor id={keyName} name={keyName} html={value} />
         </FormControl>
       );
+    case "file":
+      return (
+        <FormControl>
+          <Label htmlFor={keyName}>{capitalCase(keyName)}</Label>
+          <Input type="file" name={keyName} id={keyName} />
+        </FormControl>
+      );
     default:
       const exhaustiveCheck: never = formControlMap[keyName];
       throw new Error(`unhandled case: ${exhaustiveCheck}`);
