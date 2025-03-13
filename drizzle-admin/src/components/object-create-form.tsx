@@ -28,15 +28,27 @@ export function ObjectCreateForm({
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    const data = Object.fromEntries(formData.entries());
+    const hasFile = Array.from(formData.values()).some(
+      (value) => value instanceof File && value.size > 0
+    );
 
-    const res = await fetch(`/api/${curTable}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    let res;
+    if (hasFile) {
+      res = await fetch(`/api/${curTable}`, {
+        method: "POST",
+        body: formData
+      });
+    } else {
+      const data = Object.fromEntries(formData.entries());
+      res = await fetch(`/api/${curTable}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    }
+
     if (res.ok) {
       const json = await res.json();
       setState({ message: json.message, status: "success" });

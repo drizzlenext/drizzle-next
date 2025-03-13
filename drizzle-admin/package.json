@@ -92,5 +92,8 @@
   "author": "",
   "license": "MIT",
   "description": "",
-  "styles": "dist/styles.css"
+  "styles": "dist/styles.css",
+  "browser": {
+    "fs": false
+  }
 }
