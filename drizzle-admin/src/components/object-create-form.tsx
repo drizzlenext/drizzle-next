@@ -3,7 +3,7 @@
 import { Button, Form, FormControl, FormMessage } from "../drizzle-ui";
 import { getFormControlMap } from "../lib/client-utils";
 import { useState } from "react";
-import { ColumnDataTypeMap, FormControlMap } from "../types/types";
+import { ColumnDataTypeMap, CustomFormControlMap, FormControlMap } from "../types/types";
 import { RenderFormControl } from "./render-form-control";
 
 interface CreateStatus {
@@ -18,10 +18,12 @@ export function ObjectCreateForm({
   curTable,
   columnDataTypeMap,
   formControlMap,
+  customFormControlMap,
 }: {
   curTable: string;
   columnDataTypeMap: ColumnDataTypeMap;
-  formControlMap?: FormControlMap;
+  formControlMap: FormControlMap;
+  customFormControlMap: CustomFormControlMap;
 }) {
   const [state, setState] = useState<CreateStatus>({});
 
@@ -79,6 +81,7 @@ export function ObjectCreateForm({
               keyName={key}
               value={undefined}
               formControlMap={mergedFormControlMap}
+              customFormControlMap={customFormControlMap}
             />
             {state?.error && state.error[key] && (
               <FormMessage variant="error">{state.error[key]}</FormMessage>

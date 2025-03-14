@@ -8,7 +8,7 @@ import {
   RichTextEditor,
   Textarea,
 } from "../drizzle-ui";
-import { FormControlMap } from "../types/types";
+import { CustomFormControlMap, FormControlMap } from "../types/types";
 import { capitalCase } from "change-case-all";
 import { renderValue } from "../lib/shared-utils";
 
@@ -16,10 +16,12 @@ export function RenderFormControl({
   keyName,
   value,
   formControlMap,
+  customFormControlMap,
 }: {
   keyName: string;
   value: any;
   formControlMap: FormControlMap;
+  customFormControlMap: CustomFormControlMap;
 }) {
   switch (formControlMap[keyName]) {
     case "checkbox":
@@ -113,6 +115,14 @@ export function RenderFormControl({
           <Input type="file" name={keyName} id={keyName} />
         </FormControl>
       );
+    case "custom":
+      const CustomFormControl = customFormControlMap[keyName];
+      if (!CustomFormControl) {
+        throw new Error(`custom form control not found for key: ${keyName}`)
+      }
+      return (
+        <CustomFormControl value={value} />
+      )
     default:
       const exhaustiveCheck: never = formControlMap[keyName];
       throw new Error(`unhandled case: ${exhaustiveCheck}`);

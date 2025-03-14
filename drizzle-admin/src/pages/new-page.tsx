@@ -52,6 +52,7 @@ export async function NewPage(props: {
           columnDataTypeMap={columnDataTypeMap}
           formControlMap={drizzleTableConfig.formControlMap}
           curTable={curTable}
+          customFormControlMap={drizzleTableConfig.customFormControlMap}
         />
       </PageContent>
     </PageLayout>

@@ -4,13 +4,15 @@ import {
   UserDeletePageNav,
   UserEditPageNav,
   UserListPageNav,
+  UserRoleCustomFormControl,
   UserRowNav,
   UserViewPageNav,
 } from "@/app/(admin)/_components/users-components";
 
 export const usersTable: DrizzleTableConfig = {
   drizzleTable: users,
-  formControlMap: { image: "file" },
+  formControlMap: { image: "file", role: "custom" },
+  customFormControlMap: { role: UserRoleCustomFormControl },
   components: {
     RowNav: UserRowNav,
     ViewPageNav: UserViewPageNav,

@@ -204,6 +204,7 @@ export async function ListPage(props: {
             curTable={curTable}
             columnDataTypeMap={columnDataTypeMap}
             formControlMap={drizzleTableConfig.formControlMap}
+            customFormControlMap={drizzleTableConfig.customFormControlMap}
           />
         )}
       </PageAside>

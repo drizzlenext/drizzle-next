@@ -2,7 +2,7 @@
 
 import { Button, Form, FormControl, FormMessage } from "../drizzle-ui";
 import { useState } from "react";
-import { ColumnDataTypeMap, FormControlMap } from "../types/types";
+import { ColumnDataTypeMap, CustomFormControlMap, FormControlMap } from "../types/types";
 import { RenderFormControl } from "./render-form-control";
 import { useEffect } from "react";
 import { getFormControlMap } from "../lib/client-utils";
@@ -20,11 +20,13 @@ export function ObjectUpdateForm({
   curTable,
   columnDataTypeMap,
   formControlMap,
+  customFormControlMap,
 }: {
   obj: any;
   curTable: string;
   columnDataTypeMap: ColumnDataTypeMap;
   formControlMap?: FormControlMap;
+  customFormControlMap: CustomFormControlMap;
 }) {
   const [state, setState] = useState<UpdateStatus>({});
   const [curObj, setCurObj] = useState(obj);
@@ -98,6 +100,7 @@ export function ObjectUpdateForm({
               keyName={key}
               value={value}
               formControlMap={mergedFormControlMap}
+              customFormControlMap={customFormControlMap}
             />
             {state?.error && state.error[key] && (
               <FormMessage variant="error">{state.error[key]}</FormMessage>

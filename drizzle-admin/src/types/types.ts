@@ -5,6 +5,12 @@ export type Params = Promise<{ [key: string]: string }>;
 
 export type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
+export type CustomFormControl = (props: {value?: any}) => JSX.Element;
+
+export type CustomFormControlMap = {
+  [key: string]: CustomFormControl;
+}
+
 export type FormControlType =
   | "input"
   | "textarea"
@@ -13,7 +19,8 @@ export type FormControlType =
   | "datetime-local"
   | "number"
   | "richtext"
-  | "file";
+  | "file"
+  | "custom";
 
 export type FormControlMap = {
   [key: string]: FormControlType;
@@ -40,6 +47,7 @@ export type DrizzleTableConfig = {
   tableName?: string;
   path?: string;
   formControlMap?: FormControlMap;
+  customFormControlMap?: CustomFormControlMap;
   components?: {
     RowNav?: AdminRowNav<any>;
     ViewPageNav?: AdminPageNav<any>;
@@ -54,6 +62,7 @@ export type DrizzleTableConfigComplete = {
   tableName: string;
   path: string;
   formControlMap: FormControlMap;
+  customFormControlMap: CustomFormControlMap;
   components?: {
     RowNav?: AdminRowNav<any>;
     ViewPageNav?: AdminPageNav<any>;

@@ -6,8 +6,10 @@ import {
   AdminRowNav,
   AdminPageNavProps,
   AdminRowNavProps,
+  CustomFormControl,
 } from "@/src/types";
 import { User } from "@/schema/users";
+import { FormControl, Label, Select, SelectOption } from "@/src";
 
 export const UserRowNav: AdminRowNav<User> = (
   props: AdminRowNavProps<User>
@@ -82,3 +84,15 @@ export const UserListPageNav: AdminPageNav<User> = (
     </>
   );
 };
+
+export const UserRoleCustomFormControl: CustomFormControl = (props) => {
+  return (
+    <FormControl>
+      <Label>Role</Label>
+      <Select name="role" defaultValue={props.value}>
+        <SelectOption value="admin">admin</SelectOption>
+        <SelectOption value="user">user</SelectOption>
+      </Select>
+    </FormControl>
+  )
+}
