@@ -6,11 +6,13 @@ import {
   AdminRowNav,
   AdminPageNavProps,
   AdminRowNavProps,
+  CustomFormControl,
 } from "drizzle-admin/types";
 import { User } from "@/schema/users";
+import { FormControl, Label, Select, SelectOption } from "drizzle-admin/drizzle-ui";
 
 export const UserRowNav: AdminRowNav<User> = (
-  props: AdminRowNavProps<User>,
+  props: AdminRowNavProps<User>
 ) => {
   return (
     <>
@@ -32,7 +34,7 @@ export const UserRowNav: AdminRowNav<User> = (
 };
 
 export const UserViewPageNav: AdminPageNav<User> = (
-  props: AdminPageNavProps<User>,
+  props: AdminPageNavProps<User>
 ) => {
   return (
     <>
@@ -46,7 +48,7 @@ export const UserViewPageNav: AdminPageNav<User> = (
 };
 
 export const UserEditPageNav: AdminPageNav<User> = (
-  props: AdminPageNavProps<User>,
+  props: AdminPageNavProps<User>
 ) => {
   return (
     <>
@@ -60,7 +62,7 @@ export const UserEditPageNav: AdminPageNav<User> = (
 };
 
 export const UserDeletePageNav: AdminPageNav<User> = (
-  props: AdminPageNavProps<User>,
+  props: AdminPageNavProps<User>
 ) => {
   return (
     <>
@@ -74,13 +76,23 @@ export const UserDeletePageNav: AdminPageNav<User> = (
 };
 
 export const UserListPageNav: AdminPageNav<User> = (
-  props: AdminPageNavProps<User>,
+  props: AdminPageNavProps<User>
 ) => {
   return (
     <>
-      <Link href={`${props.basePath}/${props.resourcePath}/new`}>
-        New
-      </Link>
+      <Link href={`${props.basePath}/${props.resourcePath}/new`}>New</Link>
     </>
   );
 };
+
+export const UserRoleCustomFormControl: CustomFormControl = (props) => {
+  return (
+    <FormControl>
+      <Label>Role</Label>
+      <Select name="role" defaultValue={props.value}>
+        <SelectOption value="admin">admin</SelectOption>
+        <SelectOption value="user">user</SelectOption>
+      </Select>
+    </FormControl>
+  )
+}

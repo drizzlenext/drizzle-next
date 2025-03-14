@@ -9,7 +9,7 @@ import {
   UserViewPageNav,
 } from "@/app/(admin)/_components/users-components";
 
-export const usersTable: DrizzleTableConfig = {
+export const usersTableConfig: DrizzleTableConfig = {
   drizzleTable: users,
   formControlMap: { image: "file", role: "custom" },
   customFormControlMap: { role: UserRoleCustomFormControl },
