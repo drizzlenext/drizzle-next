@@ -28,7 +28,11 @@ export async function create{{tableObj.singularPascalCase}}(
   prevState: Create{{tableObj.singularPascalCase}}State,
   formData: FormData
 ): Promise<Create{{tableObj.singularPascalCase}}State> {
+  if (process.env.NODE_ENV !== "development") {
+    throw new Error("only accessible in development");
+  }
 {{#each uploadColumnNames}}
+
   const {{this.originalCamelCase}}File = formData.get("{{this.originalCamelCase}}") as File;
 
   let {{this.originalCamelCase}}Uri;

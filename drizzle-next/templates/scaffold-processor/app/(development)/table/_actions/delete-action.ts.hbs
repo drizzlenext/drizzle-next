@@ -28,6 +28,10 @@ export async function delete{{tableObj.singularPascalCase}}(
   prevState: Delete{{tableObj.singularPascalCase}}State,
   formData: FormData
 ): Promise<Delete{{tableObj.singularPascalCase}}State> {
+  if (process.env.NODE_ENV !== "development") {
+    throw new Error("only accessible in development");
+  }
+  
   const validatedFields = delete{{tableObj.singularPascalCase}}Schema.safeParse({
     id: formData.get("id"),
   });

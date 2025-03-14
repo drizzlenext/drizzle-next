@@ -31,7 +31,11 @@ export async function update{{tableObj.singularPascalCase}}(
   prevState: Update{{tableObj.singularPascalCase}}State,
   formData: FormData
 ): Promise<Update{{tableObj.singularPascalCase}}State> {
+  if (process.env.NODE_ENV !== "development") {
+    throw new Error("only accessible in development");
+  }
 {{#each uploadColumnNames}}
+
   const {{this.originalCamelCase}}File = formData.get("{{this.originalCamelCase}}") as File;
 
   let {{this.originalCamelCase}}Uri;
