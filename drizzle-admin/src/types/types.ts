@@ -101,12 +101,12 @@ export type DrizzleLayoutConfig = {
   sidebar: SidebarItem[];
 };
 
-export interface SimplifiedColumn {
+export type SimplifiedColumn = {
   name: string;
   dataType: string;
 }
 
-export interface Filter {
+export type Filter = {
   column: string;
   operator: string;
   value: string;

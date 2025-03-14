@@ -5,7 +5,7 @@ import { useState } from "react";
 import { capitalCase } from "change-case-all";
 import { renderValue } from "../lib/shared-utils";
 
-interface DeleteStatus {
+type DeleteStatus = {
   message?: string;
   status?: "success" | "error";
 }

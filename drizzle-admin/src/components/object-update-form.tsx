@@ -7,7 +7,7 @@ import { RenderFormControl } from "./render-form-control";
 import { useEffect } from "react";
 import { getFormControlMap } from "../lib/client-utils";
 
-interface UpdateStatus {
+type UpdateStatus = {
   message?: string;
   status?: "success" | "error";
   error?: {

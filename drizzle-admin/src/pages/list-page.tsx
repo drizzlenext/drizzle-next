@@ -31,7 +31,7 @@ import { ObjectUpdateForm } from "../components/object-update-form";
 import { OPERATOR_MAP } from "../lib/server-constants";
 import { notFound } from "next/navigation";
 
-export interface ListPageParams {
+export type ListPageParams = {
   curTable: string;
   simplifiedColumns: { name: string; dataType: any }[];
   config: DrizzleAdminConfig;

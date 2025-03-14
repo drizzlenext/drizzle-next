@@ -18,7 +18,7 @@ import { SimplifiedColumn, AdminRowNav } from "../types/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-interface CurrentCell {
+type CurrentCell = {
   row: Record<string, any>;
   col: SimplifiedColumn;
   el: HTMLTableCellElement;

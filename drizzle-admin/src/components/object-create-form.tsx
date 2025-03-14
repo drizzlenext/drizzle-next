@@ -6,7 +6,7 @@ import { useState } from "react";
 import { ColumnDataTypeMap, CustomFormControlMap, FormControlMap } from "../types/types";
 import { RenderFormControl } from "./render-form-control";
 
-interface CreateStatus {
+type CreateStatus = {
   message?: string;
   status?: "success" | "error";
   error?: {
