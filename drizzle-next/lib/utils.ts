@@ -525,11 +525,10 @@ export function preflightChecks() {
     process.exit(1);
   }
 
-  // commenting this out as we now offer a none css strategy
-  // if (!hasTailwindCSS()) {
-  //   log.red("tailwindcss is required");
-  //   process.exit(1);
-  // }
+  if (!hasTailwindCSS()) {
+    log.red("tailwindcss is required");
+    process.exit(1);
+  }
 
   if (!hasTsConfig()) {
     log.red("typescript is required");
