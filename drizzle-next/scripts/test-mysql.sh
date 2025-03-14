@@ -25,13 +25,11 @@ drizzle-next scaffold private_scaffold -c text_field:text integer_field:int real
 drizzle-next scaffold public_scaffold -c text_field:text integer_field:int real_field:real decimal_field:decimal boolean_field:boolean file_field:file timestamp_field:timestamp
 drizzle-next scaffold category -c name:varchar
 drizzle-next scaffold post -c category_id:references_select title:varchar likes:int published_at:timestamp content:text_tiptap
-# drizzle-next add stripe 
 npx drizzle-kit generate
 npx drizzle-kit migrate
 npx tsx scripts/create-user.ts user@example.com pw
 npx tsx scripts/create-user.ts admin@example.com pw
 npx tsx scripts/grant-admin.ts admin@example.com
-# npx tsx scripts/create-price.ts
 
 sed -i 's/next dev --turbopack/next dev/' package.json
 
