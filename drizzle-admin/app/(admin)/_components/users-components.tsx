@@ -9,7 +9,7 @@ import {
   CustomFormControl,
 } from "@/src/types";
 import { User } from "@/schema/users";
-import { FormControl, Label, Select, SelectOption } from "@/src";
+import { FormControl, Label, Select, SelectOption } from "@/src/drizzle-ui";
 
 export const UserRowNav: AdminRowNav<User> = (
   props: AdminRowNavProps<User>
