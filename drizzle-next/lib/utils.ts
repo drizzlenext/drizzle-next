@@ -408,7 +408,6 @@ export function loadDrizzleNextConfig(): DrizzleNextConfig {
     process.cwd(),
     "./drizzle-next.config.ts"
   )).default;
-  global.globalConfig = drizzleNextConfig;
   return drizzleNextConfig;
 }
 
@@ -436,7 +435,6 @@ export function completeDrizzleNextConfig(
     install: partialConfig.install ?? true,
     pluralizeEnabled: partialConfig.pluralizeEnabled ?? true,
   };
-  global.globalConfig = completeConfig;
   return completeConfig;
 }
 

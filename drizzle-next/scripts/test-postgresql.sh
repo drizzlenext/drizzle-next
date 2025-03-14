@@ -39,7 +39,6 @@ drizzle-next init --package-manager pnpm \
     --admin \
     --latest
 drizzle-next add tiptap
-drizzle-next add stripe
 pnpm i -D prettier prettier-plugin-tailwindcss
 pnpm i ../drizzle-next/drizzle-admin
 else
@@ -51,7 +50,6 @@ drizzle-next init --package-manager pnpm \
     --latest \
     --no-install
 drizzle-next add tiptap --no-install
-drizzle-next add stripe --no-install
 fi
 
 cp ~/code/drizzle-next-env/.env.postgresql .env
@@ -68,7 +66,6 @@ npx drizzle-kit migrate
 npx tsx scripts/create-user.ts user@example.com pw
 npx tsx scripts/create-user.ts admin@example.com pw
 npx tsx scripts/grant-admin.ts admin@example.com
-npx tsx scripts/create-dynamic-product.ts
 fi
 
 sed -i 's/next dev --turbopack/next dev/' package.json

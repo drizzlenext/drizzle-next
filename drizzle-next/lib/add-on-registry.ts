@@ -1,4 +1,3 @@
-import { StripeProcessor } from "../processors/stripe-processor";
 import { TiptapProcessor } from "../processors/tiptap-processor";
 import { DrizzleNextProcessor } from "./types";
 
@@ -15,12 +14,6 @@ interface ClassMap {
 }
 
 export const ADD_ON_REGISTRY: ClassMap = {
-  stripe: {
-    Processor: StripeProcessor,
-    name: "stripe",
-    description:
-      "a basic stripe integration with one-time, recurring, and dynamic payment examples",
-  },
   tiptap: {
     Processor: TiptapProcessor,
     name: "tiptap",
