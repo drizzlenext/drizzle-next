@@ -31,16 +31,15 @@ You will be asked a few questions to configure the app:
 ? Which package manager would you like to use? npm
 ? Which database dialect would you like to use? sqlite
 ? Which primary key generation strategy would you like to use? cuid2
-? Which authentication solution would you like to use? authjs
-? Which auth providers would you like to use? credentials,github,google
-? Do you want to add an admin dashboard with role-based authorization? yes
+? Do you want to add Auth.js authentication? yes
+? Do you want to add an admin dashboard? yes
 ```
 
 ::: info
 Alternatively, you can also run the command non-interactively:
 
 ```bash
-npx drizzle-next@latest init --package-manager npm --db-dialect sqlite --pk-strategy cuid2 --css-strategy tailwind --color-palette indigo --auth-solution authjs --auth-providers credentials,github,google --admin
+npx drizzle-next@latest init --package-manager npm --db-dialect sqlite --pk-strategy cuid2 --auth --admin
 ```
 
 :::

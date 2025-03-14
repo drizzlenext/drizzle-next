@@ -16,7 +16,7 @@ import {
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { DrizzleLayoutConfig } from "drizzle-admin/types";
-import { LogOutIcon, UserIcon, LayoutDashboardIcon } from "lucide-react";
+import { LogOutIcon, UserIcon, GaugeIcon } from "lucide-react";
 
 const config: DrizzleLayoutConfig = {
   nav: [
@@ -30,7 +30,7 @@ const config: DrizzleLayoutConfig = {
         {
           text: "Admin Dashboard",
           link: "/admin",
-          icon: LayoutDashboardIcon,
+          icon: GaugeIcon,
         },
         { text: "Users", link: "/admin/users", icon: UserIcon },
       ],
