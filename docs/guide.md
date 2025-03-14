@@ -133,7 +133,7 @@ Users will be assigned a `user` role when created. This behavior can be changed 
 
 ## File uploads
 
-drizzle-next supports a `file` data type. This creates a text db column to store the file path along with a basic ui for uploads to the file system
+drizzle-next supports a `file` data type. This creates a text db column to store the file path along with a basic ui for uploads to the file system.
 
 Example:
 
@@ -141,17 +141,23 @@ Example:
 npx drizzle-next@latest scaffold media -c title:text image:file video:file
 ```
 
-:::tip
-Next.js only generates routes for public files at compile time. If you need to serve the uploaded files, putting them into the `public` directory will not work in production without a new build every time.
+By default, file uploads are placed in a git ignored `uploads` directory at the root of the project.
 
-If the uploaded files need to be served immediately after uploading, consider using a web server like nginx to serve the static files or an s3 compatible bucket instead.
+An `uploads` route handler is used for serving the static files.
+
+:::tip
+Do not use the `public` directory for uploads because Next.js only generates routes for public files at compile time.
 :::
 
-In development, drizzle-next will put the files in `public/uploads`, so that they can be served during development. This works in development because routes are compiled without running a new build.
+:::tip
+For better performance, consider using a web server like nginx to serve the uploaded files or an s3 compatible bucket.
+:::
 
-In production, drizzle-next will put the files in `/var/www/uploads`. You'll have to find a way to serve these files. For example, pointing an nginx location `/uploads/` to the `/var/www/uploads` folder. Note: This won't work in serverless environments. If you're using serverless, consider using object storage like s3.
+:::tip
+If you're using serverless, consider using object storage like s3.
+:::
 
-The file URI will be saved to the database. The upload paths can be changed in `file-utils.ts`.
+The file URI will be saved to the database. The upload paths can be changed in `upload.ts`.
 
 Example nginx config:
 
@@ -188,24 +194,6 @@ The `add` command will install all necessary UI components, npm dependencies and
 
 Then it will write all of the necessary code for the add-on to your project.
 
-### Stripe
-
-```bash
-npx drizzle-next@latest add stripe
-```
-
-Code will be generated for a one-time purchase, monthly subscription plan, and a dynamic pricing checkout. This includes the webhook, checkout session, and customer portal api endpoints.
-
-A pricing page will be generated. The buttons will initiate a stripe checkout if the user is logged in. If the user is not logged in, they will redirect to the sign in page.
-
-A `create-price.ts` script is provided to create the initial products on Stripe and on the local database. This is required before using the one-time purchase and subscription plan. You must provide the implementation for fulfulling one-time purchases or provisioning subscriptions. That is marked as `TODO` in the webhook route.
-
-The dynamic pricing does not require creating and mapping to products on Stripe. Dynamic pricing is useful if you need to generate a custom price, manage products, and manage orders in your own database. You must provide the implementation for creating and processing dynamic orders. That is also marked as `TODO` in the dynamic checkout session and webhook route.
-
-The checkout sessions will be created with the user's email on first checkout. The user's stripe customer id will be saved in the checkout completed webhook. Subsequent checkouts will use the user's stripe customer id. This ensures that the Stripe invoice records are associated to the same Stripe customer, and allows the user to see the full invoice history in the customer portal.
-
-Any of the code and content can be changed to fit your business model. The goal of this Stripe automation is to provide some minimal integration patterns to use as a starting point.
-
 ### Tiptap Editor
 
 ```bash
@@ -224,64 +212,79 @@ npx drizzle-next@latest scaffold posts -c title:text content:text_tiptap
 
 ## Project Structure
 
-This is the drizzle-next project structure. The scaffolding automations will write to specific folders and files, so it's recommended to not move things around if you plan to continue using drizzle-next automations.
+### Drizzle Next project structure.
 
 ```text
-- actions
-  - admin - server actions requiring admin authorization
-  - auth - server actions for authentication
-  - private - server actions requiring logged in user
-  - public - server actions that are publicly accessible
 - app
-  - (admin) - route group requiring admin authorization
-  - (auth) - route group for authentication
+  - (admin) - route group for the drizzle admin engine
+  - (auth) - route group for signin and signout feature
+  - (development) - route group where scaffolded code is placed
   - (private) - route group requiring logged in user
   - (public) - route group that is publicly accessible
+  - api - api routes
+  - uploads - upload route handler for serving uploaded files
 - components
-  - admin - components for admin routes
-  - auth - components for authentication
-  - layouts - components for dashboard layouts
-  - private - components for private routes
-  - public - components for public routes
-  - ui - ui components
+  - ui - customizable ui components
 - drizzle - sql migrations
 - lib - configuration and utilities
 - public - static assets
-- queries - reusable queries and return types
 - schema - drizzle schemas
 - scripts - executable scripts
 - styles - css
-- types - module augmentation
+- types - module augmentation and types
 ```
 
-## Queries
+### Scaffold structure
 
-The `queries` folder contains modules with reusable queries and return types from running the `scaffold` command.
+Drizzle Next uses a feature based, instead of type based, structure for scaffolding. The actions, components, and utilities are colocated with the routes. This convention reduces the number of directories that need to be generated. The scaffolded code is meant to be changed and moved around by the developer, so it is simpler to have it all neatly placed in one folder.
 
-Extracting the query functions makes it reusable by putting it in a shared module. One other advantage is that it allows us to create a reusable Awaited ReturnType. For example:
+```text
+- app
+  - (development)
+    - posts
+      - _actions
+      - _components
+      - _lib
+      - [id]
+      - new
+```
+
+## Awaited Return Types
+
+The `_lib` folder for each scaffold contains reusable queries and return types.
+
+There are two main advantages to extracting queries into a separate module.
+
+1. Extracting the query functions makes it reusable in other parts of the code. 
+2. It allows us to create a reusable Awaited ReturnType which reduces type boilerplate.
+
+For example, here is a `getPostById` function:
 
 ```ts
-export type PostsWithRelations = Awaited<
-  ReturnType<typeof getPostsWithRelations>
+import { eq } from "drizzle-orm";
+import { db } from "@/lib/db";
+import { posts } from "@/schema/posts";
+
+export type PostRow = Awaited<
+  ReturnType<typeof getPostById>
 >;
 
-export async function getPostsWithRelations() {
-  return await db.query.posts.findMany({
-    with: {
-      category: true,
-    },
+export async function getPostById(id: string) {
+  return await db.query.posts.findFirst({
+    where: eq(posts.id, id),
+    with: { category: true },
   });
 }
 ```
 
-The `PostsWithRelations` type is automatically defined by whatever is returned from the `getPostsWithRelations` function.
+The `PostRow` type is automatically defined by whatever is returned from the `getPostById` function.
 
 This becomes more relevant as your project grows in size and you must deal with more nested relations. Without an automatic return type, you would spend a large amount of time writing types by hand to annotate your React component props.
 
-With the awaited return type, we get a type that might look something like this if we wrote it by hand:
+With the awaited return type, we get a type that might look something like this if we were to write it by hand:
 
 ```ts
-type PostsWithRelations = {
+type PostRow = {
   id: string;
   title: string;
   content: string;
@@ -295,10 +298,10 @@ type PostsWithRelations = {
 Now we can annotate our components as needed without having to write the type ourself:
 
 ```tsx
-import { PostsWithRelations } from "@/queries/post-queries";
+import { PostRow } from "../_lib/get-post-by-id";
 
-export function PostTable({ postList }: { postList: PostsWithRelations }) {
-...
+export function PostDetail({ postRow }: { postRow: PostRow }) {
+  // ...
 }
 ```
 
@@ -308,7 +311,7 @@ This makes it easier to achieve full stack type safety across the front end and 
 
 Number and case transformations will be automatically applied to the generated code.
 
-drizzle-next has two options when it comes to naming conventions. Plurize Enabled and Pluralize Disabled.
+Drizzle Next has two options when it comes to naming conventions. Plurize Enabled and Pluralize Disabled.
 
 Case transformations (camel case, snake case, etc) will always be applied, however number transformations (singular/plural/original) will be applied depending on the pluralize mode used.
 
@@ -318,7 +321,7 @@ You can change the mode in `drizzle-next.config.ts` by setting the `pluralizeEna
 
 ### Pluralize Enabled
 
-Pluralized Enabled is the default setting. With pluralize enabled, drizzle-next uses naming conventions as described in the table below.
+Pluralized Enabled is the default setting. With pluralize enabled, Drizzle Next uses naming conventions as described in the table below.
 
 Regardless of whether you pass in `foo_bar` or `foo_bars` as the table name, the number transformations will be applied to each part of the code, along with the case transformation.
 
@@ -345,7 +348,7 @@ Regardless of whether you pass in `foo_bar` or `foo_bars` as the table name, the
 
 ### Pluralize Disabled
 
-With pluralize disabled, drizzle-next will not apply any number transformations to the generated code.
+With pluralize disabled, Drizzle Next will not apply any number transformations to the generated code.
 
 If you pass in `foo_bar` as the table name, it will always use the singular form.
 
