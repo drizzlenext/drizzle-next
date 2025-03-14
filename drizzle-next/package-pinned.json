@@ -2,7 +2,6 @@
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.4",
     "@paralleldrive/cuid2": "^2.2.2",
-    "@stripe/stripe-js": "^5.5.0",
     "bcrypt": "^5.1.1",
     "better-sqlite3": "^11.7.0",
     "dotenv": "^16.4.7",
@@ -17,7 +16,6 @@
     "next-auth": "5.0.0-beta.25",
     "nodemailer": "^6.9.16",
     "pg": "^8.13.1",
-    "stripe": "^17.5.0",
     "@tiptap/core": "^2.8.0",
     "@tiptap/extension-code-block-lowlight": "^2.11.3",
     "@tiptap/extension-image": "^2.11.3",
