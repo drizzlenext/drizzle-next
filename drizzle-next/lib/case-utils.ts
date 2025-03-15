@@ -1,7 +1,7 @@
 import pluralize from "pluralize";
 import { Case } from "change-case-all";
 
-export interface Cases {
+export type Cases = {
   original: string;
   originalCamelCase: string;
   originalCapitalCase: string;
@@ -18,7 +18,7 @@ export interface Cases {
   pluralKebabCase: string;
 }
 
-interface CaseFactoryOpts {
+type CaseFactoryOpts = {
   pluralize: boolean;
 }
 

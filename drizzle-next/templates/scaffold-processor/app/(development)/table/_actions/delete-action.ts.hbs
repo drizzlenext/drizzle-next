@@ -16,7 +16,7 @@ const delete{{tableObj.singularPascalCase}}Schema = z.object({
   {{/each}}
 }).pick({ id: true });
 
-export interface Delete{{tableObj.singularPascalCase}}State {
+export type Delete{{tableObj.singularPascalCase}}State = {
   errors?: {
     id?: string[];
   };

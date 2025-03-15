@@ -14,7 +14,7 @@ const insert{{tableObj.singularPascalCase}}Schema = z.object({
   {{/each}}
 });
 
-export interface Create{{tableObj.singularPascalCase}}State {
+export type Create{{tableObj.singularPascalCase}}State = {
   errors?: {
     {{#each columns}}
     {{this}}?: string[];

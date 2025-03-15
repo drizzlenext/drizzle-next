@@ -7,7 +7,7 @@ import fs from "fs";
 import path from "path";
 
 // Type definitions for dependencies
-interface Dependencies {
+type Dependencies = {
   [key: string]: string;
 }
 

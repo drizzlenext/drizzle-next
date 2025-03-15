@@ -16,7 +16,7 @@ import {
 } from "../lib/pk-strategy";
 import { dialectStrategyFactory } from "../lib/strategy-factory";
 
-interface AuthStrategy {
+type AuthStrategy = {
   appendPlaceholdersToEnvLocal: () => void;
   dependencies: string[];
   devDependencies: string[];
@@ -24,7 +24,7 @@ interface AuthStrategy {
   printCompletionMessage(): void;
 }
 
-interface AuthStrategyMap {
+type AuthStrategyMap = {
   github: AuthStrategy;
   google: AuthStrategy;
   credentials: AuthStrategy;
@@ -115,7 +115,7 @@ export const authStrategyMap: AuthStrategyMap = {
   },
 };
 
-interface AuthDbDialect {
+type AuthDbDialect = {
   authSchemaTemplate: string;
   pkDataType: string;
 }

@@ -1,4 +1,4 @@
-export interface DrizzleNextConfig {
+export type DrizzleNextConfig = {
   version: string;
   packageManager: PackageManager;
   latest: boolean;
@@ -20,7 +20,7 @@ export type PkStrategy =
   | "nanoid"
   | "auto_increment";
 
-export interface DrizzleNextProcessor {
+export type DrizzleNextProcessor = {
   opts: DrizzleNextConfig;
   dependencies: string[];
   devDependencies: string[];
@@ -32,21 +32,21 @@ export interface DrizzleNextProcessor {
 
 export type DbDialect = "postgresql" | "mysql" | "sqlite";
 
-export interface DataTypeStrategyMap {
+export type DataTypeStrategyMap = {
   [key: string]: DataTypeStrategy;
 }
 
 export type AuthorizationLevel = "admin" | "private" | "public";
 
-export interface ScaffoldProcessorOpts extends DrizzleNextConfig {
+export type ScaffoldProcessorOpts = {
   table: string;
   columns: string[];
   enableCompletionMessage: boolean;
   enableUiScaffold: boolean;
   enableDbScaffold: boolean;
-}
+} & DrizzleNextConfig;
 
-export interface DataTypeStrategyOpts {
+export type DataTypeStrategyOpts = {
   keyName: string;
   columnName: string;
   referencesTable?: string;
@@ -62,7 +62,7 @@ export type FormComponent =
   | "select"
   | "tiptap-editor";
 
-export interface DataTypeStrategy {
+export type DataTypeStrategy = {
   jsType: JSType;
   sqlType: string;
   formTemplate: string;
@@ -72,7 +72,7 @@ export interface DataTypeStrategy {
   getKeyValueStrForSchema(opts: DataTypeStrategyOpts): string;
 }
 
-export interface DbDialectStrategy {
+export type DbDialectStrategy = {
   dialect: DbDialect;
   drizzleDbCorePackage: string;
   tableConstructor: string;
@@ -88,7 +88,7 @@ export interface DbDialectStrategy {
   timestampImport: string;
 }
 
-export interface DbPackageStrategy extends DrizzleNextProcessor {
+export type DbPackageStrategy =  {
   opts: DrizzleNextConfig;
   dialect: DbDialect;
   copyCreateUserScript(): void;
@@ -96,6 +96,6 @@ export interface DbPackageStrategy extends DrizzleNextProcessor {
   appendDbUrl(): void;
   copyDbInstance(): void;
   printCompletionMessage(): void;
-}
+} & DrizzleNextProcessor;
 
 export type DbPackage = "pg" | "mysql2" | "better-sqlite3";

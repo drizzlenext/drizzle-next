@@ -3,13 +3,13 @@ import { DrizzleNextProcessor } from "./types";
 
 type ClassType<T> = new (...args: any[]) => T;
 
-interface DrizzleNextAddOn {
+type DrizzleNextAddOn = {
   Processor: ClassType<DrizzleNextProcessor>;
   name: string;
   description: string;
 }
 
-interface ClassMap {
+type ClassMap = {
   [key: string]: DrizzleNextAddOn;
 }
 

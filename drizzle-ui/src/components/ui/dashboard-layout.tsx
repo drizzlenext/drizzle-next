@@ -24,10 +24,10 @@ type SidebarItem = {
 
 // the sidebarOpen flag must begin as undefined
 // to handle different starting states for sm and md resolutions
-interface DashboardLayoutState {
+type DashboardLayoutState = {
   sidebarOpen?: boolean;
   navOpen?: boolean;
-}
+};
 
 const DashboardLayoutContext = React.createContext<{
   state: DashboardLayoutState;

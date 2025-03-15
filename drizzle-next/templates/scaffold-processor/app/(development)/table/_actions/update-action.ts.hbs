@@ -17,7 +17,7 @@ const update{{tableObj.singularPascalCase}}Schema = z.object({
   .partial()
   .required({ id: true });
 
-export interface Update{{tableObj.singularPascalCase}}State {
+export type Update{{tableObj.singularPascalCase}}State = {
   errors?: {
     {{#each columns}}
     {{this}}?: string[];

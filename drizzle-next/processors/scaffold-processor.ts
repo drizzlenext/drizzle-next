@@ -17,7 +17,7 @@ import { pkStrategyImportTemplates } from "../lib/pk-strategy";
 import { caseFactory, Cases } from "../lib/case-utils";
 import { dialectStrategyFactory } from "../lib/strategy-factory";
 
-interface ScaffoldDbDialectStrategy {
+type ScaffoldDbDialectStrategy = {
   schemaTableTemplatePath: string;
 }
 
@@ -45,7 +45,7 @@ const formComponentImports: Record<FormComponent, string> = {
   "tiptap-editor": `import { TiptapEditor } from "@/components/ui/tiptap-editor";`,
 };
 
-interface ValidatedColumn {
+type ValidatedColumn = {
   columnName: string; // the original column name passed in from cli
   dataType: string; // the datatype
   caseVariants: Cases; // the case variants of the original column

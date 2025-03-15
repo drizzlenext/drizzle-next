@@ -6,7 +6,7 @@ import { users } from "@/schema/users";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
-export interface AdminSignInState {
+export type AdminSignInState = {
   message?: string;
 }
 

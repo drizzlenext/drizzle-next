@@ -5,9 +5,9 @@ import { cn } from "../../lib/utils";
 import { PanelRightIcon } from "lucide-react";
 import { Button } from "./button";
 
-interface PageLayoutState {
+type PageLayoutState = {
   asideOpen: boolean;
-}
+};
 
 const PageLayoutContext = React.createContext<{
   state: PageLayoutState;
