@@ -1,4 +1,4 @@
-# Drizzle Next Documentation
+# Drizzle Next
 
 Drizzle Next is a TypeScript web framework for scaffolding automation.
 

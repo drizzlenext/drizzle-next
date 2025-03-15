@@ -1,4 +1,4 @@
-# Guide
+# Drizzle Next Guide
 
 This guide covers the usage details and features of Drizzle Next.
 

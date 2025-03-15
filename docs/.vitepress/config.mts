@@ -8,8 +8,9 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
-      { text: "Docs", link: "/introduction" },
-      { text: "Drizzle UI", link: "https://www.drizzle-next.com/ui" },
+      { text: "Drizzle Next", link: "/drizzle-next/" },
+      { text: "Drizzle Admin", link: "/drizzle-admin"},
+      { text: "Drizzle UI", link: "/drizzle-ui" },
       { text: "Demo", link: "https://demo.drizzle-next.com" },
     ],
 
@@ -19,10 +20,19 @@ export default defineConfig({
         items: [
           // { text: "Markdown Examples", link: "/markdown-examples" },
           // { text: "Runtime API Examples", link: "/api-examples" },
-          { text: "Introduction", link: "/introduction" },
-          { text: "Installation", link: "/installation" },
-          { text: "Guide", link: "/guide" },
-          { text: "About", link: "/about" },
+          { text: "Drizzle Next", link: "/drizzle-next/", items: [
+            { text: "Installation", link: "/drizzle-next/installation" },
+            { text: "Guide", link: "/drizzle-next/guide" },
+            { text: "About", link: "/drizzle-next/about" },
+          ]},
+          { text: "Drizzle Admin", link: "/drizzle-admin/", items: [
+            { text: "Installation", link: "/drizzle-admin/installation"},
+            { text: "Guide", link: "/drizzle-admin/guide"},
+          ]},
+          { text: "Drizzle UI", link: "/drizzle-ui/", items: [
+            { text: "Installation", link: "/drizzle-ui/installation"},
+            { text: "Guide", link: "/drizzle-ui/guide"}
+          ]}
         ],
       },
     ],

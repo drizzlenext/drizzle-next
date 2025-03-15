@@ -1,4 +1,4 @@
-# Installation
+# Drizzle Next Installation
 
 This guide covers everything you need to know to install and create your first application.
 
