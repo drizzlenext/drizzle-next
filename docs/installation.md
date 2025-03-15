@@ -78,8 +78,6 @@ In this example, we'll create a simple blog application.
 
 First, open a new terminal.
 
-For the following scaffolds, make sure to choose `admin` as the authorization level.
-
 Create a `categories` schema:
 
 ```bash
