@@ -38,7 +38,7 @@ The `--no-db` flag allows you to skip the generation of the Drizzle database tab
 
 ## Data types
 
-The following are data types that can be used with the `scaffold` command. Most of the data types in Drizzle ORM are also supported in drizzle-next.
+The following are data types that can be used with the `scaffold` command. Most of the data types in Drizzle ORM are also supported in Drizzle Next.
 
 **postgresql data types**
 
@@ -54,7 +54,7 @@ integer, real, text, boolean, bigint, timestamp
 
 ## Primary key strategy
 
-drizzle-next supports the following primary key generation strategies:
+Drizzle Next supports the following primary key generation strategies:
 
 - `uuidv4` - Uses the `crypto` package
 - `cuid2` - Uses the `@paralleldrive/cuid2` package
@@ -66,7 +66,7 @@ The strategy that you choose during the `init` process will be saved in `drizzle
 
 ## Foreign key constraints
 
-drizzle-next supports adding foreign key constraints using the following special data types:
+Drizzle Next supports adding foreign key constraints using the following special data types:
 
 - `references`
 - `references_select`
@@ -375,4 +375,4 @@ This mode was added to support non-English projects where pluralization may not 
 
 Drizzle Next provides a `--latest` option to install latest dependencies during the `init` command. This means you'll get the latest cutting edge versions of Drizzle ORM, Auth.js, TailwindCSS, Zod, and other packages. However, you may need to resolve any unexpected issues.
 
-By default, you'll get the pinned versions of each top-level dependency during the `init` command. The pinned versions can be found in `package-pinned.json` in the drizzle-next GitHub repo. Each build is tested before latest dependencies are merged as the pinned dependencies.
+By default, you'll get the pinned versions of each top-level dependency during the `init` command. The pinned versions can be found in `package-pinned.json` in the Drizzle Next GitHub repo. Each build is tested before latest dependencies are merged as the pinned dependencies.
