@@ -121,8 +121,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
       outputPath: "app/(admin)/api/[...segments]/route.ts",
     });
     renderTemplate({
-      inputPath: "admin-processor/app/(admin)/drizzle-admin.config.ts.hbs",
-      outputPath: "app/(admin)/drizzle-admin.config.ts",
+      inputPath: "admin-processor/app/(admin)/_lib/drizzle-admin.config.ts.hbs",
+      outputPath: "app/(admin)/_lib/drizzle-admin.config.ts",
       data: {
         dbDialect: this.opts.dbDialect,
       },

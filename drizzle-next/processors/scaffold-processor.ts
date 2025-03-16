@@ -646,12 +646,12 @@ export class ScaffoldProcessor {
       `\n    { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}" },`,
     );
     insertTextAfterIfNotExists(
-      "app/(admin)/drizzle-admin.config.ts",
+      "app/(admin)/_lib/drizzle-admin.config.ts",
       "schema: {",
       `\n    ${tableObj.pluralCamelCase}: { drizzleTable: ${tableObj.pluralCamelCase} },`,
     );
     prependToFileIfNotExists(
-      "app/(admin)/drizzle-admin.config.ts",
+      "app/(admin)/_lib/drizzle-admin.config.ts",
       `import { ${tableObj.pluralCamelCase} } from "@/schema/${tableObj.pluralKebabCase}";\n`,
     );
   }

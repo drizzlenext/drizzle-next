@@ -1,4 +1,4 @@
-import { config } from "@/app/(admin)/drizzle-admin.config";
+import { config } from "@/app/(admin)/_lib/drizzle-admin.config";
 import {
   DELETE_ROUTE,
   GET_ROUTE,
