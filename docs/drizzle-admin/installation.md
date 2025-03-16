@@ -16,7 +16,7 @@ See the [Installation Guide for Drizzle Next](/drizzle-next/installation).
 
 ## Option 2: Standalone Installation
 
-Drizzle Admin can be installed without using Drizzle Next. This might be useful if you have an existing Next/Drizzle project, and you want to add an admin dashboard for your existing Drizzle schema.
+Drizzle Admin can be installed without using Drizzle Next. This might be useful if you have an existing Next/Drizzle project, and you want to add an admin dashboard for your existing Drizzle schema. This option might also be preferred if you need to roll your own auth.
 
 :::warning
 Keep in mind that Drizzle Admin does not include authentication and authorization. It only provides the React components for generating the dashboard.
@@ -41,7 +41,7 @@ You may run into issues if you're on previous major versions of these depenenden
 ### Step 1: Install Drizzle Admin
 
 :::tip
-Before going through this installation guide, we recommend going through the [Drizzle Next Installation Guide](/drizzle-next/installation) so you can use that as a reference.
+Before going through this installation guide, we recommend going through the [Drizzle Next Installation Guide](/drizzle-next/installation) so you can use the generated code as a reference.
 :::
 
 First, install Drizzle Admin:

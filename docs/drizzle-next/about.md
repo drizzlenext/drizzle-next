@@ -1,6 +1,6 @@
 # About Drizzle Next
 
-Drizzle Next is suitable for full stack monolithic server side rendered web applications. It is a full stack tool kit that automates away the time consuming things you need to do at the start of a new full stack Next.js project, saving you days worth of boilerplate coding.
+This page covers the thought process behind Drizzle Next, and why it was built.
 
 ## Philosophy
 

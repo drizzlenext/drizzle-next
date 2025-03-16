@@ -9,8 +9,8 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Drizzle Next", link: "/drizzle-next/" },
-      { text: "Drizzle Admin", link: "/drizzle-admin"},
-      { text: "Drizzle UI", link: "/drizzle-ui" },
+      { text: "Drizzle Admin", link: "/drizzle-admin/"},
+      { text: "Drizzle UI", link: "/drizzle-ui/" },
       { text: "Demo", link: "https://demo.drizzle-next.com" },
     ],
 

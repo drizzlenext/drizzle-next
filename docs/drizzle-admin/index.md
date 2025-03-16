@@ -4,7 +4,9 @@ Drizzle Admin is a React component that turns your Drizzle schema into an admin 
 
 ## Example
 
-You have an existing Drizzle table:
+Here's a quick usage demo.
+
+You have one or more Drizzle tables.
 
 ```tsx
 import {
@@ -15,8 +17,6 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { categories } from "@/schema/categories";
-
-export type Post = typeof posts.$inferSelect;
 
 export const posts = pgTable(
   "posts",
@@ -75,5 +75,6 @@ export default async function Page(props: {
 
 ```
 
-You'll get a customizable admin dashboard where you can create, read, update, and delete posts.
+You'll get a customizable admin dashboard where you can manage your data.
 
+The dashboard can be customized.
