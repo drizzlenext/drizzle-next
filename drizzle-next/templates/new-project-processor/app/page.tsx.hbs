@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DarkModeToggle } from "@/components/ui/dark-mode";
 import {
   CloudDrizzleIcon,
   ExternalLinkIcon,
-  GaugeIcon,
-  LayoutDashboardIcon,
+  ShieldIcon,
+  UserIcon,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -12,28 +13,43 @@ export default function Page() {
   return (
     <div className="flex h-screen flex-col">
       <div className="flex flex-1 flex-col justify-center">
-        <main className="m-auto flex w-72 flex-1 flex-col justify-center gap-5">
-          <div className="ml-auto">
+        <main className="m-auto flex w-72 flex-col justify-center gap-2">
+          <div className="flex justify-end">
             <DarkModeToggle />
           </div>
-          <h1 className="text-primary-600 dark:text-primary-400 flex items-center gap-2 font-mono text-4xl">
-            <CloudDrizzleIcon size={36} /> Drizzle Next
-          </h1>
-          <Link href="https://www.drizzle-next.com" target="_blank">
-            <Button className="flex w-full items-center justify-center gap-2">
-              <ExternalLinkIcon /> View Documentation
-            </Button>
-          </Link>
-          <Link href="/dashboard">
-            <Button className="flex w-full items-center justify-center gap-2">
-              <LayoutDashboardIcon /> User Dashboard
-            </Button>
-          </Link>
-          <Link href="/admin">
-            <Button className="flex w-full items-center justify-center gap-2">
-              <GaugeIcon /> Admin Dashboard
-            </Button>
-          </Link>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <CloudDrizzleIcon /> Drizzle Next
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-2">
+              <Link href="/dashboard">
+                <Button
+                  variant="outline"
+                  className="flex w-full items-center justify-start gap-2"
+                >
+                  <UserIcon /> User Login
+                </Button>
+              </Link>
+              <Link href="/admin">
+                <Button
+                  variant="outline"
+                  className="flex w-full items-center justify-start gap-2"
+                >
+                  <ShieldIcon /> Admin Login
+                </Button>
+              </Link>
+              <Link href="https://www.drizzle-next.com" target="_blank">
+                <Button
+                  variant="muted"
+                  className="flex w-full items-center justify-start gap-2"
+                >
+                  <ExternalLinkIcon /> Documentation
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
         </main>
       </div>
     </div>
