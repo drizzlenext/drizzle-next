@@ -24,7 +24,7 @@ export type Delete{{tableObj.singularPascalCase}}State = {
   status?: "success" | "error";
 }
 
-export async function delete{{tableObj.singularPascalCase}}(
+export async function delete{{tableObj.singularPascalCase}}Action(
   prevState: Delete{{tableObj.singularPascalCase}}State,
   formData: FormData
 ): Promise<Delete{{tableObj.singularPascalCase}}State> {

@@ -238,12 +238,17 @@ Drizzle Next uses a feature based, instead of type based, structure for scaffold
 - app
   - (development)
     - posts
-      - _actions
       - _components
       - _lib
       - [id]
       - new
 ```
+
+:::tip
+All routes in the `(development)` route group are by default only accessible when the `NODE_ENV` environment variable is set to `development`. This prevents accidental exposure of scaffolded code in production.
+
+The scaffolded code can be changed, moved around, deleted, or just saved as a reference.
+:::
 
 ## Awaited Return Types
 

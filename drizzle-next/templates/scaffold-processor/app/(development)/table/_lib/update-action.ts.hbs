@@ -1,5 +1,6 @@
 "use server";
 
+import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { db } from "@/lib/db";
@@ -8,13 +9,15 @@ import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCas
 import { uploadFile } from "@/lib/upload";
 {{/if}}
 
-const insert{{tableObj.singularPascalCase}}Schema = z.object({
+const update{{tableObj.singularPascalCase}}Schema = z.object({
   {{#each validatedColumns}}
   {{this.caseVariants.originalCamelCase}}: {{this.zodCode}},
   {{/each}}
-});
+})
+  .partial()
+  .required({ id: true });
 
-export type Create{{tableObj.singularPascalCase}}State = {
+export type Update{{tableObj.singularPascalCase}}State = {
   errors?: {
     {{#each columns}}
     {{this}}?: string[];
@@ -24,10 +27,10 @@ export type Create{{tableObj.singularPascalCase}}State = {
   status?: "success" | "error";
 }
 
-export async function create{{tableObj.singularPascalCase}}(
-  prevState: Create{{tableObj.singularPascalCase}}State,
+export async function update{{tableObj.singularPascalCase}}Action(
+  prevState: Update{{tableObj.singularPascalCase}}State,
   formData: FormData
-): Promise<Create{{tableObj.singularPascalCase}}State> {
+): Promise<Update{{tableObj.singularPascalCase}}State> {
   if (process.env.NODE_ENV !== "development") {
     throw new Error("only accessible in development");
   }
@@ -45,7 +48,7 @@ export async function create{{tableObj.singularPascalCase}}(
   }
 {{/each}}
 
-  const validatedFields = insert{{tableObj.singularPascalCase}}Schema.safeParse({
+  const validatedFields = update{{tableObj.singularPascalCase}}Schema.safeParse({
     {{#each validatedColumns}}
     {{#switch this.dataType}}
     {{#case "file"}}
@@ -55,7 +58,7 @@ export async function create{{tableObj.singularPascalCase}}(
     {{this.caseVariants.originalCamelCase}}: formData.get("{{this.caseVariants.originalCamelCase}}"),
     {{/default}}
     {{/switch}}
-    {{/each}}
+    {{/each}}    
   });
 
   if (!validatedFields.success) {
@@ -67,7 +70,10 @@ export async function create{{tableObj.singularPascalCase}}(
   }
 
   try {
-    await db.insert({{tableObj.pluralCamelCase}}).values(validatedFields.data);
+    await db
+      .update({{tableObj.pluralCamelCase}})
+      .set(validatedFields.data)
+      .where(eq({{tableObj.pluralCamelCase}}.id, validatedFields.data.id));
   } catch (error) {
     console.error(error);
     return {
@@ -77,9 +83,11 @@ export async function create{{tableObj.singularPascalCase}}(
   }
 
   revalidatePath("/{{tableObj.pluralKebabCase}}");
-  
+  revalidatePath("/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id);
+  revalidatePath("/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id + "/edit");
+
   return {
-    message: "{{tableObj.singularCapitalCase}} created successfully",
-    status: "success"
+    message: "{{tableObj.singularCapitalCase}} updated successfully",
+    status: "success",
   }
 }

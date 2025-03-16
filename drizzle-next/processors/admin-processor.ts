@@ -49,8 +49,8 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
     renderTemplate({
       inputPath:
-        "admin-processor/app/(auth)/_actions/admin-signin-action.ts.hbs",
-      outputPath: "app/(auth)/_actions/admin-signin-action.ts",
+        "admin-processor/app/(auth)/_lib/admin-signin-action.ts.hbs",
+      outputPath: "app/(auth)/_lib/admin-signin-action.ts",
     });
     renderTemplate({
       inputPath: "admin-processor/scripts/create-password-hash.ts.hbs",

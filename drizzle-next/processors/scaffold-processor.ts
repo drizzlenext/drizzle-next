@@ -395,8 +395,8 @@ export class ScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_actions/create-action.ts.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_actions/create-${tableObj.singularKebabCase}.ts`,
+        "scaffold-processor/app/(development)/table/_lib/create-action.ts.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_lib/create-${tableObj.singularKebabCase}-action.ts`,
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -428,8 +428,8 @@ export class ScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_actions/update-action.ts.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_actions/update-${tableObj.singularKebabCase}.ts`,
+        "scaffold-processor/app/(development)/table/_lib/update-action.ts.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_lib/update-${tableObj.singularKebabCase}-action.ts`,
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -446,8 +446,8 @@ export class ScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_actions/delete-action.ts.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_actions/delete-${tableObj.singularKebabCase}.ts`,
+        "scaffold-processor/app/(development)/table/_lib/delete-action.ts.hbs",
+      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_lib/delete-${tableObj.singularKebabCase}-action.ts`,
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithIdAndTimestamps,

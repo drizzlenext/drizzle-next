@@ -1,7 +1,7 @@
 "use client";
 
 import { startTransition, useActionState } from "react";
-import { create{{tableObj.singularPascalCase}}, Create{{tableObj.singularPascalCase}}State } from "../_actions/create-{{tableObj.singularKebabCase}}";
+import { create{{tableObj.singularPascalCase}}Action, Create{{tableObj.singularPascalCase}}State } from "../_lib/create-{{tableObj.singularKebabCase}}-action";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormMessage } from "@/components/ui/form";
@@ -20,7 +20,7 @@ export function {{tableObj.singularPascalCase}}CreateForm({{#if hasReferences}}{
   {{/each}}
 }{{/if}}) {
   const initialState: Create{{tableObj.singularPascalCase}}State = {};
-  const [state, dispatch] = useActionState(create{{tableObj.singularPascalCase}}, initialState);
+  const [state, dispatch] = useActionState(create{{tableObj.singularPascalCase}}Action, initialState);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

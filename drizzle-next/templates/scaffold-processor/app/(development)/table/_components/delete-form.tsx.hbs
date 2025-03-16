@@ -1,7 +1,7 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import { delete{{tableObj.singularPascalCase}}, Delete{{tableObj.singularPascalCase}}State } from "../_actions/delete-{{tableObj.singularKebabCase}}";
+import { delete{{tableObj.singularPascalCase}}Action, Delete{{tableObj.singularPascalCase}}State } from "../_lib/delete-{{tableObj.singularKebabCase}}-action";
 import { Button } from "@/components/ui/button";
 import { startTransition, useActionState } from "react";
 import { {{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 
 export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularCamelCase}}Row }: { {{tableObj.singularCamelCase}}Row?: {{tableObj.singularPascalCase}} }) {
   const initialState: Delete{{tableObj.singularPascalCase}}State = {};
-  const [state, dispatch] = useActionState(delete{{tableObj.singularPascalCase}}, initialState);
+  const [state, dispatch] = useActionState(delete{{tableObj.singularPascalCase}}Action, initialState);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

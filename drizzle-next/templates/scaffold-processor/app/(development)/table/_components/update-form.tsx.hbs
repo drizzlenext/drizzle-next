@@ -4,7 +4,7 @@
 import Link from "next/link";
 {{/if}}
 import { startTransition, useActionState } from "react";
-import { update{{tableObj.singularPascalCase}}, Update{{tableObj.singularPascalCase}}State } from "../_actions/update-{{tableObj.singularKebabCase}}";
+import { update{{tableObj.singularPascalCase}}Action, Update{{tableObj.singularPascalCase}}State } from "../_lib/update-{{tableObj.singularKebabCase}}-action";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormMessage } from "@/components/ui/form";
@@ -29,7 +29,7 @@ export function {{tableObj.singularPascalCase}}UpdateForm({
   {{/each}}
 }) {
   const initialState: Update{{tableObj.singularPascalCase}}State = {};
-  const [state, dispatch] = useActionState(update{{tableObj.singularPascalCase}}, initialState);
+  const [state, dispatch] = useActionState(update{{tableObj.singularPascalCase}}Action, initialState);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
