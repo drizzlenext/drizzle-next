@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Documentation
-      link: /introduction
+      link: /drizzle-next/
     - theme: alt
       text: Demo
       link: https://demo.drizzle-next.com

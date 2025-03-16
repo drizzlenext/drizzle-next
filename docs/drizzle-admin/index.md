@@ -77,20 +77,3 @@ export default async function Page(props: {
 
 You'll get a customizable admin dashboard where you can create, read, update, and delete posts.
 
-## Installation
-
-There are 2 options for installing Drizzle Admin.
-
-### Option 1: Drizzle Next
-
-The recommended way to install Drizzle Admin is to use Drizzle Next. You'll be given the option to add an admin dashboard during the `init` command.
-
-### Option 2: Standalone Installation
-
-Drizzle Admin can be installed without using Drizzle Next.
-
-```bash
-npm i drizzle-admin
-```
-
-## 
