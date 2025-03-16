@@ -31,6 +31,8 @@ export function POST_ROUTE(config: DrizzleAdminConfig) {
           if (value === "file" && body[key] instanceof File) {
               const fileFieldUri = await uploadFile({ file: body[key], dir: `${kebabCase(curTable)}/${kebabCase(key)}` })
               body[key] = fileFieldUri;
+          } else if (value === "json") {
+            body[key] = JSON.parse(body[key])
           }
         }
       }
@@ -40,6 +42,8 @@ export function POST_ROUTE(config: DrizzleAdminConfig) {
         const value = schema.formControlMap[key];
         if (value === "file" && typeof body[key] !== "string") {
             body[key] = null;
+        } else if (value === "json") {
+          body[key] = JSON.parse(body[key])
         }
       }
     }

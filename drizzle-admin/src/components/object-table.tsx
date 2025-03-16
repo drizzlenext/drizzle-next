@@ -12,6 +12,7 @@ import {
   TableRowActions,
   cn,
   Input,
+  Textarea,
 } from "../drizzle-ui";
 import Link from "next/link";
 import { SimplifiedColumn, AdminRowNav } from "../types/types";
@@ -165,14 +166,14 @@ export function ObjectTable(props: ObjectTableProps) {
     setCurCell({ row, col, el: e.currentTarget });
   }
 
-  async function handleBlur(e: React.FocusEvent<HTMLInputElement>) {
+  async function handleBlur(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (!curCell) {
       return;
     }
     const value = e.target.value;
     const data: Record<string, any> = {};
-    // special handling for booleans
     if (curCell.col.dataType === "boolean") {
+      // special handling for booleans
       if (value === "f") {
         data[curCell.col.name] = false;
       } else if (value === "t") {
@@ -199,6 +200,9 @@ export function ObjectTable(props: ObjectTableProps) {
       // if the data type is date, we will need to transform the string back to a date
       if (curCell.col.dataType === "date") {
         data[curCell.col.name] = new Date(data[curCell.col.name]);
+      } else if (curCell.col.dataType === "json") {
+        // if json, we'll need to parse it back
+        data[curCell.col.name] = JSON.parse(data[curCell.col.name]);
       }
 
       const newData = Object.assign({}, curList[idx], data);
@@ -221,7 +225,7 @@ export function ObjectTable(props: ObjectTableProps) {
     setCurCell(undefined);
   }
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (e.key === "Enter") {
       e.currentTarget.blur();
     }
@@ -380,8 +384,8 @@ function TableCellInput({
 }: {
   row: Record<string, any>;
   col: SimplifiedColumn;
-  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }) {
   if (col.dataType === "boolean") {
     return (
@@ -405,10 +409,19 @@ function TableCellInput({
         onKeyDown={onKeyDown}
       />
     );
+  } else if (col.dataType === "json") {
+    return (
+      <Textarea
+        className="border h-10"
+        defaultValue={JSON.stringify(row[col.name])}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+      />
+    );
   }
 
   return (
-    <Input
+    <Textarea
       className="border h-10"
       defaultValue={row[col.name]}
       onBlur={onBlur}

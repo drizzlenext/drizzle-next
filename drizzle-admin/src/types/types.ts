@@ -20,7 +20,8 @@ export type FormControlType =
   | "number"
   | "richtext"
   | "file"
-  | "custom";
+  | "custom"
+  | "json";
 
 export type FormControlMap = {
   [key: string]: FormControlType;
@@ -90,7 +91,7 @@ export type DrizzleAdminConfigComplete = {
   dbDialect: "postgresql" | "mysql" | "sqlite";
 };
 
-export type ColumnDataType = "string" | "boolean" | "number" | "date";
+export type ColumnDataType = "string" | "boolean" | "number" | "date" | "json";
 
 export type ColumnDataTypeMap = {
   [key: string]: ColumnDataType;

@@ -13,13 +13,12 @@ import {
 } from "../drizzle-ui";
 import { ObjectTable } from "../components/object-table";
 import { DrizzleFilter } from "../components/drizzle-filter";
-import { parseSearchParams } from "../lib/server-utils";
+import { getColumnDataTypeMap, parseSearchParams } from "../lib/server-utils";
 import { and, asc, desc, eq, like, getTableColumns } from "drizzle-orm";
 import { getTableConfig as getTableConfigForSqlite } from "drizzle-orm/sqlite-core";
 import { getTableConfig as getTableConfigForMysql } from "drizzle-orm/mysql-core";
 import { getTableConfig as getTableConfigForPostgresql } from "drizzle-orm/pg-core";
 import {
-  ColumnDataTypeMap,
   DrizzleAdminConfig,
   DrizzleAdminConfigComplete,
   Filter,
@@ -75,8 +74,8 @@ export async function ListPage(props: {
   const tableConf = getTableConfig(drizzleTable);
   const whereClause = [];
   let obj;
-  const cols = getTableColumns(drizzleTable);
-  const columnDataTypeMap: ColumnDataTypeMap = {};
+
+  const columnDataTypeMap = getColumnDataTypeMap(drizzleTable);
 
   if (filtersParam) {
     try {
@@ -148,10 +147,6 @@ export async function ListPage(props: {
       dataType: col.dataType,
     };
   });
-
-  for (const col in cols) {
-    columnDataTypeMap[col] = drizzleTable[col].dataType;
-  }
 
   if (searchParams.id) {
     obj = await db.query[curTable].findFirst({

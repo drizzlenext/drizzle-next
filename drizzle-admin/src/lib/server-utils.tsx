@@ -1,5 +1,6 @@
 import { kebabCase } from "change-case-all";
 import {
+  ColumnDataTypeMap,
   DrizzleAdminConfig,
   DrizzleAdminConfigComplete,
   DrizzleTableConfigComplete,
@@ -8,6 +9,7 @@ import {
 import path from "path";
 import fs from "fs";
 import crypto from "crypto";
+import { getTableColumns } from "drizzle-orm";
 
 export async function uploadFile({ file, dir }: { file: File; dir: string }) {
   const arrayBuffer = await file.arrayBuffer();
@@ -82,4 +84,13 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
   };
 
   return completeConfig;
+}
+
+export function getColumnDataTypeMap(drizzleTable: any) {
+    const cols = getTableColumns(drizzleTable);
+    const columnDataTypeMap: ColumnDataTypeMap = {};
+    for (const col in cols) {
+      columnDataTypeMap[col] = drizzleTable[col].dataType;
+    }
+    return columnDataTypeMap;
 }

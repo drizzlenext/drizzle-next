@@ -4,6 +4,7 @@ import { Button, Form, FormControl, FormMessage, Label } from "../drizzle-ui";
 import { useState } from "react";
 import { capitalCase } from "change-case-all";
 import { renderValue } from "../lib/shared-utils";
+import { ColumnDataTypeMap } from "../types";
 
 type DeleteStatus = {
   message?: string;
@@ -13,9 +14,11 @@ type DeleteStatus = {
 export function ObjectDeleteForm({
   obj,
   curTable,
+  columnDataTypeMap,
 }: {
   obj: any;
   curTable: string;
+  columnDataTypeMap: ColumnDataTypeMap;
 }) {
   const [state, setState] = useState<DeleteStatus>({});
 
@@ -49,13 +52,13 @@ export function ObjectDeleteForm({
       <FormControl>
         <Label>Confirm delete?</Label>
       </FormControl>
-
-      {Object.entries(obj).map(([key, value]) => (
-        <div key={key}>
-          <strong>{capitalCase(key)}</strong>: {renderValue(value)}
-        </div>
-      ))}
-
+      <div>
+        {Object.entries(obj).map(([key, value]) => (
+          <div key={key}>
+            <strong>{capitalCase(key)}</strong>: {renderValue(key, value, columnDataTypeMap)}
+          </div>
+        ))}
+      </div>
       <div>
         <Button type="submit" variant="destructive">
           Delete

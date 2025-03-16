@@ -4,6 +4,8 @@ import { createSchemaFactory } from "drizzle-zod";
 import { eq } from "drizzle-orm";
 import { withErrorHandling } from "./route-utils";
 import { camelCase } from "change-case-all";
+import { getFormControlMap } from "../lib/shared-utils";
+import { getColumnDataTypeMap } from "../lib/server-utils";
 
 const { createUpdateSchema } = createSchemaFactory({
   coerce: true,
@@ -24,10 +26,22 @@ export function PATCH_ROUTE(config: DrizzleAdminConfig) {
       return NextResponse.json({ message: "not found" }, { status: 404 });
     }
 
-    const drizzleSchema = schema.drizzleTable;
-    const patchSchema = createUpdateSchema(drizzleSchema);
-    const validatedFields = patchSchema.safeParse(body);
+    const drizzleTable = schema.drizzleTable;
+    const patchSchema = createUpdateSchema(drizzleTable);
 
+    const columnDataTypeMap = getColumnDataTypeMap(drizzleTable)
+    const formControlMap = getFormControlMap(columnDataTypeMap)
+    
+    // handle json parsing for json types
+    for (const key in formControlMap) {
+      const value = formControlMap[key];
+      if (value === "json" && body[key]) {
+        body[key] = JSON.parse(body[key])
+      }
+    }
+
+    const validatedFields = patchSchema.safeParse(body);
+    
     if (param0 !== "api") {
       return NextResponse.json({ message: "not found" }, { status: 404 });
     }
@@ -39,7 +53,7 @@ export function PATCH_ROUTE(config: DrizzleAdminConfig) {
     }
 
     const obj = await db.query[curTable].findFirst({
-      where: eq(drizzleSchema.id, id),
+      where: eq(drizzleTable.id, id),
     });
 
     if (!obj) {
@@ -47,9 +61,9 @@ export function PATCH_ROUTE(config: DrizzleAdminConfig) {
     }
 
     await db
-      .update(drizzleSchema)
+      .update(drizzleTable)
       .set(validatedFields.data)
-      .where(eq(drizzleSchema.id, id));
+      .where(eq(drizzleTable.id, id));
 
     return NextResponse.json({ message: `Patched successfully` });
   });

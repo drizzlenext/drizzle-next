@@ -19,6 +19,7 @@ export const posts = sqliteTable(
     categoryId: text().references(() => categories.id),
     content: text(),
     isPublished: integer({ mode: "boolean" } ),
+    badges: text({ mode: "json" }),
     createdAt: integer({ mode: "timestamp" }).notNull().default(sql`(strftime('%s', 'now'))`),
     updatedAt: integer({ mode: "timestamp" }).notNull().default(sql`(strftime('%s', 'now'))`).$onUpdate(() => new Date()),
   }

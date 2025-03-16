@@ -6,17 +6,17 @@ import {
   PageTitle,
 } from "../drizzle-ui";
 import {
-  ColumnDataTypeMap,
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
 } from "../types/types";
 import { camelCase, capitalCase } from "change-case-all";
-import { eq, getTableColumns } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { ObjectDeleteForm } from "../components/object-delete-form";
 import { notFound } from "next/navigation";
 import { ChevronRightIcon } from "lucide-react";
+import { getColumnDataTypeMap } from "../lib/server-utils";
 
 export async function DeletePage(props: {
   params: Params;
@@ -42,11 +42,7 @@ export async function DeletePage(props: {
     notFound();
   }
 
-  const cols = getTableColumns(drizzleTable);
-  const columnInfoMap: ColumnDataTypeMap = {};
-  for (const col in cols) {
-    columnInfoMap[col] = drizzleTable[col].dataType;
-  }
+  const columnDataTypeMap = getColumnDataTypeMap(drizzleTable);
 
   return (
     <PageLayout>
@@ -79,7 +75,7 @@ export async function DeletePage(props: {
         </PageNav>
       </PageHeader>
       <PageContent>
-        <ObjectDeleteForm obj={obj} curTable={curTable} />
+        <ObjectDeleteForm obj={obj} curTable={curTable} columnDataTypeMap={columnDataTypeMap} />
       </PageContent>
     </PageLayout>
   );

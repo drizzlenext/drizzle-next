@@ -16,6 +16,7 @@ import Link from "next/link";
 import { renderValue } from "../lib/shared-utils";
 import { notFound } from "next/navigation";
 import { ChevronRightIcon } from "lucide-react";
+import { getColumnDataTypeMap } from "../lib/server-utils";
 
 export async function ViewPage(props: {
   params: Params;
@@ -40,6 +41,8 @@ export async function ViewPage(props: {
   if (!obj) {
     notFound();
   }
+
+  const columnDataTypeMap = getColumnDataTypeMap(drizzleTable);
 
   return (
     <PageLayout>
@@ -73,7 +76,7 @@ export async function ViewPage(props: {
       <PageContent>
         {Object.entries(obj).map(([key, value]) => (
           <div key={key}>
-            <strong>{capitalCase(key)}</strong>: {renderValue(value)}
+            <strong>{capitalCase(key)}</strong>: {renderValue(key, value, columnDataTypeMap)}
           </div>
         ))}
       </PageContent>

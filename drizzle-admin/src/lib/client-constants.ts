@@ -7,7 +7,7 @@ export const DEFAULT_FORM_CONTROLS: Record<ColumnDataType, FormControlType> = {
   bigint: "number",
   boolean: "checkbox",
   array: "input",
-  json: "textarea",
+  json: "json",
   date: "datetime-local",
   custom: "input",
   buffer: "input",

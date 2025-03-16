@@ -4,7 +4,8 @@ import { createSchemaFactory } from "drizzle-zod";
 import { eq } from "drizzle-orm";
 import { getEmptyDrizzleObject, withErrorHandling } from "./route-utils";
 import { camelCase, kebabCase } from "change-case-all";
-import { uploadFile } from "../lib/server-utils";
+import { getColumnDataTypeMap, uploadFile } from "../lib/server-utils";
+import { getFormControlMap } from "../lib/shared-utils";
 
 const { createUpdateSchema } = createSchemaFactory({
   coerce: true,
@@ -21,27 +22,35 @@ export function PUT_ROUTE(config: DrizzleAdminConfig) {
     const schema = config.schema[curTable];
 
     let body: any = {};
+    
+    const columnDataTypeMap = getColumnDataTypeMap(schema.drizzleTable);
+    const formControlMap = getFormControlMap(columnDataTypeMap, schema.formControlMap);
+    
     const contentType = request.headers.get("content-type");
     if (contentType?.startsWith("multipart/form-data")) {      
       const formData = await request.formData();
       formData.forEach((value, key) => {
         body[key] = value;
       });
-      if (schema.formControlMap) {
-        for (const key in schema.formControlMap) {
-          const value = schema.formControlMap[key];
+      if (formControlMap) {
+        for (const key in formControlMap) {
+          const value = formControlMap[key];
           if (value === "file" && body[key] instanceof File) {
               const fileFieldUri = await uploadFile({ file: body[key], dir: `${kebabCase(curTable)}/${kebabCase(key)}` })
               body[key] = fileFieldUri;
+          } else if (value === "json") {
+            body[key] = JSON.parse(body[key])
           }
         }
       }
     } else if (contentType?.startsWith("application/json")) {
       body = await request.json();
-      for (const key in schema.formControlMap) {
-        const value = schema.formControlMap[key];
+      for (const key in formControlMap) {
+        const value = formControlMap[key];
         if (value === "file" && typeof body[key] !== "string") {
             body[key] = null;
+        } else if (value === "json") {
+          body[key] = JSON.parse(body[key])
         }
       }
     }

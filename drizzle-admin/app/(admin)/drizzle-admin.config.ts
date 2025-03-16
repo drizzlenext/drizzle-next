@@ -12,6 +12,9 @@ export const config: DrizzleAdminConfig = {
     users: usersTableConfig,
     posts: {
       drizzleTable: posts,
+      formControlMap: {
+        // badges: "json"
+      }
     },
     categories: {
       drizzleTable: categories,

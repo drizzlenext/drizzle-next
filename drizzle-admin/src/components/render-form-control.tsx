@@ -10,7 +10,6 @@ import {
 } from "../drizzle-ui";
 import { CustomFormControlMap, FormControlMap } from "../types/types";
 import { capitalCase } from "change-case-all";
-import { renderValue } from "../lib/shared-utils";
 
 export function RenderFormControl({
   keyName,
@@ -72,7 +71,7 @@ export function RenderFormControl({
         <FormControl>
           <Label htmlFor={keyName}>{capitalCase(keyName)}</Label>
           <Input
-            defaultValue={renderValue(value)}
+            defaultValue={value}
             name={keyName}
             id={keyName}
           />
@@ -83,7 +82,7 @@ export function RenderFormControl({
         <FormControl>
           <Label htmlFor={keyName}>{capitalCase(keyName)}</Label>
           <Input
-            defaultValue={renderValue(value)}
+            defaultValue={value}
             name={keyName}
             id={keyName}
             type="number"
@@ -95,7 +94,7 @@ export function RenderFormControl({
         <FormControl>
           <Label htmlFor={keyName}>{capitalCase(keyName)}</Label>
           <Textarea
-            defaultValue={renderValue(value)}
+            defaultValue={value}
             name={keyName}
             id={keyName}
           />
@@ -123,6 +122,17 @@ export function RenderFormControl({
       return (
         <CustomFormControl value={value} />
       )
+    case "json":
+      return (
+        <FormControl>
+          <Label htmlFor={keyName}>{capitalCase(keyName)}</Label>
+          <Textarea
+            defaultValue={JSON.stringify(value)}
+            name={keyName}
+            id={keyName}
+          />
+        </FormControl>
+      );
     default:
       const exhaustiveCheck: never = formControlMap[keyName];
       throw new Error(`unhandled case: ${exhaustiveCheck}`);

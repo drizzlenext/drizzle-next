@@ -6,17 +6,17 @@ import {
   PageTitle,
 } from "../drizzle-ui";
 import {
-  ColumnDataTypeMap,
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
 } from "../types/types";
 import { camelCase, capitalCase } from "change-case-all";
-import { eq, getTableColumns } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { ObjectUpdateForm } from "../components/object-update-form";
 import { notFound } from "next/navigation";
 import { ChevronRightIcon } from "lucide-react";
+import { getColumnDataTypeMap } from "../lib/server-utils";
 
 export async function EditPage(props: {
   params: Params;
@@ -42,11 +42,7 @@ export async function EditPage(props: {
     notFound();
   }
 
-  const cols = getTableColumns(drizzleTable);
-  const columnDataTypeMap: ColumnDataTypeMap = {};
-  for (const col in cols) {
-    columnDataTypeMap[col] = drizzleTable[col].dataType;
-  }
+  const columnDataTypeMap = getColumnDataTypeMap(drizzleTable);
 
   return (
     <PageLayout>
