@@ -168,10 +168,8 @@ export async function ListPage(props: {
             />
           )}
           {!drizzleTableConfig.components?.ListPageNav && (
-            <Link href={`${config.basePath}/${resourcePath}/new`}>
-              <Button className="rounded-2xl" variant="muted">
+            <Link href={`${config.basePath}/${resourcePath}/new`} className="font-bold underline">
                 New
-              </Button>
             </Link>
           )}
           <PageAsideToggle />

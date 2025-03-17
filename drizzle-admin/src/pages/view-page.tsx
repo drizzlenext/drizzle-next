@@ -93,11 +93,13 @@ function DefaultPageActions(props: {
     <>
       <Link
         href={`${props.basePath}/${props.resourcePath}/${props.obj.id}/edit`}
+        className="font-bold underline"
       >
         Edit
       </Link>
       <Link
         href={`${props.basePath}/${props.resourcePath}/${props.obj.id}/delete`}
+        className="font-bold underline"
       >
         Delete
       </Link>
