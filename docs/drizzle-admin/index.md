@@ -54,7 +54,7 @@ export const config: DrizzleAdminConfig = {
 And then pass the config into the `DrizzleAdmin` component:
 
 ```tsx
-import { config } from "@/app/(admin)/drizzle-admin.config";
+import { config } from "@/app/(admin)/_lib/drizzle-admin.config";
 import { DrizzleAdmin } from "drizzle-admin/components";
 
 export type Params = Promise<{ [key: string]: string }>;

@@ -20,8 +20,8 @@ export type FormControlType =
   | "number"
   | "richtext"
   | "file"
-  | "custom"
-  | "json";
+  | "json"
+  | "custom";
 
 export type FormControlMap = {
   [key: string]: FormControlType;

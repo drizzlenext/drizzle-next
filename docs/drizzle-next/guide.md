@@ -180,6 +180,8 @@ The Next.js `Image` component performs automatic resizing of images. This works 
 
 ## Add-on Extensions
 
+<Badge type="warning" text="experimental" />
+
 Add-ons are full stack components that can be added after a project has been initialized.
 
 An add-on extension can be added using the `add` command.

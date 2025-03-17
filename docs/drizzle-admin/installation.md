@@ -4,7 +4,7 @@ outline: [2,3]
 
 # Drizzle Admin Installation
 
-There are 2 options for installing Drizzle Admin.
+This guide covers two options for installing Drizzle Admin.
 
 ## Option 1: Drizzle Next
 
@@ -58,7 +58,7 @@ In the `app` router directory, create a new folder `(admin)`. The folder name is
 
 This is the central configuration of Drizzle Admin and is used to customize the dashboard.
 
-`app/(admin)/drizzle-admin.config.ts`
+`app/(admin)/_lib/drizzle-admin.config.ts`
 
 ```ts
 import { db } from "@/lib/db";
@@ -87,7 +87,7 @@ You can change the tables in the `schema` property. We're using a `users` and `p
 Create a new file at this path: `app/(admin)/admin/[...segments]/page.tsx`.
 
 ```tsx
-import { config } from "@/app/(admin)/drizzle-admin.config";
+import { config } from "@/app/(admin)/_lib/drizzle-admin.config";
 import { DrizzleAdmin } from "drizzle-admin/components";
 
 export type Params = Promise<{ [key: string]: string }>;
@@ -116,7 +116,7 @@ These routes are required for Drizzle Admin to function.
 `app/(admin)/api/[...segments]/route.ts`
 
 ```tsx
-import { config } from "@/app/(admin)/drizzle-admin.config";
+import { config } from "@/app/(admin)/_lib/drizzle-admin.config";
 import {
   DELETE_ROUTE,
   GET_ROUTE,
@@ -256,7 +256,7 @@ Here's an example of how you might set up auth for the API routes:
 `app/(admin)/api/[...segments]/route.ts`
 
 ```tsx
-import { config } from "@/app/(admin)/drizzle-admin.config";
+import { config } from "@/app/(admin)/_lib/drizzle-admin.config";
 import { auth } from "@/lib/auth";
 import {
   DELETE_ROUTE,

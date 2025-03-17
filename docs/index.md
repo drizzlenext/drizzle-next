@@ -15,7 +15,7 @@ hero:
       link: https://demo.drizzle-next.com
 
 features:
-  - icon: 🌐
+  - icon: 🌧️
     title: Drizzle Next
     details: A CLI tool for generating Full Stack Next.js and Drizzle ORM scaffolding.
   - icon: 🛠️

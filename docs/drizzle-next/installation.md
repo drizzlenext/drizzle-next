@@ -35,7 +35,7 @@ You will be asked a few questions to configure the app:
 ? Do you want to add an admin dashboard? yes
 ```
 
-::: info
+:::tip
 Alternatively, you can also run the command non-interactively:
 
 ```bash

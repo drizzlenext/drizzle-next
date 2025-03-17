@@ -11,6 +11,7 @@ export default defineConfig({
       { text: "Drizzle Next", link: "/drizzle-next/" },
       { text: "Drizzle Admin", link: "/drizzle-admin/"},
       { text: "Drizzle UI", link: "/drizzle-ui/" },
+      { text: "About", link: "/about/" },
       { text: "Demo", link: "https://demo.drizzle-next.com" },
     ],
 
@@ -23,7 +24,6 @@ export default defineConfig({
           { text: "Drizzle Next", link: "/drizzle-next/", items: [
             { text: "Installation", link: "/drizzle-next/installation" },
             { text: "Guide", link: "/drizzle-next/guide" },
-            { text: "About", link: "/drizzle-next/about" },
           ]},
           { text: "Drizzle Admin", link: "/drizzle-admin/", items: [
             { text: "Installation", link: "/drizzle-admin/installation"},
@@ -32,7 +32,8 @@ export default defineConfig({
           { text: "Drizzle UI", link: "/drizzle-ui/", items: [
             { text: "Installation", link: "/drizzle-ui/installation"},
             { text: "Guide", link: "/drizzle-ui/guide"}
-          ]}
+          ]},
+          { text: "About", link: "/about" },
         ],
       },
     ],

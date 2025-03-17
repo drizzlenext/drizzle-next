@@ -1,8 +1,6 @@
 # Drizzle UI Installation
 
-Drizzle UI was built for Drizzle Next and Drizzle Admin. The components were extracted from the source code of Drizzle Next and made available as a standalone package. The components can be copied and pasted or it can be installed as a dependency.
-
-There are three ways to install Drizzle UI.
+This guide covers three options for installing Drizzle UI.
 
 ## Option 1: Use Drizzle Next
 

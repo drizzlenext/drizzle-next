@@ -8,7 +8,7 @@ We can extract the table configurations from our main config file:
 
 Before:
 
-`app/(admin)/drizzle-admin.config.ts`
+`app/(admin)/_lib/drizzle-admin.config.ts`
 
 ```tsx
 import { db } from "@/lib/db";
@@ -33,7 +33,7 @@ export const config: DrizzleAdminConfig = {
 
 After:
 
-`app/(admin)/drizzle-admin.config.ts`
+`app/(admin)/_lib/drizzle-admin.config.ts`
 
 ```tsx{3,9}
 import { db } from "@/lib/db";
@@ -124,6 +124,7 @@ Here's a list of the available form control types:
 "number"
 "richtext"
 "file"
+"json"
 "custom"
 ```
 
@@ -224,9 +225,11 @@ export const UserViewPageNav: AdminPageNav<User> = (
 
 The `props` parameter includes the `basePath`, `resourcePath`, and the database `row`, that can be used to create dynamic links.
 
-This is useful if you need to create additional pages beyond the standard `show`, `new`, `edit`, `delete` views. For example, if you need to add a link to a user `images` or a user `posts` page.
+This is useful if you need to create additional pages beyond the standard `view`, `new`, `edit`, and `delete` pages. For example, if you need to add a link to a user `images` or a user `posts` page.
 
-Note that `AdminPageNav<T>` and `AdminPageNavProps<T>` accepts a generic. In this case we are passing in a `User` type. This gives us autocompletion for `props.row`. You should be able to see the user properties.
+:::tip
+`AdminPageNav<T>` and `AdminPageNavProps<T>` are generic types. This gives us autocompletion for `props.row`. In this case we are passing in a `User` type. You should be able to pass in any Drizzle table type and see the row's properties.
+:::
 
 ## Custom Table Row Navigation
 
@@ -276,6 +279,8 @@ export const UserRowNav: AdminRowNav<User> = (
 ```
 
 ## The Completed Example
+
+Here is the final result with the customizations.
 
 `app/(admin)/_components/users-components.tsx`
 
@@ -408,7 +413,7 @@ export const usersTableConfig: DrizzleTableConfig = {
 };
 ```
 
-`app/(admin)/drizzle-admin.config.ts`
+`app/(admin)/_lib/drizzle-admin.config.ts`
 
 ```ts
 import { db } from "@/lib/db";
