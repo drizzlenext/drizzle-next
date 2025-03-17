@@ -6,7 +6,7 @@ Generate apps using CLI commands inspired by Ruby on Rails and shadcn/ui
 
 ## Documentation
 
-https://www.drizzle-next.com
+https://www.drizzlenext.com
 
 ## License
 

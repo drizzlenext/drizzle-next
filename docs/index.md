@@ -13,7 +13,7 @@ hero:
       link: /drizzle-next/
     - theme: alt
       text: Demo
-      link: https://demo.drizzle-next.com
+      link: https://demo.drizzlenext.com
 
 features:
   - icon: 🌧️

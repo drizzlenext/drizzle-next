@@ -23,7 +23,7 @@ Drizzle Admin is an optional dependency for an admin dashboard that is automatic
 - Admin dashboard - Streamline back-office dashboard development with Drizzle Admin.
 - Customizable components - Simplify UI with ready-to-use Drizzle UI components.
 
-[See About page for more details](/drizzle-next/about)
+[See About page for more details](/about)
 
 ## When Drizzle Next might be for you
 
