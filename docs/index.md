@@ -6,6 +6,7 @@ hero:
   name: "Drizzle Next"
   text: "Full Stack Next.js and Drizzle ORM Framework"
   tagline: Generate apps using CLI commands inspired by Ruby on Rails and shadcn/ui
+  image: https://drizzlenext.github.io/drizzle-assets/logo.webp
   actions:
     - theme: brand
       text: Documentation

@@ -6,6 +6,7 @@ export default defineConfig({
   description: "Generate Next.js And Drizzle ORM Code",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: "https://drizzlenext.github.io/drizzle-assets/logo.webp",
     nav: [
       { text: "Home", link: "/" },
       { text: "Drizzle Next", link: "/drizzle-next/" },
