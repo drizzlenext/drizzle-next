@@ -135,7 +135,7 @@ export class AdminProcessor implements DrizzleNextProcessor {
 
   printCompletionMessage() {
     log.checklist("admin checklist");
-    log.task("grant admin privilege");
+    log.task("grant admin role");
     log.cmdsubtask("npx tsx scripts/grant-admin.ts test@example.com");
   }
 }
