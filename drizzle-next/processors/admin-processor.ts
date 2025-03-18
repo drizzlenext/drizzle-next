@@ -11,7 +11,7 @@ import { ScaffoldProcessor } from "./scaffold-processor";
 
 export class AdminProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
-  dependencies: string[] = [];
+  dependencies: string[] = ["drizzle-admin"];
   devDependencies: string[] = [];
   dbDialectStrategy: DbDialectStrategy;
 
@@ -136,6 +136,6 @@ export class AdminProcessor implements DrizzleNextProcessor {
   printCompletionMessage() {
     log.checklist("admin checklist");
     log.task("grant admin privilege");
-    log.cmdsubtask("npx tsx scripts/grant-admin.ts user@example.com");
+    log.cmdsubtask("npx tsx scripts/grant-admin.ts test@example.com");
   }
 }

@@ -33,6 +33,18 @@ type AuthStrategyMap = {
 }
 
 export const authStrategyMap: AuthStrategyMap = {
+  credentials: {
+    dependencies: ["bcrypt"],
+    devDependencies: ["@types/bcrypt"],
+    printCompletionMessage: function (): void {
+      log.task("create test user for credentials provider");
+      log.cmdsubtask(
+        "npx tsx scripts/create-user.ts test@example.com password123",
+      );
+    },
+    textToSearchInEnv: undefined,
+    appendPlaceholdersToEnvLocal: function (): void {},
+  },
   github: {
     printCompletionMessage: function (): void {
       log.task("setup github provider");
@@ -68,18 +80,6 @@ export const authStrategyMap: AuthStrategyMap = {
       appendToEnvLocal("AUTH_GOOGLE_ID", "{AUTH_GOOGLE_ID}");
       appendToEnvLocal("AUTH_GOOGLE_SECRET", "{AUTH_GOOGLE_SECRET}");
     },
-  },
-  credentials: {
-    dependencies: ["bcrypt"],
-    devDependencies: ["@types/bcrypt"],
-    printCompletionMessage: function (): void {
-      log.task("create test user for credentials provider");
-      log.cmdsubtask(
-        "npx tsx scripts/create-user.ts user@example.com password123",
-      );
-    },
-    textToSearchInEnv: undefined,
-    appendPlaceholdersToEnvLocal: function (): void {},
   },
   postmark: {
     printCompletionMessage: function (): void {
