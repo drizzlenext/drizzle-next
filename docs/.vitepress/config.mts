@@ -13,7 +13,7 @@ export default defineConfig({
       { text: "Drizzle Admin", link: "/drizzle-admin/"},
       { text: "Drizzle UI", link: "/drizzle-ui/" },
       { text: "About", link: "/about/" },
-      { text: "Demo", link: "https://demo.drizzle-next.com" },
+      { text: "Demo", link: "https://demo.drizzlenext.com" },
     ],
 
     sidebar: [
