@@ -20,6 +20,7 @@ type SidebarItem = {
   items?: SidebarItem[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon?: any;
+  target?: React.HTMLAttributeAnchorTarget;
 };
 
 // the sidebarOpen flag must begin as undefined
@@ -267,7 +268,7 @@ const DashboardSidebarList = (props: {
         if (item.link) {
           return (
             <div key={item.text + item.link}>
-              <Link href={item.link}>
+              <Link href={item.link} target={item.target}>
                 <DashboardSidebarItem active={pathname === item.link}>
                   {item.icon ? <item.icon size={16} /> : null}
                   {item.text}

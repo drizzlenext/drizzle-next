@@ -38,7 +38,7 @@ const config: DrizzleLayoutConfig = {
       link: "/admin",
       icon: GaugeIcon,
     },
-    { text: "Home", link: "/", icon: HomeIcon },
+    { text: "Home", link: "/", icon: HomeIcon, target: "_top" },
     {
       text: "Custom Group",
       icon: GroupIcon,
