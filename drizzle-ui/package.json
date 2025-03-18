@@ -10,7 +10,7 @@
     "build:all": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:cli && npm run build:css",
     "build:esm": "rollup -c ./rollup.esm.mjs",
     "build:cjs": "rollup -c ./rollup.cjs.mjs",
-    "build:cli": "tsc --project ./tsconfig.cli.json && mkdir \"dist/cli/drizzle-ui\" && cp -r src/* dist/cli/drizzle-ui",
+    "build:cli": "tsc --project ./tsconfig.cli.json && cp -r src dist && cp -r content dist",
     "clean": "rm -rf dist",
     "build:css": "@tailwindcss -i src/styles/styles.css -o dist/styles.css"
   },

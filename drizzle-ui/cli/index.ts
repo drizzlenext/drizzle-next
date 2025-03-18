@@ -45,7 +45,13 @@ program
       console.log(`create ${relativePath}`);
 
       // copy styles
-      const stylesSrcPath = path.join(__dirname, "..", "src", "styles.css");
+      const stylesSrcPath = path.join(
+        __dirname,
+        "..",
+        "src",
+        "styles",
+        "styles.css",
+      );
       const tailwindConfigDestinationPath = path.join(
         process.cwd(),
         "app",
@@ -145,7 +151,7 @@ async function copyFile(filePath: string) {
   const destinationPath = path.join(process.cwd(), relativeCodePath);
   await fs.promises.mkdir(path.dirname(destinationPath), { recursive: true });
   let fileContent = await fs.promises.readFile(sourcePath, "utf-8");
-  fileContent = fileContent.replaceAll(/\.\.\/\.\./g, "@");
+  fileContent = fileContent.replace(/\.\.\/\.\./g, "@");
   await fs.promises.writeFile(destinationPath, fileContent);
   console.log(`create ${relativeCodePath}`);
 }
