@@ -12,7 +12,7 @@ export default function Home() {
             Docs
           </Link>
           <Link
-            href="https://www.drizzle-next.com"
+            href="https://www.drizzlenext.com"
             className="flex items-center gap-1 text-lg font-semibold"
             target="_blank"
           >
@@ -37,7 +37,10 @@ export default function Home() {
           <p>Released under the MIT license.</p>
           <p>
             Copyright &copy; 2025 - present{" "}
-            <a href="https://x.com/TravisLuong" className="font-bold underline">
+            <a
+              href="https://linktr.ee/travisluong"
+              className="font-bold underline"
+            >
               Travis Luong
             </a>
           </p>

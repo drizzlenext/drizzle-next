@@ -4,7 +4,7 @@ The minimalist component library used in Drizzle Next.
 
 ## Documentation
 
-https://www.drizzlenext.com/ui/
+https://www.drizzlenext.com/drizzle-ui/
 
 ## Author
 
