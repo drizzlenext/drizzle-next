@@ -34,9 +34,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Install Dependencies
-        run: npm install -w docs
+        run: cd docs && npm install
       - name: Build Docs
-        run: npm run docs:build -w docs
+        run: cd docs && npm run docs:build
       - name: Build Drizzle UI Docs
         run: cd drizzle-ui && npm i && npm run build
       - name: Create ui subpath
