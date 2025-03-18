@@ -70,5 +70,6 @@ export default defineConfig({
       gtag('js', new Date());
       gtag('config', 'G-FR34HJSEG9');`,
     ],
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
 });
