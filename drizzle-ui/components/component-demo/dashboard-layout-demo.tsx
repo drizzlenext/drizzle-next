@@ -39,6 +39,7 @@ import Link from "next/link";
 import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 import { usePathname } from "next/navigation";
 import { PageLayoutDemo } from "./page-layout-demo";
+import { Suspense } from "react";
 
 const nav = [
   {
@@ -115,24 +116,26 @@ export function DashboardLayoutDemo() {
   const pathname = usePathname();
 
   return (
-    <DashboardLayout>
-      <DashboardHeader>
-        <DashboardTitle>
-          <DashboardSidebarToggle />
-          <Link href="/">drizzle-ui</Link>
-        </DashboardTitle>
-        <DashboardNav>
-          <DashboardNavList items={nav} pathname={pathname} />
-          <DarkModeToggle />
-        </DashboardNav>
-        <DashboardNavToggle />
-      </DashboardHeader>
-      <DashboardSidebar>
-        <DashboardSidebarList items={items} pathname={pathname} />
-      </DashboardSidebar>
-      <DashboardContent>
-        <PageLayoutDemo />
-      </DashboardContent>
-    </DashboardLayout>
+    <Suspense>
+      <DashboardLayout>
+        <DashboardHeader>
+          <DashboardTitle>
+            <DashboardSidebarToggle />
+            <Link href="/">drizzle-ui</Link>
+          </DashboardTitle>
+          <DashboardNav>
+            <DashboardNavList items={nav} pathname={pathname} />
+            <DarkModeToggle />
+          </DashboardNav>
+          <DashboardNavToggle />
+        </DashboardHeader>
+        <DashboardSidebar>
+          <DashboardSidebarList items={items} pathname={pathname} />
+        </DashboardSidebar>
+        <DashboardContent>
+          <PageLayoutDemo />
+        </DashboardContent>
+      </DashboardLayout>
+    </Suspense>
   );
 }
