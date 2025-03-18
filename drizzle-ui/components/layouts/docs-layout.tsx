@@ -141,7 +141,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
         <DashboardNav>
           <Link href="/introduction">Docs</Link>
           <Link
-            href="https://www.drizzle-next.com"
+            href="https://www.drizzlenext.com"
             className="flex items-center gap-1"
             target="_blank"
           >
