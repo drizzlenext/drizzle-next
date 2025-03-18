@@ -74,10 +74,8 @@ export function ObjectUpdateForm({
       setState({ message: json.message, status: "success" });
       const res2 = await fetch(`/api/${curTable}/${obj.id}`);
       const json2 = await res2.json();
-      console.log("fetch", json2.data);
       for (const key in columnDataTypeMap) {
         if (columnDataTypeMap.hasOwnProperty(key)) {
-          console.log(`Key: ${key}, Value: ${columnDataTypeMap[key]}`, json2.data[key], typeof json2.data);
             if (columnDataTypeMap[key] === "json" && typeof json2.data[key] === "string") {
               try {
                 json2.data[key] = JSON.parse(json2.data[key]);
@@ -103,9 +101,6 @@ export function ObjectUpdateForm({
     formControlMap
   );
 
-  console.log(mergedFormControlMap);
-  
-  
   return (
     <Form onSubmit={handleSubmit} className="flex flex-col gap-2">
       <input type="hidden" name="curTable" defaultValue={curTable} />

@@ -107,8 +107,7 @@ export const RichTextEditor = ({
 
     editor.on("update", ({ editor }) => {
       const html = editor.getHTML(); // Get content as HTML
-      console.log(html);
-      setEditorContent(editor.getHTML());
+      setEditorContent(html);
     });
   }, [editor]);
 

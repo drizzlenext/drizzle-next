@@ -99,8 +99,6 @@ export function ObjectTable(props: ObjectTableProps) {
   };
 
   const handleMouseUp = () => {
-    console.log("MOUSE UP");
-
     resizingState.current.isResizing = false;
     resizingState.current.resizingColumn = null;
 
@@ -193,7 +191,6 @@ export function ObjectTable(props: ObjectTableProps) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
-      console.log("patch success");
       // find and update row in curList
       const idx = curList.findIndex((record) => record.id === curCell.row.id);
 
