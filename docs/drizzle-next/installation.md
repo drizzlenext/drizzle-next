@@ -56,8 +56,8 @@ npx drizzle-kit migrate
 Create a test user and grant admin role:
 
 ```bash
-npx tsx scripts/create-user.ts user@example.com password123
-npx tsx scripts/grant-admin.ts user@example.com
+npx tsx scripts/create-user.ts test@example.com password123
+npx tsx scripts/grant-admin.ts test@example.com
 ```
 
 Start the dev server:
