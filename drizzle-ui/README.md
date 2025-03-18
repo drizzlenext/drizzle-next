@@ -6,6 +6,10 @@ The minimalist component library used in Drizzle Next.
 
 https://www.drizzlenext.com/ui/
 
+## Author
+
+[travisluong](https://linktr.ee/travisluong)
+
 ## License
 
 MIT

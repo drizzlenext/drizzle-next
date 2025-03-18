@@ -72,7 +72,7 @@ Without a versioned dependency, distributing small improvements meant copying an
 
 ## Author
 
-Built by [travisluong](https://www.travisluong.com).
+Built by [travisluong](https://linktr.ee/travisluong).
 
 ## License
 

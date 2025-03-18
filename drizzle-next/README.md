@@ -8,6 +8,10 @@ Generate apps using CLI commands inspired by Ruby on Rails and shadcn/ui
 
 https://www.drizzlenext.com
 
+## Author
+
+[travisluong](https://linktr.ee/travisluong)
+
 ## License
 
 MIT
