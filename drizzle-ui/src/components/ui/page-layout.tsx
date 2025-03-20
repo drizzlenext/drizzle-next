@@ -37,33 +37,6 @@ const PageHeader = React.forwardRef<
 });
 PageHeader.displayName = "PageHeader";
 
-const PageTitle = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("bg-page text-page-foreground text-nowrap", className)}
-    {...props}
-  />
-));
-PageTitle.displayName = "PageTitle";
-
-const PageNav = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "bg-page text-page-foreground ml-auto flex items-center gap-3",
-      className,
-    )}
-    {...props}
-  />
-));
-PageNav.displayName = "PageNav";
-
 const PageContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -98,4 +71,4 @@ const PageFooter = React.forwardRef<
 });
 PageFooter.displayName = "PageFooter";
 
-export { PageLayout, PageHeader, PageTitle, PageNav, PageContent, PageFooter };
+export { PageLayout, PageHeader, PageContent, PageFooter };

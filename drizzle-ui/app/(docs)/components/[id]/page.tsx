@@ -24,7 +24,7 @@ import { TableDemo } from "@/components/component-demo/table-demo";
 import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 import { RichTextEditorDemo } from "@/components/component-demo/rich-text-editor-demo";
 import { Suspense } from "react";
-import { PageContent, PageHeader, PageLayout, PageTitle } from "@/src/index";
+import { PageContent, PageHeader, PageLayout } from "@/src/index";
 
 const componentMap: { [key: string]: React.ComponentType | null } = {
   alert: AlertDemo,
@@ -91,9 +91,7 @@ export default async function Page(props: { params: Params }) {
 
   return (
     <PageLayout>
-      <PageHeader>
-        <PageTitle>{data.title}</PageTitle>
-      </PageHeader>
+      <PageHeader>{data.title}</PageHeader>
       <PageContent className="typography">
         <div className="mb-5">{data.description}</div>
         {htmlContent && (
