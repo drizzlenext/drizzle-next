@@ -255,7 +255,7 @@ const SidebarHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "border-border bg-sidebar sticky top-0 z-10 flex min-h-12 items-center border-b p-3",
+      "bg-sidebar sticky top-0 z-10 flex min-h-12 items-center p-3",
       className,
     )}
     {...props}
@@ -267,7 +267,11 @@ const SidebarContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("overflow-auto", className)} {...props} />
+  <div
+    ref={ref}
+    className={cn("flex-grow overflow-auto", className)}
+    {...props}
+  />
 ));
 SidebarContent.displayName = "SidebarContent";
 
@@ -278,7 +282,7 @@ const SidebarFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "border-border bg-sidebar sticky bottom-0 z-10 flex min-h-12 items-center border-t p-3",
+      "bg-sidebar sticky bottom-0 z-10 flex min-h-12 items-center p-3",
       className,
     )}
     {...props}
