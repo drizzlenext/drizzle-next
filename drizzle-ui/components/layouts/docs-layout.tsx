@@ -16,7 +16,6 @@ import {
   ComponentIcon,
   FormInputIcon,
   IdCardIcon,
-  MenuIcon,
   MoonStarIcon,
   NotepadTextIcon,
   PanelsTopLeftIcon,
@@ -137,7 +136,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
     <DashboardLayout>
       <DashboardHeader>
         <DashboardTitle>
-          <SidebarToggle icon={<MenuIcon />} />
+          <SidebarToggle />
           <Link href="/">drizzle-ui</Link>
         </DashboardTitle>
         <DashboardNav>
