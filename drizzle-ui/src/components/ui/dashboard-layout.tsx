@@ -105,9 +105,11 @@ const DashboardNav = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-background border-border absolute top-12 z-50 flex w-full origin-top transform flex-col items-center gap-2 border-b px-2 py-3 transition-transform duration-200 [&>a]:w-full [&>a]:py-1",
-        state.navOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0",
-        "md:relative md:top-0 md:right-0 md:flex md:w-auto md:scale-100 md:flex-row md:items-center md:gap-5 md:border-none md:bg-transparent md:text-base md:opacity-100 md:dark:bg-transparent md:[&>a]:w-auto md:[&>a]:p-0 md:[&>a]:px-2",
+        "bg-background border-border absolute top-12 z-50 flex h-[calc(100vh-3rem)] w-full origin-top transform flex-col items-center gap-2 border-b px-2 py-3 transition-all duration-200 [&>a]:w-full [&>a]:py-1",
+        state.navOpen
+          ? "scale-y-100 opacity-100"
+          : "pointer-events-none scale-y-90 opacity-0",
+        "md:pointer-events-auto md:relative md:top-0 md:right-0 md:flex md:w-auto md:scale-100 md:flex-row md:items-center md:gap-5 md:border-none md:bg-transparent md:text-base md:opacity-100 md:dark:bg-transparent md:[&>a]:w-auto md:[&>a]:p-0 md:[&>a]:px-2",
         className,
       )}
       {...props}
@@ -166,7 +168,10 @@ const DashboardNavList = (props: {
     <>
       {items.map((item) => {
         return (
-          <div key={item.text + item.link}>
+          <div
+            key={item.text + item.link}
+            className="border-border w-full max-w-72 border-b py-3 md:w-auto md:border-0 md:py-0"
+          >
             <Link
               href={item.link}
               className={cn(
