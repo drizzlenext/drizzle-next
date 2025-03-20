@@ -2,6 +2,7 @@
 
 import {
   DashboardLayout,
+  DashboardSidebarContent,
   DashboardSidebarList,
 } from "@/src/components/ui/dashboard-layout";
 import { ReactNode, useEffect } from "react";
@@ -15,6 +16,7 @@ import {
   ComponentIcon,
   FormInputIcon,
   IdCardIcon,
+  MenuIcon,
   MoonStarIcon,
   NotepadTextIcon,
   PanelsTopLeftIcon,
@@ -135,7 +137,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
     <DashboardLayout>
       <DashboardHeader>
         <DashboardTitle>
-          <DashboardSidebarToggle />
+          <DashboardSidebarToggle icon={<MenuIcon />} />
           <Link href="/">drizzle-ui</Link>
         </DashboardTitle>
         <DashboardNav>
@@ -152,7 +154,9 @@ export function DocsLayout({ children }: { children: ReactNode }) {
         <DashboardNavToggle />
       </DashboardHeader>
       <DashboardSidebar>
-        <DashboardSidebarList pathname={pathname} items={items} />
+        <DashboardSidebarContent>
+          <DashboardSidebarList pathname={pathname} items={items} />
+        </DashboardSidebarContent>
       </DashboardSidebar>
       <DashboardContent>{children}</DashboardContent>
     </DashboardLayout>

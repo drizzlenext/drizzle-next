@@ -11,6 +11,9 @@ import {
   DashboardNavToggle,
   DashboardSidebarList,
   DashboardNavList,
+  DashboardSidebarHeader,
+  DashboardSidebarContent,
+  DashboardSidebarFooter,
 } from "@/src/components/ui/dashboard-layout";
 import {
   AlertTriangleIcon,
@@ -22,6 +25,7 @@ import {
   ComponentIcon,
   FormInputIcon,
   IdCardIcon,
+  MenuIcon,
   MoonStarIcon,
   NotepadTextIcon,
   PanelsTopLeftIcon,
@@ -120,7 +124,7 @@ export function DashboardLayoutDemo() {
       <DashboardLayout>
         <DashboardHeader>
           <DashboardTitle>
-            <DashboardSidebarToggle />
+            <DashboardSidebarToggle icon={<MenuIcon />} />
             <Link href="/">drizzle-ui</Link>
           </DashboardTitle>
           <DashboardNav>
@@ -130,7 +134,11 @@ export function DashboardLayoutDemo() {
           <DashboardNavToggle />
         </DashboardHeader>
         <DashboardSidebar>
-          <DashboardSidebarList items={items} pathname={pathname} />
+          <DashboardSidebarHeader>Sidebar Header</DashboardSidebarHeader>
+          <DashboardSidebarContent>
+            <DashboardSidebarList items={items} pathname={pathname} />
+          </DashboardSidebarContent>
+          <DashboardSidebarFooter>Sidebar Footer</DashboardSidebarFooter>
         </DashboardSidebar>
         <DashboardContent>
           <PageLayoutDemo />

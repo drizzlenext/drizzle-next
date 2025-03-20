@@ -5,6 +5,7 @@ import { cn } from "../../lib/utils";
 import { MenuIcon, SidebarIcon, XIcon } from "lucide-react";
 import { Button } from "./button";
 import Link from "next/link";
+import { JSX } from "react";
 
 type NavItem = {
   text: string;
@@ -67,8 +68,8 @@ DashboardLayout.displayName = "DashboardLayout";
 
 const DashboardSidebarToggle = React.forwardRef<
   HTMLButtonElement,
-  React.HTMLAttributes<HTMLButtonElement>
->(({ className, ...props }, ref) => {
+  React.HTMLAttributes<HTMLButtonElement> & { icon?: JSX.Element }
+>(({ className, icon, ...props }, ref) => {
   const { state, setState } = React.useContext(DashboardLayoutContext);
 
   const toggleSidebar = () => {
@@ -101,7 +102,7 @@ const DashboardSidebarToggle = React.forwardRef<
       onClick={toggleSidebar}
       {...props}
     >
-      <SidebarIcon />
+      {icon ?? <SidebarIcon />}
     </Button>
   );
 });
@@ -146,7 +147,7 @@ const DashboardNav = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-background border-border absolute top-12 z-50 flex w-full origin-top transform flex-col items-center gap-2 border-b px-2 py-3 text-sm transition-transform duration-200 [&>a]:w-full [&>a]:py-1",
+        "bg-background border-border absolute top-12 z-50 flex w-full origin-top transform flex-col items-center gap-2 border-b px-2 py-3 transition-transform duration-200 [&>a]:w-full [&>a]:py-1",
         state.navOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0",
         "md:relative md:top-0 md:right-0 md:flex md:w-auto md:scale-100 md:flex-row md:items-center md:gap-5 md:border-none md:bg-transparent md:text-base md:opacity-100 md:dark:bg-transparent md:[&>a]:w-auto md:[&>a]:p-0 md:[&>a]:px-2",
         className,
@@ -195,7 +196,7 @@ const DashboardSidebar = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-sidebar border-border fixed inset-y-12 z-20 h-full w-2/3 transform flex-col overflow-auto border-r text-sm transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48 md:duration-0",
+        "bg-sidebar border-border fixed inset-y-12 z-20 flex h-[calc(100vh-3rem)] w-2/3 transform flex-col border-r transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48 md:duration-0",
         state.sidebarOpen === undefined && "-translate-x-full md:translate-x-0",
         state.sidebarOpen === true && "translate-x-0",
         state.sidebarOpen === false && "-translate-x-full",
@@ -206,6 +207,44 @@ const DashboardSidebar = React.forwardRef<
   );
 });
 DashboardSidebar.displayName = "DashboardSidebar";
+
+const DashboardSidebarHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "border-border bg-sidebar sticky top-0 z-10 flex min-h-12 items-center border-b p-3",
+      className,
+    )}
+    {...props}
+  />
+));
+DashboardSidebarHeader.displayName = "DashboardSidebarHeader";
+
+const DashboardSidebarContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("overflow-auto", className)} {...props} />
+));
+DashboardSidebarContent.displayName = "DashboardSidebarContent";
+
+const DashboardSidebarFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "border-border bg-sidebar sticky bottom-0 z-10 flex min-h-12 items-center border-t p-3",
+      className,
+    )}
+    {...props}
+  />
+));
+DashboardSidebarFooter.displayName = "DashboardSidebarFooter";
 
 const DashboardSidebarGroup = React.forwardRef<
   HTMLDivElement,
@@ -249,7 +288,7 @@ const DashboardContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("min-w-0 overflow-auto", className)}
+    className={cn("min-w-0 overflow-hidden", className)}
     {...props}
   />
 ));
@@ -331,6 +370,9 @@ export {
   DashboardNav,
   DashboardNavToggle,
   DashboardSidebar,
+  DashboardSidebarHeader,
+  DashboardSidebarContent,
+  DashboardSidebarFooter,
   DashboardSidebarGroup,
   DashboardSidebarLabel,
   DashboardSidebarItem,
