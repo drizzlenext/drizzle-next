@@ -8,20 +8,20 @@ export { CodeBlock } from "./components/ui/code-block";
 export { DarkModeScript, DarkModeToggle } from "./components/ui/dark-mode";
 export {
   DashboardLayout,
-  DashboardSidebarToggle,
+  SidebarToggle,
   DashboardHeader,
   DashboardTitle,
   DashboardNav,
   DashboardNavToggle,
-  DashboardSidebar,
-  DashboardSidebarGroup,
-  DashboardSidebarLabel,
-  DashboardSidebarItem,
+  Sidebar,
+  SidebarGroup,
+  SidebarLabel,
+  SidebarItem,
   DashboardContent,
-  DashboardSidebarList,
+  SidebarList,
   DashboardNavList,
-  type SidebarItem,
-  type NavItem,
+  type SidebarItemType,
+  type NavItemType,
 } from "./components/ui/dashboard-layout";
 export { Form, FormControl, FormMessage } from "./components/ui/form";
 export { Input } from "./components/ui/input";
@@ -31,10 +31,6 @@ export {
   PageContent,
   PageFooter,
   PageHeader,
-  PageNav,
-  PageTitle,
-  PageAside,
-  PageAsideToggle,
 } from "./components/ui/page-layout";
 export { Pagination } from "./components/ui/pagination";
 export { RichTextEditor } from "./components/ui/rich-text-editor";

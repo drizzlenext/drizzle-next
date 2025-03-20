@@ -2,8 +2,8 @@
 
 import {
   DashboardLayout,
-  DashboardSidebarContent,
-  DashboardSidebarList,
+  SidebarContent,
+  SidebarList,
 } from "@/src/components/ui/dashboard-layout";
 import { ReactNode, useEffect } from "react";
 import {
@@ -34,9 +34,9 @@ import {
   DashboardHeader,
   DashboardNav,
   DashboardNavToggle,
-  DashboardSidebarToggle,
+  SidebarToggle,
   DashboardTitle,
-  DashboardSidebar,
+  Sidebar,
 } from "@/src/components/ui/dashboard-layout";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -137,7 +137,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
     <DashboardLayout>
       <DashboardHeader>
         <DashboardTitle>
-          <DashboardSidebarToggle icon={<MenuIcon />} />
+          <SidebarToggle icon={<MenuIcon />} />
           <Link href="/">drizzle-ui</Link>
         </DashboardTitle>
         <DashboardNav>
@@ -153,11 +153,11 @@ export function DocsLayout({ children }: { children: ReactNode }) {
         </DashboardNav>
         <DashboardNavToggle />
       </DashboardHeader>
-      <DashboardSidebar>
-        <DashboardSidebarContent>
-          <DashboardSidebarList pathname={pathname} items={items} />
-        </DashboardSidebarContent>
-      </DashboardSidebar>
+      <Sidebar>
+        <SidebarContent>
+          <SidebarList pathname={pathname} items={items} />
+        </SidebarContent>
+      </Sidebar>
       <DashboardContent>{children}</DashboardContent>
     </DashboardLayout>
   );

@@ -7,7 +7,7 @@ import { Button } from "./button";
 import Link from "next/link";
 import { JSX } from "react";
 
-type NavItem = {
+type NavItemType = {
   text: string;
   link: string;
   target?: React.HTMLAttributeAnchorTarget;
@@ -15,10 +15,10 @@ type NavItem = {
   icon?: any;
 };
 
-type SidebarItem = {
+type SidebarItemType = {
   text: string;
   link?: string;
-  items?: SidebarItem[];
+  items?: SidebarItemType[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon?: any;
   target?: React.HTMLAttributeAnchorTarget;
@@ -65,48 +65,6 @@ const DashboardLayout = React.forwardRef<
   );
 });
 DashboardLayout.displayName = "DashboardLayout";
-
-const DashboardSidebarToggle = React.forwardRef<
-  HTMLButtonElement,
-  React.HTMLAttributes<HTMLButtonElement> & { icon?: JSX.Element }
->(({ className, icon, ...props }, ref) => {
-  const { state, setState } = React.useContext(DashboardLayoutContext);
-
-  const toggleSidebar = () => {
-    setState((prevState) => {
-      let newSidebarOpen;
-      if (state.sidebarOpen === undefined) {
-        // the initial behavior is different for sm and md screen sizes
-        if (window.innerWidth <= 768) {
-          newSidebarOpen = true;
-        } else {
-          newSidebarOpen = false;
-        }
-      } else {
-        // after the sidebar is set the first time, revert to normal toggle behavior
-        newSidebarOpen = !prevState.sidebarOpen;
-      }
-      return {
-        ...prevState,
-        sidebarOpen: newSidebarOpen,
-      };
-    });
-  };
-
-  return (
-    <Button
-      ref={ref}
-      variant="ghost"
-      size="icon"
-      className={cn("", className)}
-      onClick={toggleSidebar}
-      {...props}
-    >
-      {icon ?? <SidebarIcon />}
-    </Button>
-  );
-});
-DashboardSidebarToggle.displayName = "DashboardSidebarToggle";
 
 const DashboardHeader = React.forwardRef<
   HTMLDivElement,
@@ -186,102 +144,6 @@ const DashboardNavToggle = React.forwardRef<
 });
 DashboardNavToggle.displayName = "DashboardNavToggle";
 
-const DashboardSidebar = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const { state } = React.useContext(DashboardLayoutContext);
-
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        "bg-sidebar border-border fixed inset-y-12 z-20 flex h-[calc(100vh-3rem)] w-2/3 transform flex-col border-r transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48 md:duration-0",
-        state.sidebarOpen === undefined && "-translate-x-full md:translate-x-0",
-        state.sidebarOpen === true && "translate-x-0",
-        state.sidebarOpen === false && "-translate-x-full",
-        className,
-      )}
-      {...props}
-    />
-  );
-});
-DashboardSidebar.displayName = "DashboardSidebar";
-
-const DashboardSidebarHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "border-border bg-sidebar sticky top-0 z-10 flex min-h-12 items-center border-b p-3",
-      className,
-    )}
-    {...props}
-  />
-));
-DashboardSidebarHeader.displayName = "DashboardSidebarHeader";
-
-const DashboardSidebarContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("overflow-auto", className)} {...props} />
-));
-DashboardSidebarContent.displayName = "DashboardSidebarContent";
-
-const DashboardSidebarFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "border-border bg-sidebar sticky bottom-0 z-10 flex min-h-12 items-center border-t p-3",
-      className,
-    )}
-    {...props}
-  />
-));
-DashboardSidebarFooter.displayName = "DashboardSidebarFooter";
-
-const DashboardSidebarGroup = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("mb-1", className)} {...props} />
-));
-DashboardSidebarGroup.displayName = "DashboardSidebarGroup";
-
-const DashboardSidebarLabel = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex gap-2 px-3 pt-2 font-bold", className)}
-    {...props}
-  />
-));
-DashboardSidebarLabel.displayName = "DashboardSidebarLabel";
-
-const DashboardSidebarItem = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { active?: boolean }
->(({ active = false, className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "hover:bg-muted flex flex-row items-center gap-2 overflow-hidden px-3 py-1 font-normal text-nowrap",
-      active && "bg-muted",
-      className,
-    )}
-    {...props}
-  />
-));
-DashboardSidebarItem.displayName = "DashboardSidebarItem";
-
 const DashboardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -294,49 +156,9 @@ const DashboardContent = React.forwardRef<
 ));
 DashboardContent.displayName = "DashboardContent";
 
-const DashboardSidebarList = (props: {
-  pathname?: string | null;
-  items?: SidebarItem[];
-}) => {
-  const { pathname, items } = props;
-  if (!items) return null;
-
-  return (
-    <DashboardSidebarGroup>
-      {items.map((item) => {
-        if (item.link) {
-          return (
-            <div key={item.text + item.link}>
-              <Link href={item.link} target={item.target}>
-                <DashboardSidebarItem active={pathname === item.link}>
-                  {item.icon ? <item.icon size={16} /> : null}
-                  {item.text}
-                </DashboardSidebarItem>
-              </Link>
-
-              <DashboardSidebarList pathname={pathname} items={item.items} />
-            </div>
-          );
-        } else {
-          return (
-            <div key={item.text}>
-              <DashboardSidebarLabel>
-                {item.icon ? <item.icon size={16} /> : null}
-                {item.text}
-              </DashboardSidebarLabel>
-
-              <DashboardSidebarList pathname={pathname} items={item.items} />
-            </div>
-          );
-        }
-      })}
-    </DashboardSidebarGroup>
-  );
-};
-
 const DashboardNavList = (props: {
   pathname?: string | null;
-  items?: NavItem[];
+  items?: NavItemType[];
 }) => {
   const { pathname, items } = props;
   if (!items) return null;
@@ -362,23 +184,201 @@ const DashboardNavList = (props: {
   );
 };
 
+const SidebarToggle = React.forwardRef<
+  HTMLButtonElement,
+  React.HTMLAttributes<HTMLButtonElement> & { icon?: JSX.Element }
+>(({ className, icon, ...props }, ref) => {
+  const { state, setState } = React.useContext(DashboardLayoutContext);
+
+  const toggleSidebar = () => {
+    setState((prevState) => {
+      let newSidebarOpen;
+      if (state.sidebarOpen === undefined) {
+        // the initial behavior is different for sm and md screen sizes
+        if (window.innerWidth <= 768) {
+          newSidebarOpen = true;
+        } else {
+          newSidebarOpen = false;
+        }
+      } else {
+        // after the sidebar is set the first time, revert to normal toggle behavior
+        newSidebarOpen = !prevState.sidebarOpen;
+      }
+      return {
+        ...prevState,
+        sidebarOpen: newSidebarOpen,
+      };
+    });
+  };
+
+  return (
+    <Button
+      ref={ref}
+      variant="ghost"
+      size="icon"
+      className={cn("", className)}
+      onClick={toggleSidebar}
+      {...props}
+    >
+      {icon ?? <SidebarIcon />}
+    </Button>
+  );
+});
+SidebarToggle.displayName = "SidebarToggle";
+
+const Sidebar = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { state } = React.useContext(DashboardLayoutContext);
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "bg-sidebar border-border fixed inset-y-12 z-20 flex h-[calc(100vh-3rem)] w-2/3 transform flex-col border-r transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48 md:duration-0",
+        state.sidebarOpen === undefined && "-translate-x-full md:translate-x-0",
+        state.sidebarOpen === true && "translate-x-0",
+        state.sidebarOpen === false && "-translate-x-full",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
+Sidebar.displayName = "DashboardSidebar";
+
+const SidebarHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "border-border bg-sidebar sticky top-0 z-10 flex min-h-12 items-center border-b p-3",
+      className,
+    )}
+    {...props}
+  />
+));
+SidebarHeader.displayName = "SidebarHeader";
+
+const SidebarContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("overflow-auto", className)} {...props} />
+));
+SidebarContent.displayName = "SidebarContent";
+
+const SidebarFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "border-border bg-sidebar sticky bottom-0 z-10 flex min-h-12 items-center border-t p-3",
+      className,
+    )}
+    {...props}
+  />
+));
+SidebarFooter.displayName = "SidebarFooter";
+
+const SidebarGroup = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("mb-1", className)} {...props} />
+));
+SidebarGroup.displayName = "SidebarGroup";
+
+const SidebarLabel = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex gap-2 px-3 pt-2 font-bold", className)}
+    {...props}
+  />
+));
+SidebarLabel.displayName = "SidebarLabel";
+
+const SidebarItem = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & { active?: boolean }
+>(({ active = false, className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "hover:bg-muted flex flex-row items-center gap-2 overflow-hidden px-3 py-1 font-normal text-nowrap",
+      active && "bg-muted",
+      className,
+    )}
+    {...props}
+  />
+));
+SidebarItem.displayName = "DashboardSidebarItem";
+
+const SidebarList = (props: {
+  pathname?: string | null;
+  items?: SidebarItemType[];
+}) => {
+  const { pathname, items } = props;
+  if (!items) return null;
+
+  return (
+    <SidebarGroup>
+      {items.map((item) => {
+        if (item.link) {
+          return (
+            <div key={item.text + item.link}>
+              <Link href={item.link} target={item.target}>
+                <SidebarItem active={pathname === item.link}>
+                  {item.icon ? <item.icon size={16} /> : null}
+                  {item.text}
+                </SidebarItem>
+              </Link>
+
+              <SidebarList pathname={pathname} items={item.items} />
+            </div>
+          );
+        } else {
+          return (
+            <div key={item.text}>
+              <SidebarLabel>
+                {item.icon ? <item.icon size={16} /> : null}
+                {item.text}
+              </SidebarLabel>
+
+              <SidebarList pathname={pathname} items={item.items} />
+            </div>
+          );
+        }
+      })}
+    </SidebarGroup>
+  );
+};
+
 export {
   DashboardLayout,
-  DashboardSidebarToggle,
+  SidebarToggle as SidebarToggle,
   DashboardHeader,
   DashboardTitle,
   DashboardNav,
   DashboardNavToggle,
-  DashboardSidebar,
-  DashboardSidebarHeader,
-  DashboardSidebarContent,
-  DashboardSidebarFooter,
-  DashboardSidebarGroup,
-  DashboardSidebarLabel,
-  DashboardSidebarItem,
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarLabel,
+  SidebarItem,
   DashboardContent,
-  DashboardSidebarList,
+  SidebarList,
   DashboardNavList,
-  type SidebarItem,
-  type NavItem,
+  type SidebarItemType,
+  type NavItemType,
 };
