@@ -30,7 +30,7 @@ const squareStyles =
 
 const buttonSizeMap: Record<ButtonSizeVariant, string> = {
   default: "min-w-9 min-h-9",
-  icon: `rounded-icon ${squareStyles}`,
+  icon: `rounded ${squareStyles}`,
   avatar: `rounded-full ${squareStyles}`,
 };
 
@@ -44,7 +44,7 @@ const Button = React.forwardRef<
   return (
     <button
       className={cn(
-        "rounded-button cursor-pointer px-3 py-1 hover:opacity-90 disabled:opacity-50",
+        "cursor-pointer rounded px-3 py-1 hover:opacity-90 disabled:opacity-50",
         buttonVariantMap.default,
         variant && buttonVariantMap[variant],
         size && buttonSizeMap[size],

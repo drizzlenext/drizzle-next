@@ -34,11 +34,6 @@
   --color-input-border: var(--input-border);
   --color-input-background: var(--input-background);
   --color-input-ring: var(--input-ring);
-  --radius-alert: var(--radius-alert);
-  --radius-button: var(--radius-button);
-  --radius-card: var(--radius-card);
-  --radius-input: var(--radius-input);
-  --radius-icon: var(--radius-icon);
 }
 
 :root {
@@ -73,11 +68,6 @@
   --input-ring: theme(colors.blue.500);
   --scrollbar-thumb: theme(colors.zinc.400);
   --scrollbar-track: theme(colors.zinc.200);
-  --radius-alert: 6px;
-  --radius-button: 4px;
-  --radius-card: 12px;
-  --radius-input: 4px;
-  --radius-icon: 4px;
 }
 
 .dark {

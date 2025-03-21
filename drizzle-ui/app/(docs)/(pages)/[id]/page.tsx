@@ -15,7 +15,12 @@ export default async function Page(props: {
   const fileContent = getFileContent(`content/${params.id}.md`);
   const htmlContent = await marked.parse(fileContent);
 
-  return <div dangerouslySetInnerHTML={{ __html: htmlContent }}></div>;
+  return (
+    <div
+      className="overflow-auto"
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
+    ></div>
+  );
 }
 
 export async function generateStaticParams() {

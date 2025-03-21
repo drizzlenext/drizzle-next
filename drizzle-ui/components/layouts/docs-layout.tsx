@@ -131,7 +131,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
       const button = document.createElement("button");
       button.innerHTML = CopyIconSVGText;
       button.className =
-        "copy-btn absolute top-0 right-0 bg-transparent text-white min-w-9 min-h-9 max-w-9 max-h-9 aspect-square py-0 px-0 flex items-center justify-center rounded-icon cursor-pointer hover:opacity-90";
+        "copy-btn absolute top-0 right-0 bg-transparent text-white min-w-9 min-h-9 max-w-9 max-h-9 aspect-square py-0 px-0 flex items-center justify-center rounded cursor-pointer hover:opacity-90";
 
       button.onclick = async () => {
         await navigator.clipboard.writeText(codeBlock.textContent || "");

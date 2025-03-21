@@ -93,56 +93,58 @@ export default async function Page(props: { params: Params }) {
     <PageLayout>
       <PageHeader>{data.title}</PageHeader>
       <PageContent className="typography">
-        <div className="mb-5">{data.description}</div>
-        {htmlContent && (
-          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-        )}
-        {DynamicComponent && (
-          <div className="mb-5">
-            <h2>Preview</h2>
-            <div className="border-border flex flex-col border p-5">
-              <Suspense>
-                <DynamicComponent />
-              </Suspense>
+        <div className="m-auto max-w-3xl">
+          <div className="mb-5">{data.description}</div>
+          {htmlContent && (
+            <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+          )}
+          {DynamicComponent && (
+            <div className="mb-5">
+              <h2>Preview</h2>
+              <div className="border-border flex flex-col border p-5">
+                <Suspense>
+                  <DynamicComponent />
+                </Suspense>
+              </div>
             </div>
-          </div>
-        )}
-        <h2>Installation</h2>
-        <p>Add component:</p>
-        <CodeBlock
-          language="bash"
-          code={`npx drizzle-ui@latest add ${params.id}`}
-        />
-        {data.dependencies && (
-          <>
-            <p>Install dependencies:</p>
-            <CodeBlock
-              language="bash"
-              code={`npm i ${data.dependencies.join(" ")}`}
-            />
-          </>
-        )}
-        {data.dev_dependencies && (
-          <>
-            <p>Install dev dependencies:</p>
-            <CodeBlock
-              language="bash"
-              code={`npm i -D ${data.dev_dependencies.join(" ")}`}
-            />
-          </>
-        )}
-        <h2>Usage</h2>
-        <CodeBlock language="ts" code={usage} />
-        <h2>Source Code</h2>
-        {codeBlocks.map((codeBlock) => (
-          <div key={codeBlock.path}>
-            <p>{codeBlock.path.split("/").slice(1).join("/")}</p>
-            <CodeBlock
-              language={getExtFromPath(codeBlock.path)}
-              code={codeBlock.code}
-            />
-          </div>
-        ))}
+          )}
+          <h2>Installation</h2>
+          <p>Add component:</p>
+          <CodeBlock
+            language="bash"
+            code={`npx drizzle-ui@latest add ${params.id}`}
+          />
+          {data.dependencies && (
+            <>
+              <p>Install dependencies:</p>
+              <CodeBlock
+                language="bash"
+                code={`npm i ${data.dependencies.join(" ")}`}
+              />
+            </>
+          )}
+          {data.dev_dependencies && (
+            <>
+              <p>Install dev dependencies:</p>
+              <CodeBlock
+                language="bash"
+                code={`npm i -D ${data.dev_dependencies.join(" ")}`}
+              />
+            </>
+          )}
+          <h2>Usage</h2>
+          <CodeBlock language="ts" code={usage} />
+          <h2>Source Code</h2>
+          {codeBlocks.map((codeBlock) => (
+            <div key={codeBlock.path}>
+              <p>{codeBlock.path.split("/").slice(1).join("/")}</p>
+              <CodeBlock
+                language={getExtFromPath(codeBlock.path)}
+                code={codeBlock.code}
+              />
+            </div>
+          ))}
+        </div>
       </PageContent>
     </PageLayout>
   );

@@ -3,7 +3,9 @@ import { Avatar } from "@/src/components/ui/avatar";
 export function AvatarDemo() {
   return (
     <div className="flex gap-5">
-      <Avatar src="https://avatars.githubusercontent.com/u/35295184">TL</Avatar>
+      <Avatar src="https://drizzlenext.github.io/drizzle-assets/avatar.png">
+        TL
+      </Avatar>
       <Avatar>TL</Avatar>
     </div>
   );
