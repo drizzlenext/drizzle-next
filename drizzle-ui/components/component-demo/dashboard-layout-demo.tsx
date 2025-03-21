@@ -64,7 +64,7 @@ const nav = [
   },
 ];
 
-const items = [
+const sidebar = [
   {
     text: "Docs",
     icon: BookIcon,
@@ -163,7 +163,7 @@ export function DashboardLayoutDemo() {
         <Sidebar>
           <SidebarHeader>Sidebar Header</SidebarHeader>
           <SidebarContent>
-            <SidebarList items={items} pathname={pathname} />
+            <SidebarList items={sidebar} pathname={pathname} />
           </SidebarContent>
           <SidebarFooter>Sidebar Footer</SidebarFooter>
         </Sidebar>
