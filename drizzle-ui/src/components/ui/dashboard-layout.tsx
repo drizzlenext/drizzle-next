@@ -369,12 +369,15 @@ const SidebarList = (props: {
 };
 
 export {
+  type NavItemType,
+  type SidebarItemType,
   DashboardLayout,
   DashboardHeader,
   DashboardHeaderGroup,
   DashboardNav,
   DashboardNavToggle,
   DashboardContent,
+  DashboardNavList,
   Sidebar,
   SidebarToggle,
   SidebarHeader,
@@ -384,7 +387,4 @@ export {
   SidebarItem,
   SidebarFooter,
   SidebarList,
-  DashboardNavList,
-  type SidebarItemType,
-  type NavItemType,
 };

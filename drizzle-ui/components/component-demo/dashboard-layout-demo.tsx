@@ -1,19 +1,19 @@
 "use client";
 
 import {
-  DashboardContent,
-  DashboardHeader,
   DashboardLayout,
+  DashboardHeader,
+  DashboardHeaderGroup,
   DashboardNav,
   DashboardNavToggle,
   DashboardNavList,
+  DashboardContent,
   Sidebar,
   SidebarToggle,
   SidebarList,
   SidebarHeader,
   SidebarContent,
   SidebarFooter,
-  DashboardHeaderGroup,
 } from "@/src/components/ui/dashboard-layout";
 import {
   AlertTriangleIcon,
