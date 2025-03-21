@@ -29,7 +29,10 @@ type SidebarItemType = {
 type DashboardLayoutState = {
   sidebarOpen?: boolean;
   navOpen?: boolean;
+  variant: DashboardVariant;
 };
+
+type DashboardVariant = "full" | "container";
 
 const DashboardLayoutContext = React.createContext<{
   state: DashboardLayoutState;
@@ -38,22 +41,26 @@ const DashboardLayoutContext = React.createContext<{
   state: {
     sidebarOpen: undefined,
     navOpen: undefined,
+    variant: "full",
   },
   setState: () => {},
 });
 
 const DashboardLayout = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const [state, setState] = React.useState({} as DashboardLayoutState);
+  React.HTMLAttributes<HTMLDivElement> & { variant?: DashboardVariant }
+>(({ className, variant = "full", ...props }, ref) => {
+  const [state, setState] = React.useState({
+    variant: variant,
+  } as DashboardLayoutState);
 
   return (
     <DashboardLayoutContext.Provider value={{ state, setState }}>
       <div
         ref={ref}
         className={cn(
-          "bg-dashboard text-dashboard-foreground grid h-screen grid-rows-[auto_1fr]",
+          "bg-dashboard text-dashboard-foreground m-auto grid h-auto grid-rows-[auto_1fr]",
+          variant === "container" && "border-border container border-x",
           state.sidebarOpen === undefined && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === true && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === false && "md:grid-cols-[0px_1fr]",
@@ -73,7 +80,7 @@ const DashboardHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-header text-header-foreground border-border relative flex h-12 w-full items-center justify-between gap-2 border-b md:col-span-2",
+      "bg-header text-header-foreground border-border sticky top-0 z-50 flex h-12 w-full items-center justify-between gap-2 border-b md:col-span-2",
       className,
     )}
     {...props}
@@ -162,13 +169,9 @@ DashboardNavToggle.displayName = "DashboardNavToggle";
 const DashboardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("min-w-0 overflow-auto", className)}
-    {...props}
-  />
-));
+>(({ className, ...props }, ref) => {
+  return <div ref={ref} className={cn("min-w-0", className)} {...props} />;
+});
 DashboardContent.displayName = "DashboardContent";
 
 const DashboardNavList = (props: {
@@ -251,10 +254,25 @@ const Sidebar = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-sidebar border-border fixed inset-y-12 z-20 flex h-[calc(100vh-3rem)] w-2/3 transform flex-col border-r transition-transform duration-200 ease-in-out md:relative md:inset-y-0 md:w-48 md:duration-0",
-        state.sidebarOpen === undefined && "-translate-x-full md:translate-x-0",
-        state.sidebarOpen === true && "translate-x-0",
-        state.sidebarOpen === false && "-translate-x-full",
+        "bg-sidebar border-border fixed top-12 z-20 flex h-[calc(100vh-48px)] w-2/3 transform flex-col border-r transition-transform duration-200 ease-in-out md:sticky md:w-48 md:duration-0",
+        state.variant === "full" &&
+          state.sidebarOpen === undefined &&
+          "-translate-x-full md:translate-x-0",
+        state.variant === "full" &&
+          state.sidebarOpen === true &&
+          "translate-x-0",
+        state.variant === "full" &&
+          state.sidebarOpen === false &&
+          "-translate-x-full",
+        state.variant === "container" &&
+          state.sidebarOpen === undefined &&
+          "-translate-x-full sm:translate-x-0",
+        state.variant === "container" &&
+          state.sidebarOpen === true &&
+          "translate-x-0 sm:duration-0",
+        state.variant === "container" &&
+          state.sidebarOpen === false &&
+          "-translate-x-full sm:invisible sm:duration-0",
         className,
       )}
       {...props}
@@ -319,7 +337,7 @@ const SidebarLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex gap-2 px-3 pt-2 font-bold", className)}
+    className={cn("flex gap-2 px-3 pt-2 font-semibold", className)}
     {...props}
   />
 ));

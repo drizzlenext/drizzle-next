@@ -12,10 +12,8 @@ import {
   AlertTriangleIcon,
   ArrowUpDownIcon,
   ArrowUpRightIcon,
-  BookIcon,
   BookOpenTextIcon,
   CheckSquareIcon,
-  ComponentIcon,
   FormInputIcon,
   IdCardIcon,
   MoonStarIcon,
@@ -47,7 +45,6 @@ import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 const items = [
   {
     text: "Docs",
-    icon: BookIcon,
     items: [
       { text: "Introduction", link: "/introduction" },
       { text: "Installation", link: "/installation" },
@@ -55,7 +52,6 @@ const items = [
   },
   {
     text: "Components",
-    icon: ComponentIcon,
     items: [
       { text: "Alert", link: "/components/alert", icon: AlertTriangleIcon },
       { text: "Avatar", link: "/components/avatar", icon: UserCircleIcon },
@@ -145,7 +141,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   return (
-    <DashboardLayout>
+    <DashboardLayout variant="container">
       <DashboardHeader>
         <DashboardHeaderGroup>
           <SidebarToggle />

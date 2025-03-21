@@ -11,7 +11,7 @@ const PageLayout = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-page text-page-foreground relative flex h-[calc(100vh-3rem)] flex-col",
+        "bg-page text-page-foreground relative flex flex-col",
         className,
       )}
       {...props}
@@ -28,7 +28,7 @@ const PageHeader = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "border-border bg-page text-page-foreground sticky top-0 flex min-h-12 items-center justify-between gap-2 border-b p-3",
+        "border-border bg-page text-page-foreground sticky top-12 z-40 flex min-h-12 items-center justify-between gap-2 border-b p-3",
         className,
       )}
       {...props}
@@ -44,10 +44,7 @@ const PageContent = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={cn(
-        "bg-page text-page-foreground flex-grow overflow-auto p-3",
-        className,
-      )}
+      className={cn("bg-page text-page-foreground flex-grow p-3", className)}
       {...props}
     />
   );

@@ -25,6 +25,7 @@ import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 import { RichTextEditorDemo } from "@/components/component-demo/rich-text-editor-demo";
 import { Suspense } from "react";
 import { PageContent, PageHeader, PageLayout } from "@/src/index";
+import Link from "next/link";
 
 const componentMap: { [key: string]: React.ComponentType | null } = {
   alert: AlertDemo,
@@ -93,9 +94,9 @@ export default async function Page(props: { params: Params }) {
     <PageLayout>
       <PageHeader>{data.title}</PageHeader>
       <PageContent className="typography">
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-          <div>
-            <h2>Description</h2>
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-[1fr_192px]">
+          <div className="min-w-0 flex-grow">
+            <h2 id="description">Description</h2>
             <div className="mb-5">{data.description}</div>
             {htmlContent && (
               <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
@@ -111,7 +112,7 @@ export default async function Page(props: { params: Params }) {
               </div>
             )}
 
-            <h2>Installation</h2>
+            <h2 id="installation">Installation</h2>
             <p>Add component:</p>
             <CodeBlock
               language="bash"
@@ -135,11 +136,9 @@ export default async function Page(props: { params: Params }) {
                 />
               </>
             )}
-            <h2>Usage</h2>
+            <h2 id="usage">Usage</h2>
             <CodeBlock language="ts" code={usage} />
-          </div>
-          <div>
-            <h2>Code</h2>
+            <h2 id="code">Code</h2>
             {codeBlocks.map((codeBlock) => (
               <div key={codeBlock.path}>
                 <p>{codeBlock.path.split("/").slice(1).join("/")}</p>
@@ -149,6 +148,16 @@ export default async function Page(props: { params: Params }) {
                 />
               </div>
             ))}
+          </div>
+          <div className="sticky top-28 hidden self-start lg:block">
+            <h4>On this page</h4>
+            <div className="flex flex-col">
+              <Link href="#description">Description</Link>
+              {DynamicComponent && <Link href="#preview">Preview</Link>}
+              <Link href="#installation">Installation</Link>
+              <Link href="#usage">Usage</Link>
+              <Link href="#code">Code</Link>
+            </div>
           </div>
         </div>
       </PageContent>

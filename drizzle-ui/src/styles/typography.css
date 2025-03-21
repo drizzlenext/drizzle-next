@@ -1,6 +1,5 @@
 .typography a {
-  color: var(--info);
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: underline;
 }
 
