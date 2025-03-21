@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "../../lib/utils";
 
-type ButtonVariant =
+export type ButtonVariant =
   | "default"
   | "muted"
   | "success"
@@ -23,11 +23,15 @@ const buttonVariantMap: Record<ButtonVariant, string> = {
   ghost: "bg-transparent text-foreground hover:bg-muted",
 };
 
-type ButtonSizeVariant = "default" | "icon";
+export type ButtonSizeVariant = "default" | "icon" | "avatar";
+
+const squareStyles =
+  "min-w-9 min-h-9 max-w-9 max-h-9 aspect-square py-0 px-0 flex items-center justify-center";
 
 const buttonSizeMap: Record<ButtonSizeVariant, string> = {
   default: "min-w-9 min-h-9",
-  icon: "min-w-9 min-h-9 max-w-9 max-h-9 aspect-square py-0 px-0 flex items-center justify-center rounded-icon",
+  icon: `rounded-icon ${squareStyles}`,
+  avatar: `rounded-full ${squareStyles}`,
 };
 
 const Button = React.forwardRef<

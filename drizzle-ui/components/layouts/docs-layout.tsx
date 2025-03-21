@@ -34,7 +34,7 @@ import {
   DashboardNav,
   DashboardNavToggle,
   SidebarToggle,
-  DashboardTitle,
+  DashboardHeaderGroup,
   Sidebar,
 } from "@/src/components/ui/dashboard-layout";
 import Link from "next/link";
@@ -135,10 +135,10 @@ export function DocsLayout({ children }: { children: ReactNode }) {
   return (
     <DashboardLayout>
       <DashboardHeader>
-        <DashboardTitle>
+        <DashboardHeaderGroup>
           <SidebarToggle />
           <Link href="/">drizzle-ui</Link>
-        </DashboardTitle>
+        </DashboardHeaderGroup>
         <DashboardNav>
           <Link href="/introduction">Docs</Link>
           <Link

@@ -3,7 +3,6 @@
 import {
   DashboardContent,
   DashboardHeader,
-  DashboardTitle,
   DashboardLayout,
   DashboardNav,
   DashboardNavToggle,
@@ -14,6 +13,7 @@ import {
   SidebarHeader,
   SidebarContent,
   SidebarFooter,
+  DashboardHeaderGroup,
 } from "@/src/components/ui/dashboard-layout";
 import {
   AlertTriangleIcon,
@@ -25,11 +25,13 @@ import {
   ComponentIcon,
   FormInputIcon,
   IdCardIcon,
+  LogOutIcon,
   MoonStarIcon,
   NotepadTextIcon,
   PanelsTopLeftIcon,
   PanelTopIcon,
   SearchIcon,
+  SettingsIcon,
   SquareMousePointerIcon,
   SquarePenIcon,
   SquarePowerIcon,
@@ -43,6 +45,12 @@ import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 import { usePathname } from "next/navigation";
 import { PageLayoutDemo } from "./page-layout-demo";
 import { Suspense } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuItemType,
+  DropdownMenuList,
+} from "@/src/components/ui/dropdown-menu";
+import { Avatar } from "@/src/components/ui/avatar";
 
 const nav = [
   {
@@ -115,6 +123,16 @@ const items = [
   },
 ];
 
+const menu: DropdownMenuItemType[] = [
+  {
+    text: "Account",
+    items: [
+      { text: "Settings", link: "/", icon: SettingsIcon },
+      { text: "Sign Out", link: "/", icon: LogOutIcon },
+    ],
+  },
+];
+
 export function DashboardLayoutDemo() {
   const pathname = usePathname();
 
@@ -122,15 +140,25 @@ export function DashboardLayoutDemo() {
     <Suspense>
       <DashboardLayout>
         <DashboardHeader>
-          <DashboardTitle>
+          <DashboardHeaderGroup>
             <SidebarToggle />
             <Link href="/">drizzle-ui</Link>
-          </DashboardTitle>
-          <DashboardNav>
-            <DashboardNavList items={nav} pathname={pathname} />
-            <DarkModeToggle />
-          </DashboardNav>
-          <DashboardNavToggle />
+          </DashboardHeaderGroup>
+          <DashboardHeaderGroup>
+            <DashboardNav>
+              <DashboardNavList items={nav} pathname={pathname} />
+              <DarkModeToggle />
+            </DashboardNav>
+            <DashboardNavToggle />
+            <DropdownMenu
+              buttonSizeVariant="avatar"
+              buttonEl={
+                <Avatar src="https://drizzlenext.github.io/drizzle-assets/avatar.png" />
+              }
+            >
+              <DropdownMenuList items={menu} />
+            </DropdownMenu>
+          </DashboardHeaderGroup>
         </DashboardHeader>
         <Sidebar>
           <SidebarHeader>Sidebar Header</SidebarHeader>

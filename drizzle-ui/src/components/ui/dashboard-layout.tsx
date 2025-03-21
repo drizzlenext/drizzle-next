@@ -73,7 +73,7 @@ const DashboardHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-header text-header-foreground border-border flex h-12 w-full items-center justify-between gap-2 border-b md:col-span-2",
+      "bg-header text-header-foreground border-border relative flex h-12 w-full items-center justify-between gap-2 border-b md:col-span-2",
       className,
     )}
     {...props}
@@ -81,20 +81,17 @@ const DashboardHeader = React.forwardRef<
 ));
 DashboardHeader.displayName = "DashboardHeader";
 
-const DashboardTitle = React.forwardRef<
+const DashboardHeaderGroup = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "flex items-center gap-2 px-2 font-mono font-bold",
-      className,
-    )}
+    className={cn("flex items-center gap-2 px-2", className)}
     {...props}
   />
 ));
-DashboardTitle.displayName = "DashboardTitle";
+DashboardHeaderGroup.displayName = "DashboardHeaderGroup";
 
 const DashboardNav = React.forwardRef<
   HTMLDivElement,
@@ -105,7 +102,7 @@ const DashboardNav = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-background border-border absolute top-12 z-50 flex h-[calc(100vh-3rem)] w-full origin-top transform flex-col items-center gap-2 border-b px-2 py-3 transition-all duration-200 [&>a]:w-full [&>a]:py-1",
+        "bg-background border-border absolute top-12 left-0 z-50 flex h-[calc(100vh-3rem)] w-full origin-top transform flex-col items-center gap-2 border-b px-2 py-3 transition-all duration-200 [&>a]:w-full [&>a]:py-1",
         state.navOpen
           ? "scale-y-100 opacity-100"
           : "pointer-events-none scale-y-90 opacity-0 md:pointer-events-auto",
@@ -373,19 +370,19 @@ const SidebarList = (props: {
 
 export {
   DashboardLayout,
-  SidebarToggle as SidebarToggle,
   DashboardHeader,
-  DashboardTitle,
+  DashboardHeaderGroup,
   DashboardNav,
   DashboardNavToggle,
+  DashboardContent,
   Sidebar,
+  SidebarToggle,
   SidebarHeader,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarLabel,
   SidebarItem,
-  DashboardContent,
+  SidebarFooter,
   SidebarList,
   DashboardNavList,
   type SidebarItemType,
