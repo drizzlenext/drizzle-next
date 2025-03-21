@@ -115,6 +115,22 @@ const DashboardNav = React.forwardRef<
 });
 DashboardNav.displayName = "DashboardNav";
 
+const DashboardNavItem = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      (className =
+        "border-border w-full max-w-72 border-b py-3 md:w-auto md:border-0 md:py-0"),
+      className,
+    )}
+    {...props}
+  />
+));
+DashboardNavItem.displayName = "DashboardNavItem";
+
 const DashboardNavToggle = React.forwardRef<
   HTMLButtonElement,
   React.HTMLAttributes<HTMLButtonElement>
@@ -165,10 +181,7 @@ const DashboardNavList = (props: {
     <>
       {items.map((item) => {
         return (
-          <div
-            key={item.text + item.link}
-            className="border-border w-full max-w-72 border-b py-3 md:w-auto md:border-0 md:py-0"
-          >
+          <DashboardNavItem key={item.text + item.link}>
             <Link
               href={item.link}
               className={cn(
@@ -179,7 +192,7 @@ const DashboardNavList = (props: {
               {item.text}
               {item.icon && <item.icon size={16} />}
             </Link>
-          </div>
+          </DashboardNavItem>
         );
       })}
     </>
@@ -375,6 +388,7 @@ export {
   DashboardHeader,
   DashboardHeaderGroup,
   DashboardNav,
+  DashboardNavItem,
   DashboardNavToggle,
   DashboardContent,
   DashboardNavList,

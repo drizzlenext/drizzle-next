@@ -142,7 +142,7 @@ export function DashboardLayoutDemo() {
         <DashboardHeader>
           <DashboardHeaderGroup>
             <SidebarToggle />
-            <Link href="/">drizzle-ui</Link>
+            <Link href="/">Drizzle UI</Link>
           </DashboardHeaderGroup>
           <DashboardHeaderGroup>
             <DashboardNav>
