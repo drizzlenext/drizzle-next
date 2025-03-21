@@ -15,7 +15,6 @@ import { DarkModeDemo } from "@/components/component-demo/dark-mode-demo";
 import { FormDemo } from "@/components/component-demo/form-demo";
 import { InputDemo } from "@/components/component-demo/input-demo";
 import { LabelDemo } from "@/components/component-demo/label-demo";
-import { PageLayoutDemo } from "@/components/component-demo/page-layout-demo";
 import { PaginationDemo } from "@/components/component-demo/pagination-demo";
 import { SearchInput } from "@/src/components/ui/search-input";
 import { SelectDemo } from "@/components/component-demo/select-demo";
@@ -24,7 +23,6 @@ import { TableDemo } from "@/components/component-demo/table-demo";
 import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 import { RichTextEditorDemo } from "@/components/component-demo/rich-text-editor-demo";
 import { Suspense } from "react";
-import { PageContent, PageHeader, PageLayout } from "@/src/index";
 import Link from "next/link";
 
 const componentMap: { [key: string]: React.ComponentType | null } = {
@@ -38,7 +36,6 @@ const componentMap: { [key: string]: React.ComponentType | null } = {
   form: FormDemo,
   input: InputDemo,
   label: LabelDemo,
-  "page-layout": PageLayoutDemo,
   pagination: PaginationDemo,
   "search-input": SearchInput,
   select: SelectDemo,
@@ -91,11 +88,11 @@ export default async function Page(props: { params: Params }) {
   const DynamicComponent = componentMap[params.id] || null;
 
   return (
-    <PageLayout>
-      <PageHeader>{data.title}</PageHeader>
-      <PageContent className="typography">
+    <div className="p-3">
+      <div>
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-[1fr_192px]">
-          <div className="min-w-0 flex-grow">
+          <div className="typography min-w-0 flex-grow">
+            <h1>{data.title}</h1>
             <h2 id="description">Description</h2>
             <div className="mb-5">{data.description}</div>
             {htmlContent && (
@@ -149,8 +146,8 @@ export default async function Page(props: { params: Params }) {
               </div>
             ))}
           </div>
-          <div className="sticky top-28 hidden self-start lg:block">
-            <h4>On this page</h4>
+          <div className="sticky top-15 hidden self-start lg:block">
+            <h4 className="font-semibold">On this page</h4>
             <div className="flex flex-col">
               <Link href="#description">Description</Link>
               {DynamicComponent && <Link href="#preview">Preview</Link>}
@@ -160,8 +157,8 @@ export default async function Page(props: { params: Params }) {
             </div>
           </div>
         </div>
-      </PageContent>
-    </PageLayout>
+      </div>
+    </div>
   );
 }
 

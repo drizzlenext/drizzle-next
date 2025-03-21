@@ -19,7 +19,6 @@ import {
   MoonStarIcon,
   NotepadTextIcon,
   PanelsTopLeftIcon,
-  PanelTopIcon,
   SearchIcon,
   SquareMousePointerIcon,
   SquarePenIcon,
@@ -67,11 +66,6 @@ const items = [
       { text: "Form", link: "/components/form", icon: NotepadTextIcon },
       { text: "Input", link: "/components/input", icon: FormInputIcon },
       { text: "Label", link: "/components/label", icon: TagIcon },
-      {
-        text: "Page Layout",
-        link: "/components/page-layout",
-        icon: PanelTopIcon,
-      },
       {
         text: "Pagination",
         link: "/components/pagination",

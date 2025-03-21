@@ -43,7 +43,6 @@ import {
 import Link from "next/link";
 import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 import { usePathname } from "next/navigation";
-import { PageLayoutDemo } from "./page-layout-demo";
 import { Suspense } from "react";
 import {
   DropdownMenu,
@@ -168,7 +167,9 @@ export function DashboardLayoutDemo() {
           <SidebarFooter>Sidebar Footer</SidebarFooter>
         </Sidebar>
         <DashboardContent>
-          <PageLayoutDemo />
+          <p className="p-3">
+            This is the full width variant of Dashboard Layout demo.
+          </p>
         </DashboardContent>
       </DashboardLayout>
     </Suspense>
