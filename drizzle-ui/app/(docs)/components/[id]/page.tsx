@@ -32,7 +32,7 @@ const componentMap: { [key: string]: React.ComponentType | null } = {
   card: CardDemo,
   checkbox: CheckboxDemo,
   "dark-mode": DarkModeDemo,
-  "dashboard-layout": null,
+  "app-layout": null,
   form: FormDemo,
   input: InputDemo,
   label: LabelDemo,

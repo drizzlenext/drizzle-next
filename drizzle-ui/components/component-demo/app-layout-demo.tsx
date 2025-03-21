@@ -14,7 +14,7 @@ import {
   SidebarHeader,
   SidebarContent,
   SidebarFooter,
-} from "@/src/components/ui/dashboard-layout";
+} from "@/src/components/ui/app-layout";
 import {
   AlertTriangleIcon,
   ArrowUpDownIcon,
@@ -76,16 +76,16 @@ const sidebar = [
     icon: ComponentIcon,
     items: [
       { text: "Alert", link: "/components/alert", icon: AlertTriangleIcon },
+      {
+        text: "App Layout",
+        link: "/components/app-layout",
+        icon: PanelsTopLeftIcon,
+      },
       { text: "Avatar", link: "/components/avatar", icon: UserCircleIcon },
       { text: "Button", link: "/components/button", icon: SquarePowerIcon },
       { text: "Card", link: "/components/card", icon: IdCardIcon },
       { text: "Checkbox", link: "/components/checkbox", icon: CheckSquareIcon },
       { text: "Dark Mode", link: "/components/dark-mode", icon: MoonStarIcon },
-      {
-        text: "Dashboard Layout",
-        link: "/components/dashboard-layout",
-        icon: PanelsTopLeftIcon,
-      },
       { text: "Form", link: "/components/form", icon: NotepadTextIcon },
       { text: "Input", link: "/components/input", icon: FormInputIcon },
       { text: "Label", link: "/components/label", icon: TagIcon },
@@ -126,7 +126,7 @@ const menu: DropdownMenuItemType[] = [
   },
 ];
 
-export function DashboardLayoutDemo() {
+export function AppLayoutDemo() {
   const pathname = usePathname();
 
   return (
@@ -162,7 +162,7 @@ export function DashboardLayoutDemo() {
         </Sidebar>
         <DashboardContent>
           <p className="p-3">
-            This is the full width variant of Dashboard Layout demo.
+            This is the full width variant of the App Layout.
           </p>
         </DashboardContent>
       </DashboardLayout>

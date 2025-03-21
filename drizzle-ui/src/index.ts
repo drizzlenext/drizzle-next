@@ -22,7 +22,7 @@ export {
   DashboardNavList,
   type SidebarItemType,
   type NavItemType,
-} from "./components/ui/dashboard-layout";
+} from "./components/ui/app-layout";
 export { Form, FormControl, FormMessage } from "./components/ui/form";
 export { Input } from "./components/ui/input";
 export { Label } from "./components/ui/label";

@@ -15,6 +15,9 @@
 .typography h2 {
   font-size: 1.5rem;
   font-weight: bold;
+  border-top: 1px solid var(--color-border);
+  padding-top: 24px;
+  margin: 32px 0 16px;
 }
 
 .typography h3 {

@@ -6,7 +6,7 @@ import {
   NavItemType,
   SidebarContent,
   SidebarList,
-} from "@/src/components/ui/dashboard-layout";
+} from "@/src/components/ui/app-layout";
 import { ReactNode, useEffect } from "react";
 import {
   AlertTriangleIcon,
@@ -35,10 +35,10 @@ import {
   SidebarToggle,
   DashboardHeaderGroup,
   Sidebar,
-} from "@/src/components/ui/dashboard-layout";
+} from "@/src/components/ui/app-layout";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DashboardContent } from "@/src/components/ui/dashboard-layout";
+import { DashboardContent } from "@/src/components/ui/app-layout";
 import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 
 const items = [
@@ -53,16 +53,16 @@ const items = [
     text: "Components",
     items: [
       { text: "Alert", link: "/components/alert", icon: AlertTriangleIcon },
+      {
+        text: "App Layout",
+        link: "/components/app-layout",
+        icon: PanelsTopLeftIcon,
+      },
       { text: "Avatar", link: "/components/avatar", icon: UserCircleIcon },
       { text: "Button", link: "/components/button", icon: SquarePowerIcon },
       { text: "Card", link: "/components/card", icon: IdCardIcon },
       { text: "Checkbox", link: "/components/checkbox", icon: CheckSquareIcon },
       { text: "Dark Mode", link: "/components/dark-mode", icon: MoonStarIcon },
-      {
-        text: "Dashboard Layout",
-        link: "/components/dashboard-layout",
-        icon: PanelsTopLeftIcon,
-      },
       { text: "Form", link: "/components/form", icon: NotepadTextIcon },
       { text: "Input", link: "/components/input", icon: FormInputIcon },
       { text: "Label", link: "/components/label", icon: TagIcon },
