@@ -23,7 +23,7 @@ import { TableDemo } from "@/components/component-demo/table-demo";
 import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 import { RichTextEditorDemo } from "@/components/component-demo/rich-text-editor-demo";
 import { Suspense } from "react";
-import Link from "next/link";
+import ScrollLink from "@/components/scroll-link";
 
 const componentMap: { [key: string]: React.ComponentType | null } = {
   alert: AlertDemo,
@@ -149,11 +149,13 @@ export default async function Page(props: { params: Params }) {
           <div className="sticky top-15 hidden self-start lg:block">
             <h4 className="font-semibold">On this page</h4>
             <div className="flex flex-col">
-              <Link href="#description">Description</Link>
-              {DynamicComponent && <Link href="#preview">Preview</Link>}
-              <Link href="#installation">Installation</Link>
-              <Link href="#usage">Usage</Link>
-              <Link href="#code">Code</Link>
+              <ScrollLink href="#description">Description</ScrollLink>
+              {DynamicComponent && (
+                <ScrollLink href="#preview">Preview</ScrollLink>
+              )}
+              <ScrollLink href="#installation">Installation</ScrollLink>
+              <ScrollLink href="#usage">Usage</ScrollLink>
+              <ScrollLink href="#code">Code</ScrollLink>
             </div>
           </div>
         </div>
