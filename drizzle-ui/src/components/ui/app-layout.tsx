@@ -15,10 +15,10 @@ type AppNavItemType = {
   icon?: any;
 };
 
-type SidebarItemType = {
+type AppSidebarItemType = {
   text: string;
   link?: string;
-  items?: SidebarItemType[];
+  items?: AppSidebarItemType[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon?: any;
   target?: React.HTMLAttributeAnchorTarget;
@@ -202,29 +202,29 @@ const AppNavList = (props: {
   );
 };
 
-const SidebarToggle = React.forwardRef<
+const AppSidebarToggle = React.forwardRef<
   HTMLButtonElement,
   React.HTMLAttributes<HTMLButtonElement> & { icon?: JSX.Element }
 >(({ className, icon, ...props }, ref) => {
   const { state, setState } = React.useContext(AppLayoutContext);
 
-  const toggleSidebar = () => {
+  const toggleAppSidebar = () => {
     setState((prevState) => {
-      let newSidebarOpen;
+      let newAppSidebarOpen;
       if (state.sidebarOpen === undefined) {
         // the initial behavior is different for sm and md screen sizes
         if (window.innerWidth <= 768) {
-          newSidebarOpen = true;
+          newAppSidebarOpen = true;
         } else {
-          newSidebarOpen = false;
+          newAppSidebarOpen = false;
         }
       } else {
         // after the sidebar is set the first time, revert to normal toggle behavior
-        newSidebarOpen = !prevState.sidebarOpen;
+        newAppSidebarOpen = !prevState.sidebarOpen;
       }
       return {
         ...prevState,
-        sidebarOpen: newSidebarOpen,
+        sidebarOpen: newAppSidebarOpen,
       };
     });
   };
@@ -235,16 +235,16 @@ const SidebarToggle = React.forwardRef<
       variant="ghost"
       size="icon"
       className={cn("", className)}
-      onClick={toggleSidebar}
+      onClick={toggleAppSidebar}
       {...props}
     >
       {icon ?? <SidebarIcon />}
     </Button>
   );
 });
-SidebarToggle.displayName = "SidebarToggle";
+AppSidebarToggle.displayName = "AppSidebarToggle";
 
-const Sidebar = React.forwardRef<
+const AppSidebar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
@@ -279,9 +279,9 @@ const Sidebar = React.forwardRef<
     />
   );
 });
-Sidebar.displayName = "Sidebar";
+AppSidebar.displayName = "AppSidebar";
 
-const SidebarHeader = React.forwardRef<
+const AppSidebarHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -294,9 +294,9 @@ const SidebarHeader = React.forwardRef<
     {...props}
   />
 ));
-SidebarHeader.displayName = "SidebarHeader";
+AppSidebarHeader.displayName = "AppSidebarHeader";
 
-const SidebarContent = React.forwardRef<
+const AppSidebarContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -306,9 +306,9 @@ const SidebarContent = React.forwardRef<
     {...props}
   />
 ));
-SidebarContent.displayName = "SidebarContent";
+AppSidebarContent.displayName = "AppSidebarContent";
 
-const SidebarFooter = React.forwardRef<
+const AppSidebarFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -321,17 +321,17 @@ const SidebarFooter = React.forwardRef<
     {...props}
   />
 ));
-SidebarFooter.displayName = "SidebarFooter";
+AppSidebarFooter.displayName = "AppSidebarFooter";
 
-const SidebarGroup = React.forwardRef<
+const AppSidebarGroup = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("mb-1", className)} {...props} />
 ));
-SidebarGroup.displayName = "SidebarGroup";
+AppSidebarGroup.displayName = "AppSidebarGroup";
 
-const SidebarLabel = React.forwardRef<
+const AppSidebarLabel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -341,9 +341,9 @@ const SidebarLabel = React.forwardRef<
     {...props}
   />
 ));
-SidebarLabel.displayName = "SidebarLabel";
+AppSidebarLabel.displayName = "AppSidebarLabel";
 
-const SidebarItem = React.forwardRef<
+const AppSidebarItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & { active?: boolean }
 >(({ active = false, className, ...props }, ref) => (
@@ -357,51 +357,51 @@ const SidebarItem = React.forwardRef<
     {...props}
   />
 ));
-SidebarItem.displayName = "SidebarItem";
+AppSidebarItem.displayName = "AppSidebarItem";
 
-const SidebarList = (props: {
+const AppSidebarList = (props: {
   pathname?: string | null;
-  items?: SidebarItemType[];
+  items?: AppSidebarItemType[];
 }) => {
   const { pathname, items } = props;
   if (!items) return null;
 
   return (
-    <SidebarGroup>
+    <AppSidebarGroup>
       {items.map((item) => {
         if (item.link) {
           return (
             <div key={item.text + item.link}>
               <Link href={item.link} target={item.target}>
-                <SidebarItem active={pathname === item.link}>
+                <AppSidebarItem active={pathname === item.link}>
                   {item.icon ? <item.icon size={16} /> : null}
                   {item.text}
-                </SidebarItem>
+                </AppSidebarItem>
               </Link>
 
-              <SidebarList pathname={pathname} items={item.items} />
+              <AppSidebarList pathname={pathname} items={item.items} />
             </div>
           );
         } else {
           return (
             <div key={item.text}>
-              <SidebarLabel>
+              <AppSidebarLabel>
                 {item.icon ? <item.icon size={16} /> : null}
                 {item.text}
-              </SidebarLabel>
+              </AppSidebarLabel>
 
-              <SidebarList pathname={pathname} items={item.items} />
+              <AppSidebarList pathname={pathname} items={item.items} />
             </div>
           );
         }
       })}
-    </SidebarGroup>
+    </AppSidebarGroup>
   );
 };
 
 export {
   type AppNavItemType,
-  type SidebarItemType,
+  type AppSidebarItemType,
   AppLayout,
   AppHeader,
   AppHeaderGroup,
@@ -410,13 +410,13 @@ export {
   AppNavToggle,
   AppContent,
   AppNavList,
-  Sidebar,
-  SidebarToggle,
-  SidebarHeader,
-  SidebarContent,
-  SidebarGroup,
-  SidebarLabel,
-  SidebarItem,
-  SidebarFooter,
-  SidebarList,
+  AppSidebar,
+  AppSidebarToggle,
+  AppSidebarHeader,
+  AppSidebarContent,
+  AppSidebarGroup,
+  AppSidebarLabel,
+  AppSidebarItem,
+  AppSidebarFooter,
+  AppSidebarList,
 };

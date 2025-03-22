@@ -4,8 +4,8 @@ import {
   AppLayout,
   AppNavList,
   AppNavItemType,
-  SidebarContent,
-  SidebarList,
+  AppSidebarContent,
+  AppSidebarList,
 } from "@/src/components/ui/app-layout";
 import { ReactNode, useEffect } from "react";
 import {
@@ -32,9 +32,9 @@ import {
   AppHeader,
   AppNav,
   AppNavToggle,
-  SidebarToggle,
+  AppSidebarToggle,
   AppHeaderGroup,
-  Sidebar,
+  AppSidebar,
 } from "@/src/components/ui/app-layout";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -138,7 +138,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
     <AppLayout variant="container">
       <AppHeader>
         <AppHeaderGroup>
-          <SidebarToggle />
+          <AppSidebarToggle />
           <Link href="/">Drizzle UI</Link>
         </AppHeaderGroup>
         <AppHeaderGroup>
@@ -149,11 +149,11 @@ export function DocsLayout({ children }: { children: ReactNode }) {
           <AppNavToggle />
         </AppHeaderGroup>
       </AppHeader>
-      <Sidebar>
-        <SidebarContent>
-          <SidebarList pathname={pathname} items={items} />
-        </SidebarContent>
-      </Sidebar>
+      <AppSidebar>
+        <AppSidebarContent>
+          <AppSidebarList pathname={pathname} items={items} />
+        </AppSidebarContent>
+      </AppSidebar>
       <AppContent>{children}</AppContent>
     </AppLayout>
   );

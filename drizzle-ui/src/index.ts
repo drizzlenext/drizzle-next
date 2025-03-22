@@ -8,18 +8,18 @@ export { CodeBlock } from "./components/ui/code-block";
 export { DarkModeScript, DarkModeToggle } from "./components/ui/dark-mode";
 export {
   AppLayout,
-  SidebarToggle,
+  AppSidebarToggle,
   AppHeader,
   AppNav,
   AppNavToggle,
-  Sidebar,
-  SidebarGroup,
-  SidebarLabel,
-  SidebarItem,
+  AppSidebar,
+  AppSidebarGroup,
+  AppSidebarLabel,
+  AppSidebarItem,
   AppContent,
-  SidebarList,
+  AppSidebarList,
   AppNavList,
-  type SidebarItemType,
+  type AppSidebarItemType,
   type AppNavItemType,
 } from "./components/ui/app-layout";
 export { Form, FormControl, FormMessage } from "./components/ui/form";

@@ -8,12 +8,12 @@ import {
   AppNavToggle,
   AppNavList,
   AppContent,
-  Sidebar,
-  SidebarToggle,
-  SidebarList,
-  SidebarHeader,
-  SidebarContent,
-  SidebarFooter,
+  AppSidebar,
+  AppSidebarToggle,
+  AppSidebarList,
+  AppSidebarHeader,
+  AppSidebarContent,
+  AppSidebarFooter,
 } from "@/src/components/ui/app-layout";
 import {
   AlertTriangleIcon,
@@ -134,7 +134,7 @@ export function AppLayoutDemo() {
       <AppLayout>
         <AppHeader>
           <AppHeaderGroup>
-            <SidebarToggle />
+            <AppSidebarToggle />
             <Link href="/">Drizzle UI</Link>
           </AppHeaderGroup>
           <AppHeaderGroup>
@@ -153,13 +153,13 @@ export function AppLayoutDemo() {
             </DropdownMenu>
           </AppHeaderGroup>
         </AppHeader>
-        <Sidebar>
-          <SidebarHeader>Sidebar Header</SidebarHeader>
-          <SidebarContent>
-            <SidebarList items={sidebar} pathname={pathname} />
-          </SidebarContent>
-          <SidebarFooter>Sidebar Footer</SidebarFooter>
-        </Sidebar>
+        <AppSidebar>
+          <AppSidebarHeader>AppSidebar Header</AppSidebarHeader>
+          <AppSidebarContent>
+            <AppSidebarList items={sidebar} pathname={pathname} />
+          </AppSidebarContent>
+          <AppSidebarFooter>AppSidebar Footer</AppSidebarFooter>
+        </AppSidebar>
         <AppContent>
           <p className="p-3">
             This is the full width variant of the App Layout.
