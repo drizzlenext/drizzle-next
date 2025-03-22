@@ -59,8 +59,8 @@ const AppLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "bg-dashboard text-dashboard-foreground m-auto grid h-auto grid-rows-[auto_1fr]",
-          variant === "container" && "border-border container border-x",
+          "bg-dashboard text-dashboard-foreground border-border m-auto grid h-auto grid-rows-[auto_1fr] border-x px-[0.2px]",
+          variant === "container" && "container",
           state.sidebarOpen === undefined && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === true && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === false && "md:grid-cols-[0px_1fr]",
@@ -94,7 +94,7 @@ const AppHeaderGroup = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center gap-2 px-2", className)}
+    className={cn("mx-2 flex items-center gap-2", className)}
     {...props}
   />
 ));
