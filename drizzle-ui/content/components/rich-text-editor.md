@@ -1,6 +1,6 @@
 ---
 title: Rich Text Editor
-description: A rich text editor based on the Tiptap editor
+description: A versatile and customizable rich text editor component built with Tiptap. It supports various extensions such as links, text alignment, images, and code blocks, making it ideal for creating and editing rich text content in your applications.
 code:
   - src/components/ui/rich-text-editor.tsx
   - src/styles/rich-text-editor.css

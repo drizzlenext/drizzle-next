@@ -1,8 +1,6 @@
 ---
 title: Search Input
-description: A Search Input
+description: A Search Input component that manages the `search` query string parameter, allowing for dynamic data filtering by server components. It provides a user-friendly interface for entering search terms.
 code: src/components/ui/search-input.tsx
 usage: components/component-demo/search-input-demo.tsx
 ---
-
-This search input controls the `search` query string parameter, and is intended to be processed by the server components for data filtering.
