@@ -59,7 +59,7 @@ const AppLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "bg-dashboard text-dashboard-foreground border-border m-auto grid h-auto grid-rows-[auto_1fr] border-x px-[0.2px]",
+          "border-border m-auto grid h-auto grid-rows-[auto_1fr] border-x px-[0.2px]",
           variant === "container" && "container",
           state.sidebarOpen === undefined && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === true && "md:grid-cols-[192px_1fr]",
@@ -80,7 +80,7 @@ const AppHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-header text-header-foreground border-border sticky top-0 z-50 flex h-12 w-full items-center justify-between gap-2 border-b md:col-span-2",
+      "bg-background border-border sticky top-0 z-50 flex h-12 w-full items-center justify-between gap-2 border-b md:col-span-2",
       className,
     )}
     {...props}
@@ -254,7 +254,7 @@ const Sidebar = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-sidebar border-border fixed top-12 z-20 flex h-[calc(100vh-48px)] w-2/3 transform flex-col border-r transition-transform duration-200 ease-in-out md:sticky md:w-48 md:duration-0",
+        "bg-background border-border fixed top-12 z-20 flex h-[calc(100vh-48px)] w-2/3 transform flex-col border-r transition-transform duration-200 ease-in-out md:sticky md:w-48 md:duration-0",
         state.variant === "full" &&
           state.sidebarOpen === undefined &&
           "-translate-x-full md:translate-x-0",
@@ -288,7 +288,7 @@ const SidebarHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-sidebar sticky top-0 z-10 flex min-h-12 items-center p-3",
+      "sticky top-0 z-10 flex min-h-12 items-center p-3",
       className,
     )}
     {...props}
@@ -315,7 +315,7 @@ const SidebarFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-sidebar sticky bottom-0 z-10 flex min-h-12 items-center p-3",
+      "sticky bottom-0 z-10 flex min-h-12 items-center p-3",
       className,
     )}
     {...props}

@@ -25,12 +25,6 @@ export {
 export { Form, FormControl, FormMessage } from "./components/ui/form";
 export { Input } from "./components/ui/input";
 export { Label } from "./components/ui/label";
-export {
-  PageLayout,
-  PageContent,
-  PageFooter,
-  PageHeader,
-} from "./components/ui/page-layout";
 export { Pagination } from "./components/ui/pagination";
 export { RichTextEditor } from "./components/ui/rich-text-editor";
 export { SearchInput } from "./components/ui/search-input";
