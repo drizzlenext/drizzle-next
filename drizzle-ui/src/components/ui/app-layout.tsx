@@ -7,7 +7,7 @@ import { Button } from "./button";
 import Link from "next/link";
 import { JSX } from "react";
 
-type NavItemType = {
+type AppNavItemType = {
   text: string;
   link: string;
   target?: React.HTMLAttributeAnchorTarget;
@@ -26,7 +26,7 @@ type SidebarItemType = {
 
 // the sidebarOpen flag must begin as undefined
 // to handle different starting states for sm and md resolutions
-type DashboardLayoutState = {
+type AppLayoutState = {
   sidebarOpen?: boolean;
   navOpen?: boolean;
   variant: DashboardVariant;
@@ -34,9 +34,9 @@ type DashboardLayoutState = {
 
 type DashboardVariant = "full" | "container";
 
-const DashboardLayoutContext = React.createContext<{
-  state: DashboardLayoutState;
-  setState: React.Dispatch<React.SetStateAction<DashboardLayoutState>>;
+const AppLayoutContext = React.createContext<{
+  state: AppLayoutState;
+  setState: React.Dispatch<React.SetStateAction<AppLayoutState>>;
 }>({
   state: {
     sidebarOpen: undefined,
@@ -46,16 +46,16 @@ const DashboardLayoutContext = React.createContext<{
   setState: () => {},
 });
 
-const DashboardLayout = React.forwardRef<
+const AppLayout = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & { variant?: DashboardVariant }
 >(({ className, variant = "full", ...props }, ref) => {
   const [state, setState] = React.useState({
     variant: variant,
-  } as DashboardLayoutState);
+  } as AppLayoutState);
 
   return (
-    <DashboardLayoutContext.Provider value={{ state, setState }}>
+    <AppLayoutContext.Provider value={{ state, setState }}>
       <div
         ref={ref}
         className={cn(
@@ -68,12 +68,12 @@ const DashboardLayout = React.forwardRef<
         )}
         {...props}
       />
-    </DashboardLayoutContext.Provider>
+    </AppLayoutContext.Provider>
   );
 });
-DashboardLayout.displayName = "DashboardLayout";
+AppLayout.displayName = "AppLayout";
 
-const DashboardHeader = React.forwardRef<
+const AppHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -86,9 +86,9 @@ const DashboardHeader = React.forwardRef<
     {...props}
   />
 ));
-DashboardHeader.displayName = "DashboardHeader";
+AppHeader.displayName = "AppHeader";
 
-const DashboardHeaderGroup = React.forwardRef<
+const AppHeaderGroup = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -98,13 +98,13 @@ const DashboardHeaderGroup = React.forwardRef<
     {...props}
   />
 ));
-DashboardHeaderGroup.displayName = "DashboardHeaderGroup";
+AppHeaderGroup.displayName = "AppHeaderGroup";
 
-const DashboardNav = React.forwardRef<
+const AppNav = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { state } = React.useContext(DashboardLayoutContext);
+  const { state } = React.useContext(AppLayoutContext);
   return (
     <div
       ref={ref}
@@ -120,9 +120,9 @@ const DashboardNav = React.forwardRef<
     />
   );
 });
-DashboardNav.displayName = "DashboardNav";
+AppNav.displayName = "AppNav";
 
-const DashboardNavItem = React.forwardRef<
+const AppNavItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -136,13 +136,13 @@ const DashboardNavItem = React.forwardRef<
     {...props}
   />
 ));
-DashboardNavItem.displayName = "DashboardNavItem";
+AppNavItem.displayName = "AppNavItem";
 
-const DashboardNavToggle = React.forwardRef<
+const AppNavToggle = React.forwardRef<
   HTMLButtonElement,
   React.HTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
-  const { state, setState } = React.useContext(DashboardLayoutContext);
+  const { state, setState } = React.useContext(AppLayoutContext);
 
   const toggleNav = () => {
     setState((prevState) => ({
@@ -164,19 +164,19 @@ const DashboardNavToggle = React.forwardRef<
     </Button>
   );
 });
-DashboardNavToggle.displayName = "DashboardNavToggle";
+AppNavToggle.displayName = "AppNavToggle";
 
-const DashboardContent = React.forwardRef<
+const AppContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   return <div ref={ref} className={cn("min-w-0", className)} {...props} />;
 });
-DashboardContent.displayName = "DashboardContent";
+AppContent.displayName = "AppContent";
 
-const DashboardNavList = (props: {
+const AppNavList = (props: {
   pathname?: string | null;
-  items?: NavItemType[];
+  items?: AppNavItemType[];
 }) => {
   const { pathname, items } = props;
   if (!items) return null;
@@ -184,7 +184,7 @@ const DashboardNavList = (props: {
     <>
       {items.map((item) => {
         return (
-          <DashboardNavItem key={item.text + item.link}>
+          <AppNavItem key={item.text + item.link}>
             <Link
               href={item.link}
               className={cn(
@@ -195,7 +195,7 @@ const DashboardNavList = (props: {
               {item.text}
               {item.icon && <item.icon size={16} />}
             </Link>
-          </DashboardNavItem>
+          </AppNavItem>
         );
       })}
     </>
@@ -206,7 +206,7 @@ const SidebarToggle = React.forwardRef<
   HTMLButtonElement,
   React.HTMLAttributes<HTMLButtonElement> & { icon?: JSX.Element }
 >(({ className, icon, ...props }, ref) => {
-  const { state, setState } = React.useContext(DashboardLayoutContext);
+  const { state, setState } = React.useContext(AppLayoutContext);
 
   const toggleSidebar = () => {
     setState((prevState) => {
@@ -248,7 +248,7 @@ const Sidebar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { state } = React.useContext(DashboardLayoutContext);
+  const { state } = React.useContext(AppLayoutContext);
 
   return (
     <div
@@ -400,16 +400,16 @@ const SidebarList = (props: {
 };
 
 export {
-  type NavItemType,
+  type AppNavItemType,
   type SidebarItemType,
-  DashboardLayout,
-  DashboardHeader,
-  DashboardHeaderGroup,
-  DashboardNav,
-  DashboardNavItem,
-  DashboardNavToggle,
-  DashboardContent,
-  DashboardNavList,
+  AppLayout,
+  AppHeader,
+  AppHeaderGroup,
+  AppNav,
+  AppNavItem,
+  AppNavToggle,
+  AppContent,
+  AppNavList,
   Sidebar,
   SidebarToggle,
   SidebarHeader,

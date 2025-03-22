@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  DashboardLayout,
-  DashboardNavList,
-  NavItemType,
+  AppLayout,
+  AppNavList,
+  AppNavItemType,
   SidebarContent,
   SidebarList,
 } from "@/src/components/ui/app-layout";
@@ -29,16 +29,16 @@ import {
   UserCircleIcon,
 } from "lucide-react";
 import {
-  DashboardHeader,
-  DashboardNav,
-  DashboardNavToggle,
+  AppHeader,
+  AppNav,
+  AppNavToggle,
   SidebarToggle,
-  DashboardHeaderGroup,
+  AppHeaderGroup,
   Sidebar,
 } from "@/src/components/ui/app-layout";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DashboardContent } from "@/src/components/ui/app-layout";
+import { AppContent } from "@/src/components/ui/app-layout";
 import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 
 const items = [
@@ -93,7 +93,7 @@ const items = [
   },
 ];
 
-const nav: NavItemType[] = [
+const nav: AppNavItemType[] = [
   { text: "Docs", link: "/introduction" },
   {
     text: "Drizzle Next",
@@ -135,26 +135,26 @@ export function DocsLayout({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   return (
-    <DashboardLayout variant="container">
-      <DashboardHeader>
-        <DashboardHeaderGroup>
+    <AppLayout variant="container">
+      <AppHeader>
+        <AppHeaderGroup>
           <SidebarToggle />
           <Link href="/">Drizzle UI</Link>
-        </DashboardHeaderGroup>
-        <DashboardHeaderGroup>
-          <DashboardNav>
-            <DashboardNavList items={nav} />
+        </AppHeaderGroup>
+        <AppHeaderGroup>
+          <AppNav>
+            <AppNavList items={nav} />
             <DarkModeToggle />
-          </DashboardNav>
-          <DashboardNavToggle />
-        </DashboardHeaderGroup>
-      </DashboardHeader>
+          </AppNav>
+          <AppNavToggle />
+        </AppHeaderGroup>
+      </AppHeader>
       <Sidebar>
         <SidebarContent>
           <SidebarList pathname={pathname} items={items} />
         </SidebarContent>
       </Sidebar>
-      <DashboardContent>{children}</DashboardContent>
-    </DashboardLayout>
+      <AppContent>{children}</AppContent>
+    </AppLayout>
   );
 }

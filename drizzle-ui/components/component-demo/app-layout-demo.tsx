@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  DashboardLayout,
-  DashboardHeader,
-  DashboardHeaderGroup,
-  DashboardNav,
-  DashboardNavToggle,
-  DashboardNavList,
-  DashboardContent,
+  AppLayout,
+  AppHeader,
+  AppHeaderGroup,
+  AppNav,
+  AppNavToggle,
+  AppNavList,
+  AppContent,
   Sidebar,
   SidebarToggle,
   SidebarList,
@@ -131,18 +131,18 @@ export function AppLayoutDemo() {
 
   return (
     <Suspense>
-      <DashboardLayout>
-        <DashboardHeader>
-          <DashboardHeaderGroup>
+      <AppLayout>
+        <AppHeader>
+          <AppHeaderGroup>
             <SidebarToggle />
             <Link href="/">Drizzle UI</Link>
-          </DashboardHeaderGroup>
-          <DashboardHeaderGroup>
-            <DashboardNav>
-              <DashboardNavList items={nav} pathname={pathname} />
+          </AppHeaderGroup>
+          <AppHeaderGroup>
+            <AppNav>
+              <AppNavList items={nav} pathname={pathname} />
               <DarkModeToggle />
-            </DashboardNav>
-            <DashboardNavToggle />
+            </AppNav>
+            <AppNavToggle />
             <DropdownMenu
               buttonSizeVariant="avatar"
               buttonEl={
@@ -151,8 +151,8 @@ export function AppLayoutDemo() {
             >
               <DropdownMenuList items={menu} />
             </DropdownMenu>
-          </DashboardHeaderGroup>
-        </DashboardHeader>
+          </AppHeaderGroup>
+        </AppHeader>
         <Sidebar>
           <SidebarHeader>Sidebar Header</SidebarHeader>
           <SidebarContent>
@@ -160,12 +160,12 @@ export function AppLayoutDemo() {
           </SidebarContent>
           <SidebarFooter>Sidebar Footer</SidebarFooter>
         </Sidebar>
-        <DashboardContent>
+        <AppContent>
           <p className="p-3">
             This is the full width variant of the App Layout.
           </p>
-        </DashboardContent>
-      </DashboardLayout>
+        </AppContent>
+      </AppLayout>
     </Suspense>
   );
 }

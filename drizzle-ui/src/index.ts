@@ -7,21 +7,20 @@ export { cn } from "./lib/utils";
 export { CodeBlock } from "./components/ui/code-block";
 export { DarkModeScript, DarkModeToggle } from "./components/ui/dark-mode";
 export {
-  DashboardLayout,
+  AppLayout,
   SidebarToggle,
-  DashboardHeader,
-  DashboardTitle,
-  DashboardNav,
-  DashboardNavToggle,
+  AppHeader,
+  AppNav,
+  AppNavToggle,
   Sidebar,
   SidebarGroup,
   SidebarLabel,
   SidebarItem,
-  DashboardContent,
+  AppContent,
   SidebarList,
-  DashboardNavList,
+  AppNavList,
   type SidebarItemType,
-  type NavItemType,
+  type AppNavItemType,
 } from "./components/ui/app-layout";
 export { Form, FormControl, FormMessage } from "./components/ui/form";
 export { Input } from "./components/ui/input";
