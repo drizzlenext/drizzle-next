@@ -29,10 +29,10 @@ type SidebarItemType = {
 type AppLayoutState = {
   sidebarOpen?: boolean;
   navOpen?: boolean;
-  variant: DashboardVariant;
+  variant: AppLayoutVariant;
 };
 
-type DashboardVariant = "full" | "container";
+type AppLayoutVariant = "full" | "container";
 
 const AppLayoutContext = React.createContext<{
   state: AppLayoutState;
@@ -48,7 +48,7 @@ const AppLayoutContext = React.createContext<{
 
 const AppLayout = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { variant?: DashboardVariant }
+  React.HTMLAttributes<HTMLDivElement> & { variant?: AppLayoutVariant }
 >(({ className, variant = "full", ...props }, ref) => {
   const [state, setState] = React.useState({
     variant: variant,
@@ -279,7 +279,7 @@ const Sidebar = React.forwardRef<
     />
   );
 });
-Sidebar.displayName = "DashboardSidebar";
+Sidebar.displayName = "Sidebar";
 
 const SidebarHeader = React.forwardRef<
   HTMLDivElement,
@@ -357,7 +357,7 @@ const SidebarItem = React.forwardRef<
     {...props}
   />
 ));
-SidebarItem.displayName = "DashboardSidebarItem";
+SidebarItem.displayName = "SidebarItem";
 
 const SidebarList = (props: {
   pathname?: string | null;
