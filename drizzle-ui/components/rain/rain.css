@@ -1,0 +1,33 @@
+/* Rain.css */
+.rain-container {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  top: -50px;
+  pointer-events: none;
+}
+
+.rain-drop {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: gray;
+  border-radius: 2px;
+  animation: fall linear infinite;
+}
+
+.dark .rain-drop {
+  background: white;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0.7;
+  }
+}

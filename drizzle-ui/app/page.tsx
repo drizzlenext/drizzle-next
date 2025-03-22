@@ -1,3 +1,4 @@
+import Rain from "@/components/rain/rain";
 import { Button } from "@/src/components/ui/button";
 import { DarkModeToggle } from "@/src/components/ui/dark-mode";
 import { ArrowUpRightIcon, CloudDrizzleIcon } from "lucide-react";
@@ -5,12 +6,10 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex h-screen flex-col items-center justify-between p-8">
+    <div className="relative flex h-screen flex-col items-center justify-between p-8">
+      <Rain />
       <header className="flex w-full items-center justify-between">
         <div className="flex gap-4">
-          <Link href="/introduction" className="text-lg font-semibold">
-            Docs
-          </Link>
           <Link
             href="https://www.drizzlenext.com"
             className="flex items-center gap-1 text-lg font-semibold"
