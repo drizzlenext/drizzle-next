@@ -1,3 +1,4 @@
+import { Avatar } from "@/src/components/ui/avatar";
 import { Button } from "@/src/components/ui/button";
 import { GhostIcon, RocketIcon } from "lucide-react";
 
@@ -17,6 +18,9 @@ export function ButtonDemo() {
       </Button>
       <Button size="icon">
         <RocketIcon />
+      </Button>
+      <Button size="avatar" variant="ghost">
+        <Avatar src="https://drizzlenext.github.io/drizzle-assets/avatar.png" />
       </Button>
     </div>
   );
