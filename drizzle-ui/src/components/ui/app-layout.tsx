@@ -59,8 +59,8 @@ const AppLayout = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "border-border m-auto grid h-auto grid-rows-[auto_1fr] border-x px-[0.2px]",
-          variant === "container" && "container",
+          "m-auto grid h-auto grid-rows-[auto_1fr] px-[0.2px]",
+          variant === "container" && "border-border container border-x",
           state.sidebarOpen === undefined && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === true && "md:grid-cols-[192px_1fr]",
           state.sidebarOpen === false && "md:grid-cols-[0px_1fr]",
