@@ -5,9 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  TableRowActions,
 } from "@/src/components/ui/table";
-import Link from "next/link";
 
 const data = Array.from({ length: 20 }, (_, index) => ({
   id: index + 1,
@@ -37,12 +35,6 @@ export function TableDemo() {
             <TableCell>{item.price}</TableCell>
             <TableCell>{item.description}</TableCell>
             <TableCell>{item.category}</TableCell>
-            <TableCell className="text-right">
-              <TableRowActions>
-                <Link href="">View</Link> <Link href="">Edit</Link>{" "}
-                <Link href="">Delete</Link>
-              </TableRowActions>
-            </TableCell>
           </TableRow>
         ))}
       </TableBody>
