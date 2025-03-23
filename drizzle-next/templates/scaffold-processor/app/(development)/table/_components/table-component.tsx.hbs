@@ -6,7 +6,6 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  TableRowActions,
 } from "@/components/ui/table";
 import { Sortable } from "@/components/ui/sortable";
 import { {{tableObj.singularPascalCase}}List } from "../_lib/get-{{tableObj.singularKebabCase}}-list";
@@ -72,17 +71,15 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
               {{/switch}}
             {{/each}}
             <TableCell>
-              <TableRowActions>
-                <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }`}>
-                  View
-                </Link>
-                <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }/edit`}>
-                  Edit
-                </Link>
-                <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }/delete`}>
-                  Delete
-                </Link>
-              </TableRowActions>
+              <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }`}>
+                View
+              </Link>
+              <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }/edit`}>
+                Edit
+              </Link>
+              <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }/delete`}>
+                Delete
+              </Link>
             </TableCell>
           </TableRow>
         ))}

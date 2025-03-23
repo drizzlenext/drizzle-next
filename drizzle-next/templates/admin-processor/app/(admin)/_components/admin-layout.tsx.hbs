@@ -1,17 +1,17 @@
 "use client";
 
 import {
-  DashboardLayout,
-  DashboardHeader,
-  DashboardTitle,
-  DashboardSidebarToggle,
-  DashboardContent,
-  DashboardSidebar,
-  DashboardNav,
-  DashboardNavToggle,
+  AppLayout,
+  AppHeader,
+  AppHeaderGroup,
+  AppSidebarToggle,
+  AppContent,
+  AppSidebar,
+  AppNav,
+  AppNavToggle,
   DarkModeToggle,
-  DashboardSidebarList,
-  DashboardNavList,
+  AppSidebarList,
+  AppNavList,
 } from "drizzle-admin/drizzle-ui";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
@@ -42,22 +42,22 @@ export function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <DashboardLayout>
-      <DashboardHeader>
-        <DashboardTitle>
-          <DashboardSidebarToggle />
+    <AppLayout>
+      <AppHeader>
+        <AppHeaderGroup>
+          <AppSidebarToggle />
           Drizzle Admin
-        </DashboardTitle>
-        <DashboardNav>
-          <DashboardNavList items={config.nav} pathname={pathname} />
+        </AppHeaderGroup>
+        <AppNav>
+          <AppNavList items={config.nav} pathname={pathname} />
           <DarkModeToggle />
-        </DashboardNav>
-        <DashboardNavToggle />
-      </DashboardHeader>
-      <DashboardSidebar>
-        <DashboardSidebarList items={config.sidebar} pathname={pathname} />
-      </DashboardSidebar>
-      <DashboardContent>{children}</DashboardContent>
-    </DashboardLayout>
+        </AppNav>
+        <AppNavToggle />
+      </AppHeader>
+      <AppSidebar>
+        <AppSidebarList items={config.sidebar} pathname={pathname} />
+      </AppSidebar>
+      <AppContent>{children}</AppContent>
+    </AppLayout>
   );
 }

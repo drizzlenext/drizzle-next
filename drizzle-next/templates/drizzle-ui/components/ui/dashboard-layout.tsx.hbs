@@ -25,14 +25,14 @@ type SidebarItem = {
 
 // the sidebarOpen flag must begin as undefined
 // to handle different starting states for sm and md resolutions
-type DashboardLayoutState = {
+type AppLayoutState = {
   sidebarOpen?: boolean;
   navOpen?: boolean;
 };
 
-const DashboardLayoutContext = React.createContext<{
-  state: DashboardLayoutState;
-  setState: React.Dispatch<React.SetStateAction<DashboardLayoutState>>;
+const AppLayoutContext = React.createContext<{
+  state: AppLayoutState;
+  setState: React.Dispatch<React.SetStateAction<AppLayoutState>>;
 }>({
   state: {
     sidebarOpen: undefined,
@@ -41,14 +41,14 @@ const DashboardLayoutContext = React.createContext<{
   setState: () => {},
 });
 
-const DashboardLayout = React.forwardRef<
+const AppLayout = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const [state, setState] = React.useState({} as DashboardLayoutState);
+  const [state, setState] = React.useState({} as AppLayoutState);
 
   return (
-    <DashboardLayoutContext.Provider value={ { state, setState } }>
+    <AppLayoutContext.Provider value={ { state, setState } }>
       <div
         ref={ref}
         className={cn(
@@ -60,16 +60,16 @@ const DashboardLayout = React.forwardRef<
         )}
         {...props}
       />
-    </DashboardLayoutContext.Provider>
+    </AppLayoutContext.Provider>
   );
 });
-DashboardLayout.displayName = "DashboardLayout";
+AppLayout.displayName = "AppLayout";
 
-const DashboardSidebarToggle = React.forwardRef<
+const AppSidebarToggle = React.forwardRef<
   HTMLButtonElement,
   React.HTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
-  const { state, setState } = React.useContext(DashboardLayoutContext);
+  const { state, setState } = React.useContext(AppLayoutContext);
 
   const toggleSidebar = () => {
     setState((prevState) => {
@@ -105,9 +105,9 @@ const DashboardSidebarToggle = React.forwardRef<
     </Button>
   );
 });
-DashboardSidebarToggle.displayName = "DashboardSidebarToggle";
+AppSidebarToggle.displayName = "AppSidebarToggle";
 
-const DashboardHeader = React.forwardRef<
+const AppHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -120,9 +120,9 @@ const DashboardHeader = React.forwardRef<
     {...props}
   />
 ));
-DashboardHeader.displayName = "DashboardHeader";
+AppHeader.displayName = "AppHeader";
 
-const DashboardTitle = React.forwardRef<
+const AppTitle = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -135,13 +135,13 @@ const DashboardTitle = React.forwardRef<
     {...props}
   />
 ));
-DashboardTitle.displayName = "DashboardTitle";
+AppTitle.displayName = "AppTitle";
 
-const DashboardNav = React.forwardRef<
+const AppNav = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { state } = React.useContext(DashboardLayoutContext);
+  const { state } = React.useContext(AppLayoutContext);
   return (
     <div
       ref={ref}
@@ -155,13 +155,13 @@ const DashboardNav = React.forwardRef<
     />
   );
 });
-DashboardNav.displayName = "DashboardNav";
+AppNav.displayName = "AppNav";
 
-const DashboardNavToggle = React.forwardRef<
+const AppNavToggle = React.forwardRef<
   HTMLButtonElement,
   React.HTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
-  const { state, setState } = React.useContext(DashboardLayoutContext);
+  const { state, setState } = React.useContext(AppLayoutContext);
 
   const toggleNav = () => {
     setState((prevState) => ({
@@ -183,13 +183,13 @@ const DashboardNavToggle = React.forwardRef<
     </Button>
   );
 });
-DashboardNavToggle.displayName = "DashboardNavToggle";
+AppNavToggle.displayName = "AppNavToggle";
 
-const DashboardSidebar = React.forwardRef<
+const AppSidebar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { state } = React.useContext(DashboardLayoutContext);
+  const { state } = React.useContext(AppLayoutContext);
 
   return (
     <div
@@ -205,17 +205,17 @@ const DashboardSidebar = React.forwardRef<
     />
   );
 });
-DashboardSidebar.displayName = "DashboardSidebar";
+AppSidebar.displayName = "AppSidebar";
 
-const DashboardSidebarGroup = React.forwardRef<
+const AppSidebarGroup = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("mb-1", className)} {...props} />
 ));
-DashboardSidebarGroup.displayName = "DashboardSidebarGroup";
+AppSidebarGroup.displayName = "AppSidebarGroup";
 
-const DashboardSidebarLabel = React.forwardRef<
+const AppSidebarLabel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -225,9 +225,9 @@ const DashboardSidebarLabel = React.forwardRef<
     {...props}
   />
 ));
-DashboardSidebarLabel.displayName = "DashboardSidebarLabel";
+AppSidebarLabel.displayName = "AppSidebarLabel";
 
-const DashboardSidebarItem = React.forwardRef<
+const AppSidebarItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & { active?: boolean }
 >(({ active = false, className, ...props }, ref) => (
@@ -241,9 +241,9 @@ const DashboardSidebarItem = React.forwardRef<
     {...props}
   />
 ));
-DashboardSidebarItem.displayName = "DashboardSidebarItem";
+AppSidebarItem.displayName = "AppSidebarItem";
 
-const DashboardContent = React.forwardRef<
+const AppContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -253,9 +253,9 @@ const DashboardContent = React.forwardRef<
     {...props}
   />
 ));
-DashboardContent.displayName = "DashboardContent";
+AppContent.displayName = "AppContent";
 
-const DashboardSidebarList = (props: {
+const AppSidebarList = (props: {
   pathname?: string | null;
   items?: SidebarItem[];
 }) => {
@@ -263,39 +263,39 @@ const DashboardSidebarList = (props: {
   if (!items) return null;
 
   return (
-    <DashboardSidebarGroup>
+    <AppSidebarGroup>
       {items.map((item) => {
         if (item.link) {
           return (
             <div key={item.text + item.link}>
               <Link href={item.link} target={item.target}>
-                <DashboardSidebarItem active={pathname === item.link}>
+                <AppSidebarItem active={pathname === item.link}>
                   {item.icon ? <item.icon size={16} /> : null}
                   {item.text}
-                </DashboardSidebarItem>
+                </AppSidebarItem>
               </Link>
 
-              <DashboardSidebarList pathname={pathname} items={item.items} />
+              <AppSidebarList pathname={pathname} items={item.items} />
             </div>
           );
         } else {
           return (
             <div key={item.text}>
-              <DashboardSidebarLabel>
+              <AppSidebarLabel>
                 {item.icon ? <item.icon size={16} /> : null}
                 {item.text}
-              </DashboardSidebarLabel>
+              </AppSidebarLabel>
 
-              <DashboardSidebarList pathname={pathname} items={item.items} />
+              <AppSidebarList pathname={pathname} items={item.items} />
             </div>
           );
         }
       })}
-    </DashboardSidebarGroup>
+    </AppSidebarGroup>
   );
 };
 
-const DashboardNavList = (props: {
+const AppNavList = (props: {
   pathname?: string | null;
   items?: NavItem[];
 }) => {
@@ -324,19 +324,19 @@ const DashboardNavList = (props: {
 };
 
 export {
-  DashboardLayout,
-  DashboardSidebarToggle,
-  DashboardHeader,
-  DashboardTitle,
-  DashboardNav,
-  DashboardNavToggle,
-  DashboardSidebar,
-  DashboardSidebarGroup,
-  DashboardSidebarLabel,
-  DashboardSidebarItem,
-  DashboardContent,
-  DashboardSidebarList,
-  DashboardNavList,
+  AppLayout,
+  AppSidebarToggle,
+  AppHeader,
+  AppTitle,
+  AppNav,
+  AppNavToggle,
+  AppSidebar,
+  AppSidebarGroup,
+  AppSidebarLabel,
+  AppSidebarItem,
+  AppContent,
+  AppSidebarList,
+  AppNavList,
   type SidebarItem,
   type NavItem,
 };

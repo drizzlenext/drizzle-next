@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { config } from "@/lib/config";
 {{/if}}
 import { get{{tableObj.singularPascalCase}}ById } from "../_lib/get-{{tableObj.singularKebabCase}}-by-id";
-import { PageLayout, PageHeader, PageTitle, PageContent, PageNav } from "@/components/ui/page-layout";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 
@@ -19,16 +18,16 @@ export default async function Page(props: { params: Params }) {
   }
 
   return (
-    <PageLayout>
-      <PageHeader>
-        <PageTitle>{{tableObj.singularCapitalCase}}</PageTitle>
-        <PageNav>
+    <div>
+      <div>
+        <div>{{tableObj.singularCapitalCase}}</div>
+        <div>
           <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
           <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }/edit`}>Edit</Link>
           <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }/delete`}>Delete</Link>
-        </PageNav>
-      </PageHeader>
-      <PageContent>
+        </div>
+      </div>
+      <div>
         <p><strong>Id:</strong> { {{tableObj.singularCamelCase}}Row.id }</p>
         {{#each validatedColumns}}
           {{#switch this.dataType}}
@@ -64,7 +63,7 @@ export default async function Page(props: { params: Params }) {
             {{/default}}
           {{/switch}}
         {{/each}}
-      </PageContent>
-    </PageLayout>
+      </div>
+    </div>
   );
 }

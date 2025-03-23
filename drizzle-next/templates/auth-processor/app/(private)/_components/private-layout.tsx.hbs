@@ -1,19 +1,19 @@
 "use client";
 
 import {
-  DashboardContent,
-  DashboardHeader,
-  DashboardLayout,
-  DashboardNav,
-  DashboardSidebar,
-  DashboardSidebarGroup,
-  DashboardSidebarItem,
-  DashboardTitle,
+  AppContent,
+  AppHeader,
+  AppLayout,
+  AppNav,
+  AppSidebar,
+  AppSidebarGroup,
+  AppSidebarItem,
+  AppTitle,
 } from "@/components/ui/dashboard-layout";
 import {
   User2Icon,
   LogOutIcon,
-  LayoutDashboardIcon,
+  LayoutAppIcon,
   UserIcon,
   Table2Icon,
 } from "lucide-react";
@@ -38,27 +38,27 @@ export function PrivateLayout({
   const pathname = usePathname();
 
   return (
-    <DashboardLayout>
-      <DashboardHeader>
-        <DashboardTitle>Drizzle Next</DashboardTitle>
-        <DashboardNav>
+    <AppLayout>
+      <AppHeader>
+        <AppTitle>Drizzle Next</AppTitle>
+        <AppNav>
           <Avatar src={userRow.image}>
             <User2Icon />
           </Avatar>
-        </DashboardNav>
-      </DashboardHeader>
-      <DashboardSidebar>
-        <DashboardSidebarGroup>
+        </AppNav>
+      </AppHeader>
+      <AppSidebar>
+        <AppSidebarGroup>
           {items.map((item) => (
             <Link key={item.text} href={item.link}>
-              <DashboardSidebarItem active={pathname === item.link}>
+              <AppSidebarItem active={pathname === item.link}>
                 <item.icon size={16} /> {item.text}
-              </DashboardSidebarItem>
+              </AppSidebarItem>
             </Link>
           ))}
-        </DashboardSidebarGroup>
-      </DashboardSidebar>
-      <DashboardContent>{children}</DashboardContent>
-    </DashboardLayout>
+        </AppSidebarGroup>
+      </AppSidebar>
+      <AppContent>{children}</AppContent>
+    </AppLayout>
   );
 }

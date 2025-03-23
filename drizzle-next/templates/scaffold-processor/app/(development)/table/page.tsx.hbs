@@ -3,7 +3,6 @@ import { like } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { Pagination } from "@/components/ui/pagination";
 import { SearchInput } from "@/components/ui/search-input";
-import { PageLayout, PageHeader, PageTitle, PageNav, PageContent, PageFooter } from "@/components/ui/page-layout";
 import { Button } from "@/components/ui/button";
 import { parseSearchParams } from "@/lib/search-params";
 import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
@@ -36,27 +35,27 @@ export default async function Page(props: {
   });
 
   return (
-    <PageLayout>
-      <PageHeader>
-        <PageTitle>{{tableObj.pluralCapitalCase}}</PageTitle>
-        <PageNav>
+    <div>
+      <div>
+        <div>{{tableObj.pluralCapitalCase}}</div>
+        <div>
           <Link href="/{{tableObj.pluralKebabCase}}/new">
             <Button variant="info">New</Button>
           </Link>
-        </PageNav>
-      </PageHeader>
-      <PageContent>
+        </div>
+      </div>
+      <div>
         <SearchInput />
         <{{tableObj.singularPascalCase}}Table {{tableObj.singularCamelCase}}List={ {{tableObj.singularCamelCase}}List } />
-      </PageContent>
-      <PageFooter>
+      </div>
+      <div>
         <Pagination
           page={page}
           pageSize={pageSize}
           totalPages={totalPages}
           count={count}
         />
-      </PageFooter>
-    </PageLayout>
+      </div>
+    </div>
   );
 }

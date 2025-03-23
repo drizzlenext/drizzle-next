@@ -10,6 +10,7 @@ export {
   AppLayout,
   AppSidebarToggle,
   AppHeader,
+  AppHeaderGroup,
   AppNav,
   AppNavToggle,
   AppSidebar,

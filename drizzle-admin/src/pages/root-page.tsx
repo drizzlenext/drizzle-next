@@ -1,4 +1,3 @@
-import { PageContent, PageHeader, PageLayout, PageTitle } from "../drizzle-ui";
 import {
   DrizzleAdminConfigComplete,
   Params,
@@ -11,11 +10,6 @@ export async function RootPage(props: {
   config: DrizzleAdminConfigComplete;
 }) {
   return (
-    <PageLayout>
-      <PageHeader>
-        <PageTitle>Drizzle Admin</PageTitle>
-      </PageHeader>
-      <PageContent></PageContent>
-    </PageLayout>
+    <div>Drizzle Admin</div>
   );
 }

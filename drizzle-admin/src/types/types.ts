@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { NavItem, SidebarItem } from "../drizzle-ui";
+import { type AppNavItemType, type AppSidebarItemType } from "../drizzle-ui";
 
 export type Params = Promise<{ [key: string]: string }>;
 
@@ -98,8 +98,8 @@ export type ColumnDataTypeMap = {
 };
 
 export type DrizzleLayoutConfig = {
-  nav: NavItem[];
-  sidebar: SidebarItem[];
+  nav: AppNavItemType[];
+  sidebar: AppSidebarItemType[];
 };
 
 export type SimplifiedColumn = {
