@@ -104,7 +104,9 @@ export default async function Page(props: { params: Params }) {
             </div>
             {DynamicComponent && (
               <div className="mb-5">
-                <h2 id="preview">Preview</h2>
+                <div className="typography">
+                  <h2 id="preview">Preview</h2>
+                </div>
                 <div className="border-border flex flex-col border p-5">
                   <Suspense>
                     <DynamicComponent />
