@@ -10,10 +10,10 @@ const Avatar = ({
   className?: string;
   children?: React.ReactNode;
 }) => (
-  <div className="bg-muted text-foreground flex h-6 w-6 items-center justify-center rounded-full text-xs">
+  <div className="bg-muted text-foreground flex h-7 w-7 items-center justify-center rounded-full text-xs">
     {src ? (
       <img
-        className={cn("h-6 w-6 rounded-full", className)}
+        className={cn("h-7 w-7 rounded-full", className)}
         src={src}
         alt="avatar"
       />

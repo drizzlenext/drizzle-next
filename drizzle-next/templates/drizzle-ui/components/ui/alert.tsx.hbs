@@ -25,7 +25,7 @@ const Alert = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-alert flex items-center gap-2 border p-2",
+      "flex items-center gap-2 rounded border p-2",
       variant && alertVariantMap[variant],
       className,
     )}

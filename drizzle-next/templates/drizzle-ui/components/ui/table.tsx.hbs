@@ -76,18 +76,6 @@ const TableCaption = React.forwardRef<
 ));
 TableCaption.displayName = "TableCaption";
 
-const TableRowActions = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex justify-end gap-2 underline", className)}
-    {...props}
-  />
-));
-TableRowActions.displayName = "TableRowActions";
-
 export {
   Table,
   TableHeader,
@@ -97,5 +85,4 @@ export {
   TableRow,
   TableCell,
   TableCaption,
-  TableRowActions,
 };

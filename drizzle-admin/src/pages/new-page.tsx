@@ -1,4 +1,3 @@
-import { PageContent, PageHeader, PageLayout, PageTitle } from "../drizzle-ui";
 import {
   DrizzleAdminConfigComplete,
   Params,
@@ -28,9 +27,9 @@ export async function NewPage(props: {
   const columnDataTypeMap = getColumnDataTypeMap(drizzleTable);
 
   return (
-    <PageLayout>
-      <PageHeader>
-        <PageTitle className="flex items-center">
+    <div className="p-3 flex flex-col gap-3">
+      <div>
+        <div className="flex items-center">
           <Link
             href={`${config.basePath}/${resourcePath}`}
             className="underline"
@@ -39,16 +38,16 @@ export async function NewPage(props: {
           </Link>
           <ChevronRightIcon />
           New
-        </PageTitle>
-      </PageHeader>
-      <PageContent>
+        </div>
+      </div>
+      <div>
         <ObjectCreateForm
           columnDataTypeMap={columnDataTypeMap}
           formControlMap={drizzleTableConfig.formControlMap}
           curTable={curTable}
           customFormControlMap={drizzleTableConfig.customFormControlMap}
         />
-      </PageContent>
-    </PageLayout>
+      </div>
+    </div>
   );
 }

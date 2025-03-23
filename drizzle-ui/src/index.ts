@@ -39,6 +39,5 @@ export {
   TableHead,
   TableHeader,
   TableRow,
-  TableRowActions,
 } from "./components/ui/table";
 export { Textarea } from "./components/ui/textarea";

@@ -1,11 +1,4 @@
 import {
-  PageContent,
-  PageHeader,
-  PageLayout,
-  PageNav,
-  PageTitle,
-} from "../drizzle-ui";
-import {
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
@@ -45,9 +38,9 @@ export async function DeletePage(props: {
   const columnDataTypeMap = getColumnDataTypeMap(drizzleTable);
 
   return (
-    <PageLayout>
-      <PageHeader>
-        <PageTitle className="flex items-center">
+    <div className="p-3 flex flex-col gap-3">
+      <div>
+        <div className="flex items-center">
           <Link
             href={`${config.basePath}/${resourcePath}`}
             className="underline"
@@ -63,8 +56,8 @@ export async function DeletePage(props: {
           </Link>
           <ChevronRightIcon />
           Delete
-        </PageTitle>
-        <PageNav>
+        </div>
+        <div>
           {drizzleTableConfig.components?.DeletePageNav && (
             <drizzleTableConfig.components.DeletePageNav
               basePath={config.basePath}
@@ -72,11 +65,11 @@ export async function DeletePage(props: {
               row={obj}
             />
           )}
-        </PageNav>
-      </PageHeader>
-      <PageContent>
+        </div>
+      </div>
+      <div>
         <ObjectDeleteForm obj={obj} curTable={curTable} columnDataTypeMap={columnDataTypeMap} />
-      </PageContent>
-    </PageLayout>
+      </div>
+    </div>
   );
 }

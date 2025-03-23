@@ -9,7 +9,6 @@ import {
   TableRow,
   Sortable,
   TableHead,
-  TableRowActions,
   cn,
   Input,
   Textarea,
@@ -18,6 +17,7 @@ import Link from "next/link";
 import { SimplifiedColumn, AdminRowNav } from "../types/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { FileTextIcon, SquarePenIcon } from "lucide-react";
 
 type CurrentCell = {
   row: Record<string, any>;
@@ -229,14 +229,15 @@ export function ObjectTable(props: ObjectTableProps) {
   }
 
   return (
-    <Table className="border">
+    <Table>
       <TableHeader>
         <TableRow>
+          <TableHead></TableHead>
           {columns.map((col, index) => {
             return (
               <TableHead
                 key={col.name}
-                className="border text-nowrap overflow-hidden relative"
+                className="text-nowrap overflow-hidden relative"
                 style={{
                   width: col.width,
                   minWidth: col.minWidth,
@@ -258,7 +259,6 @@ export function ObjectTable(props: ObjectTableProps) {
               </TableHead>
             );
           })}
-          <TableHead className="border"></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -272,12 +272,30 @@ export function ObjectTable(props: ObjectTableProps) {
               )}
               onClick={() => handleClick(row)}
             >
+              <TableCell>
+                <div onClick={(e) => e.stopPropagation()}>
+                  {props.RowActions && (
+                    <props.RowActions
+                      basePath={props.basePath}
+                      resourcePath={props.resourcePath}
+                      row={row}
+                    />
+                  )}
+                  {!props.RowActions && (
+                    <DefaultRowActions
+                      basePath={props.basePath}
+                      resourcePath={props.resourcePath}
+                      row={row}
+                    />
+                  )}
+                </div>
+              </TableCell>
               {columns.map((col) => {
                 return (
                   <TableCell
                     key={col.name}
                     className={cn(
-                      "text-nowrap overflow-hidden border select-none border-border",
+                      "text-nowrap overflow-hidden",
                       isCurrentCell(row, col, curCell) && "p-0"
                     )}
                     onDoubleClick={(e) => handleDoubleClickCell(e, row, col)}
@@ -315,24 +333,6 @@ export function ObjectTable(props: ObjectTableProps) {
                   </TableCell>
                 );
               })}
-              <TableCell className="border border-border">
-                <TableRowActions onClick={(e) => e.stopPropagation()}>
-                  {props.RowActions && (
-                    <props.RowActions
-                      basePath={props.basePath}
-                      resourcePath={props.resourcePath}
-                      row={row}
-                    />
-                  )}
-                  {!props.RowActions && (
-                    <DefaultRowActions
-                      basePath={props.basePath}
-                      resourcePath={props.resourcePath}
-                      row={row}
-                    />
-                  )}
-                </TableRowActions>
-              </TableCell>
             </TableRow>
           );
         })}
@@ -347,21 +347,14 @@ function DefaultRowActions(props: {
   row: any;
 }) {
   return (
-    <>
+    <div className="flex gap-1">
       <Link href={`${props.basePath}/${props.resourcePath}/${props.row.id}`}>
-        View
+        <FileTextIcon />
       </Link>
-      <Link
-        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/edit`}
-      >
-        Edit
+      <Link href={`${props.basePath}/${props.resourcePath}/${props.row.id}/edit`}>
+        <SquarePenIcon />
       </Link>
-      <Link
-        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/delete`}
-      >
-        Delete
-      </Link>
-    </>
+    </div>
   );
 }
 

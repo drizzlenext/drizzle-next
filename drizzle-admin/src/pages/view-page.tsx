@@ -1,12 +1,5 @@
 import { camelCase, capitalCase } from "change-case-all";
 import {
-  PageContent,
-  PageHeader,
-  PageLayout,
-  PageNav,
-  PageTitle,
-} from "../drizzle-ui";
-import {
   DrizzleAdminConfigComplete,
   Params,
   SearchParams,
@@ -15,7 +8,7 @@ import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { renderValue } from "../lib/shared-utils";
 import { notFound } from "next/navigation";
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon, EditIcon, Trash2Icon } from "lucide-react";
 import { getColumnDataTypeMap } from "../lib/server-utils";
 
 export async function ViewPage(props: {
@@ -45,9 +38,9 @@ export async function ViewPage(props: {
   const columnDataTypeMap = getColumnDataTypeMap(drizzleTable);
 
   return (
-    <PageLayout>
-      <PageHeader>
-        <PageTitle className="flex items-center">
+    <div className="p-3 flex flex-col gap-3">
+      <div>
+        <div className="flex items-center">
           <Link
             href={`${config.basePath}/${resourcePath}`}
             className="underline"
@@ -55,8 +48,8 @@ export async function ViewPage(props: {
             {capitalCase(resourcePath)}
           </Link>{" "}
           <ChevronRightIcon /> {obj.id}
-        </PageTitle>
-        <PageNav>
+        </div>
+        <div className="flex justify-end gap-3">
           {drizzleTableConfig.components?.ViewPageNav && (
             <drizzleTableConfig.components.ViewPageNav
               basePath={config.basePath}
@@ -71,16 +64,16 @@ export async function ViewPage(props: {
               obj={obj}
             />
           )}
-        </PageNav>
-      </PageHeader>
-      <PageContent>
+        </div>
+      </div>
+      <div>
         {Object.entries(obj).map(([key, value]) => (
           <div key={key}>
             <strong>{capitalCase(key)}</strong>: {renderValue(key, value, columnDataTypeMap)}
           </div>
         ))}
-      </PageContent>
-    </PageLayout>
+      </div>
+    </div>
   );
 }
 
@@ -95,13 +88,13 @@ function DefaultPageActions(props: {
         href={`${props.basePath}/${props.resourcePath}/${props.obj.id}/edit`}
         className="font-bold underline"
       >
-        Edit
+        <EditIcon />
       </Link>
       <Link
         href={`${props.basePath}/${props.resourcePath}/${props.obj.id}/delete`}
         className="font-bold underline"
       >
-        Delete
+        <Trash2Icon />
       </Link>
     </>
   );

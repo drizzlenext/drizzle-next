@@ -1,14 +1,6 @@
 import { camelCase, capitalCase } from "change-case-all";
 import {
   Button,
-  PageAside,
-  PageAsideToggle,
-  PageContent,
-  PageFooter,
-  PageHeader,
-  PageLayout,
-  PageNav,
-  PageTitle,
   Pagination,
 } from "../drizzle-ui";
 import { ObjectTable } from "../components/object-table";
@@ -155,12 +147,12 @@ export async function ListPage(props: {
   }
 
   return (
-    <PageLayout>
-      <PageHeader>
-        <PageTitle className="flex gap-5 items-center">
+    <div className="p-3 flex flex-col gap-3">
+      <div>
+        <div className="flex gap-5 items-center">
           {capitalCase(resourcePath)}{" "}
-        </PageTitle>
-        <PageNav className="flex-wrap px-0">
+        </div>
+        <div className="flex-wrap px-0 flex justify-end gap-3">
           {drizzleTableConfig.components?.ListPageNav && (
             <drizzleTableConfig.components.ListPageNav
               basePath={config.basePath}
@@ -168,17 +160,18 @@ export async function ListPage(props: {
             />
           )}
           {!drizzleTableConfig.components?.ListPageNav && (
-            <Link href={`${config.basePath}/${resourcePath}/new`} className="font-bold underline">
+            <Link href={`${config.basePath}/${resourcePath}/new`}>
+              <Button variant="muted">
                 New
+              </Button>
             </Link>
           )}
-          <PageAsideToggle />
-        </PageNav>
-      </PageHeader>
-      <PageContent className="h-[calc(100vh-145px)]">
-        <div className="flex justify-end">
-          <DrizzleFilter simplifiedColumns={simplifiedColumns} />
         </div>
+      </div>
+      <div>
+        <DrizzleFilter simplifiedColumns={simplifiedColumns} />
+      </div>
+      <div className="overflow-auto border border-border rounded">
         <ObjectTable
           list={list}
           basePath={config.basePath}
@@ -188,27 +181,15 @@ export async function ListPage(props: {
           curRow={obj}
           RowActions={drizzleTableConfig.components?.RowNav}
         />
-      </PageContent>
-      <PageAside className="overflow-auto">
-        <PageAsideToggle className="ml-auto" />
-        {obj && (
-          <ObjectUpdateForm
-            obj={obj}
-            curTable={curTable}
-            columnDataTypeMap={columnDataTypeMap}
-            formControlMap={drizzleTableConfig.formControlMap}
-            customFormControlMap={drizzleTableConfig.customFormControlMap}
-          />
-        )}
-      </PageAside>
-      <PageFooter className="flex justify-between">
+      </div>
+      <div className="flex justify-end">
         <Pagination
           count={count}
           page={page}
           pageSize={pageSize}
           totalPages={totalPages}
         />
-      </PageFooter>
-    </PageLayout>
+      </div>
+    </div>
   );
 }
