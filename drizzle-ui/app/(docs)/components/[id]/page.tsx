@@ -24,6 +24,7 @@ import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 import { RichTextEditorDemo } from "@/components/component-demo/rich-text-editor-demo";
 import { Suspense } from "react";
 import ScrollLink from "@/components/scroll-link";
+import { DropdownMenuDemo } from "@/components/component-demo/dropdown-menu-demo";
 
 const componentMap: { [key: string]: React.ComponentType | null } = {
   alert: AlertDemo,
@@ -32,6 +33,7 @@ const componentMap: { [key: string]: React.ComponentType | null } = {
   card: CardDemo,
   checkbox: CheckboxDemo,
   "dark-mode": DarkModeDemo,
+  "dropdown-menu": DropdownMenuDemo,
   "app-layout": null,
   form: FormDemo,
   input: InputDemo,
@@ -91,13 +93,15 @@ export default async function Page(props: { params: Params }) {
     <div className="p-3">
       <div>
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-[1fr_192px]">
-          <div className="typography min-w-0 flex-grow">
-            <h1>{data.title}</h1>
-            <h2 id="description">Description</h2>
-            <div className="mb-5">{data.description}</div>
-            {htmlContent && (
-              <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-            )}
+          <div className="min-w-0 flex-grow">
+            <div className="typography">
+              <h1>{data.title}</h1>
+              <h2 id="description">Description</h2>
+              <div className="mb-5">{data.description}</div>
+              {htmlContent && (
+                <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+              )}
+            </div>
             {DynamicComponent && (
               <div className="mb-5">
                 <h2 id="preview">Preview</h2>
@@ -108,43 +112,44 @@ export default async function Page(props: { params: Params }) {
                 </div>
               </div>
             )}
-
-            <h2 id="installation">Installation</h2>
-            <p>Add component:</p>
-            <CodeBlock
-              language="bash"
-              code={`npx drizzle-ui@latest add ${params.id}`}
-            />
-            {data.dependencies && (
-              <>
-                <p>Install dependencies:</p>
-                <CodeBlock
-                  language="bash"
-                  code={`npm i ${data.dependencies.join(" ")}`}
-                />
-              </>
-            )}
-            {data.dev_dependencies && (
-              <>
-                <p>Install dev dependencies:</p>
-                <CodeBlock
-                  language="bash"
-                  code={`npm i -D ${data.dev_dependencies.join(" ")}`}
-                />
-              </>
-            )}
-            <h2 id="usage">Usage</h2>
-            <CodeBlock language="ts" code={usage} />
-            <h2 id="code">Code</h2>
-            {codeBlocks.map((codeBlock) => (
-              <div key={codeBlock.path}>
-                <p>{codeBlock.path.split("/").slice(1).join("/")}</p>
-                <CodeBlock
-                  language={getExtFromPath(codeBlock.path)}
-                  code={codeBlock.code}
-                />
-              </div>
-            ))}
+            <div className="typography">
+              <h2 id="installation">Installation</h2>
+              <p>Add component:</p>
+              <CodeBlock
+                language="bash"
+                code={`npx drizzle-ui@latest add ${params.id}`}
+              />
+              {data.dependencies && (
+                <>
+                  <p>Install dependencies:</p>
+                  <CodeBlock
+                    language="bash"
+                    code={`npm i ${data.dependencies.join(" ")}`}
+                  />
+                </>
+              )}
+              {data.dev_dependencies && (
+                <>
+                  <p>Install dev dependencies:</p>
+                  <CodeBlock
+                    language="bash"
+                    code={`npm i -D ${data.dev_dependencies.join(" ")}`}
+                  />
+                </>
+              )}
+              <h2 id="usage">Usage</h2>
+              <CodeBlock language="ts" code={usage} />
+              <h2 id="code">Code</h2>
+              {codeBlocks.map((codeBlock) => (
+                <div key={codeBlock.path}>
+                  <p>{codeBlock.path.split("/").slice(1).join("/")}</p>
+                  <CodeBlock
+                    language={getExtFromPath(codeBlock.path)}
+                    code={codeBlock.code}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
           <div className="sticky top-15 hidden self-start lg:block">
             <h4 className="font-semibold">On this page</h4>
