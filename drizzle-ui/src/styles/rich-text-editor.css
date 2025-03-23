@@ -1,22 +1,25 @@
 /* rich text editor */
 .rich-text-editor-container {
   border: 1px solid var(--input-border);
-  border-radius: var(--radius-input);
+  border-radius: 4px;
   background-color: var(--input-background);
 }
 .rich-text-editor-toolbar {
   border-bottom: 1px solid var(--input-border);
   background-color: var(--background);
-  border-top-left-radius: var(--radius-input);
-  border-top-right-radius: var(--radius-input);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 .rich-text-editor-btn {
   padding: 5px;
   color: var(--foreground);
   cursor: pointer;
   background-color: var(--background);
-  border-top-left-radius: var(--radius-input);
-  border-top-right-radius: var(--radius-input);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.rich-text-editor-toolbar > :first-child {
+  border-top-left-radius: 4px;
 }
 .rich-text-editor-btn.active {
   background-color: var(--muted);
