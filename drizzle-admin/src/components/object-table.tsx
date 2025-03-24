@@ -194,7 +194,7 @@ export function ObjectTable(props: ObjectTableProps) {
                   <TableCell
                     key={col.name}
                     className={cn(
-                      "text-nowrap overflow-hidden",
+                      "text-nowrap overflow-hidden max-w-80 truncate whitespace-nowrap",
                       isCurrentCell(row, col, curCell) && "p-0"
                     )}
                     onDoubleClick={(e) => handleDoubleClickCell(e, row, col)}

@@ -9,7 +9,8 @@ import {
   CustomFormControl,
 } from "@/src/types";
 import { User } from "@/schema/users";
-import { FormControl, Label, Select, SelectOption } from "@/src/drizzle-ui";
+import { Button, FormControl, Label, Select, SelectOption } from "@/src/drizzle-ui";
+import { FileTextIcon } from "lucide-react";
 
 export const UserRowNav: AdminRowNav<User> = (
   props: AdminRowNavProps<User>
@@ -17,17 +18,9 @@ export const UserRowNav: AdminRowNav<User> = (
   return (
     <>
       <Link href={`${props.basePath}/${props.resourcePath}/${props.row.id}`}>
-        View
-      </Link>
-      <Link
-        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/edit`}
-      >
-        Edit
-      </Link>
-      <Link
-        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/delete`}
-      >
-        Delete
+      <Button variant="info" size="icon" >
+        <FileTextIcon size={16} />
+      </Button>
       </Link>
     </>
   );
