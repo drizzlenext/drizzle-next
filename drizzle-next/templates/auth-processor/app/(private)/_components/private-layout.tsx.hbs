@@ -3,19 +3,18 @@
 import {
   AppContent,
   AppHeader,
+  AppHeaderGroup,
   AppLayout,
   AppNav,
   AppSidebar,
   AppSidebarGroup,
   AppSidebarItem,
-  AppTitle,
-} from "@/components/ui/dashboard-layout";
+} from "@/components/ui/app-layout";
 import {
   User2Icon,
   LogOutIcon,
-  LayoutAppIcon,
+  LayoutDashboardIcon,
   UserIcon,
-  Table2Icon,
 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { User } from "@/schema/users";
@@ -40,12 +39,14 @@ export function PrivateLayout({
   return (
     <AppLayout>
       <AppHeader>
-        <AppTitle>Drizzle Next</AppTitle>
-        <AppNav>
-          <Avatar src={userRow.image}>
-            <User2Icon />
-          </Avatar>
-        </AppNav>
+        <AppHeaderGroup>Drizzle Next</AppHeaderGroup>
+        <AppHeaderGroup>
+          <AppNav>
+            <Avatar src={userRow.image}>
+              <User2Icon />
+            </Avatar>
+          </AppNav>
+        </AppHeaderGroup>
       </AppHeader>
       <AppSidebar>
         <AppSidebarGroup>

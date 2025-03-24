@@ -42,7 +42,7 @@
     "better-sqlite3": "^11.8.1",
     "dotenv": "^16.4.7",
     "drizzle-kit": "^0.30.5",
-    "drizzle-orm": "^0.40.0",
+    "drizzle-orm": "^0.41.0",
     "next": "^15.2.0",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
@@ -56,7 +56,7 @@
     "typescript": "5.8.2"
   },
   "peerDependencies": {
-    "drizzle-orm": "^0.40.0",
+    "drizzle-orm": "^0.41.0",
     "next": "^15.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
