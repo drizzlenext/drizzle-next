@@ -16,7 +16,6 @@ import {
 } from "../drizzle-ui";
 import Link from "next/link";
 import { SimplifiedColumn, AdminRowNav } from "../types/types";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FileTextIcon, SquarePenIcon, Trash2Icon } from "lucide-react";
 
@@ -37,9 +36,6 @@ type ObjectTableProps = {
 };
 
 export function ObjectTable(props: ObjectTableProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [curRow, setCurRow] = useState<Record<string, any>>(props.curRow);
   const [curCell, setCurCell] = useState<CurrentCell>();
   const [curList, setCurList] = useState<Record<string, any>[]>(props.list);
