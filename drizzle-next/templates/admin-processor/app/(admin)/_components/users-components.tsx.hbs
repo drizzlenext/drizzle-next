@@ -1,89 +1,13 @@
 "use client";
 
-import Link from "next/link";
+import { CustomFormControl } from "drizzle-admin/types";
+
 import {
-  AdminPageNav,
-  AdminRowNav,
-  AdminPageNavProps,
-  AdminRowNavProps,
-  CustomFormControl,
-} from "drizzle-admin/types";
-import { User } from "@/schema/users";
-import { FormControl, Label, Select, SelectOption } from "drizzle-admin/drizzle-ui";
-
-export const UserRowNav: AdminRowNav<User> = (
-  props: AdminRowNavProps<User>
-) => {
-  return (
-    <>
-      <Link href={`${props.basePath}/${props.resourcePath}/${props.row.id}`}>
-        View
-      </Link>
-      <Link
-        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/edit`}
-      >
-        Edit
-      </Link>
-      <Link
-        href={`${props.basePath}/${props.resourcePath}/${props.row.id}/delete`}
-      >
-        Delete
-      </Link>
-    </>
-  );
-};
-
-export const UserViewPageNav: AdminPageNav<User> = (
-  props: AdminPageNavProps<User>
-) => {
-  return (
-    <>
-      <Link
-        href={`${props.basePath}/${props.resourcePath}/${props.row?.id}/edit`}
-      >
-        Edit
-      </Link>
-    </>
-  );
-};
-
-export const UserEditPageNav: AdminPageNav<User> = (
-  props: AdminPageNavProps<User>
-) => {
-  return (
-    <>
-      <Link
-        href={`${props.basePath}/${props.resourcePath}/${props.row?.id}/edit`}
-      >
-        Edit
-      </Link>
-    </>
-  );
-};
-
-export const UserDeletePageNav: AdminPageNav<User> = (
-  props: AdminPageNavProps<User>
-) => {
-  return (
-    <>
-      <Link
-        href={`${props.basePath}/${props.resourcePath}/${props.row?.id}/edit`}
-      >
-        Edit
-      </Link>
-    </>
-  );
-};
-
-export const UserListPageNav: AdminPageNav<User> = (
-  props: AdminPageNavProps<User>
-) => {
-  return (
-    <>
-      <Link href={`${props.basePath}/${props.resourcePath}/new`}>New</Link>
-    </>
-  );
-};
+  FormControl,
+  Label,
+  Select,
+  SelectOption,
+} from "drizzle-admin/drizzle-ui";
 
 export const UserRoleCustomFormControl: CustomFormControl = (props) => {
   return (
@@ -94,5 +18,5 @@ export const UserRoleCustomFormControl: CustomFormControl = (props) => {
         <SelectOption value="user">user</SelectOption>
       </Select>
     </FormControl>
-  )
-}
+  );
+};
