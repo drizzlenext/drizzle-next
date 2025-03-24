@@ -125,6 +125,10 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       outputPath: "components/ui/dark-mode.tsx",
     });
     renderTemplate({
+      inputPath: "drizzle-ui/components/ui/dropdown-menu.tsx.hbs",
+      outputPath: "components/ui/dropdown-menu.tsx",
+    });
+    renderTemplate({
       inputPath: "drizzle-ui/components/ui/app-layout.tsx.hbs",
       outputPath: "components/ui/app-layout.tsx",
     });

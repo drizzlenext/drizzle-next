@@ -1,28 +1,35 @@
 "use client";
 
 import {
+  Avatar,
   AppLayout,
   AppHeader,
   AppHeaderGroup,
-  AppSidebarToggle,
-  AppContent,
-  AppSidebar,
   AppNav,
   AppNavToggle,
-  DarkModeToggle,
-  AppSidebarList,
   AppNavList,
+  AppSidebar,
+  AppSidebarToggle,
+  AppSidebarList,
+  AppContent,
+  DarkModeToggle,
+  DropdownMenu,
+  DropdownMenuList,
 } from "drizzle-admin/drizzle-ui";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { DrizzleLayoutConfig } from "drizzle-admin/types";
-import { LogOutIcon, UserIcon, GaugeIcon } from "lucide-react";
+import {
+  LogOutIcon,
+  UserIcon,
+  GaugeIcon,
+  SettingsIcon,
+  HomeIcon,
+} from "lucide-react";
+import { User } from "@/schema/users";
 
 const config: DrizzleLayoutConfig = {
-  nav: [
-    { text: "Settings", link: "/admin/settings" },
-    { text: "Sign Out", link: "/signout", icon: LogOutIcon },
-  ],
+  nav: [{ text: "Home", link: "/", icon: HomeIcon }],
   sidebar: [
     {
       text: "Admin",
@@ -36,9 +43,19 @@ const config: DrizzleLayoutConfig = {
       ],
     },
   ],
+  dropdown: [
+    { text: "Settings", link: "/admin/settings", icon: SettingsIcon },
+    { text: "Sign out", link: "/signout", icon: LogOutIcon },
+  ],
 };
 
-export function AdminLayout({ children }: { children: ReactNode }) {
+export function AdminLayout({
+  children,
+  userRow,
+}: {
+  children: ReactNode;
+  userRow: User;
+}) {
   const pathname = usePathname();
 
   return (
@@ -48,11 +65,20 @@ export function AdminLayout({ children }: { children: ReactNode }) {
           <AppSidebarToggle />
           Drizzle Admin
         </AppHeaderGroup>
-        <AppNav>
-          <AppNavList items={config.nav} pathname={pathname} />
-          <DarkModeToggle />
-        </AppNav>
-        <AppNavToggle />
+        <AppHeaderGroup>
+          <AppNav>
+            <AppNavList items={config.nav} pathname={pathname} />
+            <DarkModeToggle />
+          </AppNav>
+          <AppNavToggle />
+          <DropdownMenu
+            buttonEl={<Avatar src={userRow.image} />}
+            buttonSizeVariant="avatar"
+            buttonVariant="ghost"
+          >
+            <DropdownMenuList items={config.dropdown} />
+          </DropdownMenu>
+        </AppHeaderGroup>
       </AppHeader>
       <AppSidebar>
         <AppSidebarList items={config.sidebar} pathname={pathname} />

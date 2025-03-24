@@ -6,9 +6,9 @@ import {
   AppHeaderGroup,
   AppLayout,
   AppNav,
+  AppNavToggle,
   AppSidebar,
-  AppSidebarGroup,
-  AppSidebarItem,
+  AppSidebarList,
 } from "@/components/ui/app-layout";
 import {
   User2Icon,
@@ -18,11 +18,14 @@ import {
 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { User } from "@/schema/users";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { DropdownMenu, DropdownMenuList } from "@/components/ui/dropdown-menu";
 
-const items = [
+const sidebar = [
   { text: "Dashboard", link: "/dashboard", icon: LayoutDashboardIcon },
+];
+
+const dropdown = [
   { text: "Profile", link: "/profile", icon: UserIcon },
   { text: "Sign out", link: "/signout", icon: LogOutIcon },
 ];
@@ -37,27 +40,27 @@ export function PrivateLayout({
   const pathname = usePathname();
 
   return (
-    <AppLayout>
+    <AppLayout variant="container">
       <AppHeader>
         <AppHeaderGroup>Drizzle Next</AppHeaderGroup>
         <AppHeaderGroup>
-          <AppNav>
-            <Avatar src={userRow.image}>
-              <User2Icon />
-            </Avatar>
-          </AppNav>
+          <AppNav></AppNav>
+          <AppNavToggle />
+          <DropdownMenu
+            buttonEl={
+              <Avatar src={userRow.image}>
+                <User2Icon />
+              </Avatar>
+            }
+            buttonSizeVariant="avatar"
+            buttonVariant="ghost"
+          >
+            <DropdownMenuList items={dropdown} />
+          </DropdownMenu>
         </AppHeaderGroup>
       </AppHeader>
       <AppSidebar>
-        <AppSidebarGroup>
-          {items.map((item) => (
-            <Link key={item.text} href={item.link}>
-              <AppSidebarItem active={pathname === item.link}>
-                <item.icon size={16} /> {item.text}
-              </AppSidebarItem>
-            </Link>
-          ))}
-        </AppSidebarGroup>
+        <AppSidebarList items={sidebar} />
       </AppSidebar>
       <AppContent>{children}</AppContent>
     </AppLayout>
