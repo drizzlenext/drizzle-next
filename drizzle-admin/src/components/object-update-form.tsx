@@ -4,7 +4,6 @@ import { Button, Form, FormControl, FormMessage } from "../drizzle-ui";
 import { useState } from "react";
 import { ColumnDataTypeMap, CustomFormControlMap, FormControlMap } from "../types/types";
 import { RenderFormControl } from "./render-form-control";
-import { useEffect } from "react";
 import { getFormControlMap } from "../lib/shared-utils";
 
 type UpdateStatus = {
@@ -30,20 +29,6 @@ export function ObjectUpdateForm({
 }) {
   const [state, setState] = useState<UpdateStatus>({});
   const [curObj, setCurObj] = useState(obj);
-
-  useEffect(() => {
-    function handleRowClick(event: CustomEvent) {
-      const { detail } = event;
-      setCurObj((prev: any) => ({ ...prev, ...detail }));
-      setState(() => ({}));
-    }
-
-    window.addEventListener("rowClick", handleRowClick as EventListener);
-
-    return () => {
-      window.removeEventListener("rowClick", handleRowClick as EventListener);
-    };
-  }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

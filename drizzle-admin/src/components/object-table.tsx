@@ -148,15 +148,6 @@ export function ObjectTable(props: ObjectTableProps) {
     };
   }, [curList]);
 
-  function handleClick(row: any) {
-    setCurRow(row);
-    const params = new URLSearchParams(searchParams ?? "");
-    params.set("id", row.id);
-    router.push(`${pathname}?${params.toString()}`);
-    const event = new CustomEvent("rowClick", { detail: row });
-    window.dispatchEvent(event);
-  }
-
   function handleDoubleClickCell(
     e: React.MouseEvent<HTMLTableCellElement>,
     row: any,
@@ -204,11 +195,6 @@ export function ObjectTable(props: ObjectTableProps) {
       }
 
       const newData = Object.assign({}, curList[idx], data);
-
-      const updateEvent = new CustomEvent("rowClick", {
-        detail: newData,
-      });
-      window.dispatchEvent(updateEvent);
 
       setCurList([
         ...curList.slice(0, idx),
@@ -271,7 +257,6 @@ export function ObjectTable(props: ObjectTableProps) {
                 "hover:bg-zinc-100 hover:dark:bg-zinc-800",
                 curRow?.id === row.id && "bg-zinc-100 dark:bg-zinc-800"
               )}
-              onClick={() => handleClick(row)}
             >
               <TableCell>
                 <div onClick={(e) => e.stopPropagation()}>
