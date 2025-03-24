@@ -3,6 +3,7 @@
 import {
   AppLayout,
   AppHeader,
+  AppHeaderGroup,
   AppSidebarToggle,
   AppContent,
   AppSidebar,
@@ -11,6 +12,9 @@ import {
   DarkModeToggle,
   AppSidebarList,
   AppNavList,
+  DropdownMenu,
+  Avatar,
+  DropdownMenuList,
 } from "@/src/drizzle-ui";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
@@ -25,12 +29,10 @@ import {
   Table2Icon,
   UserIcon,
 } from "lucide-react";
-import { AppHeaderGroup } from "@/src/drizzle-ui/components/ui/app-layout";
 
 const config: DrizzleLayoutConfig = {
   nav: [
-    { text: "Settings", link: "/settings", icon: SettingsIcon },
-    { text: "Sign Out", link: "/signout", icon: LogOutIcon },
+    { text: "Home", link: "/", icon: HomeIcon },
   ],
   sidebar: [
     {
@@ -69,6 +71,7 @@ const config: DrizzleLayoutConfig = {
       ],
     },
   ],
+  dropdown: [{ text: "Settings", link: "/settings", icon: SettingsIcon}, { text: "Sign Out", link: "/signout", icon: LogOutIcon}]
 };
 
 export function AdminLayout({ children }: { children: ReactNode }) {
@@ -86,8 +89,11 @@ export function AdminLayout({ children }: { children: ReactNode }) {
             <AppNavList items={config.nav} pathname={pathname} />
             <DarkModeToggle />
           </AppNav>
+          <AppNavToggle />
+          <DropdownMenu buttonEl={<Avatar src="https://drizzlenext.github.io/drizzle-assets/avatar.png" />} buttonSizeVariant="avatar" buttonVariant="ghost">
+            <DropdownMenuList items={config.dropdown} />
+          </ DropdownMenu>
         </AppHeaderGroup>
-        <AppNavToggle />
       </AppHeader>
       <AppSidebar>
         <AppSidebarList items={config.sidebar} pathname={pathname} />
