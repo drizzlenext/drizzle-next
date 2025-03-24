@@ -13,7 +13,7 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="email"]').type("admin@example.com");
     cy.get('input[name="password"]').type("pw");
     cy.contains("Sign in").click();
-    cy.contains("Settings").should("exist");
+    cy.contains("Home").should("exist");
     cy.get("a").contains("Categories").click();
     cy.get("a").contains("New").click();
     cy.get(`input[name="name"]`).type("my_category");
