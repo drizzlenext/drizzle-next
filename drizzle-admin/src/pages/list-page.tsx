@@ -6,7 +6,7 @@ import {
 import { ObjectTable } from "../components/object-table";
 import { DrizzleFilter } from "../components/drizzle-filter";
 import { getColumnDataTypeMap, parseSearchParams } from "../lib/server-utils";
-import { and, asc, desc, eq, like, getTableColumns } from "drizzle-orm";
+import { and, asc, desc, eq, like } from "drizzle-orm";
 import { getTableConfig as getTableConfigForSqlite } from "drizzle-orm/sqlite-core";
 import { getTableConfig as getTableConfigForMysql } from "drizzle-orm/mysql-core";
 import { getTableConfig as getTableConfigForPostgresql } from "drizzle-orm/pg-core";
@@ -18,9 +18,9 @@ import {
   SearchParams,
 } from "../types/types";
 import Link from "next/link";
-import { ObjectUpdateForm } from "../components/object-update-form";
 import { OPERATOR_MAP } from "../lib/server-constants";
 import { notFound } from "next/navigation";
+import { FilePlusIcon } from "lucide-react";
 
 export type ListPageParams = {
   curTable: string;
@@ -161,8 +161,8 @@ export async function ListPage(props: {
           )}
           {!drizzleTableConfig.components?.ListPageNav && (
             <Link href={`${config.basePath}/${resourcePath}/new`}>
-              <Button variant="muted">
-                New
+              <Button variant="muted" className="flex items-center gap-1">
+                <FilePlusIcon size={16} /> New
               </Button>
             </Link>
           )}

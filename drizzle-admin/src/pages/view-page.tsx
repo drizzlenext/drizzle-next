@@ -10,6 +10,7 @@ import { renderValue } from "../lib/shared-utils";
 import { notFound } from "next/navigation";
 import { ChevronRightIcon, EditIcon, Trash2Icon } from "lucide-react";
 import { getColumnDataTypeMap } from "../lib/server-utils";
+import { Button } from "../drizzle-ui";
 
 export async function ViewPage(props: {
   params: Params;
@@ -86,15 +87,17 @@ function DefaultPageActions(props: {
     <>
       <Link
         href={`${props.basePath}/${props.resourcePath}/${props.obj.id}/edit`}
-        className="font-bold underline"
       >
-        <EditIcon />
+        <Button variant="muted" size="default" className="flex gap-1 items-center">
+          <EditIcon size={16} /> Edit
+        </Button>
       </Link>
       <Link
         href={`${props.basePath}/${props.resourcePath}/${props.obj.id}/delete`}
-        className="font-bold underline"
       >
-        <Trash2Icon />
+        <Button variant="muted" size="default" className="flex gap-1 items-center">
+          <Trash2Icon size={16} /> Delete
+        </Button>
       </Link>
     </>
   );

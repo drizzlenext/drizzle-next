@@ -12,12 +12,13 @@ import {
   cn,
   Input,
   Textarea,
+  Button,
 } from "../drizzle-ui";
 import Link from "next/link";
 import { SimplifiedColumn, AdminRowNav } from "../types/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { FileTextIcon, SquarePenIcon } from "lucide-react";
+import { FileTextIcon, SquarePenIcon, Trash2Icon } from "lucide-react";
 
 type CurrentCell = {
   row: Record<string, any>;
@@ -229,7 +230,7 @@ export function ObjectTable(props: ObjectTableProps) {
   }
 
   return (
-    <Table>
+    <Table className="table-auto">
       <TableHeader>
         <TableRow>
           <TableHead></TableHead>
@@ -349,10 +350,19 @@ function DefaultRowActions(props: {
   return (
     <div className="flex gap-1">
       <Link href={`${props.basePath}/${props.resourcePath}/${props.row.id}`}>
-        <FileTextIcon />
+        <Button variant="ghost" size="icon">
+          <FileTextIcon size={16} className="shrink-0" />
+        </Button>
       </Link>
       <Link href={`${props.basePath}/${props.resourcePath}/${props.row.id}/edit`}>
-        <SquarePenIcon />
+        <Button variant="ghost" size="icon">
+          <SquarePenIcon size={16} className="shrink-0" />
+        </Button>
+      </Link>
+      <Link href={`${props.basePath}/${props.resourcePath}/${props.row.id}/delete`}>
+        <Button variant="ghost" size="icon">
+          <Trash2Icon size={16} className="shrink-0" />
+        </Button>
       </Link>
     </div>
   );
