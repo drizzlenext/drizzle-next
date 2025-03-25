@@ -192,6 +192,7 @@ const AppNavList = (props: {
                 "hover:text-primary flex items-center gap-0.5 font-semibold",
                 pathname === item.link && "text-primary",
               )}
+              target={item.target}
             >
               {item.text}
               {item.icon && <item.icon size={16} />}

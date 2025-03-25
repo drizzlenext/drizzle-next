@@ -9,6 +9,7 @@ import {
   AppNavToggle,
   AppSidebar,
   AppSidebarList,
+  AppSidebarToggle,
 } from "@/components/ui/app-layout";
 import {
   User2Icon,
@@ -20,6 +21,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { User } from "@/schema/users";
 import { usePathname } from "next/navigation";
 import { DropdownMenu, DropdownMenuList } from "@/components/ui/dropdown-menu";
+import { DarkModeToggle } from "@/components/ui/dark-mode";
 
 const sidebar = [
   { text: "Dashboard", link: "/dashboard", icon: LayoutDashboardIcon },
@@ -42,9 +44,13 @@ export function PrivateLayout({
   return (
     <AppLayout variant="container">
       <AppHeader>
-        <AppHeaderGroup>Drizzle Next</AppHeaderGroup>
         <AppHeaderGroup>
-          <AppNav></AppNav>
+          <AppSidebarToggle /> Drizzle Next
+        </AppHeaderGroup>
+        <AppHeaderGroup>
+          <AppNav>
+            <DarkModeToggle />
+          </AppNav>
           <AppNavToggle />
           <DropdownMenu
             buttonEl={
