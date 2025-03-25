@@ -72,7 +72,7 @@ export function DrizzleFilter({
             setFilters((prev) => [{ column: "id", operator: "=", value: "" }]);
           }}
         >
-          <FilterIcon /> Filter
+          <FilterIcon size={16} /> Filter
         </Button>
       </div>
     );

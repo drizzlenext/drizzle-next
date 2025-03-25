@@ -66,6 +66,7 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
       path: value.path || kebabCase(key),
       formControlMap: value.formControlMap || {},
       customFormControlMap: value.customFormControlMap || {},
+      searchBy: value.searchBy,
       components: {
         RowNav: value.components?.RowNav,
         ViewPageNav: value.components?.ViewPageNav,

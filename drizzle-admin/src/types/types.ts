@@ -49,6 +49,7 @@ export type DrizzleTableConfig = {
   path?: string;
   formControlMap?: FormControlMap;
   customFormControlMap?: CustomFormControlMap;
+  searchBy?: string[];
   components?: {
     RowNav?: AdminRowNav<any>;
     ViewPageNav?: AdminPageNav<any>;
@@ -64,6 +65,7 @@ export type DrizzleTableConfigComplete = {
   path: string;
   formControlMap: FormControlMap;
   customFormControlMap: CustomFormControlMap;
+  searchBy?: string[];
   components?: {
     RowNav?: AdminRowNav<any>;
     ViewPageNav?: AdminPageNav<any>;

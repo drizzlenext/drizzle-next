@@ -16,7 +16,7 @@ export function SearchInput({ placeholder }: { placeholder?: string }) {
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams || "");
     params.set("search", text);
     router.push(`${pathname}?${params.toString()}`);
   }

@@ -2,11 +2,12 @@ import { camelCase, capitalCase } from "change-case-all";
 import {
   Button,
   Pagination,
+  SearchInput,
 } from "../drizzle-ui";
 import { ObjectTable } from "../components/object-table";
 import { DrizzleFilter } from "../components/drizzle-filter";
 import { getColumnDataTypeMap, parseSearchParams } from "../lib/server-utils";
-import { and, asc, desc, eq, like } from "drizzle-orm";
+import { and, asc, desc, eq, like, or } from "drizzle-orm";
 import { getTableConfig as getTableConfigForSqlite } from "drizzle-orm/sqlite-core";
 import { getTableConfig as getTableConfigForMysql } from "drizzle-orm/mysql-core";
 import { getTableConfig as getTableConfigForPostgresql } from "drizzle-orm/pg-core";
@@ -124,6 +125,15 @@ export async function ListPage(props: {
     whereClause.push(op(drizzleTable[filter.column], parsedValue));
   }
 
+  if (search) {
+    if (drizzleTableConfig.searchBy) {
+      const clauses = drizzleTableConfig.searchBy.map((val) => like(drizzleTable[val], `%${search}%`));
+      whereClause.push(or(...clauses));
+    } else {
+      whereClause.push(like(drizzleTable.id, `%${search}%`));
+    }
+  }
+
   const count = await db.$count(drizzleTable, and(...whereClause));
   const totalPages = Math.ceil(count / pageSize);
 
@@ -146,13 +156,23 @@ export async function ListPage(props: {
     });
   }
 
+  let searchByPlaceholder = `Search by `;
+  if (drizzleTableConfig.searchBy) {
+    searchByPlaceholder += drizzleTableConfig.searchBy.join(", ")
+  } else {
+    searchByPlaceholder += "id"
+  }
+
   return (
     <div className="p-3 flex flex-col gap-3">
-      <div>
-        <div className="flex gap-5 items-center">
+      <div className="flex flex-col gap-3">
+        <div className="flex gap-3 items-center">
           {capitalCase(resourcePath)}{" "}
         </div>
-        <div className="flex-wrap px-0 flex justify-end gap-3">
+        <div className="flex-wrap px-0 flex justify-between gap-3">
+          <div className="w-96">
+            <SearchInput placeholder={`${searchByPlaceholder}`} />
+          </div>
           {drizzleTableConfig.components?.ListPageNav && (
             <drizzleTableConfig.components.ListPageNav
               basePath={config.basePath}
