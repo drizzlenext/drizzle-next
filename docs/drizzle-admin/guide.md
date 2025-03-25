@@ -302,6 +302,44 @@ export const usersTableConfig: DrizzleTableConfig = {
 
 As you can see, the search bar on the user list page will now search by both id and email.
 
+## Custom Pagination
+
+The pagination controls can be controlled globally.
+
+`app/(admin)/_lib/drizzle-admin.config.ts`
+
+```ts{16-24}
+import { db } from "@/lib/db";
+import { DrizzleAdminConfig } from "drizzle-admin/types";
+import { usersTableConfig } from "./_lib/users-table.config";
+import { posts } from "@/schema/posts";
+
+export const config: DrizzleAdminConfig = {
+  basePath: "/admin",
+  schema: {
+    users: usersTableConfig,
+    posts: {
+      drizzleTable: posts,
+    },
+  },
+  db: db,
+  dbDialect: "sqlite",
+  paginationOpts: {
+    buttonVariant: "info",
+    enablePageInput: true,
+    perPageInputType: "text",
+    perPageLabel: "Per Page",
+    rowPluralLabel: "objects",
+    rowSingularLabel: "object",
+    showRowCount: true,
+  }
+};
+```
+
+:::tip
+The pagination options are the same as the pagination options for the [Drizzle UI Pagination component](https://www.drizzlenext.com/ui/components/pagination).
+:::
+
 ## The Completed Example
 
 Here is the final result with the customizations.

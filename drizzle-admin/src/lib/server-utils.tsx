@@ -82,6 +82,7 @@ export function completeDrizzleAdminConfig(config: DrizzleAdminConfig) {
     schema: completeSchema,
     db: config.db,
     dbDialect: config.dbDialect,
+    paginationOpts: config.paginationOpts,
   };
 
   return completeConfig;

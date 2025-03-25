@@ -208,6 +208,7 @@ export async function ListPage(props: {
           page={page}
           pageSize={pageSize}
           totalPages={totalPages}
+          opts={config.paginationOpts}
         />
       </div>
     </div>

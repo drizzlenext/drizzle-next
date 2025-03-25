@@ -8,7 +8,7 @@ const Select = React.forwardRef<
   return (
     <select
       className={cn(
-        "focus:border-input-ring border-input-border bg-input-background w-full rounded border px-3 py-1 focus:ring-0 focus:outline-none",
+        "focus:border-input-ring border-input-border bg-input-background h-9 w-full rounded border px-3 py-1 focus:ring-0 focus:outline-none",
         className,
       )}
       ref={ref}

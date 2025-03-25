@@ -29,4 +29,5 @@ export const config: DrizzleAdminConfig = {
   },
   db: db,
   dbDialect: "sqlite",
+  paginationOpts: {enablePageInput: true, buttonVariant: "info", perPageInputType: "text"}
 };

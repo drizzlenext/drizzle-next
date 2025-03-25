@@ -8,6 +8,38 @@ export function PaginationDemo() {
   const page = parseInt(searchParams.get("page") || "1");
   const pageSize = parseInt(searchParams.get("pageSize") || "10");
   return (
-    <Pagination count={100} page={page} pageSize={pageSize} totalPages={10} />
+    <div className="flex flex-col gap-5">
+      <Pagination count={100} page={page} pageSize={pageSize} totalPages={10} />
+      <Pagination
+        count={100}
+        page={page}
+        pageSize={pageSize}
+        totalPages={10}
+        opts={{
+          buttonVariant: "info",
+          enablePageInput: true,
+          perPageInputType: "text",
+          perPageLabel: "Per Page",
+          rowPluralLabel: "objects",
+          rowSingularLabel: "object",
+          showRowCount: true,
+        }}
+      />
+      <Pagination
+        count={100}
+        page={page}
+        pageSize={pageSize}
+        totalPages={10}
+        opts={{
+          buttonVariant: "ghost",
+          enablePageInput: false,
+          perPageInputType: "none",
+          perPageLabel: "",
+          rowPluralLabel: "objects",
+          rowSingularLabel: "object",
+          showRowCount: false,
+        }}
+      />
+    </div>
   );
 }

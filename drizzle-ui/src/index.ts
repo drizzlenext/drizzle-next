@@ -34,7 +34,7 @@ export {
 export { Form, FormControl, FormMessage } from "./components/ui/form";
 export { Input } from "./components/ui/input";
 export { Label } from "./components/ui/label";
-export { Pagination } from "./components/ui/pagination";
+export { Pagination, type PaginationOpts } from "./components/ui/pagination";
 export { RichTextEditor } from "./components/ui/rich-text-editor";
 export { SearchInput } from "./components/ui/search-input";
 export { Select, SelectOption } from "./components/ui/select";

@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { type DropdownMenuItemType, type AppNavItemType, type AppSidebarItemType } from "../drizzle-ui";
+import { type DropdownMenuItemType, type AppNavItemType, type AppSidebarItemType, PaginationOpts } from "../drizzle-ui";
 
 export type Params = Promise<{ [key: string]: string }>;
 
@@ -82,6 +82,7 @@ export type DrizzleAdminConfig = {
   };
   db: any;
   dbDialect: "postgresql" | "mysql" | "sqlite";
+  paginationOpts?: PaginationOpts;
 };
 
 export type DrizzleAdminConfigComplete = {
@@ -91,6 +92,7 @@ export type DrizzleAdminConfigComplete = {
   };
   db: any;
   dbDialect: "postgresql" | "mysql" | "sqlite";
+  paginationOpts?: PaginationOpts;
 };
 
 export type ColumnDataType = "string" | "boolean" | "number" | "date" | "json";
