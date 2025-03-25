@@ -4,6 +4,7 @@ import { UserRoleCustomFormControl } from "@/app/(admin)/_components/users-compo
 
 export const usersTableConfig: DrizzleTableConfig = {
   drizzleTable: users,
+  searchBy: ["id", "name", "email"],
   formControlMap: { role: "custom" },
   customFormControlMap: { role: UserRoleCustomFormControl },
 };

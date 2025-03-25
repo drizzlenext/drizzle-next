@@ -10,12 +10,10 @@ export default async function Page() {
   {{/each}}
 
   return (
-    <div>
-      <div>
-        <div>New {{tableObj.singularCapitalCase}}</div>
-        <div>
-          <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
-        </div>
+    <div className="flex flex-col gap-3 p-3">
+      <div>New {{tableObj.singularCapitalCase}}</div>
+      <div className="[&>a]:underline">
+        <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
       </div>
       <div>
         <{{tableObj.singularPascalCase}}CreateForm 

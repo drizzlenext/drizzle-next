@@ -12,12 +12,10 @@ export default async function Page(props: { params: Params }) {
   const {{tableObj.singularCamelCase}}Row = await db.query.{{tableObj.pluralCamelCase}}.findFirst({ where: eq({{tableObj.pluralCamelCase}}.id, id) });
 
   return (
-    <div>
-      <div>
-        <div>Delete {{tableObj.singularCapitalCase}}</div>
-        <div>
-          <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
-        </div>
+    <div className="flex flex-col gap-3 p-3">
+      <div>Delete {{tableObj.singularCapitalCase}}</div>
+      <div className="[&>a]:underline">
+        <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
       </div>
       <div>
         <{{tableObj.singularPascalCase}}DeleteForm {{tableObj.singularCamelCase}}Row={ {{tableObj.singularCamelCase}}Row } />

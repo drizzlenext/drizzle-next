@@ -18,14 +18,12 @@ export default async function Page(props: { params: Params }) {
   }
 
   return (
-    <div>
-      <div>
-        <div>{{tableObj.singularCapitalCase}}</div>
-        <div>
-          <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
-          <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }/edit`}>Edit</Link>
-          <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }/delete`}>Delete</Link>
-        </div>
+    <div className="flex flex-col gap-3 p-3">
+      <div>{{tableObj.singularCapitalCase}}</div>
+      <div className="flex gap-3 [&>a]:underline">
+        <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
+        <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }/edit`}>Edit</Link>
+        <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }/delete`}>Delete</Link>
       </div>
       <div>
         <p><strong>Id:</strong> { {{tableObj.singularCamelCase}}Row.id }</p>

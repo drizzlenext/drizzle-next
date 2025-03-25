@@ -19,6 +19,7 @@ export const config: DrizzleAdminConfig = {
     },
     categories: {
       drizzleTable: categories,
+      searchBy: ["id", "name"]
     },
     tags: {
       drizzleTable: tags,

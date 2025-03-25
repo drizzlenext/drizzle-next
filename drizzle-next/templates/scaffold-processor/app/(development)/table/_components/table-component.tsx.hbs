@@ -70,7 +70,7 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
                 {{/default}}
               {{/switch}}
             {{/each}}
-            <TableCell>
+            <TableCell className="flex gap-3 [&>a]:underline">
               <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Row.id }`}>
                 View
               </Link>
