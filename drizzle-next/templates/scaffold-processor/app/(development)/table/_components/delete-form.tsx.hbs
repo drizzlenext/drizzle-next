@@ -29,7 +29,7 @@ export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularC
   return (
     <Form onSubmit={handleSubmit}>
       <FormControl>
-        <Label htmlFor="id">Id: { {{tableObj.singularCamelCase}}Row.id }</Label>
+        <Label htmlFor="id"><strong>Id:</strong> { {{tableObj.singularCamelCase}}Row.id }</Label>
         <input type="hidden" name="id" id="id" value={ {{tableObj.singularCamelCase}}Row.id } />
       </FormControl>
       <FormControl>
