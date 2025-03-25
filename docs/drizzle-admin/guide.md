@@ -278,6 +278,30 @@ export const UserRowNav: AdminRowNav<User> = (
 };
 ```
 
+## Custom Search
+
+You can customize each search bar to filter by different columns.
+
+`app/(admin)/_lib/users-table.config.ts`
+
+```tsx{3}
+export const usersTableConfig: DrizzleTableConfig = {
+  drizzleTable: users,
+  searchBy: ["id", "email"],
+  formControlMap: { image: "file", role: "custom" },
+  customFormControlMap: { role: UserRoleCustomFormControl },
+  components: {
+    RowNav: UserRowNav,
+    ViewPageNav: UserViewPageNav,
+    EditPageNav: UserEditPageNav,
+    DeletePageNav: UserDeletePageNav,
+    ListPageNav: UserListPageNav,
+  },
+};
+```
+
+As you can see, the search bar on the user list page will now search by both id and email.
+
 ## The Completed Example
 
 Here is the final result with the customizations.
@@ -401,6 +425,7 @@ import {
 
 export const usersTableConfig: DrizzleTableConfig = {
   drizzleTable: users,
+  searchBy: ["id", "email"],
   formControlMap: { image: "file", role: "custom" },
   customFormControlMap: { role: UserRoleCustomFormControl },
   components: {
