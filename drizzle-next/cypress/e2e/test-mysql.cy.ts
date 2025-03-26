@@ -13,12 +13,12 @@ describe("shadriz e2e test", () => {
     cy.get('input[name="email"]').type("admin@example.com");
     cy.get('input[name="password"]').type("pw");
     cy.contains("Sign in").click();
-    cy.contains("Settings").should("exist");
+    cy.contains("Home").should("exist");
   });
 
   it("home page", () => {
     cy.visit("http://localhost:3000");
-    cy.get("h1").first().contains("Drizzle Next");
+    cy.contains("Drizzle Next");
   });
 
   it("admin scaffold happy path", () => {

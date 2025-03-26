@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DarkModeToggle } from "@/components/ui/dark-mode";
 import {
   CloudDrizzleIcon,
+  ConstructionIcon,
   ExternalLinkIcon,
   ShieldIcon,
   UserIcon,
@@ -26,28 +27,37 @@ export default function Page() {
             <CardContent className="flex flex-col gap-2">
               <Link href="/dashboard">
                 <Button
-                  variant="outline"
+                  variant="success"
                   className="flex w-full items-center justify-start gap-2"
                 >
                   <UserIcon /> User Login
                 </Button>
               </Link>
-              <Link href="/admin">
-                <Button
-                  variant="outline"
-                  className="flex w-full items-center justify-start gap-2"
-                >
-                  <ShieldIcon /> Admin Login
-                </Button>
-              </Link>
-              <Link href="https://www.drizzlenext.com" target="_blank">
-                <Button
-                  variant="muted"
-                  className="flex w-full items-center justify-start gap-2"
-                >
-                  <ExternalLinkIcon /> Documentation
-                </Button>
-              </Link>
+              {process.env.NODE_ENV === "development" && (
+                <>
+                  <Link href="/admin">
+                    <Button
+                      variant="destructive"
+                      className="flex w-full items-center justify-start gap-2"
+                    >
+                      <ShieldIcon /> Admin Login
+                    </Button>
+                  </Link>
+                  <Link href="/development">
+                    <Button variant="warning" className="flex w-full items-center justify-start gap-2">
+                      <ConstructionIcon /> Development
+                    </Button>
+                  </Link>
+                  <Link href="https://www.drizzlenext.com" target="_blank">
+                    <Button
+                      variant="info"
+                      className="flex w-full items-center justify-start gap-2"
+                    >
+                      <ExternalLinkIcon /> Documentation
+                    </Button>
+                  </Link>
+                </>
+              )}
             </CardContent>
           </Card>
         </main>

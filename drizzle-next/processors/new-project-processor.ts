@@ -90,6 +90,10 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       inputPath: "new-project-processor/app/uploads/[...segments]/route.ts.hbs",
       outputPath: "app/uploads/[...segments]/route.ts"
     });
+    renderTemplate({
+      inputPath: "new-project-processor/app/(development)/development/page.tsx.hbs",
+      outputPath: "app/(development)/development/page.tsx"
+    })
 
     appendToFileIfTextNotExists(".gitignore", "/uploads", "/uploads");
 

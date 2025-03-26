@@ -175,6 +175,7 @@ export class ScaffoldProcessor {
       this.addDeleteForm();
       this.addTableComponent();
       this.addQueries();
+      this.updateDevelopmentIndex();
     }
     if (this.opts.adminEnabled) {
       this.updateDrizzleAdminFiles();
@@ -654,5 +655,11 @@ export class ScaffoldProcessor {
       "app/(admin)/_lib/drizzle-admin.config.ts",
       `import { ${tableObj.pluralCamelCase} } from "@/schema/${tableObj.pluralKebabCase}";\n`,
     );
+  }
+  updateDevelopmentIndex() {
+    const tableObj = caseFactory(this.opts.table, {
+      pluralize: this.opts.pluralizeEnabled
+    })
+    insertTextAfterIfNotExists("app/(development)/development/page.tsx", "const links: string[] = [", `\n  "${tableObj.pluralKebabCase}",`)
   }
 }

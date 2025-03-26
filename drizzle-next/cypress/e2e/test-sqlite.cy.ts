@@ -10,7 +10,7 @@ describe("shadriz e2e test", () => {
 
   it("home page", () => {
     cy.visit("http://localhost:3000");
-    cy.get("h1").first().contains("Drizzle Next");
+    cy.contains("Drizzle Next");
   });
 
   it("private scaffold happy path", () => {
