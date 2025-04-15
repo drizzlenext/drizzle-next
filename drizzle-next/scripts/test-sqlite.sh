@@ -13,7 +13,8 @@ drizzle-next init --package-manager pnpm \
     --pk-strategy nanoid \
     --auth \
     --no-admin \
-    --latest
+    --latest \
+    --frameworks all
 cp ~/code/drizzle-next-env/.env.sqlite .env
 cp ~/code/drizzle-next/drizzle-next/templates/test-scripts/load-fake-data.ts.hbs scripts/load-fake-data.ts
 drizzle-next add tiptap

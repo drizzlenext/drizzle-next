@@ -1,3 +1,9 @@
+export type Frameworks = {
+  next: boolean;
+  express: boolean;
+  drizzle: boolean;
+};
+
 export type DrizzleNextConfig = {
   version: string;
   packageManager: PackageManager;
@@ -9,7 +15,8 @@ export type DrizzleNextConfig = {
   adminEnabled: boolean;
   install: boolean;
   pluralizeEnabled: boolean;
-}
+  frameworks: Frameworks;
+};
 
 export type PackageManager = "npm" | "pnpm" | "bun";
 
@@ -28,13 +35,13 @@ export type DrizzleNextProcessor = {
   init(): Promise<void>;
   render(): Promise<void>;
   printCompletionMessage: () => void;
-}
+};
 
 export type DbDialect = "postgresql" | "mysql" | "sqlite";
 
 export type DataTypeStrategyMap = {
   [key: string]: DataTypeStrategy;
-}
+};
 
 export type AuthorizationLevel = "admin" | "private" | "public";
 
@@ -42,8 +49,9 @@ export type ScaffoldProcessorOpts = {
   table: string;
   columns: string[];
   enableCompletionMessage: boolean;
-  enableUiScaffold: boolean;
-  enableDbScaffold: boolean;
+  enableNextScaffold: boolean;
+  enableDrizzleScaffold: boolean;
+  enableExpressScaffold: boolean;
 } & DrizzleNextConfig;
 
 export type DataTypeStrategyOpts = {
@@ -51,7 +59,7 @@ export type DataTypeStrategyOpts = {
   columnName: string;
   referencesTable?: string;
   fkStrategyTemplate?: string;
-}
+};
 
 type JSType = "string" | "number" | "boolean" | "object";
 
@@ -70,7 +78,7 @@ export type DataTypeStrategy = {
   formComponents: FormComponent[];
   zodCode: string;
   getKeyValueStrForSchema(opts: DataTypeStrategyOpts): string;
-}
+};
 
 export type DbDialectStrategy = {
   dialect: DbDialect;
@@ -86,9 +94,9 @@ export type DbDialectStrategy = {
   pkDataType: string;
   fkAutoIncrementDataType: string;
   timestampImport: string;
-}
+};
 
-export type DbPackageStrategy =  {
+export type DbPackageStrategy = {
   opts: DrizzleNextConfig;
   dialect: DbDialect;
   copyCreateUserScript(): void;

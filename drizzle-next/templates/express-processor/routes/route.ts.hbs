@@ -1,0 +1,100 @@
+import { db } from "@/lib/db";
+import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+import { eq } from "drizzle-orm";
+import { Request, Response } from "express";
+import { z } from "zod";
+import express from "express";
+
+const router = express.Router();
+
+const {{tableObj.singularPascalCase}}Schema = z.object({
+  {{#each validatedColumns}}
+  {{this.caseVariants.originalCamelCase}}: {{this.zodCode}},
+  {{/each}}
+});
+
+router.get("/", async function (req: Request, res: Response) {
+  const {{tableObj.pluralCamelCase}} = await db.query.{{tableObj.pluralCamelCase}}.findMany();
+  res.send({{tableObj.pluralCamelCase}});
+});
+
+router.get("/:id", async function (req: Request, res: Response) {
+  const {{tableObj.singularCamelCase}} = await db.query.{{tableObj.pluralCamelCase}}.findFirst({
+    where: eq({{tableObj.pluralCamelCase}}.id, req.params.id),
+  });
+  if (!{{tableObj.singularCamelCase}}) {
+    res.sendStatus(404);
+  }
+  res.send({{tableObj.singularCamelCase}});
+});
+
+router.post("/", async function (req: Request, res: Response) {
+  const validatedFields = {{tableObj.singularPascalCase}}Schema.safeParse(req.body);
+
+  if (!validatedFields.success) {
+    res.status(400).send({
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Invalid data",
+    });
+    return;
+  }
+
+  await db.insert({{tableObj.pluralCamelCase}}).values(validatedFields.data);
+
+  res.sendStatus(201);
+});
+
+router.put("/:id", async function (req: Request, res: Response) {
+  const validatedFields = {{tableObj.singularPascalCase}}Schema.safeParse(req.body);
+
+  if (!validatedFields.success) {
+    res.status(400).send({
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Invalid data",
+    });
+    return;
+  }
+
+  await db
+    .update({{tableObj.pluralCamelCase}})
+    .set(validatedFields.data)
+    .where(eq({{tableObj.pluralCamelCase}}.id, req.params.id));
+
+  res.sendStatus(200);
+});
+
+router.patch("/:id", async function (req: Request, res: Response) {
+  const validatedFields = {{tableObj.singularPascalCase}}Schema.partial().safeParse(req.body);
+
+  if (!validatedFields.success) {
+    res.status(400).send({
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Invalid data",
+    });
+    return;
+  }
+
+  await db
+    .update({{tableObj.pluralCamelCase}})
+    .set(validatedFields.data)
+    .where(eq({{tableObj.pluralCamelCase}}.id, req.params.id));
+
+  res.sendStatus(200);
+});
+
+router.delete("/:id", async function (req: Request, res: Response) {
+  const {{tableObj.singularCamelCase}} = await db.query.{{tableObj.pluralCamelCase}}.findFirst({
+    where: eq({{tableObj.pluralCamelCase}}.id, req.params.id),
+  });
+
+  if (!{{tableObj.singularCamelCase}}) {
+    res.sendStatus(404);
+    return;
+  }
+
+  await db.delete({{tableObj.pluralCamelCase}}).where(eq({{tableObj.pluralCamelCase}}.id, req.params.id));
+
+  res.sendStatus(204);
+});
+
+export default router;

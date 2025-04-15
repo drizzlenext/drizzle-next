@@ -48,8 +48,7 @@ export class AdminProcessor implements DrizzleNextProcessor {
       outputPath: "app/(auth)/_components/admin-signin-form.tsx",
     });
     renderTemplate({
-      inputPath:
-        "admin-processor/app/(auth)/_lib/admin-signin-action.ts.hbs",
+      inputPath: "admin-processor/app/(auth)/_lib/admin-signin-action.ts.hbs",
       outputPath: "app/(auth)/_lib/admin-signin-action.ts",
     });
     renderTemplate({
@@ -91,9 +90,10 @@ export class AdminProcessor implements DrizzleNextProcessor {
       columns: strategies[this.opts.dbDialect],
       table: "users",
       enableCompletionMessage: false,
-      enableUiScaffold: true,
-      enableDbScaffold: false,
-      pluralizeEnabled: true
+      enableNextScaffold: true,
+      enableDrizzleScaffold: false,
+      enableExpressScaffold: false,
+      pluralizeEnabled: true,
     });
 
     userScaffold.process();

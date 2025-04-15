@@ -425,6 +425,11 @@ export function completeDrizzleNextConfig(
 ): DrizzleNextConfig {
   const completeConfig: DrizzleNextConfig = {
     version: partialConfig.version ?? "",
+    frameworks: partialConfig.frameworks ?? {
+      next: true,
+      express: false,
+      drizzle: true,
+    },
     packageManager: partialConfig.packageManager ?? "npm",
     latest: partialConfig.latest ?? false,
     dbDialect: partialConfig.dbDialect ?? "sqlite",

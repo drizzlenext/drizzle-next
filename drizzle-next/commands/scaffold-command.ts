@@ -32,27 +32,39 @@ integer, real, text, boolean, bigint, timestamp
     "-c, --columns <columns...>",
     "space separated list of columns in the format of column_name:data_type"
   )
-  .option("--no-db", "skip the generation of drizzle database table", true)
-  .option(
-    "--no-ui",
-    "skip the generation of next.js routes, pages, and actions",
-    true
+  .addOption(
+    new Option("--frameworks <framework>", "frameworks to scaffold").choices([
+      "next",
+      "express",
+      "drizzle",
+      "all",
+    ])
   )
   .action(async (table, options) => {
-    if (!options.ui && !options.db) {
-      log.red(
-        "--no-db and --no-ui flag are present. both ui and db generation are skipped. nothing to do."
-      );
-      process.exit(1);
-    }
     const drizzleNextConfig: DrizzleNextConfig = loadDrizzleNextConfig();
+    const frameworksEnabled = drizzleNextConfig.frameworks;
+
+    // override the config defaults if framework option is passed in
+    if (options.frameworks) {
+      frameworksEnabled.next = ["next", "all"].includes(options.frameworks);
+      frameworksEnabled.express = ["express", "all"].includes(
+        options.frameworks
+      );
+      frameworksEnabled.drizzle = [
+        "next",
+        "express",
+        "drizzle",
+        "all",
+      ].includes(options.frameworks);
+    }
 
     const scaffoldProcessor = new ScaffoldProcessor({
       table: table,
       columns: options.columns,
       enableCompletionMessage: true,
-      enableUiScaffold: options.ui,
-      enableDbScaffold: options.db,
+      enableNextScaffold: frameworksEnabled.next,
+      enableDrizzleScaffold: frameworksEnabled.drizzle,
+      enableExpressScaffold: frameworksEnabled.express,
       ...drizzleNextConfig,
     });
     scaffoldProcessor.process();

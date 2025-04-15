@@ -23,23 +23,31 @@ const VERSION = packageJson["version"];
 initCommand
   .description("initialize next.js project for development with drizzle-next")
   .addOption(
+    new Option("--frameworks <framework>", "frameworks to scaffold").choices([
+      "next",
+      "express",
+      "drizzle",
+      "all",
+    ])
+  )
+  .addOption(
     new Option(
       "--package-manager <manager>",
-      "package manager for this project",
-    ).choices(["npm", "pnpm", "bun"]),
+      "package manager for this project"
+    ).choices(["npm", "pnpm", "bun"])
   )
   .addOption(
     new Option("--db-dialect <dialect>", "database dialect").choices([
       "sqlite",
       "postgresql",
       "mysql",
-    ]),
+    ])
   )
   .addOption(
     new Option(
       "--pk-strategy <strategy>",
-      "primary key generation strategy",
-    ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"]),
+      "primary key generation strategy"
+    ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"])
   )
   .option("--auth", "install auth.js authentication")
   .option("--no-auth", "skip installation of auth.js")
@@ -50,12 +58,30 @@ initCommand
   .option("--latest", "install latest cutting edge dependencies")
   .action(async (options) => {
     try {
-      preflightChecks();
-
       // inquire
 
       const partialConfig: Partial<DrizzleNextConfig> = {};
       partialConfig.version = VERSION;
+
+      const frameworkAnswer =
+        options.frameworks ||
+        (await select({
+          message: "Which frameworks do you want to initialize?",
+          choices: [
+            { value: "next", description: "Next.js + Drizzle ORM" },
+            { value: "express", description: "Express.js + Drizzle ORM" },
+            { value: "drizzle", description: "Drizzle ORM only" },
+            { value: "all", description: "All of the above" },
+          ],
+        }));
+
+      partialConfig.frameworks = {
+        next: ["next", "all"].includes(frameworkAnswer),
+        express: ["express", "all"].includes(frameworkAnswer),
+        drizzle: ["next", "express", "drizzle", "all"].includes(
+          frameworkAnswer
+        ),
+      };
 
       partialConfig.packageManager =
         options.packageManager ||
@@ -172,11 +198,11 @@ initCommand
       let authProcessor;
       let adminProcessor;
 
-      if (completeConfig.authEnabled) {
+      if (completeConfig.authEnabled && completeConfig.frameworks.next) {
         authProcessor = new AuthProcessor(completeConfig);
         processors.push(authProcessor);
       }
-      if (completeConfig.adminEnabled) {
+      if (completeConfig.adminEnabled && completeConfig.frameworks.next) {
         adminProcessor = new AdminProcessor(completeConfig);
         processors.push(adminProcessor);
       }

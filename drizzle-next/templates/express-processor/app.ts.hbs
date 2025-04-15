@@ -1,0 +1,25 @@
+import { Request, Response } from "express";
+
+const express = require("express");
+const app = express();
+const port = 3001;
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("Hello World!");
+});
+
+app.use((err: any, req: Request, res: Response, next: Function) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    error: {
+      message: err.message || "Internal Server Error",
+    },
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});

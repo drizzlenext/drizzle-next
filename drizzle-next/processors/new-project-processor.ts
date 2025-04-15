@@ -3,6 +3,9 @@ import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
 import {
   appendToEnvLocal,
   appendToFileIfTextNotExists,
+  insertTextAfterIfNotExists,
+  installDependencies,
+  installDevDependencies,
   renderTemplate,
   renderTemplateIfNotExists,
   writeDrizzleNextConfig,
@@ -11,17 +14,9 @@ import {
 export class NewProjectProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
 
-  dependencies = [
-    "drizzle-orm",
-    "dotenv",
-    "zod",
-    "lucide-react",
-    "clsx",
-    "tailwind-merge",
-    "mime"
-  ];
+  dependencies = [];
 
-  devDependencies = ["drizzle-kit"];
+  devDependencies = [];
 
   constructor(opts: DrizzleNextConfig) {
     this.opts = opts;
@@ -38,13 +33,70 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     }
 
     // installation logic
+    if (this.opts.frameworks.next) {
+      await installDependencies({
+        dependencies: ["lucide-react", "clsx", "tailwind-merge", "mime"],
+        packageManager: this.opts.packageManager,
+        latest: this.opts.latest,
+      });
+    }
+
+    if (this.opts.frameworks.express) {
+      await installDependencies({
+        dependencies: ["express", "body-parser"],
+        packageManager: this.opts.packageManager,
+        latest: this.opts.latest,
+      });
+
+      await installDevDependencies({
+        devDependencies: ["@types/express", "nodemon", "@types/body-parser"],
+        packageManager: this.opts.packageManager,
+        latest: this.opts.latest,
+      });
+    }
+
+    if (this.opts.frameworks.drizzle) {
+      await installDependencies({
+        dependencies: ["drizzle-orm", "dotenv", "zod"],
+        packageManager: this.opts.packageManager,
+        latest: this.opts.latest,
+      });
+
+      await installDevDependencies({
+        devDependencies: ["drizzle-kit"],
+        packageManager: this.opts.packageManager,
+        latest: this.opts.latest,
+      });
+    }
   }
 
   async render() {
     writeDrizzleNextConfig(this.opts);
 
-    this.renderDrizzleUI();
+    this.renderNewProject();
 
+    if (this.opts.frameworks.next) {
+      this.renderNext();
+      this.renderDrizzleUI();
+    }
+
+    if (this.opts.frameworks.express) {
+      this.renderExpress();
+    }
+  }
+
+  renderNewProject() {
+    renderTemplateIfNotExists({
+      inputPath: "new-project-processor/.env.hbs",
+      outputPath: ".env",
+    });
+    renderTemplate({
+      inputPath: "new-project-processor/lib/config.ts.hbs",
+      outputPath: "lib/config.ts",
+    });
+  }
+
+  renderNext() {
     renderTemplate({
       inputPath: "new-project-processor/app/layout.tsx.hbs",
       outputPath: "app/layout.tsx",
@@ -66,14 +118,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       inputPath: "new-project-processor/lib/upload.ts.hbs",
       outputPath: "lib/upload.ts",
     });
-    renderTemplateIfNotExists({
-      inputPath: "new-project-processor/.env.hbs",
-      outputPath: ".env",
-    });
-    renderTemplate({
-      inputPath: "new-project-processor/lib/config.ts.hbs",
-      outputPath: "lib/config.ts",
-    });
     renderTemplate({
       inputPath: "new-project-processor/eslint.config.mjs.hbs",
       outputPath: "eslint.config.mjs",
@@ -88,18 +132,19 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
     renderTemplate({
       inputPath: "new-project-processor/app/uploads/[...segments]/route.ts.hbs",
-      outputPath: "app/uploads/[...segments]/route.ts"
+      outputPath: "app/uploads/[...segments]/route.ts",
     });
     renderTemplate({
-      inputPath: "new-project-processor/app/(development)/development/page.tsx.hbs",
-      outputPath: "app/(development)/development/page.tsx"
-    })
+      inputPath:
+        "new-project-processor/app/(development)/development/page.tsx.hbs",
+      outputPath: "app/(development)/development/page.tsx",
+    });
 
     appendToFileIfTextNotExists(".gitignore", "/uploads", "/uploads");
 
     appendToEnvLocal(
       "NEXT_PUBLIC_UPLOAD_BASE_URL",
-      "http://localhost:3000/uploads",
+      "http://localhost:3000/uploads"
     );
   }
 
@@ -180,6 +225,19 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       inputPath: "drizzle-ui/styles/styles.css.hbs",
       outputPath: "app/globals.css",
     });
+  }
+
+  renderExpress() {
+    renderTemplate({
+      inputPath: "express-processor/app.ts.hbs",
+      outputPath: "api/app.ts",
+    });
+
+    insertTextAfterIfNotExists(
+      "package.json",
+      `"scripts": {`,
+      `\n    "dev:api": "nodemon --watch api --exec tsx api/app.ts",`
+    );
   }
 
   printCompletionMessage() {}

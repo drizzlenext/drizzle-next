@@ -26,7 +26,7 @@ fi
 cd ~/code
 
 if [ "$RESET" = true ]; then
-pnpm create next-app@latest demo-postgresql --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
+mkdir demo-postgresql
 fi
 
 cd demo-postgresql
@@ -41,7 +41,6 @@ drizzle-next init --package-manager pnpm \
     --frameworks express
 drizzle-next add tiptap
 pnpm i -D prettier prettier-plugin-tailwindcss
-pnpm i ../drizzle-next/drizzle-admin
 else
 drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
@@ -51,7 +50,6 @@ drizzle-next init --package-manager pnpm \
     --latest \
     --no-install \
     --frameworks express
-drizzle-next add tiptap --no-install
 fi
 
 cp ~/code/drizzle-next-env/.env.postgresql .env
@@ -65,12 +63,4 @@ drizzle-next scaffold post -c category_id:references_select title:text likes:int
 if [ "$RESET" = true ]; then
 npx drizzle-kit generate
 npx drizzle-kit migrate
-npx tsx scripts/create-user.ts user@example.com pw
-npx tsx scripts/create-user.ts admin@example.com pw
-npx tsx scripts/grant-admin.ts admin@example.com
 fi
-
-sed -i 's/next dev --turbopack/next dev/' package.json
-
-npm run build
-npm run dev

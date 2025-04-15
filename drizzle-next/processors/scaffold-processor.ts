@@ -11,6 +11,8 @@ import {
   insertSchemaToSchemaIndex,
   insertTextAfterIfNotExists,
   prependToFileIfNotExists,
+  insertTextAfter,
+  insertTextBeforeIfNotExists,
 } from "../lib/utils";
 import { log } from "../lib/log";
 import { pkStrategyImportTemplates } from "../lib/pk-strategy";
@@ -19,7 +21,7 @@ import { dialectStrategyFactory } from "../lib/strategy-factory";
 
 type ScaffoldDbDialectStrategy = {
   schemaTableTemplatePath: string;
-}
+};
 
 const scaffoldDbDialectStrategies: Record<
   DbDialect,
@@ -51,7 +53,7 @@ type ValidatedColumn = {
   caseVariants: Cases; // the case variants of the original column
   zodCode: string; // the zod coersion code
   referenceTableVars?: Cases; // for the table name of reference types
-}
+};
 
 const zodCodeRecord: Record<PkStrategy, string> = {
   cuid2: "z.coerce.string().cuid2()",
@@ -151,17 +153,17 @@ export class ScaffoldProcessor {
   }
 
   process(): void {
-    if (!this.opts.enableDbScaffold && !this.opts.enableUiScaffold) {
+    if (!this.opts.enableDrizzleScaffold && !this.opts.enableNextScaffold) {
       throw new Error("ui and db scaffold are both skipped. nothing to do.");
     }
     log.init(`scaffolding ${this.opts.table}...`);
-    if (this.opts.enableDbScaffold) {
+    if (this.opts.enableDrizzleScaffold) {
       this.addSchema();
       insertSchemaToSchemaIndex(this.opts.table, {
         pluralize: this.opts.pluralizeEnabled,
       });
     }
-    if (this.opts.enableUiScaffold) {
+    if (this.opts.enableNextScaffold) {
       this.addListView();
       this.addDetailView();
       this.addNewView();
@@ -177,12 +179,41 @@ export class ScaffoldProcessor {
       this.addQueries();
       this.updateDevelopmentIndex();
     }
+    if (this.opts.enableExpressScaffold) {
+      this.addExpressRoute();
+    }
     if (this.opts.adminEnabled) {
       this.updateDrizzleAdminFiles();
     }
     if (this.opts.enableCompletionMessage) {
       this.printCompletionMessage();
     }
+  }
+  addExpressRoute() {
+    const { table } = this.opts;
+    const tableObj = caseFactory(table, {
+      pluralize: this.opts.pluralizeEnabled,
+    });
+
+    renderTemplate({
+      inputPath: "express-processor/routes/route.ts.hbs",
+      outputPath: `api/routes/${tableObj.pluralKebabCase}.ts`,
+      data: {
+        tableObj,
+        validatedColumns: this.validatedColumns,
+      },
+    });
+
+    insertTextAfterIfNotExists(
+      "api/app.ts",
+      `const bodyParser = require("body-parser");`,
+      `\nconst ${tableObj.pluralCamelCase}Router = require("./routes/${tableObj.pluralKebabCase}");`
+    );
+    insertTextAfterIfNotExists(
+      "api/app.ts",
+      `app.use(bodyParser.json());`,
+      `\napp.use("/${tableObj.pluralKebabCase}", ${tableObj.pluralCamelCase}Router);`
+    );
   }
   addSchema(): void {
     const { table } = this.opts;
@@ -228,7 +259,7 @@ export class ScaffoldProcessor {
   generateImportsCodeFromColumns() {
     const dataTypeSet = new Set<string>();
     dataTypeSet.add(
-      this.dbDialectStrategy.pkStrategyDataTypes[this.opts.pkStrategy],
+      this.dbDialectStrategy.pkStrategyDataTypes[this.opts.pkStrategy]
     );
     let referenceImportsCode = "";
     for (const validatedColumn of this.validatedColumns) {
@@ -325,7 +356,7 @@ export class ScaffoldProcessor {
   hasFileDataType() {
     return (
       this.validatedColumns.filter((validatedColumn) =>
-        validatedColumn.dataType.startsWith("file"),
+        validatedColumn.dataType.startsWith("file")
       ).length > 0
     );
   }
@@ -387,7 +418,7 @@ export class ScaffoldProcessor {
       .map((validatedColumn) =>
         caseFactory(validatedColumn.columnName, {
           pluralize: this.opts.pluralizeEnabled,
-        }),
+        })
       );
 
     const tableObj = caseFactory(this.opts.table, {
@@ -420,7 +451,7 @@ export class ScaffoldProcessor {
       .map((validatedColumn) =>
         caseFactory(validatedColumn.columnName, {
           pluralize: this.opts.pluralizeEnabled,
-        }),
+        })
       );
 
     const tableObj = caseFactory(this.opts.table, {
@@ -514,7 +545,7 @@ export class ScaffoldProcessor {
   getReferencesColumnList(startsWith: "references" | "references_") {
     const referencesColumnList = this.validatedColumns
       .filter((validatedColumn) =>
-        validatedColumn.dataType.startsWith(startsWith),
+        validatedColumn.dataType.startsWith(startsWith)
       )
       .map((validatedColumn) => validatedColumn);
     return referencesColumnList;
@@ -644,22 +675,26 @@ export class ScaffoldProcessor {
     insertTextAfterIfNotExists(
       "app/(admin)/_components/admin-layout.tsx",
       "sidebar: [",
-      `\n    { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}" },`,
+      `\n    { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}" },`
     );
     insertTextAfterIfNotExists(
       "app/(admin)/_lib/drizzle-admin.config.ts",
       "schema: {",
-      `\n    ${tableObj.pluralCamelCase}: { drizzleTable: ${tableObj.pluralCamelCase} },`,
+      `\n    ${tableObj.pluralCamelCase}: { drizzleTable: ${tableObj.pluralCamelCase} },`
     );
     prependToFileIfNotExists(
       "app/(admin)/_lib/drizzle-admin.config.ts",
-      `import { ${tableObj.pluralCamelCase} } from "@/schema/${tableObj.pluralKebabCase}";\n`,
+      `import { ${tableObj.pluralCamelCase} } from "@/schema/${tableObj.pluralKebabCase}";\n`
     );
   }
   updateDevelopmentIndex() {
     const tableObj = caseFactory(this.opts.table, {
-      pluralize: this.opts.pluralizeEnabled
-    })
-    insertTextAfterIfNotExists("app/(development)/development/page.tsx", "const links: string[] = [", `\n  "${tableObj.pluralKebabCase}",`)
+      pluralize: this.opts.pluralizeEnabled,
+    });
+    insertTextAfterIfNotExists(
+      "app/(development)/development/page.tsx",
+      "const links: string[] = [",
+      `\n  "${tableObj.pluralKebabCase}",`
+    );
   }
 }

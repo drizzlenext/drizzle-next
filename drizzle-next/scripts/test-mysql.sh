@@ -16,7 +16,8 @@ drizzle-next init --package-manager pnpm \
     --auth \
     --admin \
     --no-pluralize \
-    --latest
+    --latest \
+    --frameworks all
 cp ~/code/drizzle-next-env/.env.mysql .env
 drizzle-next add tiptap
 pnpm i ../drizzle-next/drizzle-admin
