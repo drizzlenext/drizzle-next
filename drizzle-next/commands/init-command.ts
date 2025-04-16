@@ -217,11 +217,13 @@ initCommand
         devDependencies.push(...processor.devDependencies);
       }
 
-      for (const authProvider in authStrategyMap) {
-        const authStrategy =
-          authStrategyMap[authProvider as keyof typeof authStrategyMap];
-        dependencies.push(...authStrategy.dependencies);
-        devDependencies.push(...authStrategy.devDependencies);
+      if (completeConfig.frameworks.next) {
+        for (const authProvider in authStrategyMap) {
+          const authStrategy =
+            authStrategyMap[authProvider as keyof typeof authStrategyMap];
+          dependencies.push(...authStrategy.dependencies);
+          devDependencies.push(...authStrategy.devDependencies);
+        }
       }
 
       if (completeConfig.install) {

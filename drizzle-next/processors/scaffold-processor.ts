@@ -153,8 +153,12 @@ export class ScaffoldProcessor {
   }
 
   process(): void {
-    if (!this.opts.enableDrizzleScaffold && !this.opts.enableNextScaffold) {
-      throw new Error("ui and db scaffold are both skipped. nothing to do.");
+    if (
+      !this.opts.enableDrizzleScaffold &&
+      !this.opts.enableNextScaffold &&
+      !this.opts.enableExpressScaffold
+    ) {
+      throw new Error("all scaffolds are disabled. nothing to do.");
     }
     log.init(`scaffolding ${this.opts.table}...`);
     if (this.opts.enableDrizzleScaffold) {
@@ -178,13 +182,14 @@ export class ScaffoldProcessor {
       this.addTableComponent();
       this.addQueries();
       this.updateDevelopmentIndex();
+      if (this.opts.adminEnabled) {
+        this.updateDrizzleAdminFiles();
+      }
     }
     if (this.opts.enableExpressScaffold) {
       this.addExpressRoute();
     }
-    if (this.opts.adminEnabled) {
-      this.updateDrizzleAdminFiles();
-    }
+
     if (this.opts.enableCompletionMessage) {
       this.printCompletionMessage();
     }
@@ -196,8 +201,8 @@ export class ScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath: "express-processor/routes/route.ts.hbs",
-      outputPath: `api/routes/${tableObj.pluralKebabCase}.ts`,
+      inputPath: "express-templates/routes/route.ts.hbs",
+      outputPath: `routes/${tableObj.pluralKebabCase}.ts`,
       data: {
         tableObj,
         validatedColumns: this.validatedColumns,
@@ -205,12 +210,12 @@ export class ScaffoldProcessor {
     });
 
     insertTextAfterIfNotExists(
-      "api/app.ts",
-      `const bodyParser = require("body-parser");`,
-      `\nconst ${tableObj.pluralCamelCase}Router = require("./routes/${tableObj.pluralKebabCase}");`
+      "app.ts",
+      `import bodyParser from "body-parser";`,
+      `\nimport ${tableObj.pluralCamelCase}Router from "./routes/${tableObj.pluralKebabCase}";`
     );
     insertTextAfterIfNotExists(
-      "api/app.ts",
+      "app.ts",
       `app.use(bodyParser.json());`,
       `\napp.use("/${tableObj.pluralKebabCase}", ${tableObj.pluralCamelCase}Router);`
     );

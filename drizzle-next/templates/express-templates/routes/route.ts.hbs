@@ -14,18 +14,18 @@ const {{tableObj.singularPascalCase}}Schema = z.object({
 });
 
 router.get("/", async function (req: Request, res: Response) {
-  const {{tableObj.pluralCamelCase}} = await db.query.{{tableObj.pluralCamelCase}}.findMany();
-  res.send({{tableObj.pluralCamelCase}});
+  const {{tableObj.pluralCamelCase}}List = await db.query.{{tableObj.pluralCamelCase}}.findMany();
+  res.send({{tableObj.pluralCamelCase}}List);
 });
 
 router.get("/:id", async function (req: Request, res: Response) {
-  const {{tableObj.singularCamelCase}} = await db.query.{{tableObj.pluralCamelCase}}.findFirst({
+  const {{tableObj.singularCamelCase}}Obj = await db.query.{{tableObj.pluralCamelCase}}.findFirst({
     where: eq({{tableObj.pluralCamelCase}}.id, req.params.id),
   });
-  if (!{{tableObj.singularCamelCase}}) {
+  if (!{{tableObj.singularCamelCase}}Obj) {
     res.sendStatus(404);
   }
-  res.send({{tableObj.singularCamelCase}});
+  res.send({{tableObj.singularCamelCase}}Obj);
 });
 
 router.post("/", async function (req: Request, res: Response) {
@@ -83,11 +83,11 @@ router.patch("/:id", async function (req: Request, res: Response) {
 });
 
 router.delete("/:id", async function (req: Request, res: Response) {
-  const {{tableObj.singularCamelCase}} = await db.query.{{tableObj.pluralCamelCase}}.findFirst({
+  const {{tableObj.singularCamelCase}}Obj = await db.query.{{tableObj.pluralCamelCase}}.findFirst({
     where: eq({{tableObj.pluralCamelCase}}.id, req.params.id),
   });
 
-  if (!{{tableObj.singularCamelCase}}) {
+  if (!{{tableObj.singularCamelCase}}Obj) {
     res.sendStatus(404);
     return;
   }

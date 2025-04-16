@@ -38,7 +38,7 @@ drizzle-next init --package-manager pnpm \
     --auth \
     --admin \
     --latest \
-    --frameworks express
+    --frameworks all
 drizzle-next add tiptap
 pnpm i -D prettier prettier-plugin-tailwindcss
 pnpm i ../drizzle-next/drizzle-admin
@@ -50,7 +50,7 @@ drizzle-next init --package-manager pnpm \
     --admin \
     --latest \
     --no-install \
-    --frameworks express
+    --frameworks all
 drizzle-next add tiptap --no-install
 fi
 

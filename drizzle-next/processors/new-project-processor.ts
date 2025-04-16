@@ -73,8 +73,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
   async render() {
     writeDrizzleNextConfig(this.opts);
 
-    this.renderNewProject();
-
     if (this.opts.frameworks.next) {
       this.renderNext();
       this.renderDrizzleUI();
@@ -83,20 +81,21 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     if (this.opts.frameworks.express) {
       this.renderExpress();
     }
+
+    if (!this.opts.frameworks.next) {
+      this.renderNextDisabledFiles();
+    }
   }
 
-  renderNewProject() {
-    renderTemplateIfNotExists({
-      inputPath: "new-project-processor/.env.hbs",
-      outputPath: ".env",
-    });
+  renderNext() {
     renderTemplate({
       inputPath: "new-project-processor/lib/config.ts.hbs",
       outputPath: "lib/config.ts",
     });
-  }
-
-  renderNext() {
+    renderTemplateIfNotExists({
+      inputPath: "new-project-processor/.env.hbs",
+      outputPath: ".env",
+    });
     renderTemplate({
       inputPath: "new-project-processor/app/layout.tsx.hbs",
       outputPath: "app/layout.tsx",
@@ -229,15 +228,39 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
 
   renderExpress() {
     renderTemplate({
-      inputPath: "express-processor/app.ts.hbs",
-      outputPath: "api/app.ts",
+      inputPath: "express-templates/app.ts.hbs",
+      outputPath: "app.ts",
     });
 
     insertTextAfterIfNotExists(
       "package.json",
       `"scripts": {`,
-      `\n    "dev:api": "nodemon --watch api --exec tsx api/app.ts",`
+      `\n    "dev:api": "nodemon --watch routes --watch app.ts --exec tsx app.ts",`
     );
+  }
+
+  renderNextDisabledFiles() {
+    // if next is disabled, render the tsconfig for express setup. and gitignore. and env.
+    // also needed for drizzle only setup.
+    renderTemplate({
+      inputPath: "express-templates/tsconfig.json.hbs",
+      outputPath: "tsconfig.json",
+    });
+
+    renderTemplate({
+      inputPath: "express-templates/.gitignore.hbs",
+      outputPath: ".gitignore",
+    });
+
+    renderTemplate({
+      inputPath: "express-templates/env.hbs",
+      outputPath: ".env",
+    });
+
+    renderTemplate({
+      inputPath: "express-templates/lib/config.ts.hbs",
+      outputPath: "lib/config.ts",
+    });
   }
 
   printCompletionMessage() {}

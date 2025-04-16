@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 
-const express = require("express");
+import express from "express";
+import bodyParser from "body-parser";
+
 const app = express();
 const port = 3001;
-const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
 

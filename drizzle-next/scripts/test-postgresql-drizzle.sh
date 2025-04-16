@@ -39,7 +39,7 @@ drizzle-next init --package-manager pnpm \
     --auth \
     --admin \
     --latest \
-    --frameworks express
+    --frameworks drizzle
 pnpm i -D prettier prettier-plugin-tailwindcss
 else
 drizzle-next init --package-manager pnpm \
@@ -49,7 +49,7 @@ drizzle-next init --package-manager pnpm \
     --admin \
     --latest \
     --no-install \
-    --frameworks express
+    --frameworks drizzle
 fi
 
 cp ~/code/drizzle-next-env/.env.postgresql .env
@@ -64,5 +64,3 @@ if [ "$RESET" = true ]; then
 npx drizzle-kit generate
 npx drizzle-kit migrate
 fi
-
-npm run dev:api

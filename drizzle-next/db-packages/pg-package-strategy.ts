@@ -47,7 +47,7 @@ export class PgPackageStrategy implements DbPackageStrategy {
   }
 
   copyCreateUserScript() {
-    if (!this.opts.authEnabled) return;
+    if (!this.opts.authEnabled || !this.opts.frameworks.next) return;
     const tableObj = caseFactory("user", {
       pluralize: this.opts.pluralizeEnabled,
     });

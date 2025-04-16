@@ -15,6 +15,7 @@
     "test-mysql": "sh ./scripts/test-mysql.sh",
     "test-postgresql-auto-increment": "sh ./scripts/test-postgresql-auto-increment.sh",
     "test-postgresql-express": "sh ./scripts/test-postgresql-express.sh",
+    "test-postgresql-drizzle": "sh ./scripts/test-postgresql-drizzle.sh",
     "merge-package-json": "tsx ./scripts/merge-package-json.ts"
   },
   "author": "travisluong",
