@@ -1,5 +1,5 @@
 ---
-outline: [2,3]
+outline: [2, 3]
 ---
 
 # Drizzle Admin Installation
@@ -31,7 +31,7 @@ As of writing this doc, Drizzle Admin has been tested with the following package
   "next": "^15.2.2",
   "react": "^19.0.0",
   "@tailwindcss/postcss": "^4.0.14",
-  "tailwindcss": "^4.0.14",
+  "tailwindcss": "^4.0.14"
 }
 ```
 
@@ -80,7 +80,8 @@ export const config: DrizzleAdminConfig = {
   dbDialect: "sqlite",
 };
 ```
-You can change the tables in the `schema` property. We're using a `users` and `posts` example above. 
+
+You can change the tables in the `schema` property. We're using a `users` and `posts` example above.
 
 ### Step 4: Create the route for Drizzle Admin
 
@@ -164,7 +165,6 @@ The client layout is where you can add interactivity to the dashboard.
 The client layout:
 
 `app/(admin)/admin/_components/admin-layout.tsx`
-
 
 ```tsx
 "use client";
@@ -285,7 +285,6 @@ export const GET = withMiddleware(GET_ROUTE(config));
 export const PUT = withMiddleware(PUT_ROUTE(config));
 export const PATCH = withMiddleware(PATCH_ROUTE(config));
 export const DELETE = withMiddleware(DELETE_ROUTE(config));
-
 ```
 
 Here is an example of how to set up authentication for the all the pages within the `(admin)` route group.
@@ -309,11 +308,11 @@ export default async function Layout({
 }) {
   const session = await authorize("admin");
 
-  const userRow = await db.query.users.findFirst({
+  const userObj = await db.query.users.findFirst({
     where: eq(users.id, session.user.id),
   });
 
-  if (!userRow) {
+  if (!userObj) {
     redirect("/admin-signin");
   }
 

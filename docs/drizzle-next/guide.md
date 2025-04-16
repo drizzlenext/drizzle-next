@@ -258,7 +258,7 @@ The `_lib` folder for each scaffold contains reusable queries and return types.
 
 There are two main advantages to extracting queries into a separate module.
 
-1. Extracting the query functions makes it reusable in other parts of the code. 
+1. Extracting the query functions makes it reusable in other parts of the code.
 2. It allows us to create a reusable Awaited ReturnType which reduces type boilerplate.
 
 For example, here is a `getPostById` function:
@@ -268,9 +268,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { posts } from "@/schema/posts";
 
-export type PostRow = Awaited<
-  ReturnType<typeof getPostById>
->;
+export type PostObj = Awaited<ReturnType<typeof getPostById>>;
 
 export async function getPostById(id: string) {
   return await db.query.posts.findFirst({
@@ -280,14 +278,14 @@ export async function getPostById(id: string) {
 }
 ```
 
-The `PostRow` type is automatically defined by whatever is returned from the `getPostById` function.
+The `PostObj` type is automatically defined by whatever is returned from the `getPostById` function.
 
 This becomes more relevant as your project grows in size and you must deal with more nested relations. Without an automatic return type, you would spend a large amount of time writing types by hand to annotate your React component props.
 
 With the awaited return type, we get a type that might look something like this if we were to write it by hand:
 
 ```ts
-type PostRow = {
+type PostObj = {
   id: string;
   title: string;
   content: string;
@@ -301,9 +299,9 @@ type PostRow = {
 Now we can annotate our components as needed without having to write the type ourself:
 
 ```tsx
-import { PostRow } from "../_lib/get-post-by-id";
+import { PostObj } from "../_lib/get-post-by-id";
 
-export function PostDetail({ postRow }: { postRow: PostRow }) {
+export function PostDetail({ postObj }: { postObj: PostObj }) {
   // ...
 }
 ```
@@ -338,7 +336,7 @@ Regardless of whether you pass in `foo_bar` or `foo_bars` as the table name, the
 | Drizzle column property names      | original | camel case   | fooBar      |
 | Drizzle foreign key property names | singular | camel case   | fooBarId    |
 | Drizzle findMany variable names    | singular | camel case   | fooBarList  |
-| Drizzle findFirst variable names   | singular | camel case   | fooBarRow   |
+| Drizzle findFirst variable names   | singular | camel case   | fooBarObj   |
 | File names                         | any      | kebab case   | foo-bar.ts  |
 | Form input names                   | original | camel case   | fooBar      |
 | React array props                  | singular | camel case   | fooBarList  |
@@ -367,7 +365,7 @@ If you pass in `foo_bars` as the table name, it will always use the plural form.
 | Drizzle column property names      | original | camel case   | fooBar      | fooBars      |
 | Drizzle foreign key property names | original | camel case   | fooBarId    | fooBarsId    |
 | Drizzle findMany variable names    | original | camel case   | fooBarList  | fooBarsList  |
-| Drizzle findFirst variable names   | original | camel case   | fooBarRow   | fooBarsRow   |
+| Drizzle findFirst variable names   | original | camel case   | fooBarObj   | fooBarsObj   |
 | File names                         | any      | kebab case   | foo-bar.ts  | foo-bars.ts  |
 | Form input names                   | original | camel case   | fooBar      | fooBars      |
 | React array props                  | original | camel case   | fooBarList  | fooBarsList  |
