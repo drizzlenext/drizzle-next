@@ -15,7 +15,7 @@ export type DrizzleNextConfig = {
   adminEnabled: boolean;
   install: boolean;
   pluralizeEnabled: boolean;
-  frameworks: Frameworks;
+  framework: Frameworks;
 };
 
 export type PackageManager = "npm" | "pnpm" | "bun";

@@ -33,7 +33,7 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     }
 
     // installation logic
-    if (this.opts.frameworks.next) {
+    if (this.opts.framework.next) {
       await installDependencies({
         dependencies: ["lucide-react", "clsx", "tailwind-merge", "mime"],
         packageManager: this.opts.packageManager,
@@ -41,7 +41,7 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       });
     }
 
-    if (this.opts.frameworks.express) {
+    if (this.opts.framework.express) {
       await installDependencies({
         dependencies: ["express", "body-parser"],
         packageManager: this.opts.packageManager,
@@ -55,7 +55,7 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       });
     }
 
-    if (this.opts.frameworks.drizzle) {
+    if (this.opts.framework.drizzle) {
       await installDependencies({
         dependencies: ["drizzle-orm", "dotenv", "zod"],
         packageManager: this.opts.packageManager,
@@ -73,16 +73,16 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
   async render() {
     writeDrizzleNextConfig(this.opts);
 
-    if (this.opts.frameworks.next) {
+    if (this.opts.framework.next) {
       this.renderNext();
       this.renderDrizzleUI();
     }
 
-    if (this.opts.frameworks.express) {
+    if (this.opts.framework.express) {
       this.renderExpress();
     }
 
-    if (!this.opts.frameworks.next) {
+    if (!this.opts.framework.next) {
       this.renderNextDisabledFiles();
     }
   }

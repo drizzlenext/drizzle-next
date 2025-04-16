@@ -28,6 +28,7 @@ npx drizzle-next@latest init
 You will be asked a few questions to configure the app:
 
 ```text
+? Which framework do you want to initialize? next
 ? Which package manager would you like to use? npm
 ? Which database dialect would you like to use? sqlite
 ? Which primary key generation strategy would you like to use? cuid2
@@ -39,7 +40,7 @@ You will be asked a few questions to configure the app:
 Alternatively, you can also run the command non-interactively:
 
 ```bash
-npx drizzle-next@latest init --package-manager npm --db-dialect sqlite --pk-strategy cuid2 --auth --admin
+npx drizzle-next@latest init --framework next --package-manager npm --db-dialect sqlite --pk-strategy cuid2 --auth --admin
 ```
 
 :::

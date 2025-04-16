@@ -17,7 +17,7 @@ drizzle-next init --package-manager pnpm \
     --no-auth \
     --no-admin \
     --latest \
-    --frameworks all
+    --framework all
 cp ~/code/drizzle-next-env/.env.postgresql .env
 drizzle-next add tiptap
 drizzle-next scaffold public_scaffold -c integer_type:integer smallint_type:smallint bigint_type:bigint serial_type:serial bigserial_type:bigserial boolean_type:boolean text_type:text varchar_type:varchar char_type:char numeric_type:numeric decimal_type:decimal real_type:real double_precision_type:doublePrecision json_type:json jsonb_type:jsonb time_type:time timestamp_type:timestamp: date_type:date file_type:file

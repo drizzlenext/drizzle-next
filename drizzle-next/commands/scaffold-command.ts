@@ -33,7 +33,7 @@ integer, real, text, boolean, bigint, timestamp
     "space separated list of columns in the format of column_name:data_type"
   )
   .addOption(
-    new Option("--frameworks <framework>", "frameworks to scaffold").choices([
+    new Option("--framework <framework>", "framework to scaffold").choices([
       "next",
       "express",
       "drizzle",
@@ -42,29 +42,24 @@ integer, real, text, boolean, bigint, timestamp
   )
   .action(async (table, options) => {
     const drizzleNextConfig: DrizzleNextConfig = loadDrizzleNextConfig();
-    const frameworksEnabled = drizzleNextConfig.frameworks;
+    const frameworkEnabled = drizzleNextConfig.framework;
 
     // override the config defaults if framework option is passed in
-    if (options.frameworks) {
-      frameworksEnabled.next = ["next", "all"].includes(options.frameworks);
-      frameworksEnabled.express = ["express", "all"].includes(
-        options.frameworks
+    if (options.framework) {
+      frameworkEnabled.next = ["next", "all"].includes(options.framework);
+      frameworkEnabled.express = ["express", "all"].includes(options.framework);
+      frameworkEnabled.drizzle = ["next", "express", "drizzle", "all"].includes(
+        options.framework
       );
-      frameworksEnabled.drizzle = [
-        "next",
-        "express",
-        "drizzle",
-        "all",
-      ].includes(options.frameworks);
     }
 
     const scaffoldProcessor = new ScaffoldProcessor({
       table: table,
       columns: options.columns,
       enableCompletionMessage: true,
-      enableNextScaffold: frameworksEnabled.next,
-      enableDrizzleScaffold: frameworksEnabled.drizzle,
-      enableExpressScaffold: frameworksEnabled.express,
+      enableNextScaffold: frameworkEnabled.next,
+      enableDrizzleScaffold: frameworkEnabled.drizzle,
+      enableExpressScaffold: frameworkEnabled.express,
       ...drizzleNextConfig,
     });
     scaffoldProcessor.process();

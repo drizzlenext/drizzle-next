@@ -14,7 +14,7 @@ drizzle-next init --package-manager pnpm \
     --auth \
     --no-admin \
     --latest \
-    --frameworks all
+    --framework all
 cp ~/code/drizzle-next-env/.env.sqlite .env
 cp ~/code/drizzle-next/drizzle-next/templates/test-scripts/load-fake-data.ts.hbs scripts/load-fake-data.ts
 drizzle-next add tiptap

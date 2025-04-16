@@ -39,7 +39,7 @@ drizzle-next init --package-manager pnpm \
     --auth \
     --admin \
     --latest \
-    --frameworks drizzle
+    --framework drizzle
 pnpm i -D prettier prettier-plugin-tailwindcss
 else
 drizzle-next init --package-manager pnpm \
@@ -49,7 +49,7 @@ drizzle-next init --package-manager pnpm \
     --admin \
     --latest \
     --no-install \
-    --frameworks drizzle
+    --framework drizzle
 fi
 
 cp ~/code/drizzle-next-env/.env.postgresql .env

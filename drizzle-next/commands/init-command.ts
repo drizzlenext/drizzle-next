@@ -23,7 +23,7 @@ const VERSION = packageJson["version"];
 initCommand
   .description("initialize next.js project for development with drizzle-next")
   .addOption(
-    new Option("--frameworks <framework>", "frameworks to scaffold").choices([
+    new Option("--framework <framework>", "framework to scaffold").choices([
       "next",
       "express",
       "drizzle",
@@ -64,9 +64,9 @@ initCommand
       partialConfig.version = VERSION;
 
       const frameworkAnswer =
-        options.frameworks ||
+        options.framework ||
         (await select({
-          message: "Which frameworks do you want to initialize?",
+          message: "Which framework do you want to initialize?",
           choices: [
             { value: "next", description: "Next.js + Drizzle ORM" },
             { value: "express", description: "Express.js + Drizzle ORM" },
@@ -75,7 +75,7 @@ initCommand
           ],
         }));
 
-      partialConfig.frameworks = {
+      partialConfig.framework = {
         next: ["next", "all"].includes(frameworkAnswer),
         express: ["express", "all"].includes(frameworkAnswer),
         drizzle: ["next", "express", "drizzle", "all"].includes(
@@ -198,11 +198,11 @@ initCommand
       let authProcessor;
       let adminProcessor;
 
-      if (completeConfig.authEnabled && completeConfig.frameworks.next) {
+      if (completeConfig.authEnabled && completeConfig.framework.next) {
         authProcessor = new AuthProcessor(completeConfig);
         processors.push(authProcessor);
       }
-      if (completeConfig.adminEnabled && completeConfig.frameworks.next) {
+      if (completeConfig.adminEnabled && completeConfig.framework.next) {
         adminProcessor = new AdminProcessor(completeConfig);
         processors.push(adminProcessor);
       }
@@ -217,7 +217,7 @@ initCommand
         devDependencies.push(...processor.devDependencies);
       }
 
-      if (completeConfig.frameworks.next) {
+      if (completeConfig.framework.next) {
         for (const authProvider in authStrategyMap) {
           const authStrategy =
             authStrategyMap[authProvider as keyof typeof authStrategyMap];

@@ -404,10 +404,9 @@ export async function installDevDependencies(opts: {
 }
 
 export function loadDrizzleNextConfig(): DrizzleNextConfig {
-  const drizzleNextConfig = require(path.join(
-    process.cwd(),
-    "./drizzle-next.config.ts"
-  )).default;
+  const drizzleNextConfig = require(
+    path.join(process.cwd(), "./drizzle-next.config.ts")
+  ).default;
   return drizzleNextConfig;
 }
 
@@ -425,7 +424,7 @@ export function completeDrizzleNextConfig(
 ): DrizzleNextConfig {
   const completeConfig: DrizzleNextConfig = {
     version: partialConfig.version ?? "",
-    frameworks: partialConfig.frameworks ?? {
+    framework: partialConfig.framework ?? {
       next: true,
       express: false,
       drizzle: true,
