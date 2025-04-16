@@ -60,13 +60,13 @@
   --primary-foreground: theme(colors.black);
   --muted: theme(colors.zinc.700);
   --muted-foreground: theme(colors.zinc.300);
-  --destructive: theme(colors.red.900);
+  --destructive: theme(colors.rose.600);
   --destructive-foreground: theme(colors.white);
-  --info: theme(colors.blue.900);
+  --info: theme(colors.sky.600);
   --info-foreground: theme(colors.white);
-  --success: theme(colors.green.900);
+  --success: theme(colors.emerald.600);
   --success-foreground: theme(colors.white);
-  --warning: theme(colors.yellow.900);
+  --warning: theme(colors.amber.600);
   --warning-foreground: theme(colors.white);
   --card: theme(colors.zinc.950);
   --card-foreground: theme(colors.zinc.50);
