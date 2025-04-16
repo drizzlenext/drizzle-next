@@ -12,16 +12,16 @@ export default async function Layout({
 }) {
   const session = await authorize("user");
 
-  const userRow = await db.query.users.findFirst({
+  const userObj = await db.query.users.findFirst({
     where: eq(users.id, session.user.id),
   });
 
-  if (!userRow) {
+  if (!userObj) {
     redirect("/signin");
   }
 
   return (
-    <PrivateLayout userRow={userRow} >
+    <PrivateLayout userObj={userObj} >
       {children}
     </PrivateLayout>
   );

@@ -3,7 +3,7 @@
         <Select 
           name="{{validatedColumn.caseVariants.singularCamelCase}}"
           id="{{validatedColumn.caseVariants.singularCamelCase}}"
-          defaultValue={ {{tableObj.singularCamelCase}}Row.{{validatedColumn.caseVariants.singularCamelCase}}?.toString() }
+          defaultValue={ {{tableObj.singularCamelCase}}Obj.{{validatedColumn.caseVariants.singularCamelCase}}?.toString() }
         >
         { {{validatedColumn.referenceTableVars.singularCamelCase}}List.map(({{validatedColumn.referenceTableVars.singularCamelCase}}) => (
           <SelectOption key={ {{validatedColumn.referenceTableVars.singularCamelCase}}.id } value={ {{validatedColumn.referenceTableVars.singularCamelCase}}.id.toString() }>

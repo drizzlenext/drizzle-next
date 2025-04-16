@@ -7,11 +7,11 @@ async function main() {
 
   const email = process.argv[2];
 
-  const userRow = await db.query.users.findFirst({
+  const userObj = await db.query.users.findFirst({
     where: eq(users.email, email),
   });
 
-  if (!userRow) {
+  if (!userObj) {
     throw new Error("user not found " + email);
   }
 

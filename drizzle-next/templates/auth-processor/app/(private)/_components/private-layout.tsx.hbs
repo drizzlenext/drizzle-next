@@ -33,10 +33,10 @@ const dropdown = [
 ];
 
 export function PrivateLayout({
-  userRow,
+  userObj,
   children,
 }: {
-  userRow: User;
+  userObj: User;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
@@ -54,7 +54,7 @@ export function PrivateLayout({
           <AppNavToggle />
           <DropdownMenu
             buttonEl={
-              <Avatar src={userRow.image}>
+              <Avatar src={userObj.image}>
                 <User2Icon />
               </Avatar>
             }

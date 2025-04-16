@@ -1,6 +1,6 @@
         <FormControl>
           <Label htmlFor="{{validatedColumn.caseVariants.originalCamelCase}}">{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
-          <TiptapEditor html={ {{tableObj.singularCamelCase}}Row.{{validatedColumn.caseVariants.originalCamelCase}} ?? ""} name="{{validatedColumn.caseVariants.originalCamelCase}}" id="{{validatedColumn.caseVariants.originalCamelCase}}" />
+          <TiptapEditor html={ {{tableObj.singularCamelCase}}Obj.{{validatedColumn.caseVariants.originalCamelCase}} ?? ""} name="{{validatedColumn.caseVariants.originalCamelCase}}" id="{{validatedColumn.caseVariants.originalCamelCase}}" />
           {state.errors?.{{validatedColumn.caseVariants.originalCamelCase}}?.map((error) => (
             <FormMessage key={error} variant="error">{error}</FormMessage>
           ))}

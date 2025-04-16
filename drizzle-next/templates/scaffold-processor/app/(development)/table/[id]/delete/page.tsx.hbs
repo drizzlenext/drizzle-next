@@ -9,7 +9,7 @@ type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 export default async function Page(props: { params: Params }) {
   const params = await props.params;
   const { id } = params;
-  const {{tableObj.singularCamelCase}}Row = await db.query.{{tableObj.pluralCamelCase}}.findFirst({ where: eq({{tableObj.pluralCamelCase}}.id, id) });
+  const {{tableObj.singularCamelCase}}Obj = await db.query.{{tableObj.pluralCamelCase}}.findFirst({ where: eq({{tableObj.pluralCamelCase}}.id, id) });
 
   return (
     <div className="flex flex-col gap-3 p-3">
@@ -18,7 +18,7 @@ export default async function Page(props: { params: Params }) {
         <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
       </div>
       <div>
-        <{{tableObj.singularPascalCase}}DeleteForm {{tableObj.singularCamelCase}}Row={ {{tableObj.singularCamelCase}}Row } />
+        <{{tableObj.singularPascalCase}}DeleteForm {{tableObj.singularCamelCase}}Obj={ {{tableObj.singularCamelCase}}Obj } />
       </div>
     </div>
   );

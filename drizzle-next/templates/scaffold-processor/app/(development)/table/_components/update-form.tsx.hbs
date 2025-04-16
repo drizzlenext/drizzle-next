@@ -18,12 +18,12 @@ import { {{this.referenceTableVars.singularPascalCase}} } from "@/schema/{{this.
 {{/each}}
 
 export function {{tableObj.singularPascalCase}}UpdateForm({ 
-  {{tableObj.singularCamelCase}}Row,
+  {{tableObj.singularCamelCase}}Obj,
   {{#each referencesColumnList}}
   {{this.referenceTableVars.singularCamelCase}}List,
   {{/each}}
 }: { 
-  {{tableObj.singularCamelCase}}Row: {{tableObj.singularPascalCase}};
+  {{tableObj.singularCamelCase}}Obj: {{tableObj.singularPascalCase}};
   {{#each referencesColumnList}}
   {{this.referenceTableVars.singularCamelCase}}List: {{this.referenceTableVars.singularPascalCase}}[];
   {{/each}}

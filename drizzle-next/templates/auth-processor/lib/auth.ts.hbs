@@ -52,20 +52,20 @@ const providers: Provider[] = [
       authorize: async (credentials) => {
         const email = credentials.email as string;
         const password = credentials.password as string;
-        const userRow = await db.query.users.findFirst({
+        const userObj = await db.query.users.findFirst({
           where: eq(users.email, email),
         });
-        if (!userRow) {
+        if (!userObj) {
           throw new Error("User not found.");
         }
-        if (!userRow.password) {
+        if (!userObj.password) {
           throw new Error("Password not found.");
         }
-        const valid = bcrypt.compareSync(password, userRow.password);
+        const valid = bcrypt.compareSync(password, userObj.password);
         if (!valid) {
           throw new Error("Invalid password.");
         }
-        return userRow;
+        return userObj;
       },
     }),
 ]
