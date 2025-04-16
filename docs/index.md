@@ -53,4 +53,8 @@ features:
       src: https://cdn.simpleicons.org/auth0/gray
     title: Auth.js
     details: Generate Auth.js configuration and setup using Credentials, GitHub, Google, and other providers.
+  - icon:
+      src: https://cdn.simpleicons.org/express/gray
+    title: Express
+    details: Generate Express APIs.
 ---
