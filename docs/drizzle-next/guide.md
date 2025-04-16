@@ -28,13 +28,14 @@ npx drizzle-next@latest scaffold products -c title:text price:integer descriptio
 The table names will be transformed according to the [Naming Conventions](#naming-conventions) in this document.
 :::
 
-### Skip UI generation
+## Scaffolding Modes
 
-The `--no-ui` flag allows you to skip the generation of the Next.js routes, pages, components, and actions. This is useful if you want to only scaffold the Drizzle database table without the UI.
+During the `init` command, you have the option to choose the `--framework`. This is used to control what type of scaffolding Drizzle Next will generate.
 
-### Skip DB generation
-
-The `--no-db` flag allows you to skip the generation of the Drizzle database table. This is useful if you have an existing table and want to only scaffold the routes, pages, components, and actions.
+- `next` - This is the default option. It will generate everything you need to start building full stack Next.js apps. Use case: If you plan to build full stack Next.js apps using the server components and server actions pattern with Drizzle ORM.
+- `express` - This mode will generate only Express.js API routes along with the Drizzle ORM schemas. Use case: If you need to quickly generate CRUD APIs that integrates both Express.js and Drizzle ORM.
+- `drizzle` - This mode will only setup Drizzle ORM. When you run scaffolds, it will only generate the Drizzle tables. Use case: If you want to use Drizzle Next's drizzle automation with other frameworks.
+- `all` - This option includes all of the above. This mode will generate full stack Next.js code, Drizzle tables, and Express.js API routes. Use case: If you want to build a full stack Next.js app, along with a separate Express API that leverages the same Drizzle tables.
 
 ## Data types
 
