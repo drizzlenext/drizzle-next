@@ -6,7 +6,7 @@ There are three ways to install Drizzle UI.
 
 ## Option 1: Use Drizzle Next
 
-Drizzle UI is the default UI solution for Drizzle Next. To use Drizzle UI with Drizzle Next follow the [installation instructions here](https://www.drizzle-next.com/installation.html). This is the recommended way to use Drizzle UI. However, if you want to use Drizzle UI without Drizzle Next, there are a few ways to do a standalone installation:
+Drizzle UI is the default UI solution for Drizzle Next. To use Drizzle UI with Drizzle Next follow the [installation instructions here](https://www.drizzlenext.com/drizzle-next/installation.html). This is the recommended way to use Drizzle UI. However, if you want to use Drizzle UI without Drizzle Next, there are a few ways to do a standalone installation:
 
 ## Option 2: Drizzle UI CLI
 
