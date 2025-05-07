@@ -6,7 +6,6 @@ import {
 import {
   appendToEnvLocal,
   appendToFileIfTextNotExists,
-  insertTextAfterIfNotExists,
   installDependencies,
   installDevDependencies,
   renderTemplate,
@@ -36,58 +35,30 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     }
 
     // installation logic
-    if (this.opts.framework.next) {
-      await installDependencies({
-        dependencies: ["lucide-react", "clsx", "tailwind-merge", "mime"],
-        packageManager: this.opts.packageManager,
-        latest: this.opts.latest,
-      });
-    }
+    await installDependencies({
+      dependencies: ["lucide-react", "clsx", "tailwind-merge", "mime"],
+      packageManager: this.opts.packageManager,
+      latest: this.opts.latest,
+    });
 
-    if (this.opts.framework.express) {
-      await installDependencies({
-        dependencies: ["express", "body-parser"],
-        packageManager: this.opts.packageManager,
-        latest: this.opts.latest,
-      });
+    await installDependencies({
+      dependencies: ["drizzle-orm", "dotenv", "zod"],
+      packageManager: this.opts.packageManager,
+      latest: this.opts.latest,
+    });
 
-      await installDevDependencies({
-        devDependencies: ["@types/express", "nodemon", "@types/body-parser"],
-        packageManager: this.opts.packageManager,
-        latest: this.opts.latest,
-      });
-    }
-
-    if (this.opts.framework.drizzle) {
-      await installDependencies({
-        dependencies: ["drizzle-orm", "dotenv", "zod"],
-        packageManager: this.opts.packageManager,
-        latest: this.opts.latest,
-      });
-
-      await installDevDependencies({
-        devDependencies: ["drizzle-kit"],
-        packageManager: this.opts.packageManager,
-        latest: this.opts.latest,
-      });
-    }
+    await installDevDependencies({
+      devDependencies: ["drizzle-kit"],
+      packageManager: this.opts.packageManager,
+      latest: this.opts.latest,
+    });
   }
 
   async render() {
     writeDrizzleNextConfig(this.opts);
 
-    if (this.opts.framework.next) {
-      this.renderNext();
-      this.renderDrizzleUI();
-    }
-
-    if (this.opts.framework.express) {
-      this.renderExpress();
-    }
-
-    if (!this.opts.framework.next) {
-      this.renderNextDisabledFiles();
-    }
+    this.renderNext();
+    this.renderDrizzleUI();
   }
 
   renderNext() {
@@ -226,43 +197,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     renderTemplate({
       inputPath: "drizzle-ui/styles/styles.css.hbs",
       outputPath: "app/globals.css",
-    });
-  }
-
-  renderExpress() {
-    renderTemplate({
-      inputPath: "express-templates/app.ts.hbs",
-      outputPath: "app.ts",
-    });
-
-    insertTextAfterIfNotExists(
-      "package.json",
-      `"scripts": {`,
-      `\n    "dev:api": "nodemon --watch routes --watch app.ts --exec tsx app.ts",`
-    );
-  }
-
-  renderNextDisabledFiles() {
-    // if next is disabled, render the tsconfig for express setup. and gitignore. and env.
-    // also needed for drizzle only setup.
-    renderTemplate({
-      inputPath: "express-templates/tsconfig.json.hbs",
-      outputPath: "tsconfig.json",
-    });
-
-    renderTemplate({
-      inputPath: "express-templates/.gitignore.hbs",
-      outputPath: ".gitignore",
-    });
-
-    renderTemplate({
-      inputPath: "express-templates/env.hbs",
-      outputPath: ".env",
-    });
-
-    renderTemplate({
-      inputPath: "express-templates/lib/config.ts.hbs",
-      outputPath: "lib/config.ts",
     });
   }
 

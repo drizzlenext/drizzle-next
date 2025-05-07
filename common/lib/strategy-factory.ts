@@ -1,4 +1,4 @@
-import { DbDialect, DrizzleNextConfig } from "../types/types";
+import { DbDialect, DbPackageStrategyOpts } from "../types/types";
 import { BetterSqlite3PackageStrategy } from "../db-packages/better-sqlite3-package-strategy";
 import { Mysql2PackageStrategy } from "../db-packages/mysql2-package-strategy";
 import { PgPackageStrategy } from "../db-packages/pg-package-strategy";
@@ -6,7 +6,7 @@ import { sqliteDialectStrategy } from "../db-dialects/sqlite-dialect-strategy";
 import { mysqlDialectStrategy } from "../db-dialects/mysql-dialect-strategy";
 import { postgresqlDialectStrategy } from "../db-dialects/postgresql-dialect-strategy";
 
-export function packageStrategyFactory(opts: DrizzleNextConfig) {
+export function packageStrategyFactory(opts: DbPackageStrategyOpts) {
   switch (opts.dbPackage) {
     case "better-sqlite3":
       return new BetterSqlite3PackageStrategy(opts);

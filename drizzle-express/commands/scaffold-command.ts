@@ -1,15 +1,15 @@
-import { Command, Option } from "commander";
-import { DrizzleNextConfig } from "../../common/types/types";
-import { loadDrizzleNextConfig } from "../../common/lib/utils";
-import { NextScaffoldProcessor } from "../processors/next-scaffold-processor";
+import { Command } from "commander";
+import { DrizzleExpressConfig } from "../../common/types/types";
+import { loadDrizzleExpressConfig } from "../../common/lib/utils";
+import { ExpressScaffoldProcessor } from "../processors/express-scaffold-processor";
 import { DrizzleScaffoldProcessor } from "../../common/processors/drizzle-scaffold-processor";
 
 export const scaffoldCommand = new Command("scaffold");
 
 scaffoldCommand
-  .summary("scaffold next.js ui and drizzle database table")
+  .summary("scaffold express.js api and drizzle database table")
   .description(
-    `scaffold next.js ui and drizzle database table
+    `scaffold express.js api and drizzle database table
 
 examples:
 npx drizzle-next@latest scaffold category -c name:text
@@ -31,20 +31,21 @@ integer, real, text, boolean, bigint, timestamp
     "space separated list of columns in the format of column_name:data_type"
   )
   .action(async (table, options) => {
-    const drizzleNextConfig: DrizzleNextConfig = loadDrizzleNextConfig();
+    const drizzleExpressConfig: DrizzleExpressConfig =
+      loadDrizzleExpressConfig();
 
     const drizzleScaffoldProcessor = new DrizzleScaffoldProcessor({
       table: table,
       columns: options.columns,
       enableCompletionMessage: true,
-      ...drizzleNextConfig,
+      ...drizzleExpressConfig,
     });
 
-    const nextScaffoldProcessor = new NextScaffoldProcessor({
+    const nextScaffoldProcessor = new ExpressScaffoldProcessor({
       table: table,
       columns: options.columns,
       enableCompletionMessage: true,
-      ...drizzleNextConfig,
+      ...drizzleExpressConfig,
     });
 
     drizzleScaffoldProcessor.process();

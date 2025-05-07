@@ -7,7 +7,7 @@ import {
   DrizzleNextProcessor,
 } from "../../common/types/types";
 import { renderTemplate } from "../../common/lib/utils";
-import { ScaffoldProcessor } from "./scaffold-processor";
+import { NextScaffoldProcessor } from "./next-scaffold-processor";
 
 export class AdminProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
@@ -85,14 +85,11 @@ export class AdminProcessor implements DrizzleNextProcessor {
       ],
     };
 
-    const userScaffold = new ScaffoldProcessor({
+    const userScaffold = new NextScaffoldProcessor({
       ...this.opts,
       columns: strategies[this.opts.dbDialect],
       table: "users",
       enableCompletionMessage: false,
-      enableNextScaffold: true,
-      enableDrizzleScaffold: false,
-      enableExpressScaffold: false,
       pluralizeEnabled: true,
     });
 

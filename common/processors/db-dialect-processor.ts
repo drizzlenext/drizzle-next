@@ -1,18 +1,12 @@
-import { log } from "../../common/lib/log";
-import {
-  DrizzleNextConfig,
-  DrizzleNextProcessor,
-} from "../../common/types/types";
-import {
-  renderTemplate,
-  renderTemplateIfNotExists,
-} from "../../common/lib/utils";
+import { log } from "../lib/log";
+import { BaseProcessor, DbDialectProcessorOpts } from "../types/types";
+import { renderTemplate, renderTemplateIfNotExists } from "../lib/utils";
 
-export class DbDialectProcessor implements DrizzleNextProcessor {
-  opts: DrizzleNextConfig;
+export class DbDialectProcessor implements BaseProcessor {
+  opts: DbDialectProcessorOpts;
   dependencies: string[] = [];
   devDependencies: string[] = [];
-  constructor(opts: DrizzleNextConfig) {
+  constructor(opts: DbDialectProcessorOpts) {
     this.opts = opts;
   }
 

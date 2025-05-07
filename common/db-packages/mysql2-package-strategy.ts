@@ -3,7 +3,7 @@ import { log } from "../lib/log";
 import {
   DbDialect,
   DbPackageStrategy,
-  DrizzleNextConfig,
+  DbPackageStrategyOpts,
 } from "../../common/types/types";
 import {
   appendToEnvLocal,
@@ -12,12 +12,12 @@ import {
 } from "../lib/utils";
 
 export class Mysql2PackageStrategy implements DbPackageStrategy {
-  opts: DrizzleNextConfig;
+  opts: DbPackageStrategyOpts;
   dialect: DbDialect = "mysql";
   dependencies = ["mysql2"];
   devDependencies = [];
 
-  constructor(opts: DrizzleNextConfig) {
+  constructor(opts: DbPackageStrategyOpts) {
     this.opts = opts;
   }
 
@@ -56,7 +56,7 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
   }
 
   copyCreateUserScript() {
-    if (!this.opts.authEnabled || !this.opts.framework.next) return;
+    if (!this.opts.authEnabled) return;
     const tableObj = caseFactory("user", {
       pluralize: this.opts.pluralizeEnabled,
     });

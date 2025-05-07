@@ -3,17 +3,17 @@ import { log } from "../lib/log";
 import {
   DbDialect,
   DbPackageStrategy,
-  DrizzleNextConfig,
+  DbPackageStrategyOpts,
 } from "../types/types";
 import { appendToEnvLocal, renderTemplate } from "../lib/utils";
 
 export class PgPackageStrategy implements DbPackageStrategy {
-  opts: DrizzleNextConfig;
+  opts: DbPackageStrategyOpts;
   dialect: DbDialect = "postgresql";
   dependencies = ["pg"];
   devDependencies = ["@types/pg"];
 
-  constructor(opts: DrizzleNextConfig) {
+  constructor(opts: DbPackageStrategyOpts) {
     this.opts = opts;
   }
 
@@ -51,7 +51,7 @@ export class PgPackageStrategy implements DbPackageStrategy {
   }
 
   copyCreateUserScript() {
-    if (!this.opts.authEnabled || !this.opts.framework.next) return;
+    if (!this.opts.authEnabled) return;
     const tableObj = caseFactory("user", {
       pluralize: this.opts.pluralizeEnabled,
     });

@@ -3,7 +3,7 @@ import { log } from "../lib/log";
 import {
   DbDialect,
   DbPackageStrategy,
-  DrizzleNextConfig,
+  DbPackageStrategyOpts,
 } from "../types/types";
 import {
   appendToEnvLocal,
@@ -12,12 +12,12 @@ import {
 } from "../lib/utils";
 
 export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
-  opts: DrizzleNextConfig;
+  opts: DbPackageStrategyOpts;
   dialect: DbDialect = "sqlite";
   dependencies: string[] = ["better-sqlite3"];
   devDependencies: string[] = ["@types/better-sqlite3"];
 
-  constructor(opts: DrizzleNextConfig) {
+  constructor(opts: DbPackageStrategyOpts) {
     this.opts = opts;
   }
 
@@ -56,7 +56,7 @@ export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
   }
 
   copyCreateUserScript() {
-    if (!this.opts.authEnabled || !this.opts.framework.next) return;
+    if (!this.opts.authEnabled) return;
     const tableObj = caseFactory("user", {
       pluralize: this.opts.pluralizeEnabled,
     });

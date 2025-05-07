@@ -1,22 +1,20 @@
-export type Frameworks = {
-  next: boolean;
-  express: boolean;
-  drizzle: boolean;
-};
-
-export type DrizzleNextConfig = {
+export type DrizzleBaseConfig = {
   version: string;
   packageManager: PackageManager;
   latest: boolean;
   dbDialect: DbDialect;
   dbPackage: DbPackage;
   pkStrategy: PkStrategy;
-  authEnabled: boolean;
-  adminEnabled: boolean;
   install: boolean;
   pluralizeEnabled: boolean;
-  framework: Frameworks;
 };
+
+export type DrizzleNextConfig = {
+  authEnabled: boolean;
+  adminEnabled: boolean;
+} & DrizzleBaseConfig;
+
+export type DrizzleExpressConfig = {} & DrizzleBaseConfig;
 
 export type PackageManager = "npm" | "pnpm" | "bun";
 
@@ -27,8 +25,7 @@ export type PkStrategy =
   | "nanoid"
   | "auto_increment";
 
-export type DrizzleNextProcessor = {
-  opts: DrizzleNextConfig;
+export type BaseProcessor = {
   dependencies: string[];
   devDependencies: string[];
   dbDialectStrategy?: DbDialectStrategy;
@@ -36,6 +33,10 @@ export type DrizzleNextProcessor = {
   render(): Promise<void>;
   printCompletionMessage: () => void;
 };
+
+export type DrizzleNextProcessor = {
+  opts: DrizzleNextConfig;
+} & BaseProcessor;
 
 export type DbDialect = "postgresql" | "mysql" | "sqlite";
 
@@ -45,14 +46,17 @@ export type DataTypeStrategyMap = {
 
 export type AuthorizationLevel = "admin" | "private" | "public";
 
-export type ScaffoldProcessorOpts = {
+export type BaseScaffoldProcessorOpts = {
   table: string;
   columns: string[];
   enableCompletionMessage: boolean;
-  enableNextScaffold: boolean;
-  enableDrizzleScaffold: boolean;
-  enableExpressScaffold: boolean;
-} & DrizzleNextConfig;
+} & DrizzleBaseConfig;
+
+export type NextScaffoldProcessorOpts = BaseScaffoldProcessorOpts &
+  DrizzleNextConfig;
+
+export type ExpressScaffoldProcessorOpts = BaseScaffoldProcessorOpts &
+  DrizzleExpressConfig;
 
 export type DataTypeStrategyOpts = {
   keyName: string;
@@ -97,13 +101,23 @@ export type DbDialectStrategy = {
 };
 
 export type DbPackageStrategy = {
-  opts: DrizzleNextConfig;
+  opts: DbPackageStrategyOpts;
   dialect: DbDialect;
   copyCreateUserScript(): void;
   copyMigrateScript(): void;
   appendDbUrl(): void;
   copyDbInstance(): void;
   printCompletionMessage(): void;
-} & DrizzleNextProcessor;
+};
+
+export type DbPackageStrategyOpts = {
+  authEnabled: boolean;
+  pluralizeEnabled: boolean;
+  dbPackage: DbPackage;
+};
 
 export type DbPackage = "pg" | "mysql2" | "better-sqlite3";
+
+export type DbDialectProcessorOpts = {
+  dbDialect: DbDialect;
+};

@@ -18,7 +18,8 @@
     "../common/lib/utils.ts",
     "../common/lib/handlebars-helpers.ts",
     "../common/lib/strategy-factory.ts",
-    "../common/lib/pk-strategy.ts"
+    "../common/lib/pk-strategy.ts",
+    "../common/processors/db-dialect-processor.ts"
   ],
   "exclude": ["node_modules", "dist", "../common/test"]
 }

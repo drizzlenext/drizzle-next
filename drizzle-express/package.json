@@ -1,0 +1,15 @@
+{
+  "name": "drizzle-express",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@inquirer/prompts": "^7.5.0",
+    "commander": "^13.1.0"
+  }
+}

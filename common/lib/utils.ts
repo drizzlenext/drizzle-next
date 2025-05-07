@@ -4,7 +4,11 @@ import * as path from "path";
 import Handlebars from "handlebars";
 import { log } from "./log";
 import packageDrizzleNextJson from "../../drizzle-next/package-pinned.json";
-import { PackageManager, DrizzleNextConfig } from "../types/types";
+import {
+  PackageManager,
+  DrizzleNextConfig,
+  DrizzleExpressConfig,
+} from "../types/types";
 import { caseFactory } from "./case-utils";
 import { registerHandlebarsHelpers } from "./handlebars-helpers";
 import { register } from "esbuild-register/dist/node";
@@ -419,16 +423,29 @@ export function writeDrizzleNextConfig(completeConfig: DrizzleNextConfig) {
   writeToFile("drizzle-next.config.ts", configTsContent);
 }
 
+export function loadDrizzleExpressConfig(): DrizzleExpressConfig {
+  const drizzleExpressConfig = require(
+    path.join(process.cwd(), "./drizzle-express.config.ts")
+  ).default;
+  return drizzleExpressConfig;
+}
+
+export function writeDrizzleExpressConfig(
+  completeConfig: DrizzleExpressConfig
+) {
+  const configTsContent = `const drizzleExpressConfig = ${JSON.stringify(
+    completeConfig,
+    null,
+    2
+  )};\n\nexport default drizzleExpressConfig;`;
+  writeToFile("drizzle-express.config.ts", configTsContent);
+}
+
 export function completeDrizzleNextConfig(
   partialConfig: Partial<DrizzleNextConfig>
 ): DrizzleNextConfig {
   const completeConfig: DrizzleNextConfig = {
     version: partialConfig.version ?? "",
-    framework: partialConfig.framework ?? {
-      next: true,
-      express: false,
-      drizzle: true,
-    },
     packageManager: partialConfig.packageManager ?? "npm",
     latest: partialConfig.latest ?? false,
     dbDialect: partialConfig.dbDialect ?? "sqlite",
@@ -436,6 +453,22 @@ export function completeDrizzleNextConfig(
     pkStrategy: partialConfig.pkStrategy ?? "uuidv4",
     authEnabled: partialConfig.authEnabled ?? true,
     adminEnabled: partialConfig.adminEnabled ?? true,
+    install: partialConfig.install ?? true,
+    pluralizeEnabled: partialConfig.pluralizeEnabled ?? true,
+  };
+  return completeConfig;
+}
+
+export function completeDrizzleExpressConfig(
+  partialConfig: Partial<DrizzleExpressConfig>
+): DrizzleExpressConfig {
+  const completeConfig: DrizzleExpressConfig = {
+    version: partialConfig.version ?? "",
+    packageManager: partialConfig.packageManager ?? "npm",
+    latest: partialConfig.latest ?? false,
+    dbDialect: partialConfig.dbDialect ?? "sqlite",
+    dbPackage: partialConfig.dbPackage ?? "better-sqlite3",
+    pkStrategy: partialConfig.pkStrategy ?? "uuidv4",
     install: partialConfig.install ?? true,
     pluralizeEnabled: partialConfig.pluralizeEnabled ?? true,
   };

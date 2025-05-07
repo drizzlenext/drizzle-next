@@ -1,43 +1,19 @@
 import {
-  DbDialect,
   DbDialectStrategy,
   FormComponent,
   PkStrategy,
-  ScaffoldProcessorOpts,
+  NextScaffoldProcessorOpts,
 } from "../../common/types/types";
 import {
   compileTemplate,
   renderTemplate,
-  insertSchemaToSchemaIndex,
   insertTextAfterIfNotExists,
   prependToFileIfNotExists,
-  insertTextAfter,
-  insertTextBeforeIfNotExists,
 } from "../../common/lib/utils";
 import { log } from "../../common/lib/log";
 import { pkStrategyImportTemplates } from "../../common/lib/pk-strategy";
 import { caseFactory, Cases } from "../../common/lib/case-utils";
 import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
-
-type ScaffoldDbDialectStrategy = {
-  schemaTableTemplatePath: string;
-};
-
-const scaffoldDbDialectStrategies: Record<
-  DbDialect,
-  ScaffoldDbDialectStrategy
-> = {
-  postgresql: {
-    schemaTableTemplatePath:
-      "scaffold-processor/schema/table.ts.postgresql.hbs",
-  },
-  mysql: {
-    schemaTableTemplatePath: "scaffold-processor/schema/table.ts.mysql.hbs",
-  },
-  sqlite: {
-    schemaTableTemplatePath: "scaffold-processor/schema/table.ts.sqlite.hbs",
-  },
-};
 
 const formComponentImports: Record<FormComponent, string> = {
   input: `import { Input } from "@/components/ui/input";`,
@@ -63,8 +39,8 @@ const zodCodeRecord: Record<PkStrategy, string> = {
   auto_increment: "z.coerce.number()",
 };
 
-export class ScaffoldProcessor {
-  opts: ScaffoldProcessorOpts;
+export class NextScaffoldProcessor {
+  opts: NextScaffoldProcessorOpts;
 
   dbDialectStrategy: DbDialectStrategy;
 
@@ -74,7 +50,7 @@ export class ScaffoldProcessor {
 
   validatedColumnsWithIdAndTimestamps: ValidatedColumn[];
 
-  constructor(opts: ScaffoldProcessorOpts) {
+  constructor(opts: NextScaffoldProcessorOpts) {
     this.opts = opts;
     this.dbDialectStrategy = dialectStrategyFactory(opts.dbDialect);
     this.validatedColumns = this.parseColumns(opts.columns);
@@ -153,131 +129,27 @@ export class ScaffoldProcessor {
   }
 
   process(): void {
-    if (
-      !this.opts.enableDrizzleScaffold &&
-      !this.opts.enableNextScaffold &&
-      !this.opts.enableExpressScaffold
-    ) {
-      throw new Error("all scaffolds are disabled. nothing to do.");
-    }
     log.init(`scaffolding ${this.opts.table}...`);
-    if (this.opts.enableDrizzleScaffold) {
-      this.addSchema();
-      insertSchemaToSchemaIndex(this.opts.table, {
-        pluralize: this.opts.pluralizeEnabled,
-      });
+    this.addListView();
+    this.addDetailView();
+    this.addNewView();
+    this.addEditView();
+    this.addDeleteView();
+    this.addCreateAction();
+    this.addUpdateAction();
+    this.addDeleteAction();
+    this.addCreateForm();
+    this.addUpdateForm();
+    this.addDeleteForm();
+    this.addTableComponent();
+    this.addQueries();
+    this.updateDevelopmentIndex();
+    if (this.opts.adminEnabled) {
+      this.updateDrizzleAdminFiles();
     }
-    if (this.opts.enableNextScaffold) {
-      this.addListView();
-      this.addDetailView();
-      this.addNewView();
-      this.addEditView();
-      this.addDeleteView();
-      this.addCreateAction();
-      this.addUpdateAction();
-      this.addDeleteAction();
-      this.addCreateForm();
-      this.addUpdateForm();
-      this.addDeleteForm();
-      this.addTableComponent();
-      this.addQueries();
-      this.updateDevelopmentIndex();
-      if (this.opts.adminEnabled) {
-        this.updateDrizzleAdminFiles();
-      }
-    }
-    if (this.opts.enableExpressScaffold) {
-      this.addExpressRoute();
-    }
-
     if (this.opts.enableCompletionMessage) {
       this.printCompletionMessage();
     }
-  }
-  addExpressRoute() {
-    const { table } = this.opts;
-    const tableObj = caseFactory(table, {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-
-    renderTemplate({
-      inputPath: "express-templates/routes/routes.ts.hbs",
-      outputPath: `routes/${tableObj.pluralKebabCase}.routes.ts`,
-      data: {
-        tableObj,
-        validatedColumns: this.validatedColumns,
-      },
-    });
-
-    renderTemplate({
-      inputPath: "express-templates/controllers/controller.ts.hbs",
-      outputPath: `controllers/${tableObj.pluralKebabCase}.controller.ts`,
-      data: {
-        tableObj,
-        validatedColumns: this.validatedColumns,
-      },
-    });
-
-    renderTemplate({
-      inputPath: "express-templates/services/service.ts.hbs",
-      outputPath: `services/${tableObj.pluralKebabCase}.service.ts`,
-      data: {
-        tableObj,
-        validatedColumns: this.validatedColumns,
-      },
-    });
-
-    insertTextAfterIfNotExists(
-      "app.ts",
-      `import bodyParser from "body-parser";`,
-      `\nimport { ${tableObj.singularPascalCase}Routes } from "./routes/${tableObj.pluralKebabCase}.routes";`
-    );
-    insertTextAfterIfNotExists(
-      "app.ts",
-      `app.use(bodyParser.json());`,
-      `\napp.use("/${tableObj.pluralKebabCase}", ${tableObj.singularPascalCase}Routes);`
-    );
-  }
-  addSchema(): void {
-    const { table } = this.opts;
-    // compile columns
-    let columnsCode = "";
-
-    // add primary key id
-    const pkCode =
-      this.dbDialectStrategy.pkStrategyTemplates[this.opts.pkStrategy];
-    columnsCode += "    " + pkCode + "\n";
-
-    // add other columns
-    for (const [index, column] of this.validatedColumns.entries()) {
-      columnsCode += this.getKeyValueStrForSchema(column);
-      if (index !== this.validatedColumns.length - 1) {
-        columnsCode += "\n";
-      }
-    }
-
-    // add timestamps
-    columnsCode += "\n    " + this.dbDialectStrategy.createdAtTemplate + "\n";
-    columnsCode += "    " + this.dbDialectStrategy.updatedAtTemplate;
-
-    // generate imports code
-    const importsCode = this.generateImportsCodeFromColumns();
-    const tableObj = caseFactory(table, {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-    const referencesColumnList = this.getReferencesColumnList("references");
-    renderTemplate({
-      inputPath:
-        scaffoldDbDialectStrategies[this.opts.dbDialect]
-          .schemaTableTemplatePath,
-      outputPath: `schema/${tableObj.pluralKebabCase}.ts`,
-      data: {
-        columns: columnsCode,
-        imports: importsCode,
-        tableObj: tableObj,
-        referencesColumnList: referencesColumnList,
-      },
-    });
   }
   generateImportsCodeFromColumns() {
     const dataTypeSet = new Set<string>();
@@ -658,10 +530,7 @@ export class ScaffoldProcessor {
     return html;
   }
   printCompletionMessage() {
-    log.success("successfully scaffolded " + this.opts.table);
-    log.checklist("scaffold checklist");
-    log.cmdtask("npx drizzle-kit generate");
-    log.cmdtask("npx drizzle-kit migrate");
+    log.success("next successfully scaffolded " + this.opts.table);
   }
   addQueries() {
     const tableObj = caseFactory(this.opts.table, {

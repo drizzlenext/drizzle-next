@@ -1,0 +1,174 @@
+import {
+  DbDialectStrategy,
+  PkStrategy,
+  ExpressScaffoldProcessorOpts,
+} from "../../common/types/types";
+import {
+  renderTemplate,
+  insertTextAfterIfNotExists,
+} from "../../common/lib/utils";
+import { log } from "../../common/lib/log";
+import { caseFactory, Cases } from "../../common/lib/case-utils";
+import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
+
+type ValidatedColumn = {
+  columnName: string; // the original column name passed in from cli
+  dataType: string; // the datatype
+  caseVariants: Cases; // the case variants of the original column
+  zodCode: string; // the zod coersion code
+  referenceTableVars?: Cases; // for the table name of reference types
+};
+
+const zodCodeRecord: Record<PkStrategy, string> = {
+  cuid2: "z.coerce.string().cuid2()",
+  uuidv7: "z.coerce.string().uuid()",
+  uuidv4: "z.coerce.string().uuid()",
+  nanoid: "z.coerce.string().nanoid()",
+  auto_increment: "z.coerce.number()",
+};
+
+export class ExpressScaffoldProcessor {
+  opts: ExpressScaffoldProcessorOpts;
+
+  dbDialectStrategy: DbDialectStrategy;
+
+  validatedColumns: ValidatedColumn[];
+
+  validatedColumnsWithTimestamps: ValidatedColumn[];
+
+  validatedColumnsWithIdAndTimestamps: ValidatedColumn[];
+
+  constructor(opts: ExpressScaffoldProcessorOpts) {
+    this.opts = opts;
+    this.dbDialectStrategy = dialectStrategyFactory(opts.dbDialect);
+    this.validatedColumns = this.parseColumns(opts.columns);
+    this.validatedColumnsWithTimestamps =
+      this.getValidatedColumnsWithTimestamps();
+    this.validatedColumnsWithIdAndTimestamps =
+      this.getValidatedColumsWithIdAndTimestamps();
+  }
+
+  getValidatedColumsWithIdAndTimestamps() {
+    const idCol: ValidatedColumn = {
+      columnName: "id",
+      dataType: this.dbDialectStrategy.pkDataType,
+      caseVariants: caseFactory("id", {
+        pluralize: this.opts.pluralizeEnabled,
+      }),
+      zodCode: zodCodeRecord[this.opts.pkStrategy],
+    };
+
+    return [idCol].concat(this.getValidatedColumnsWithTimestamps());
+  }
+
+  getValidatedColumnsWithTimestamps() {
+    const createdAtCol: ValidatedColumn = {
+      columnName: "created_at",
+      dataType: "timestamp",
+      caseVariants: caseFactory("created_at", {
+        pluralize: this.opts.pluralizeEnabled,
+      }),
+      zodCode: this.dbDialectStrategy.dataTypeStrategyMap["timestamp"].zodCode,
+    };
+
+    const updatedAtCol: ValidatedColumn = {
+      columnName: "updated_at",
+      dataType: "timestamp",
+      caseVariants: caseFactory("updated_at", {
+        pluralize: this.opts.pluralizeEnabled,
+      }),
+      zodCode: this.dbDialectStrategy.dataTypeStrategyMap["timestamp"].zodCode,
+    };
+
+    return this.validatedColumns.concat([createdAtCol, updatedAtCol]);
+  }
+
+  parseColumns(columns: string[]) {
+    const dataTypeStrategyMap = this.dbDialectStrategy.dataTypeStrategyMap;
+    const validatedColumns: ValidatedColumn[] = [];
+    for (const column of columns) {
+      let [columnName, dataType] = column.split(":");
+      let referenceTableVars;
+      if (dataType.startsWith("references")) {
+        const inferredReferencesTableName = columnName.split("_id")[0];
+        referenceTableVars = caseFactory(inferredReferencesTableName, {
+          pluralize: this.opts.pluralizeEnabled,
+        });
+      }
+      if (!(dataType in dataTypeStrategyMap)) {
+        throw new Error(`invalid data type ${dataType}`);
+      }
+      let zodCode = dataTypeStrategyMap[dataType].zodCode;
+      if (dataType.startsWith("references")) {
+        zodCode = zodCodeRecord[this.opts.pkStrategy];
+      }
+      validatedColumns.push({
+        columnName,
+        dataType,
+        caseVariants: caseFactory(columnName, {
+          pluralize: this.opts.pluralizeEnabled,
+        }),
+        referenceTableVars: referenceTableVars,
+        zodCode: zodCode,
+      });
+    }
+
+    return validatedColumns;
+  }
+
+  process(): void {
+    log.init(`scaffolding ${this.opts.table}...`);
+    this.addExpressRoute();
+    if (this.opts.enableCompletionMessage) {
+      this.printCompletionMessage();
+    }
+  }
+  addExpressRoute() {
+    const { table } = this.opts;
+    const tableObj = caseFactory(table, {
+      pluralize: this.opts.pluralizeEnabled,
+    });
+
+    renderTemplate({
+      inputPath: "express-templates/routes/routes.ts.hbs",
+      outputPath: `routes/${tableObj.pluralKebabCase}.routes.ts`,
+      data: {
+        tableObj,
+        validatedColumns: this.validatedColumns,
+      },
+    });
+
+    renderTemplate({
+      inputPath: "express-templates/controllers/controller.ts.hbs",
+      outputPath: `controllers/${tableObj.pluralKebabCase}.controller.ts`,
+      data: {
+        tableObj,
+        validatedColumns: this.validatedColumns,
+      },
+    });
+
+    renderTemplate({
+      inputPath: "express-templates/services/service.ts.hbs",
+      outputPath: `services/${tableObj.pluralKebabCase}.service.ts`,
+      data: {
+        tableObj,
+        validatedColumns: this.validatedColumns,
+      },
+    });
+
+    insertTextAfterIfNotExists(
+      "app.ts",
+      `import bodyParser from "body-parser";`,
+      `\nimport { ${tableObj.singularPascalCase}Routes } from "./routes/${tableObj.pluralKebabCase}.routes";`
+    );
+    insertTextAfterIfNotExists(
+      "app.ts",
+      `app.use(bodyParser.json());`,
+      `\napp.use("/${tableObj.pluralKebabCase}", ${tableObj.singularPascalCase}Routes);`
+    );
+  }
+
+  printCompletionMessage() {
+    log.success("successfully scaffolded express " + this.opts.table);
+  }
+}
