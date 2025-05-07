@@ -1,6 +1,12 @@
-import { log } from "../lib/log";
-import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
-import { renderTemplate, renderTemplateIfNotExists } from "../lib/utils";
+import { log } from "../../common/lib/log";
+import {
+  DrizzleNextConfig,
+  DrizzleNextProcessor,
+} from "../../common/types/types";
+import {
+  renderTemplate,
+  renderTemplateIfNotExists,
+} from "../../common/lib/utils";
 
 export class DbDialectProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;

@@ -4,7 +4,7 @@ import {
   FormComponent,
   PkStrategy,
   ScaffoldProcessorOpts,
-} from "../lib/types";
+} from "../../common/types/types";
 import {
   compileTemplate,
   renderTemplate,
@@ -13,11 +13,11 @@ import {
   prependToFileIfNotExists,
   insertTextAfter,
   insertTextBeforeIfNotExists,
-} from "../lib/utils";
-import { log } from "../lib/log";
-import { pkStrategyImportTemplates } from "../lib/pk-strategy";
-import { caseFactory, Cases } from "../lib/case-utils";
-import { dialectStrategyFactory } from "../lib/strategy-factory";
+} from "../../common/lib/utils";
+import { log } from "../../common/lib/log";
+import { pkStrategyImportTemplates } from "../../common/lib/pk-strategy";
+import { caseFactory, Cases } from "../../common/lib/case-utils";
+import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
 
 type ScaffoldDbDialectStrategy = {
   schemaTableTemplatePath: string;

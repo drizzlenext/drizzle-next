@@ -2,19 +2,19 @@ import {
   appendToEnvLocal,
   insertSchemaToSchemaIndex,
   renderTemplate,
-} from "../lib/utils";
-import { log } from "../lib/log";
+} from "../../common/lib/utils";
+import { log } from "../../common/lib/log";
 import {
   DbDialect,
   DbDialectStrategy,
   DrizzleNextConfig,
   DrizzleNextProcessor,
-} from "../lib/types";
+} from "../../common/types/types";
 import {
   pkKeyValTemplates,
   pkStrategyImportTemplates,
-} from "../lib/pk-strategy";
-import { dialectStrategyFactory } from "../lib/strategy-factory";
+} from "../../common/lib/pk-strategy";
+import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
 
 type AuthStrategy = {
   appendPlaceholdersToEnvLocal: () => void;
@@ -22,7 +22,7 @@ type AuthStrategy = {
   devDependencies: string[];
   textToSearchInEnv?: string;
   printCompletionMessage(): void;
-}
+};
 
 type AuthStrategyMap = {
   github: AuthStrategy;
@@ -30,7 +30,7 @@ type AuthStrategyMap = {
   credentials: AuthStrategy;
   postmark: AuthStrategy;
   nodemailer: AuthStrategy;
-}
+};
 
 export const authStrategyMap: AuthStrategyMap = {
   credentials: {
@@ -39,7 +39,7 @@ export const authStrategyMap: AuthStrategyMap = {
     printCompletionMessage: function (): void {
       log.task("create test user for credentials provider");
       log.cmdsubtask(
-        "npx tsx scripts/create-user.ts test@example.com password123",
+        "npx tsx scripts/create-user.ts test@example.com password123"
       );
     },
     textToSearchInEnv: undefined,
@@ -49,7 +49,7 @@ export const authStrategyMap: AuthStrategyMap = {
     printCompletionMessage: function (): void {
       log.task("setup github provider");
       log.subtask(
-        "go to github > settings > developer settings > oauth apps > new oauth app",
+        "go to github > settings > developer settings > oauth apps > new oauth app"
       );
       log.subtask("callback: http://localhost:3000/api/auth/callback/github");
       log.subtask("update AUTH_GITHUB_ID in .env");
@@ -67,7 +67,7 @@ export const authStrategyMap: AuthStrategyMap = {
     printCompletionMessage: function (): void {
       log.task("setup google provider");
       log.subtask(
-        "go to console.cloud.google.com > new project > oauth consent screen + 2.0 client",
+        "go to console.cloud.google.com > new project > oauth consent screen + 2.0 client"
       );
       log.subtask("callback: http://localhost:3000/api/auth/callback/google");
       log.subtask("update AUTH_GOOGLE_ID in .env");
@@ -108,7 +108,7 @@ export const authStrategyMap: AuthStrategyMap = {
     appendPlaceholdersToEnvLocal: function (): void {
       appendToEnvLocal(
         "EMAIL_SERVER",
-        "smtps://username:password@smtp.example.com:465",
+        "smtps://username:password@smtp.example.com:465"
       );
       appendToEnvLocal("EMAIL_FROM", "noreply@example.com");
     },
@@ -118,7 +118,7 @@ export const authStrategyMap: AuthStrategyMap = {
 type AuthDbDialect = {
   authSchemaTemplate: string;
   pkDataType: string;
-}
+};
 
 const authDbDialectStrategy: Record<DbDialect, AuthDbDialect> = {
   postgresql: {

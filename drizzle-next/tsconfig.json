@@ -10,6 +10,15 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules", "dist", "test"]
+  "include": [
+    "**/*.ts",
+    "../common/types/types.ts",
+    "../common/lib/case-utils.ts",
+    "../common/lib/log.ts",
+    "../common/lib/utils.ts",
+    "../common/lib/handlebars-helpers.ts",
+    "../common/lib/strategy-factory.ts",
+    "../common/lib/pk-strategy.ts"
+  ],
+  "exclude": ["node_modules", "dist", "../common/test"]
 }

@@ -1,5 +1,8 @@
-import { log } from "../lib/log";
-import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
+import { log } from "../../common/lib/log";
+import {
+  DrizzleNextConfig,
+  DrizzleNextProcessor,
+} from "../../common/types/types";
 import {
   appendToEnvLocal,
   appendToFileIfTextNotExists,
@@ -9,7 +12,7 @@ import {
   renderTemplate,
   renderTemplateIfNotExists,
   writeDrizzleNextConfig,
-} from "../lib/utils";
+} from "../../common/lib/utils";
 
 export class NewProjectProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;

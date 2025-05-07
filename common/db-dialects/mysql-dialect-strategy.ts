@@ -2,7 +2,7 @@ import {
   DataTypeStrategyMap,
   DataTypeStrategyOpts,
   DbDialectStrategy,
-} from "../lib/types";
+} from "../../common/types/types";
 
 const mysqlDataTypeStrategies: DataTypeStrategyMap = {
   int: {

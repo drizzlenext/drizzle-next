@@ -1,4 +1,4 @@
-import { PkStrategy } from "./types";
+import { PkStrategy } from "../types/types";
 
 export const pkStrategyImportTemplates: Record<PkStrategy, string> = {
   cuid2: `import { createId } from "@paralleldrive/cuid2";`,

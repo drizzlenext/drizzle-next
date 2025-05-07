@@ -1,24 +1,28 @@
 import { caseFactory } from "../lib/case-utils";
 import { log } from "../lib/log";
-import { DbDialect, DbPackageStrategy, DrizzleNextConfig } from "../lib/types";
+import {
+  DbDialect,
+  DbPackageStrategy,
+  DrizzleNextConfig,
+} from "../types/types";
 import {
   appendToEnvLocal,
-  insertTextAfterIfNotExists,
+  appendToFileIfTextNotExists,
   renderTemplate,
 } from "../lib/utils";
 
-export class Mysql2PackageStrategy implements DbPackageStrategy {
+export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
   opts: DrizzleNextConfig;
-  dialect: DbDialect = "mysql";
-  dependencies = ["mysql2"];
-  devDependencies = [];
+  dialect: DbDialect = "sqlite";
+  dependencies: string[] = ["better-sqlite3"];
+  devDependencies: string[] = ["@types/better-sqlite3"];
 
   constructor(opts: DrizzleNextConfig) {
     this.opts = opts;
   }
 
   async init() {
-    log.init("initializing mysql2 package...");
+    log.init("initializing better-sqlite3 package...");
     await this.render();
   }
 
@@ -26,8 +30,8 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
     this.copyMigrateScript();
     this.appendDbUrl();
     this.copyDbInstance();
+    this.appendSqliteToGitignore();
     this.copyCreateUserScript();
-    this.addServerComponentExternalPackageToNextConfig();
   }
 
   copyMigrateScript(): void {
@@ -35,18 +39,18 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
       inputPath: "db-packages/scripts/migrate.ts.hbs",
       outputPath: "scripts/migrate.ts",
       data: {
-        migratorImport: `import { migrate } from "drizzle-orm/mysql2/migrator";`,
+        migratorImport: `import { migrate } from "drizzle-orm/better-sqlite3/migrator";`,
       },
     });
   }
 
   appendDbUrl(): void {
-    appendToEnvLocal("DB_URL", "mysql://user:password@host:port/db");
+    appendToEnvLocal("DB_URL", "sqlite.db");
   }
 
   copyDbInstance(): void {
     renderTemplate({
-      inputPath: "db-packages/lib/db.ts.mysql2.hbs",
+      inputPath: "db-packages/lib/db.ts.better-sqlite3.hbs",
       outputPath: "lib/db.ts",
     });
   }
@@ -65,23 +69,12 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
     });
   }
 
-  /**
-   * this is necessary to fix a production build error
-   * TypeError: r is not a constructor
-   * https://github.com/sidorares/node-mysql2/issues/1885
-   */
-  addServerComponentExternalPackageToNextConfig() {
-    const text = `\n  serverExternalPackages: ["mysql2"],`;
-    insertTextAfterIfNotExists(
-      "next.config.ts",
-      "const nextConfig: NextConfig = {",
-      text
-    );
+  appendSqliteToGitignore() {
+    appendToFileIfTextNotExists(".gitignore", "sqlite.db", "sqlite.db");
   }
 
   printCompletionMessage(): void {
-    log.checklist("mysql2 checklist");
-    log.task("update DB_URL in .env");
+    log.checklist("better-sqlite3 checklist");
     log.cmdtask("npx drizzle-kit generate");
     log.cmdtask("npx drizzle-kit migrate");
   }

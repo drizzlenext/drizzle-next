@@ -1,12 +1,12 @@
-import { log } from "../lib/log";
-import { dialectStrategyFactory } from "../lib/strategy-factory";
+import { log } from "../../common/lib/log";
+import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
 import {
   DbDialect,
   DbDialectStrategy,
   DrizzleNextConfig,
   DrizzleNextProcessor,
-} from "../lib/types";
-import { renderTemplate } from "../lib/utils";
+} from "../../common/types/types";
+import { renderTemplate } from "../../common/lib/utils";
 import { ScaffoldProcessor } from "./scaffold-processor";
 
 export class AdminProcessor implements DrizzleNextProcessor {

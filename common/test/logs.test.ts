@@ -1,9 +1,9 @@
 import { test } from "vitest";
-import { AuthProcessor } from "../processors/auth-processor";
-import { AdminProcessor } from "../processors/admin-processor";
+import { AuthProcessor } from "../../drizzle-next/processors/auth-processor";
+import { AdminProcessor } from "../../drizzle-next/processors/admin-processor";
 import { BetterSqlite3PackageStrategy } from "../db-packages/better-sqlite3-package-strategy";
 import { PgPackageStrategy } from "../db-packages/pg-package-strategy";
-import { DrizzleNextConfig } from "../lib/types";
+import { DrizzleNextConfig } from "../types/types";
 import { Mysql2PackageStrategy } from "../db-packages/mysql2-package-strategy";
 
 const drizzleNextConfig: DrizzleNextConfig = {
@@ -16,7 +16,8 @@ const drizzleNextConfig: DrizzleNextConfig = {
   authEnabled: true,
   dbPackage: "better-sqlite3",
   version: "2",
-  pluralizeEnabled: false
+  pluralizeEnabled: false,
+  framework: { drizzle: true, express: true, next: true },
 };
 
 test("better sqlite3 package strategy", () => {

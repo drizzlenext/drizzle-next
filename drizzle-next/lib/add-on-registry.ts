@@ -1,5 +1,5 @@
 import { TiptapProcessor } from "../processors/tiptap-processor";
-import { DrizzleNextProcessor } from "./types";
+import { DrizzleNextProcessor } from "../../common/types/types";
 
 type ClassType<T> = new (...args: any[]) => T;
 
@@ -7,11 +7,11 @@ type DrizzleNextAddOn = {
   Processor: ClassType<DrizzleNextProcessor>;
   name: string;
   description: string;
-}
+};
 
 type ClassMap = {
   [key: string]: DrizzleNextAddOn;
-}
+};
 
 export const ADD_ON_REGISTRY: ClassMap = {
   tiptap: {

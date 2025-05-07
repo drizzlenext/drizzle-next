@@ -1,9 +1,12 @@
 import fs from "fs";
 import { Command, Option } from "commander";
-import { log } from "../lib/log";
-import { AuthorizationLevel, DrizzleNextConfig } from "../lib/types";
+import { log } from "../../common/lib/log";
+import {
+  AuthorizationLevel,
+  DrizzleNextConfig,
+} from "../../common/types/types";
 import { select } from "@inquirer/prompts";
-import { loadDrizzleNextConfig } from "../lib/utils";
+import { loadDrizzleNextConfig } from "../../common/lib/utils";
 import { ScaffoldProcessor } from "../processors/scaffold-processor";
 
 export const scaffoldCommand = new Command("scaffold");

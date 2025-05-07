@@ -1,20 +1,23 @@
 import { Command, Option } from "commander";
-import { log } from "../lib/log";
-import { DrizzleNextConfig, DrizzleNextProcessor } from "../lib/types";
+import { log } from "../../common/lib/log";
+import {
+  DrizzleNextConfig,
+  DrizzleNextProcessor,
+} from "../../common/types/types";
 import { select, confirm } from "@inquirer/prompts";
 import {
   completeDrizzleNextConfig,
   installDependencies,
   installDevDependencies,
   preflightChecks,
-} from "../lib/utils";
-import { packageStrategyFactory } from "../lib/strategy-factory";
+} from "../../common/lib/utils";
+import { packageStrategyFactory } from "../../common/lib/strategy-factory";
 import { AuthProcessor, authStrategyMap } from "../processors/auth-processor";
 import { NewProjectProcessor } from "../processors/new-project-processor";
 import { AdminProcessor } from "../processors/admin-processor";
 import { DbDialectProcessor } from "../processors/db-dialect-processor";
 import packageJson from "../package.json";
-import { pkDependencies } from "../lib/pk-strategy";
+import { pkDependencies } from "../../common/lib/pk-strategy";
 
 export const initCommand = new Command("init");
 

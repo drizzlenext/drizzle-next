@@ -1,11 +1,11 @@
 import { Command } from "commander";
-import { log } from "../lib/log";
-import { DrizzleNextConfig } from "../lib/types";
+import { log } from "../../common/lib/log";
+import { DrizzleNextConfig } from "../../common/types/types";
 import {
   installDependencies,
   installDevDependencies,
   loadDrizzleNextConfig,
-} from "../lib/utils";
+} from "../../common/lib/utils";
 import { ADD_ON_REGISTRY, getAddOnHelpText } from "../lib/add-on-registry";
 
 export const addCommand = new Command("add");

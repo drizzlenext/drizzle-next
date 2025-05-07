@@ -1,6 +1,10 @@
 import { caseFactory } from "../lib/case-utils";
 import { log } from "../lib/log";
-import { DbDialect, DbPackageStrategy, DrizzleNextConfig } from "../lib/types";
+import {
+  DbDialect,
+  DbPackageStrategy,
+  DrizzleNextConfig,
+} from "../types/types";
 import { appendToEnvLocal, renderTemplate } from "../lib/utils";
 
 export class PgPackageStrategy implements DbPackageStrategy {

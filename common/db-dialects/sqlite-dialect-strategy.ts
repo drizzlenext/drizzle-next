@@ -2,7 +2,7 @@ import {
   DataTypeStrategyMap,
   DataTypeStrategyOpts,
   DbDialectStrategy,
-} from "../lib/types";
+} from "../types/types";
 
 const sqliteDataTypeStrategies: DataTypeStrategyMap = {
   integer: {
