@@ -201,8 +201,26 @@ export class ScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath: "express-templates/routes/route.ts.hbs",
-      outputPath: `routes/${tableObj.pluralKebabCase}.ts`,
+      inputPath: "express-templates/routes/routes.ts.hbs",
+      outputPath: `routes/${tableObj.pluralKebabCase}.routes.ts`,
+      data: {
+        tableObj,
+        validatedColumns: this.validatedColumns,
+      },
+    });
+
+    renderTemplate({
+      inputPath: "express-templates/controllers/controller.ts.hbs",
+      outputPath: `controllers/${tableObj.pluralKebabCase}.controller.ts`,
+      data: {
+        tableObj,
+        validatedColumns: this.validatedColumns,
+      },
+    });
+
+    renderTemplate({
+      inputPath: "express-templates/services/service.ts.hbs",
+      outputPath: `services/${tableObj.pluralKebabCase}.service.ts`,
       data: {
         tableObj,
         validatedColumns: this.validatedColumns,
@@ -212,12 +230,12 @@ export class ScaffoldProcessor {
     insertTextAfterIfNotExists(
       "app.ts",
       `import bodyParser from "body-parser";`,
-      `\nimport ${tableObj.pluralCamelCase}Router from "./routes/${tableObj.pluralKebabCase}";`
+      `\nimport { ${tableObj.singularPascalCase}Routes } from "./routes/${tableObj.pluralKebabCase}.routes";`
     );
     insertTextAfterIfNotExists(
       "app.ts",
       `app.use(bodyParser.json());`,
-      `\napp.use("/${tableObj.pluralKebabCase}", ${tableObj.pluralCamelCase}Router);`
+      `\napp.use("/${tableObj.pluralKebabCase}", ${tableObj.singularPascalCase}Routes);`
     );
   }
   addSchema(): void {

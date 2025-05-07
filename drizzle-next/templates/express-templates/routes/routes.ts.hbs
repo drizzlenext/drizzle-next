@@ -1,0 +1,11 @@
+import express from "express";
+import { {{tableObj.singularPascalCase}}Controller } from "../controllers/{{tableObj.pluralKebabCase}}.controller";
+
+export const {{tableObj.singularPascalCase}}Routes = express.Router();
+
+{{tableObj.singularPascalCase}}Routes.get("/", {{tableObj.singularPascalCase}}Controller.getAll);
+{{tableObj.singularPascalCase}}Routes.get("/:id", {{tableObj.singularPascalCase}}Controller.getById);
+{{tableObj.singularPascalCase}}Routes.post("/", {{tableObj.singularPascalCase}}Controller.create);
+{{tableObj.singularPascalCase}}Routes.put("/:id", {{tableObj.singularPascalCase}}Controller.update);
+{{tableObj.singularPascalCase}}Routes.patch("/:id", {{tableObj.singularPascalCase}}Controller.patch);
+{{tableObj.singularPascalCase}}Routes.delete("/:id", {{tableObj.singularPascalCase}}Controller.delete);

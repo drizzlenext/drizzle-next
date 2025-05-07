@@ -1,0 +1,65 @@
+import { Request, Response } from "express";
+import { z } from "zod";
+import { {{tableObj.singularPascalCase}}Service } from "../services/{{tableObj.pluralKebabCase}}.service";
+
+const {{tableObj.singularPascalCase}}Schema = z.object({
+  {{#each validatedColumns}}
+  {{this.caseVariants.originalCamelCase}}: {{this.zodCode}},
+  {{/each}}
+});
+
+export class {{tableObj.singularPascalCase}}Controller {
+  static async getAll(req: Request, res: Response) {
+    const list = await {{tableObj.singularPascalCase}}Service.getAll();
+    res.send(list);
+  }
+
+  static async getById(req: Request, res: Response) {
+    const obj = await {{tableObj.singularPascalCase}}Service.getById(req.params.id);
+    if (!obj) return void res.sendStatus(404);
+    res.send(obj);
+  }
+
+  static async create(req: Request, res: Response) {
+    const validated = {{tableObj.singularPascalCase}}Schema.safeParse(req.body);
+    if (!validated.success) {
+      return void res.status(400).send({
+        errors: validated.error.flatten().fieldErrors,
+        message: "Invalid data",
+      });
+    }
+    await {{tableObj.singularPascalCase}}Service.create(validated.data);
+    res.sendStatus(201);
+  }
+
+  static async update(req: Request, res: Response) {
+    const validated = {{tableObj.singularPascalCase}}Schema.safeParse(req.body);
+    if (!validated.success) {
+      return void res.status(400).send({
+        errors: validated.error.flatten().fieldErrors,
+        message: "Invalid data",
+      });
+    }
+    await {{tableObj.singularPascalCase}}Service.update(req.params.id, validated.data);
+    res.sendStatus(200);
+  }
+
+  static async patch(req: Request, res: Response) {
+    const validated = {{tableObj.singularPascalCase}}Schema.partial().safeParse(req.body);
+    if (!validated.success) {
+      return void res.status(400).send({
+        errors: validated.error.flatten().fieldErrors,
+        message: "Invalid data",
+      });
+    }
+    await {{tableObj.singularPascalCase}}Service.patch(req.params.id, validated.data);
+    res.sendStatus(200);
+  }
+
+  static async delete(req: Request, res: Response) {
+    const obj = await {{tableObj.singularPascalCase}}Service.getById(req.params.id);
+    if (!obj) return void res.sendStatus(404);
+    await {{tableObj.singularPascalCase}}Service.delete(req.params.id);
+    res.sendStatus(204);
+  }
+}
