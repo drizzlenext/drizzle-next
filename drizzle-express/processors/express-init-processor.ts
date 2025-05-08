@@ -4,8 +4,8 @@ import {
   insertTextAfterIfNotExists,
   installDependencies,
   installDevDependencies,
-  renderTemplate,
 } from "../../common/lib/utils";
+import { renderTemplate } from "../lib/utils";
 
 export class ExpressInitProcessor {
   opts: DrizzleExpressConfig;

@@ -10,6 +10,7 @@
   "description": "",
   "dependencies": {
     "@inquirer/prompts": "^7.5.0",
-    "commander": "^13.1.0"
+    "commander": "^13.1.0",
+    "handlebars": "^4.7.8"
   }
 }

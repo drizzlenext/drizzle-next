@@ -3,13 +3,11 @@ import {
   PkStrategy,
   ExpressScaffoldProcessorOpts,
 } from "../../common/types/types";
-import {
-  renderTemplate,
-  insertTextAfterIfNotExists,
-} from "../../common/lib/utils";
+import { insertTextAfterIfNotExists } from "../../common/lib/utils";
 import { log } from "../../common/lib/log";
 import { caseFactory, Cases } from "../../common/lib/case-utils";
 import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
+import { renderTemplate } from "../lib/utils";
 
 type ValidatedColumn = {
   columnName: string; // the original column name passed in from cli
