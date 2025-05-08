@@ -177,7 +177,7 @@ export class DrizzleScaffoldProcessor {
       inputPath:
         scaffoldDbDialectStrategies[this.opts.dbDialect]
           .schemaTableTemplatePath,
-      outputPath: `schema/${tableObj.pluralKebabCase}.ts`,
+      outputPath: `src/schema/${tableObj.pluralKebabCase}.ts`,
       data: {
         columns: columnsCode,
         imports: importsCode,
@@ -204,7 +204,7 @@ export class DrizzleScaffoldProcessor {
 
       // references
       if (dataType.startsWith("references") && referenceTableVars) {
-        referenceImportsCode += `import { ${referenceTableVars.pluralCamelCase} } from "@/schema/${referenceTableVars.pluralKebabCase}";\n`;
+        referenceImportsCode += `import { ${referenceTableVars.pluralCamelCase} } from "@/src/schema/${referenceTableVars.pluralKebabCase}";\n`;
         if (this.opts.pkStrategy === "auto_increment") {
           dataTypeSet.add(this.dbDialectStrategy.fkAutoIncrementDataType);
         }

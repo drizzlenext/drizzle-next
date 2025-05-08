@@ -41,7 +41,7 @@ integer, real, text, boolean, bigint, timestamp
       ...drizzleExpressConfig,
     });
 
-    const nextScaffoldProcessor = new ExpressScaffoldProcessor({
+    const expressScaffoldProcessor = new ExpressScaffoldProcessor({
       table: table,
       columns: options.columns,
       enableCompletionMessage: true,
@@ -50,5 +50,5 @@ integer, real, text, boolean, bigint, timestamp
 
     drizzleScaffoldProcessor.process();
 
-    nextScaffoldProcessor.process();
+    expressScaffoldProcessor.process();
   });

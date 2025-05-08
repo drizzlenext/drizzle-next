@@ -23,8 +23,8 @@ export class DbDialectProcessor implements BaseProcessor {
     });
 
     renderTemplateIfNotExists({
-      inputPath: `db-dialect-processor/lib/schema.ts.${this.opts.dbDialect}.hbs`,
-      outputPath: "lib/schema.ts",
+      inputPath: `db-dialect-processor/src/config/schema.ts.${this.opts.dbDialect}.hbs`,
+      outputPath: "src/config/schema.ts",
     });
   }
 

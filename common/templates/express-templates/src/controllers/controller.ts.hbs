@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import { {{tableObj.singularPascalCase}}Service } from "../services/{{tableObj.pluralKebabCase}}.service";
+import { {{tableObj.singularCamelCase}}Service } from "../services/{{tableObj.singularKebabCase}}.service";
 
 const {{tableObj.singularPascalCase}}Schema = z.object({
   {{#each validatedColumns}}
@@ -8,19 +8,19 @@ const {{tableObj.singularPascalCase}}Schema = z.object({
   {{/each}}
 });
 
-export class {{tableObj.singularPascalCase}}Controller {
-  static async getAll(req: Request, res: Response) {
-    const list = await {{tableObj.singularPascalCase}}Service.getAll();
+export const {{tableObj.singularCamelCase}}Controller = {
+  async getAll(req: Request, res: Response) {
+    const list = await {{tableObj.singularCamelCase}}Service.getAll();
     res.send(list);
-  }
+  },
 
-  static async getById(req: Request, res: Response) {
-    const obj = await {{tableObj.singularPascalCase}}Service.getById(req.params.id);
+  async getById(req: Request, res: Response) {
+    const obj = await {{tableObj.singularCamelCase}}Service.getById(req.params.id);
     if (!obj) return void res.sendStatus(404);
     res.send(obj);
-  }
+  },
 
-  static async create(req: Request, res: Response) {
+  async create(req: Request, res: Response) {
     const validated = {{tableObj.singularPascalCase}}Schema.safeParse(req.body);
     if (!validated.success) {
       return void res.status(400).send({
@@ -28,11 +28,11 @@ export class {{tableObj.singularPascalCase}}Controller {
         message: "Invalid data",
       });
     }
-    await {{tableObj.singularPascalCase}}Service.create(validated.data);
+    await {{tableObj.singularCamelCase}}Service.create(validated.data);
     res.sendStatus(201);
-  }
+  },
 
-  static async update(req: Request, res: Response) {
+  async update(req: Request, res: Response) {
     const validated = {{tableObj.singularPascalCase}}Schema.safeParse(req.body);
     if (!validated.success) {
       return void res.status(400).send({
@@ -40,11 +40,11 @@ export class {{tableObj.singularPascalCase}}Controller {
         message: "Invalid data",
       });
     }
-    await {{tableObj.singularPascalCase}}Service.update(req.params.id, validated.data);
+    await {{tableObj.singularCamelCase}}Service.update(req.params.id, validated.data);
     res.sendStatus(200);
-  }
+  },
 
-  static async patch(req: Request, res: Response) {
+  async patch(req: Request, res: Response) {
     const validated = {{tableObj.singularPascalCase}}Schema.partial().safeParse(req.body);
     if (!validated.success) {
       return void res.status(400).send({
@@ -52,14 +52,14 @@ export class {{tableObj.singularPascalCase}}Controller {
         message: "Invalid data",
       });
     }
-    await {{tableObj.singularPascalCase}}Service.patch(req.params.id, validated.data);
+    await {{tableObj.singularCamelCase}}Service.patch(req.params.id, validated.data);
     res.sendStatus(200);
-  }
+  },
 
-  static async delete(req: Request, res: Response) {
-    const obj = await {{tableObj.singularPascalCase}}Service.getById(req.params.id);
+  async delete(req: Request, res: Response) {
+    const obj = await {{tableObj.singularCamelCase}}Service.getById(req.params.id);
     if (!obj) return void res.sendStatus(404);
-    await {{tableObj.singularPascalCase}}Service.delete(req.params.id);
+    await {{tableObj.singularCamelCase}}Service.delete(req.params.id);
     res.sendStatus(204);
   }
-}
+};

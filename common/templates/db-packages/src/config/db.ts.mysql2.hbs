@@ -1,17 +1,17 @@
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
 import { createConnection } from "mysql2";
-import { config } from "@/lib/config";
-import * as schema from "@/lib/schema";
+import { env } from "@/src/config/env";
+import * as schema from "@/src/config/schema";
 
 const poolConnection = mysql.createPool({
-  uri: config.DB_URL,
+  uri: env.DB_URL,
 });
 
 export const db = drizzle(poolConnection, { schema, mode: "default", casing: "snake_case" });
 
 export async function openConnection() {
-  const connection = createConnection(config.DB_URL);
+  const connection = createConnection(env.DB_URL);
   const db = drizzle(connection, { schema, mode: "default", casing: "snake_case" });
   const closeConnection = async () => await connection.end();
   return {

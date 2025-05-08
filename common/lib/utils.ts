@@ -328,7 +328,7 @@ export async function installDependencies(opts: {
   packageManager: PackageManager;
   latest: boolean;
 }) {
-  const collectDependencies = [];
+  const collectDependencies: string[] = [];
   for (const str of opts.dependencies) {
     const pinnedVersion =
       packageDrizzleNextJson.dependencies[
@@ -370,7 +370,7 @@ export async function installDevDependencies(opts: {
   packageManager: PackageManager;
   latest: boolean;
 }) {
-  const collectDevDependencies = [];
+  const collectDevDependencies: string[] = [];
   for (const str of opts.devDependencies) {
     const pinnedVersion =
       packageDrizzleNextJson.devDependencies[
@@ -495,9 +495,9 @@ export function insertSchemaToSchemaIndex(
 ) {
   const tableObj = caseFactory(table, { pluralize: opts.pluralize });
   appendToFileIfTextNotExists(
-    "lib/schema.ts",
-    `export * from "@/schema/${tableObj.pluralKebabCase}";`,
-    `export * from "@/schema/${tableObj.pluralKebabCase}";`
+    "src/config/schema.ts",
+    `export * from "@/src/schema/${tableObj.pluralKebabCase}";`,
+    `export * from "@/src/schema/${tableObj.pluralKebabCase}";`
   );
 }
 

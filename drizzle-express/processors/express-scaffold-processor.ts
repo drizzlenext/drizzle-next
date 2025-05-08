@@ -130,8 +130,8 @@ export class ExpressScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath: "express-templates/routes/routes.ts.hbs",
-      outputPath: `routes/${tableObj.pluralKebabCase}.routes.ts`,
+      inputPath: "express-templates/src/routes/routes.ts.hbs",
+      outputPath: `src/routes/${tableObj.singularKebabCase}.routes.ts`,
       data: {
         tableObj,
         validatedColumns: this.validatedColumns,
@@ -139,8 +139,8 @@ export class ExpressScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath: "express-templates/controllers/controller.ts.hbs",
-      outputPath: `controllers/${tableObj.pluralKebabCase}.controller.ts`,
+      inputPath: "express-templates/src/controllers/controller.ts.hbs",
+      outputPath: `src/controllers/${tableObj.singularKebabCase}.controller.ts`,
       data: {
         tableObj,
         validatedColumns: this.validatedColumns,
@@ -148,8 +148,8 @@ export class ExpressScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath: "express-templates/services/service.ts.hbs",
-      outputPath: `services/${tableObj.pluralKebabCase}.service.ts`,
+      inputPath: "express-templates/src/services/service.ts.hbs",
+      outputPath: `src/services/${tableObj.singularKebabCase}.service.ts`,
       data: {
         tableObj,
         validatedColumns: this.validatedColumns,
@@ -157,14 +157,14 @@ export class ExpressScaffoldProcessor {
     });
 
     insertTextAfterIfNotExists(
-      "app.ts",
+      "src/app.ts",
       `import bodyParser from "body-parser";`,
-      `\nimport { ${tableObj.singularPascalCase}Routes } from "./routes/${tableObj.pluralKebabCase}.routes";`
+      `\nimport ${tableObj.singularCamelCase}Routes from "@/src/routes/${tableObj.singularKebabCase}.routes";`
     );
     insertTextAfterIfNotExists(
-      "app.ts",
+      "src/app.ts",
       `app.use(bodyParser.json());`,
-      `\napp.use("/${tableObj.pluralKebabCase}", ${tableObj.singularPascalCase}Routes);`
+      `\napp.use("/${tableObj.pluralKebabCase}", ${tableObj.singularCamelCase}Routes);`
     );
   }
 

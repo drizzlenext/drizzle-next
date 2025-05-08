@@ -1,37 +1,37 @@
-import { db } from "@/lib/db";
-import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+import { db } from "@/src/config/db";
+import { {{tableObj.pluralCamelCase}} } from "@/src/schema/{{tableObj.pluralKebabCase}}";
 import { eq } from "drizzle-orm";
 
-export class {{tableObj.singularPascalCase}}Service {
-  static async getAll() {
+export const {{tableObj.singularCamelCase}}Service = {
+  async getAll() {
     return db.query.{{tableObj.pluralCamelCase}}.findMany();
-  }
+  },
 
-  static async getById(id: string) {
+  async getById(id: string) {
     return db.query.{{tableObj.pluralCamelCase}}.findFirst({
       where: eq({{tableObj.pluralCamelCase}}.id, id),
     });
-  }
+  },
 
-  static async create(data: any) {
+  async create(data: any) {
     await db.insert({{tableObj.pluralCamelCase}}).values(data);
-  }
+  },
 
-  static async update(id: string, data: any) {
+  async update(id: string, data: any) {
     await db
       .update({{tableObj.pluralCamelCase}})
       .set(data)
       .where(eq({{tableObj.pluralCamelCase}}.id, id));
-  }
+  },
 
-  static async patch(id: string, data: any) {
+  async patch(id: string, data: any) {
     await db
       .update({{tableObj.pluralCamelCase}})
       .set(data)
       .where(eq({{tableObj.pluralCamelCase}}.id, id));
-  }
+  },
 
-  static async delete(id: string) {
+  async delete(id: string) {
     await db.delete({{tableObj.pluralCamelCase}}).where(eq({{tableObj.pluralCamelCase}}.id, id));
   }
-}
+};

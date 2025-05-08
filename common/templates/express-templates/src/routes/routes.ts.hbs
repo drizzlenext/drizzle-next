@@ -1,0 +1,13 @@
+import express from "express";
+import { {{tableObj.singularCamelCase}}Controller } from "../controllers/{{tableObj.singularKebabCase}}.controller";
+
+export const router = express.Router();
+
+router.get("/", {{tableObj.singularCamelCase}}Controller.getAll);
+router.get("/:id", {{tableObj.singularCamelCase}}Controller.getById);
+router.post("/", {{tableObj.singularCamelCase}}Controller.create);
+router.put("/:id", {{tableObj.singularCamelCase}}Controller.update);
+router.patch("/:id", {{tableObj.singularCamelCase}}Controller.patch);
+router.delete("/:id", {{tableObj.singularCamelCase}}Controller.delete);
+
+export default router;

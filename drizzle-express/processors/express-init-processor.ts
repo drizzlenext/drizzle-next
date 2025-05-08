@@ -55,14 +55,14 @@ export class ExpressInitProcessor {
 
   async render() {
     renderTemplate({
-      inputPath: "express-templates/app.ts.hbs",
-      outputPath: "app.ts",
+      inputPath: "express-templates/src/app.ts.hbs",
+      outputPath: "src/app.ts",
     });
 
     insertTextAfterIfNotExists(
       "package.json",
       `"scripts": {`,
-      `\n    "dev:api": "nodemon --watch routes --watch app.ts --exec tsx app.ts",`
+      `\n    "dev": "nodemon --watch src --exec tsx src/app.ts",`
     );
 
     renderTemplate({
@@ -81,8 +81,8 @@ export class ExpressInitProcessor {
     });
 
     renderTemplate({
-      inputPath: "express-templates/lib/config.ts.hbs",
-      outputPath: "lib/config.ts",
+      inputPath: "express-templates/src/config/env.ts.hbs",
+      outputPath: "src/config/env.ts",
     });
   }
 
