@@ -1,7 +1,6 @@
 import { spawn, spawnSync, exec } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
-import Handlebars from "handlebars";
 import { log } from "./log";
 import packageDrizzleNextJson from "../../drizzle-next/package-pinned.json";
 import {
@@ -10,12 +9,12 @@ import {
   DrizzleExpressConfig,
 } from "../types/types";
 import { caseFactory } from "./case-utils";
-import { registerHandlebarsHelpers } from "./handlebars-helpers";
 import { register } from "esbuild-register/dist/node";
+import { getHandlebars } from "./handlebars-helpers";
+
+const Handlebars = getHandlebars();
 
 register();
-
-registerHandlebarsHelpers();
 
 export function renderTemplateIfNotExists({
   inputPath,
@@ -496,8 +495,8 @@ export function insertSchemaToSchemaIndex(
   const tableObj = caseFactory(table, { pluralize: opts.pluralize });
   appendToFileIfTextNotExists(
     "src/config/schema.ts",
-    `export * from "@/src/schema/${tableObj.pluralKebabCase}";`,
-    `export * from "@/src/schema/${tableObj.pluralKebabCase}";`
+    `export * from "@/schema/${tableObj.pluralKebabCase}";`,
+    `export * from "@/schema/${tableObj.pluralKebabCase}";`
   );
 }
 

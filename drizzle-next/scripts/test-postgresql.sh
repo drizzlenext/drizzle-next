@@ -26,7 +26,7 @@ fi
 cd ~/code
 
 if [ "$RESET" = true ]; then
-pnpm create next-app@latest demo-postgresql --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
+pnpm create next-app@latest demo-postgresql --typescript --eslint --tailwind --app --src-dir --no-import-alias --turbopack
 fi
 
 cd demo-postgresql
@@ -37,8 +37,7 @@ drizzle-next init --package-manager pnpm \
     --pk-strategy cuid2 \
     --auth \
     --admin \
-    --latest \
-    --framework all
+    --latest
 drizzle-next add tiptap
 pnpm i -D prettier prettier-plugin-tailwindcss
 pnpm i ../drizzle-next/drizzle-admin
@@ -49,8 +48,7 @@ drizzle-next init --package-manager pnpm \
     --auth \
     --admin \
     --latest \
-    --no-install \
-    --framework all
+    --no-install
 drizzle-next add tiptap --no-install
 fi
 

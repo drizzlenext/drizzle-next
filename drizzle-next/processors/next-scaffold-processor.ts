@@ -5,8 +5,6 @@ import {
   NextScaffoldProcessorOpts,
 } from "../../common/types/types";
 import {
-  compileTemplate,
-  renderTemplate,
   insertTextAfterIfNotExists,
   prependToFileIfNotExists,
 } from "../../common/lib/utils";
@@ -14,6 +12,7 @@ import { log } from "../../common/lib/log";
 import { pkStrategyImportTemplates } from "../../common/lib/pk-strategy";
 import { caseFactory, Cases } from "../../common/lib/case-utils";
 import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
+import { compileTemplate, renderTemplate } from "../lib/utils";
 
 const formComponentImports: Record<FormComponent, string> = {
   input: `import { Input } from "@/components/ui/input";`,
@@ -224,8 +223,8 @@ export class NextScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "scaffold-processor/app/(development)/table/page.tsx.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/page.tsx`,
+      inputPath: "scaffold-processor/src/app/(development)/table/page.tsx.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/page.tsx`,
       data: {
         tableObj: tableObj,
       },
@@ -237,8 +236,9 @@ export class NextScaffoldProcessor {
     });
     const hasFileDataType = this.hasFileDataType();
     renderTemplate({
-      inputPath: "scaffold-processor/app/(development)/table/[id]/page.tsx.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/[id]/page.tsx`,
+      inputPath:
+        "scaffold-processor/src/app/(development)/table/[id]/page.tsx.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/[id]/page.tsx`,
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithTimestamps,
@@ -262,8 +262,8 @@ export class NextScaffoldProcessor {
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/[id]/edit/page.tsx.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/[id]/edit/page.tsx`,
+        "scaffold-processor/src/app/(development)/table/[id]/edit/page.tsx.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/[id]/edit/page.tsx`,
       data: {
         tableObj: tableObj,
         referencesColumnList: referencesColumnList,
@@ -278,8 +278,9 @@ export class NextScaffoldProcessor {
     });
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
-      inputPath: "scaffold-processor/app/(development)/table/new/page.tsx.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/new/page.tsx`,
+      inputPath:
+        "scaffold-processor/src/app/(development)/table/new/page.tsx.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/new/page.tsx`,
       data: {
         tableObj: tableObj,
         referencesColumnList: referencesColumnList,
@@ -292,8 +293,8 @@ export class NextScaffoldProcessor {
     });
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/[id]/delete/page.tsx.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/[id]/delete/page.tsx`,
+        "scaffold-processor/src/app/(development)/table/[id]/delete/page.tsx.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/[id]/delete/page.tsx`,
       data: {
         tableObj: tableObj,
         pkStrategyJsType:
@@ -322,8 +323,8 @@ export class NextScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_lib/create-action.ts.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_lib/create-${tableObj.singularKebabCase}-action.ts`,
+        "scaffold-processor/src/app/(development)/table/_lib/create-action.ts.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_lib/create-${tableObj.singularKebabCase}-action.ts`,
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -355,8 +356,8 @@ export class NextScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_lib/update-action.ts.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_lib/update-${tableObj.singularKebabCase}-action.ts`,
+        "scaffold-processor/src/app/(development)/table/_lib/update-action.ts.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_lib/update-${tableObj.singularKebabCase}-action.ts`,
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -373,8 +374,8 @@ export class NextScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_lib/delete-action.ts.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_lib/delete-${tableObj.singularKebabCase}-action.ts`,
+        "scaffold-processor/src/app/(development)/table/_lib/delete-action.ts.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_lib/delete-${tableObj.singularKebabCase}-action.ts`,
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithIdAndTimestamps,
@@ -390,8 +391,8 @@ export class NextScaffoldProcessor {
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_components/create-form.tsx.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-create-form.tsx`,
+        "scaffold-processor/src/app/(development)/table/_components/create-form.tsx.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-create-form.tsx`,
       data: {
         tableObj: tableObj,
         formControlsImports: formControlsImports,
@@ -455,8 +456,8 @@ export class NextScaffoldProcessor {
     const hasFileDataType = this.hasFileDataType();
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_components/update-form.tsx.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-update-form.tsx`,
+        "scaffold-processor/src/app/(development)/table/_components/update-form.tsx.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-update-form.tsx`,
       data: {
         tableObj: tableObj,
         formControlsImports: formControlsImports,
@@ -472,8 +473,8 @@ export class NextScaffoldProcessor {
     });
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_components/delete-form.tsx.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-delete-form.tsx`,
+        "scaffold-processor/src/app/(development)/table/_components/delete-form.tsx.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-delete-form.tsx`,
       data: {
         tableObj: tableObj,
       },
@@ -486,8 +487,8 @@ export class NextScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_components/table-component.tsx.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-table.tsx`,
+        "scaffold-processor/src/app/(development)/table/_components/table-component.tsx.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-table.tsx`,
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithTimestamps,
@@ -538,8 +539,8 @@ export class NextScaffoldProcessor {
     });
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_lib/get-by-id-action.ts.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_lib/get-${tableObj.singularKebabCase}-by-id.ts`,
+        "scaffold-processor/src/app/(development)/table/_lib/get-by-id-action.ts.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_lib/get-${tableObj.singularKebabCase}-by-id.ts`,
       data: {
         tableObj,
         pkStrategyJsType:
@@ -548,8 +549,8 @@ export class NextScaffoldProcessor {
     });
     renderTemplate({
       inputPath:
-        "scaffold-processor/app/(development)/table/_lib/get-list-action.ts.hbs",
-      outputPath: `app/(development)/${tableObj.pluralKebabCase}/_lib/get-${tableObj.singularKebabCase}-list.ts`,
+        "scaffold-processor/src/app/(development)/table/_lib/get-list-action.ts.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_lib/get-${tableObj.singularKebabCase}-list.ts`,
       data: {
         tableObj,
         pkStrategyJsType:
@@ -565,17 +566,17 @@ export class NextScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     insertTextAfterIfNotExists(
-      "app/(admin)/_components/admin-layout.tsx",
+      "src/app/(admin)/_components/admin-layout.tsx",
       "sidebar: [",
       `\n    { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}" },`
     );
     insertTextAfterIfNotExists(
-      "app/(admin)/_lib/drizzle-admin.config.ts",
+      "src/app/(admin)/_lib/drizzle-admin.config.ts",
       "schema: {",
       `\n    ${tableObj.pluralCamelCase}: { drizzleTable: ${tableObj.pluralCamelCase} },`
     );
     prependToFileIfNotExists(
-      "app/(admin)/_lib/drizzle-admin.config.ts",
+      "src/app/(admin)/_lib/drizzle-admin.config.ts",
       `import { ${tableObj.pluralCamelCase} } from "@/schema/${tableObj.pluralKebabCase}";\n`
     );
   }
@@ -584,7 +585,7 @@ export class NextScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     insertTextAfterIfNotExists(
-      "app/(development)/development/page.tsx",
+      "src/app/(development)/development/page.tsx",
       "const links: string[] = [",
       `\n  "${tableObj.pluralKebabCase}",`
     );

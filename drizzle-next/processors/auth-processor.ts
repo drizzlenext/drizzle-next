@@ -1,7 +1,6 @@
 import {
   appendToEnvLocal,
   insertSchemaToSchemaIndex,
-  renderTemplate,
 } from "../../common/lib/utils";
 import { log } from "../../common/lib/log";
 import {
@@ -15,6 +14,7 @@ import {
   pkStrategyImportTemplates,
 } from "../../common/lib/pk-strategy";
 import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
+import { renderTemplate } from "../lib/utils";
 
 type AuthStrategy = {
   appendPlaceholdersToEnvLocal: () => void;
@@ -122,15 +122,16 @@ type AuthDbDialect = {
 
 const authDbDialectStrategy: Record<DbDialect, AuthDbDialect> = {
   postgresql: {
-    authSchemaTemplate: "auth-processor/schema/auth-tables.ts.postgresql.hbs",
+    authSchemaTemplate:
+      "auth-processor/src/schema/auth-tables.ts.postgresql.hbs",
     pkDataType: "text",
   },
   mysql: {
-    authSchemaTemplate: "auth-processor/schema/auth-tables.ts.mysql.hbs",
+    authSchemaTemplate: "auth-processor/src/schema/auth-tables.ts.mysql.hbs",
     pkDataType: "varchar",
   },
   sqlite: {
-    authSchemaTemplate: "auth-processor/schema/auth-tables.ts.sqlite.hbs",
+    authSchemaTemplate: "auth-processor/src/schema/auth-tables.ts.sqlite.hbs",
     pkDataType: "text",
   },
 };
@@ -161,49 +162,50 @@ export class AuthProcessor implements DrizzleNextProcessor {
     this.addLayout();
 
     renderTemplate({
-      inputPath: "auth-processor/lib/authorize.ts.hbs",
-      outputPath: "lib/authorize.ts",
+      inputPath: "auth-processor/src/lib/authorize.ts.hbs",
+      outputPath: "src/lib/authorize.ts",
     });
     renderTemplate({
       inputPath:
-        "auth-processor/app/(private)/_components/private-layout.tsx.hbs",
-      outputPath: "app/(private)/_components/private-layout.tsx",
+        "auth-processor/src/app/(private)/_components/private-layout.tsx.hbs",
+      outputPath: "src/app/(private)/_components/private-layout.tsx",
     });
     renderTemplate({
-      inputPath: "auth-processor/app/api/auth/[...nextauth]/route.ts.hbs",
-      outputPath: "app/api/auth/[...nextauth]/route.ts",
+      inputPath: "auth-processor/src/app/api/auth/[...nextauth]/route.ts.hbs",
+      outputPath: "src/app/api/auth/[...nextauth]/route.ts",
     });
     renderTemplate({
-      inputPath: "auth-processor/app/(private)/dashboard/page.tsx.hbs",
-      outputPath: "app/(private)/dashboard/page.tsx",
+      inputPath: "auth-processor/src/app/(private)/dashboard/page.tsx.hbs",
+      outputPath: "src/app/(private)/dashboard/page.tsx",
     });
     renderTemplate({
-      inputPath: "auth-processor/app/(auth)/signin/page.tsx.hbs",
-      outputPath: "app/(auth)/signin/page.tsx",
+      inputPath: "auth-processor/src/app/(auth)/signin/page.tsx.hbs",
+      outputPath: "src/app/(auth)/signin/page.tsx",
     });
     renderTemplate({
-      inputPath: "auth-processor/app/(private)/profile/page.tsx.hbs",
-      outputPath: "app/(private)/profile/page.tsx",
+      inputPath: "auth-processor/src/app/(private)/profile/page.tsx.hbs",
+      outputPath: "src/app/(private)/profile/page.tsx",
     });
     renderTemplate({
-      inputPath: "auth-processor/app/(auth)/signout/page.tsx.hbs",
-      outputPath: "app/(auth)/signout/page.tsx",
+      inputPath: "auth-processor/src/app/(auth)/signout/page.tsx.hbs",
+      outputPath: "src/app/(auth)/signout/page.tsx",
     });
     renderTemplate({
-      inputPath: "auth-processor/types/next-auth.d.ts.hbs",
-      outputPath: "types/next-auth.d.ts",
+      inputPath: "auth-processor/src/types/next-auth.d.ts.hbs",
+      outputPath: "src/types/next-auth.d.ts",
     });
     renderTemplate({
-      inputPath: "auth-processor/app/(auth)/_components/signin-form.tsx.hbs",
-      outputPath: "app/(auth)/_components/signin-form.tsx",
+      inputPath:
+        "auth-processor/src/app/(auth)/_components/signin-form.tsx.hbs",
+      outputPath: "src/app/(auth)/_components/signin-form.tsx",
     });
     renderTemplate({
-      inputPath: "auth-processor/app/(auth)/_lib/signin-action.ts.hbs",
-      outputPath: "app/(auth)/_lib/signin-action.ts",
+      inputPath: "auth-processor/src/app/(auth)/_lib/signin-action.ts.hbs",
+      outputPath: "src/app/(auth)/_lib/signin-action.ts",
     });
     renderTemplate({
-      inputPath: "auth-processor/app/(auth)/layout.tsx.hbs",
-      outputPath: "app/(auth)/layout.tsx",
+      inputPath: "auth-processor/src/app/(auth)/layout.tsx.hbs",
+      outputPath: "src/app/(auth)/layout.tsx",
     });
     appendToEnvLocal("AUTH_TRUST_HOST", "http://localhost:3000");
     appendToEnvLocal("AUTH_SECRET", "secret");
@@ -211,8 +213,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   addAuthConfig() {
     renderTemplate({
-      inputPath: "auth-processor/lib/auth.ts.hbs",
-      outputPath: "lib/auth.ts",
+      inputPath: "auth-processor/src/lib/auth.ts.hbs",
+      outputPath: "src/lib/auth.ts",
       data: {
         pkStrategyImport: pkStrategyImportTemplates[this.opts.pkStrategy],
         pkKeyValTemplate: pkKeyValTemplates[this.opts.pkStrategy],
@@ -229,8 +231,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   addLayout() {
     renderTemplate({
-      inputPath: "auth-processor/app/(private)/layout.tsx.hbs",
-      outputPath: "app/(private)/layout.tsx",
+      inputPath: "auth-processor/src/app/(private)/layout.tsx.hbs",
+      outputPath: "src/app/(private)/layout.tsx",
     });
   }
 
@@ -257,7 +259,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
     renderTemplate({
       inputPath: authDbDialectStrategy[this.opts.dbDialect].authSchemaTemplate,
-      outputPath: "schema/auth-tables.ts",
+      outputPath: "src/schema/auth-tables.ts",
       data: {
         pkText: pkText,
         pkStrategyImport: pkStrategyImport,
@@ -275,9 +277,9 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   addUserSchema() {
     const userSchemaStrategy: Record<DbDialect, string> = {
-      postgresql: "auth-processor/schema/users.ts.postgresql.hbs",
-      mysql: "auth-processor/schema/users.ts.mysql.hbs",
-      sqlite: "auth-processor/schema/users.ts.sqlite.hbs",
+      postgresql: "auth-processor/src/schema/users.ts.postgresql.hbs",
+      mysql: "auth-processor/src/schema/users.ts.mysql.hbs",
+      sqlite: "auth-processor/src/schema/users.ts.sqlite.hbs",
     };
     const pkText =
       this.dbDialectStrategy.pkStrategyTemplates[this.opts.pkStrategy];
@@ -300,7 +302,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
     }
     renderTemplate({
       inputPath: userSchemaStrategy[this.opts.dbDialect],
-      outputPath: "schema/users.ts",
+      outputPath: "src/schema/users.ts",
       data: {
         pkText: pkText,
         pkStrategyImport: pkStrategyImport,

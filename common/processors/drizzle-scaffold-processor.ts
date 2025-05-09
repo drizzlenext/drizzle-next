@@ -20,13 +20,14 @@ const scaffoldDbDialectStrategies: Record<
 > = {
   postgresql: {
     schemaTableTemplatePath:
-      "scaffold-processor/schema/table.ts.postgresql.hbs",
+      "scaffold-processor/src/schema/table.ts.postgresql.hbs",
   },
   mysql: {
-    schemaTableTemplatePath: "scaffold-processor/schema/table.ts.mysql.hbs",
+    schemaTableTemplatePath: "scaffold-processor/src/schema/table.ts.mysql.hbs",
   },
   sqlite: {
-    schemaTableTemplatePath: "scaffold-processor/schema/table.ts.sqlite.hbs",
+    schemaTableTemplatePath:
+      "scaffold-processor/src/schema/table.ts.sqlite.hbs",
   },
 };
 
@@ -204,7 +205,7 @@ export class DrizzleScaffoldProcessor {
 
       // references
       if (dataType.startsWith("references") && referenceTableVars) {
-        referenceImportsCode += `import { ${referenceTableVars.pluralCamelCase} } from "@/src/schema/${referenceTableVars.pluralKebabCase}";\n`;
+        referenceImportsCode += `import { ${referenceTableVars.pluralCamelCase} } from "@/schema/${referenceTableVars.pluralKebabCase}";\n`;
         if (this.opts.pkStrategy === "auto_increment") {
           dataTypeSet.add(this.dbDialectStrategy.fkAutoIncrementDataType);
         }

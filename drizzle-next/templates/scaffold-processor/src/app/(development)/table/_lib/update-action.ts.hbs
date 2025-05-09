@@ -1,0 +1,93 @@
+"use server";
+
+import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
+import { db } from "@/config/db";
+import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+{{#if importFileUtils}}
+import { uploadFile } from "@/lib/upload";
+{{/if}}
+
+const update{{tableObj.singularPascalCase}}Schema = z.object({
+  {{#each validatedColumns}}
+  {{this.caseVariants.originalCamelCase}}: {{this.zodCode}},
+  {{/each}}
+})
+  .partial()
+  .required({ id: true });
+
+export type Update{{tableObj.singularPascalCase}}State = {
+  errors?: {
+    {{#each columns}}
+    {{this}}?: string[];
+    {{/each}}
+  };
+  message?: string;
+  status?: "success" | "error";
+}
+
+export async function update{{tableObj.singularPascalCase}}Action(
+  prevState: Update{{tableObj.singularPascalCase}}State,
+  formData: FormData
+): Promise<Update{{tableObj.singularPascalCase}}State> {
+  if (process.env.NODE_ENV !== "development") {
+    throw new Error("only accessible in development");
+  }
+{{#each uploadColumnNames}}
+
+  const {{this.originalCamelCase}}File = formData.get("{{this.originalCamelCase}}") as File;
+
+  let {{this.originalCamelCase}}Uri;
+
+  if ({{this.originalCamelCase}}File.size) {
+    {{this.originalCamelCase}}Uri = await uploadFile({
+      file: {{this.originalCamelCase}}File,
+      dir: "{{../tableObj.pluralKebabCase}}/{{this.originalKebabCase}}"
+    })
+  }
+{{/each}}
+
+  const validatedFields = update{{tableObj.singularPascalCase}}Schema.safeParse({
+    {{#each validatedColumns}}
+    {{#switch this.dataType}}
+    {{#case "file"}}
+    {{this.caseVariants.originalCamelCase}}: {{this.caseVariants.singularCamelCase}}Uri,
+    {{/case}}
+    {{#default}}
+    {{this.caseVariants.originalCamelCase}}: formData.get("{{this.caseVariants.originalCamelCase}}"),
+    {{/default}}
+    {{/switch}}
+    {{/each}}    
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Invalid data",
+      status: "error",
+    };
+  }
+
+  try {
+    await db
+      .update({{tableObj.pluralCamelCase}})
+      .set(validatedFields.data)
+      .where(eq({{tableObj.pluralCamelCase}}.id, validatedFields.data.id));
+  } catch (error) {
+    console.error(error);
+    return {
+      message: "Database error",
+      status: "error",
+    }
+  }
+
+  revalidatePath("/{{tableObj.pluralKebabCase}}");
+  revalidatePath("/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id);
+  revalidatePath("/{{tableObj.pluralKebabCase}}/" + validatedFields.data.id + "/edit");
+
+  return {
+    message: "{{tableObj.singularCapitalCase}} updated successfully",
+    status: "success",
+  }
+}

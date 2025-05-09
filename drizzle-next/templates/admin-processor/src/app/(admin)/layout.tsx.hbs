@@ -1,0 +1,33 @@
+import { users } from "@/schema/users";
+import { redirect } from "next/navigation";
+import { db } from "@/config/db";
+import { eq } from "drizzle-orm";
+import { AdminLayout } from "@/app/(admin)/_components/admin-layout";
+import { authorize } from "@/lib/authorize";
+import { DarkModeScript } from "drizzle-admin/drizzle-ui";
+import "drizzle-admin/styles";
+
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await authorize("admin");
+
+  const userObj = await db.query.users.findFirst({
+    where: eq(users.id, session.user.id),
+  });
+
+  if (!userObj) {
+    redirect("/admin-signin");
+  }
+
+  return (
+    <AdminLayout userObj={userObj}>
+      {children}
+      <DarkModeScript />
+    </AdminLayout>
+  );
+}
+
+export const dynamic = "force-dynamic";

@@ -1,0 +1,27 @@
+import Link from "next/link";
+{{#if referencesColumnList.length}}
+import { db } from "@/config/db";
+{{/if}}
+import { {{tableObj.singularPascalCase}}CreateForm } from "../_components/{{tableObj.singularKebabCase}}-create-form";
+
+export default async function Page() {
+  {{#each referencesColumnList}}
+  const {{this.referenceTableVars.singularCamelCase}}List = await db.query.{{this.referenceTableVars.pluralCamelCase}}.findMany();
+  {{/each}}
+
+  return (
+    <div className="flex flex-col gap-3 p-3">
+      <div>New {{tableObj.singularCapitalCase}}</div>
+      <div className="[&>a]:underline">
+        <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
+      </div>
+      <div>
+        <{{tableObj.singularPascalCase}}CreateForm 
+          {{#each referencesColumnList}}
+          {{this.referenceTableVars.singularCamelCase}}List={ {{this.referenceTableVars.singularCamelCase}}List }
+          {{/each}}
+        />
+      </div>
+    </div>
+  );
+}

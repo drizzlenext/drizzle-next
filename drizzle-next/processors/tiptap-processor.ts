@@ -5,7 +5,7 @@ import {
   DrizzleNextConfig,
   DrizzleNextProcessor,
 } from "../../common/types/types";
-import { renderTemplate } from "../../common/lib/utils";
+import { renderTemplate } from "../lib/utils";
 
 export class TiptapProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
@@ -34,12 +34,12 @@ export class TiptapProcessor implements DrizzleNextProcessor {
   }
   async render(): Promise<void> {
     renderTemplate({
-      inputPath: "tiptap-processor/components/ui/tiptap-editor.tsx.hbs",
-      outputPath: "components/ui/tiptap-editor.tsx",
+      inputPath: "tiptap-processor/src/components/ui/tiptap-editor.tsx.hbs",
+      outputPath: "src/components/ui/tiptap-editor.tsx",
     });
     renderTemplate({
-      inputPath: "tiptap-processor/styles/tiptap-editor.css.hbs",
-      outputPath: "styles/tiptap-editor.css",
+      inputPath: "tiptap-processor/src/styles/tiptap-editor.css.hbs",
+      outputPath: "src/styles/tiptap-editor.css",
     });
   }
   printCompletionMessage() {

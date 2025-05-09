@@ -1,0 +1,14 @@
+import { eq } from "drizzle-orm";
+import { db } from "@/config/db";
+import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+
+export type {{tableObj.singularPascalCase}}Obj = Awaited<
+  ReturnType<typeof get{{tableObj.singularPascalCase}}ById>
+>;
+
+export async function get{{tableObj.singularPascalCase}}ById(id: {{pkStrategyJsType}}) {
+  return await db.query.{{tableObj.pluralCamelCase}}.findFirst({
+    where: eq({{tableObj.pluralCamelCase}}.id, id),
+    with: undefined,
+  });
+}

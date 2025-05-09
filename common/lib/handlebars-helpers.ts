@@ -22,3 +22,12 @@ export function registerHandlebarsHelpers() {
     }
   });
 }
+
+let runOnce = true;
+export function getHandlebars() {
+  if (runOnce) {
+    registerHandlebarsHelpers();
+    runOnce = false;
+  }
+  return Handlebars;
+}
