@@ -200,8 +200,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
       outputPath: "src/app/(auth)/_components/signin-form.tsx",
     });
     renderTemplate({
-      inputPath: "auth-processor/src/app/(auth)/_lib/signin-action.ts.hbs",
-      outputPath: "src/app/(auth)/_lib/signin-action.ts",
+      inputPath: "auth-processor/src/app/(auth)/_actions/signin.action.ts.hbs",
+      outputPath: "src/app/(auth)/_actions/signin.action.ts",
     });
     renderTemplate({
       inputPath: "auth-processor/src/app/(auth)/layout.tsx.hbs",
