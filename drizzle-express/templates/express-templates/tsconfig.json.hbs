@@ -8,14 +8,13 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "rootDirs": ["./src", "./scripts"],
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "types": ["node"],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*.ts", "scripts/**/*.ts"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

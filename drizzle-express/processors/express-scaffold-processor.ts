@@ -157,7 +157,7 @@ export class ExpressScaffoldProcessor {
     insertTextAfterIfNotExists(
       "src/app.ts",
       `import bodyParser from "body-parser";`,
-      `\nimport ${tableObj.singularCamelCase}Routes from "@/src/routes/${tableObj.singularKebabCase}.routes";`
+      `\nimport ${tableObj.singularCamelCase}Routes from "@/routes/${tableObj.singularKebabCase}.routes";`
     );
     insertTextAfterIfNotExists(
       "src/app.ts",

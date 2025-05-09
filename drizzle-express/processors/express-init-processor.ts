@@ -81,7 +81,7 @@ export class ExpressInitProcessor {
     });
 
     renderTemplate({
-      inputPath: "express-templates/env.hbs",
+      inputPath: `express-templates/env.${this.opts.dbDialect}.hbs`,
       outputPath: ".env",
     });
 

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import { {{tableObj.singularCamelCase}}Service } from "../services/{{tableObj.singularKebabCase}}.service";
+import { {{tableObj.singularCamelCase}}Service } from "@/services/{{tableObj.singularKebabCase}}.service";
 
 const {{tableObj.singularPascalCase}}Schema = z.object({
   {{#each validatedColumns}}
