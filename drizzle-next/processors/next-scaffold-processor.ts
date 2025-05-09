@@ -323,8 +323,8 @@ export class NextScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(development)/table/_lib/create-action.ts.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_lib/create-${tableObj.singularKebabCase}-action.ts`,
+        "scaffold-processor/src/app/(development)/table/_actions/create-action.ts.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_actions/create-${tableObj.singularKebabCase}.action.ts`,
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -356,8 +356,8 @@ export class NextScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(development)/table/_lib/update-action.ts.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_lib/update-${tableObj.singularKebabCase}-action.ts`,
+        "scaffold-processor/src/app/(development)/table/_actions/update-action.ts.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_actions/update-${tableObj.singularKebabCase}.action.ts`,
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -374,8 +374,8 @@ export class NextScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(development)/table/_lib/delete-action.ts.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_lib/delete-${tableObj.singularKebabCase}-action.ts`,
+        "scaffold-processor/src/app/(development)/table/_actions/delete-action.ts.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_actions/delete-${tableObj.singularKebabCase}.action.ts`,
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithIdAndTimestamps,
@@ -539,8 +539,8 @@ export class NextScaffoldProcessor {
     });
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(development)/table/_lib/get-by-id-action.ts.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_lib/get-${tableObj.singularKebabCase}-by-id.ts`,
+        "scaffold-processor/src/app/(development)/table/_queries/get-by-id.ts.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-by-id.query.ts`,
       data: {
         tableObj,
         pkStrategyJsType:
@@ -549,8 +549,8 @@ export class NextScaffoldProcessor {
     });
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(development)/table/_lib/get-list-action.ts.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_lib/get-${tableObj.singularKebabCase}-list.ts`,
+        "scaffold-processor/src/app/(development)/table/_queries/get-list.ts.hbs",
+      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-list.query.ts`,
       data: {
         tableObj,
         pkStrategyJsType:
