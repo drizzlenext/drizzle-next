@@ -2,7 +2,7 @@ import { spawn, spawnSync, exec } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
 import { log } from "./log";
-import packageDrizzleNextJson from "../../drizzle-next/package-pinned.json";
+import packageDrizzleNextJson from "../package-pinned.json";
 import {
   PackageManager,
   DrizzleNextConfig,
