@@ -1,16 +1,23 @@
 {
   "name": "drizzle-express",
-  "version": "0.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "sh ./scripts/test.sh"
+  "version": "0.0.1",
+  "bin": {
+    "drizzle-express": "dist/drizzle-express/index.js"
   },
-  "author": "",
+  "main": "dist/drizzle-express/index.js",
+  "scripts": {
+    "test": "sh ./scripts/test.sh",
+    "build": "rm -rf dist && tsc && cp -R templates dist/drizzle-express"
+  },
+  "author": "travisluong",
   "license": "MIT",
-  "description": "",
+  "description": "Express.js and Drizzle ORM Framework",
   "dependencies": {
     "@inquirer/prompts": "^7.5.0",
+    "chalk": "^5.4.1",
+    "change-case-all": "^2.1.0",
     "commander": "^13.1.0",
-    "handlebars": "^4.7.8"
+    "handlebars": "^4.7.8",
+    "pluralize": "^8.0.0"
   }
 }
