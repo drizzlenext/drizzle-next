@@ -25,7 +25,7 @@ import {
   GaugeIcon,
   SettingsIcon,
 } from "lucide-react";
-import { User } from "@/schema/users";
+import { SelectUser } from "@/schema/users";
 
 const config: DrizzleLayoutConfig = {
   nav: [{ text: "Home", link: "/" }],
@@ -53,7 +53,7 @@ export function AdminLayout({
   userObj,
 }: {
   children: ReactNode;
-  userObj: User;
+  userObj: SelectUser;
 }) {
   const pathname = usePathname();
 

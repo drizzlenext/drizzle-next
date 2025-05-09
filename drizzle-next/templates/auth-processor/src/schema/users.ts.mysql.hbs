@@ -19,4 +19,5 @@ export const users = mysqlTable("users", {
   {{updatedAtTemplate}}
 })
 
-export type User = typeof users.$inferSelect;
+export type SelectUser = typeof users.$inferSelect;
+export type InsertUser = typeof users.$inferInsert;

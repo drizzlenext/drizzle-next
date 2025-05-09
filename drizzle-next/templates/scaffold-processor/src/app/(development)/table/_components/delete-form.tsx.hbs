@@ -4,11 +4,11 @@ import { notFound } from "next/navigation";
 import { delete{{tableObj.singularPascalCase}}Action, Delete{{tableObj.singularPascalCase}}State } from "../_lib/delete-{{tableObj.singularKebabCase}}-action";
 import { Button } from "@/components/ui/button";
 import { startTransition, useActionState } from "react";
-import { {{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+import { Select{{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 import { Form, FormControl, FormMessage } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 
-export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularCamelCase}}Obj }: { {{tableObj.singularCamelCase}}Obj?: {{tableObj.singularPascalCase}} }) {
+export function {{tableObj.singularPascalCase}}DeleteForm({ {{tableObj.singularCamelCase}}Obj }: { {{tableObj.singularCamelCase}}Obj?: Select{{tableObj.singularPascalCase}} }) {
   const initialState: Delete{{tableObj.singularPascalCase}}State = {};
   const [state, dispatch] = useActionState(delete{{tableObj.singularPascalCase}}Action, initialState);
 

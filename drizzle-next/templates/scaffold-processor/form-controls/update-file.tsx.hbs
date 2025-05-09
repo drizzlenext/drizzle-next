@@ -2,7 +2,7 @@
         <Label htmlFor="{{validatedColumn.caseVariants.originalCamelCase}}">{{validatedColumn.caseVariants.originalCapitalCase}}</Label>
         { {{tableObj.singularCamelCase}}Obj.{{validatedColumn.caseVariants.originalCamelCase}}  && (
           <div>
-            <Link href={config.NEXT_PUBLIC_UPLOAD_BASE_URL +  {{tableObj.singularCamelCase}}Obj.{{validatedColumn.caseVariants.originalCamelCase}} }>{ {{tableObj.singularCamelCase}}Obj.{{validatedColumn.caseVariants.originalCamelCase}} }</Link>
+            <Link href={env.NEXT_PUBLIC_UPLOAD_BASE_URL +  {{tableObj.singularCamelCase}}Obj.{{validatedColumn.caseVariants.originalCamelCase}} }>{ {{tableObj.singularCamelCase}}Obj.{{validatedColumn.caseVariants.originalCamelCase}} }</Link>
           </div>
         )}
         <Input type="file" name="{{validatedColumn.caseVariants.originalCamelCase}}" id="{{validatedColumn.caseVariants.originalCamelCase}}" />

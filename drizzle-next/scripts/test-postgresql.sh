@@ -58,7 +58,7 @@ drizzle-next scaffold admin_scaffold -c integer_type:integer smallint_type:small
 drizzle-next scaffold private_scaffold -c text_field:text integer_field:integer real_field:real decimal_field:decimal boolean_field:boolean file_field:file timestamp_field:timestamp
 drizzle-next scaffold public_scaffold -c text_field:text integer_field:integer real_field:real decimal_field:decimal boolean_field:boolean file_field:file timestamp_field:timestamp
 drizzle-next scaffold category -c name:text
-drizzle-next scaffold post -c category_id:references_select title:text likes:integer published_at:timestamp content:text_tiptap
+drizzle-next scaffold post -c category_id:references_select title:text likes:integer published_at:timestamp content:text
 
 if [ "$RESET" = true ]; then
 npx drizzle-kit generate

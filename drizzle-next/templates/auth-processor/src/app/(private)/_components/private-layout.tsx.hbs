@@ -18,7 +18,7 @@ import {
   UserIcon,
 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
-import { User } from "@/schema/users";
+import { SelectUser } from "@/schema/users";
 import { usePathname } from "next/navigation";
 import { DropdownMenu, DropdownMenuList } from "@/components/ui/dropdown-menu";
 import { DarkModeToggle } from "@/components/ui/dark-mode";
@@ -36,7 +36,7 @@ export function PrivateLayout({
   userObj,
   children,
 }: {
-  userObj: User;
+  userObj: SelectUser;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();

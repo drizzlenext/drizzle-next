@@ -10,11 +10,11 @@ import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormMessage } from "@/components/ui/form";
 {{formControlsImports}}
 {{#if hasFileDataType}}
-import { config } from "@/lib/config";
+import { env } from "@/config/env";
 {{/if}}
-import { {{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+import { Select{{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
 {{#each referencesColumnList}}
-import { {{this.referenceTableVars.singularPascalCase}} } from "@/schema/{{this.referenceTableVars.pluralKebabCase}}";
+import { Select{{this.referenceTableVars.singularPascalCase}} } from "@/schema/{{this.referenceTableVars.pluralKebabCase}}";
 {{/each}}
 
 export function {{tableObj.singularPascalCase}}UpdateForm({ 
@@ -23,9 +23,9 @@ export function {{tableObj.singularPascalCase}}UpdateForm({
   {{this.referenceTableVars.singularCamelCase}}List,
   {{/each}}
 }: { 
-  {{tableObj.singularCamelCase}}Obj: {{tableObj.singularPascalCase}};
+  {{tableObj.singularCamelCase}}Obj: Select{{tableObj.singularPascalCase}};
   {{#each referencesColumnList}}
-  {{this.referenceTableVars.singularCamelCase}}List: {{this.referenceTableVars.singularPascalCase}}[];
+  {{this.referenceTableVars.singularCamelCase}}List: Select{{this.referenceTableVars.singularPascalCase}}[];
   {{/each}}
 }) {
   const initialState: Update{{tableObj.singularPascalCase}}State = {};
