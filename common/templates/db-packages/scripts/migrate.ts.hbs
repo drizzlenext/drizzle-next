@@ -1,5 +1,5 @@
 {{migratorImport}}
-import { openConnection } from "@/lib/db";
+import { openConnection } from "@/src/config/db";
 
 async function main() {
   const { db, closeConnection } = await openConnection();

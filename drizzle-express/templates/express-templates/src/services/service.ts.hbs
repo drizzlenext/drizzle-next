@@ -1,5 +1,5 @@
 import { db } from "@/src/config/db";
-import { {{tableObj.pluralCamelCase}} } from "@/src/schema/{{tableObj.pluralKebabCase}}";
+import { {{tableObj.pluralCamelCase}}, Insert{{tableObj.singularPascalCase}} } from "@/src/schema/{{tableObj.pluralKebabCase}}";
 import { eq } from "drizzle-orm";
 
 export const {{tableObj.singularCamelCase}}Service = {
@@ -13,22 +13,16 @@ export const {{tableObj.singularCamelCase}}Service = {
     });
   },
 
-  async create(data: any) {
+  async create(data: Insert{{tableObj.singularPascalCase}}) {
     await db.insert({{tableObj.pluralCamelCase}}).values(data);
   },
 
-  async update(id: string, data: any) {
-    await db
-      .update({{tableObj.pluralCamelCase}})
-      .set(data)
-      .where(eq({{tableObj.pluralCamelCase}}.id, id));
+  async update(id: string, data: Insert{{tableObj.singularPascalCase}}) {
+    await db.update({{tableObj.pluralCamelCase}}).set(data).where(eq({{tableObj.pluralCamelCase}}.id, id));
   },
 
-  async patch(id: string, data: any) {
-    await db
-      .update({{tableObj.pluralCamelCase}})
-      .set(data)
-      .where(eq({{tableObj.pluralCamelCase}}.id, id));
+  async patch(id: string, data: Insert{{tableObj.singularPascalCase}}) {
+    await db.update({{tableObj.pluralCamelCase}}).set(data).where(eq({{tableObj.pluralCamelCase}}.id, id));
   },
 
   async delete(id: string) {

@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
-
 import express from "express";
 import bodyParser from "body-parser";
+import { errorHandler } from "./middlewares/error-handler.middleware";
 
 const app = express();
-const port = 3001;
 
 app.use(bodyParser.json());
 
@@ -12,15 +11,6 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
-app.use((err: any, req: Request, res: Response, next: Function) => {
-  console.error(err.stack);
-  res.status(err.status || 500).json({
-    error: {
-      message: err.message || "Internal Server Error",
-    },
-  });
-});
+app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+export default app;

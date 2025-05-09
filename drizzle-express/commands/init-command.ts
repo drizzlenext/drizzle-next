@@ -40,8 +40,8 @@ initCommand
     ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"])
   )
   .option("--no-pluralize", "disable the pluralization of variable names", true)
-  .option("--no-install", "skip installation of dependencies")
-  .option("--latest", "install latest cutting edge dependencies")
+  .option("--no-install", "skip installation of dependencies", true)
+  .option("--latest", "install latest cutting edge dependencies", false)
   .action(async (options) => {
     try {
       // inquire
@@ -152,6 +152,8 @@ initCommand
       }
 
       if (completeConfig.install) {
+        await expressInitProcessor.install();
+
         await installDependencies({
           dependencies,
           packageManager: completeConfig.packageManager,
