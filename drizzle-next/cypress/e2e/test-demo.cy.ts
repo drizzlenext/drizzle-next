@@ -28,7 +28,7 @@ describe("shadriz e2e test", () => {
     cy.get('select[name="categoryId"]').select(1, { force: true });
     cy.get('input[name="title"]').type("hello world", { force: true });
     cy.get('input[name="publishedAt"]').type("2008-08-08", { force: true });
-    cy.get(".tiptap.ProseMirror").type("hello", { force: true });
+    cy.get('input[name="content"]').type("hello", { force: true });
     cy.contains("Submit").click();
     cy.get("div").contains("hello").should("exist");
   });
