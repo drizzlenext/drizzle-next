@@ -8,7 +8,7 @@ A scaffold is all of the starter code, including the UI and data layer, that is 
 
 After the initial configuration is completed from running the `init` command, you can create full stack scaffolding with the `scaffold` command.
 
-Given the table and column parameters, this command will generate the Next.js user interface, server actions, server components and client components. And it will also generate the Drizzle database table definition.
+Given the table and column parameters, this command will generate the Next.js UI, server actions, server components and client components. And it will also generate the Drizzle database table definition.
 
 The `-c` option takes a space-separated string of column configurations in the following format: `column_name:dataType`. The data types map directly to most of the available data types in Drizzle ORM. See [Data Types](#data-types) for a list of supported data types.
 
@@ -27,15 +27,6 @@ npx drizzle-next@latest scaffold products -c title:text price:integer descriptio
 :::info
 The table names will be transformed according to the [Naming Conventions](#naming-conventions) in this document.
 :::
-
-## Scaffolding Modes
-
-During the `init` command, you have the option to choose the `--framework`. This is used to control what type of scaffolding Drizzle Next will generate.
-
-- `next` - This is the default option. It will generate everything you need to start building full stack Next.js apps. Use case: If you plan to build full stack Next.js apps using the server components and server actions pattern with Drizzle ORM.
-- `express` - This mode will generate only Express.js API routes along with the Drizzle ORM schemas. Use case: If you need to quickly generate CRUD APIs that integrates both Express.js and Drizzle ORM.
-- `drizzle` - This mode will only setup Drizzle ORM. When you run scaffolds, it will only generate the Drizzle tables. Use case: If you want to use Drizzle Next's drizzle automation with other frameworks.
-- `all` - This option includes all of the above. This mode will generate full stack Next.js code, Drizzle tables, and Express.js API routes. Use case: If you want to build a full stack Next.js app, along with a separate Express API that leverages the same Drizzle tables.
 
 ## Data types
 
@@ -179,70 +170,42 @@ server {
 The Next.js `Image` component performs automatic resizing of images. This works well for static images. However, uploaded images will not show up immediately unless you use the `unoptimized` attribute. Alternatively, you can use a regular `img` tag.
 :::
 
-## Add-on Extensions
-
-<Badge type="warning" text="experimental" />
-
-Add-ons are full stack components that can be added after a project has been initialized.
-
-An add-on extension can be added using the `add` command.
-
-To see a list of available add-ons, run `npx drizzle-next@latest add -h`.
-
-The `add` command will install all necessary UI components, npm dependencies and dev dependencies for the add-on.
-
-Then it will write all of the necessary code for the add-on to your project.
-
-### Tiptap Editor
-
-```bash
-npx drizzle-next@latest add tiptap
-```
-
-This add-on will install several tiptap dependencies and write the code for a generic tiptap editor component.
-
-After installing the add-on, you'll be able to scaffold with a `text_tiptap` data type.
-
-For example:
-
-```bash
-npx drizzle-next@latest scaffold posts -c title:text content:text_tiptap
-```
-
 ## Project Structure
 
 ### Drizzle Next project structure.
 
 ```text
-- app
-  - (admin) - route group for the drizzle admin engine
-  - (auth) - route group for signin and signout feature
-  - (development) - route group where scaffolded code is placed
-  - (private) - route group requiring logged in user
-  - (public) - route group that is publicly accessible
-  - api - api routes
-  - uploads - upload route handler for serving uploaded files
-- components
-  - ui - customizable ui components
 - drizzle - sql migrations
-- lib - configuration and utilities
 - public - static assets
-- schema - drizzle schemas
 - scripts - executable scripts
-- styles - css
-- types - module augmentation and types
+- src
+  - app
+    - (admin) - route group for the drizzle admin engine
+    - (auth) - route group for signin and signout feature
+    - (development) - route group where scaffolded code is placed
+    - (private) - route group requiring logged in user
+    - (public) - route group that is publicly accessible
+    - api - api routes
+    - uploads - upload route handler for serving uploaded files
+  - components
+    - ui - customizable ui components
+  - config - configuration, db, env, etc
+  - lib - helpers and utilities
+  - schema - drizzle schemas
+  - types - types
 ```
 
 ### Scaffold structure
 
-Drizzle Next uses a feature based, instead of type based, structure for scaffolding. The actions, components, and utilities are colocated with the routes. This convention reduces the number of directories that need to be generated. The scaffolded code is meant to be changed and moved around by the developer.
+Drizzle Next uses a feature based, instead of type based, structure for scaffolding. The actions, components, and queries are colocated with the routes. This convention reduces the number of directories that need to be generated. The scaffolded code is meant to be changed and moved around by the developer.
 
 ```text
 - app
   - (development)
     - posts
+      - _actions
       - _components
-      - _lib
+      - _queries
       - [id]
       - new
 ```
@@ -255,7 +218,7 @@ The scaffolded code can be changed, moved around, deleted, or just saved as a re
 
 ## Awaited Return Types
 
-The `_lib` folder for each scaffold contains reusable queries and return types.
+The `_queries` folder for each scaffold contains reusable queries and return types.
 
 There are two main advantages to extracting queries into a separate module.
 
@@ -300,7 +263,7 @@ type PostObj = {
 Now we can annotate our components as needed without having to write the type ourself:
 
 ```tsx
-import { PostObj } from "../_lib/get-post-by-id";
+import { PostObj } from "../_queries/get-post-by-id.query";
 
 export function PostDetail({ postObj }: { postObj: PostObj }) {
   // ...
