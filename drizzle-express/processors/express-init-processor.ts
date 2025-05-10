@@ -47,7 +47,7 @@ export class ExpressInitProcessor {
     });
 
     await installDevDependencies({
-      devDependencies: ["drizzle-kit"],
+      devDependencies: ["drizzle-kit", "typescript"],
       packageManager: this.opts.packageManager,
       latest: this.opts.latest,
     });

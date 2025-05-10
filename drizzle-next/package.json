@@ -1,13 +1,13 @@
 {
   "name": "drizzle-next",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "main": "dist/drizzle-next/index.js",
   "bin": {
     "drizzle-next": "dist/drizzle-next/index.js"
   },
   "scripts": {
     "test": "vitest",
-    "build": "rm -rf ./dist && tsc && cp -R ../common/templates dist/common",
+    "build": "rm -rf ./dist && tsc && cp -R ../common/templates dist/common && cp -R templates dist/drizzle-next",
     "start": "node dist/index.js",
     "cypress": "cypress open",
     "test-postgresql": "sh ./scripts/test-postgresql.sh",

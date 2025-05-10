@@ -5,7 +5,7 @@ import {
   DbPackageStrategy,
   DbPackageStrategyOpts,
 } from "../types/types";
-import { appendToEnvLocal, renderTemplate } from "../lib/utils";
+import { appendToEnvLocal, isNextJsApp, renderTemplate } from "../lib/utils";
 
 export class PgPackageStrategy implements DbPackageStrategy {
   opts: DbPackageStrategyOpts;
@@ -40,7 +40,10 @@ export class PgPackageStrategy implements DbPackageStrategy {
   }
 
   appendDbUrl(): void {
-    appendToEnvLocal("DB_URL", "postgres://user:password@host:port/db");
+    appendToEnvLocal(
+      "DB_URL",
+      "postgres://postgres:postgres@localhost:5432/drizzle_next"
+    );
   }
 
   copyDbInstance(): void {
@@ -67,5 +70,9 @@ export class PgPackageStrategy implements DbPackageStrategy {
   printCompletionMessage(): void {
     log.checklist("pg checklist");
     log.task("update DB_URL in .env");
+    if (isNextJsApp()) {
+      log.cmdtask("npx drizzle-kit generate");
+      log.cmdtask("npx drizzle-kit migrate");
+    }
   }
 }

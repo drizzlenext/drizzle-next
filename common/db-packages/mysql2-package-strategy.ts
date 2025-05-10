@@ -8,6 +8,7 @@ import {
 import {
   appendToEnvLocal,
   insertTextAfterIfNotExists,
+  isNextJsApp,
   renderTemplate,
 } from "../lib/utils";
 
@@ -45,7 +46,10 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
   }
 
   appendDbUrl(): void {
-    appendToEnvLocal("DB_URL", "mysql://user:password@host:port/db");
+    appendToEnvLocal(
+      "DB_URL",
+      "mysql://root:password@localhost:3306/drizzle_next"
+    );
   }
 
   copyDbInstance(): void {
@@ -91,5 +95,9 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
   printCompletionMessage(): void {
     log.checklist("mysql2 checklist");
     log.task("update DB_URL in .env");
+    if (isNextJsApp()) {
+      log.cmdtask("npx drizzle-kit generate");
+      log.cmdtask("npx drizzle-kit migrate");
+    }
   }
 }

@@ -8,6 +8,7 @@ import {
 import {
   appendToEnvLocal,
   appendToFileIfTextNotExists,
+  isNextJsApp,
   renderTemplate,
 } from "../lib/utils";
 
@@ -73,5 +74,11 @@ export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
     appendToFileIfTextNotExists(".gitignore", "sqlite.db", "sqlite.db");
   }
 
-  printCompletionMessage(): void {}
+  printCompletionMessage(): void {
+    if (isNextJsApp()) {
+      log.checklist("better-sqlite3 checklist");
+      log.cmdtask("npx drizzle-kit generate");
+      log.cmdtask("npx drizzle-kit migrate");
+    }
+  }
 }

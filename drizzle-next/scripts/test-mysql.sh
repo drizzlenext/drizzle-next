@@ -4,8 +4,8 @@ drizzle_next() {
     tsx "$DRIZZLE_NEXT_PATH" "$@"
 }
 alias drizzle-next="drizzle_next"
-mysqlsh.exe -u root -e "drop database demo;" --sql
-mysqlsh.exe -u root -e "create database demo;" --sql
+mysqlsh.exe -u root -e "drop database drizzle_next;" --sql
+mysqlsh.exe -u root -e "create database drizzle_next;" --sql
 rm -rf ~/code/demo-mysql
 cd ~/code
 pnpm create next-app@latest demo-mysql --typescript --eslint --tailwind --app --src-dir --no-import-alias --turbopack

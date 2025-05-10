@@ -18,8 +18,8 @@ drizzle_next() {
 alias drizzle-next="drizzle_next"
 
 if [ "$RESET" = true ]; then
-PGPASSWORD=postgres dropdb -p 5432 -U postgres demo
-PGPASSWORD=postgres createdb -p 5432 -U postgres demo
+PGPASSWORD=postgres dropdb -p 5432 -U postgres drizzle_next
+PGPASSWORD=postgres createdb -p 5432 -U postgres drizzle_next
 rm -rf ~/code/demo-postgresql
 fi
 
@@ -50,8 +50,8 @@ drizzle-next init --package-manager pnpm \
     --no-install
 fi
 
-cp ~/code/drizzle-next-env/.env.postgresql .env
-cp ~/code/drizzle-next/drizzle-next/templates/test-scripts/.prettierrc.hbs .prettierrc
+# cp ~/code/drizzle-next-env/.env.postgresql .env
+cp ~/code/drizzle-next/common/templates/test-scripts/.prettierrc.hbs .prettierrc
 drizzle-next scaffold admin_scaffold -c integer_type:integer smallint_type:smallint bigint_type:bigint serial_type:serial bigserial_type:bigserial boolean_type:boolean text_type:text varchar_type:varchar char_type:char numeric_type:numeric decimal_type:decimal real_type:real double_precision_type:doublePrecision json_type:json jsonb_type:jsonb time_type:time timestamp_type:timestamp: date_type:date file_type:file
 drizzle-next scaffold private_scaffold -c text_field:text integer_field:integer real_field:real decimal_field:decimal boolean_field:boolean file_field:file timestamp_field:timestamp
 drizzle-next scaffold public_scaffold -c text_field:text integer_field:integer real_field:real decimal_field:decimal boolean_field:boolean file_field:file timestamp_field:timestamp

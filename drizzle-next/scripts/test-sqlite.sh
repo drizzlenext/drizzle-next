@@ -14,7 +14,7 @@ drizzle-next init --package-manager pnpm \
     --auth \
     --no-admin \
     --latest
-cp ~/code/drizzle-next-env/.env.sqlite .env
+# cp ~/code/drizzle-next-env/.env.sqlite .env
 cp ~/code/drizzle-next/drizzle-next/templates/test-scripts/load-fake-data.ts.hbs scripts/load-fake-data.ts
 # pnpm i ../drizzle-next/drizzle-admin
 drizzle-next scaffold private_scaffold -c text_type:text integer_type:integer real_type:real boolean_type:boolean file_type:file timestamp_type:timestamp

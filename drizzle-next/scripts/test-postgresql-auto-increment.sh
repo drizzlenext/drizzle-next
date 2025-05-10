@@ -5,8 +5,8 @@ drizzle_next() {
 }
 alias drizzle-next="drizzle_next"
 
-PGPASSWORD=postgres dropdb -p 5432 -U postgres demo
-PGPASSWORD=postgres createdb -p 5432 -U postgres demo
+PGPASSWORD=postgres dropdb -p 5432 -U postgres drizzle_next
+PGPASSWORD=postgres createdb -p 5432 -U postgres drizzle_next
 rm -rf ~/code/demo-postgresql
 cd ~/code
 pnpm create next-app@latest demo-postgresql --typescript --eslint --tailwind --app --src-dir --no-import-alias --turbopack
