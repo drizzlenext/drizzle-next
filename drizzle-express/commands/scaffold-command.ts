@@ -12,8 +12,8 @@ scaffoldCommand
     `scaffold express.js api and drizzle database table
 
 examples:
-npx drizzle-next@latest scaffold category -c name:text
-npx drizzle-next@latest scaffold post -c category_id:references title:text content:text is_published:boolean
+npx drizzle-express@latest scaffold category -c name:text
+npx drizzle-express@latest scaffold post -c category_id:references title:text content:text is_published:boolean
 
 postgresql data types:
 integer, smallint, bigint, serial, smallserial, bigserial, boolean, text, varchar, char, numeric, decimal, real, doublePrecision, json, jsonb, time, timestamp, date, uuid

@@ -27,7 +27,7 @@ features:
     details: A collection of customizable UI components with minimal dependencies.
   - icon: 🚂
     title: Drizzle Express
-    details: A CLI tool for generating Express APIs with Drizzle ORM integration.
+    details: A CLI tool for generating Express APIs with Drizzle ORM.
   - icon:
       src: https://cdn.simpleicons.org/Next.js/gray
     title: Next.js
