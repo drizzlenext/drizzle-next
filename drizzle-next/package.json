@@ -1,6 +1,6 @@
 {
   "name": "drizzle-next",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "main": "dist/drizzle-next/index.js",
   "bin": {
     "drizzle-next": "dist/drizzle-next/index.js"
