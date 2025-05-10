@@ -76,17 +76,20 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
    */
   addServerComponentExternalPackageToNextConfig() {
     const text = `\n  serverExternalPackages: ["mysql2"],`;
-    insertTextAfterIfNotExists(
-      "next.config.ts",
-      "const nextConfig: NextConfig = {",
-      text
-    );
+    // only needed for drizzle-next. silently fails for drizzle-express.
+    try {
+      insertTextAfterIfNotExists(
+        "next.config.ts",
+        "const nextConfig: NextConfig = {",
+        text
+      );
+    } catch (error) {
+      // do nothing
+    }
   }
 
   printCompletionMessage(): void {
     log.checklist("mysql2 checklist");
     log.task("update DB_URL in .env");
-    log.cmdtask("npx drizzle-kit generate");
-    log.cmdtask("npx drizzle-kit migrate");
   }
 }

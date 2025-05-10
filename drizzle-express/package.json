@@ -7,7 +7,7 @@
   "main": "dist/drizzle-express/index.js",
   "scripts": {
     "test": "sh ./scripts/test.sh",
-    "build": "rm -rf dist && tsc && cp -R templates dist/drizzle-express"
+    "build": "rm -rf dist && tsc && cp -R templates dist/drizzle-express && cp -R ../common/templates dist/common"
   },
   "author": "travisluong",
   "license": "MIT",

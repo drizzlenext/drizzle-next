@@ -73,9 +73,5 @@ export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
     appendToFileIfTextNotExists(".gitignore", "sqlite.db", "sqlite.db");
   }
 
-  printCompletionMessage(): void {
-    log.checklist("better-sqlite3 checklist");
-    log.cmdtask("npx drizzle-kit generate");
-    log.cmdtask("npx drizzle-kit migrate");
-  }
+  printCompletionMessage(): void {}
 }

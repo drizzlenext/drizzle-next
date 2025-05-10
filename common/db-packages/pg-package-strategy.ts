@@ -67,7 +67,5 @@ export class PgPackageStrategy implements DbPackageStrategy {
   printCompletionMessage(): void {
     log.checklist("pg checklist");
     log.task("update DB_URL in .env");
-    log.cmdtask("npx drizzle-kit generate");
-    log.cmdtask("npx drizzle-kit migrate");
   }
 }
