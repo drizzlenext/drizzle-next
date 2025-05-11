@@ -1,6 +1,6 @@
 # Drizzle Express
 
-A CLI tool for generating Express APIs with Drizzle ORM.
+Drizzle Express is a framework for generating REST APIs built with Express.js and Drizzle ORM.
 
 ## Documentation
 

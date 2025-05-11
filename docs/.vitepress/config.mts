@@ -10,8 +10,9 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Drizzle Next", link: "/drizzle-next/" },
-      { text: "Drizzle Admin", link: "/drizzle-admin/"},
+      { text: "Drizzle Admin", link: "/drizzle-admin/" },
       { text: "Drizzle UI", link: "/drizzle-ui/" },
+      { text: "Drizzle Express", link: "/drizzle-express/" },
       { text: "About", link: "/about/" },
       { text: "Demo", link: "https://demo.drizzlenext.com" },
     ],
@@ -22,18 +23,38 @@ export default defineConfig({
         items: [
           // { text: "Markdown Examples", link: "/markdown-examples" },
           // { text: "Runtime API Examples", link: "/api-examples" },
-          { text: "Drizzle Next", link: "/drizzle-next/", items: [
-            { text: "Installation", link: "/drizzle-next/installation" },
-            { text: "Guide", link: "/drizzle-next/guide" },
-          ]},
-          { text: "Drizzle Admin", link: "/drizzle-admin/", items: [
-            { text: "Installation", link: "/drizzle-admin/installation"},
-            { text: "Guide", link: "/drizzle-admin/guide"},
-          ]},
-          { text: "Drizzle UI", link: "/drizzle-ui/", items: [
-            { text: "Installation", link: "/drizzle-ui/installation"},
-            { text: "Guide", link: "/drizzle-ui/guide"}
-          ]},
+          {
+            text: "Drizzle Next",
+            link: "/drizzle-next/",
+            items: [
+              { text: "Installation", link: "/drizzle-next/installation" },
+              { text: "Guide", link: "/drizzle-next/guide" },
+            ],
+          },
+          {
+            text: "Drizzle Admin",
+            link: "/drizzle-admin/",
+            items: [
+              { text: "Installation", link: "/drizzle-admin/installation" },
+              { text: "Guide", link: "/drizzle-admin/guide" },
+            ],
+          },
+          {
+            text: "Drizzle UI",
+            link: "/drizzle-ui/",
+            items: [
+              { text: "Installation", link: "/drizzle-ui/installation" },
+              { text: "Guide", link: "/drizzle-ui/guide" },
+            ],
+          },
+          {
+            text: "Drizzle Express",
+            link: "/drizzle-express/",
+            items: [
+              { text: "Installation", link: "/drizzle-express/installation" },
+              { text: "Guide", link: "/drizzle-express/guide" },
+            ],
+          },
           { text: "About", link: "/about" },
         ],
       },
@@ -70,6 +91,6 @@ export default defineConfig({
       gtag('js', new Date());
       gtag('config', 'G-FR34HJSEG9');`,
     ],
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
+    ["link", { rel: "icon", href: "/favicon.ico" }],
   ],
 });

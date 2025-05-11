@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: "Drizzle Next"
-  text: "Full Stack Next.js and Drizzle ORM Framework"
-  tagline: Generate apps using CLI commands inspired by Ruby on Rails and shadcn/ui
+  text: "The Full Stack Developer's TypeScript Toolkit"
+  tagline: Generate full stack Next.js apps, Admin dashboards, UI components, Express.js APIs, and Drizzle ORM schemas using CLI tools inspired by Ruby on Rails and shadcn/ui.
   image: https://drizzlenext.github.io/drizzle-assets/logo.webp
   actions:
     - theme: brand

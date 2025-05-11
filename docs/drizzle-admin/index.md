@@ -2,35 +2,48 @@
 
 Drizzle Admin is a React component that turns your Drizzle schema into an admin dashboard.
 
-## Example
+## Why Drizzle Admin?
 
-Here's a quick usage demo.
+1. You need a generic dashboard to manage data, as opposed to a custom dashboard.
+2. You don't want to build or maintain a custom dashboard.
+3. You want to save time by using a packaged dashboard solution.
+
+## Introduction
+
+Drizzle Admin is an npm package that transforms your Drizzle schema into a ready-to-use admin dashboard.
+
+It abstracts common CRUD operations into a reusable React component, allowing you to manage your data with minimal setup.
+
+**Should you use Drizzle Admin?**
+
+If your project requires a straightforward admin dashboard, such as a basic Content Management System, Drizzle Admin is a good fit. You can customize the dashboard by overriding Next.js pages and components as needed.
+
+For projects that demand complete control and advanced customization, building a custom dashboard from scratch may be more appropriate.
+
+## Example
 
 You have one or more Drizzle tables.
 
 ```tsx
-import {
-  pgTable,
-  text,
-  integer,
-  timestamp,
-} from "drizzle-orm/pg-core";
+import { pgTable, text, integer, timestamp } from "drizzle-orm/pg-core";
 
 import { categories } from "@/schema/categories";
 
-export const posts = pgTable(
-  "posts",
-  {
-    id: text().primaryKey().$defaultFn(() => crypto.randomUUID()),
-    categoryId: text().references(() => categories.id),
-    title: text(),
-    likes: integer(),
-    publishedAt: timestamp(),
-    content: text(),
-    createdAt: timestamp().notNull().defaultNow(),
-    updatedAt: timestamp().notNull().defaultNow().$onUpdate(() => new Date()),
-  }
-)
+export const posts = pgTable("posts", {
+  id: text()
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  categoryId: text().references(() => categories.id),
+  title: text(),
+  likes: integer(),
+  publishedAt: timestamp(),
+  content: text(),
+  createdAt: timestamp().notNull().defaultNow(),
+  updatedAt: timestamp()
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+});
 ```
 
 You can add the table to the `drizzle-admin.config.ts`:
@@ -48,7 +61,6 @@ export const config: DrizzleAdminConfig = {
   db: db,
   dbDialect: "postgresql",
 };
-
 ```
 
 And then pass the config into the `DrizzleAdmin` component:
@@ -72,7 +84,6 @@ export default async function Page(props: {
     />
   );
 }
-
 ```
 
 You'll get a customizable admin dashboard where you can manage your data.
