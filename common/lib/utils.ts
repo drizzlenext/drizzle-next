@@ -7,6 +7,7 @@ import {
   PackageManager,
   DrizzleNextConfig,
   DrizzleExpressConfig,
+  DrizzleUtilConfig,
 } from "../types/types";
 import { caseFactory } from "./case-utils";
 import { register } from "esbuild-register/dist/node";
@@ -429,6 +430,13 @@ export function loadDrizzleExpressConfig(): DrizzleExpressConfig {
   return drizzleExpressConfig;
 }
 
+export function loadDrizzleUtilConfig(): DrizzleUtilConfig {
+  const drizzleUtilConfig = require(
+    path.join(process.cwd(), "./drizzle-util.config.ts")
+  ).default;
+  return drizzleUtilConfig;
+}
+
 export function writeDrizzleExpressConfig(
   completeConfig: DrizzleExpressConfig
 ) {
@@ -438,6 +446,15 @@ export function writeDrizzleExpressConfig(
     2
   )};\n\nexport default drizzleExpressConfig;`;
   writeToFile("drizzle-express.config.ts", configTsContent);
+}
+
+export function writeDrizzleUtilConfig(completeConfig: DrizzleUtilConfig) {
+  const configTsContent = `const drizzleUtilConfig = ${JSON.stringify(
+    completeConfig,
+    null,
+    2
+  )};\n\nexport default drizzleUtilConfig;`;
+  writeToFile("drizzle-util.config.ts", configTsContent);
 }
 
 export function completeDrizzleNextConfig(
@@ -462,6 +479,22 @@ export function completeDrizzleExpressConfig(
   partialConfig: Partial<DrizzleExpressConfig>
 ): DrizzleExpressConfig {
   const completeConfig: DrizzleExpressConfig = {
+    version: partialConfig.version ?? "",
+    packageManager: partialConfig.packageManager ?? "npm",
+    latest: partialConfig.latest ?? false,
+    dbDialect: partialConfig.dbDialect ?? "sqlite",
+    dbPackage: partialConfig.dbPackage ?? "better-sqlite3",
+    pkStrategy: partialConfig.pkStrategy ?? "uuidv4",
+    install: partialConfig.install ?? true,
+    pluralizeEnabled: partialConfig.pluralizeEnabled ?? true,
+  };
+  return completeConfig;
+}
+
+export function completeDrizzleUtilConfig(
+  partialConfig: Partial<DrizzleUtilConfig>
+): DrizzleUtilConfig {
+  const completeConfig: DrizzleUtilConfig = {
     version: partialConfig.version ?? "",
     packageManager: partialConfig.packageManager ?? "npm",
     latest: partialConfig.latest ?? false,

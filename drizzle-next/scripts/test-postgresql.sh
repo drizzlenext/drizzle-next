@@ -18,8 +18,8 @@ drizzle_next() {
 alias drizzle-next="drizzle_next"
 
 if [ "$RESET" = true ]; then
-PGPASSWORD=postgres dropdb -p 5432 -U postgres drizzle_next
-PGPASSWORD=postgres createdb -p 5432 -U postgres drizzle_next
+PGPASSWORD=postgres dropdb -p 5432 -U postgres drizzle_demo
+PGPASSWORD=postgres createdb -p 5432 -U postgres drizzle_demo
 rm -rf ~/code/demo-postgresql
 fi
 

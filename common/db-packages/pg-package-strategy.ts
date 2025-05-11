@@ -42,7 +42,7 @@ export class PgPackageStrategy implements DbPackageStrategy {
   appendDbUrl(): void {
     appendToEnvLocal(
       "DB_URL",
-      "postgres://postgres:postgres@localhost:5432/drizzle_next"
+      "postgres://postgres:postgres@localhost:5432/drizzle_demo"
     );
   }
 

@@ -19,8 +19,8 @@ alias drizzle-express="drizzle_express"
 
 if [ "$RESET" = true ]; then
 rm -rf ~/code/demo-drizzle-express
-PGPASSWORD=postgres dropdb -p 5432 -U postgres drizzle_express
-PGPASSWORD=postgres createdb -p 5432 -U postgres drizzle_express
+PGPASSWORD=postgres dropdb -p 5432 -U postgres drizzle_demo
+PGPASSWORD=postgres createdb -p 5432 -U postgres drizzle_demo
 fi
 
 cd ~/code

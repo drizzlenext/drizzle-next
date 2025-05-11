@@ -137,9 +137,9 @@ initCommand
       const dbDialectProcessor = new DbDialectProcessor(completeConfig);
       const expressInitProcessor = new ExpressInitProcessor(completeConfig);
 
-      processors.push(expressInitProcessor);
-      processors.push(dbPackageStrategy);
       processors.push(dbDialectProcessor);
+      processors.push(dbPackageStrategy);
+      processors.push(expressInitProcessor);
 
       const dependencies: string[] = [];
       const devDependencies: string[] = [];

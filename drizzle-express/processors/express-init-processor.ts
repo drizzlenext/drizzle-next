@@ -58,38 +58,27 @@ export class ExpressInitProcessor {
       inputPath: "express-templates/src/app.ts.hbs",
       outputPath: "src/app.ts",
     });
-
     renderTemplate({
       inputPath: "express-templates/src/server.ts.hbs",
       outputPath: "src/server.ts",
     });
-
     insertTextAfterIfNotExists(
       "package.json",
       `"scripts": {`,
       `\n    "dev": "nodemon --watch src --exec tsx src/server.ts",`
     );
-
     renderTemplate({
       inputPath: "express-templates/tsconfig.json.hbs",
       outputPath: "tsconfig.json",
     });
-
     renderTemplate({
       inputPath: "express-templates/.gitignore.hbs",
       outputPath: ".gitignore",
     });
-
-    renderTemplate({
-      inputPath: `express-templates/env.${this.opts.dbDialect}.hbs`,
-      outputPath: ".env",
-    });
-
     renderTemplate({
       inputPath: "express-templates/src/config/env.ts.hbs",
       outputPath: "src/config/env.ts",
     });
-
     renderTemplate({
       inputPath:
         "express-templates/src/middlewares/error-handler.middleware.ts.hbs",

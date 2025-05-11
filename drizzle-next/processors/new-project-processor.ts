@@ -65,10 +65,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       inputPath: "new-project-processor/src/config/env.ts.hbs",
       outputPath: "src/config/env.ts",
     });
-    renderTemplateIfNotExists({
-      inputPath: "new-project-processor/.env.hbs",
-      outputPath: ".env",
-    });
     renderTemplate({
       inputPath: "new-project-processor/src/app/layout.tsx.hbs",
       outputPath: "src/app/layout.tsx",

@@ -16,6 +16,8 @@ export type DrizzleNextConfig = {
 
 export type DrizzleExpressConfig = {} & DrizzleBaseConfig;
 
+export type DrizzleUtilConfig = {} & DrizzleBaseConfig;
+
 export type PackageManager = "npm" | "pnpm" | "bun";
 
 export type PkStrategy =

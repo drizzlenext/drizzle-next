@@ -48,7 +48,7 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
   appendDbUrl(): void {
     appendToEnvLocal(
       "DB_URL",
-      "mysql://root:password@localhost:3306/drizzle_next"
+      "mysql://root:password@localhost:3306/drizzle_demo"
     );
   }
 

@@ -531,7 +531,7 @@ export class NextScaffoldProcessor {
     return html;
   }
   printCompletionMessage() {
-    log.success("successfully scaffolded nextjs" + this.opts.table);
+    log.success("successfully scaffolded nextjs " + this.opts.table);
   }
   addQueries() {
     const tableObj = caseFactory(this.opts.table, {

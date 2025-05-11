@@ -1,16 +1,14 @@
 import { Command, Option } from "commander";
 import { log } from "../../common/lib/log";
-import { BaseProcessor, DrizzleNextConfig } from "../../common/types/types";
-import { select, confirm } from "@inquirer/prompts";
+import { BaseProcessor, DrizzleUtilConfig } from "../../common/types/types";
+import { select } from "@inquirer/prompts";
 import {
-  completeDrizzleNextConfig,
+  completeDrizzleUtilConfig,
   installDependencies,
   installDevDependencies,
+  writeDrizzleUtilConfig,
 } from "../../common/lib/utils";
 import { packageStrategyFactory } from "../../common/lib/strategy-factory";
-import { AuthProcessor, authStrategyMap } from "../processors/auth-processor";
-import { NewProjectProcessor } from "../processors/new-project-processor";
-import { AdminProcessor } from "../processors/admin-processor";
 import { DbDialectProcessor } from "../../common/processors/db-dialect-processor";
 import packageJson from "../package.json";
 import { pkDependencies } from "../../common/lib/pk-strategy";
@@ -20,7 +18,7 @@ export const initCommand = new Command("init");
 const VERSION = packageJson["version"];
 
 initCommand
-  .description("initialize next.js project for development with drizzle-next")
+  .description("initialize express.js and drizzle orm project")
   .addOption(
     new Option(
       "--package-manager <manager>",
@@ -40,18 +38,14 @@ initCommand
       "primary key generation strategy"
     ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"])
   )
-  .option("--auth", "install auth.js authentication")
-  .option("--no-auth", "skip installation of auth.js")
-  .option("--admin", "generate admin dashboard with role-based authorization")
-  .option("--no-admin", "skip generation of admin dashboard")
   .option("--no-pluralize", "disable the pluralization of variable names", true)
-  .option("--no-install", "skip installation of dependencies")
-  .option("--latest", "install latest cutting edge dependencies")
+  .option("--no-install", "skip installation of dependencies", true)
+  .option("--latest", "install latest cutting edge dependencies", false)
   .action(async (options) => {
     try {
       // inquire
 
-      const partialConfig: Partial<DrizzleNextConfig> = {};
+      const partialConfig: Partial<DrizzleUtilConfig> = {};
       partialConfig.version = VERSION;
 
       partialConfig.packageManager =
@@ -121,29 +115,6 @@ initCommand
             },
           ],
         }));
-      partialConfig.authEnabled =
-        options.auth ??
-        (await confirm({
-          message: "Do you want to add Auth.js authentication?",
-          default: true,
-        }));
-      if (
-        partialConfig.pkStrategy === "auto_increment" &&
-        partialConfig.authEnabled
-      ) {
-        log.red("auto_increment is not compatible with authjs");
-        process.exit(1);
-      }
-      if (partialConfig.authEnabled) {
-        partialConfig.adminEnabled =
-          options.admin ??
-          (await confirm({
-            message: "Do you want to add an admin dashboard?",
-            default: true,
-          }));
-      } else {
-        partialConfig.adminEnabled = false;
-      }
 
       partialConfig.pluralizeEnabled = options.pluralize;
 
@@ -153,46 +124,28 @@ initCommand
 
       const processors: BaseProcessor[] = [];
 
-      const completeConfig = completeDrizzleNextConfig(partialConfig);
+      const completeConfig = completeDrizzleUtilConfig(partialConfig);
 
-      const newProjectProcessor = new NewProjectProcessor(completeConfig);
+      writeDrizzleUtilConfig(completeConfig);
 
-      await newProjectProcessor.install();
-
-      const dbPackageStrategy = packageStrategyFactory(completeConfig);
       const dbDialectProcessor = new DbDialectProcessor(completeConfig);
+      const dbPackageStrategy = packageStrategyFactory({
+        authEnabled: false,
+        dbPackage: completeConfig.dbPackage,
+        pluralizeEnabled: completeConfig.pluralizeEnabled,
+      });
 
       processors.push(dbDialectProcessor);
       processors.push(dbPackageStrategy);
-      processors.push(newProjectProcessor);
 
-      let authProcessor;
-      let adminProcessor;
-
-      if (completeConfig.authEnabled) {
-        authProcessor = new AuthProcessor(completeConfig);
-        processors.push(authProcessor);
-      }
-      if (completeConfig.adminEnabled) {
-        adminProcessor = new AdminProcessor(completeConfig);
-        processors.push(adminProcessor);
-      }
-
-      const dependencies = [];
-      const devDependencies = [];
+      const dependencies: string[] = [];
+      const devDependencies: string[] = [];
 
       dependencies.push(...pkDependencies[completeConfig.pkStrategy]);
 
       for (const processor of processors) {
         dependencies.push(...processor.dependencies);
         devDependencies.push(...processor.devDependencies);
-      }
-
-      for (const authProvider in authStrategyMap) {
-        const authStrategy =
-          authStrategyMap[authProvider as keyof typeof authStrategyMap];
-        dependencies.push(...authStrategy.dependencies);
-        devDependencies.push(...authStrategy.devDependencies);
       }
 
       if (completeConfig.install) {
@@ -213,7 +166,7 @@ initCommand
         await processor.init();
       }
 
-      log.success("successfully initialized drizzle-next");
+      log.success("successfully initialized drizzle");
 
       for (const processor of processors) {
         processor.printCompletionMessage();
