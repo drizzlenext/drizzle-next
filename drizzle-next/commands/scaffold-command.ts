@@ -33,13 +33,6 @@ integer, real, text, boolean, bigint, timestamp
   .action(async (table, options) => {
     const drizzleNextConfig: DrizzleNextConfig = loadDrizzleNextConfig();
 
-    const drizzleScaffoldProcessor = new DrizzleScaffoldProcessor({
-      table: table,
-      columns: options.columns,
-      enableCompletionMessage: true,
-      ...drizzleNextConfig,
-    });
-
     const nextScaffoldProcessor = new NextScaffoldProcessor({
       table: table,
       columns: options.columns,
@@ -47,7 +40,14 @@ integer, real, text, boolean, bigint, timestamp
       ...drizzleNextConfig,
     });
 
-    drizzleScaffoldProcessor.process();
+    const drizzleScaffoldProcessor = new DrizzleScaffoldProcessor({
+      table: table,
+      columns: options.columns,
+      enableCompletionMessage: true,
+      ...drizzleNextConfig,
+    });
 
     nextScaffoldProcessor.process();
+
+    drizzleScaffoldProcessor.process();
   });

@@ -21,7 +21,7 @@ export class AdminProcessor implements DrizzleNextProcessor {
   }
 
   async init(): Promise<void> {
-    log.init("initializing admin...");
+    log.init("initializing admin");
     await this.render();
   }
 

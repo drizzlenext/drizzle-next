@@ -148,7 +148,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
   dbDialectStrategy: DbDialectStrategy;
 
   async init() {
-    log.init("initializing auth...");
+    log.init("initializing auth");
     await this.render();
   }
 

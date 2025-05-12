@@ -23,7 +23,7 @@ export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
   }
 
   async init() {
-    log.init("initializing better-sqlite3 package...");
+    log.init("initializing better-sqlite3 package");
     await this.render();
   }
 

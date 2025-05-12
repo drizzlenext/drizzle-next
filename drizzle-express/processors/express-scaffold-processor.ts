@@ -115,7 +115,7 @@ export class ExpressScaffoldProcessor {
   }
 
   process(): void {
-    log.init(`scaffolding ${this.opts.table}...`);
+    log.init(`generate express.js scaffold: ${this.opts.table}`);
     this.addExpressRoute();
     if (this.opts.enableCompletionMessage) {
       this.printCompletionMessage();
@@ -167,6 +167,8 @@ export class ExpressScaffoldProcessor {
   }
 
   printCompletionMessage() {
-    log.success("successfully scaffolded express " + this.opts.table);
+    log.success(
+      "successfully generated express.js scaffold: " + this.opts.table
+    );
   }
 }

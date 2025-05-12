@@ -23,7 +23,7 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
   }
 
   async init() {
-    log.init("initializing mysql2 package...");
+    log.init("initializing mysql2 package");
     await this.render();
   }
 

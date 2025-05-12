@@ -11,7 +11,7 @@ export class DbDialectProcessor implements BaseProcessor {
   }
 
   async init(): Promise<void> {
-    log.init("initializing db dialect...");
+    log.init("initializing db dialect");
     await this.render();
   }
 

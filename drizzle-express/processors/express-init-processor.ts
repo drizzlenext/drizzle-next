@@ -19,7 +19,7 @@ export class ExpressInitProcessor {
   }
 
   async init() {
-    log.init("initializing new project...");
+    log.init("initializing new project");
     await this.render();
   }
 

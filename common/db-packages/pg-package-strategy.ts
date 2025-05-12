@@ -18,7 +18,7 @@ export class PgPackageStrategy implements DbPackageStrategy {
   }
 
   async init() {
-    log.init("initializing pg package...");
+    log.init("initializing pg package");
     await this.render();
   }
 

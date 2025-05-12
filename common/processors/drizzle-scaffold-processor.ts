@@ -137,7 +137,7 @@ export class DrizzleScaffoldProcessor {
   }
 
   process(): void {
-    log.init(`scaffolding ${this.opts.table}...`);
+    log.init(`generate drizzle scaffold: ${this.opts.table}`);
     this.addSchema();
     insertSchemaToSchemaIndex(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -264,7 +264,7 @@ export class DrizzleScaffoldProcessor {
     return referencesColumnList;
   }
   printCompletionMessage() {
-    log.success("successfully scaffolded " + this.opts.table);
+    log.success("successfully generated drizzle scaffold: " + this.opts.table);
     log.checklist("scaffold checklist");
     log.cmdtask("npx drizzle-kit generate");
     log.cmdtask("npx drizzle-kit migrate");
