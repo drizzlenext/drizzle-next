@@ -6,7 +6,7 @@ This guide covers the usage details of Drizzle Express.
 
 A scaffold, in Drizzle Express, is all of the starter code, including the routes, controller, service, and schema, that is required to have a fully functional CRUD API.
 
-After the initial configuration is completed from running the `init` command, you can create full stack scaffolding with the `scaffold` command.
+After the initial configuration is completed from running the `init` command, you can create REST API scaffolding with the `scaffold` command.
 
 The `-c` option takes a space-separated string of column configurations in the following format: `column_name:dataType`. The data types map directly to most of the available data types in Drizzle ORM. See [Data Types](/drizzle-next/guide.html#data-types) for a list of supported data types.
 

@@ -14,4 +14,4 @@ Drizzle Express enables rapid REST API development with a CLI tool inspired by R
 
 With Drizzle Express, you can generate a complete Express.js API project structure and scaffold resources in minutes. Its configuration defaults and automated scaffolding save setup time and reduce boilerplate.
 
-Drizzle Express follows the RCSS architecture: Route → Controller → Service → Schema, inspired by Spring Boot. This approach is scalable, modular, and easy to test.
+Drizzle Express follows this standard architecture: Route → Controller → Service → Schema. This approach is scalable, modular, and easy to test.

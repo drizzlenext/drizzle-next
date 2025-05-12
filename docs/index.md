@@ -28,6 +28,9 @@ features:
   - icon: 🚂
     title: Drizzle Express
     details: A CLI tool for generating Express APIs with Drizzle ORM.
+  - icon: 🧰
+    title: Drizzle Util
+    details: A CLI tool to help you quickly generate Drizzle ORM configuration and schemas.
   - icon:
       src: https://cdn.simpleicons.org/Next.js/gray
     title: Next.js
