@@ -1,6 +1,6 @@
 # Drizzle Util
 
-Drizzle Utilities - Scaffold Generator
+Drizzle ORM Utilities - Scaffold Generator
 
 ## Documentation
 
