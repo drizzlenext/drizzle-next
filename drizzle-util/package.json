@@ -1,15 +1,23 @@
 {
   "name": "drizzle-util",
   "version": "0.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "dist/drizzle-util/index.js",
+  "bin": {
+    "drizzle-util": "dist/drizzle-util/index.js"
   },
-  "author": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist && tsc && cp -R ../common/templates dist/common"
+  },
+  "author": "travisluong",
   "license": "MIT",
-  "description": "",
+  "description": "Drizzle ORM Scaffold Generator",
   "dependencies": {
     "@inquirer/prompts": "^7.5.1",
-    "commander": "^13.1.0"
+    "chalk": "^4.1.2",
+    "change-case-all": "^2.1.0",
+    "commander": "^13.1.0",
+    "handlebars": "^4.7.8",
+    "pluralize": "^8.0.0"
   }
 }
