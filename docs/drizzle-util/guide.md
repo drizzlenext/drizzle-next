@@ -17,7 +17,7 @@ After scaffolding, you can review the schema and make any necessary changes befo
 Example command:
 
 ```bash
-npx drizzle-express@latest scaffold products -c title:text price:integer description:text
+npx drizzle-util@latest scaffold products -c title:text price:integer description:text
 ```
 
 ## Example scaffold
