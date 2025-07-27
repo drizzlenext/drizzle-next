@@ -23,6 +23,10 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     this.opts = opts;
   }
 
+  private getOutputPath(path: string): string {
+    return this.opts.srcDir ? `src/${path}` : path;
+  }
+
   async init() {
     log.init("initializing new project");
     await this.render();
@@ -63,28 +67,30 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
   renderNext() {
     renderTemplate({
       inputPath: "new-project-processor/src/config/env.ts.hbs",
-      outputPath: "src/config/env.ts",
+      outputPath: this.getOutputPath("config/env.ts"),
     });
     renderTemplate({
       inputPath: "new-project-processor/src/app/layout.tsx.hbs",
-      outputPath: "src/app/layout.tsx",
+      outputPath: this.getOutputPath("app/layout.tsx"),
     });
     renderTemplate({
       inputPath: "new-project-processor/src/app/page.tsx.hbs",
-      outputPath: "src/app/page.tsx",
+      outputPath: this.getOutputPath("app/page.tsx"),
     });
     renderTemplate({
       inputPath:
         "new-project-processor/src/app/(public)/_components/public-layout.tsx.hbs",
-      outputPath: "src/app/(public)/_components/public-layout.tsx",
+      outputPath: this.getOutputPath(
+        "app/(public)/_components/public-layout.tsx"
+      ),
     });
     renderTemplate({
       inputPath: "new-project-processor/src/app/(public)/layout.tsx.hbs",
-      outputPath: "src/app/(public)/layout.tsx",
+      outputPath: this.getOutputPath("app/(public)/layout.tsx"),
     });
     renderTemplate({
       inputPath: "new-project-processor/src/lib/upload.ts.hbs",
-      outputPath: "src/lib/upload.ts",
+      outputPath: this.getOutputPath("lib/upload.ts"),
     });
     renderTemplate({
       inputPath: "new-project-processor/eslint.config.mjs.hbs",
@@ -92,21 +98,21 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
     renderTemplate({
       inputPath: "new-project-processor/src/lib/search-params.ts.hbs",
-      outputPath: "src/lib/search-params.ts",
+      outputPath: this.getOutputPath("lib/search-params.ts"),
     });
     renderTemplate({
       inputPath: "new-project-processor/src/app/(development)/layout.tsx.hbs",
-      outputPath: "src/app/(development)/layout.tsx",
+      outputPath: this.getOutputPath("app/(development)/layout.tsx"),
     });
     renderTemplate({
       inputPath:
         "new-project-processor/src/app/uploads/[...segments]/route.ts.hbs",
-      outputPath: "src/app/uploads/[...segments]/route.ts",
+      outputPath: this.getOutputPath("app/uploads/[...segments]/route.ts"),
     });
     renderTemplate({
       inputPath:
         "new-project-processor/src/app/(development)/development/page.tsx.hbs",
-      outputPath: "src/app/(development)/development/page.tsx",
+      outputPath: this.getOutputPath("app/(development)/development/page.tsx"),
     });
 
     appendToFileIfTextNotExists(".gitignore", "/uploads", "/uploads");
@@ -120,79 +126,79 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
   renderDrizzleUI() {
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/alert.tsx.hbs",
-      outputPath: "src/components/ui/alert.tsx",
+      outputPath: this.getOutputPath("components/ui/alert.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/avatar.tsx.hbs",
-      outputPath: "src/components/ui/avatar.tsx",
+      outputPath: this.getOutputPath("components/ui/avatar.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/button.tsx.hbs",
-      outputPath: "src/components/ui/button.tsx",
+      outputPath: this.getOutputPath("components/ui/button.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/card.tsx.hbs",
-      outputPath: "src/components/ui/card.tsx",
+      outputPath: this.getOutputPath("components/ui/card.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/checkbox.tsx.hbs",
-      outputPath: "src/components/ui/checkbox.tsx",
+      outputPath: this.getOutputPath("components/ui/checkbox.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/dark-mode.tsx.hbs",
-      outputPath: "src/components/ui/dark-mode.tsx",
+      outputPath: this.getOutputPath("components/ui/dark-mode.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/dropdown-menu.tsx.hbs",
-      outputPath: "src/components/ui/dropdown-menu.tsx",
+      outputPath: this.getOutputPath("components/ui/dropdown-menu.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/app-layout.tsx.hbs",
-      outputPath: "src/components/ui/app-layout.tsx",
+      outputPath: this.getOutputPath("components/ui/app-layout.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/form.tsx.hbs",
-      outputPath: "src/components/ui/form.tsx",
+      outputPath: this.getOutputPath("components/ui/form.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/input.tsx.hbs",
-      outputPath: "src/components/ui/input.tsx",
+      outputPath: this.getOutputPath("components/ui/input.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/label.tsx.hbs",
-      outputPath: "src/components/ui/label.tsx",
+      outputPath: this.getOutputPath("components/ui/label.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/pagination.tsx.hbs",
-      outputPath: "src/components/ui/pagination.tsx",
+      outputPath: this.getOutputPath("components/ui/pagination.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/search-input.tsx.hbs",
-      outputPath: "src/components/ui/search-input.tsx",
+      outputPath: this.getOutputPath("components/ui/search-input.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/select.tsx.hbs",
-      outputPath: "src/components/ui/select.tsx",
+      outputPath: this.getOutputPath("components/ui/select.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/sortable.tsx.hbs",
-      outputPath: "src/components/ui/sortable.tsx",
+      outputPath: this.getOutputPath("components/ui/sortable.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/table.tsx.hbs",
-      outputPath: "src/components/ui/table.tsx",
+      outputPath: this.getOutputPath("components/ui/table.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/components/ui/textarea.tsx.hbs",
-      outputPath: "src/components/ui/textarea.tsx",
+      outputPath: this.getOutputPath("components/ui/textarea.tsx"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/lib/utils.ts.hbs",
-      outputPath: "src/lib/utils.ts",
+      outputPath: this.getOutputPath("lib/utils.ts"),
     });
     renderTemplate({
       inputPath: "drizzle-ui/styles/styles.css.hbs",
-      outputPath: "src/app/globals.css",
+      outputPath: this.getOutputPath("app/globals.css"),
     });
   }
 
