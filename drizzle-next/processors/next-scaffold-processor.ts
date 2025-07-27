@@ -530,22 +530,9 @@ export class NextScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath:
-        "scaffold-processor/src/app/(admin)/table/_queries/get-by-id.ts.hbs",
+      inputPath: "scaffold-processor/src/app/(admin)/table/queries.ts.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-by-id.query.ts`
-      ),
-      data: {
-        tableObj,
-        pkStrategyJsType:
-          this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
-      },
-    });
-    renderTemplate({
-      inputPath:
-        "scaffold-processor/src/app/(admin)/table/_queries/get-list.ts.hbs",
-      outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-list.query.ts`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/queries.ts`
       ),
       data: {
         tableObj,
