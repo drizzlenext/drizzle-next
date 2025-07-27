@@ -40,10 +40,8 @@ initCommand
       "primary key generation strategy"
     ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"])
   )
-  .option("--auth", "install auth.js authentication")
-  .option("--no-auth", "skip installation of auth.js")
-  .option("--admin", "generate admin dashboard with role-based authorization")
-  .option("--no-admin", "skip generation of admin dashboard")
+  .option("--src-dir", "enable src directory", false)
+  .option("--no-src-dir", "disable src directory", false)
   .option("--no-pluralize", "disable the pluralization of variable names", true)
   .option("--no-install", "skip installation of dependencies")
   .option("--latest", "install latest cutting edge dependencies")
@@ -113,37 +111,8 @@ initCommand
               value: "nanoid",
               description: "Uses the nanoid package",
             },
-            {
-              name: "auto_increment",
-              value: "auto_increment",
-              description:
-                "Auto increment. Warning: Does not work with Auth.js Drizzle Adapter.",
-            },
           ],
         }));
-      partialConfig.authEnabled =
-        options.auth ??
-        (await confirm({
-          message: "Do you want to add Auth.js authentication?",
-          default: true,
-        }));
-      if (
-        partialConfig.pkStrategy === "auto_increment" &&
-        partialConfig.authEnabled
-      ) {
-        log.red("auto_increment is not compatible with authjs");
-        process.exit(1);
-      }
-      if (partialConfig.authEnabled) {
-        partialConfig.adminEnabled =
-          options.admin ??
-          (await confirm({
-            message: "Do you want to add an admin dashboard?",
-            default: true,
-          }));
-      } else {
-        partialConfig.adminEnabled = false;
-      }
 
       partialConfig.pluralizeEnabled = options.pluralize;
 
@@ -169,14 +138,11 @@ initCommand
       let authProcessor;
       let adminProcessor;
 
-      if (completeConfig.authEnabled) {
-        authProcessor = new AuthProcessor(completeConfig);
-        processors.push(authProcessor);
-      }
-      if (completeConfig.adminEnabled) {
-        adminProcessor = new AdminProcessor(completeConfig);
-        processors.push(adminProcessor);
-      }
+      authProcessor = new AuthProcessor(completeConfig);
+      processors.push(authProcessor);
+
+      adminProcessor = new AdminProcessor(completeConfig);
+      processors.push(adminProcessor);
 
       const dependencies = [];
       const devDependencies = [];

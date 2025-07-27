@@ -147,6 +147,10 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   dbDialectStrategy: DbDialectStrategy;
 
+  private getOutputPath(path: string): string {
+    return this.opts.srcDir ? `src/${path}` : path;
+  }
+
   async init() {
     log.init("initializing auth");
     await this.render();
@@ -163,49 +167,51 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
     renderTemplate({
       inputPath: "auth-processor/src/lib/authorize.ts.hbs",
-      outputPath: "src/lib/authorize.ts",
+      outputPath: this.getOutputPath("lib/authorize.ts"),
     });
     renderTemplate({
       inputPath:
         "auth-processor/src/app/(private)/_components/private-layout.tsx.hbs",
-      outputPath: "src/app/(private)/_components/private-layout.tsx",
+      outputPath: this.getOutputPath(
+        "app/(private)/_components/private-layout.tsx"
+      ),
     });
     renderTemplate({
       inputPath: "auth-processor/src/app/api/auth/[...nextauth]/route.ts.hbs",
-      outputPath: "src/app/api/auth/[...nextauth]/route.ts",
+      outputPath: this.getOutputPath("app/api/auth/[...nextauth]/route.ts"),
     });
     renderTemplate({
       inputPath: "auth-processor/src/app/(private)/dashboard/page.tsx.hbs",
-      outputPath: "src/app/(private)/dashboard/page.tsx",
+      outputPath: this.getOutputPath("app/(private)/dashboard/page.tsx"),
     });
     renderTemplate({
       inputPath: "auth-processor/src/app/(auth)/signin/page.tsx.hbs",
-      outputPath: "src/app/(auth)/signin/page.tsx",
+      outputPath: this.getOutputPath("app/(auth)/signin/page.tsx"),
     });
     renderTemplate({
       inputPath: "auth-processor/src/app/(private)/profile/page.tsx.hbs",
-      outputPath: "src/app/(private)/profile/page.tsx",
+      outputPath: this.getOutputPath("app/(private)/profile/page.tsx"),
     });
     renderTemplate({
       inputPath: "auth-processor/src/app/(auth)/signout/page.tsx.hbs",
-      outputPath: "src/app/(auth)/signout/page.tsx",
+      outputPath: this.getOutputPath("app/(auth)/signout/page.tsx"),
     });
     renderTemplate({
       inputPath: "auth-processor/src/types/next-auth.d.ts.hbs",
-      outputPath: "src/types/next-auth.d.ts",
+      outputPath: this.getOutputPath("types/next-auth.d.ts"),
     });
     renderTemplate({
       inputPath:
         "auth-processor/src/app/(auth)/_components/signin-form.tsx.hbs",
-      outputPath: "src/app/(auth)/_components/signin-form.tsx",
+      outputPath: this.getOutputPath("app/(auth)/_components/signin-form.tsx"),
     });
     renderTemplate({
       inputPath: "auth-processor/src/app/(auth)/_actions/signin.action.ts.hbs",
-      outputPath: "src/app/(auth)/_actions/signin.action.ts",
+      outputPath: this.getOutputPath("app/(auth)/_actions/signin.action.ts"),
     });
     renderTemplate({
       inputPath: "auth-processor/src/app/(auth)/layout.tsx.hbs",
-      outputPath: "src/app/(auth)/layout.tsx",
+      outputPath: this.getOutputPath("app/(auth)/layout.tsx"),
     });
     appendToEnvLocal("AUTH_TRUST_HOST", "http://localhost:3000");
     appendToEnvLocal("AUTH_SECRET", "secret");
@@ -214,7 +220,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
   addAuthConfig() {
     renderTemplate({
       inputPath: "auth-processor/src/lib/auth.ts.hbs",
-      outputPath: "src/lib/auth.ts",
+      outputPath: this.getOutputPath("lib/auth.ts"),
       data: {
         pkStrategyImport: pkStrategyImportTemplates[this.opts.pkStrategy],
         pkKeyValTemplate: pkKeyValTemplates[this.opts.pkStrategy],
@@ -232,7 +238,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
   addLayout() {
     renderTemplate({
       inputPath: "auth-processor/src/app/(private)/layout.tsx.hbs",
-      outputPath: "src/app/(private)/layout.tsx",
+      outputPath: this.getOutputPath("app/(private)/layout.tsx"),
     });
   }
 
@@ -259,7 +265,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
     renderTemplate({
       inputPath: authDbDialectStrategy[this.opts.dbDialect].authSchemaTemplate,
-      outputPath: "src/schema/auth-tables.ts",
+      outputPath: this.getOutputPath("schema/auth-tables.ts"),
       data: {
         pkText: pkText,
         pkStrategyImport: pkStrategyImport,
@@ -302,7 +308,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
     }
     renderTemplate({
       inputPath: userSchemaStrategy[this.opts.dbDialect],
-      outputPath: "src/schema/users.ts",
+      outputPath: this.getOutputPath("schema/users.ts"),
       data: {
         pkText: pkText,
         pkStrategyImport: pkStrategyImport,

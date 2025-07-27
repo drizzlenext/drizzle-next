@@ -7,12 +7,10 @@ export type DrizzleBaseConfig = {
   pkStrategy: PkStrategy;
   install: boolean;
   pluralizeEnabled: boolean;
+  srcDir: boolean;
 };
 
-export type DrizzleNextConfig = {
-  authEnabled: boolean;
-  adminEnabled: boolean;
-} & DrizzleBaseConfig;
+export type DrizzleNextConfig = {} & DrizzleBaseConfig;
 
 export type DrizzleExpressConfig = {} & DrizzleBaseConfig;
 
@@ -113,7 +111,6 @@ export type DbPackageStrategy = {
 };
 
 export type DbPackageStrategyOpts = {
-  authEnabled: boolean;
   pluralizeEnabled: boolean;
   dbPackage: DbPackage;
 };
