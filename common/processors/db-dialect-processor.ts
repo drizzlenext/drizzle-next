@@ -31,11 +31,6 @@ export class DbDialectProcessor implements BaseProcessor {
     });
 
     renderTemplate({
-      inputPath: "db-dialect-processor/src/config/env.ts.hbs",
-      outputPath: this.getOutputPath("config/env.ts"),
-    });
-
-    renderTemplate({
       inputPath: "db-dialect-processor/drizzle.config.ts.hbs",
       outputPath: "drizzle.config.ts",
       data: { dialect: this.opts.dbDialect, srcDir: this.opts.srcDir },
