@@ -123,15 +123,16 @@ type AuthDbDialect = {
 const authDbDialectStrategy: Record<DbDialect, AuthDbDialect> = {
   postgresql: {
     authSchemaTemplate:
-      "auth-processor/src/schema/auth-tables.ts.postgresql.hbs",
+      "auth-processor/src/db/schema/auth-tables.ts.postgresql.hbs",
     pkDataType: "text",
   },
   mysql: {
-    authSchemaTemplate: "auth-processor/src/schema/auth-tables.ts.mysql.hbs",
+    authSchemaTemplate: "auth-processor/src/db/schema/auth-tables.ts.mysql.hbs",
     pkDataType: "varchar",
   },
   sqlite: {
-    authSchemaTemplate: "auth-processor/src/schema/auth-tables.ts.sqlite.hbs",
+    authSchemaTemplate:
+      "auth-processor/src/db/schema/auth-tables.ts.sqlite.hbs",
     pkDataType: "text",
   },
 };
@@ -269,7 +270,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
     renderTemplate({
       inputPath: authDbDialectStrategy[this.opts.dbDialect].authSchemaTemplate,
-      outputPath: this.getOutputPath("schema/auth-tables.ts"),
+      outputPath: this.getOutputPath("db/schema/auth-tables.ts"),
       data: {
         pkText: pkText,
         pkStrategyImport: pkStrategyImport,
@@ -288,9 +289,9 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   addUserSchema() {
     const userSchemaStrategy: Record<DbDialect, string> = {
-      postgresql: "auth-processor/src/schema/users.ts.postgresql.hbs",
-      mysql: "auth-processor/src/schema/users.ts.mysql.hbs",
-      sqlite: "auth-processor/src/schema/users.ts.sqlite.hbs",
+      postgresql: "auth-processor/src/db/schema/users.ts.postgresql.hbs",
+      mysql: "auth-processor/src/db/schema/users.ts.mysql.hbs",
+      sqlite: "auth-processor/src/db/schema/users.ts.sqlite.hbs",
     };
     const pkText =
       this.dbDialectStrategy.pkStrategyTemplates[this.opts.pkStrategy];
@@ -313,7 +314,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
     }
     renderTemplate({
       inputPath: userSchemaStrategy[this.opts.dbDialect],
-      outputPath: this.getOutputPath("schema/users.ts"),
+      outputPath: this.getOutputPath("db/schema/users.ts"),
       data: {
         pkText: pkText,
         pkStrategyImport: pkStrategyImport,

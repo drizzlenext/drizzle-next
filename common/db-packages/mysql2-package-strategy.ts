@@ -57,8 +57,8 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
 
   copyDbInstance(): void {
     renderTemplate({
-      inputPath: "db-packages/src/config/db.ts.mysql2.hbs",
-      outputPath: this.getOutputPath("config/db.ts"),
+      inputPath: "db-packages/src/db/db.ts.mysql2.hbs",
+      outputPath: this.getOutputPath("db/db.ts"),
     });
   }
 

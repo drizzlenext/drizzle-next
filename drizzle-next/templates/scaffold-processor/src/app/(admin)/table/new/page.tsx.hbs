@@ -1,6 +1,6 @@
 import Link from "next/link";
 {{#if referencesColumnList.length}}
-import { db } from "@/config/db";
+import { db } from "@/db/db";
 {{/if}}
 import { {{tableObj.singularPascalCase}}CreateForm } from "../_components/{{tableObj.singularKebabCase}}-create-form";
 

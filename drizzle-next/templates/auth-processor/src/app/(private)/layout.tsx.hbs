@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import { db } from "@/config/db";
-import { users } from "@/schema/users";
+import { db } from "@/db/db";
+import { users } from "@/db/schema/users";
 import { PrivateLayout } from "@/app/(private)/_components/private-layout";
 import { authorize } from "@/lib/authorize";
 

@@ -1,6 +1,6 @@
-import { users } from "@/schema/users";
+import { users } from "@/db/schema/users";
 import { redirect } from "next/navigation";
-import { db } from "@/config/db";
+import { db } from "@/db/db";
 import { eq } from "drizzle-orm";
 import { AdminLayout } from "@/app/(admin)/_components/admin-layout";
 import { authorize } from "@/lib/authorize";

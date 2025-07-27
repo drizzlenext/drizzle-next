@@ -151,7 +151,7 @@ export class NextScaffoldProcessor {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
     });
-    const text = `\n      { text: "${tableObj.singularCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}", icon: Table2Icon },`;
+    const text = `\n      { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}", icon: Table2Icon },`;
     insertTextAfterIfNotExists(
       "app/(admin)/_components/admin-layout.tsx",
       "// DRIZZLE_NEXT_SIDEBAR_ITEMS",
@@ -177,7 +177,7 @@ export class NextScaffoldProcessor {
 
       // references
       if (dataType.startsWith("references") && referenceTableVars) {
-        referenceImportsCode += `import { ${referenceTableVars.pluralCamelCase} } from "@/schema/${referenceTableVars.pluralKebabCase}";\n`;
+        referenceImportsCode += `import { ${referenceTableVars.pluralCamelCase} } from "@/db/schema/${referenceTableVars.pluralKebabCase}";\n`;
         if (this.opts.pkStrategy === "auto_increment") {
           dataTypeSet.add(this.dbDialectStrategy.fkAutoIncrementDataType);
         }

@@ -230,7 +230,7 @@ For example, here is a `getPostById` function:
 ```ts
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
-import { posts } from "@/schema/posts";
+import { posts } from "@/db/schema/posts";
 
 export type PostObj = Awaited<ReturnType<typeof getPostById>>;
 

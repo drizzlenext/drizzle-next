@@ -29,7 +29,7 @@ import { relations } from "drizzle-orm";
 import { pgTable, text, integer, timestamp } from "drizzle-orm/pg-core";
 import { createId } from "@paralleldrive/cuid2";
 
-import { categories } from "@/schema/categories";
+import { categories } from "@/db/schema/categories";
 
 export const posts = pgTable("posts", {
   id: text()

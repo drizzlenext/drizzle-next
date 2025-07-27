@@ -1,5 +1,5 @@
-import { db } from "@/config/db";
-import { {{tableObj.pluralCamelCase}}, Insert{{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+import { db } from "@/db/db";
+import { {{tableObj.pluralCamelCase}}, Insert{{tableObj.singularPascalCase}} } from "@/db/schema/{{tableObj.pluralKebabCase}}";
 import { eq } from "drizzle-orm";
 
 export const {{tableObj.singularCamelCase}}Service = {

@@ -1,6 +1,6 @@
 import { eq, asc, desc, SQL } from "drizzle-orm";
-import { db } from "@/config/db";
-import { Select{{tableObj.singularPascalCase}}, {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+import { db } from "@/db/db";
+import { Select{{tableObj.singularPascalCase}}, {{tableObj.pluralCamelCase}} } from "@/db/schema/{{tableObj.pluralKebabCase}}";
 
 export type {{tableObj.singularPascalCase}}Obj = Awaited<
   ReturnType<typeof get{{tableObj.singularPascalCase}}ById>

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { eq } from "drizzle-orm";
 import { {{tableObj.singularPascalCase}}DeleteForm } from "../../_components/{{tableObj.singularKebabCase}}-delete-form";
-import { db } from "@/config/db";
-import { {{tableObj.pluralCamelCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+import { db } from "@/db/db";
+import { {{tableObj.pluralCamelCase}} } from "@/db/schema/{{tableObj.pluralKebabCase}}";
 
 type Params = Promise<{ id: {{pkStrategyJsType}} }>;
 

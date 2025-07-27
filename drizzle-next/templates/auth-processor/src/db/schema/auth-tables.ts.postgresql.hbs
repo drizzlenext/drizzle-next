@@ -1,9 +1,16 @@
-import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text, primaryKey, {{fkDataTypeImportCode}} } from "drizzle-orm/sqlite-core"
+import {
+  boolean,
+  timestamp,
+  pgTable,
+  text,
+  primaryKey,
+  integer,
+  {{fkDataTypeImportCode}}
+} from "drizzle-orm/pg-core"
 import type { AdapterAccountType } from "next-auth/adapters"
-import { users } from "@/schema/users"
-
-export const accounts = sqliteTable(
+import { users } from "@/db/schema/users"
+ 
+export const accounts = pgTable(
   "accounts",
   {
     userId: {{fkStrategyTemplate}}
@@ -27,20 +34,20 @@ export const accounts = sqliteTable(
   })
 )
  
-export const sessions = sqliteTable("sessions", {
+export const sessions = pgTable("sessions", {
   sessionToken: text().primaryKey(),
   userId: {{fkStrategyTemplate}}
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  expires: integer({ mode: "timestamp_ms" }).notNull(),
+  expires: timestamp({ mode: "date" }).notNull(),
 })
  
-export const verificationTokens = sqliteTable(
+export const verificationTokens = pgTable(
   "verification_tokens",
   {
     identifier: text().notNull(),
     token: text().notNull(),
-    expires: integer({ mode: "timestamp_ms" }).notNull(),
+    expires: timestamp({ mode: "date" }).notNull(),
   },
   (verificationToken) => ({
     compositePk: primaryKey({
@@ -49,7 +56,7 @@ export const verificationTokens = sqliteTable(
   })
 )
  
-export const authenticators = sqliteTable(
+export const authenticators = pgTable(
   "authenticators",
   {
     credentialID: text().notNull().unique(),
@@ -60,10 +67,8 @@ export const authenticators = sqliteTable(
     credentialPublicKey: text().notNull(),
     counter: integer().notNull(),
     credentialDeviceType: text().notNull(),
-    credentialBackedUp: integer({
-      mode: "boolean",
-    }).notNull(),
-    transports: text("transports"),
+    credentialBackedUp: boolean().notNull(),
+    transports: text(),
   },
   (authenticator) => ({
     compositePK: primaryKey({

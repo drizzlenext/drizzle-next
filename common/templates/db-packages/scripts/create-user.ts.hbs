@@ -1,6 +1,6 @@
-import { users } from "@/schema/users";
+import { users } from "@/db/schema/users";
 import bcrypt from "bcrypt";
-import { openConnection } from "@/config/db";
+import { openConnection } from "@/db/db";
 
 async function main() {
   const { db, closeConnection } = await openConnection();

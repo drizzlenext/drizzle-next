@@ -1,24 +1,11 @@
 /// <reference types="cypress" />
 
 describe("shadriz e2e test", () => {
-  // beforeEach(() => {
-  //   cy.visit("http://localhost:3000/admin-signin");
-  //   cy.get('input[name="email"]').type("admin@example.com");
-  //   cy.get('input[name="password"]').type("pw");
-  //   cy.contains("Sign in").click();
-  // });
-
-  it("sign in and test admin dashboard", () => {
+  beforeEach(() => {
     cy.visit("http://localhost:3000/admin-signin");
     cy.get('input[name="email"]').type("admin@example.com");
     cy.get('input[name="password"]').type("pw");
     cy.contains("Sign in").click();
-    cy.contains("Home").should("exist");
-    cy.get("a").contains("Categories").click();
-    cy.get("a").contains("New").click();
-    cy.get(`input[name="name"]`).type("my_category");
-    cy.get("button").contains("Submit").click();
-    cy.contains("Created successfully");
   });
 
   it("home page", () => {
@@ -26,8 +13,7 @@ describe("shadriz e2e test", () => {
     cy.contains("Drizzle Next");
   });
 
-  it("user happy path", () => {
-    cy.visit("http://localhost:3000/users");
+  it("users should exist", () => {
     cy.contains("User").click();
     cy.contains("User");
     cy.contains("user@example.com").should("exist");
@@ -35,7 +21,6 @@ describe("shadriz e2e test", () => {
   });
 
   it("admin scaffold happy path", () => {
-    cy.visit("http://localhost:3000/admin-scaffolds");
     cy.contains("Admin Scaffold").click();
     cy.get("div").contains("Admin Scaffolds");
     cy.contains("New").click();
@@ -62,7 +47,7 @@ describe("shadriz e2e test", () => {
   });
 
   it("create category", () => {
-    cy.visit("http://localhost:3000/categories");
+    cy.contains("Categories").click();
     cy.contains("New").click();
     cy.get('input[name="name"]').type("my_category");
     cy.get('button[type="submit"]').click();
@@ -71,7 +56,7 @@ describe("shadriz e2e test", () => {
   });
 
   it("create post", () => {
-    cy.visit("http://localhost:3000/posts");
+    cy.contains("Posts").click();
     cy.contains("New").click();
     // need to select the hidden vanilla select since radix ui uses portals
     cy.get('select[name="categoryId"]').select(0, { force: true });

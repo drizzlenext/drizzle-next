@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
 import { openConnection } from "@/lib/db";
-import { posts } from "@/schema/posts";
-import { categories } from "@/schema/categories";
-import { users } from "@/schema/users";
+import { posts } from "@/db/schema/posts";
+import { categories } from "@/db/schema/categories";
+import { users } from "@/db/schema/users";
 
 type Post = typeof posts.$inferInsert;
 type Category = typeof categories.$inferInsert;

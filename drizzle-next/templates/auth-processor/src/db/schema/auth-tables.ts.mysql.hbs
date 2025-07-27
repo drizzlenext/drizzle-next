@@ -8,7 +8,7 @@ import {
   {{fkDataTypeImportCode}}
 } from "drizzle-orm/mysql-core"
 import type { AdapterAccountType } from "next-auth/adapters"
-import { users } from "@/schema/users"
+import { users } from "@/db/schema/users"
 
 export const accounts = mysqlTable(
   "accounts",

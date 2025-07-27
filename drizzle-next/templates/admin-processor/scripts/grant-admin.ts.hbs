@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
-import { openConnection } from "@/config/db";
-import { users } from "@/schema/users";
+import { openConnection } from "@/db/db";
+import { users } from "@/db/schema/users";
 
 async function main() {
   const { db, closeConnection } = await openConnection();

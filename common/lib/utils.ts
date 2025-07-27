@@ -527,11 +527,11 @@ export function insertSchemaToSchemaIndex(
   opts: { pluralize: boolean; srcDir: boolean }
 ) {
   const tableObj = caseFactory(table, { pluralize: opts.pluralize });
-  const schemaPath = opts.srcDir ? "src/config/schema.ts" : "config/schema.ts";
+  const schemaPath = opts.srcDir ? "src/db/schema.ts" : "db/schema.ts";
   appendToFileIfTextNotExists(
     schemaPath,
-    `export * from "@/schema/${tableObj.pluralKebabCase}";`,
-    `export * from "@/schema/${tableObj.pluralKebabCase}";`
+    `export * from "@/db/schema/${tableObj.pluralKebabCase}";`,
+    `export * from "@/db/schema/${tableObj.pluralKebabCase}";`
   );
 }
 

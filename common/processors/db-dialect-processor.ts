@@ -20,7 +20,7 @@ export class DbDialectProcessor implements BaseProcessor {
   }
 
   async render(): Promise<void> {
-    renderTemplate({
+    renderTemplateIfNotExists({
       inputPath: "db-dialect-processor/env.hbs",
       outputPath: ".env",
     });
@@ -42,8 +42,8 @@ export class DbDialectProcessor implements BaseProcessor {
     });
 
     renderTemplateIfNotExists({
-      inputPath: `db-dialect-processor/src/config/schema.ts.hbs`,
-      outputPath: this.getOutputPath("config/schema.ts"),
+      inputPath: `db-dialect-processor/src/db/schema.ts.hbs`,
+      outputPath: this.getOutputPath("db/schema.ts"),
     });
   }
 

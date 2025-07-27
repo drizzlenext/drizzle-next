@@ -12,9 +12,9 @@ import { Form, FormControl, FormMessage } from "@/components/ui/form";
 {{#if hasFileDataType}}
 import { env } from "@/config/env";
 {{/if}}
-import { Select{{tableObj.singularPascalCase}} } from "@/schema/{{tableObj.pluralKebabCase}}";
+import { Select{{tableObj.singularPascalCase}} } from "@/db/schema/{{tableObj.pluralKebabCase}}";
 {{#each referencesColumnList}}
-import { Select{{this.referenceTableVars.singularPascalCase}} } from "@/schema/{{this.referenceTableVars.pluralKebabCase}}";
+import { Select{{this.referenceTableVars.singularPascalCase}} } from "@/db/schema/{{this.referenceTableVars.pluralKebabCase}}";
 {{/each}}
 
 export function {{tableObj.singularPascalCase}}UpdateForm({ 
