@@ -10,6 +10,10 @@ export class DbDialectProcessor implements BaseProcessor {
     this.opts = opts;
   }
 
+  private getOutputPath(path: string): string {
+    return this.opts.srcDir ? `src/${path}` : path;
+  }
+
   async init(): Promise<void> {
     log.init("initializing db dialect");
     await this.render();
@@ -33,18 +37,18 @@ export class DbDialectProcessor implements BaseProcessor {
 
     renderTemplate({
       inputPath: "db-dialect-processor/src/config/env.ts.hbs",
-      outputPath: "src/config/env.ts",
+      outputPath: this.getOutputPath("config/env.ts"),
     });
 
     renderTemplate({
       inputPath: "db-dialect-processor/drizzle.config.ts.hbs",
       outputPath: "drizzle.config.ts",
-      data: { dialect: this.opts.dbDialect },
+      data: { dialect: this.opts.dbDialect, srcDir: this.opts.srcDir },
     });
 
     renderTemplateIfNotExists({
       inputPath: `db-dialect-processor/src/config/schema.ts.hbs`,
-      outputPath: "src/config/schema.ts",
+      outputPath: this.getOutputPath("config/schema.ts"),
     });
   }
 

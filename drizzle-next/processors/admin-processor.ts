@@ -68,6 +68,13 @@ export class AdminProcessor implements DrizzleNextProcessor {
       inputPath: "admin-processor/src/app/(admin)/admin/page.tsx.hbs",
       outputPath: this.getOutputPath("app/(admin)/admin/page.tsx"),
     });
+    renderTemplate({
+      inputPath:
+        "admin-processor/src/app/(admin)/_components/admin-layout.tsx.hbs",
+      outputPath: this.getOutputPath(
+        "app/(admin)/_components/admin-layout.tsx"
+      ),
+    });
 
     const strategies: Record<DbDialect, string[]> = {
       postgresql: [

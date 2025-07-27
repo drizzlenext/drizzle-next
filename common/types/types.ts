@@ -103,7 +103,6 @@ export type DbDialectStrategy = {
 export type DbPackageStrategy = {
   opts: DbPackageStrategyOpts;
   dialect: DbDialect;
-  copyCreateUserScript(): void;
   copyMigrateScript(): void;
   appendDbUrl(): void;
   copyDbInstance(): void;
@@ -113,10 +112,11 @@ export type DbPackageStrategy = {
 export type DbPackageStrategyOpts = {
   pluralizeEnabled: boolean;
   dbPackage: DbPackage;
+  srcDir: boolean;
 };
 
 export type DbPackage = "pg" | "mysql2" | "better-sqlite3";
 
 export type DbDialectProcessorOpts = {
   dbDialect: DbDialect;
-};
+} & DrizzleBaseConfig;

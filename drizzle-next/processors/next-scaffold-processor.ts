@@ -224,7 +224,7 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath: "scaffold-processor/src/app/(admin)/table/page.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/page.tsx`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/page.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -240,7 +240,7 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath: "scaffold-processor/src/app/(admin)/table/[id]/page.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/[id]/page.tsx`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/[id]/page.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -269,7 +269,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/[id]/edit/page.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/[id]/edit/page.tsx`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/[id]/edit/page.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -288,7 +288,7 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath: "scaffold-processor/src/app/(admin)/table/new/page.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/new/page.tsx`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/new/page.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -305,7 +305,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/[id]/delete/page.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/[id]/delete/page.tsx`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/[id]/delete/page.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -338,7 +338,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/_actions/create-action.ts.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/_actions/create-${tableObj.singularKebabCase}.action.ts`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/_actions/create-${tableObj.singularKebabCase}.action.ts`
       ),
       data: {
         tableObj: tableObj,
@@ -374,7 +374,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/_actions/update-action.ts.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/_actions/update-${tableObj.singularKebabCase}.action.ts`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/_actions/update-${tableObj.singularKebabCase}.action.ts`
       ),
       data: {
         tableObj: tableObj,
@@ -395,7 +395,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/_actions/delete-action.ts.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/_actions/delete-${tableObj.singularKebabCase}.action.ts`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/_actions/delete-${tableObj.singularKebabCase}.action.ts`
       ),
       data: {
         tableObj: tableObj,
@@ -415,7 +415,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/_components/create-form.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-create-form.tsx`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-create-form.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -486,7 +486,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/_components/update-form.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-update-form.tsx`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-update-form.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -506,7 +506,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/_components/delete-form.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-delete-form.tsx`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-delete-form.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -523,7 +523,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/_components/table-component.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-table.tsx`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-table.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -580,7 +580,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/_queries/get-by-id.ts.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-by-id.query.ts`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-by-id.query.ts`
       ),
       data: {
         tableObj,
@@ -592,7 +592,7 @@ export class NextScaffoldProcessor {
       inputPath:
         "scaffold-processor/src/app/(admin)/table/_queries/get-list.ts.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-list.query.ts`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-list.query.ts`
       ),
       data: {
         tableObj,

@@ -22,6 +22,10 @@ export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
     this.opts = opts;
   }
 
+  private getOutputPath(path: string): string {
+    return this.opts.srcDir ? `src/${path}` : path;
+  }
+
   async init() {
     log.init("initializing better-sqlite3 package");
     await this.render();
@@ -32,7 +36,6 @@ export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
     this.appendDbUrl();
     this.copyDbInstance();
     this.appendSqliteToGitignore();
-    this.copyCreateUserScript();
   }
 
   copyMigrateScript(): void {
@@ -52,21 +55,7 @@ export class BetterSqlite3PackageStrategy implements DbPackageStrategy {
   copyDbInstance(): void {
     renderTemplate({
       inputPath: "db-packages/src/config/db.ts.better-sqlite3.hbs",
-      outputPath: "src/config/db.ts",
-    });
-  }
-
-  copyCreateUserScript() {
-    if (!this.opts.authEnabled) return;
-    const tableObj = caseFactory("user", {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-    renderTemplate({
-      inputPath: "db-packages/scripts/create-user.ts.hbs",
-      outputPath: "scripts/create-user.ts",
-      data: {
-        tableObj,
-      },
+      outputPath: this.getOutputPath("config/db.ts"),
     });
   }
 

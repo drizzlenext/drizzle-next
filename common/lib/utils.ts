@@ -524,11 +524,12 @@ export function removeTextFromFile(
 
 export function insertSchemaToSchemaIndex(
   table: string,
-  opts: { pluralize: boolean }
+  opts: { pluralize: boolean; srcDir: boolean }
 ) {
   const tableObj = caseFactory(table, { pluralize: opts.pluralize });
+  const schemaPath = opts.srcDir ? "src/config/schema.ts" : "config/schema.ts";
   appendToFileIfTextNotExists(
-    "src/config/schema.ts",
+    schemaPath,
     `export * from "@/schema/${tableObj.pluralKebabCase}";`,
     `export * from "@/schema/${tableObj.pluralKebabCase}";`
   );

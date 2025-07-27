@@ -68,6 +68,10 @@ export class DrizzleScaffoldProcessor {
       this.getValidatedColumsWithIdAndTimestamps();
   }
 
+  private getOutputPath(path: string): string {
+    return this.opts.srcDir ? `src/${path}` : path;
+  }
+
   getValidatedColumsWithIdAndTimestamps() {
     const idCol: ValidatedColumn = {
       columnName: "id",
@@ -141,6 +145,7 @@ export class DrizzleScaffoldProcessor {
     this.addSchema();
     insertSchemaToSchemaIndex(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
+      srcDir: this.opts.srcDir,
     });
     if (this.opts.enableCompletionMessage) {
       this.printCompletionMessage();
@@ -178,7 +183,7 @@ export class DrizzleScaffoldProcessor {
       inputPath:
         scaffoldDbDialectStrategies[this.opts.dbDialect]
           .schemaTableTemplatePath,
-      outputPath: `src/schema/${tableObj.pluralKebabCase}.ts`,
+      outputPath: this.getOutputPath(`schema/${tableObj.pluralKebabCase}.ts`),
       data: {
         columns: columnsCode,
         imports: importsCode,

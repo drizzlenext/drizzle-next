@@ -22,6 +22,10 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
     this.opts = opts;
   }
 
+  private getOutputPath(path: string): string {
+    return this.opts.srcDir ? `src/${path}` : path;
+  }
+
   async init() {
     log.init("initializing mysql2 package");
     await this.render();
@@ -31,7 +35,6 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
     this.copyMigrateScript();
     this.appendDbUrl();
     this.copyDbInstance();
-    this.copyCreateUserScript();
     this.addServerComponentExternalPackageToNextConfig();
   }
 
@@ -55,21 +58,7 @@ export class Mysql2PackageStrategy implements DbPackageStrategy {
   copyDbInstance(): void {
     renderTemplate({
       inputPath: "db-packages/src/config/db.ts.mysql2.hbs",
-      outputPath: "src/config/db.ts",
-    });
-  }
-
-  copyCreateUserScript() {
-    if (!this.opts.authEnabled) return;
-    const tableObj = caseFactory("user", {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-    renderTemplate({
-      inputPath: "db-packages/scripts/create-user.ts.hbs",
-      outputPath: "scripts/create-user.ts",
-      data: {
-        tableObj,
-      },
+      outputPath: this.getOutputPath("config/db.ts"),
     });
   }
 

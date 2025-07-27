@@ -213,6 +213,10 @@ export class AuthProcessor implements DrizzleNextProcessor {
       inputPath: "auth-processor/src/app/(auth)/layout.tsx.hbs",
       outputPath: this.getOutputPath("app/(auth)/layout.tsx"),
     });
+    renderTemplate({
+      inputPath: "auth-processor/scripts/create-user.ts.hbs",
+      outputPath: "scripts/create-user.ts",
+    });
     appendToEnvLocal("AUTH_TRUST_HOST", "http://localhost:3000");
     appendToEnvLocal("AUTH_SECRET", "secret");
   }
