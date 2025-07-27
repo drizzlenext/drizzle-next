@@ -13,7 +13,7 @@ export default async function Page() {
     <div className="flex flex-col gap-3 p-3">
       <div>New {{tableObj.singularCapitalCase}}</div>
       <div className="[&>a]:underline">
-        <Link href={`/{{tableObj.pluralKebabCase}}`}>Back</Link>
+        <Link href={`/admin/{{tableObj.pluralKebabCase}}`}>Back</Link>
       </div>
       <div>
         <{{tableObj.singularPascalCase}}CreateForm 

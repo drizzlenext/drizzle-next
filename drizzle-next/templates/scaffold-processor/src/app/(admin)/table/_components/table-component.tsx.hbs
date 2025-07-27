@@ -37,13 +37,13 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
           <TableRow key={ {{tableObj.singularCamelCase}}Obj.id }>
             <TableCell>
               <div className="flex gap-3 [&>a]:underline">
-                <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>
+                <Link href={`/admin/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>
                   View
                 </Link>
-                <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/edit`}>
+                <Link href={`/admin/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/edit`}>
                   Edit
                 </Link>
-                <Link href={`/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/delete`}>
+                <Link href={`/admin/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/delete`}>
                   Delete
                 </Link>
               </div>
