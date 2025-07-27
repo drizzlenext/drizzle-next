@@ -20,6 +20,10 @@ export class AdminProcessor implements DrizzleNextProcessor {
     this.opts = opts;
   }
 
+  private getOutputPath(path: string): string {
+    return this.opts.srcDir ? `src/${path}` : path;
+  }
+
   async init(): Promise<void> {
     log.init("initializing admin");
     await this.render();
@@ -28,11 +32,11 @@ export class AdminProcessor implements DrizzleNextProcessor {
   async render(): Promise<void> {
     renderTemplate({
       inputPath: "admin-processor/src/app/(admin)/layout.tsx.hbs",
-      outputPath: "src/app/(admin)/layout.tsx",
+      outputPath: this.getOutputPath("app/(admin)/layout.tsx"),
     });
     renderTemplate({
       inputPath: "admin-processor/src/app/(auth)/admin-signin/page.tsx.hbs",
-      outputPath: "src/app/(auth)/admin-signin/page.tsx",
+      outputPath: this.getOutputPath("app/(auth)/admin-signin/page.tsx"),
     });
     renderTemplate({
       inputPath: `admin-processor/scripts/grant-admin.ts.hbs`,
@@ -40,24 +44,30 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
     renderTemplate({
       inputPath: "admin-processor/src/app/(admin)/admin/settings/page.tsx.hbs",
-      outputPath: "src/app/(admin)/admin/settings/page.tsx",
+      outputPath: this.getOutputPath("app/(admin)/admin/settings/page.tsx"),
     });
     renderTemplate({
       inputPath:
         "admin-processor/src/app/(auth)/_components/admin-signin-form.tsx.hbs",
-      outputPath: "src/app/(auth)/_components/admin-signin-form.tsx",
+      outputPath: this.getOutputPath(
+        "app/(auth)/_components/admin-signin-form.tsx"
+      ),
     });
     renderTemplate({
       inputPath:
         "admin-processor/src/app/(auth)/_actions/admin-signin.action.ts.hbs",
-      outputPath: "src/app/(auth)/_actions/admin-signin.action.ts",
+      outputPath: this.getOutputPath(
+        "app/(auth)/_actions/admin-signin.action.ts"
+      ),
     });
     renderTemplate({
       inputPath: "admin-processor/scripts/create-password-hash.ts.hbs",
       outputPath: "scripts/create-password-hash.ts",
     });
-
-    this.renderDrizzleAdmin();
+    renderTemplate({
+      inputPath: "admin-processor/src/app/(admin)/admin/page.tsx.hbs",
+      outputPath: this.getOutputPath("app/(admin)/admin/page.tsx"),
+    });
 
     const strategies: Record<DbDialect, string[]> = {
       postgresql: [
@@ -95,44 +105,6 @@ export class AdminProcessor implements DrizzleNextProcessor {
     });
 
     userScaffold.process();
-  }
-
-  renderDrizzleAdmin() {
-    renderTemplate({
-      inputPath: `admin-processor/src/app/(admin)/_components/users-components.tsx.hbs`,
-      outputPath: `src/app/(admin)/_components/users-components.tsx`,
-    });
-    renderTemplate({
-      inputPath:
-        "admin-processor/src/app/(admin)/_components/admin-layout.tsx.hbs",
-      outputPath: "src/app/(admin)/_components/admin-layout.tsx",
-    });
-    renderTemplate({
-      inputPath: `admin-processor/src/app/(admin)/_lib/users-table.config.ts.hbs`,
-      outputPath: `/src/app/(admin)/_lib/users-table.config.ts`,
-    });
-    renderTemplate({
-      inputPath:
-        "admin-processor/src/app/(admin)/admin/[...segments]/page.tsx.hbs",
-      outputPath: "src/app/(admin)/admin/[...segments]/page.tsx",
-    });
-    renderTemplate({
-      inputPath:
-        "admin-processor/src/app/(admin)/api/[...segments]/route.ts.hbs",
-      outputPath: "src/app/(admin)/api/[...segments]/route.ts",
-    });
-    renderTemplate({
-      inputPath:
-        "admin-processor/src/app/(admin)/_lib/drizzle-admin.config.ts.hbs",
-      outputPath: "src/app/(admin)/_lib/drizzle-admin.config.ts",
-      data: {
-        dbDialect: this.opts.dbDialect,
-      },
-    });
-    renderTemplate({
-      inputPath: "admin-processor/src/app/(admin)/admin/page.tsx.hbs",
-      outputPath: "src/app/(admin)/admin/page.tsx",
-    });
   }
 
   printCompletionMessage() {
