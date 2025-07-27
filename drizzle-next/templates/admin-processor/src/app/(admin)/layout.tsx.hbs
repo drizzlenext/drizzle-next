@@ -4,8 +4,7 @@ import { db } from "@/config/db";
 import { eq } from "drizzle-orm";
 import { AdminLayout } from "@/app/(admin)/_components/admin-layout";
 import { authorize } from "@/lib/authorize";
-import { DarkModeScript } from "drizzle-admin/drizzle-ui";
-import "drizzle-admin/styles";
+import { DarkModeScript } from "@/components/ui/dark-mode";
 
 export default async function Layout({
   children,

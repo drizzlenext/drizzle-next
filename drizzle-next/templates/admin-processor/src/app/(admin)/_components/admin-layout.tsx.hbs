@@ -11,36 +11,41 @@ import {
   AppSidebarToggle,
   AppSidebarList,
   AppContent,
+  AppNavItemType,
+  AppSidebarItemType,
 } from "@/components/ui/app-layout";
 import { Avatar } from "@/components/ui/avatar";
 import { DarkModeToggle } from "@/components/ui/dark-mode";
-import { DropdownMenu, DropdownMenuList } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuItemType,
+  DropdownMenuList,
+} from "@/components/ui/dropdown-menu";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { DrizzleLayoutConfig } from "drizzle-admin/types";
 import { LogOutIcon, UserIcon, GaugeIcon, SettingsIcon } from "lucide-react";
 import { SelectUser } from "@/schema/users";
 
-const config: DrizzleLayoutConfig = {
-  nav: [{ text: "Home", link: "/" }],
-  sidebar: [
-    {
-      text: "Admin",
-      items: [
-        {
-          text: "Admin Dashboard",
-          link: "/admin",
-          icon: GaugeIcon,
-        },
-        { text: "Users", link: "/admin/users", icon: UserIcon },
-      ],
-    },
-  ],
-  dropdown: [
-    { text: "Settings", link: "/admin/settings", icon: SettingsIcon },
-    { text: "Sign out", link: "/signout", icon: LogOutIcon },
-  ],
-};
+const nav: AppNavItemType[] = [{ text: "Home", link: "/" }];
+
+const sidebar: AppSidebarItemType[] = [
+  {
+    text: "Admin",
+    items: [
+      {
+        text: "Admin Dashboard",
+        link: "/admin",
+        icon: GaugeIcon,
+      },
+      { text: "Users", link: "/admin/users", icon: UserIcon },
+    ],
+  },
+];
+
+const dropdown: DropdownMenuItemType[] = [
+  { text: "Settings", link: "/admin/settings", icon: SettingsIcon },
+  { text: "Sign out", link: "/signout", icon: LogOutIcon },
+];
 
 export function AdminLayout({
   children,
@@ -60,7 +65,7 @@ export function AdminLayout({
         </AppHeaderGroup>
         <AppHeaderGroup>
           <AppNav>
-            <AppNavList items={config.nav} pathname={pathname} />
+            <AppNavList items={nav} pathname={pathname} />
             <DarkModeToggle />
           </AppNav>
           <AppNavToggle />
@@ -69,12 +74,12 @@ export function AdminLayout({
             buttonSizeVariant="avatar"
             buttonVariant="ghost"
           >
-            <DropdownMenuList items={config.dropdown} />
+            <DropdownMenuList items={dropdown} />
           </DropdownMenu>
         </AppHeaderGroup>
       </AppHeader>
       <AppSidebar>
-        <AppSidebarList items={config.sidebar} pathname={pathname} />
+        <AppSidebarList items={sidebar} pathname={pathname} />
       </AppSidebar>
       <AppContent>{children}</AppContent>
     </AppLayout>
