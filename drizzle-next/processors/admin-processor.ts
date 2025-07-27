@@ -11,7 +11,7 @@ import { NextScaffoldProcessor } from "./next-scaffold-processor";
 
 export class AdminProcessor implements DrizzleNextProcessor {
   opts: DrizzleNextConfig;
-  dependencies: string[] = ["drizzle-admin"];
+  dependencies: string[] = [];
   devDependencies: string[] = [];
   dbDialectStrategy: DbDialectStrategy;
 

@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Avatar,
   AppLayout,
   AppHeader,
   AppHeaderGroup,
@@ -12,19 +11,14 @@ import {
   AppSidebarToggle,
   AppSidebarList,
   AppContent,
-  DarkModeToggle,
-  DropdownMenu,
-  DropdownMenuList,
-} from "drizzle-admin/drizzle-ui";
+} from "@/components/ui/app-layout";
+import { Avatar } from "@/components/ui/avatar";
+import { DarkModeToggle } from "@/components/ui/dark-mode";
+import { DropdownMenu, DropdownMenuList } from "@/components/ui/dropdown-menu";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { DrizzleLayoutConfig } from "drizzle-admin/types";
-import {
-  LogOutIcon,
-  UserIcon,
-  GaugeIcon,
-  SettingsIcon,
-} from "lucide-react";
+import { LogOutIcon, UserIcon, GaugeIcon, SettingsIcon } from "lucide-react";
 import { SelectUser } from "@/schema/users";
 
 const config: DrizzleLayoutConfig = {

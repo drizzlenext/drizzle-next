@@ -314,7 +314,6 @@ export class NextScaffoldProcessor {
   }
 
   addActions(): void {
-    console.log(this.validatedColumnsWithIdAndTimestamps);
     const createColumns = [];
     for (const validatedColumn of this.validatedColumns) {
       const { caseVariants } = validatedColumn;
