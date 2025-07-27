@@ -282,6 +282,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
     insertSchemaToSchemaIndex("auth_tables", {
       pluralize: this.opts.pluralizeEnabled,
+      srcDir: this.opts.srcDir,
     });
   }
 
@@ -325,6 +326,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
     insertSchemaToSchemaIndex("users", {
       pluralize: true,
+      srcDir: this.opts.srcDir,
     });
   }
 

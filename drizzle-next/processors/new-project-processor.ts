@@ -101,18 +101,9 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       outputPath: this.getOutputPath("lib/search-params.ts"),
     });
     renderTemplate({
-      inputPath: "new-project-processor/src/app/(development)/layout.tsx.hbs",
-      outputPath: this.getOutputPath("app/(development)/layout.tsx"),
-    });
-    renderTemplate({
       inputPath:
         "new-project-processor/src/app/uploads/[...segments]/route.ts.hbs",
       outputPath: this.getOutputPath("app/uploads/[...segments]/route.ts"),
-    });
-    renderTemplate({
-      inputPath:
-        "new-project-processor/src/app/(development)/development/page.tsx.hbs",
-      outputPath: this.getOutputPath("app/(development)/development/page.tsx"),
     });
 
     appendToFileIfTextNotExists(".gitignore", "/uploads", "/uploads");
