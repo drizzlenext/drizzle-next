@@ -4,10 +4,6 @@ import {
   PkStrategy,
   NextScaffoldProcessorOpts,
 } from "../../common/types/types";
-import {
-  insertTextAfterIfNotExists,
-  prependToFileIfNotExists,
-} from "../../common/lib/utils";
 import { log } from "../../common/lib/log";
 import { pkStrategyImportTemplates } from "../../common/lib/pk-strategy";
 import { caseFactory, Cases } from "../../common/lib/case-utils";
@@ -57,6 +53,10 @@ export class NextScaffoldProcessor {
       this.getValidatedColumnsWithTimestamps();
     this.validatedColumnsWithIdAndTimestamps =
       this.getValidatedColumsWithIdAndTimestamps();
+  }
+
+  private getOutputPath(path: string): string {
+    return this.opts.srcDir ? `src/${path}` : path;
   }
 
   getValidatedColumsWithIdAndTimestamps() {
@@ -142,14 +142,11 @@ export class NextScaffoldProcessor {
     this.addDeleteForm();
     this.addTableComponent();
     this.addQueries();
-    this.updateDevelopmentIndex();
-    if (this.opts.adminEnabled) {
-      this.updateDrizzleAdminFiles();
-    }
     if (this.opts.enableCompletionMessage) {
       this.printCompletionMessage();
     }
   }
+
   generateImportsCodeFromColumns() {
     const dataTypeSet = new Set<string>();
     dataTypeSet.add(
@@ -196,6 +193,7 @@ export class NextScaffoldProcessor {
 
     return code;
   }
+
   getKeyValueStrForSchema(validatedColumn: ValidatedColumn): string {
     const { dataTypeStrategyMap } = this.dbDialectStrategy;
     let { columnName, dataType, caseVariants, referenceTableVars } =
@@ -218,18 +216,22 @@ export class NextScaffoldProcessor {
     str += ",";
     return str;
   }
+
   addListView(): void {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
       inputPath: "scaffold-processor/src/app/(development)/table/page.tsx.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/page.tsx`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/page.tsx`
+      ),
       data: {
         tableObj: tableObj,
       },
     });
   }
+
   addDetailView(): void {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -238,7 +240,9 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/[id]/page.tsx.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/[id]/page.tsx`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/[id]/page.tsx`
+      ),
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithTimestamps,
@@ -248,6 +252,7 @@ export class NextScaffoldProcessor {
       },
     });
   }
+
   hasFileDataType() {
     return (
       this.validatedColumns.filter((validatedColumn) =>
@@ -255,6 +260,7 @@ export class NextScaffoldProcessor {
       ).length > 0
     );
   }
+
   addEditView(): void {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -263,7 +269,9 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/[id]/edit/page.tsx.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/[id]/edit/page.tsx`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/[id]/edit/page.tsx`
+      ),
       data: {
         tableObj: tableObj,
         referencesColumnList: referencesColumnList,
@@ -272,6 +280,7 @@ export class NextScaffoldProcessor {
       },
     });
   }
+
   addNewView(): void {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -280,13 +289,16 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/new/page.tsx.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/new/page.tsx`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/new/page.tsx`
+      ),
       data: {
         tableObj: tableObj,
         referencesColumnList: referencesColumnList,
       },
     });
   }
+
   addDeleteView(): void {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -294,7 +306,9 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/[id]/delete/page.tsx.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/[id]/delete/page.tsx`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/[id]/delete/page.tsx`
+      ),
       data: {
         tableObj: tableObj,
         pkStrategyJsType:
@@ -302,6 +316,7 @@ export class NextScaffoldProcessor {
       },
     });
   }
+
   addCreateAction(): void {
     const columns = ["id"];
     for (const validatedColumn of this.validatedColumns) {
@@ -324,7 +339,9 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/_actions/create-action.ts.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_actions/create-${tableObj.singularKebabCase}.action.ts`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/_actions/create-${tableObj.singularKebabCase}.action.ts`
+      ),
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -334,6 +351,7 @@ export class NextScaffoldProcessor {
       },
     });
   }
+
   addUpdateAction(): void {
     const columns = ["id"];
     for (const validatedColumn of this.validatedColumnsWithTimestamps) {
@@ -357,7 +375,9 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/_actions/update-action.ts.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_actions/update-${tableObj.singularKebabCase}.action.ts`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/_actions/update-${tableObj.singularKebabCase}.action.ts`
+      ),
       data: {
         tableObj: tableObj,
         columns: columns,
@@ -367,6 +387,7 @@ export class NextScaffoldProcessor {
       },
     });
   }
+
   addDeleteAction(): void {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -375,13 +396,16 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/_actions/delete-action.ts.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_actions/delete-${tableObj.singularKebabCase}.action.ts`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/_actions/delete-${tableObj.singularKebabCase}.action.ts`
+      ),
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithIdAndTimestamps,
       },
     });
   }
+
   addCreateForm(): void {
     const formControlsImports = this.getFormControlsImports();
     const formControlsHtml = this.getFormControlsHtml();
@@ -392,7 +416,9 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/_components/create-form.tsx.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-create-form.tsx`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-create-form.tsx`
+      ),
       data: {
         tableObj: tableObj,
         formControlsImports: formControlsImports,
@@ -402,6 +428,7 @@ export class NextScaffoldProcessor {
       },
     });
   }
+
   getFormControlsHtml(): string {
     let html = "";
     const tableObj = caseFactory(this.opts.table, {
@@ -419,6 +446,7 @@ export class NextScaffoldProcessor {
     }
     return html;
   }
+
   getFormControlsImports(): string {
     let html = "";
     const formComponentSet = new Set<FormComponent>();
@@ -438,6 +466,7 @@ export class NextScaffoldProcessor {
     });
     return html;
   }
+
   getReferencesColumnList(startsWith: "references" | "references_") {
     const referencesColumnList = this.validatedColumns
       .filter((validatedColumn) =>
@@ -446,6 +475,7 @@ export class NextScaffoldProcessor {
       .map((validatedColumn) => validatedColumn);
     return referencesColumnList;
   }
+
   addUpdateForm(): void {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -457,7 +487,9 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/_components/update-form.tsx.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-update-form.tsx`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-update-form.tsx`
+      ),
       data: {
         tableObj: tableObj,
         formControlsImports: formControlsImports,
@@ -467,6 +499,7 @@ export class NextScaffoldProcessor {
       },
     });
   }
+
   addDeleteForm(): void {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -474,12 +507,15 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/_components/delete-form.tsx.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-delete-form.tsx`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-delete-form.tsx`
+      ),
       data: {
         tableObj: tableObj,
       },
     });
   }
+
   addTableComponent(): void {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -488,13 +524,16 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/_components/table-component.tsx.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-table.tsx`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-table.tsx`
+      ),
       data: {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithTimestamps,
       },
     });
   }
+
   getUpdateFormControlsHtml(): string {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -530,9 +569,11 @@ export class NextScaffoldProcessor {
     }
     return html;
   }
+
   printCompletionMessage() {
     log.success("successfully generated next.js scaffold: " + this.opts.table);
   }
+
   addQueries() {
     const tableObj = caseFactory(this.opts.table, {
       pluralize: this.opts.pluralizeEnabled,
@@ -540,7 +581,9 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/_queries/get-by-id.ts.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-by-id.query.ts`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-by-id.query.ts`
+      ),
       data: {
         tableObj,
         pkStrategyJsType:
@@ -550,44 +593,14 @@ export class NextScaffoldProcessor {
     renderTemplate({
       inputPath:
         "scaffold-processor/src/app/(development)/table/_queries/get-list.ts.hbs",
-      outputPath: `src/app/(development)/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-list.query.ts`,
+      outputPath: this.getOutputPath(
+        `app/(development)/${tableObj.pluralKebabCase}/_queries/get-${tableObj.singularKebabCase}-list.query.ts`
+      ),
       data: {
         tableObj,
         pkStrategyJsType:
           this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
       },
     });
-  }
-  updateDrizzleAdminFiles() {
-    if (this.opts.table === "users") {
-      return;
-    }
-    const tableObj = caseFactory(this.opts.table, {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-    insertTextAfterIfNotExists(
-      "src/app/(admin)/_components/admin-layout.tsx",
-      "sidebar: [",
-      `\n    { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}" },`
-    );
-    insertTextAfterIfNotExists(
-      "src/app/(admin)/_lib/drizzle-admin.config.ts",
-      "schema: {",
-      `\n    ${tableObj.pluralCamelCase}: { drizzleTable: ${tableObj.pluralCamelCase} },`
-    );
-    prependToFileIfNotExists(
-      "src/app/(admin)/_lib/drizzle-admin.config.ts",
-      `import { ${tableObj.pluralCamelCase} } from "@/schema/${tableObj.pluralKebabCase}";\n`
-    );
-  }
-  updateDevelopmentIndex() {
-    const tableObj = caseFactory(this.opts.table, {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-    insertTextAfterIfNotExists(
-      "src/app/(development)/development/page.tsx",
-      "const links: string[] = [",
-      `\n  "${tableObj.pluralKebabCase}",`
-    );
   }
 }
