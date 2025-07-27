@@ -25,11 +25,6 @@ export class DbDialectProcessor implements BaseProcessor {
       outputPath: ".env",
     });
 
-    renderTemplate({
-      inputPath: "db-dialect-processor/gitignore.hbs",
-      outputPath: ".gitignore",
-    });
-
     renderTemplateIfNotExists({
       inputPath: "db-dialect-processor/tsconfig.json.hbs",
       outputPath: "tsconfig.json",
