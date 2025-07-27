@@ -23,7 +23,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { LogOutIcon, UserIcon, GaugeIcon, SettingsIcon } from "lucide-react";
+import {
+  LogOutIcon,
+  UserIcon,
+  GaugeIcon,
+  SettingsIcon,
+  Table2Icon,
+} from "lucide-react";
 import { SelectUser } from "@/schema/users";
 
 const nav: AppNavItemType[] = [{ text: "Home", link: "/" }];
@@ -37,7 +43,7 @@ const sidebar: AppSidebarItemType[] = [
         link: "/admin",
         icon: GaugeIcon,
       },
-      { text: "Users", link: "/admin/users", icon: UserIcon },
+      // DRIZZLE_NEXT_SIDEBAR_ITEMS
     ],
   },
 ];

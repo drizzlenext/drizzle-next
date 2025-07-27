@@ -9,6 +9,7 @@ import { pkStrategyImportTemplates } from "../../common/lib/pk-strategy";
 import { caseFactory, Cases } from "../../common/lib/case-utils";
 import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
 import { compileTemplate, renderTemplate } from "../lib/utils";
+import { insertTextAfterIfNotExists } from "../../common/lib/utils";
 
 const formComponentImports: Record<FormComponent, string> = {
   input: `import { Input } from "@/components/ui/input";`,
@@ -140,9 +141,22 @@ export class NextScaffoldProcessor {
     this.addDeleteForm();
     this.addTableComponent();
     this.addQueries();
+    this.addLinkToSidebar();
     if (this.opts.enableCompletionMessage) {
       this.printCompletionMessage();
     }
+  }
+
+  addLinkToSidebar() {
+    const tableObj = caseFactory(this.opts.table, {
+      pluralize: this.opts.pluralizeEnabled,
+    });
+    const text = `\n      { text: "${tableObj.singularCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}", icon: Table2Icon },`;
+    insertTextAfterIfNotExists(
+      "app/(admin)/_components/admin-layout.tsx",
+      "// DRIZZLE_NEXT_SIDEBAR_ITEMS",
+      text
+    );
   }
 
   generateImportsCodeFromColumns() {
