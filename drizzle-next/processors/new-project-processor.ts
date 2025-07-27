@@ -66,8 +66,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
 
   renderNext() {
     renderTemplate({
-      inputPath: "new-project-processor/src/config/env.ts.hbs",
-      outputPath: this.getOutputPath("config/env.ts"),
+      inputPath: "new-project-processor/src/lib/env.ts.hbs",
+      outputPath: this.getOutputPath("lib/env.ts"),
     });
     renderTemplate({
       inputPath: "new-project-processor/src/app/layout.tsx.hbs",

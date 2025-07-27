@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 {{#if hasFileDataType}}
-import { env } from "@/config/env";
+import { env } from "@/lib/env";
 {{/if}}
 import { get{{tableObj.singularPascalCase}}ById } from "../queries";
 
