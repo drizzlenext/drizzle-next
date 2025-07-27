@@ -134,9 +134,7 @@ export class NextScaffoldProcessor {
     this.addNewView();
     this.addEditView();
     this.addDeleteView();
-    this.addCreateAction();
-    this.addUpdateAction();
-    this.addDeleteAction();
+    this.addActions();
     this.addCreateForm();
     this.addUpdateForm();
     this.addDeleteForm();
@@ -315,14 +313,21 @@ export class NextScaffoldProcessor {
     });
   }
 
-  addCreateAction(): void {
-    const columns = ["id"];
+  addActions(): void {
+    console.log(this.validatedColumnsWithIdAndTimestamps);
+    const createColumns = [];
     for (const validatedColumn of this.validatedColumns) {
       const { caseVariants } = validatedColumn;
-      columns.push(caseVariants.originalCamelCase);
+      createColumns.push(caseVariants.originalCamelCase);
     }
 
-    const uploadColumnNames = this.validatedColumns
+    const updateColumns = [];
+    for (const validatedColumn of this.validatedColumnsWithIdAndTimestamps) {
+      const { caseVariants } = validatedColumn;
+      updateColumns.push(caseVariants.originalCamelCase);
+    }
+
+    const uploadColumnNames = this.validatedColumnsWithIdAndTimestamps
       .filter((validatedColumn) => validatedColumn.dataType === "file")
       .map((validatedColumn) =>
         caseFactory(validatedColumn.columnName, {
@@ -335,71 +340,19 @@ export class NextScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath:
-        "scaffold-processor/src/app/(admin)/table/_actions/create-action.ts.hbs",
+      inputPath: "scaffold-processor/src/app/(admin)/table/actions.ts.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/_actions/create-${tableObj.singularKebabCase}.action.ts`
+        `app/(admin)/admin/${tableObj.pluralKebabCase}/actions.ts`
       ),
       data: {
         tableObj: tableObj,
-        columns: columns,
+        createColumns: createColumns,
+        updateColumns: updateColumns,
         uploadColumnNames: uploadColumnNames,
         importFileUtils: uploadColumnNames.length > 0,
         validatedColumns: this.validatedColumns,
-      },
-    });
-  }
-
-  addUpdateAction(): void {
-    const columns = ["id"];
-    for (const validatedColumn of this.validatedColumnsWithTimestamps) {
-      const { caseVariants } = validatedColumn;
-
-      columns.push(caseVariants.originalCamelCase);
-    }
-
-    const uploadColumnNames = this.validatedColumns
-      .filter((validatedColumn) => validatedColumn.dataType === "file")
-      .map((validatedColumn) =>
-        caseFactory(validatedColumn.columnName, {
-          pluralize: this.opts.pluralizeEnabled,
-        })
-      );
-
-    const tableObj = caseFactory(this.opts.table, {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-
-    renderTemplate({
-      inputPath:
-        "scaffold-processor/src/app/(admin)/table/_actions/update-action.ts.hbs",
-      outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/_actions/update-${tableObj.singularKebabCase}.action.ts`
-      ),
-      data: {
-        tableObj: tableObj,
-        columns: columns,
-        uploadColumnNames: uploadColumnNames,
-        importFileUtils: uploadColumnNames.length > 0,
-        validatedColumns: this.validatedColumnsWithIdAndTimestamps,
-      },
-    });
-  }
-
-  addDeleteAction(): void {
-    const tableObj = caseFactory(this.opts.table, {
-      pluralize: this.opts.pluralizeEnabled,
-    });
-
-    renderTemplate({
-      inputPath:
-        "scaffold-processor/src/app/(admin)/table/_actions/delete-action.ts.hbs",
-      outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/_actions/delete-${tableObj.singularKebabCase}.action.ts`
-      ),
-      data: {
-        tableObj: tableObj,
-        validatedColumns: this.validatedColumnsWithIdAndTimestamps,
+        validatedColumnsWithIdAndTimestamps:
+          this.validatedColumnsWithIdAndTimestamps,
       },
     });
   }
