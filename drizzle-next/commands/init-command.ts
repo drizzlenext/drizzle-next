@@ -118,6 +118,8 @@ initCommand
 
       partialConfig.install = options.install;
 
+      partialConfig.srcDir = options.srcDir;
+
       // process
 
       const processors: BaseProcessor[] = [];

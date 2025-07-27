@@ -469,7 +469,7 @@ export function completeDrizzleNextConfig(
     pkStrategy: partialConfig.pkStrategy ?? "uuidv4",
     install: partialConfig.install ?? true,
     pluralizeEnabled: partialConfig.pluralizeEnabled ?? true,
-    srcDir: partialConfig.srcDir || false,
+    srcDir: partialConfig.srcDir ?? false,
   };
   return completeConfig;
 }
