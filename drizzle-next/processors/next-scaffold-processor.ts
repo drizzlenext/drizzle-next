@@ -153,7 +153,7 @@ export class NextScaffoldProcessor {
     });
     const text = `\n      { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}", icon: Table2Icon },`;
     insertTextAfterIfNotExists(
-      "app/(admin)/_components/admin-layout.tsx",
+      this.getOutputPath("app/(admin)/_components/admin-layout.tsx"),
       "// DRIZZLE_NEXT_SIDEBAR_ITEMS",
       text
     );
