@@ -10,7 +10,6 @@ import {
 import { packageStrategyFactory } from "../../common/lib/strategy-factory";
 import { AuthProcessor, authStrategyMap } from "../processors/auth-processor";
 import { NewProjectProcessor } from "../processors/new-project-processor";
-import { AdminProcessor } from "../processors/admin-processor";
 import { DbDialectProcessor } from "../../common/processors/db-dialect-processor";
 import packageJson from "../package.json";
 import { pkDependencies } from "../../common/lib/pk-strategy";
@@ -138,13 +137,9 @@ initCommand
       processors.push(newProjectProcessor);
 
       let authProcessor;
-      let adminProcessor;
 
       authProcessor = new AuthProcessor(completeConfig);
       processors.push(authProcessor);
-
-      adminProcessor = new AdminProcessor(completeConfig);
-      processors.push(adminProcessor);
 
       const dependencies = [];
       const devDependencies = [];

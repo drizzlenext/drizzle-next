@@ -15,6 +15,7 @@ import {
 } from "../../common/lib/pk-strategy";
 import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
 import { renderTemplate } from "../lib/utils";
+import { NextScaffoldProcessor } from "./next-scaffold-processor";
 
 type AuthStrategy = {
   appendPlaceholdersToEnvLocal: () => void;
@@ -41,6 +42,8 @@ export const authStrategyMap: AuthStrategyMap = {
       log.cmdsubtask(
         "npx tsx scripts/create-user.ts test@example.com password123"
       );
+      log.task("grant admin role");
+      log.cmdsubtask("npx tsx scripts/grant-admin.ts test@example.com");
     },
     textToSearchInEnv: undefined,
     appendPlaceholdersToEnvLocal: function (): void {},
@@ -165,7 +168,18 @@ export class AuthProcessor implements DrizzleNextProcessor {
     this.addAuthSchema();
     this.addUserSchema();
     this.addLayout();
+    this.addAuthTemplates();
+    this.addAdminTemplates();
+    this.addUserScaffold();
+    this.addEnvVars();
+  }
 
+  addEnvVars() {
+    appendToEnvLocal("AUTH_TRUST_HOST", "http://localhost:3000");
+    appendToEnvLocal("AUTH_SECRET", "secret");
+  }
+
+  addAuthTemplates() {
     renderTemplate({
       inputPath: "auth-processor/src/lib/authorize.ts.hbs",
       outputPath: this.getOutputPath("lib/authorize.ts"),
@@ -218,8 +232,93 @@ export class AuthProcessor implements DrizzleNextProcessor {
       inputPath: "auth-processor/scripts/create-user.ts.hbs",
       outputPath: "scripts/create-user.ts",
     });
-    appendToEnvLocal("AUTH_TRUST_HOST", "http://localhost:3000");
-    appendToEnvLocal("AUTH_SECRET", "secret");
+  }
+
+  addUserScaffold() {
+    const strategies: Record<DbDialect, string[]> = {
+      postgresql: [
+        "name:text",
+        "email:text",
+        "email_verified:timestamp",
+        "image:text",
+        "role:text",
+        "password:text",
+      ],
+      mysql: [
+        "name:varchar",
+        "email:varchar",
+        "email_verified:timestamp",
+        "image:varchar",
+        "role:text",
+        "password:varchar",
+      ],
+      sqlite: [
+        "name:text",
+        "email:text",
+        "email_verified:timestamp",
+        "image:text",
+        "role:text",
+        "password:text",
+      ],
+    };
+
+    const userScaffold = new NextScaffoldProcessor({
+      ...this.opts,
+      columns: strategies[this.opts.dbDialect],
+      table: "users",
+      enableCompletionMessage: false,
+      pluralizeEnabled: true,
+    });
+
+    userScaffold.process();
+  }
+
+  addAdminTemplates() {
+    renderTemplate({
+      inputPath: "auth-processor/src/app/(admin)/layout.tsx.hbs",
+      outputPath: this.getOutputPath("app/(admin)/layout.tsx"),
+    });
+    renderTemplate({
+      inputPath: "auth-processor/src/app/(auth)/admin-signin/page.tsx.hbs",
+      outputPath: this.getOutputPath("app/(auth)/admin-signin/page.tsx"),
+    });
+    renderTemplate({
+      inputPath: `auth-processor/scripts/grant-admin.ts.hbs`,
+      outputPath: "scripts/grant-admin.ts",
+    });
+    renderTemplate({
+      inputPath: "auth-processor/src/app/(admin)/admin/settings/page.tsx.hbs",
+      outputPath: this.getOutputPath("app/(admin)/admin/settings/page.tsx"),
+    });
+    renderTemplate({
+      inputPath:
+        "auth-processor/src/app/(auth)/_components/admin-signin-form.tsx.hbs",
+      outputPath: this.getOutputPath(
+        "app/(auth)/_components/admin-signin-form.tsx"
+      ),
+    });
+    renderTemplate({
+      inputPath:
+        "auth-processor/src/app/(auth)/_actions/admin-signin.action.ts.hbs",
+      outputPath: this.getOutputPath(
+        "app/(auth)/_actions/admin-signin.action.ts"
+      ),
+    });
+    renderTemplate({
+      inputPath: "auth-processor/scripts/create-password-hash.ts.hbs",
+      outputPath: "scripts/create-password-hash.ts",
+    });
+    renderTemplate({
+      inputPath: "auth-processor/src/app/(admin)/admin/page.tsx.hbs",
+      outputPath: this.getOutputPath("app/(admin)/admin/page.tsx"),
+    });
+    renderTemplate({
+      inputPath:
+        "auth-processor/src/app/(admin)/_components/admin-layout.tsx.hbs",
+      outputPath: this.getOutputPath(
+        "app/(admin)/_components/admin-layout.tsx"
+      ),
+    });
   }
 
   addAuthConfig() {
