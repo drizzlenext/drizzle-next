@@ -8,6 +8,7 @@ import { {{tableObj.pluralCamelCase}} } from "@/db/schema/{{tableObj.pluralKebab
 {{#if importFileUtils}}
 import { uploadFile } from "@/lib/upload";
 {{/if}}
+import { requireAdmin } from "@/lib/auth";
 
 const insert{{tableObj.singularPascalCase}}Schema = z.object({
   {{#each validatedColumns}}
@@ -29,9 +30,7 @@ export async function create{{tableObj.singularPascalCase}}Action(
   prevState: Create{{tableObj.singularPascalCase}}State,
   formData: FormData
 ): Promise<Create{{tableObj.singularPascalCase}}State> {
-  if (process.env.NODE_ENV !== "development") {
-    throw new Error("only accessible in development");
-  }
+  const session = await requireAdmin();
 {{#each uploadColumnNames}}
 
   const {{this.originalCamelCase}}File = formData.get("{{this.originalCamelCase}}") as File;
@@ -107,9 +106,7 @@ export async function update{{tableObj.singularPascalCase}}Action(
   prevState: Update{{tableObj.singularPascalCase}}State,
   formData: FormData
 ): Promise<Update{{tableObj.singularPascalCase}}State> {
-  if (process.env.NODE_ENV !== "development") {
-    throw new Error("only accessible in development");
-  }
+  const session = await requireAdmin();
 {{#each uploadColumnNames}}
 
   const {{this.originalCamelCase}}File = formData.get("{{this.originalCamelCase}}") as File;
@@ -190,9 +187,7 @@ export async function delete{{tableObj.singularPascalCase}}Action(
   prevState: Delete{{tableObj.singularPascalCase}}State,
   formData: FormData
 ): Promise<Delete{{tableObj.singularPascalCase}}State> {
-  if (process.env.NODE_ENV !== "development") {
-    throw new Error("only accessible in development");
-  }
+  const session = await requireAdmin();
   
   const validatedFields = delete{{tableObj.singularPascalCase}}Schema.safeParse({
     id: formData.get("id"),
