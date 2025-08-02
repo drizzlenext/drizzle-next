@@ -16,6 +16,6 @@ export async function uploadFile({ file, dir }: { file: File; dir: string }) {
   if (!fs.existsSync(resolvedDirPath)) {
     fs.mkdirSync(resolvedDirPath, { recursive: true });
   }
-  fs.writeFileSync(resolvedPath, buffer);
+  fs.writeFileSync(resolvedPath, new Uint8Array(buffer));
   return fileUri;
 }
