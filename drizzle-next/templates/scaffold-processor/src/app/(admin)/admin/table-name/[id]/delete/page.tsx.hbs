@@ -13,10 +13,10 @@ export default async function Page(props: { params: Params }) {
 
   return (
     <div className="flex flex-col gap-3 p-3">
-      <div>Delete {{tableObj.singularCapitalCase}}</div>
       <div className="[&>a]:underline">
         <Link href={`/admin/{{tableObj.pluralKebabCase}}`}>Back</Link>
       </div>
+      <div>Delete {{tableObj.singularCapitalCase}}</div>
       <div>
         <{{tableObj.singularPascalCase}}DeleteForm {{tableObj.singularCamelCase}}Obj={ {{tableObj.singularCamelCase}}Obj } />
       </div>

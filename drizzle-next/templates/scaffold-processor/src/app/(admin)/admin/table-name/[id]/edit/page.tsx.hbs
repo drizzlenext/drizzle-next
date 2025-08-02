@@ -23,11 +23,11 @@ export default async function Page(props: { params: Params }) {
 
   return (
     <div className="flex flex-col gap-3 p-3">
-      <div>Editing {{tableObj.singularCapitalCase}}</div>
       <div className="flex gap-3 [&>a]:underline">
         <Link href={`/admin/{{tableObj.pluralKebabCase}}`}>Back</Link>
         <Link href={`/admin/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>Show</Link>
       </div>
+      <div>Editing {{tableObj.singularCapitalCase}}</div>
       <div>
         <{{tableObj.singularPascalCase}}UpdateForm 
           {{tableObj.singularCamelCase}}Obj={ {{tableObj.singularCamelCase}}Obj }
