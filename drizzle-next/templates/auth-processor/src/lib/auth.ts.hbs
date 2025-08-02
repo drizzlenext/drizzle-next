@@ -1,10 +1,14 @@
 import { db } from "@/db/db";
-import NextAuth from "next-auth"
+import NextAuth, { Session } from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import type { Provider } from "next-auth/providers";
 import { eq } from "drizzle-orm";
 import { users } from "@/db/schema/users";
-import { accounts, sessions, verificationTokens } from "@/db/schema/auth-tables";
+import {
+  accounts,
+  sessions,
+  verificationTokens,
+} from "@/db/schema/auth-tables";
 import { Adapter } from "next-auth/adapters";
 import { createId } from "@/lib/id";
 import GitHub from "next-auth/providers/github";
@@ -13,6 +17,7 @@ import Postmark from "next-auth/providers/postmark";
 import Nodemailer from "next-auth/providers/nodemailer";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import { redirect } from "next/navigation";
 
 const adapter = {
   ...(DrizzleAdapter(db, {
@@ -27,8 +32,7 @@ const adapter = {
       email: data.email,
       name: data.name,
       image: data.image,
-      emailVerified: data.emailVerified,
-      role: "user"
+      emailVerified: data.emailVerified
     };
 
     await db.insert(users).values(newUser);
@@ -37,38 +41,38 @@ const adapter = {
 };
 
 const providers: Provider[] = [
-    GitHub,
-    Google,
-    Postmark({ from: "noreply@example.com" }),
-    Nodemailer({
-      server: process.env.EMAIL_SERVER,
-      from: process.env.EMAIL_FROM,
-    }),
-    Credentials({
-      credentials: {
-        email: {},
-        password: { type: "password" },
-      },
-      authorize: async (credentials) => {
-        const email = credentials.email as string;
-        const password = credentials.password as string;
-        const userObj = await db.query.users.findFirst({
-          where: eq(users.email, email),
-        });
-        if (!userObj) {
-          throw new Error("User not found.");
-        }
-        if (!userObj.password) {
-          throw new Error("Password not found.");
-        }
-        const valid = bcrypt.compareSync(password, userObj.password);
-        if (!valid) {
-          throw new Error("Invalid password.");
-        }
-        return userObj;
-      },
-    }),
-]
+  GitHub,
+  Google,
+  Postmark({ from: "noreply@example.com" }),
+  Nodemailer({
+    server: process.env.EMAIL_SERVER,
+    from: process.env.EMAIL_FROM,
+  }),
+  Credentials({
+    credentials: {
+      email: {},
+      password: { type: "password" },
+    },
+    authorize: async (credentials) => {
+      const email = credentials.email as string;
+      const password = credentials.password as string;
+      const userObj = await db.query.users.findFirst({
+        where: eq(users.email, email),
+      });
+      if (!userObj) {
+        throw new Error("User not found.");
+      }
+      if (!userObj.password) {
+        throw new Error("Password not found.");
+      }
+      const valid = bcrypt.compareSync(password, userObj.password);
+      if (!valid) {
+        throw new Error("Invalid password.");
+      }
+      return userObj;
+    },
+  }),
+];
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: adapter,
@@ -93,4 +97,33 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
   },
-})
+});
+
+export async function requireAdmin(): Promise<Session> {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    redirect("/admin-signin");
+  }
+
+  if (session.user.role !== "admin") {
+    throw new Error("unauthorized");
+  }
+
+  return session;
+}
+
+export async function requireAuth(): Promise<Session> {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    redirect("/signin");
+  }
+
+  return session;
+}
+
+export async function getSession(): Promise<Session | null> {
+  const session = await auth();
+  return session;
+}

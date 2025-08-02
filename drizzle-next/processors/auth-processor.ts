@@ -177,10 +177,6 @@ export class AuthProcessor implements DrizzleNextProcessor {
 
   addAuthTemplates() {
     renderTemplate({
-      inputPath: "auth-processor/src/lib/authorize.ts.hbs",
-      outputPath: this.getOutputPath("lib/authorize.ts"),
-    });
-    renderTemplate({
       inputPath: "auth-processor/src/components/layouts/private-layout.tsx.hbs",
       outputPath: this.getOutputPath("components/layouts/private-layout.tsx"),
     });

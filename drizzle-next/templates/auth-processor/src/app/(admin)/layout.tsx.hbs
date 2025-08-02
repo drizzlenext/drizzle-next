@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/db/db";
 import { eq } from "drizzle-orm";
 import { AdminLayout } from "@/components/layouts/admin-layout";
-import { authorize } from "@/lib/authorize";
+import { requireAdmin } from "@/lib/auth";
 import { DarkModeScript } from "@/components/ui/dark-mode";
 
 export default async function Layout({
@@ -11,7 +11,7 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await authorize("admin");
+  const session = await requireAdmin();
 
   const userObj = await db.query.users.findFirst({
     where: eq(users.id, session.user.id),

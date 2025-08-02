@@ -3,14 +3,14 @@ import { redirect } from "next/navigation";
 import { db } from "@/db/db";
 import { users } from "@/db/schema/users";
 import { PrivateLayout } from "@/components/layouts/private-layout";
-import { authorize } from "@/lib/authorize";
+import { requireAuth } from "@/lib/auth";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await authorize("user");
+  const session = await requireAuth();
 
   const userObj = await db.query.users.findFirst({
     where: eq(users.id, session.user.id),
