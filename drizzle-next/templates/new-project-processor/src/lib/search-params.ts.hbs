@@ -3,7 +3,7 @@ type SearchParams = {
   pageIndex?: string;
   pageSize?: string;
   search?: string;
-  sortKey?: string;
+  sortBy?: string;
   sortOrder?: string;
   [key: string]: string | string[] | undefined;
 };
@@ -19,14 +19,14 @@ export function parseSearchParams(searchParams: SearchParams) {
       ? parseInt(searchParams.pageSize)
       : undefined;
   const search = searchParams.search;
-  const sortKey = searchParams.sortKey;
+  const sortBy = searchParams.sortBy;
   const sortOrder = searchParams.sortOrder;
   return {
     page,
     pageIndex,
     pageSize,
     search,
-    sortKey,
+    sortBy,
     sortOrder,
   };
 }

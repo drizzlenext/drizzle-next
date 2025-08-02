@@ -21,23 +21,23 @@ export async function get{{tableObj.singularPascalCase}}List({
   filters,
   limit,
   offset,
-  sortKey,
+  sortBy,
   sortOrder,
 }: {
   filters?: SQL;
   limit?: number;
   offset?: number;
-  sortKey?: string;
+  sortBy?: string;
   sortOrder?: string;
 }) {
   let orderBy;
-  if (sortKey && sortKey in {{tableObj.pluralCamelCase}}) {
+  if (sortBy && sortBy in {{tableObj.pluralCamelCase}}) {
     switch (sortOrder) {
       case "asc":
-        orderBy = asc({{tableObj.pluralCamelCase}}[sortKey as keyof Select{{tableObj.singularPascalCase}}]);
+        orderBy = asc({{tableObj.pluralCamelCase}}[sortBy as keyof Select{{tableObj.singularPascalCase}}]);
         break;
       case "desc":
-        orderBy = desc({{tableObj.pluralCamelCase}}[sortKey as keyof Select{{tableObj.singularPascalCase}}]);
+        orderBy = desc({{tableObj.pluralCamelCase}}[sortBy as keyof Select{{tableObj.singularPascalCase}}]);
         break;
     }
   }
