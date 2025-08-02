@@ -139,11 +139,15 @@ export class NextScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     const text = `\n      { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}", icon: Table2Icon },`;
-    insertTextAfterIfNotExists(
-      this.getOutputPath("components/layouts/admin-layout.tsx"),
-      "// DRIZZLE_NEXT_SIDEBAR_ITEMS",
-      text
-    );
+    try {
+      insertTextAfterIfNotExists(
+        this.getOutputPath("components/layouts/admin-layout.tsx"),
+        "// DRIZZLE_NEXT_SIDEBAR_ITEMS",
+        text
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   generateImportsCodeFromColumns() {
