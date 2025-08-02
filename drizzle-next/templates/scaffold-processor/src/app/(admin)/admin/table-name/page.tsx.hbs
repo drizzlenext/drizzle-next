@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { parseSearchParams } from "@/lib/search-params";
 import { {{tableObj.pluralCamelCase}} } from "@/db/schema/{{tableObj.pluralKebabCase}}";
 import { {{tableObj.singularPascalCase}}Table } from "@/components/admin/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-table";
-import { get{{tableObj.singularPascalCase}}List } from "@/queries/admin/{{tableObj.pluralKebabCase}}-queries";
+import { get{{tableObj.singularPascalCase}}List } from "@/db/queries/{{tableObj.pluralKebabCase}}-queries";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 

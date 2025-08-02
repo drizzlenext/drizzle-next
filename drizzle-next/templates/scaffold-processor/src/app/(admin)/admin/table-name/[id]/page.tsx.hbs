@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 {{#if hasFileDataType}}
 import { env } from "@/lib/env";
 {{/if}}
-import { get{{tableObj.singularPascalCase}}ById } from "@/queries/admin/{{tableObj.pluralKebabCase}}-queries";
+import { get{{tableObj.singularPascalCase}}ById } from "@/db/queries/{{tableObj.pluralKebabCase}}-queries";
 
 type Params = Promise<{ id: string }>;
 

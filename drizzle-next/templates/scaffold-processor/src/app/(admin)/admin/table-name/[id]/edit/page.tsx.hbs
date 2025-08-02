@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { db } from "@/db/db";
 {{/if}}
 import { {{tableObj.singularPascalCase}}UpdateForm } from "@/components/admin/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-update-form";
-import { get{{tableObj.singularPascalCase}}ById } from "@/queries/admin/{{tableObj.pluralKebabCase}}-queries";
+import { get{{tableObj.singularPascalCase}}ById } from "@/db/queries/{{tableObj.pluralKebabCase}}-queries";
 
 type Params = Promise<{ id: string }>;
 

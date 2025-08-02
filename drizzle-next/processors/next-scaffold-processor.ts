@@ -517,10 +517,9 @@ export class NextScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath:
-        "scaffold-processor/src/queries/admin/table-name-queries.ts.hbs",
+      inputPath: "scaffold-processor/src/db/queries/table-name-queries.ts.hbs",
       outputPath: this.getOutputPath(
-        `queries/admin/${tableObj.pluralKebabCase}-queries.ts`
+        `db/queries/${tableObj.pluralKebabCase}-queries.ts`
       ),
       data: {
         tableObj,
