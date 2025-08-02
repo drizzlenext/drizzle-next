@@ -13,7 +13,7 @@ import { users } from "@/db/schema/users"
 export const accounts = mysqlTable(
   "accounts",
   {
-    userId: {{fkStrategyTemplate}}
+    userId: varchar({ length: 255 })
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     type: varchar({ length: 255 })
@@ -38,7 +38,7 @@ export const accounts = mysqlTable(
  
 export const sessions = mysqlTable("sessions", {
   sessionToken: varchar({ length: 255 }).primaryKey(),
-  userId: {{fkStrategyTemplate}}
+  userId: varchar({ length: 255 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp({ mode: "date" }).notNull(),
@@ -62,7 +62,7 @@ export const authenticators = mysqlTable(
   "authenticators",
   {
     credentialID: varchar({ length: 255 }).notNull().unique(),
-    userId: {{fkStrategyTemplate}}
+    userId: varchar({ length: 255 })
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     providerAccountId: varchar({ length: 255 }).notNull(),

@@ -4,7 +4,6 @@ export type DrizzleBaseConfig = {
   latest: boolean;
   dbDialect: DbDialect;
   dbPackage: DbPackage;
-  pkStrategy: PkStrategy;
   install: boolean;
   pluralizeEnabled: boolean;
   srcDir: boolean;
@@ -17,13 +16,6 @@ export type DrizzleExpressConfig = {} & DrizzleBaseConfig;
 export type DrizzleUtilConfig = {} & DrizzleBaseConfig;
 
 export type PackageManager = "npm" | "pnpm" | "bun";
-
-export type PkStrategy =
-  | "cuid2"
-  | "uuidv7"
-  | "uuidv4"
-  | "nanoid"
-  | "auto_increment";
 
 export type BaseProcessor = {
   dependencies: string[];
@@ -89,14 +81,9 @@ export type DbDialectStrategy = {
   drizzleDbCorePackage: string;
   tableConstructor: string;
   dataTypeStrategyMap: DataTypeStrategyMap;
-  pkStrategyJsType: Record<PkStrategy, string>;
-  pkStrategyTemplates: Record<PkStrategy, string>;
-  pkStrategyDataTypes: Record<PkStrategy, string>;
-  fkStrategyTemplates: Record<PkStrategy, string>;
   createdAtTemplate: string;
   updatedAtTemplate: string;
   pkDataType: string;
-  fkAutoIncrementDataType: string;
   timestampImport: string;
 };
 

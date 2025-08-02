@@ -2,10 +2,10 @@ import {
   mysqlTable,
 {{dataTypeImports}}
 } from "drizzle-orm/mysql-core"
-{{pkStrategyImport}}
+import { createId } from "@/lib/id";
 
 export const users = mysqlTable("users", {
-  {{pkText}}
+  id: varchar({ length: 255 }).primaryKey().$defaultFn(() => createId()),
   name: varchar({ length: 255 }),
   email: varchar({ length: 255 }).notNull(),
   emailVerified: timestamp({

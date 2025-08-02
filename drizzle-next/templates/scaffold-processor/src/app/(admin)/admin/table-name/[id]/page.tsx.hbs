@@ -5,7 +5,7 @@ import { env } from "@/lib/env";
 {{/if}}
 import { get{{tableObj.singularPascalCase}}ById } from "@/queries/admin/{{tableObj.pluralKebabCase}}-queries";
 
-type Params = Promise<{ id: {{pkStrategyJsType}} }>;
+type Params = Promise<{ id: string }>;
 
 export default async function Page(props: { params: Params }) {
   const params = await props.params;

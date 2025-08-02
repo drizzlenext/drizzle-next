@@ -4,7 +4,7 @@ import { {{tableObj.singularPascalCase}}DeleteForm } from "@/components/admin/{{
 import { db } from "@/db/db";
 import { {{tableObj.pluralCamelCase}} } from "@/db/schema/{{tableObj.pluralKebabCase}}";
 
-type Params = Promise<{ id: {{pkStrategyJsType}} }>;
+type Params = Promise<{ id: string }>;
 
 export default async function Page(props: { params: Params }) {
   const params = await props.params;

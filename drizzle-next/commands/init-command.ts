@@ -12,7 +12,6 @@ import { AuthProcessor, authStrategyMap } from "../processors/auth-processor";
 import { NewProjectProcessor } from "../processors/new-project-processor";
 import { DbDialectProcessor } from "../../common/processors/db-dialect-processor";
 import packageJson from "../package.json";
-import { pkDependencies } from "../../common/lib/pk-strategy";
 
 export const initCommand = new Command("init");
 
@@ -32,12 +31,6 @@ initCommand
       "postgresql",
       "mysql",
     ])
-  )
-  .addOption(
-    new Option(
-      "--pk-strategy <strategy>",
-      "primary key generation strategy"
-    ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"])
   )
   .option("--src-dir", "enable src directory", false)
   .option("--no-src-dir", "disable src directory", false)
@@ -84,34 +77,6 @@ initCommand
         default:
           break;
       }
-      partialConfig.pkStrategy =
-        options.pkStrategy ||
-        (await select({
-          message:
-            "Which primary key generation strategy would you like to use?",
-          choices: [
-            {
-              name: "cuid2",
-              value: "cuid2",
-              description: "Uses the @paralleldrive/cuid2 package",
-            },
-            {
-              name: "uuidv4",
-              value: "uuidv4",
-              description: "Uses crypto.randomUUID",
-            },
-            {
-              name: "uuidv7",
-              value: "uuidv7",
-              description: "Uses the uuidv7 package",
-            },
-            {
-              name: "nanoid",
-              value: "nanoid",
-              description: "Uses the nanoid package",
-            },
-          ],
-        }));
 
       partialConfig.pluralizeEnabled = options.pluralize;
 
@@ -143,8 +108,6 @@ initCommand
 
       const dependencies = [];
       const devDependencies = [];
-
-      dependencies.push(...pkDependencies[completeConfig.pkStrategy]);
 
       for (const processor of processors) {
         dependencies.push(...processor.dependencies);

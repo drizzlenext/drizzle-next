@@ -6,7 +6,7 @@ import { users } from "@/db/schema/users"
 export const accounts = sqliteTable(
   "accounts",
   {
-    userId: {{fkStrategyTemplate}}
+    userId: text()
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     type: text().$type<AdapterAccountType>().notNull(),
@@ -29,7 +29,7 @@ export const accounts = sqliteTable(
  
 export const sessions = sqliteTable("sessions", {
   sessionToken: text().primaryKey(),
-  userId: {{fkStrategyTemplate}}
+  userId: text()
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: integer({ mode: "timestamp_ms" }).notNull(),
@@ -53,7 +53,7 @@ export const authenticators = sqliteTable(
   "authenticators",
   {
     credentialID: text().notNull().unique(),
-    userId: {{fkStrategyTemplate}}
+    userId: text()
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     providerAccountId: text().notNull(),

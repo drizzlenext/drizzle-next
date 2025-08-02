@@ -1,11 +1,9 @@
 import {
   DbDialectStrategy,
   FormComponent,
-  PkStrategy,
   NextScaffoldProcessorOpts,
 } from "../../common/types/types";
 import { log } from "../../common/lib/log";
-import { pkStrategyImportTemplates } from "../../common/lib/pk-strategy";
 import { caseFactory, Cases } from "../../common/lib/case-utils";
 import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
 import { compileTemplate, renderTemplate } from "../lib/utils";
@@ -25,14 +23,6 @@ type ValidatedColumn = {
   caseVariants: Cases; // the case variants of the original column
   zodCode: string; // the zod coersion code
   referenceTableVars?: Cases; // for the table name of reference types
-};
-
-const zodCodeRecord: Record<PkStrategy, string> = {
-  cuid2: "z.coerce.string().cuid2()",
-  uuidv7: "z.coerce.string().uuid()",
-  uuidv4: "z.coerce.string().uuid()",
-  nanoid: "z.coerce.string().nanoid()",
-  auto_increment: "z.coerce.number()",
 };
 
 export class NextScaffoldProcessor {
@@ -67,7 +57,7 @@ export class NextScaffoldProcessor {
       caseVariants: caseFactory("id", {
         pluralize: this.opts.pluralizeEnabled,
       }),
-      zodCode: zodCodeRecord[this.opts.pkStrategy],
+      zodCode: "z.coerce.string()",
     };
 
     return [idCol].concat(this.getValidatedColumnsWithTimestamps());
@@ -111,9 +101,6 @@ export class NextScaffoldProcessor {
         throw new Error(`invalid data type ${dataType}`);
       }
       let zodCode = dataTypeStrategyMap[dataType].zodCode;
-      if (dataType.startsWith("references")) {
-        zodCode = zodCodeRecord[this.opts.pkStrategy];
-      }
       validatedColumns.push({
         columnName,
         dataType,
@@ -161,9 +148,6 @@ export class NextScaffoldProcessor {
 
   generateImportsCodeFromColumns() {
     const dataTypeSet = new Set<string>();
-    dataTypeSet.add(
-      this.dbDialectStrategy.pkStrategyDataTypes[this.opts.pkStrategy]
-    );
     let referenceImportsCode = "";
     for (const validatedColumn of this.validatedColumns) {
       const { dataType, referenceTableVars } = validatedColumn;
@@ -178,9 +162,6 @@ export class NextScaffoldProcessor {
       // references
       if (dataType.startsWith("references") && referenceTableVars) {
         referenceImportsCode += `import { ${referenceTableVars.pluralCamelCase} } from "@/db/schema/${referenceTableVars.pluralKebabCase}";\n`;
-        if (this.opts.pkStrategy === "auto_increment") {
-          dataTypeSet.add(this.dbDialectStrategy.fkAutoIncrementDataType);
-        }
       }
     }
 
@@ -194,9 +175,6 @@ export class NextScaffoldProcessor {
       code += `  ${dataType},\n`;
     }
     code += `} from "${this.dbDialectStrategy.drizzleDbCorePackage}";\n`;
-
-    // pk strategy import
-    code += `${pkStrategyImportTemplates[this.opts.pkStrategy]}\n`;
 
     // reference import
     if (referenceImportsCode !== "") {
@@ -222,8 +200,6 @@ export class NextScaffoldProcessor {
         keyName: caseVariants.originalCamelCase,
         columnName: columnName,
         referencesTable: referenceTableVars?.pluralCamelCase,
-        fkStrategyTemplate:
-          this.dbDialectStrategy.fkStrategyTemplates[this.opts.pkStrategy],
       });
     str += ",";
     return str;
@@ -260,8 +236,6 @@ export class NextScaffoldProcessor {
         tableObj: tableObj,
         validatedColumns: this.validatedColumnsWithTimestamps,
         hasFileDataType,
-        pkStrategyJsType:
-          this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
       },
     });
   }
@@ -288,8 +262,6 @@ export class NextScaffoldProcessor {
       data: {
         tableObj: tableObj,
         referencesColumnList: referencesColumnList,
-        pkStrategyJsType:
-          this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
       },
     });
   }
@@ -324,8 +296,6 @@ export class NextScaffoldProcessor {
       ),
       data: {
         tableObj: tableObj,
-        pkStrategyJsType:
-          this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
       },
     });
   }
@@ -554,8 +524,6 @@ export class NextScaffoldProcessor {
       ),
       data: {
         tableObj,
-        pkStrategyJsType:
-          this.dbDialectStrategy.pkStrategyJsType[this.opts.pkStrategy],
       },
     });
   }

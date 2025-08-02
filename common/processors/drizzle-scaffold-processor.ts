@@ -1,12 +1,10 @@
 import {
   DbDialect,
   DbDialectStrategy,
-  PkStrategy,
   BaseScaffoldProcessorOpts,
 } from "../types/types";
 import { renderTemplate, insertSchemaToSchemaIndex } from "../lib/utils";
 import { log } from "../lib/log";
-import { pkStrategyImportTemplates } from "../lib/pk-strategy";
 import { caseFactory, Cases } from "../lib/case-utils";
 import { dialectStrategyFactory } from "../lib/strategy-factory";
 
@@ -37,14 +35,6 @@ type ValidatedColumn = {
   caseVariants: Cases; // the case variants of the original column
   zodCode: string; // the zod coersion code
   referenceTableVars?: Cases; // for the table name of reference types
-};
-
-const zodCodeRecord: Record<PkStrategy, string> = {
-  cuid2: "z.coerce.string().cuid2()",
-  uuidv7: "z.coerce.string().uuid()",
-  uuidv4: "z.coerce.string().uuid()",
-  nanoid: "z.coerce.string().nanoid()",
-  auto_increment: "z.coerce.number()",
 };
 
 export class DrizzleScaffoldProcessor {
@@ -79,7 +69,7 @@ export class DrizzleScaffoldProcessor {
       caseVariants: caseFactory("id", {
         pluralize: this.opts.pluralizeEnabled,
       }),
-      zodCode: zodCodeRecord[this.opts.pkStrategy],
+      zodCode: "z.coerce.string()",
     };
 
     return [idCol].concat(this.getValidatedColumnsWithTimestamps());
@@ -124,7 +114,7 @@ export class DrizzleScaffoldProcessor {
       }
       let zodCode = dataTypeStrategyMap[dataType].zodCode;
       if (dataType.startsWith("references")) {
-        zodCode = zodCodeRecord[this.opts.pkStrategy];
+        zodCode = "z.coerce.string()";
       }
       validatedColumns.push({
         columnName,
@@ -157,8 +147,7 @@ export class DrizzleScaffoldProcessor {
     let columnsCode = "";
 
     // add primary key id
-    const pkCode =
-      this.dbDialectStrategy.pkStrategyTemplates[this.opts.pkStrategy];
+    const pkCode = "id: text().primaryKey().$defaultFn(() => createId()),";
     columnsCode += "    " + pkCode + "\n";
 
     // add other columns
@@ -196,9 +185,6 @@ export class DrizzleScaffoldProcessor {
   }
   generateImportsCodeFromColumns() {
     const dataTypeSet = new Set<string>();
-    dataTypeSet.add(
-      this.dbDialectStrategy.pkStrategyDataTypes[this.opts.pkStrategy]
-    );
     let referenceImportsCode = "";
     for (const validatedColumn of this.validatedColumns) {
       const { dataType, referenceTableVars } = validatedColumn;
@@ -213,9 +199,6 @@ export class DrizzleScaffoldProcessor {
       // references
       if (dataType.startsWith("references") && referenceTableVars) {
         referenceImportsCode += `import { ${referenceTableVars.pluralCamelCase} } from "@/db/schema/${referenceTableVars.pluralKebabCase}";\n`;
-        if (this.opts.pkStrategy === "auto_increment") {
-          dataTypeSet.add(this.dbDialectStrategy.fkAutoIncrementDataType);
-        }
       }
     }
 
@@ -229,9 +212,6 @@ export class DrizzleScaffoldProcessor {
       code += `  ${dataType},\n`;
     }
     code += `} from "${this.dbDialectStrategy.drizzleDbCorePackage}";\n`;
-
-    // pk strategy import
-    code += `${pkStrategyImportTemplates[this.opts.pkStrategy]}\n`;
 
     // reference import
     if (referenceImportsCode !== "") {
@@ -256,8 +236,7 @@ export class DrizzleScaffoldProcessor {
         keyName: caseVariants.originalCamelCase,
         columnName: columnName,
         referencesTable: referenceTableVars?.pluralCamelCase,
-        fkStrategyTemplate:
-          this.dbDialectStrategy.fkStrategyTemplates[this.opts.pkStrategy],
+        fkStrategyTemplate: "text()",
       });
     str += ",";
     return str;

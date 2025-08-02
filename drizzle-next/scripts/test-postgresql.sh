@@ -34,7 +34,6 @@ cd demo-postgresql
 if [ "$RESET" = true ]; then
 drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
-    --pk-strategy cuid2 \
     --no-src-dir \
     --latest
 pnpm i -D prettier prettier-plugin-tailwindcss
@@ -42,7 +41,6 @@ pnpm i -D prettier prettier-plugin-tailwindcss
 else
 drizzle-next init --package-manager pnpm \
     --db-dialect postgresql \
-    --pk-strategy cuid2 \
     --latest \
     --no-src-dir \
     --no-install

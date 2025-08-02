@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 import { users } from "@/db/schema/users";
 import { accounts, sessions, verificationTokens } from "@/db/schema/auth-tables";
 import { Adapter } from "next-auth/adapters";
-{{pkStrategyImport}}
+import { createId } from "@/lib/id";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import Postmark from "next-auth/providers/postmark";
@@ -23,7 +23,7 @@ const adapter = {
   }) as Adapter),
   createUser: async (data: any) => {
     const newUser = {
-      {{pkKeyValTemplate}}
+      id: createId(),
       email: data.email,
       name: data.name,
       image: data.image,

@@ -305,38 +305,8 @@ const mysqlDataTypeStrategies: DataTypeStrategyMap = {
 
 export const mysqlDialectStrategy: DbDialectStrategy = {
   pkDataType: "varchar",
-  fkAutoIncrementDataType: "bigint",
   createdAtTemplate: `createdAt: timestamp().notNull().defaultNow(),`,
   updatedAtTemplate: `updatedAt: timestamp().notNull().defaultNow().$onUpdate(() => new Date()),`,
-  pkStrategyTemplates: {
-    uuidv7: `id: varchar({ length: 255 }).primaryKey().$defaultFn(() => uuidv7()),`,
-    uuidv4: `id: varchar({ length: 255 }).primaryKey().$defaultFn(() => crypto.randomUUID()),`,
-    cuid2:
-      "id: varchar({ length: 255 }).primaryKey().$defaultFn(() => createId()),",
-    nanoid: `id: varchar({ length: 255 }).primaryKey().$defaultFn(() => nanoid()),`,
-    auto_increment: `id: bigint({ mode: "number" }).autoincrement().primaryKey(),`,
-  },
-  pkStrategyDataTypes: {
-    cuid2: "varchar",
-    uuidv7: "varchar",
-    uuidv4: "varchar",
-    nanoid: "varchar",
-    auto_increment: "bigint",
-  },
-  fkStrategyTemplates: {
-    cuid2: "varchar({ length: 255 })",
-    uuidv7: "varchar({ length: 255 })",
-    uuidv4: "varchar({ length: 255 })",
-    nanoid: "varchar({ length: 255 })",
-    auto_increment: `bigint({ mode: "number"})`,
-  },
-  pkStrategyJsType: {
-    cuid2: "string",
-    uuidv7: "string",
-    uuidv4: "string",
-    nanoid: "string",
-    auto_increment: "number",
-  },
   drizzleDbCorePackage: "drizzle-orm/mysql-core",
   tableConstructor: "mysqlTable",
   dialect: "mysql",

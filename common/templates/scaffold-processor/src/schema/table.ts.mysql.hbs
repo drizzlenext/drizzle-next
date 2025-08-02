@@ -1,5 +1,7 @@
 import { relations } from "drizzle-orm";
 {{imports}}
+import { createId } from "@/lib/id";
+
 export const {{tableObj.pluralCamelCase}} = mysqlTable(
   "{{tableObj.pluralSnakeCase}}",
   {
