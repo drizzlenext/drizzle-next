@@ -4,7 +4,7 @@
 import Link from "next/link";
 {{/if}}
 import { startTransition, useActionState } from "react";
-import { update{{tableObj.singularPascalCase}}Action, Update{{tableObj.singularPascalCase}}State } from "../actions";
+import { update{{tableObj.singularPascalCase}}Action, Update{{tableObj.singularPascalCase}}State } from "@/actions/admin/{{tableObj.pluralKebabCase}}-actions";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormMessage } from "@/components/ui/form";

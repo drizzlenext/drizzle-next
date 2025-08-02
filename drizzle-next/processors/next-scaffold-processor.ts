@@ -153,7 +153,7 @@ export class NextScaffoldProcessor {
     });
     const text = `\n      { text: "${tableObj.pluralCapitalCase}", link: "/admin/${tableObj.pluralKebabCase}", icon: Table2Icon },`;
     insertTextAfterIfNotExists(
-      this.getOutputPath("app/(admin)/_components/admin-layout.tsx"),
+      this.getOutputPath("components/layouts/admin-layout.tsx"),
       "// DRIZZLE_NEXT_SIDEBAR_ITEMS",
       text
     );
@@ -234,7 +234,8 @@ export class NextScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "scaffold-processor/src/app/(admin)/table/page.tsx.hbs",
+      inputPath:
+        "scaffold-processor/src/app/(admin)/admin/table-name/page.tsx.hbs",
       outputPath: this.getOutputPath(
         `app/(admin)/admin/${tableObj.pluralKebabCase}/page.tsx`
       ),
@@ -250,7 +251,8 @@ export class NextScaffoldProcessor {
     });
     const hasFileDataType = this.hasFileDataType();
     renderTemplate({
-      inputPath: "scaffold-processor/src/app/(admin)/table/[id]/page.tsx.hbs",
+      inputPath:
+        "scaffold-processor/src/app/(admin)/admin/table-name/[id]/page.tsx.hbs",
       outputPath: this.getOutputPath(
         `app/(admin)/admin/${tableObj.pluralKebabCase}/[id]/page.tsx`
       ),
@@ -279,7 +281,7 @@ export class NextScaffoldProcessor {
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(admin)/table/[id]/edit/page.tsx.hbs",
+        "scaffold-processor/src/app/(admin)/admin/table-name/[id]/edit/page.tsx.hbs",
       outputPath: this.getOutputPath(
         `app/(admin)/admin/${tableObj.pluralKebabCase}/[id]/edit/page.tsx`
       ),
@@ -298,7 +300,8 @@ export class NextScaffoldProcessor {
     });
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
-      inputPath: "scaffold-processor/src/app/(admin)/table/new/page.tsx.hbs",
+      inputPath:
+        "scaffold-processor/src/app/(admin)/admin/table-name/new/page.tsx.hbs",
       outputPath: this.getOutputPath(
         `app/(admin)/admin/${tableObj.pluralKebabCase}/new/page.tsx`
       ),
@@ -315,7 +318,7 @@ export class NextScaffoldProcessor {
     });
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(admin)/table/[id]/delete/page.tsx.hbs",
+        "scaffold-processor/src/app/(admin)/admin/table-name/[id]/delete/page.tsx.hbs",
       outputPath: this.getOutputPath(
         `app/(admin)/admin/${tableObj.pluralKebabCase}/[id]/delete/page.tsx`
       ),
@@ -353,9 +356,10 @@ export class NextScaffoldProcessor {
     });
 
     renderTemplate({
-      inputPath: "scaffold-processor/src/app/(admin)/table/actions.ts.hbs",
+      inputPath:
+        "scaffold-processor/src/actions/admin/table-name-actions.ts.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/actions.ts`
+        `actions/admin/${tableObj.pluralKebabCase}-actions.ts`
       ),
       data: {
         tableObj: tableObj,
@@ -379,9 +383,9 @@ export class NextScaffoldProcessor {
     const referencesColumnList = this.getReferencesColumnList("references_");
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(admin)/table/_components/create-form.tsx.hbs",
+        "scaffold-processor/src/components/admin/table-name/create-form.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-create-form.tsx`
+        `components/admin/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-create-form.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -450,9 +454,9 @@ export class NextScaffoldProcessor {
     const hasFileDataType = this.hasFileDataType();
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(admin)/table/_components/update-form.tsx.hbs",
+        "scaffold-processor/src/components/admin/table-name/update-form.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-update-form.tsx`
+        `components/admin/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-update-form.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -470,9 +474,9 @@ export class NextScaffoldProcessor {
     });
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(admin)/table/_components/delete-form.tsx.hbs",
+        "scaffold-processor/src/components/admin/table-name/delete-form.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-delete-form.tsx`
+        `components/admin/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-delete-form.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -487,9 +491,9 @@ export class NextScaffoldProcessor {
 
     renderTemplate({
       inputPath:
-        "scaffold-processor/src/app/(admin)/table/_components/table-component.tsx.hbs",
+        "scaffold-processor/src/components/admin/table-name/table-component.tsx.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/_components/${tableObj.singularKebabCase}-table.tsx`
+        `components/admin/${tableObj.pluralKebabCase}/${tableObj.singularKebabCase}-table.tsx`
       ),
       data: {
         tableObj: tableObj,
@@ -543,9 +547,10 @@ export class NextScaffoldProcessor {
       pluralize: this.opts.pluralizeEnabled,
     });
     renderTemplate({
-      inputPath: "scaffold-processor/src/app/(admin)/table/queries.ts.hbs",
+      inputPath:
+        "scaffold-processor/src/queries/admin/table-name-queries.ts.hbs",
       outputPath: this.getOutputPath(
-        `app/(admin)/admin/${tableObj.pluralKebabCase}/queries.ts`
+        `queries/admin/${tableObj.pluralKebabCase}-queries.ts`
       ),
       data: {
         tableObj,

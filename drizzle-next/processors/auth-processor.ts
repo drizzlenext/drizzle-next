@@ -185,11 +185,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
       outputPath: this.getOutputPath("lib/authorize.ts"),
     });
     renderTemplate({
-      inputPath:
-        "auth-processor/src/app/(private)/_components/private-layout.tsx.hbs",
-      outputPath: this.getOutputPath(
-        "app/(private)/_components/private-layout.tsx"
-      ),
+      inputPath: "auth-processor/src/components/layouts/private-layout.tsx.hbs",
+      outputPath: this.getOutputPath("components/layouts/private-layout.tsx"),
     });
     renderTemplate({
       inputPath: "auth-processor/src/app/api/auth/[...nextauth]/route.ts.hbs",
@@ -216,13 +213,16 @@ export class AuthProcessor implements DrizzleNextProcessor {
       outputPath: this.getOutputPath("types/next-auth.d.ts"),
     });
     renderTemplate({
-      inputPath:
-        "auth-processor/src/app/(auth)/_components/signin-form.tsx.hbs",
-      outputPath: this.getOutputPath("app/(auth)/_components/signin-form.tsx"),
+      inputPath: "auth-processor/src/components/auth/signin-form.tsx.hbs",
+      outputPath: this.getOutputPath("components/auth/signin-form.tsx"),
     });
     renderTemplate({
-      inputPath: "auth-processor/src/app/(auth)/_actions/signin.action.ts.hbs",
-      outputPath: this.getOutputPath("app/(auth)/_actions/signin.action.ts"),
+      inputPath: "auth-processor/src/actions/auth/signin.action.ts.hbs",
+      outputPath: this.getOutputPath("actions/auth/signin.action.ts"),
+    });
+    renderTemplate({
+      inputPath: "auth-processor/src/actions/auth/admin-signin.action.ts.hbs",
+      outputPath: this.getOutputPath("actions/auth/admin-signin.action.ts"),
     });
     renderTemplate({
       inputPath: "auth-processor/src/app/(auth)/layout.tsx.hbs",
@@ -291,18 +291,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
       outputPath: this.getOutputPath("app/(admin)/admin/settings/page.tsx"),
     });
     renderTemplate({
-      inputPath:
-        "auth-processor/src/app/(auth)/_components/admin-signin-form.tsx.hbs",
-      outputPath: this.getOutputPath(
-        "app/(auth)/_components/admin-signin-form.tsx"
-      ),
-    });
-    renderTemplate({
-      inputPath:
-        "auth-processor/src/app/(auth)/_actions/admin-signin.action.ts.hbs",
-      outputPath: this.getOutputPath(
-        "app/(auth)/_actions/admin-signin.action.ts"
-      ),
+      inputPath: "auth-processor/src/components/auth/admin-signin-form.tsx.hbs",
+      outputPath: this.getOutputPath("components/auth/admin-signin-form.tsx"),
     });
     renderTemplate({
       inputPath: "auth-processor/scripts/create-password-hash.ts.hbs",
@@ -313,11 +303,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
       outputPath: this.getOutputPath("app/(admin)/admin/page.tsx"),
     });
     renderTemplate({
-      inputPath:
-        "auth-processor/src/app/(admin)/_components/admin-layout.tsx.hbs",
-      outputPath: this.getOutputPath(
-        "app/(admin)/_components/admin-layout.tsx"
-      ),
+      inputPath: "auth-processor/src/components/layouts/admin-layout.tsx.hbs",
+      outputPath: this.getOutputPath("components/layouts/admin-layout.tsx"),
     });
   }
 

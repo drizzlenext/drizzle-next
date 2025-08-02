@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { db } from "@/db/db";
 import { users } from "@/db/schema/users";
-import { PrivateLayout } from "@/app/(private)/_components/private-layout";
+import { PrivateLayout } from "@/components/layouts/private-layout";
 import { authorize } from "@/lib/authorize";
 
 export default async function Layout({

@@ -2,7 +2,7 @@ import Link from "next/link";
 {{#if referencesColumnList.length}}
 import { db } from "@/db/db";
 {{/if}}
-import { {{tableObj.singularPascalCase}}CreateForm } from "../_components/{{tableObj.singularKebabCase}}-create-form";
+import { {{tableObj.singularPascalCase}}CreateForm } from "@/components/admin/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-create-form";
 
 export default async function Page() {
   {{#each referencesColumnList}}

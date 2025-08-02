@@ -18,8 +18,8 @@ drizzle_next() {
 alias drizzle-next="drizzle_next"
 
 if [ "$RESET" = true ]; then
-PGPASSWORD=postgres dropdb -p 5432 -U postgres drizzle_demo
-PGPASSWORD=postgres createdb -p 5432 -U postgres drizzle_demo
+PGPASSWORD=postgres dropdb -p 5434 -U postgres drizzle_demo
+PGPASSWORD=postgres createdb -p 5434 -U postgres drizzle_demo
 rm -rf ~/code/demo-postgresql
 fi
 
@@ -57,6 +57,7 @@ drizzle-next scaffold category -c name:text
 drizzle-next scaffold post -c category_id:references_select title:text likes:integer published_at:timestamp content:text
 
 if [ "$RESET" = true ]; then
+sed -i 's/5432/5434/g' .env
 npx drizzle-kit generate
 npx drizzle-kit migrate
 npx tsx scripts/create-user.ts user@example.com pw

@@ -6,8 +6,8 @@ import { SearchInput } from "@/components/ui/search-input";
 import { Button } from "@/components/ui/button";
 import { parseSearchParams } from "@/lib/search-params";
 import { {{tableObj.pluralCamelCase}} } from "@/db/schema/{{tableObj.pluralKebabCase}}";
-import { {{tableObj.singularPascalCase}}Table } from "./_components/{{tableObj.singularKebabCase}}-table";
-import { get{{tableObj.singularPascalCase}}List } from "./queries";
+import { {{tableObj.singularPascalCase}}Table } from "@/components/admin/{{tableObj.pluralKebabCase}}/{{tableObj.singularKebabCase}}-table";
+import { get{{tableObj.singularPascalCase}}List } from "@/queries/admin/{{tableObj.pluralKebabCase}}-queries";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 

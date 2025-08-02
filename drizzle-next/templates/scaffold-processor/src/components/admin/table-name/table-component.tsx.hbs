@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Sortable } from "@/components/ui/sortable";
-import { {{tableObj.singularPascalCase}}List } from "../queries";
+import { {{tableObj.singularPascalCase}}List } from "@/queries/admin/{{tableObj.pluralKebabCase}}-queries";
 
 export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelCase}}List }: { {{tableObj.singularCamelCase}}List: {{tableObj.singularPascalCase}}List }) {
   return (

@@ -3,12 +3,16 @@
 import { startTransition, useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SignInState, signInAction } from "../_actions/signin.action";
+import { Label } from "@/components/ui/label";
+import {
+  AdminSignInState,
+  adminSignInAction,
+} from "@/actions/auth/admin-signin.action";
 import { Form, FormControl, FormMessage } from "@/components/ui/form";
 
-export function SignInForm() {
-  const initialState: SignInState = {};
-  const [state, dispatch] = useActionState(signInAction, initialState);
+export function AdminSignInForm() {
+  const initialState: AdminSignInState = {};
+  const [state, dispatch] = useActionState(adminSignInAction, initialState);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -23,14 +27,16 @@ export function SignInForm() {
       className="flex flex-col gap-2"
     >
       <FormControl>
-        <Input type="text" name="email" placeholder="Email" />
+        <Label htmlFor="email">Email</Label>
+        <Input type="text" name="email" id="email" />
       </FormControl>
       <FormControl>
-        <Input type="password" name="password" placeholder="Password" />
+        <Label htmlFor="password">Password</Label>
+        <Input type="password" name="password" id="password" />
       </FormControl>
-      <Button className="w-full" type="submit">
-        Sign in with Credentials
-      </Button>
+      <FormControl>
+        <Button type="submit">Sign in</Button>
+      </FormControl>
       {state.message && <FormMessage>{state.message}</FormMessage>}
     </Form>
   );
