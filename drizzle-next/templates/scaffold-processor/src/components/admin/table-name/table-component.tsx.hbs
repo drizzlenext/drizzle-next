@@ -15,7 +15,6 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead></TableHead>
           <TableHead><Sortable column="id">Id</Sortable></TableHead>
           {{#each validatedColumns}}
             {{#switch this.dataType}}
@@ -30,24 +29,12 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
               {{/default}}
             {{/switch}}
           {{/each}}
+          <TableHead></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         { {{tableObj.singularCamelCase}}List.map(({{tableObj.singularCamelCase}}Obj) => (
           <TableRow key={ {{tableObj.singularCamelCase}}Obj.id }>
-            <TableCell>
-              <div className="flex gap-3 [&>a]:underline">
-                <Link href={`/admin/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>
-                  View
-                </Link>
-                <Link href={`/admin/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/edit`}>
-                  Edit
-                </Link>
-                <Link href={`/admin/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/delete`}>
-                  Delete
-                </Link>
-              </div>
-            </TableCell>
             <TableCell>{ {{tableObj.singularCamelCase}}Obj.id }</TableCell>
             {{#each validatedColumns}}
               {{#switch this.dataType}}
@@ -83,6 +70,19 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
                 {{/default}}
               {{/switch}}
             {{/each}}
+            <TableCell>
+              <div className="flex gap-3 [&>a]:underline">
+                <Link href={`/admin/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }`}>
+                  View
+                </Link>
+                <Link href={`/admin/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/edit`}>
+                  Edit
+                </Link>
+                <Link href={`/admin/{{tableObj.pluralKebabCase}}/${ {{tableObj.singularCamelCase}}Obj.id }/delete`}>
+                  Delete
+                </Link>
+              </div>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
