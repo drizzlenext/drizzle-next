@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const Avatar = ({
   src,
@@ -10,7 +10,7 @@ const Avatar = ({
   className?: string;
   children?: React.ReactNode;
 }) => (
-  <div className="bg-muted text-foreground flex h-7 w-7 items-center justify-center rounded-full text-xs">
+  <div className="bg-muted text-foreground flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-xs">
     {src ? (
       <img
         className={cn("h-7 w-7 rounded-full", className)}
