@@ -20,8 +20,8 @@ export function Sortable({
   const pathname = usePathname();
 
   useEffect(() => {
-    const sortKey = searchParams.get("sortKey");
-    if (sortKey !== column) {
+    const sortBy = searchParams.get("sortBy");
+    if (sortBy !== column) {
       setSortOrder("none");
     }
   }, [searchParams, column]);
@@ -33,17 +33,17 @@ export function Sortable({
       case "asc":
         setSortOrder("desc");
         params.set("sortOrder", "desc");
-        params.set("sortKey", column);
+        params.set("sortBy", column);
         break;
       case "desc":
         setSortOrder("none");
         params.delete("sortOrder");
-        params.delete("sortKey");
+        params.delete("sortBy");
         break;
       case "none":
         setSortOrder("asc");
         params.set("sortOrder", "asc");
-        params.set("sortKey", column);
+        params.set("sortBy", column);
         break;
       default:
         const exhaustiveCheck: never = sortOrder;
@@ -56,7 +56,7 @@ export function Sortable({
   return (
     <div
       onClick={handleClick}
-      className="flex cursor-pointer select-none items-center"
+      className="flex cursor-pointer items-center select-none"
     >
       <div className="text-nowrap">{children}</div>
       {sortOrder === "asc" && <MoveUpIcon className="h-4 w-4" />}

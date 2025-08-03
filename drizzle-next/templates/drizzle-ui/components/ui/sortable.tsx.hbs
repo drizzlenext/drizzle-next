@@ -55,7 +55,7 @@ export function Sortable({
   return (
     <div
       onClick={handleClick}
-      className="flex cursor-pointer select-none items-center"
+      className="flex cursor-pointer items-center select-none"
     >
       <div className="text-nowrap">{children}</div>
       {sortOrder === "asc" && <MoveUpIcon className="h-4 w-4" />}
