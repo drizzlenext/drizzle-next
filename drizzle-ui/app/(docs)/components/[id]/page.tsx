@@ -24,7 +24,6 @@ import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 import { RichTextEditorDemo } from "@/components/component-demo/rich-text-editor-demo";
 import { Suspense } from "react";
 import ScrollLink from "@/components/scroll-link";
-import { DropdownMenuDemo } from "@/components/component-demo/dropdown-menu-demo";
 
 const componentMap: { [key: string]: React.ComponentType | null } = {
   alert: AlertDemo,
@@ -33,8 +32,6 @@ const componentMap: { [key: string]: React.ComponentType | null } = {
   card: CardDemo,
   checkbox: CheckboxDemo,
   "dark-mode": DarkModeDemo,
-  "dropdown-menu": DropdownMenuDemo,
-  "app-layout": null,
   form: FormDemo,
   input: InputDemo,
   label: LabelDemo,
