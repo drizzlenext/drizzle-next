@@ -1,54 +1,28 @@
 "use client";
 
-import {
-  AppLayout,
-  AppHeader,
-  AppHeaderGroup,
-  AppNav,
-  AppNavToggle,
-  AppNavList,
-  AppSidebar,
-  AppSidebarToggle,
-  AppSidebarList,
-  AppContent,
-  AppNavItemType,
-  AppSidebarItemType,
-} from "@/components/ui/app-layout";
-import { Avatar } from "@/components/ui/avatar";
-import { DarkModeToggle } from "@/components/ui/dark-mode";
-import {
-  DropdownMenu,
-  DropdownMenuItemType,
-  DropdownMenuList,
-} from "@/components/ui/dropdown-menu";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import {
   LogOutIcon,
-  UserIcon,
   GaugeIcon,
   SettingsIcon,
   Table2Icon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from "lucide-react";
+import { Avatar } from "@/components/ui/avatar";
 import { SelectUser } from "@/db/schema/users";
+import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 
-const nav: AppNavItemType[] = [{ text: "Home", link: "/" }];
-
-const sidebar: AppSidebarItemType[] = [
+const sidebarItems = [
   {
-    text: "Admin",
-    items: [
-      {
-        text: "Admin Dashboard",
-        link: "/admin",
-        icon: GaugeIcon,
-      },
-      // DRIZZLE_NEXT_SIDEBAR_ITEMS
-    ],
+    text: "Admin Dashboard",
+    link: "/admin",
+    icon: GaugeIcon,
   },
-];
-
-const dropdown: DropdownMenuItemType[] = [
+  // DRIZZLE_NEXT_SIDEBAR_ITEMS
   { text: "Settings", link: "/admin/settings", icon: SettingsIcon },
   { text: "Sign out", link: "/signout", icon: LogOutIcon },
 ];
@@ -60,34 +34,88 @@ export function AdminLayout({
   children: ReactNode;
   userObj: SelectUser;
 }) {
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const pathname = usePathname();
 
   return (
-    <AppLayout>
-      <AppHeader>
-        <AppHeaderGroup>
-          <AppSidebarToggle />
-          Drizzle Admin
-        </AppHeaderGroup>
-        <AppHeaderGroup>
-          <AppNav>
-            <AppNavList items={nav} pathname={pathname} />
-            <DarkModeToggle />
-          </AppNav>
-          <AppNavToggle />
-          <DropdownMenu
-            buttonEl={<Avatar src={userObj.image} />}
-            buttonSizeVariant="avatar"
-            buttonVariant="ghost"
+    <div className="bg-background flex min-h-screen">
+      {/* Sidebar */}
+      <aside
+        className={cn(
+          "bg-card border-border flex flex-col border-r transition-all duration-300",
+          sidebarCollapsed ? "w-16" : "min-w-64",
+        )}
+      >
+        {/* Sidebar Header */}
+        <div className="border-border flex items-center justify-between border-b p-4">
+          {!sidebarCollapsed && (
+            <h1 className="text-lg font-semibold">Drizzle Admin</h1>
+          )}
+          <Button
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className="rounded-md p-2"
+            variant="ghost"
           >
-            <DropdownMenuList items={dropdown} />
-          </DropdownMenu>
-        </AppHeaderGroup>
-      </AppHeader>
-      <AppSidebar>
-        <AppSidebarList items={sidebar} pathname={pathname} />
-      </AppSidebar>
-      <AppContent>{children}</AppContent>
-    </AppLayout>
+            {sidebarCollapsed ? (
+              <ChevronRightIcon size={20} />
+            ) : (
+              <ChevronLeftIcon size={20} />
+            )}
+          </Button>
+        </div>
+
+        {/* Sidebar Navigation */}
+        <nav className="p-4">
+          <ul className="space-y-2">
+            {sidebarItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.link;
+
+              return (
+                <li key={item.link}>
+                  <Link
+                    href={item.link}
+                    className={cn(
+                      "hover:bg-muted flex items-center rounded-md transition-colors",
+                      sidebarCollapsed
+                        ? "justify-center px-3 py-3"
+                        : "gap-3 px-3 py-2",
+                      isActive && "bg-muted text-muted-foreground",
+                    )}
+                  >
+                    <Icon size={20} className="flex-shrink-0" />
+                    {!sidebarCollapsed && <span>{item.text}</span>}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        {/* User Section at Bottom */}
+        <div className="border-border mt-auto border-t p-4">
+          <div
+            className={cn(
+              "flex items-center px-3 py-0",
+              sidebarCollapsed ? "justify-center" : "gap-3",
+            )}
+          >
+            <Avatar src={userObj.image} />
+            {!sidebarCollapsed && (
+              <div className="min-w-0 flex-1">
+                <p className="text-muted-foreground truncate text-xs">
+                  {userObj.email}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex flex-1 flex-col">
+        <div className="flex-1 p-6">{children}</div>
+      </main>
+    </div>
   );
 }

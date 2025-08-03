@@ -1,5 +1,26 @@
+import { DarkModeToggle } from "@/components/ui/dark-mode";
+
 export default function Page() {
   return (
-    <div className="p-3">Settings</div>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold">Settings</h1>
+        <p className="text-muted-foreground">
+          Manage your application preferences
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b py-3">
+          <div>
+            <h3 className="font-medium">Theme</h3>
+            <p className="text-muted-foreground text-sm">
+              Toggle between light and dark mode
+            </p>
+          </div>
+          <DarkModeToggle />
+        </div>
+      </div>
+    </div>
   );
 }
