@@ -1,5 +1,9 @@
 # Drizzle Admin
 
+:::warning
+Drizzle Admin is DEPRECATED and no longer supported. [Drizzle Next](/drizzle-next/) is the recommended way to build fully customizable admin dashboards.
+:::
+
 Drizzle Admin is a React component that turns your Drizzle schema into an admin dashboard.
 
 ## Why Drizzle Admin?
@@ -19,6 +23,10 @@ It abstracts common CRUD operations into a reusable React component, allowing yo
 If your project requires a straightforward admin dashboard, such as a basic Content Management System, Drizzle Admin is a good fit. You can customize the dashboard by overriding Next.js pages and components as needed.
 
 For projects that demand complete control and advanced customization, building a custom dashboard from scratch may be more appropriate.
+
+:::tip
+Do not use Drizzle Admin. Use Drizzle Next instead.
+:::
 
 ## Example
 
