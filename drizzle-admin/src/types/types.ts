@@ -1,15 +1,15 @@
 import { JSX } from "react";
-import { type DropdownMenuItemType, type AppNavItemType, type AppSidebarItemType, PaginationOpts } from "../drizzle-ui";
+import { PaginationOpts } from "../drizzle-ui";
 
 export type Params = Promise<{ [key: string]: string }>;
 
 export type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
-export type CustomFormControl = (props: {value?: any}) => JSX.Element;
+export type CustomFormControl = (props: { value?: any }) => JSX.Element;
 
 export type CustomFormControlMap = {
   [key: string]: CustomFormControl;
-}
+};
 
 export type FormControlType =
   | "input"
@@ -101,19 +101,13 @@ export type ColumnDataTypeMap = {
   [key: string]: ColumnDataType;
 };
 
-export type DrizzleLayoutConfig = {
-  nav: AppNavItemType[];
-  sidebar: AppSidebarItemType[];
-  dropdown: DropdownMenuItemType[];
-};
-
 export type SimplifiedColumn = {
   name: string;
   dataType: string;
-}
+};
 
 export type Filter = {
   column: string;
   operator: string;
   value: string;
-}
+};
