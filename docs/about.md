@@ -1,5 +1,5 @@
 ---
-outline: [2,3]
+outline: [2, 3]
 ---
 
 # About Drizzle Next
@@ -62,13 +62,9 @@ shadcn/ui strikes the perfect balance of customization and beautiful defaults. s
 
 Drizzle Next initially used shadcn as the default UI component library. However, shadcn was removed in favor of custom-built components for minimizing dependencies and improving build times. Drizzle UI was built specifically for Drizzle Next to address the issues of cutting dependencies, improving build speed, and ease of maintenance.
 
-### Admin Dashboard
+## Conclusion
 
-The technical and visual design of Drizzle Admin was inspired by many tools including: Django Admin, Active Admin, TablePlus, PayloadCMS, VitePress, and WordPress.
-
-The initial version of Drizzle Next did not include a packaged dashboard library. It was soon realized that maintaining a consistent dashboard experience across all tables and projects proved challenging.
-
-Without a versioned dependency, distributing small improvements meant copying and pasting changes to update Drizzle Next scaffolded projects. Drizzle Admin was created to solve this problem.
+Drizzle Next represents a culmination of lessons learned from modern web development, combining the rapid scaffolding capabilities of Ruby on Rails with the performance and developer experience of Next.js, TypeScript, and Drizzle ORM. By providing opinionated defaults and automation tools, it aims to eliminate the decision fatigue and configuration overhead that often slows down project initiation, allowing developers to focus on building unique features rather than repetitive boilerplate code. Whether you're a solo developer looking to prototype quickly or a team seeking consistency across projects, Drizzle Next offers a battle-tested foundation that scales from MVP to production-ready applications.
 
 ## Author
 
