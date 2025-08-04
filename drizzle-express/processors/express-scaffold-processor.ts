@@ -1,6 +1,5 @@
 import {
   DbDialectStrategy,
-  PkStrategy,
   ExpressScaffoldProcessorOpts,
 } from "../../common/types/types";
 import { insertTextAfterIfNotExists } from "../../common/lib/utils";
@@ -15,14 +14,6 @@ type ValidatedColumn = {
   caseVariants: Cases; // the case variants of the original column
   zodCode: string; // the zod coersion code
   referenceTableVars?: Cases; // for the table name of reference types
-};
-
-const zodCodeRecord: Record<PkStrategy, string> = {
-  cuid2: "z.coerce.string().cuid2()",
-  uuidv7: "z.coerce.string().uuid()",
-  uuidv4: "z.coerce.string().uuid()",
-  nanoid: "z.coerce.string().nanoid()",
-  auto_increment: "z.coerce.number()",
 };
 
 export class ExpressScaffoldProcessor {
@@ -53,7 +44,7 @@ export class ExpressScaffoldProcessor {
       caseVariants: caseFactory("id", {
         pluralize: this.opts.pluralizeEnabled,
       }),
-      zodCode: zodCodeRecord[this.opts.pkStrategy],
+      zodCode: "z.coerce.string()",
     };
 
     return [idCol].concat(this.getValidatedColumnsWithTimestamps());
@@ -98,7 +89,7 @@ export class ExpressScaffoldProcessor {
       }
       let zodCode = dataTypeStrategyMap[dataType].zodCode;
       if (dataType.startsWith("references")) {
-        zodCode = zodCodeRecord[this.opts.pkStrategy];
+        zodCode = "z.coerce.string()";
       }
       validatedColumns.push({
         columnName,

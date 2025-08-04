@@ -76,8 +76,12 @@ export class ExpressInitProcessor {
       outputPath: ".gitignore",
     });
     renderTemplate({
-      inputPath: "express-templates/src/config/env.ts.hbs",
-      outputPath: "src/config/env.ts",
+      inputPath: "express-templates/src/lib/env.ts.hbs",
+      outputPath: "src/lib/env.ts",
+    });
+    renderTemplate({
+      inputPath: "express-templates/src/lib/id.ts.hbs",
+      outputPath: "src/lib/id.ts",
     });
     renderTemplate({
       inputPath:
