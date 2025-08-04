@@ -54,10 +54,10 @@ Drizzle Express uses the following project structure:
 - drizzle
 - scripts
 - src
-  - config
   - controllers
+  - db
+  - lib
   - middlewares
   - routes
-  - schema
   - services
 ```
