@@ -11,7 +11,6 @@ import {
 import { packageStrategyFactory } from "../../common/lib/strategy-factory";
 import { DbDialectProcessor } from "../../common/processors/db-dialect-processor";
 import packageJson from "../package.json";
-import { pkDependencies } from "../../common/lib/pk-strategy";
 
 export const initCommand = new Command("init");
 
@@ -32,12 +31,8 @@ initCommand
       "mysql",
     ])
   )
-  .addOption(
-    new Option(
-      "--pk-strategy <strategy>",
-      "primary key generation strategy"
-    ).choices(["cuid2", "uuidv4", "uuidv7", "nanoid", "auto_increment"])
-  )
+  .option("--src-dir", "enable src directory", false)
+  .option("--no-src-dir", "disable src directory", false)
   .option("--no-pluralize", "disable the pluralization of variable names", true)
   .option("--no-install", "skip installation of dependencies", true)
   .option("--latest", "install latest cutting edge dependencies", false)
@@ -81,44 +76,12 @@ initCommand
         default:
           break;
       }
-      partialConfig.pkStrategy =
-        options.pkStrategy ||
-        (await select({
-          message:
-            "Which primary key generation strategy would you like to use?",
-          choices: [
-            {
-              name: "cuid2",
-              value: "cuid2",
-              description: "Uses the @paralleldrive/cuid2 package",
-            },
-            {
-              name: "uuidv4",
-              value: "uuidv4",
-              description: "Uses crypto.randomUUID",
-            },
-            {
-              name: "uuidv7",
-              value: "uuidv7",
-              description: "Uses the uuidv7 package",
-            },
-            {
-              name: "nanoid",
-              value: "nanoid",
-              description: "Uses the nanoid package",
-            },
-            {
-              name: "auto_increment",
-              value: "auto_increment",
-              description:
-                "Auto increment. Warning: Does not work with Auth.js Drizzle Adapter.",
-            },
-          ],
-        }));
 
       partialConfig.pluralizeEnabled = options.pluralize;
 
       partialConfig.install = options.install;
+
+      partialConfig.srcDir = options.srcDir;
 
       // process
 
@@ -130,9 +93,9 @@ initCommand
 
       const dbDialectProcessor = new DbDialectProcessor(completeConfig);
       const dbPackageStrategy = packageStrategyFactory({
-        authEnabled: false,
         dbPackage: completeConfig.dbPackage,
         pluralizeEnabled: completeConfig.pluralizeEnabled,
+        srcDir: completeConfig.srcDir,
       });
 
       processors.push(dbDialectProcessor);
@@ -140,8 +103,6 @@ initCommand
 
       const dependencies: string[] = [];
       const devDependencies: string[] = [];
-
-      dependencies.push(...pkDependencies[completeConfig.pkStrategy]);
 
       for (const processor of processors) {
         dependencies.push(...processor.dependencies);

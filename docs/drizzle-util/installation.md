@@ -23,7 +23,6 @@ npx drizzle-util@latest init
 ```text
 ? Which package manager would you like to use? npm
 ? Which database dialect would you like to use? sqlite
-? Which primary key generation strategy would you like to use? cuid2
 ```
 
 ## Step 4: Generate scaffold
