@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: "Drizzle Next"
-  text: "The Full Stack Developer's TypeScript Toolkit"
-  tagline: Generate full stack Next.js apps, Admin dashboards, UI components, Express.js APIs, and Drizzle ORM schemas using CLI tools inspired by Ruby on Rails and shadcn/ui.
+  text: "Drizzle ORM + Next.js Scaffolding CLI"
+  tagline: Fully customizable admin dashboard and database schema in seconds.
   image: https://drizzlenext.github.io/drizzle-assets/logo.webp
   actions:
     - theme: brand
@@ -19,9 +19,6 @@ features:
   - icon: 🌧️
     title: Drizzle Next
     details: A CLI tool for generating Full Stack Next.js and Drizzle ORM scaffolding.
-  - icon: 🛠️
-    title: Drizzle Admin
-    details: A React component that turns your Drizzle schema into a customizable admin dashboard.
   - icon: 🎨
     title: Drizzle UI
     details: A collection of customizable UI components with minimal dependencies.

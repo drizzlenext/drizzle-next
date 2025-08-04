@@ -7,11 +7,11 @@ This guide covers everything you need to know to install and create your first a
 Start by creating a new Next.js project using `create-next-app`.
 
 ```bash
-npx create-next-app@latest my-app --typescript --eslint --tailwind --app --src-dir --no-import-alias --turbopack
+npx create-next-app@latest my-app --typescript --eslint --tailwind --app --no-src-dir --no-import-alias --turbopack
 ```
 
 :::tip
-The `--typescript`, `--tailwind`, `--app`, `--src-dir`, and `--no-import-alias` are required for Drizzle Next to work properly.
+The `--typescript`, `--tailwind`, `--app`, and `--no-import-alias` are required for Drizzle Next to work properly. `--no-src-dir` is the default of Drizzle Next, however `--src-dir` is also supported.
 :::
 
 ## Step 2: Run the CLI
@@ -30,16 +30,13 @@ You will be asked a few questions to configure the app:
 ```text
 ? Which package manager would you like to use? npm
 ? Which database dialect would you like to use? sqlite
-? Which primary key generation strategy would you like to use? cuid2
-? Do you want to add Auth.js authentication? yes
-? Do you want to add an admin dashboard? yes
 ```
 
 :::tip
 Alternatively, you can also run the command non-interactively:
 
 ```bash
-npx drizzle-next@latest init --package-manager npm --db-dialect sqlite --pk-strategy cuid2 --auth --admin
+npx drizzle-next@latest init --package-manager npm --db-dialect sqlite
 ```
 
 :::
