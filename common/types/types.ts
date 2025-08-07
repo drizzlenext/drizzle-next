@@ -84,6 +84,7 @@ export type DbDialectStrategy = {
   createdAtTemplate: string;
   updatedAtTemplate: string;
   pkDataType: string;
+  pkFunctionTemplate: string;
   timestampImport: string;
 };
 

@@ -126,6 +126,7 @@ const sqliteDataTypeStrategies: DataTypeStrategyMap = {
 
 export const sqliteDialectStrategy: DbDialectStrategy = {
   pkDataType: "text",
+  pkFunctionTemplate: "text()",
   createdAtTemplate:
     "createdAt: integer({ mode: \"timestamp\" }).notNull().default(sql`(strftime('%s', 'now'))`),",
   updatedAtTemplate:

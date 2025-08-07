@@ -1,12 +1,12 @@
 /// <reference types="cypress" />
 
 describe("shadriz e2e test", () => {
-  // beforeEach(() => {
-  //   cy.visit("http://localhost:3000/signin");
-  //   cy.get('input[name="email"]').first().type("admin@example.com");
-  //   cy.get('input[name="password"]').first().type("pw");
-  //   cy.contains("Sign in with Credentials").click();
-  // });
+  beforeEach(() => {
+    cy.visit("http://localhost:3000/admin-signin");
+    cy.get('input[name="email"]').first().type("admin@example.com");
+    cy.get('input[name="password"]').first().type("pw");
+    cy.contains("Sign in").click();
+  });
 
   it("home page", () => {
     cy.visit("http://localhost:3000");
@@ -14,7 +14,7 @@ describe("shadriz e2e test", () => {
   });
 
   it("private scaffold happy path", () => {
-    cy.visit("http://localhost:3000/private-scaffolds");
+    cy.contains("Private Scaffolds").click();
     cy.contains("New").click();
     cy.get('input[name="integerType"]').type("1");
     cy.get('input[name="realType"]').type("2");
@@ -26,7 +26,7 @@ describe("shadriz e2e test", () => {
   });
 
   it("create category", () => {
-    cy.visit("http://localhost:3000/categories");
+    cy.contains("Categories").click();
     cy.contains("New").click();
     cy.get('input[name="name"]').type("my_category");
     cy.get('button[type="submit"]').click();
@@ -34,7 +34,7 @@ describe("shadriz e2e test", () => {
   });
 
   it("create post", () => {
-    cy.visit("http://localhost:3000/posts");
+    cy.contains("Posts").click();
     cy.contains("New").click();
     // need to select the hidden vanilla select since radix ui uses portals
     cy.get('select[name="categoryId"]').select(0, { force: true });

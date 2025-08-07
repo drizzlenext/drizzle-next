@@ -48,6 +48,10 @@ export class DrizzleScaffoldProcessor {
 
   validatedColumnsWithIdAndTimestamps: ValidatedColumn[];
 
+  pkZodCode: string;
+
+  pkFunctionTemplate: string;
+
   constructor(opts: BaseScaffoldProcessorOpts) {
     this.opts = opts;
     this.dbDialectStrategy = dialectStrategyFactory(opts.dbDialect);
@@ -56,6 +60,14 @@ export class DrizzleScaffoldProcessor {
       this.getValidatedColumnsWithTimestamps();
     this.validatedColumnsWithIdAndTimestamps =
       this.getValidatedColumsWithIdAndTimestamps();
+
+    // z.coerce.string()
+    this.pkZodCode =
+      this.dbDialectStrategy.dataTypeStrategyMap[
+        this.dbDialectStrategy.pkDataType
+      ].zodCode;
+
+    this.pkFunctionTemplate = this.dbDialectStrategy.pkFunctionTemplate;
   }
 
   private getOutputPath(path: string): string {
@@ -69,7 +81,7 @@ export class DrizzleScaffoldProcessor {
       caseVariants: caseFactory("id", {
         pluralize: this.opts.pluralizeEnabled,
       }),
-      zodCode: "z.coerce.string()",
+      zodCode: this.pkZodCode,
     };
 
     return [idCol].concat(this.getValidatedColumnsWithTimestamps());
@@ -114,7 +126,7 @@ export class DrizzleScaffoldProcessor {
       }
       let zodCode = dataTypeStrategyMap[dataType].zodCode;
       if (dataType.startsWith("references")) {
-        zodCode = "z.coerce.string()";
+        zodCode = this.pkZodCode;
       }
       validatedColumns.push({
         columnName,
@@ -146,8 +158,7 @@ export class DrizzleScaffoldProcessor {
     // compile columns
     let columnsCode = "";
 
-    // add primary key id
-    const pkCode = "id: text().primaryKey().$defaultFn(() => createId()),";
+    const pkCode = `id: ${this.pkFunctionTemplate}.primaryKey().$defaultFn(() => createId()),`;
     columnsCode += "    " + pkCode + "\n";
 
     // add other columns
@@ -185,6 +196,10 @@ export class DrizzleScaffoldProcessor {
   }
   generateImportsCodeFromColumns() {
     const dataTypeSet = new Set<string>();
+
+    // add pk data type
+    dataTypeSet.add(this.dbDialectStrategy.pkDataType);
+
     let referenceImportsCode = "";
     for (const validatedColumn of this.validatedColumns) {
       const { dataType, referenceTableVars } = validatedColumn;
@@ -236,7 +251,7 @@ export class DrizzleScaffoldProcessor {
         keyName: caseVariants.originalCamelCase,
         columnName: columnName,
         referencesTable: referenceTableVars?.pluralCamelCase,
-        fkStrategyTemplate: "text()",
+        fkStrategyTemplate: this.pkFunctionTemplate,
       });
     str += ",";
     return str;

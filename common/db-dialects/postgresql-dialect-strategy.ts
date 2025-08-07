@@ -282,7 +282,8 @@ const postgresqlDataTypeStrategies: DataTypeStrategyMap = {
 };
 
 export const postgresqlDialectStrategy: DbDialectStrategy = {
-  pkDataType: "text",
+  pkDataType: "uuid",
+  pkFunctionTemplate: "uuid()",
   createdAtTemplate: `createdAt: timestamp().notNull().defaultNow(),`,
   updatedAtTemplate: `updatedAt: timestamp().notNull().defaultNow().$onUpdate(() => new Date()),`,
   drizzleDbCorePackage: "drizzle-orm/pg-core",

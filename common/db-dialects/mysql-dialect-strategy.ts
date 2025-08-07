@@ -305,6 +305,7 @@ const mysqlDataTypeStrategies: DataTypeStrategyMap = {
 
 export const mysqlDialectStrategy: DbDialectStrategy = {
   pkDataType: "varchar",
+  pkFunctionTemplate: "varchar({ length: 255 })",
   createdAtTemplate: `createdAt: timestamp().notNull().defaultNow(),`,
   updatedAtTemplate: `updatedAt: timestamp().notNull().defaultNow().$onUpdate(() => new Date()),`,
   drizzleDbCorePackage: "drizzle-orm/mysql-core",
