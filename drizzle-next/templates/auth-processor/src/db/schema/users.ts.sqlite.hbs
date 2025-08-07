@@ -6,7 +6,7 @@ import {
 import { createId } from "@/lib/id";
 
 export const users = sqliteTable("users", {
-  id: text().primaryKey().$defaultFn(() => createId()),
+  id: {{pkFunctionTemplate}}.primaryKey().$defaultFn(() => createId()),
   name: text(),
   email: text().notNull(),
   emailVerified: integer({ mode: "timestamp_ms" }),

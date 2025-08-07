@@ -5,7 +5,7 @@ import {
   text,
   primaryKey,
   integer,
-  {{fkDataTypeImportCode}}
+  {{pkDataType}}
 } from "drizzle-orm/pg-core"
 import type { AdapterAccountType } from "next-auth/adapters"
 import { users } from "@/db/schema/users"
@@ -13,7 +13,7 @@ import { users } from "@/db/schema/users"
 export const accounts = pgTable(
   "accounts",
   {
-    userId: text()
+    userId: {{pkFunctionTemplate}}
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     type: text().$type<AdapterAccountType>().notNull(),
@@ -36,7 +36,7 @@ export const accounts = pgTable(
  
 export const sessions = pgTable("sessions", {
   sessionToken: text().primaryKey(),
-  userId: text()
+  userId: {{pkFunctionTemplate}}
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp({ mode: "date" }).notNull(),
@@ -60,7 +60,7 @@ export const authenticators = pgTable(
   "authenticators",
   {
     credentialID: text().notNull().unique(),
-    userId: text()
+    userId: {{pkFunctionTemplate}}
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     providerAccountId: text().notNull(),

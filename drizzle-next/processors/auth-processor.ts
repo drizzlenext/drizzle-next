@@ -328,6 +328,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
       data: {
         createdAtTemplate: this.dbDialectStrategy.createdAtTemplate,
         updatedAtTemplate: this.dbDialectStrategy.updatedAtTemplate,
+        pkDataType: this.dbDialectStrategy.pkDataType,
+        pkFunctionTemplate: this.dbDialectStrategy.pkFunctionTemplate,
       },
     });
 
@@ -344,7 +346,7 @@ export class AuthProcessor implements DrizzleNextProcessor {
       sqlite: "auth-processor/src/db/schema/users.ts.sqlite.hbs",
     };
     const dataTypeImportsRecord: Record<DbDialect, Set<string>> = {
-      postgresql: new Set(["timestamp", "text"]),
+      postgresql: new Set(["timestamp", "text", "uuid"]),
       mysql: new Set(["timestamp", "varchar"]),
       sqlite: new Set(["integer", "text"]),
     };
@@ -362,6 +364,8 @@ export class AuthProcessor implements DrizzleNextProcessor {
         dataTypeImports: dataTypeImportsCode,
         createdAtTemplate: this.dbDialectStrategy.createdAtTemplate,
         updatedAtTemplate: this.dbDialectStrategy.updatedAtTemplate,
+        pkDataType: this.dbDialectStrategy.pkDataType,
+        pkFunctionTemplate: this.dbDialectStrategy.pkFunctionTemplate,
       },
     });
 
