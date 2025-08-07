@@ -40,7 +40,56 @@ integer, real, text, boolean, bigint, timestamp
 
 ## Primary key configuration
 
-Drizzle Next will create an `id` utility in `lib/id.ts`. You can change the id generator function here. All schemas will use the `createId` function by default.
+Drizzle Next will create an id generation utility in `lib/id.ts`:
+
+```ts
+export function createId() {
+  return crypto.randomUUID();
+}
+```
+
+It is easy to change the implementation to a different id generator like uuid v7, cuid2, or nanoid.
+
+By default, Drizzle Next will use the following primary key data types:
+
+- postgresql: `uuid`
+- mysql: `varchar`
+- sqlite: `text`
+
+You can override this in `drizzle-next.config.ts`.
+
+```ts
+const drizzleNextConfig = {
+  // ...
+  pkDataType: "text",
+  pkFunctionTemplate: "text()",
+};
+
+export default drizzleNextConfig;
+```
+
+The `pkDataType` controls what gets imported into the generated schemas.
+
+The `pkFunctionTemplate` controls what gets rendered as the value of the generated schema id columns.
+
+For example:
+
+```ts
+import {
+  pgTable,
+  timestamp,
+  text, // <-- pkDataType
+} from "drizzle-orm/pg-core";
+import { createId } from "@/lib/id";
+
+export const users = pgTable("users", {
+  id: text() // <-- pkFunctionTemplate
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  name: text(),
+  // ...
+});
+```
 
 ## Foreign key constraints
 
