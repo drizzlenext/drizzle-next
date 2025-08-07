@@ -52,6 +52,8 @@ export class DrizzleScaffoldProcessor {
 
   pkFunctionTemplate: string;
 
+  pkDataType: string;
+
   constructor(opts: BaseScaffoldProcessorOpts) {
     this.opts = opts;
     this.dbDialectStrategy = dialectStrategyFactory(opts.dbDialect);
@@ -61,13 +63,16 @@ export class DrizzleScaffoldProcessor {
     this.validatedColumnsWithIdAndTimestamps =
       this.getValidatedColumsWithIdAndTimestamps();
 
+    // uuid, varchar, text
+    this.pkDataType = this.opts.pkDataType || this.dbDialectStrategy.pkDataType;
+
+    // uuid(), varchar({ length: 255 }), text()
+    this.pkFunctionTemplate =
+      this.opts.pkFunctionTemplate || this.dbDialectStrategy.pkFunctionTemplate;
+
     // z.coerce.string()
     this.pkZodCode =
-      this.dbDialectStrategy.dataTypeStrategyMap[
-        this.dbDialectStrategy.pkDataType
-      ].zodCode;
-
-    this.pkFunctionTemplate = this.dbDialectStrategy.pkFunctionTemplate;
+      this.dbDialectStrategy.dataTypeStrategyMap[this.pkDataType].zodCode;
   }
 
   private getOutputPath(path: string): string {
@@ -77,7 +82,7 @@ export class DrizzleScaffoldProcessor {
   getValidatedColumsWithIdAndTimestamps() {
     const idCol: ValidatedColumn = {
       columnName: "id",
-      dataType: this.dbDialectStrategy.pkDataType,
+      dataType: this.pkDataType,
       caseVariants: caseFactory("id", {
         pluralize: this.opts.pluralizeEnabled,
       }),
@@ -198,7 +203,7 @@ export class DrizzleScaffoldProcessor {
     const dataTypeSet = new Set<string>();
 
     // add pk data type
-    dataTypeSet.add(this.dbDialectStrategy.pkDataType);
+    dataTypeSet.add(this.pkDataType);
 
     let referenceImportsCode = "";
     for (const validatedColumn of this.validatedColumns) {

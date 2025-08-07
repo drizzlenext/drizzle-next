@@ -7,6 +7,8 @@ export type DrizzleBaseConfig = {
   install: boolean;
   pluralizeEnabled: boolean;
   srcDir: boolean;
+  pkDataType?: string;
+  pkFunctionTemplate?: string;
 };
 
 export type DrizzleNextConfig = {} & DrizzleBaseConfig;
