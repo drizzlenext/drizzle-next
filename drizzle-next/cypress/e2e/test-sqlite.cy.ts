@@ -13,7 +13,7 @@ describe("shadriz e2e test", () => {
     cy.contains("Drizzle Next");
   });
 
-  it("private scaffold happy path", () => {
+  it("create private scaffold", () => {
     cy.contains("Private Scaffolds").click();
     cy.contains("New").click();
     cy.get('input[name="integerType"]').type("1");

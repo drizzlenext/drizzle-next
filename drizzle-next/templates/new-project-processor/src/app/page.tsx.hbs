@@ -33,34 +33,22 @@ export default function Page() {
                   <UserIcon /> User Login
                 </Button>
               </Link>
-              {process.env.NODE_ENV === "development" && (
-                <>
-                  <Link href="/admin">
-                    <Button
-                      variant="outline"
-                      className="flex w-full items-center justify-start gap-2"
-                    >
-                      <ShieldIcon /> Admin Login
-                    </Button>
-                  </Link>
-                  <Link href="/development">
-                    <Button
-                      variant="outline"
-                      className="flex w-full items-center justify-start gap-2"
-                    >
-                      <ConstructionIcon /> Development
-                    </Button>
-                  </Link>
-                  <Link href="https://www.drizzlenext.com" target="_blank">
-                    <Button
-                      variant="default"
-                      className="flex w-full items-center justify-start gap-2"
-                    >
-                      <ExternalLinkIcon /> Documentation
-                    </Button>
-                  </Link>
-                </>
-              )}
+              <Link href="/admin">
+                <Button
+                  variant="outline"
+                  className="flex w-full items-center justify-start gap-2"
+                >
+                  <ShieldIcon /> Admin Login
+                </Button>
+              </Link>
+              <Link href="https://www.drizzlenext.com" target="_blank">
+                <Button
+                  variant="default"
+                  className="flex w-full items-center justify-start gap-2"
+                >
+                  <ExternalLinkIcon /> Documentation
+                </Button>
+              </Link>
             </CardContent>
           </Card>
         </main>

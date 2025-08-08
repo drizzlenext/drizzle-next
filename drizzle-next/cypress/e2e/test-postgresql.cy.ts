@@ -20,7 +20,7 @@ describe("shadriz e2e test", () => {
     cy.contains("admin@example.com").should("exist");
   });
 
-  it("admin scaffold happy path", () => {
+  it("create admin scaffold", () => {
     cy.contains("Admin Scaffold").click();
     cy.get("div").contains("Admin Scaffolds");
     cy.contains("New").click();
