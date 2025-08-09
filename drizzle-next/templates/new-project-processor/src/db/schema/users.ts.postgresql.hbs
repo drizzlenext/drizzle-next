@@ -7,8 +7,7 @@ import { createId } from "@/lib/id";
 export const users = pgTable("users", {
   id: {{pkFunctionTemplate}}.primaryKey().$defaultFn(() => createId()),
   name: text(),
-  email: text().notNull(),
-  emailVerified: timestamp({ mode: "date" }),
+  email: text().notNull().unique(),
   image: text(),
   role: text(),
   password: text(),

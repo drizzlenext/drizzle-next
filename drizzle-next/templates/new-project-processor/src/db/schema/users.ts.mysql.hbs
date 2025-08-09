@@ -7,11 +7,7 @@ import { createId } from "@/lib/id";
 export const users = mysqlTable("users", {
   id: {{pkFunctionTemplate}}.primaryKey().$defaultFn(() => createId()),
   name: varchar({ length: 255 }),
-  email: varchar({ length: 255 }).notNull(),
-  emailVerified: timestamp({
-    mode: "date",
-    fsp: 3,
-  }),
+  email: varchar({ length: 255 }).notNull().unique(),
   image: varchar({ length: 255 }),
   role: varchar({ length: 255 }),
   password: varchar({ length: 255 }),
