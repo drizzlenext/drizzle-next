@@ -13,7 +13,6 @@ export { Pagination, type PaginationOpts } from "./components/ui/pagination";
 export { RichTextEditor } from "./components/ui/rich-text-editor";
 export { SearchInput } from "./components/ui/search-input";
 export { Select, SelectOption } from "./components/ui/select";
-export { Sortable } from "./components/ui/sortable";
 export {
   Table,
   TableBody,

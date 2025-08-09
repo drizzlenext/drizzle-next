@@ -18,7 +18,6 @@ import { LabelDemo } from "@/components/component-demo/label-demo";
 import { PaginationDemo } from "@/components/component-demo/pagination-demo";
 import { SearchInput } from "@/src/components/ui/search-input";
 import { SelectDemo } from "@/components/component-demo/select-demo";
-import { SortableDemo } from "@/components/component-demo/sortable-demo";
 import { TableDemo } from "@/components/component-demo/table-demo";
 import { TextareaDemo } from "@/components/component-demo/textarea-demo";
 import { RichTextEditorDemo } from "@/components/component-demo/rich-text-editor-demo";
@@ -38,7 +37,6 @@ const componentMap: { [key: string]: React.ComponentType | null } = {
   pagination: PaginationDemo,
   "search-input": SearchInput,
   select: SelectDemo,
-  sortable: SortableDemo,
   table: TableDemo,
   textarea: TextareaDemo,
   "rich-text-editor": RichTextEditorDemo,
