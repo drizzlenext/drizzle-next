@@ -47,7 +47,7 @@ features:
     title: TailwindCSS
     details: TailwindCSS is a utility-first CSS framework.
   - icon:
-      src: https://cdn.simpleicons.org/auth0/gray
-    title: Auth.js
+      src: https://cdn.simpleicons.org/jsonwebtokens/gray
+    title: JSON Web Tokens
     details: Authentication using Credentials, GitHub, Google, and other providers.
 ---
