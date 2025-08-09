@@ -164,7 +164,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       postgresql: [
         "name:text",
         "email:text",
-        "email_verified:timestamp",
         "image:text",
         "role:text",
         "password:text",
@@ -172,7 +171,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       mysql: [
         "name:varchar",
         "email:varchar",
-        "email_verified:timestamp",
         "image:varchar",
         "role:text",
         "password:varchar",
@@ -180,7 +178,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       sqlite: [
         "name:text",
         "email:text",
-        "email_verified:timestamp",
         "image:text",
         "role:text",
         "password:text",

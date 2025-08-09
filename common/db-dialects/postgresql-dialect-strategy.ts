@@ -267,18 +267,6 @@ const postgresqlDataTypeStrategies: DataTypeStrategyMap = {
     formComponents: ["input"],
     zodCode: "z.coerce.string()",
   },
-  text_tiptap: {
-    jsType: "string",
-    sqlType: "text",
-    formTemplate: "tiptap-processor/components/create-tiptap-editor.tsx.hbs",
-    updateFormTemplate:
-      "tiptap-processor/components/update-tiptap-editor.tsx.hbs",
-    getKeyValueStrForSchema: function (opts: DataTypeStrategyOpts): string {
-      return `${opts.keyName}: text()`;
-    },
-    formComponents: ["tiptap-editor"],
-    zodCode: "z.coerce.string()",
-  },
 };
 
 export const postgresqlDialectStrategy: DbDialectStrategy = {
