@@ -370,10 +370,6 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       outputPath: this.getOutputPath("components/ui/select.tsx"),
     });
     renderTemplate({
-      inputPath: "drizzle-ui/components/ui/sortable.tsx.hbs",
-      outputPath: this.getOutputPath("components/ui/sortable.tsx"),
-    });
-    renderTemplate({
       inputPath: "drizzle-ui/components/ui/table.tsx.hbs",
       outputPath: this.getOutputPath("components/ui/table.tsx"),
     });

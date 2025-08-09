@@ -7,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Sortable } from "@/components/ui/sortable";
 import { {{tableObj.singularPascalCase}}List } from "@/db/queries/{{tableObj.pluralKebabCase}}-queries";
 
 export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelCase}}List }: { {{tableObj.singularCamelCase}}List: {{tableObj.singularPascalCase}}List }) {
@@ -15,17 +14,17 @@ export function {{tableObj.singularPascalCase}}Table({ {{tableObj.singularCamelC
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead><Sortable column="id">Id</Sortable></TableHead>
+          <TableHead>Id</TableHead>
           {{#each validatedColumns}}
             {{#switch this.dataType}}
               {{#case "references"}}
-          <TableHead><Sortable column="{{this.caseVariants.originalCamelCase}}">{{this.caseVariants.originalCapitalCase}}</Sortable></TableHead>
+          <TableHead>{{this.caseVariants.originalCapitalCase}}</TableHead>
               {{/case}}
               {{#case "references_select"}}
-          <TableHead><Sortable column="{{this.caseVariants.originalCamelCase}}">{{this.caseVariants.originalCapitalCase}}</Sortable></TableHead>
+          <TableHead>{{this.caseVariants.originalCapitalCase}}</TableHead>
               {{/case}}
               {{#default}}
-          <TableHead><Sortable column="{{this.caseVariants.originalCamelCase}}">{{this.caseVariants.originalCapitalCase}}</Sortable></TableHead>
+          <TableHead>{{this.caseVariants.originalCapitalCase}}</TableHead>
               {{/default}}
             {{/switch}}
           {{/each}}
