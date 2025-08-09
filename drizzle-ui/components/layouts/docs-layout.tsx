@@ -3,7 +3,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import {
   AlertTriangleIcon,
-  ArrowUpDownIcon,
   ArrowUpRightIcon,
   BookOpenTextIcon,
   CheckSquareIcon,
@@ -65,7 +64,6 @@ const items = [
         link: "/components/select",
         icon: SquareMousePointerIcon,
       },
-      { text: "Sortable", link: "/components/sortable", icon: ArrowUpDownIcon },
       { text: "Table", link: "/components/table", icon: TableIcon },
       { text: "Textarea", link: "/components/textarea", icon: TextIcon },
     ],
@@ -170,7 +168,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
         <aside
           className={`fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block ${sidebarOpen ? "block" : "hidden"} md:block`}
         >
-          <div className="h-full py-6 pr-6 lg:py-8">
+          <div className="h-full max-h-[calc(100vh-3.5rem)] overflow-y-auto py-6 pr-6 lg:py-8">
             <div className="w-full">
               {items.map((section) => (
                 <div key={section.text} className="pb-4">
