@@ -61,12 +61,7 @@ export type DataTypeStrategyOpts = {
 
 type JSType = "string" | "number" | "boolean" | "object";
 
-export type FormComponent =
-  | "input"
-  | "textarea"
-  | "checkbox"
-  | "select"
-  | "tiptap-editor";
+export type FormComponent = "input" | "textarea" | "checkbox" | "select";
 
 export type DataTypeStrategy = {
   jsType: JSType;

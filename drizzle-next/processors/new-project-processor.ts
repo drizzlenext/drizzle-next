@@ -13,7 +13,7 @@ import {
   installDevDependencies,
   writeDrizzleNextConfig,
 } from "../../common/lib/utils";
-import { renderTemplate, renderTemplateIfNotExists } from "../lib/utils";
+import { renderTemplate } from "../lib/utils";
 import { NextScaffoldProcessor } from "./next-scaffold-processor";
 import { dialectStrategyFactory } from "../../common/lib/strategy-factory";
 

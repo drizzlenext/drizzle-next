@@ -1,14 +1,13 @@
 import { Command, Option } from "commander";
 import { log } from "../../common/lib/log";
 import { BaseProcessor, DrizzleNextConfig } from "../../common/types/types";
-import { select, confirm } from "@inquirer/prompts";
+import { select } from "@inquirer/prompts";
 import {
   completeDrizzleNextConfig,
   installDependencies,
   installDevDependencies,
 } from "../../common/lib/utils";
 import { packageStrategyFactory } from "../../common/lib/strategy-factory";
-import { AuthProcessor, authStrategyMap } from "../processors/auth-processor";
 import { NewProjectProcessor } from "../processors/new-project-processor";
 import { DbDialectProcessor } from "../../common/processors/db-dialect-processor";
 import packageJson from "../package.json";
@@ -107,13 +106,6 @@ initCommand
       for (const processor of processors) {
         dependencies.push(...processor.dependencies);
         devDependencies.push(...processor.devDependencies);
-      }
-
-      for (const authProvider in authStrategyMap) {
-        const authStrategy =
-          authStrategyMap[authProvider as keyof typeof authStrategyMap];
-        dependencies.push(...authStrategy.dependencies);
-        devDependencies.push(...authStrategy.devDependencies);
       }
 
       if (completeConfig.install) {

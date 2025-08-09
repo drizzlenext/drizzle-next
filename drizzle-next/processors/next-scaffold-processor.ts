@@ -14,7 +14,6 @@ const formComponentImports: Record<FormComponent, string> = {
   textarea: `import { Textarea } from "@/components/ui/textarea";`,
   checkbox: `import { Checkbox } from "@/components/ui/checkbox";`,
   select: `import { Select, SelectOption } from "@/components/ui/select";`,
-  "tiptap-editor": `import { TiptapEditor } from "@/components/ui/tiptap-editor";`,
 };
 
 type ValidatedColumn = {
