@@ -4,63 +4,49 @@ outline: [2, 3]
 
 # About Drizzle Next
 
-This page covers the rationale behind Drizzle Next, and why it was built.
+This page covers the rationale behind Drizzle Next and explains why it was created.
 
 ## Philosophy
 
 ### Technology curation
 
-Many decisions happen at the beginnings of projects. A developer must decide on: a web framework, a database, UI component library, object relational mapper (ORM), CSS framework, authentication solution, validation library, and other technologies relevant to the project.
-
-This can be time consuming and lead to decision fatigue. In the JavaScript world, this is commonly known as JavaScript fatigue, a phenomenon describing the overwhelming array of technology choices in the JavaScript ecosystem. Drizzle Next uses a curated selection of technologies to be used as a foundation for web app projects.
+Many decisions happen at the beginnings of projects, where developers must choose a web framework, database, UI component library, object relational mapper (ORM), CSS framework, authentication solution, validation library, and other technologies relevant to the project. This can be time consuming and lead to decision fatigue, commonly known as JavaScript fatigue in the JavaScript world - a phenomenon describing the overwhelming array of technology choices in the JavaScript ecosystem. Drizzle Next uses a curated selection of technologies to serve as a foundation for web app projects, eliminating these early decision bottlenecks.
 
 ### Configuration automation
 
-Developers will often use libraries to add capabilities such as authentication, authorization, UI and DB libraries. However, setting these up can be time consuming. Drizzle Next provides an `init` command which allows you to choose from a short menu of configurations that you can initialize your Next.js app with.
-
-By having a simple working example, you'll save time not having to build it entirely from scratch. You can customize the generated code to fit your project requirements. Additionally, Drizzle Next will display a checklist of tasks to complete the initial configuration. The `init` command is intended to be run once at the beginning of a new project.
+Developers will often use libraries to add capabilities such as authentication, authorization, UI and DB libraries, but setting these up can be time consuming. Drizzle Next provides an `init` command which allows you to choose from a short menu of configurations that you can initialize your Next.js app with, and by having a simple working example, you'll save time not having to build it entirely from scratch. You can customize the generated code to fit your project requirements, and Drizzle Next will display a checklist of tasks to complete the initial configuration, with the `init` command intended to be run once at the beginning of a new project.
 
 ### Scaffold automation
 
-Drizzle Next provides a `scaffold` command to automate the entire process of setting up the initial "boilerplate" code of new features. You only have to provide the table name along with the columns and data types. Drizzle Next will generate the Drizzle database table, back end code, and front end code for the provided database table schema.
-
-This provides a fully working full stack Create Read Update Delete (CRUD) feature that you can use as a reference to build the rest of your app. The `scaffold` command is intended to be run as many times as you need to generate full stack scaffolding. This automation is heavily inspired by the Ruby on Rails scaffold command.
+Drizzle Next provides a `scaffold` command to automate the entire process of setting up the initial "boilerplate" code of new features by generating the Drizzle database table, back end code, and front end code for a provided database table schema - you only need to specify the table name along with the columns and data types. This provides a fully working full stack Create Read Update Delete (CRUD) feature that serves as a reference for building the rest of your app, and the `scaffold` command can be run as many times as needed to generate additional full stack scaffolding, with this automation heavily inspired by the Ruby on Rails scaffold command.
 
 ## Technologies and Inspirations
 
-Having used various web technologies extensively, I’ve developed a preference for certain development methods.
-
-The ideas from each technology ultimately resulted in the creation of Drizzle Next.
+Having used various web technologies extensively, I've developed preferences for certain development approaches that prioritize developer productivity, type safety, and minimal complexity. The ideas and patterns from each of these technologies ultimately influenced the creation of Drizzle Next.
 
 ### Ruby on Rails
 
-Nostalgia for Ruby on Rails style development is one motivation that led to the creation of Drizzle Next. The `drizzle-next scaffold` command was modeled after the `rails generate scaffold` command. With scaffolding automation and predefined conventions, you'll spend less time writing common structural code by hand and more time building the valuable parts of the app.
-
-Ruby on Rails was the framework that introduced to me the idea of scaffolding. In construction, these are the wooden planks, metal poles, or bamboo that workers use while building. Similarly, scaffolding in web development is the initial "boilerplate" code that you generate using a tool like Rails. The starter code saves you time, as it provides some type of structural pattern that you can then build on.
+Nostalgia for Ruby on Rails style development is one motivation that led to the creation of Drizzle Next. The `drizzle-next scaffold` command was modeled after the `rails generate scaffold` command, which introduced me to the concept of scaffolding automation. In construction, scaffolding consists of wooden planks, metal poles, or bamboo that workers use while building, and similarly in web development, scaffolding refers to the initial "boilerplate" code generated using tools like Rails. With scaffolding automation and predefined conventions, you'll spend less time writing common structural code by hand and more time building the valuable parts of the app, as the starter code provides a structural pattern that you can build upon.
 
 ### Next.js
 
-Many of the full stack patterns used in Drizzle Next are based on the official Next.js documentation and best practices. Next.js provides many conveniences out of the box, such as file system routing, server side rendering, code bundling, and more.
-
-Before the advent of Next.js, setting up a Single Page Application (SPA) project, with AngularJS or React, may have involved dealing with very complicated build and automation tools. Next.js solved this problem by abstracting away all of the complex build process. With one command, you could get started writing your React components right away. The file system routing brought consistency to React's routing. With server side rendering, you were no longer limited to SPAs. Many of Next.js's performance optimizations help you make really fast websites.
+Many of the full stack patterns used in Drizzle Next are based on the official Next.js documentation and best practices. Next.js provides many conveniences out of the box, such as file system routing, server side rendering, and code bundling. Before Next.js, setting up Single Page Application (SPA) projects with frameworks like AngularJS or React often involved dealing with complex build and automation tools, but Next.js solved this by abstracting away the complicated build process, allowing developers to start writing React components immediately with just one command. The framework brought consistency to React's routing through file system routing, expanded beyond SPAs with server side rendering capabilities, and includes numerous performance optimizations that help create fast, scalable websites.
 
 ### TypeScript
 
-TypeScript adds additional syntax for types to JavaScript. This enables the early catching of errors in your editor and at compile time. The IDE warnings, autocompletion, and compile time errors all help to reduce bugs from sneaking into production. Features like type annotations, interfaces, type unions, record utility, and exhaustive switches all help in eliminating bugs and building apps with minimal defects.
-
-It is worth mentioning the use of TypeScript on both the front end and back end in a full stack project. The types can be shared between the two sides. With Drizzle ORM, you can infer the types of your database tables and share them with the front end. This gives your full stack app end to end type safety. So when the database changes, the TypeScript compiler can catch issues on the front end. Furthermore, using a single language across the full stack lowers cognitive burden, as you no longer have to context switch between two languages.
+TypeScript adds additional syntax for types to JavaScript, enabling early error detection in your editor and at compile time through IDE warnings, autocompletion, and compile-time errors that help reduce bugs from reaching production. Features like type annotations, interfaces, type unions, record utility, and exhaustive switches all contribute to building apps with minimal defects. In full stack projects, TypeScript's use on both front end and back end allows types to be shared between the two sides, and with Drizzle ORM, you can infer database table types and share them with the front end for end-to-end type safety. This means when the database changes, the TypeScript compiler can catch issues on the front end, while using a single language across the full stack reduces cognitive burden by eliminating the need to context switch between different languages.
 
 ### Drizzle ORM
 
-Drizzle ORM is a Headless TypeScript ORM that provides both SQL-like and relational queries. It also provides a `drizzle-kit` CLI tool that generates and runs raw SQL migrations from your TypeScript table definitions. The learning curve for Drizzle is fast if you are familiar with SQL. Drizzle always outputs one query, which helps prevent common mistakes that lead to performance issues.
+Drizzle ORM is a headless TypeScript ORM that provides both SQL-like and relational queries, along with a `drizzle-kit` CLI tool that generates and runs raw SQL migrations from TypeScript table definitions. The learning curve is minimal for developers familiar with SQL, and Drizzle's approach of always outputting a single query helps prevent common performance issues. Drizzle was chosen for three key reasons: it makes building dynamic queries and adding conditional SQL filters straightforward, it allows writing migrations in plain SQL rather than learning library-specific migration syntax, and it provides full TypeScript integration so the compiler can catch database-related issues in application logic when schemas change.
 
-There are three main reasons Drizzle was chosen as the ORM. 1. It is easy to build queries dynamically and it is easy add on SQL filters conditionally. 2. Be able to write migrations in plain SQL. This is preferred over a migration DSL, as it avoids having to learn yet another library specific migration syntax. 3. The ORM should work with TypeScript, so that when the database changes, the TypeScript compiler will catch any issues in the application logic. Drizzle ORM checked all the boxes.
+### Drizzle UI
 
-### shadcn/ui
+Drizzle UI was created as a custom UI component library specifically for Drizzle Next after initially using shadcn/ui. While shadcn/ui offers an excellent approach with pre-styled components built on headless libraries like Radix UI that you copy into your project, it introduced dependencies and complexity that conflicted with Drizzle Next's core philosophy. By building Drizzle UI from scratch, we eliminated external dependencies, reduced bundle size, improved build times, and gained complete control over the component implementation. This custom approach ensures that every component aligns perfectly with Drizzle Next's performance goals and maintains the project's commitment to minimal dependencies while still providing beautiful, functional UI components out of the box.
 
-shadcn/ui strikes the perfect balance of customization and beautiful defaults. shadcn/ui skyrocketed in popularity because it introduced a new approach to UI component libraries. They have created a collection of pre-styled components built on various headless libraries like radix-ui, and provided it to you to copy and paste into your own project. This approach gives you greater control over the code, as opposed to using a traditional component library where the styling is hidden behind the package.
+### JWT
 
-Drizzle Next initially used shadcn as the default UI component library. However, shadcn was removed in favor of custom-built components for minimizing dependencies and improving build times. Drizzle UI was built specifically for Drizzle Next to address the issues of cutting dependencies, improving build speed, and ease of maintenance.
+JSON Web Tokens (JWT) provide a simple, stateless authentication mechanism that aligns perfectly with Drizzle Next's philosophy of minimal dependencies and maximum control. Rather than integrating a third-party authentication library like Auth.js or Firebase Auth, Drizzle Next implements JWT authentication directly using standard libraries. This approach eliminates external service dependencies, reduces bundle size, and gives developers complete control over the authentication flow. JWT's self-contained nature means no database sessions to manage, making it ideal for serverless deployments and horizontal scaling. The straightforward implementation also makes it easier to understand, debug, and customize authentication logic to fit specific project requirements without being constrained by a library's opinions or limitations.
 
 ## Conclusion
 

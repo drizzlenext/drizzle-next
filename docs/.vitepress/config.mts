@@ -9,9 +9,9 @@ export default defineConfig({
     logo: "https://drizzlenext.github.io/drizzle-assets/logo.webp",
     nav: [
       { text: "Home", link: "/" },
+      { text: "About", link: "/about" },
       { text: "Drizzle Next", link: "/drizzle-next/" },
       { text: "Drizzle UI", link: "/drizzle-ui/" },
-      { text: "About", link: "/about/" },
       { text: "Demo", link: "https://demo.drizzlenext.com" },
     ],
 
@@ -21,6 +21,7 @@ export default defineConfig({
         items: [
           // { text: "Markdown Examples", link: "/markdown-examples" },
           // { text: "Runtime API Examples", link: "/api-examples" },
+          { text: "About", link: "/about" },
           {
             text: "Drizzle Next",
             link: "/drizzle-next/",
@@ -61,7 +62,6 @@ export default defineConfig({
               { text: "Guide", link: "/drizzle-admin/guide" },
             ],
           },
-          { text: "About", link: "/about" },
         ],
       },
     ],
