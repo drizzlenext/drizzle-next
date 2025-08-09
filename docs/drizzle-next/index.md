@@ -20,12 +20,14 @@ The generated code is fully customizable as it is written to your project.
 
 ## When Drizzle Next might be for you
 
+- If you want to build a full stack web app with Drizzle ORM and Next.js.
 - If you want ownership of data.
-- If you want to work directly with Next.js and Drizzle ORM code.
+- If you want direct control over the frontend components and backend business logic.
 - If you want a light-weight solution with minimal dependencies.
 
 ## When Drizzle Next might not be for you
 
+- If you want to build a standard REST API.
 - If you want a third-party service to control your data.
-- If you want to work with complex abstractions and configuration-heavy solutions.
 - If you want less direct control over the code.
+- If you want to work with complex abstractions and configuration-heavy solutions.
