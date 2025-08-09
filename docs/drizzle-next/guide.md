@@ -128,33 +128,21 @@ npx drizzle-next@latest scaffold post -c category_id:references_select title:tex
 
 The component will initially show a list of ids, however it is easy to customize by changing the code in the form. For example, changing the react code from `{category.id}` to `{category.title}`.
 
-## Auth
+## Authentication and Authorization
 
-Drizzle Next ships with Auth.js as the default authentication library.
+Drizzle Next ships with a simple JWT authentication implementation. This is a basic starting point that can be extended for more advanced use cases.
 
 Drizzle Next provides a `create-user.ts` script to create test users.
 
-The Auth.js configuration is located in `lib/auth.ts`. Drizzle Next includes the following providers: Credential, GitHub, Google, Postmark, and Nodemailer. You can add or remove providers as needed.
+A `grant-admin.ts` script is provided to grant users the admin role.
 
-After initialization, Drizzle Next will display a checklist of things to complete setup, such as adding client ids and secrets.
-
-Drizzle Next uses the `jwt` strategy of Auth.js. If you need `database` sessions, you will have to provide the implementation. Note: the `credentials` provider only supports the `jwt` strategy.
-
-### Private Dashboard
-
-Users will be able to sign in at `/signin` and access a user dashboard at `/dashboard`.
+Users will be able to sign in at `/login` and access a user dashboard at `/dashboard`.
 
 Any pages in the `(private)` route group will require the user to be logged in. This behavior can be changed in `app/(private)/layout.tsx`.
 
-## Authorization
+Users with the `admin` role will be able to access the admin dashboard at `/admin`. The admin login is at `/admin-login`. An authorization check happens at the admin `layout.tsx`.
 
-Users with the `admin` role will be able to access the admin dashboard at `/admin`. The admin signin is at `/admin-signin`.
-
-An authorization check happens at the admin `layout.tsx`. The `lib/auth.ts` module contains various utility functions, such as `requireAuth` and `requireAdmin`. The function can be customized and used in pages, layouts, and server actions. `getSession` can be used for optional authentication.
-
-A `grant-admin.ts` script is provided to grant users the admin role.
-
-By default, users will no be assigned a role when created. This behavior can be changed in `auth.ts`.
+The `lib/auth.ts` module contains various utility functions, such as `requireAuth` and `requireAdmin`. The function can be customized and used in pages, layouts, and server actions. `getUserSession` can be used for optional authentication.
 
 ## File uploads
 
@@ -213,7 +201,7 @@ The Next.js `Image` component performs automatic resizing of images. This works 
   - auth - auth actions
 - app
   - (admin) - route group for admin dashboard and scaffolding
-  - (auth) - route group for signin and signout feature
+  - (auth) - route group for login and logout feature
   - (private) - route group requiring logged in user
   - (public) - route group that is publicly accessible
   - api - api routes

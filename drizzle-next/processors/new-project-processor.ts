@@ -387,5 +387,13 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
   }
 
-  printCompletionMessage() {}
+  printCompletionMessage() {
+    log.checklist("authentication checklist");
+    log.task("create test user");
+    log.cmdsubtask(
+      "npx tsx scripts/create-user.ts test@example.com password123"
+    );
+    log.task("grant admin role");
+    log.cmdsubtask("npx tsx scripts/grant-admin.ts test@example.com");
+  }
 }
