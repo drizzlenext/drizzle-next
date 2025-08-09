@@ -1,5 +1,9 @@
 # Drizzle Express
 
+:::warning
+Drizzle Express is DEPRECATED and no longer supported. This was an experimental project. There are better tools for building APIs.
+:::
+
 Drizzle Express is a framework for generating REST APIs built with Express.js and Drizzle ORM.
 
 ## Why Drizzle Express?

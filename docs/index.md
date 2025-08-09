@@ -49,5 +49,5 @@ features:
   - icon:
       src: https://cdn.simpleicons.org/jsonwebtokens/gray
     title: JSON Web Tokens
-    details: Authentication using Credentials, GitHub, Google, and other providers.
+    details: Simple and fully customizable JWT authentication.
 ---
