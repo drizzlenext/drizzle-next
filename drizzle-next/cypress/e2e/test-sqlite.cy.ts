@@ -2,10 +2,10 @@
 
 describe("shadriz e2e test", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/admin-signin");
+    cy.visit("http://localhost:3000/admin-login");
     cy.get('input[name="email"]').first().type("admin@example.com");
     cy.get('input[name="password"]').first().type("pw");
-    cy.contains("Sign in").click();
+    cy.contains("Log in").click();
   });
 
   it("home page", () => {

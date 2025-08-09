@@ -15,7 +15,7 @@ export async function requireAdmin(): Promise<Session> {
   const session = await getSession();
 
   if (!session) {
-    redirect("/admin-signin");
+    redirect("/admin-login");
   }
 
   if (session.role !== "admin") {
@@ -37,7 +37,7 @@ export async function requireAuth(): Promise<Session> {
   const session = await getSession();
 
   if (!session) {
-    redirect("/signin");
+    redirect("/login");
   }
 
   return {

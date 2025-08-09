@@ -127,8 +127,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
     renderTemplate({
       inputPath:
-        "new-project-processor/src/app/(auth)/admin-signin/page.tsx.hbs",
-      outputPath: this.getOutputPath("app/(auth)/admin-signin/page.tsx"),
+        "new-project-processor/src/app/(auth)/admin-login/page.tsx.hbs",
+      outputPath: this.getOutputPath("app/(auth)/admin-login/page.tsx"),
     });
     renderTemplate({
       inputPath: `new-project-processor/scripts/grant-admin.ts.hbs`,
@@ -141,8 +141,8 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
     });
     renderTemplate({
       inputPath:
-        "new-project-processor/src/components/auth/admin-signin-form.tsx.hbs",
-      outputPath: this.getOutputPath("components/auth/admin-signin-form.tsx"),
+        "new-project-processor/src/components/auth/admin-login-form.tsx.hbs",
+      outputPath: this.getOutputPath("components/auth/admin-login-form.tsx"),
     });
     renderTemplate({
       inputPath: "new-project-processor/scripts/create-password-hash.ts.hbs",
@@ -214,34 +214,33 @@ export class NewProjectProcessor implements DrizzleNextProcessor {
       outputPath: this.getOutputPath("app/(private)/dashboard/page.tsx"),
     });
     renderTemplate({
-      inputPath: "new-project-processor/src/app/(auth)/signin/page.tsx.hbs",
-      outputPath: this.getOutputPath("app/(auth)/signin/page.tsx"),
+      inputPath: "new-project-processor/src/app/(auth)/login/page.tsx.hbs",
+      outputPath: this.getOutputPath("app/(auth)/login/page.tsx"),
     });
     renderTemplate({
       inputPath: "new-project-processor/src/app/(private)/profile/page.tsx.hbs",
       outputPath: this.getOutputPath("app/(private)/profile/page.tsx"),
     });
     renderTemplate({
-      inputPath: "new-project-processor/src/app/(auth)/signout/page.tsx.hbs",
-      outputPath: this.getOutputPath("app/(auth)/signout/page.tsx"),
+      inputPath: "new-project-processor/src/app/(auth)/logout/page.tsx.hbs",
+      outputPath: this.getOutputPath("app/(auth)/logout/page.tsx"),
+    });
+    renderTemplate({
+      inputPath: "new-project-processor/src/components/auth/login-form.tsx.hbs",
+      outputPath: this.getOutputPath("components/auth/login-form.tsx"),
+    });
+    renderTemplate({
+      inputPath: "new-project-processor/src/actions/auth/login-action.ts.hbs",
+      outputPath: this.getOutputPath("actions/auth/login-action.ts"),
     });
     renderTemplate({
       inputPath:
-        "new-project-processor/src/components/auth/signin-form.tsx.hbs",
-      outputPath: this.getOutputPath("components/auth/signin-form.tsx"),
+        "new-project-processor/src/actions/auth/admin-login-action.ts.hbs",
+      outputPath: this.getOutputPath("actions/auth/admin-login-action.ts"),
     });
     renderTemplate({
-      inputPath: "new-project-processor/src/actions/auth/signin-action.ts.hbs",
-      outputPath: this.getOutputPath("actions/auth/signin-action.ts"),
-    });
-    renderTemplate({
-      inputPath:
-        "new-project-processor/src/actions/auth/admin-signin-action.ts.hbs",
-      outputPath: this.getOutputPath("actions/auth/admin-signin-action.ts"),
-    });
-    renderTemplate({
-      inputPath: "new-project-processor/src/actions/auth/signout-action.ts.hbs",
-      outputPath: this.getOutputPath("actions/auth/signout-action.ts"),
+      inputPath: "new-project-processor/src/actions/auth/logout-action.ts.hbs",
+      outputPath: this.getOutputPath("actions/auth/logout-action.ts"),
     });
     renderTemplate({
       inputPath: "new-project-processor/src/app/(auth)/layout.tsx.hbs",

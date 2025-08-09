@@ -1,20 +1,20 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { db } from "@/db/db";
 import { users } from "@/db/schema/users";
 import { eq } from "drizzle-orm";
+import { redirect } from "next/navigation";
 import { comparePassword } from "@/lib/password";
 import { createSession } from "@/lib/session";
 
-export type SignInState = {
+export type AdminLogInState = {
   message?: string;
 };
 
-export async function signInAction(
-  prevState: SignInState,
+export async function adminLogInAction(
+  prevState: AdminLogInState,
   formData: FormData,
-): Promise<SignInState> {
+): Promise<AdminLogInState> {
   "use server";
   try {
     const email = formData.get("email") as string;
@@ -26,23 +26,29 @@ export async function signInAction(
       };
     }
 
-    const user = await db.query.users.findFirst({
+    const userObj = await db.query.users.findFirst({
       where: eq(users.email, email),
     });
 
-    if (!user) {
+    if (!userObj) {
       return {
         message: "Invalid email or password.",
       };
     }
 
-    if (!user.password) {
+    if (userObj.role !== "admin") {
+      return {
+        message: "Unauthorized",
+      };
+    }
+
+    if (!userObj.password) {
       return {
         message: "Account does not have a password set.",
       };
     }
 
-    const isValidPassword = await comparePassword(password, user.password);
+    const isValidPassword = await comparePassword(password, userObj.password);
     if (!isValidPassword) {
       return {
         message: "Invalid email or password.",
@@ -50,14 +56,16 @@ export async function signInAction(
     }
 
     await createSession({
-      id: user.id,
-      email: user.email,
-      role: user.role || "user",
+      id: userObj.id,
+      email: userObj.email,
+      role: userObj.role,
     });
   } catch (error) {
+    console.error(error);
+
     return {
-      message: "Sign in failed.",
+      message: "Log In failed.",
     };
   }
-  redirect("/dashboard");
+  redirect("/admin");
 }
