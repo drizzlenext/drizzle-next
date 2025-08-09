@@ -48,7 +48,7 @@ export function createId() {
 }
 ```
 
-It is easy to change the implementation to a different id generator like uuid v7, cuid2, or nanoid.
+It is easy to change the implementation to a different id generator. For example: uuid v7, cuid2, nanoid, or a library of your choice.
 
 By default, Drizzle Next will use the following primary key data types:
 

@@ -22,12 +22,6 @@ features:
   - icon: 🎨
     title: Drizzle UI
     details: A collection of customizable UI components with minimal dependencies.
-  - icon: 🚂
-    title: Drizzle Express
-    details: A CLI tool for generating Express APIs with Drizzle ORM.
-  - icon: 🧰
-    title: Drizzle Util
-    details: A CLI tool to help you quickly generate Drizzle ORM configuration and schemas.
   - icon:
       src: https://cdn.simpleicons.org/Next.js/gray
     title: Next.js
@@ -55,9 +49,5 @@ features:
   - icon:
       src: https://cdn.simpleicons.org/auth0/gray
     title: Auth.js
-    details: Generate Auth.js configuration and setup using Credentials, GitHub, Google, and other providers.
-  - icon:
-      src: https://cdn.simpleicons.org/express/gray
-    title: Express
-    details: Fast, unopinionated, minimalist web framework for Node.js
+    details: Authentication using Credentials, GitHub, Google, and other providers.
 ---

@@ -18,8 +18,6 @@ Instead, it is a command line interface code generation tool with a focus on kee
 
 The generated code is fully customizable as it is written to your project.
 
-[See About page for more details](/about)
-
 ## When Drizzle Next might be for you
 
 - If you want ownership of data.

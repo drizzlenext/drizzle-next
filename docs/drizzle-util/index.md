@@ -5,7 +5,7 @@ Drizzle Util is a CLI tool to help you quickly generate Drizzle ORM configuratio
 ## Why Drizzle Util?
 
 1. You want to quickly set up Drizzle ORM.
-2. You only want to generate the Drizzle ORM scaffolding (without Next.js and Express.js).
+2. You only want to generate the Drizzle ORM scaffolding (without Next.js).
 3. You want to use the Drizzle ORM scaffolding with another web framework.
 
 ## Introduction
