@@ -1,0 +1,71 @@
+"use server";
+
+import { db } from "@/db/db";
+import { users } from "@/db/schema/users";
+import { eq } from "drizzle-orm";
+import { redirect } from "next/navigation";
+import { comparePassword } from "@/lib/password";
+import { createSession } from "@/lib/session";
+
+export type AdminSignInState = {
+  message?: string;
+};
+
+export async function adminSignInAction(
+  prevState: AdminSignInState,
+  formData: FormData,
+): Promise<AdminSignInState> {
+  "use server";
+  try {
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    if (!email || !password) {
+      return {
+        message: "Email and password are required.",
+      };
+    }
+
+    const userObj = await db.query.users.findFirst({
+      where: eq(users.email, email),
+    });
+
+    if (!userObj) {
+      return {
+        message: "Invalid email or password.",
+      };
+    }
+
+    if (userObj.role !== "admin") {
+      return {
+        message: "Unauthorized",
+      };
+    }
+
+    if (!userObj.password) {
+      return {
+        message: "Account does not have a password set.",
+      };
+    }
+
+    const isValidPassword = await comparePassword(password, userObj.password);
+    if (!isValidPassword) {
+      return {
+        message: "Invalid email or password.",
+      };
+    }
+
+    await createSession({
+      id: userObj.id,
+      email: userObj.email,
+      role: userObj.role,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return {
+      message: "Sign In failed.",
+    };
+  }
+  redirect("/admin");
+}

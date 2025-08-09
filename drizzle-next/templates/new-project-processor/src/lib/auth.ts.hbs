@@ -1,0 +1,70 @@
+import { redirect } from "next/navigation";
+import { getSession } from "./session";
+
+export interface Session {
+  user: {
+    id: string;
+    email: string;
+    name?: string | null;
+    role: string;
+    image?: string | null;
+  };
+}
+
+export async function requireAdmin(): Promise<Session> {
+  const session = await getSession();
+
+  if (!session) {
+    redirect("/admin-signin");
+  }
+
+  if (session.role !== "admin") {
+    throw new Error("unauthorized");
+  }
+
+  return {
+    user: {
+      id: session.id,
+      email: session.email,
+      role: session.role,
+      name: null,
+      image: null,
+    },
+  };
+}
+
+export async function requireAuth(): Promise<Session> {
+  const session = await getSession();
+
+  if (!session) {
+    redirect("/signin");
+  }
+
+  return {
+    user: {
+      id: session.id,
+      email: session.email,
+      role: session.role,
+      name: null,
+      image: null,
+    },
+  };
+}
+
+export async function getUserSession(): Promise<Session | null> {
+  const session = await getSession();
+
+  if (!session) {
+    return null;
+  }
+
+  return {
+    user: {
+      id: session.id,
+      email: session.email,
+      role: session.role,
+      name: null,
+      image: null,
+    },
+  };
+}

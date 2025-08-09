@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { signOut } from "@/lib/auth";
+import { signOutAction } from "@/actions/auth/signout-action";
 
 export default function Page() {
   return (
@@ -9,12 +9,7 @@ export default function Page() {
         <CardTitle>Are you sure you want to sign out?</CardTitle>
       </CardHeader>
       <CardContent>
-        <form
-          action={async () => {
-            "use server";
-            await signOut({ redirectTo: "/" });
-          }}
-        >
+        <form action={signOutAction}>
           <Button type="submit">Sign out</Button>
         </form>
       </CardContent>

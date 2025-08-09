@@ -1,7 +1,7 @@
-import { auth } from "@/lib/auth";
+import { getUserSession } from "@/lib/auth";
 
 export default async function Page() {
-  const session = await auth();
+  const session = await getUserSession();
   return (
     <div className="p-3">
       <div>Profile</div>

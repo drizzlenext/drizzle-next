@@ -101,11 +101,6 @@ initCommand
       processors.push(dbPackageStrategy);
       processors.push(newProjectProcessor);
 
-      let authProcessor;
-
-      authProcessor = new AuthProcessor(completeConfig);
-      processors.push(authProcessor);
-
       const dependencies = [];
       const devDependencies = [];
 
