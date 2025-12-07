@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: "/drizzle-next/",
   title: "Drizzle Next",
   description: "Generate Next.js And Drizzle ORM Code",
   themeConfig: {
