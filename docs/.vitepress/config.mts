@@ -13,7 +13,6 @@ export default defineConfig({
       { text: "About", link: "/about" },
       { text: "Drizzle Next", link: "/drizzle-next/" },
       { text: "Drizzle UI", link: "/drizzle-ui/" },
-      { text: "Demo", link: "https://demo.drizzlenext.com" },
     ],
 
     sidebar: [
