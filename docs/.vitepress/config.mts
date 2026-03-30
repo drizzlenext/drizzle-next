@@ -35,6 +35,7 @@ export default defineConfig({
             link: "/drizzle-ui/",
             items: [
               { text: "Installation", link: "/drizzle-ui/installation" },
+              { text: "Guide", link: "/drizzle-ui/guide" },
             ],
           },
           {
