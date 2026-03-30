@@ -18,4 +18,4 @@ Drizzle UI can also be used as an installable dependency or copied and pasted in
 
 The documentation and component showcase can be found here:
 
-https://www.drizzlenext.com/ui/
+https://drizzlenext.github.io/drizzle-next/ui
