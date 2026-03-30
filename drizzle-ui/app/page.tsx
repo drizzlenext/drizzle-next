@@ -11,7 +11,7 @@ export default function Home() {
       <header className="flex w-full items-center justify-between">
         <div className="flex gap-4">
           <Link
-            href="https://www.drizzlenext.com"
+            href="https://drizzlenext.github.io/drizzle-next/"
             className="flex items-center gap-1 text-lg font-semibold"
             target="_blank"
           >
