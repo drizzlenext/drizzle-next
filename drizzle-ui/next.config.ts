@@ -1,13 +1,13 @@
 import type { NextConfig } from "next";
 
-const isGitHubActions = process.env.GITHUB_ACTIONS === "true";
+const isGitHubPagesBuild = process.env.DRIZZLE_UI_GITHUB_PAGES === "true";
 const githubPagesBasePath = "/drizzle-next/ui";
 
 const nextConfig: NextConfig = {
   /* config options here */
   output: "export",
-  assetPrefix: isGitHubActions ? githubPagesBasePath : "",
-  basePath: isGitHubActions ? githubPagesBasePath : ""
+  assetPrefix: isGitHubPagesBuild ? githubPagesBasePath : "",
+  basePath: isGitHubPagesBuild ? githubPagesBasePath : ""
 };
 
 export default nextConfig;
