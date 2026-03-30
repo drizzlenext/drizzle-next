@@ -337,7 +337,7 @@ export const config: DrizzleAdminConfig = {
 ```
 
 :::tip
-The pagination options are the same as the pagination options for the [Drizzle UI Pagination component](https://www.drizzlenext.com/ui/components/pagination).
+The pagination options are the same as the pagination options for the [Drizzle UI Pagination component](https://drizzlenext.github.io/drizzle-next/ui/components/pagination).
 :::
 
 ## The Completed Example
