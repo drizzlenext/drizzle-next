@@ -74,7 +74,7 @@ const nav = [
   { text: "Docs", link: "/introduction" },
   {
     text: "Drizzle Next",
-    link: "https://www.drizzlenext.com",
+    link: "https://drizzlenext.github.io/drizzle-next/",
     target: "_blank",
     icon: ArrowUpRightIcon,
   },
